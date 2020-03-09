@@ -8,6 +8,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { MainBannerComponent } from './components/main-banner/main-banner.component';
 import { FeaturedProductComponent } from './components/featured-product/featured-product.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SliderComponent,
     MainBannerComponent,
     FeaturedProductComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
