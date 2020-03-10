@@ -1,1 +1,19 @@
-<p>main-banner works!</p>
+<div class="main-banner">
+
+    <div class="animated background" [class]="animation.image" [ngStyle]="{background: 'url('+ image +')'}"></div>
+
+
+    <div class="arrow left-arrow" (click)="bannerLeft()">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+
+    <div class="arrow right-arrow" (click)="bannerRight()">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </div>
+
+    <div class="content">
+        <h2 class="animated" [class]="animation.content">{{ heading }}</h2>
+        <p class="animated" [class]="animation.content">{{ contents }}</p>
+    </div>
+
+</div>

@@ -1,0 +1,67 @@
+div.main-banner {
+  width: 100%;
+  height: 568px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  font-family: "Open Sans", sans-serif;
+
+  .content {
+    width: 700px;
+    margin-left: 100px;
+    text-align: justify;
+
+    h2 {
+      font-size: 3em;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+  }
+
+
+  .arrow{
+    background: rgba(0, 0, 0, 0.527);
+    font-size: 2em;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+
+  .left-arrow{
+    position: absolute;
+    left: 20px;
+    padding-right: 5px;
+  }
+
+  .right-arrow{
+    position: absolute;
+    right: 20px;
+    padding-left: 5px;
+  }
+
+  .background{
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    z-index: -1;
+    opacity: 0;
+  }
+
+
+  
+
+}
