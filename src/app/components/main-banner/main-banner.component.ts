@@ -21,6 +21,7 @@ export class MainBannerComponent implements OnInit {
     image: 'fadeIn',
   }
 
+
   constructor(private _homeContents: HomeService) { }
 
   ngOnInit(): void {
@@ -29,11 +30,16 @@ export class MainBannerComponent implements OnInit {
     this.image = this._homeContents.bannerContents[this.number].image;
 
     this.update();
+
+    setInterval(()=>{
+      this.bannerRight();
+    }, 8000);
+
+
   }
 
   ngAfterViewInit(): void {
   }
-
 
   update(): void {
     this.heading = this._homeContents.bannerContents[this.number].header;
