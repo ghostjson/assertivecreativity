@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Feature } from 'src/app/services/home.service';
+
+
 
 @Component({
   selector: 'app-featured-product',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeaturedProductComponent implements OnInit {
 
+  @Input('content') content: Feature;
+  @Input('index') index : number;
+
+
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.index)
   }
 
 }

@@ -1,1 +1,14 @@
-<p>featured-product works!</p>
+<section class="feature" [ngClass]="{'reverse': index%2}">
+    <div class="image">
+        <img src="{{ content.image }}" alt="">
+    </div>
+    <div class="content">
+        <h2>{{ content.header }}</h2>
+        <div class="description">
+            {{ content.content }}
+        </div>
+        <div class="button">
+            <a href="#">Shop Now</a>
+        </div>
+    </div>
+</section>
