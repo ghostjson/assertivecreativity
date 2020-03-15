@@ -1,5 +1,9 @@
-<app-header></app-header>
-<app-main-banner></app-main-banner>
+
+<div>
+    
+    <app-header></app-header>
+    <app-main-banner></app-main-banner>
+</div>
 
 <div class="featured" *ngFor="let feature of featured; index as i">
     <app-featured-product   [content]="feature" index={{i}}></app-featured-product>

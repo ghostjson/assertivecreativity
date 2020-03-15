@@ -10,6 +10,8 @@ section{
 
         h2{
             font-size: 2em;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
         }
 
         div.description{
@@ -33,4 +35,39 @@ section{
 
 section.reverse{
     flex-direction: row-reverse;
+}
+
+@media (max-width: 1000px) {
+
+    .reverse, section{
+        flex-direction: column !important;
+    }
+
+    section{
+        margin: 60px 0px;
+    }
+
+    div.content{
+        padding: 3px !important;
+
+        h2{
+            font-size: 2em !important;
+        }
+
+        div.description{
+            margin-top: 10px !important;
+        }
+
+        div.button{
+            margin-top: 10px !important;
+
+            a, a:visited, a:active, a:hover{
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 1em;
+                font-weight: 700;
+                color: var(--dark-color);
+            }
+        }
+    }
 }

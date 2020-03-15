@@ -1,24 +1,26 @@
 <header>
         <div class="left-grp">
+                
+            <i class="fas fa-bars desktop-only"></i>
             <img src="./../../../assets/images/logo.png" alt="logo">
         </div>
         <div class="center">
                 <div class="menu">
                         <ul>
-                            <li class="active">
-                                <a href="#">Home</a>
+                            <li [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                <a>Home</a>
+                            </li>
+                            <li [routerLink]="['/about']" routerLinkActive="active">
+                                <a>About Us</a>
                             </li>
                             <li>
-                                <a href="#">About Us</a>
+                                <a>Contact Us</a>
                             </li>
                             <li>
-                                <a href="#">Contact Us</a>
+                                <a>Shop</a>
                             </li>
                             <li>
-                                <a href="#">Shop</a>
-                            </li>
-                            <li>
-                                <a href="#">Sign In</a>
+                                <a>Sign In</a>
                             </li>
                         </ul>
                     </div>
