@@ -70,3 +70,20 @@
     }
   }
 }
+
+
+@media (max-width: 1000px){
+  .footer{
+    
+    height: 250px;
+
+    .navigation{
+      
+
+      ul li{
+        font-size: 0.6em;
+        margin: 0 5px;
+      }
+    }
+  }
+}
