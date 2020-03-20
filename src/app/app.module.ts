@@ -9,6 +9,8 @@ import { FeaturedProductComponent } from './components/featured-product/featured
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ProductSliderComponent } from './components/product-slider/product-slider.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { AboutComponent } from './pages/about/about.component';
     FeaturedProductComponent,
     FooterComponent,
     HeaderComponent,
-    AboutComponent
+    AboutComponent,
+    ProductSliderComponent
   ],
   imports: [
     BrowserModule,

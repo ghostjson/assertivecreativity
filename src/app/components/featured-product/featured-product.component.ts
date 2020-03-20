@@ -18,7 +18,6 @@ export class FeaturedProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.index)
   }
 
 }

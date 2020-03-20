@@ -14,6 +14,11 @@ export interface Feature{
   image: string
 }
 
+export interface ProductSlider{
+  image: string,
+  url: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +28,8 @@ export class HomeService {
 
   bannerContents: Array<BannerContent> = [];
   featured: Array<Feature> = [];
+
+  productSlider: Array<ProductSlider> = [];
 
 
   constructor() {
@@ -60,6 +67,38 @@ export class HomeService {
         header: "some more heading",
         content: "Some More Contents for this section",
         image: "https://via.placeholder.com/650x400.png"
+      }
+    ]
+
+
+    this.productSlider = [
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
+      },
+      {
+        image: 'https://via.placeholder.com/200x200.png',
+        url: ''
       }
     ]
   }

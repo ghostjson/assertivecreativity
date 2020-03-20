@@ -1,0 +1,27 @@
+<div class="product-slider">
+
+  <div class="heading">
+    <h2>{{ title }}</h2>
+  </div>
+
+  <div class="scroll-left" (click)="scrollLeft()">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+
+  <div class="scroll-right" (click)="scrollRight()">
+    <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </div>
+
+  <div class="slide-wrapper" #wrapper>
+
+    <div class="slide" *ngFor="let slide of slides">
+      <img src="{{slide.image}}">
+      <div class="more" routerLink="{{slide.url}}">
+        KNOW MORE
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

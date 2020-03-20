@@ -1,9 +1,13 @@
 
 <div>
-    
+
     <app-header></app-header>
     <app-main-banner></app-main-banner>
 </div>
+
+
+<app-product-slider title="Today's Deal" [slides]="productSlider"></app-product-slider>
+
 
 <div class="featured" *ngFor="let feature of featured; index as i">
     <app-featured-product   [content]="feature" index={{i}}></app-featured-product>
