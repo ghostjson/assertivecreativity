@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Feature } from 'src/app/services/home.service';
 
 
 
@@ -10,14 +9,13 @@ import { Feature } from 'src/app/services/home.service';
 })
 export class FeaturedProductComponent implements OnInit {
 
-  @Input('content') content: Feature;
-  @Input('index') index : number;
-
+  @Input('data') data: any;
 
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
 }

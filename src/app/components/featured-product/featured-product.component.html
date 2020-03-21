@@ -1,14 +1,14 @@
-<section class="feature" [ngClass]="{'reverse': index%2}">
+<section class="feature" [ngClass]="{'reverse': data.reverse}">
     <div class="image">
-        <img src="{{ content.image }}" alt="">
+        <img src="{{ data.image }}" alt="">
     </div>
     <div class="content">
-        <h2>{{ content.header }}</h2>
+        <h2>{{ data.header }}</h2>
         <div class="description">
-            {{ content.content }}
+            {{ data.content }}
         </div>
         <div class="button">
-            <a href="#">Shop Now</a>
+            <a href="{{ data.url }}">Shop Now</a>
         </div>
     </div>
 </section>

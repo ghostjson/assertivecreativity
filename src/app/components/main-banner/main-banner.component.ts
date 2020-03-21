@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { HomeService } from '../../services/home.service';
 export class MainBannerComponent implements OnInit {
 
   @ViewChild('banner') bannerElem: ElementRef;
+
+  @Input('data') data: object;
 
   heading: string = '';
   contents: string = '';
@@ -26,32 +28,41 @@ export class MainBannerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.total = this._homeContents.bannerContents.length;
-    this.image = this._homeContents.bannerContents[this.number].image;
+
+    this.total = Object.keys(this.data).length;
 
     this.update();
 
+
+
+  }
+
+
+  ngAfterContentInit(): void{
     setInterval(()=>{
       this.bannerRight();
     }, 8000);
 
 
+    this.image = this.data[this.number].image;
+
+    this.animation.image = 'fadeIn';
   }
 
   ngAfterViewInit(): void {
   }
 
   update(): void {
-    this.heading = this._homeContents.bannerContents[this.number].header;
-    this.contents = this._homeContents.bannerContents[this.number].content;
-    this.image = this._homeContents.bannerContents[this.number].image;
+    this.heading = this.data[this.number].header;
+    this.contents = this.data[this.number].content;
+    this.image = this.data[this.number].image;
   }
 
 
   bannerLeft(): void {
 
     this.animation.content = "fadeOutLeft";
-    this.animation.image = "fadeOut";
+    this.animation.image = "fadeIn";
 
     setTimeout(() => {
       this.number--;

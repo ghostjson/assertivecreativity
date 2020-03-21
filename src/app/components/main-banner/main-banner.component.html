@@ -1,6 +1,6 @@
 <div class="main-banner">
 
-    <div class="animated background" [class]="animation.image" [ngStyle]="{background: 'url('+ image +')'}"></div>
+    <div class="animated background" [ngClass]="animation.image" [ngStyle]="{background: 'url('+ image +')'? 'url('+ image +')' : ''}"></div>
 
 
     <div class="arrow left-arrow" (click)="bannerLeft()">

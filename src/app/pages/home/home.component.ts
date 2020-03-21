@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { HomeService } from '../../services/home.service';
-import { Feature, ProductSlider } from './../../services/home.service';
+import { WidgetManagerService } from '../../services/widget-manager.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +9,21 @@ import { Feature, ProductSlider } from './../../services/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  featured: Array<Feature> = [];
+  @ViewChild('main', { read: ViewContainerRef }) entry: ViewContainerRef;
+  widgets: any;
 
-  productSlider: Array<ProductSlider> = [];
+  constructor(private _homeService : HomeService, private resolver: ComponentFactoryResolver,
+    private _widgetManager: WidgetManagerService) { }
 
-  constructor(private _homeService : HomeService) { }
-
-  ngOnInit(): void {
-    this.featured = this._homeService.featured;
-    this.productSlider = this._homeService.productSlider;
+  ngOnInit(): void{
 
   }
+
+  ngAfterViewInit() : void {
+    this.widgets = this._homeService.fetchData();
+    
+    this._widgetManager.drawWidgets(this.entry, this.widgets);
+  }
+  
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { ProductSlider } from '../../services/home.service';
 
 @Component({
   selector: 'app-product-slider',
@@ -10,12 +9,18 @@ import { ProductSlider } from '../../services/home.service';
 export class ProductSliderComponent implements OnInit {
 
   @ViewChild('wrapper') wrapper: ElementRef;
-  @Input('title') title: string;
-  @Input('slides') slides: Array<ProductSlider>;
+  title: string;
+  slides: object[];
+
+  @Input('data') data: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    
+    this.title = this.data.title;
+    this.slides = this.data.slides;
+
   }
 
   scrollRight(): void{
