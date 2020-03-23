@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,18 @@ export class ContactService {
     return {
       widgets: [
         {
+          component: 'Spacer',
+          data: '50'
+        },
+        {
           component: "ContactForm",
           data: {
             description: "We are here to help you."
           }
+        },
+        {
+          component: 'Spacer',
+          data: '100'
         },
         {
           component: 'ContactSection',
@@ -27,7 +35,11 @@ export class ContactService {
             email: 'somefakeemail@fake.mm',
             emailText: 'You can add any text here'
           }
-        }
+        },
+        {
+          component: 'Spacer',
+          data: '100'
+        },
       ]
     }
   }
