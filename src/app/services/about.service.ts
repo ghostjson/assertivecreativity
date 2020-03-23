@@ -11,6 +11,14 @@ export class AboutService {
     return {
       widgets: [
         {
+          component: 'Heading',
+          data: {
+            text: 'About Us',
+            fontSize: '1em',
+            padding: '10px 0px 0px 80px'
+          }
+        },
+        {
           component: 'GraphicContent',
           data: {
             image: './../../../assets/images/undraw_factory_dy0a.svg',

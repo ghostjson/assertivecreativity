@@ -4,6 +4,7 @@ import { ProductSliderComponent } from '../components/product-slider/product-sli
 import { FeaturedProductComponent } from '../components/featured-product/featured-product.component';
 import { SpacerComponent } from '../components/spacer/spacer.component';
 import { GraphicContentComponent } from '../components/graphic-content/graphic-content.component';
+import { HeadingComponent } from '../components/heading/heading.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class WidgetManagerService {
     {
       name: 'GraphicContent',
       component: GraphicContentComponent
+    },
+    {
+      name: 'Heading',
+      component: HeadingComponent
     }
   ]
 

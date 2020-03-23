@@ -12,6 +12,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider.component';
 import { SpacerComponent } from './components/spacer/spacer.component';
 import { GraphicContentComponent } from './components/graphic-content/graphic-content.component';
+import { HeadingComponent } from './components/heading/heading.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { GraphicContentComponent } from './components/graphic-content/graphic-co
     AboutComponent,
     ProductSliderComponent,
     SpacerComponent,
-    GraphicContentComponent
+    GraphicContentComponent,
+    HeadingComponent
   ],
   imports: [
     BrowserModule,
