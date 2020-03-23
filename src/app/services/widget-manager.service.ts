@@ -3,6 +3,7 @@ import { MainBannerComponent } from '../components/main-banner/main-banner.compo
 import { ProductSliderComponent } from '../components/product-slider/product-slider.component';
 import { FeaturedProductComponent } from '../components/featured-product/featured-product.component';
 import { SpacerComponent } from '../components/spacer/spacer.component';
+import { GraphicContentComponent } from '../components/graphic-content/graphic-content.component';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class WidgetManagerService {
     {
       name: 'Spacer',
       component: SpacerComponent
+    },
+    {
+      name: 'GraphicContent',
+      component: GraphicContentComponent
     }
   ]
 

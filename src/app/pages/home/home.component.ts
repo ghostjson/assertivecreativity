@@ -12,8 +12,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('main', { read: ViewContainerRef }) entry: ViewContainerRef;
   widgets: any;
 
-  constructor(private _homeService : HomeService, private resolver: ComponentFactoryResolver,
-    private _widgetManager: WidgetManagerService) { }
+  constructor(private _homeService : HomeService, private _widgetManager: WidgetManagerService) { }
 
   ngOnInit(): void{
 

@@ -1,0 +1,48 @@
+section.about{
+    display: flex;
+    margin: 20px 50px;
+
+    .content{
+        
+        width: 50vw;
+
+        p{
+            font-family: "Open Sans";
+            font-size: 0.9em;
+        }
+
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 30px;
+    }
+
+
+    .graphic{
+        width: 100%;
+
+        img{
+            width: 50vw;
+        }
+    }
+
+    &.reverse{
+        flex-direction: row-reverse;
+    }
+
+    
+}
+
+@media (max-width: 800px){
+    section.about{
+        text-align: center;
+        flex-direction: column !important;
+        margin: 5px 5px;
+
+        .content{
+            width: 100%;
+            padding: 3px;
+            text-align: left !important;
+        }
+    }
+}

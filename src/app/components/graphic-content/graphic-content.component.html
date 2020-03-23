@@ -1,1 +1,11 @@
-<p>graphic-content works!</p>
+
+<section class="about" [ngClass]="{'reverse': data.reverse}">
+
+    <div class="content">
+        {{data.content}}
+    </div>
+    <div class="graphic">
+        <img src="{{data.image}}">
+    </div>
+
+</section>
