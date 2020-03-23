@@ -1,0 +1,32 @@
+.contact-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+
+
+    .icon{
+    font-size: 2.5em;
+    color: var(--primary-color);
+    }
+
+    .title{
+        font-size: 0.9em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+        margin: 10px 0px;
+    }
+
+    .content{
+        font-size: 0.8em;
+        color: gray;
+        margin-bottom: 5px;
+    }
+
+    .value{
+        font-size: 0.9em;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+}
+

@@ -15,6 +15,7 @@ import { GraphicContentComponent } from './components/graphic-content/graphic-co
 import { HeadingComponent } from './components/heading/heading.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { ContactSectionComponent } from './components/contact-section/contact-section.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
     GraphicContentComponent,
     HeadingComponent,
     ContactComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ContactSectionComponent
   ],
   imports: [
     BrowserModule,
