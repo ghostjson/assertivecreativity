@@ -2,6 +2,7 @@ import { Injectable, ComponentFactoryResolver, ViewContainerRef } from '@angular
 import { MainBannerComponent } from '../components/main-banner/main-banner.component';
 import { ProductSliderComponent } from '../components/product-slider/product-slider.component';
 import { FeaturedProductComponent } from '../components/featured-product/featured-product.component';
+import { SpacerComponent } from '../components/spacer/spacer.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class WidgetManagerService {
       name: 'FeaturedProduct',
       component: FeaturedProductComponent
     },
+    {
+      name: 'Spacer',
+      component: SpacerComponent
+    }
   ]
 
   constructor(private resolver: ComponentFactoryResolver) { }

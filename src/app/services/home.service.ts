@@ -33,6 +33,10 @@ export class HomeService {
           ]
         },
         {
+          component: 'Spacer',
+          data: '30'
+        },
+        {
           component: 'ProductSlider',
           data: {
               title: "Today's Offer",
@@ -67,6 +71,10 @@ export class HomeService {
                 }
               ]
             }
+        },
+        {
+          component: 'Spacer',
+          data: '30'
         },
         {
           component: 'FeaturedProduct',

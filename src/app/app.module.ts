@@ -10,6 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider.component';
+import { SpacerComponent } from './components/spacer/spacer.component';
+import { GraphicContentComponent } from './components/graphic-content/graphic-content.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ProductSliderComponent } from './components/product-slider/product-slid
     FooterComponent,
     HeaderComponent,
     AboutComponent,
-    ProductSliderComponent
+    ProductSliderComponent,
+    SpacerComponent,
+    GraphicContentComponent
   ],
   imports: [
     BrowserModule,
