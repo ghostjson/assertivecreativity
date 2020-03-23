@@ -5,6 +5,7 @@ import { FeaturedProductComponent } from '../components/featured-product/feature
 import { SpacerComponent } from '../components/spacer/spacer.component';
 import { GraphicContentComponent } from '../components/graphic-content/graphic-content.component';
 import { HeadingComponent } from '../components/heading/heading.component';
+import { ContactFormComponent } from '../components/contact-form/contact-form.component';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class WidgetManagerService {
     {
       name: 'Heading',
       component: HeadingComponent
+    },
+    {
+      name: 'ContactForm',
+      component: ContactFormComponent
     }
   ]
 

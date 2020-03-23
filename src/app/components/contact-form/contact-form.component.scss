@@ -1,0 +1,51 @@
+.contact{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    height: 400px;
+    align-items: center;
+    font-family: 'Roboto';
+    margin: 0 auto;
+}
+
+.contact .content h2{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2em;
+}
+
+
+.form form .input{
+    padding: 10px;
+}
+
+.form form .input input{
+    padding: 5px;
+    border: 1px solid rgb(224, 224, 224);
+    width: 300px;
+}
+
+.form form .input input[type="submit"]{
+    background: var(--dark-color);
+    color: white;
+    transition: all 0.5s;
+    font-weight: 700;
+    &:hover{
+        background: white;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+}
+
+
+.form form .input textarea{
+    padding: 5px;
+    border: 1px solid rgb(224, 224, 224);
+    width: 300px;
+    height: 150px;
+}
+
+@media (max-width: 800px){
+    .contact{
+        flex-direction: column;
+    }
+}

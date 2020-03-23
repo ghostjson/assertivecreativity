@@ -13,6 +13,8 @@ import { ProductSliderComponent } from './components/product-slider/product-slid
 import { SpacerComponent } from './components/spacer/spacer.component';
 import { GraphicContentComponent } from './components/graphic-content/graphic-content.component';
 import { HeadingComponent } from './components/heading/heading.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { HeadingComponent } from './components/heading/heading.component';
     ProductSliderComponent,
     SpacerComponent,
     GraphicContentComponent,
-    HeadingComponent
+    HeadingComponent,
+    ContactComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
