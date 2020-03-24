@@ -2,10 +2,12 @@
     display: flex;
     width: 80%;
     justify-content: space-around;
-    height: 400px;
     align-items: center;
     font-family: 'Roboto';
     margin: 0 auto;
+    border: 1px solid rgb(224, 224, 224);
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .contact .content h2{
