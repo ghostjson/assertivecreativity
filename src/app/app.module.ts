@@ -18,6 +18,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { ContactSectionComponent } from './components/contact-section/contact-section.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { ShopComponent } from './pages/shop/shop.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     ContactSectionComponent,
     SigninComponent,
     SignupComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
