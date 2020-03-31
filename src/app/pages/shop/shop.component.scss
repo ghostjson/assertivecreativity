@@ -40,3 +40,16 @@
 .page-link{
     color: var(--dark-color);
 }
+
+.search{
+    padding: 0px;
+    margin: 0px;
+}
+
+.search input{
+    padding: 5px 10px;
+    background: var(--dark-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
