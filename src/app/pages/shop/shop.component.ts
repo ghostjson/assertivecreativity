@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../../common.service';
 
 @Component({
   selector: 'app-shop',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopComponent implements OnInit {
 
-  constructor() { }
+  featured: any;
 
-  ngOnInit(): void {
+  constructor(private common: CommonService) { }
+
+  ngOnInit(){
+    this.featured = this.common.featuredProduct();
+    console.log(this.featured)
   }
+
+  ngAfterViewInit(): void {
+    
+  }
+
+
+
 
 }

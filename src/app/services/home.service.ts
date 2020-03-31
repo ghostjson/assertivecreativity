@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { CommonService } from '../common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor() {
+  constructor(private _common : CommonService) {
   }
 
 
@@ -38,39 +39,7 @@ export class HomeService {
         },
         {
           component: 'ProductSlider',
-          data: {
-              title: "Today's Offer",
-              slides: [
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                },
-                {
-                  image: 'https://via.placeholder.com/200x200.png',
-                  url: ''
-                }
-              ]
-            }
+          data: this._common.featuredProduct()
         },
         {
           component: 'Spacer',

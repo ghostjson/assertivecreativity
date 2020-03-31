@@ -3,6 +3,8 @@
   background: #e2e2e254;
   font-family: "Lato", sans-serif;
   position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
 
   h2{
     font-size: 1.3em;
@@ -57,7 +59,7 @@
     font-size: 0.8em;
     background: var(--dark-color);
     width: fit-content;
-    margin: 0 auto;
+    margin: 5px auto;
     padding: 5px 10px;
     color: white;
     cursor: pointer;
