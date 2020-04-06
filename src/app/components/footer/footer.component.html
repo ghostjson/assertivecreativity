@@ -17,13 +17,22 @@
             <li  [routerLink]="['/shop']" routerLinkActive="active">
                 <a>Shop</a>
             </li>
-            <li  [routerLink]="['/signin']" routerLinkActive="active">
-                <a>Sign In</a>
-            </li>
-
-            <li  [routerLink]="['/signup']" routerLinkActive="active">
-                <a>Sign Up</a>
-            </li>
+            <ng-container *ngIf="!auth.isAuthenticated">
+                <li [routerLink]="['/signin']" routerLinkActive="active">
+                    <a>Sign In</a>
+                </li>
+                <li [routerLink]="['/signup']" routerLinkActive="active">
+                    <a>Sign Up</a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="auth.isAuthenticated">
+                <li [routerLink]="['/user-profile']" routerLinkActive="active">
+                    <a>Profile</a>
+                </li>
+                <li [routerLink]="['/logout']" routerLinkActive="active">
+                    <a>Logout</a>
+                </li>
+            </ng-container>
         </ul>
     </div>
 
