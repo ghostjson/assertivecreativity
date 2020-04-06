@@ -1,36 +1,38 @@
 <header>
-        <div class="left-grp">
-                
-            <i class="fas fa-bars desktop-only"></i>
-            <img src="./../../../assets/images/logo.png" alt="logo">
+    <div class="left-grp">
+
+        <i class="fas fa-bars desktop-only"></i>
+        <img src="./../../../assets/images/logo.png" alt="logo">
+    </div>
+    <div class="center">
+        <div class="menu">
+            <ul>
+                <li [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <a>Home</a>
+                </li>
+                <li [routerLink]="['/about']" routerLinkActive="active">
+                    <a>About Us</a>
+                </li>
+                <li [routerLink]="['/contact']" routerLinkActive="active">
+                    <a>Contact Us</a>
+                </li>
+                <li [routerLink]="['/shop']" routerLinkActive="active">
+                    <a>Shop</a>
+                </li>
+                <ng-container *ngIf="!auth.isAuthenticated">
+                    <li [routerLink]="['/signin']" routerLinkActive="active">
+                        <a>Sign In</a>
+                    </li>
+                    <li [routerLink]="['/signup']" routerLinkActive="active">
+                        <a>Sign Up</a>
+                    </li>
+                </ng-container>
+            </ul>
         </div>
-        <div class="center">
-                <div class="menu">
-                        <ul>
-                            <li [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                                <a>Home</a>
-                            </li>
-                            <li [routerLink]="['/about']" routerLinkActive="active">
-                                <a>About Us</a>
-                            </li>
-                            <li [routerLink]="['/contact']" routerLinkActive="active">
-                                <a>Contact Us</a>
-                            </li>
-                            <li [routerLink]="['/shop']" routerLinkActive="active">
-                                <a>Shop</a>
-                            </li>
-                            <li [routerLink]="['/signin']" routerLinkActive="active">
-                                <a>Sign In</a>
-                            </li>
-                            <li [routerLink]="['/signup']" routerLinkActive="active">
-                                <a>Sign Up</a>
-                            </li>
-                        </ul>
-                    </div>
-        </div>
-        <!-- <div class="right-grp">
+    </div>
+    <!-- <div class="right-grp">
             <i class="fas fa-search"></i>
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">2</span>
         </div> -->
-    </header>
+</header>

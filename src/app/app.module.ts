@@ -20,7 +20,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

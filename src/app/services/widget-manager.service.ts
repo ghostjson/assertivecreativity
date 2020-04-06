@@ -16,7 +16,7 @@ export class WidgetManagerService {
   factory: any;
   componentRef: any;
 
-
+  // Register Widget Component here
   widgets: {name: string, component: any}[] = [
     {
       name: 'MainBanner',
