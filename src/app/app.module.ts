@@ -19,6 +19,7 @@ import { ContactSectionComponent } from './components/contact-section/contact-se
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ShopComponent } from './pages/shop/shop.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ShopComponent } from './pages/shop/shop.component';
     SigninComponent,
     SignupComponent,
     ShopComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
