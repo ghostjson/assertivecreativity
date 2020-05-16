@@ -1,27 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { FormComponent } from "./library/FormComponents";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { MainBannerComponent } from './components/main-banner/main-banner.component';
-import { FeaturedProductComponent } from './components/featured-product/featured-product.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ProductSliderComponent } from './components/product-slider/product-slider.component';
-import { SpacerComponent } from './components/spacer/spacer.component';
-import { GraphicContentComponent } from './components/graphic-content/graphic-content.component';
-import { HeadingComponent } from './components/heading/heading.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { ContactFormComponent } from './components/contact-form/contact-form.component';
-import { ContactSectionComponent } from './components/contact-section/contact-section.component';
-import { SigninComponent } from './pages/signin/signin.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { ShopComponent } from './pages/shop/shop.component';
-import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './pages/logout/logout.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { MainBannerComponent } from "./components/main-banner/main-banner.component";
+import { FeaturedProductComponent } from "./components/featured-product/featured-product.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { HeaderComponent } from "./components/header/header.component";
+import { AboutComponent } from "./pages/about/about.component";
+import { ProductSliderComponent } from "./components/product-slider/product-slider.component";
+import { SpacerComponent } from "./components/spacer/spacer.component";
+import { GraphicContentComponent } from "./components/graphic-content/graphic-content.component";
+import { HeadingComponent } from "./components/heading/heading.component";
+import { ContactComponent } from "./pages/contact/contact.component";
+import { ContactFormComponent } from "./components/contact-form/contact-form.component";
+import { ContactSectionComponent } from "./components/contact-section/contact-section.component";
+import { SigninComponent } from "./pages/signin/signin.component";
+import { SignupComponent } from "./pages/signup/signup.component";
+import { ShopComponent } from "./pages/shop/shop.component";
+import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
+import { FormsModule } from "@angular/forms";
+import { LogoutComponent } from "./pages/logout/logout.component";
+import { FormViewComponent } from "./pages/form-view/form-view.component";
 
 @NgModule({
   declarations: [
@@ -44,13 +47,10 @@ import { LogoutComponent } from './pages/logout/logout.component';
     ShopComponent,
     UserProfileComponent,
     LogoutComponent,
+    FormViewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [FormComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

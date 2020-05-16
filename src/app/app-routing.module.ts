@@ -9,6 +9,7 @@ import { ShopComponent } from './pages/shop/shop.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { FormViewComponent } from './pages/form-view/form-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-  { path: 'logout', component: LogoutComponent}
+  { path: 'logout', component: LogoutComponent},
+  { path: 'form/:formId', component: FormViewComponent}
 ];
 
 @NgModule({
