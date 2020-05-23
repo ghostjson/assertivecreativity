@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'logout', component: LogoutComponent},
   { path: 'form/:formId', component: FormViewComponent},
-  { path: 'cart', component: CartComponent}
+  { path: 'cart', component: CartComponent},
+  { path: 'checkout', component: CheckoutComponent}
 ];
 
 @NgModule({

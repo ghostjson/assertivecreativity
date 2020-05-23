@@ -26,6 +26,7 @@ import { FormsModule } from "@angular/forms";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CartComponent } from './pages/cart/cart.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CartComponent } from './pages/cart/cart.component';
     UserProfileComponent,
     LogoutComponent,
     FormViewComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [FormComponent],
