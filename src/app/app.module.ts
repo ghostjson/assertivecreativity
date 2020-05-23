@@ -25,6 +25,7 @@ import { UserProfileComponent } from "./pages/user-profile/user-profile.componen
 import { FormsModule } from "@angular/forms";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FormViewComponent } from "./pages/form-view/form-view.component";
     ShopComponent,
     UserProfileComponent,
     LogoutComponent,
-    FormViewComponent
+    FormViewComponent,
+    CartComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [FormComponent],

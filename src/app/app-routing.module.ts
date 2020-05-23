@@ -1,3 +1,4 @@
+import { CartComponent } from './pages/cart/cart.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'logout', component: LogoutComponent},
-  { path: 'form/:formId', component: FormViewComponent}
+  { path: 'form/:formId', component: FormViewComponent},
+  { path: 'cart', component: CartComponent}
 ];
 
 @NgModule({

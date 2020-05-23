@@ -34,13 +34,14 @@
                     <li [routerLink]="['/logout']" routerLinkActive="active">
                         <a>Logout</a>
                     </li>
+                    <div class="right-grp">
+                        <!-- <i class="fas fa-search"></i> -->
+                        <i class="fas fa-shopping-cart" [routerLink]="['/cart']"></i>
+                        <span class="cart-count">3</span>
+                    </div>
                 </ng-container>
             </ul>
         </div>
     </div>
-    <!-- <div class="right-grp">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">2</span>
-        </div> -->
+    
 </header>
