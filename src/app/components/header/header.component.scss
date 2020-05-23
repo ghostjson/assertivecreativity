@@ -1,11 +1,12 @@
 header {
   width: 100%;
   display: grid;
-  padding: 30px 40px;
+  padding: 10px 40px;
   grid-template-columns: 1fr 5fr 1fr;
   font-size: 1.2em;
   font-family: "Lato", sans-serif;
   border: 1px solid rgba(236, 236, 236, 0.664);
+
 
   i.fa-bars {
     margin: 0 20px;
@@ -25,7 +26,7 @@ header {
 
   .left-grp {
     img {
-      width: 300px;
+      width: 250px;
     }
   }
 
@@ -35,14 +36,16 @@ header {
     font-size: 0.7em;
     font-weight: 700;
     text-transform: uppercase;
+    padding-top: 15px;
 
     ul {
       list-style: none;
-
+      
       display: flex;
-
+      
       li {
         padding: 0 30px;
+        outline: none;
       }
 
       li a,
@@ -51,7 +54,7 @@ header {
       li a:hover {
         text-decoration: none;
         color: var(--dark-color);
-
+        outline: none;
         transition: color 0.5s;
         cursor: pointer;
       }
