@@ -27,6 +27,7 @@ import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CommunicationComponent } from './pages/communication/communication.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     LogoutComponent,
     FormViewComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CommunicationComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [FormComponent],

@@ -12,6 +12,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { AuthGuard } from './guard/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { FormViewComponent } from './pages/form-view/form-view.component';
+import { CommunicationComponent } from './pages/communication/communication.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent},
   { path: 'form/:formId', component: FormViewComponent},
   { path: 'cart', component: CartComponent},
-  { path: 'checkout', component: CheckoutComponent}
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'communication', component: CommunicationComponent}
 ];
 
 @NgModule({
