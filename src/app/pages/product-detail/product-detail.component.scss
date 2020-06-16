@@ -1,0 +1,45 @@
+#product-indicator {
+  margin: 15%;
+}
+
+.content {
+  padding-top: 100px;
+
+  h3 {
+    font-size: 2em;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size: 1em;
+    color: var(--primary-color);
+  }
+
+  .params {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    p {
+      margin-bottom: 3px;
+    }
+  }
+}
+
+.more {
+  font-size: 0.9em;
+  background: var(--dark-color);
+  width: fit-content;
+  margin: 5px 5px;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.rating {
+  margin-top: 30px;
+
+  .total_rate {
+    &:first-child {
+      text-align: center;
+    }
+  }
+}

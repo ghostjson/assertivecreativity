@@ -1,3 +1,4 @@
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'form/:formId', component: FormViewComponent},
   { path: 'cart', component: CartComponent},
   { path: 'checkout', component: CheckoutComponent},
-  { path: 'communication', component: CommunicationComponent}
+  { path: 'communication', component: CommunicationComponent},
+  { path: 'product/detail', component: ProductDetailComponent}
 ];
 
 @NgModule({

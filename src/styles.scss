@@ -1,18 +1,23 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-:root{
-    --primary-color: #CC9933;
-    --secondary-color: #DEEFB7;
-    --dark-color: #2B2B2B;
-
-    
-
+:root {
+  --primary-color: #cc9933;
+  --secondary-color: #deefb7;
+  --dark-color: #2b2b2b;
 }
 
- 
-
+.highlight {
+  color: var(--primary-color);
+}

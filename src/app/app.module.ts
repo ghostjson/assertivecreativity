@@ -3,6 +3,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
+
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
@@ -28,6 +30,11 @@ import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CommunicationComponent } from './pages/communication/communication.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
 
 @NgModule({
   declarations: [
@@ -53,9 +60,11 @@ import { CommunicationComponent } from './pages/communication/communication.comp
     FormViewComponent,
     CartComponent,
     CheckoutComponent,
-    CommunicationComponent
+    CommunicationComponent,
+    ProductDetailComponent,
+    VendorAdminComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
   providers: [FormComponent],
   bootstrap: [AppComponent]
 })
