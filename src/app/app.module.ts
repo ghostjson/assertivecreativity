@@ -36,6 +36,8 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
 import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
+import { MailBoxComponent } from './components/mail-box/mail-box.component';
+import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { VendorAdminHeaderComponent } from './components/vendor-admin-header/ven
     CommunicationComponent,
     ProductDetailComponent,
     VendorAdminComponent,
-    VendorAdminHeaderComponent
+    VendorAdminHeaderComponent,
+    MailBoxComponent,
+    VendorAdminMailComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
   providers: [FormComponent],
