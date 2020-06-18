@@ -29,10 +29,14 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/adminlte.min.css",
+              "src/assets/css/OverlayScrollbars.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/js/adminlte.min.js",
+              "src/assets/js/jquery.overlayScrollbars.min.js"
             ]
           },
           "configurations": {

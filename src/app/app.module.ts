@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
+import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.componen
     CheckoutComponent,
     CommunicationComponent,
     ProductDetailComponent,
-    VendorAdminComponent
+    VendorAdminComponent,
+    VendorAdminHeaderComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
   providers: [FormComponent],
