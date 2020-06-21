@@ -17,6 +17,7 @@ import { CommunicationComponent } from './pages/communication/communication.comp
 import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
+import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'product/detail', component: ProductDetailComponent},
   { path: 'vendor/admin', component: VendorAdminComponent},
   { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
-  { path: 'vendor/admin/products', component: VendorAdminProductsComponent}
+  { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
+  { path: 'vendor/admin/products/show', component: VendorAdminProductComponent}
 ];
 
 @NgModule({

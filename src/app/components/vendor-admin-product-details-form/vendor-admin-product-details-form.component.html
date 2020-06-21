@@ -1,0 +1,32 @@
+<div class="card card-primary">
+  <div class="card-header">
+    <h2 class="card-title">Product Detail</h2>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form role="form">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="product-name">Name</label>
+        <input type="text" class="form-control" name="name" id="product-name" placeholder="Enter product name" required>
+      </div>
+      <div class="form-group">
+        <label for="product-description">Description</label>
+        <textarea class="form-control" name="description" id="product-description" placeholder="Enter the product details" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-price">Price</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" name="price" id="product-price" class="form-control" required>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</div>

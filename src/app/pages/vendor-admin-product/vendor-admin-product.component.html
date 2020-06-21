@@ -1,0 +1,17 @@
+<app-vendor-admin-header></app-vendor-admin-header>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <h1 class="col-12">
+      {{ product.name }}
+    </h1>
+    <div class="col-12 col-md-8">
+      <app-vendor-admin-product-image [product]="product"></app-vendor-admin-product-image>
+    </div>
+    <div class="col-12 col-md-8">
+      <app-vendor-admin-product-details-form></app-vendor-admin-product-details-form>
+    </div>
+    <div class="col-12 col-md-8">
+      <app-vendor-admin-product-features-form></app-vendor-admin-product-features-form>
+    </div>
+  </div>
+</div>

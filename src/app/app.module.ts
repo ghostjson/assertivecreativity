@@ -40,6 +40,10 @@ import { MailBoxComponent } from './components/mail-box/mail-box.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
 import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
+import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
+import { VendorAdminProductImageComponent } from './components/vendor-admin-product-image/vendor-admin-product-image.component';
+import { VendorAdminProductDetailsFormComponent } from './components/vendor-admin-product-details-form/vendor-admin-product-details-form.component';
+import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +76,11 @@ import { VendorAdminProductsListComponent } from './components/vendor-admin-prod
     MailBoxComponent,
     VendorAdminMailComponent,
     VendorAdminProductsComponent,
-    VendorAdminProductsListComponent
+    VendorAdminProductsListComponent,
+    VendorAdminProductComponent,
+    VendorAdminProductImageComponent,
+    VendorAdminProductDetailsFormComponent,
+    VendorAdminProductFeaturesFormComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
   providers: [FormComponent],
