@@ -22,6 +22,11 @@ export class VendorAdminHeaderComponent implements OnInit {
                 location: ['/vendor/admin/mail'],
                 icon: 'fas fa-envelope-open-text'
             },
+            {
+                text: 'Products',
+                location: ['/vendor/admin/products'],
+                icon: 'fas fa-store'
+            }
         ];
     }
 }

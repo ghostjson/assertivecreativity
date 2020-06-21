@@ -38,6 +38,8 @@ import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.componen
 import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
+import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
+import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin
     VendorAdminComponent,
     VendorAdminHeaderComponent,
     MailBoxComponent,
-    VendorAdminMailComponent
+    VendorAdminMailComponent,
+    VendorAdminProductsComponent,
+    VendorAdminProductsListComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
   providers: [FormComponent],
