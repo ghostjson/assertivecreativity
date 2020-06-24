@@ -34,6 +34,8 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+
+/** Vendor Admin module imports */
 import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
 import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
@@ -44,6 +46,10 @@ import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor
 import { VendorAdminProductImageComponent } from './components/vendor-admin-product-image/vendor-admin-product-image.component';
 import { VendorAdminProductDetailsFormComponent } from './components/vendor-admin-product-details-form/vendor-admin-product-details-form.component';
 import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
+import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
+import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -80,9 +86,12 @@ import { VendorAdminProductFeaturesFormComponent } from './components/vendor-adm
     VendorAdminProductComponent,
     VendorAdminProductImageComponent,
     VendorAdminProductDetailsFormComponent,
-    VendorAdminProductFeaturesFormComponent
+    VendorAdminProductFeaturesFormComponent,
+    VendorAdminMailComposeComponent,
+    VendorAdminMailWriterComponent,
+    VendorAdminMailSidebarComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule, NgxSummernoteModule],
   providers: [FormComponent],
   bootstrap: [AppComponent]
 })
