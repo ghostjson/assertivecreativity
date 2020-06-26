@@ -50,6 +50,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
 import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
 import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
+import { VendorAdminStatusCardComponent } from './components/vendor-admin-status-card/vendor-admin-status-card.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-
     VendorAdminProductFeaturesFormComponent,
     VendorAdminMailComposeComponent,
     VendorAdminMailWriterComponent,
-    VendorAdminMailSidebarComponent
+    VendorAdminMailSidebarComponent,
+    VendorAdminStatusCardComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule, NgxSummernoteModule],
   providers: [FormComponent],

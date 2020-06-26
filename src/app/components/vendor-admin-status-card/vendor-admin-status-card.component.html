@@ -1,0 +1,10 @@
+<div [ngClass]="card.classes">
+  <div class="inner">
+    <h3>{{ card.value }}</h3>
+    <p>{{ card.title }}</p>
+  </div>
+  <div class="icon">
+    <i [ngClass]="card.icon"></i>
+  </div>
+  <a [routerLink]="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+</div>

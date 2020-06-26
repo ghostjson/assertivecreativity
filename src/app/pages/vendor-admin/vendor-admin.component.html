@@ -1,8 +1,10 @@
-<app-vendor-admin-header></app-vendor-admin-header>
-
-
-
-
-
-
-
+<div>
+    <app-vendor-admin-header></app-vendor-admin-header>
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let card of cards" class="col-lg-3 col-6">
+                <app-vendor-admin-status-card [card]="card"></app-vendor-admin-status-card>
+            </div>
+        </div>
+    </div>
+</div>
