@@ -51,6 +51,9 @@ import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compo
 import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
 import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
 import { VendorAdminStatusCardComponent } from './components/vendor-admin-status-card/vendor-admin-status-card.component';
+import { ChartjsModule } from '@ctrl/ngx-chartjs';
+import { VendorAdminFooterComponent } from './components/vendor-admin-footer/vendor-admin-footer.component';
+import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
 
 @NgModule({
   declarations: [
@@ -91,9 +94,11 @@ import { VendorAdminStatusCardComponent } from './components/vendor-admin-status
     VendorAdminMailComposeComponent,
     VendorAdminMailWriterComponent,
     VendorAdminMailSidebarComponent,
-    VendorAdminStatusCardComponent
+    VendorAdminStatusCardComponent,
+    VendorAdminFooterComponent,
+    VendorAdminChartCardComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule, NgxSummernoteModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule, NgxSummernoteModule, ChartjsModule],
   providers: [FormComponent],
   bootstrap: [AppComponent]
 })
