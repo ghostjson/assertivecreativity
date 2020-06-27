@@ -10,10 +10,10 @@ import { VendorAdminProductService } from '../../services/vendor-admin-product.s
 export class VendorAdminProductsListComponent implements OnInit {
   products: Product[]
 
-  constructor(private productService: VendorAdminProductService) { }
+  constructor(private _productService: VendorAdminProductService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.products = this._productService.getProducts();
   }
 
 }

@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
   { path: 'vendor/admin/mail/compose', component: VendorAdminMailComposeComponent},
   { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
-  { path: 'vendor/admin/products/show', component: VendorAdminProductComponent},
+  { path: 'vendor/admin/products/:id', component: VendorAdminProductComponent},
 ];
 
 @NgModule({

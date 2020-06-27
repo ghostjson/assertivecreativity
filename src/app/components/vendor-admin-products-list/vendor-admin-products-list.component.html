@@ -50,13 +50,13 @@
               <tr *ngFor="let product of products">
                 <td>
                   <div class="icheck-primary">
-                    <input type="checkbox" value="" id="check1">
-                    <label for="check1"></label>
+                    <input type="checkbox" value="" id="'check' + {{ product.id }}">
+                    <label for="'check' + {{ product.id }}"></label>
                   </div>
                 </td>
                 <td>
                   <img src="{{ product.image }}" alt="{{ product.name }}" class="img-circle img-size-32 mr-2">
-                  <a [routerLink]="product.link" class="link-to-product">
+                  <a [routerLink]="[product.id]" class="link-to-product">
                     {{ product.name }}
                   </a>
                 </td>
