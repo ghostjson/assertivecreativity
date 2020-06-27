@@ -36,7 +36,7 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 /** Vendor Admin module imports */
-import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
+import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
 import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
@@ -81,7 +81,7 @@ import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-c
     CheckoutComponent,
     CommunicationComponent,
     ProductDetailComponent,
-    VendorAdminComponent,
+    VendorAdminDashboardComponent,
     VendorAdminHeaderComponent,
     MailBoxComponent,
     VendorAdminMailComponent,

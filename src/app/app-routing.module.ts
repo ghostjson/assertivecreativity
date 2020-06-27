@@ -14,7 +14,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { FormViewComponent } from './pages/form-view/form-view.component';
 import { CommunicationComponent } from './pages/communication/communication.component';
-import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
+import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
   { path: 'communication', component: CommunicationComponent},
   { path: 'product/detail', component: ProductDetailComponent},
-  { path: 'vendor/admin', component: VendorAdminComponent},
+  { path: 'vendor/admin', component: VendorAdminDashboardComponent},
   { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
   { path: 'vendor/admin/mail/compose', component: VendorAdminMailComposeComponent},
   { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
