@@ -16,4 +16,12 @@ export class VendorAdminProductsListComponent implements OnInit {
     this.products = this._productService.getProducts();
   }
 
+  deleteProduct(product: Product): void {
+    console.log('Product ID: ', product.id);
+    // delete from ui
+    this.products = this.products.filter(p => p.id != product.id);
+    // delete from the server
+    this.products = this._productService.deleteProduct(product);
+  }
+
 }

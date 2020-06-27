@@ -18,13 +18,6 @@
       <!-- /.card-header -->
       <div class="card-body p-0">
         <div class="mailbox-controls">
-          <!-- Check all button -->
-          <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-          </button>
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-          </div>
-          <!-- /.btn-group -->
           <div class="float-right">
             1-50/200
             <div class="btn-group">
@@ -39,21 +32,15 @@
           <table class="table table-hover table-striped">
             <thead>
               <tr>
-                <th></th>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Sales</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let product of products">
-                <td>
-                  <div class="icheck-primary">
-                    <input type="checkbox" value="" id="'check' + {{ product.id }}">
-                    <label for="'check' + {{ product.id }}"></label>
-                  </div>
-                </td>
                 <td>
                   <img src="{{ product.image }}" alt="{{ product.name }}" class="img-circle img-size-32 mr-2">
                   <a [routerLink]="[product.id]" class="link-to-product">
@@ -67,6 +54,9 @@
                 <td>
                   {{ product.sales }}
                 </td>
+                <td>
+                  <button (click)="deleteProduct(product)" attr.data-product-id="{{ product.id }}" type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -77,13 +67,6 @@
       <!-- /.card-body -->
       <div class="card-footer p-0">
         <div class="mailbox-controls">
-          <!-- Check all button -->
-          <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-          </button>
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-          </div>
-          <!-- /.btn-group -->
           <div class="float-right">
             1-50/200
             <div class="btn-group">

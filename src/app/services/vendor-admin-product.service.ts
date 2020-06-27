@@ -53,7 +53,7 @@ export class VendorAdminProductService {
     return this.products;
   }
 
-  deletProduct(product: Product): Product[] {
+  deleteProduct(product: Product): Product[] {
     this.products = this.products.filter(p => {
       return p.id != product.id;
     });
@@ -65,13 +65,5 @@ export class VendorAdminProductService {
     return this.products.find(p => {
       return p.id === id
     });
-    // return {
-    //   id: '1',
-    //   name: 'Product 1',
-    //   image: '../../../assets/images/default-150x150.png',
-    //   price: 100,
-    //   stock: 25000,
-    //   sales: 12000
-    // };
   }
 }
