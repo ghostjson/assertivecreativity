@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/Product';
+import { Product, ProductColor, ProductSize } from '../models/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -7,38 +7,132 @@ import { Product } from '../models/Product';
 
 export class VendorAdminProductService {
   products = [
-    {
-      id: '1',
-      name: 'Product 1',
-      image: '../../../assets/images/default-150x150.png',
-      price: 100,
-      stock: 25000,
-      sales: 12000
-    },
-    {
-      id: '2',
-      name: 'Product 2',
-      image: '../../../assets/images/default-150x150.png',
-      price: 45,
-      stock: 25000,
-      sales: 435345
-    },
-    {
-      id: '3',
-      name: 'Product 3',
-      image: '../../../assets/images/default-150x150.png',
-      price: 45,
-      stock: 25000,
-      sales: 127565
-    },
-    {
-      id: '4',
-      name: 'Product 4',
-      image: '../../../assets/images/default-150x150.png',
-      price: 45,
-      stock: 25000,
-      sales: 7567556
-    },
+    new Product(
+      '1',
+      'Product 1',
+      'This is a random product that does not exist',
+      100,
+      25000,
+      12000,
+      '../../../assets/images/default-150x150.png',
+      [
+        new ProductColor(
+          'Pick a color',
+          [
+            {
+              colorName: 'Red',
+              colorHex: '#ff0000'
+            },
+            {
+              colorName: 'Blue',
+              colorHex: '#0000ff'
+            },
+            {
+              colorName: 'Green',
+              colorHex: '#00ff00'
+            }
+          ]
+        ),
+        new ProductSize([
+          {
+            name: 'L',
+            value: 50
+          },
+          {
+            name: 'M',
+            value: 40
+          },
+          {
+            name: 'S',
+            value: 20
+          }
+        ])
+      ]
+    ),
+    new Product(
+      '2',
+      'Product 2',
+      'This is a random product that does not exist',
+      100,
+      25000,
+      12000,
+      '../../../assets/images/default-150x150.png',
+      [
+        new ProductColor(
+          'Pick a color',
+          [
+            {
+              colorName: 'Red',
+              colorHex: '#ff0000'
+            },
+            {
+              colorName: 'Blue',
+              colorHex: '#0000ff'
+            },
+            {
+              colorName: 'Green',
+              colorHex: '#00ff00'
+            }
+          ]
+        ),
+        new ProductSize([
+          {
+            name: 'L',
+            value: 50
+          },
+          {
+            name: 'M',
+            value: 40
+          },
+          {
+            name: 'S',
+            value: 20
+          }
+        ])
+      ]
+    ),
+    new Product(
+      '3',
+      'Product 3',
+      'This is a random product that does not exist',
+      100,
+      25000,
+      12000,
+      '../../../assets/images/default-150x150.png',
+      [
+        new ProductColor(
+          'Pick a color',
+          [
+            {
+              colorName: 'Red',
+              colorHex: '#ff0000'
+            },
+            {
+              colorName: 'Blue',
+              colorHex: '#0000ff'
+            },
+            {
+              colorName: 'Green',
+              colorHex: '#00ff00'
+            }
+          ]
+        ),
+        new ProductSize([
+          {
+            name: 'L',
+            value: 50
+          },
+          {
+            name: 'M',
+            value: 40
+          },
+          {
+            name: 'S',
+            value: 20
+          }
+        ])
+      ]
+    )
   ];
 
   constructor() { }
