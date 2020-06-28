@@ -54,6 +54,8 @@ import { VendorAdminStatusCardComponent } from './components/vendor-admin-status
 import { ChartjsModule } from '@ctrl/ngx-chartjs';
 import { VendorAdminFooterComponent } from './components/vendor-admin-footer/vendor-admin-footer.component';
 import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
+import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -96,9 +98,22 @@ import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-c
     VendorAdminMailSidebarComponent,
     VendorAdminStatusCardComponent,
     VendorAdminFooterComponent,
-    VendorAdminChartCardComponent
+    VendorAdminChartCardComponent,
+    VendorAdminAddProductComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule, NgxSummernoteModule, ChartjsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NgxSummernoteModule,
+    ChartjsModule,
+    ReactiveFormsModule
+  ],
   providers: [FormComponent],
   bootstrap: [AppComponent]
 })

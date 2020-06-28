@@ -4,29 +4,53 @@
   </div>
   <!-- /.card-header -->
   <!-- form start -->
-  <form role="form">
+  <form [formGroup]="newProductForm" (ngSubmit)="addProduct()" role="form" action="/vendor/admin/products" method="POST">
     <div class="card-body">
       <div class="form-group">
         <label for="product-name">Name</label>
-        <input type="text" class="form-control" name="name" id="product-name" placeholder="Enter product name" required>
+        <input formControlName="name" type="text" class="form-control" name="name" id="product-name" placeholder="Enter product name" required>
       </div>
       <div class="form-group">
         <label for="product-description">Description</label>
-        <textarea class="form-control" name="description" id="product-description" placeholder="Enter the product details" required></textarea>
+        <textarea formControlName="description" class="form-control" name="description" id="product-description" placeholder="Enter the product details" required></textarea>
       </div>
       <div class="form-group">
         <label for="product-price">Price</label>
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+            <span class="input-group-text">
+              <i class="fas fa-money-bill-alt"></i>
+            </span>
           </div>
-          <input type="text" name="price" id="product-price" class="form-control" required>
+          <input formControlName="price" type="text" name="price" id="product-price" class="form-control" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="product-stock">stock</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-warehouse"></i>
+            </span>
+          </div>
+          <input formControlName="stock" type="text" name="stock" id="product-stock" class="form-control" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="product-image">image</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-image"></i>
+            </span>
+          </div>
+          <input formControlName="image" type="text" name="image" id="product-image" class="form-control" required>
         </div>
       </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button [disabled]="!newProductForm.valid" type="submit" class="btn btn-primary">Save</button>
     </div>
   </form>
 </div>

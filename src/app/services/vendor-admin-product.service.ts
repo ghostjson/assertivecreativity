@@ -141,10 +141,10 @@ export class VendorAdminProductService {
     return this.products;
   }
 
-  addProduct(product: Product): Product[] {
+  addProduct(product: Product): Product {
     this.products.push(product);
 
-    return this.products;
+    return this.products[this.products.length - 1];
   }
 
   deleteProduct(product: Product): Product[] {

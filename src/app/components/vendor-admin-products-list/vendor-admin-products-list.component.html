@@ -1,9 +1,11 @@
 <div class="row d-flex justify-content-center">
   <div class="col-md-11">
+    <h1>
+      Products
+    </h1>
     <div class="card card-primary card-outline">
       <div class="card-header">
-        <h3 class="card-title">Products</h3>
-        <div class="card-tools">
+        <div class="card-tools product-search">
           <div class="input-group input-group-sm">
             <input type="text" class="form-control" placeholder="Search Products">
             <div class="input-group-append">
@@ -12,8 +14,13 @@
               </div>
             </div>
           </div>
+          <!-- /.card-tools -->
         </div>
-        <!-- /.card-tools -->
+        <div class="card-tools add-product">
+          <a [routerLink]="['/vendor/admin/products/add']" class="btn btn-primary">
+            Add New Product
+          </a>
+        </div>
       </div>
       <!-- /.card-header -->
       <div class="card-body p-0">

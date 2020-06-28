@@ -19,7 +19,7 @@ import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
 import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
-
+import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent},
@@ -38,6 +38,7 @@ const routes: Routes = [
   { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
   { path: 'vendor/admin/mail/compose', component: VendorAdminMailComposeComponent},
   { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
+  { path: 'vendor/admin/products/add', component: VendorAdminAddProductComponent},
   { path: 'vendor/admin/products/:id', component: VendorAdminProductComponent},
 ];
 
