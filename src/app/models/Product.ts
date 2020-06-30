@@ -25,6 +25,7 @@ export class ProductColor {
 // model for specifying color
 export class Color {
   constructor(
+    public id: number,
     public colorName: string,
     public colorHex: string
   ) {
@@ -36,6 +37,7 @@ export class Color {
 // model for product size
 export class ProductSize {
   constructor(
+    public title: string,
     public sizes: Size[]
   ) {}
 }

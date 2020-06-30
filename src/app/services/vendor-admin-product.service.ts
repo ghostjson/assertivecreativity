@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Product, ProductColor, ProductSize } from '../models/Product';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,33 +19,38 @@ export class VendorAdminProductService {
           'Pick a color',
           [
             {
+              id: 1,
               colorName: 'Red',
               colorHex: '#ff0000'
             },
             {
+              id: 2,
               colorName: 'Blue',
               colorHex: '#0000ff'
             },
             {
+              id: 3,
               colorName: 'Green',
               colorHex: '#00ff00'
             }
           ]
         ),
-        new ProductSize([
-          {
-            name: 'L',
-            value: 50
-          },
-          {
-            name: 'M',
-            value: 40
-          },
-          {
-            name: 'S',
-            value: 20
-          }
-        ])
+        new ProductSize(
+          'Pick a size',
+          [
+            {
+              name: 'L',
+              value: 50
+            },
+            {
+              name: 'M',
+              value: 40
+            },
+            {
+              name: 'S',
+              value: 20
+            }
+          ])
       ]
     ),
     new Product(
@@ -62,33 +66,38 @@ export class VendorAdminProductService {
           'Pick a color',
           [
             {
+              id: 1,
               colorName: 'Red',
               colorHex: '#ff0000'
             },
             {
+              id: 2,
               colorName: 'Blue',
               colorHex: '#0000ff'
             },
             {
+              id: 3,
               colorName: 'Green',
               colorHex: '#00ff00'
             }
           ]
         ),
-        new ProductSize([
-          {
-            name: 'L',
-            value: 50
-          },
-          {
-            name: 'M',
-            value: 40
-          },
-          {
-            name: 'S',
-            value: 20
-          }
-        ])
+        new ProductSize(
+          'Pick a size',
+          [
+            {
+              name: 'L',
+              value: 50
+            },
+            {
+              name: 'M',
+              value: 40
+            },
+            {
+              name: 'S',
+              value: 20
+            }
+          ])
       ]
     ),
     new Product(
@@ -104,33 +113,38 @@ export class VendorAdminProductService {
           'Pick a color',
           [
             {
+              id: 1,
               colorName: 'Red',
               colorHex: '#ff0000'
             },
             {
+              id: 2,
               colorName: 'Blue',
               colorHex: '#0000ff'
             },
             {
+              id: 3,
               colorName: 'Green',
               colorHex: '#00ff00'
             }
           ]
         ),
-        new ProductSize([
-          {
-            name: 'L',
-            value: 50
-          },
-          {
-            name: 'M',
-            value: 40
-          },
-          {
-            name: 'S',
-            value: 20
-          }
-        ])
+        new ProductSize(
+          'Pick a size',
+          [
+            {
+              name: 'L',
+              value: 50
+            },
+            {
+              name: 'M',
+              value: 40
+            },
+            {
+              name: 'S',
+              value: 20
+            }
+          ])
       ]
     )
   ];

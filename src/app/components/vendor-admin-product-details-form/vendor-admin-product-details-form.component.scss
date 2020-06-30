@@ -9,3 +9,24 @@ h1 {
     text-transform: capitalize;
   }
 }
+
+.add-product-feature {
+  h2 {
+    text-align: center;
+  }
+
+  padding-bottom: 1em;
+
+  .add-feature-form {
+    display: flex;
+    align-items: center;
+
+    .input-group {
+      width: auto;
+    }
+
+    >* {
+      margin-left: 1em;
+    }
+  }
+}

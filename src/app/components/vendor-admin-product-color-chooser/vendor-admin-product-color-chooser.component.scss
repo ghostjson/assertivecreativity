@@ -1,0 +1,35 @@
+.card {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &::before, &::after {
+    display: none;
+  }
+}
+
+.color-chooser-preview {
+  height: 2.4rem;
+  width: 6rem;
+}
+
+.color-picker-input {
+  border-left: none;
+}
+
+.form-group.color {
+  margin-bottom: 1em;
+
+  .input-group {
+    padding: 1em;
+
+    label {
+      width: 100%;
+    }
+  }
+}

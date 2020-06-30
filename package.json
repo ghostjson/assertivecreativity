@@ -27,6 +27,7 @@
     "chart.js": "^2.9.3",
     "eva-icons": "^1.1.2",
     "jquery": "^3.5.1",
+    "ngx-color-picker": "^9.1.0",
     "ngx-summernote": "^0.7.7",
     "rxjs": "~6.5.4",
     "summernote": "^0.8.18",

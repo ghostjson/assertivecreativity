@@ -47,6 +47,29 @@
           <input formControlName="image" type="text" name="image" id="product-image" class="form-control" required>
         </div>
       </div>
+      <div class="form-group add-product-feature card">
+        <h2>Product Features</h2>
+        <div class="card-body add-feature-form">
+          <label class="sr-only" for="product-image">Select feature to add</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fas fa-plus-square"></i>
+              </span>
+            </div>
+            <select formControlName="addFeatureSelect">
+              <option value="null" selected>Select</option>
+              <option value="color">Color</option>
+            </select>
+          </div>
+          <div>
+            <button (click)="addFeatureForm()" type="button" class="btn btn-primary">Add feature</button>
+          </div>
+        </div>
+        <div class="active-features-container">
+          <ng-template appVendorAdminColorChooser></ng-template>
+        </div>
+      </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
