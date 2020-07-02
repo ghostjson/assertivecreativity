@@ -16,6 +16,10 @@ export class VendorAdminProductsListComponent implements OnInit {
     this.products = this._productService.getProducts();
   }
 
+  createNewProduct(): void {
+    console.log(this._productService.createNewProduct());
+  }
+
   deleteProduct(product: Product): void {
     console.log('Product ID: ', product.id);
     // delete from ui

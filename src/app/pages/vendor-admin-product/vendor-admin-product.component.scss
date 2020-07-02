@@ -1,9 +1,34 @@
 @import 'src/assets/css/admin-common.scss';
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    margin-top: 5em;
+  margin-top: 5em;
+}
+
+.list-colors {
+  list-style: none;
+}
+
+.list-colors {
+  li {
+    display: flex;
+    align-items: center;
+  }
+
+}
+
+.list-colors {
+  li {
+    &>div {
+      margin-right: 1em;
+    }
+  }
+
+  .color-preview {
+    height: 1rem;
+    width: 2rem;
+  }
 }

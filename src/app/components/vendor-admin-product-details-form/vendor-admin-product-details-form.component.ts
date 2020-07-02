@@ -6,7 +6,8 @@ import {
   OnInit,
   OnDestroy,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
+  Input
 } from '@angular/core';
 import { Product, ProductColor, ProductSize } from '../../models/Product';
 import { VendorAdminProductService } from '../../services/vendor-admin-product.service';
@@ -34,7 +35,6 @@ export class VendorAdminProductDetailsFormComponent implements OnInit, OnDestroy
     features: new FormControl()
   });
 
-  newProduct: Product;
   featuresComponentRefs: (ComponentRef<VendorAdminProductColorChooserComponent>)[] = [];
 
   constructor(
@@ -83,23 +83,11 @@ export class VendorAdminProductDetailsFormComponent implements OnInit, OnDestroy
 
   // add new product to the database
   addProduct() {
-    console.log(this.newProductForm);
-    this.newProduct.id = String(Math.floor(Math.random() * 1000));
-    this.newProduct.name = this.newProductForm.value.name;
-    this.newProduct.description = this.newProductForm.value.description;
-    this.newProduct.price = this.newProductForm.value.price;
-    this.newProduct.stock = this.newProductForm.value.stock;
-    this.newProduct.sales = 0;
-    this.newProduct.image = this.newProductForm.value.image;
-    this.newProduct.features = [];
-
     // add the product in the server
-    this._productService.addProduct(this.newProduct);
+    this._productService.addProduct(this.newProductForm.value);
 
     // redirect to the products page
     this.router.navigate(['/vendor/admin/products']);
-
-    return this.newProduct;
   }
 
   insertFeatureForm(): void {

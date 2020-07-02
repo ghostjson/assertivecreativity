@@ -16,7 +16,8 @@ export class Product {
 // model for defining product color
 export class ProductColor {
   constructor(
-    public title: string,
+    public id: string,
+    public type: string,
     public colors: Color[]
   ) {}
 }

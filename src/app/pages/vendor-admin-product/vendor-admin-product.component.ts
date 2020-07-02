@@ -20,5 +20,6 @@ export class VendorAdminProductComponent implements OnInit {
     let id: string = this._activatedRoute.snapshot.paramMap.get("id");
     console.log(id);
     this.product = this._productService.getProduct(id);
+    console.log(this.product);
   }
 }
