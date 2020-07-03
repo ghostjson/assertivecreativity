@@ -30,7 +30,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.scss",
-              "src/assets/css/adminlte.min.css",
+              "src/assets/css/adminlte.css",
               "src/assets/css/OverlayScrollbars.min.css",
               "src/assets/css/icheck-bootstrap.min.css",
               "node_modules/summernote/dist/summernote-lite.min.css"

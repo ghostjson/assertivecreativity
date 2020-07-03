@@ -44,7 +44,6 @@ import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vend
 import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
 import { VendorAdminProductImageComponent } from './components/vendor-admin-product-image/vendor-admin-product-image.component';
-import { VendorAdminProductDetailsFormComponent } from './components/vendor-admin-product-details-form/vendor-admin-product-details-form.component';
 import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
@@ -59,6 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VendorAdminProductColorChooserComponent } from './components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { VendorAdminColorChooserDirective } from './directives/vendor-admin-color-chooser.directive';
+import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,6 @@ import { VendorAdminColorChooserDirective } from './directives/vendor-admin-colo
     VendorAdminProductsListComponent,
     VendorAdminProductComponent,
     VendorAdminProductImageComponent,
-    VendorAdminProductDetailsFormComponent,
     VendorAdminProductFeaturesFormComponent,
     VendorAdminMailComposeComponent,
     VendorAdminMailWriterComponent,
@@ -104,7 +103,8 @@ import { VendorAdminColorChooserDirective } from './directives/vendor-admin-colo
     VendorAdminChartCardComponent,
     VendorAdminAddProductComponent,
     VendorAdminProductColorChooserComponent,
-    VendorAdminColorChooserDirective
+    VendorAdminColorChooserDirective,
+    VendorAdminAddProductFormComponent
   ],
   imports: [
     BrowserModule,

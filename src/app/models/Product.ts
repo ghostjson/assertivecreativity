@@ -8,7 +8,7 @@ export class Product {
     public stock: number,
     public sales: number,
     public image: string,
-    public features: (ProductColor| ProductSize)[]
+    public features: Array<Object>
   ) { }
 }
 
