@@ -55,9 +55,7 @@ import { VendorAdminFooterComponent } from './components/vendor-admin-footer/ven
 import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
 import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { VendorAdminProductColorChooserComponent } from './components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { VendorAdminColorChooserDirective } from './directives/vendor-admin-color-chooser.directive';
 import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 
 @NgModule({
@@ -102,8 +100,6 @@ import { VendorAdminAddProductFormComponent } from './components/vendor-admin-ad
     VendorAdminFooterComponent,
     VendorAdminChartCardComponent,
     VendorAdminAddProductComponent,
-    VendorAdminProductColorChooserComponent,
-    VendorAdminColorChooserDirective,
     VendorAdminAddProductFormComponent
   ],
   imports: [
@@ -121,7 +117,7 @@ import { VendorAdminAddProductFormComponent } from './components/vendor-admin-ad
     ColorPickerModule
   ],
   entryComponents: [
-    VendorAdminProductColorChooserComponent
+    // VendorAdminProductColorChooserComponent
   ],
   providers: [FormComponent],
   bootstrap: [AppComponent]
