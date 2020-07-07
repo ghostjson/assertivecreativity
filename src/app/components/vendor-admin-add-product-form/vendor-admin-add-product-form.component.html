@@ -47,66 +47,53 @@
           <input formControlName="image" type="text" name="image" id="product-image" class="form-control" required>
         </div>
       </div>
-      <div class="form-group">
-        <label for="add-feature-form">Add a feature</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-image"></i>
-            </span>
-          </div>
-          <!-- <input formControlName="image" type="text" name="image" id="product-image" class="form-control" required> -->
-          <select #featureToAdd>
-            <option value="none">Select</option>
-            <option *ngFor="let featureType of getKeys(possibleFeatures)" value="{{ featureType }}">
-              {{ possibleFeatures[featureType].name }}
-            </option>
-          </select>
-          <button (click)="addFeature(featureToAdd.value)" type="button" class="btn btn-primary">Add</button>
-        </div>
-      </div>
       <div formArrayName="features" *ngFor="let feature of features().controls; let featInd = index;">
         <!-- add color to the product -->
         <div *ngIf="feature.value.type === 'color'">
-          <div [formGroupName]="featInd" class="form-group color card card-outline card-success">
+          <form [formGroupName]="featInd" class="form-group color card card-outline card-success">
             <div class="card-header">
               <p class="card-title">Colors</p>
               <button class="btn btn-primary" type="button" (click)="removeFeature(featInd)">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </div>
-            <label for="feature-title-{{featInd}}">Title of the feature:</label>
-            <input
-              formControlName="title"
-              id="feature-title-{{featInd}}"
-              type="text"
-              name="feature-title-{{featInd}}"
-              placeholder="Title goes here"
-              required
-            >
-            <div formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let colorInd = index">
-              <div [formGroupName]="colorInd">
-                <div class="input-group">
-                  <label for="color-name-{{colorInd}}">Name of the Color<sup>*</sup></label>
-                  <input formControlName="colorName" id="color-name-{{colorInd}}" type="input.type" name="color-name-{{colorInd}}" required>
-                </div>
-                <div class="input-group">
-                  <label for="color-chooser-{{colorInd}}">Color Code<sup>*</sup></label>
-                  <div class="input-group-prepend color-chooser-preview" [style.background]="input.value.colorHex">
+            <div class="card-body">
+              <div class="feature-title form-group">
+                <label for="feature-title-{{featInd}}">Title of the feature:</label>
+                <input class="form-control" formControlName="title" id="feature-title-{{featInd}}" type="text" name="feature-title-{{featInd}}" placeholder="Title goes here" required>
+              </div>
+              <div class="feature-input card-body" formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let colorInd = index">
+                <form [formGroupName]="colorInd">
+                  <button class="btn btn-danger" type="button" (click)="removeFeatureInput(featInd, colorInd)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <div class="form-group">
+                    <label for="color-name-{{colorInd}}">Name of the Color<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="colorName" id="color-name-{{colorInd}}" type="input.type" name="color-name-{{colorInd}}" required>
+                    </div>
                   </div>
-                  <input formControlName="colorHex" [(colorPicker)]="input.value.colorHex" [(cpOutputFormat)]="colorPicker.cpOutputFormat" [(cpAlphaChannel)]="colorPicker.cpAlphaChannel" [value]="input.value.colorHex" id="color-chooser-{{colorInd}}" name="color-chooser-{{colorInd}}" class="form-control color-picker-input" required>
-                </div>
+                  <div class="form-group">
+                    <label for="color-chooser-{{colorInd}}">Color Code<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="colorHex" [(colorPicker)]="input.value.colorHex" [(cpOutputFormat)]="colorPicker.cpOutputFormat" [(cpAlphaChannel)]="colorPicker.cpAlphaChannel" [value]="input.value.colorHex" id="color-chooser-{{colorInd}}" name="color-chooser-{{colorInd}}" class="form-control color-picker-input" required>
+                      <div class="input-group-append">
+                        <span class="input-group-text color-chooser-preview" [style.background]="input.value.colorHex">
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <button (click)="addFeatureInput(feature.value.type, featInd)" type="button" class="btn btn-primary">Add color</button>
               </div>
             </div>
-            <div class="card-footer">
-              <button (click)="addFeatureInput(feature.value.type, featInd)" type="button" class="btn btn-primary">Add color</button>
-            </div>
-          </div>
+          </form>
         </div>
-
         <!-- add radio buttons feature -->
         <div *ngIf="feature.value.type === 'radioBtn'">
-          <div [formGroupName]="featInd" class="form-group color card card-outline card-success">
+          <form [formGroupName]="featInd" class="form-group color card card-outline card-success">
             <div class="card-header">
               <p class="class-title">
                 Radio Buttons
@@ -115,62 +102,71 @@
                 <i class="fas fa-trash-alt"></i>
               </button>
             </div>
-            <label for="feature-title-{{featInd}}">Title of the feature:</label>
-            <input
-              formControlName="title"
-              id="feature-title-{{featInd}}"
-              type="text"
-              name="feature-title-{{featInd}}"
-              placeholder="Title goes here"
-              required
-            >
-            <div formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let radioInd = index">
-              <div [formGroupName]="radioInd">
-                <div class="input-group">
-                  <label for="choice-text-{{radioInd}}">Text To display<sup>*</sup></label>
-                  <input formControlName="choiceText" id="choice-text-{{radioInd}}" type="input.type" name="choiceText{{radioInd}}" required>
+            <div class="card-body">
+              <div class="feature-title">
+                <div class="form-group">
+                  <label for="feature-title-{{featInd}}">Title of the feature:</label>
+                  <input class="form-control" formControlName="title" id="feature-title-{{featInd}}" type="text" name="feature-title-{{featInd}}" placeholder="Title goes here" required>
                 </div>
-                <div class="input-group">
-                  <label for="choice-value-{{radioInd}}">Value Of the choice<sup>*</sup></label>
-                  <input formControlName="choiceValue" id="choice-value-{{radioInd}}" name="choiceValue{{radioInd}}" class="form-control" required>
-                </div>
+              </div>
+              <div class="feature-input card-body" formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let radioInd = index">
+                <form [formGroupName]="radioInd">
+                  <button class="btn btn-danger" type="button" (click)="removeFeatureInput(featInd, radioInd)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <div class="form-group">
+                    <label for="choice-text-{{radioInd}}">Text To display<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="choiceText" id="choice-text-{{radioInd}}" type="input.type" name="choiceText{{radioInd}}" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="choice-value-{{radioInd}}">Value Of the choice<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="choiceValue" id="choice-value-{{radioInd}}" name="choiceValue{{radioInd}}" class="form-control" required>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
             <div class="card-footer">
               <button (click)="addFeatureInput(feature.value.type, featInd)" type="button" class="btn btn-primary">Add radio button</button>
             </div>
-          </div>
+          </form>
         </div>
-
         <!-- add dropdown feature -->
         <div *ngIf="feature.value.type === 'dropdown'">
           <div [formGroupName]="featInd" class="form-group color card card-outline card-success">
             <div class="card-header">
-              <p class="class-title">
+              <p class="card-title">
                 Dropdown selection
               </p>
               <button class="btn btn-primary" type="button" (click)="removeFeature(featInd)">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </div>
-            <label for="feature-title-{{featInd}}">Title of the feature:</label>
-            <input
-              formControlName="title"
-              id="feature-title-{{featInd}}"
-              type="text"
-              name="feature-title-{{featInd}}"
-              placeholder="Title goes here"
-              required
-            >
-            <div formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let dropdownInd = index">
-              <div [formGroupName]="dropdownInd">
-                <div class="input-group">
-                  <label for="choice-text-{{dropdownInd}}">Text To display<sup>*</sup></label>
-                  <input formControlName="choiceText" id="choice-text-{{dropdownInd}}" type="input.type" name="choiceText{{dropdownInd}}" required>
-                </div>
-                <div class="input-group">
-                  <label for="choice-value-{{dropdownInd}}">Value Of the choice<sup>*</sup></label>
-                  <input formControlName="choiceValue" id="choice-value-{{dropdownInd}}" name="choiceValue{{dropdownInd}}" class="form-control" required>
+            <div class="card-body">
+              <div class="feature-title form-group">
+                <label for="feature-title-{{featInd}}">Title of the feature:</label>
+                <input class="form-control" formControlName="title" id="feature-title-{{featInd}}" type="text" name="feature-title-{{featInd}}" placeholder="Title goes here" required>
+              </div>
+              <div class="feature-input card-body" formArrayName="inputs" *ngFor="let input of featureInputs(featInd).controls; let dropdownInd = index">
+                <button class="btn btn-danger" type="button" (click)="removeFeatureInput(featInd, dropdownInd)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <div [formGroupName]="dropdownInd">
+                  <div class="form-group">
+                    <label for="choice-text-{{dropdownInd}}">Text To display<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="choiceText" id="choice-text-{{dropdownInd}}" type="input.type" name="  choiceText{{dropdownInd}}" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="choice-value-{{dropdownInd}}">Value Of the choice<sup>*</sup></label>
+                    <div class="input-group">
+                      <input class="form-control" formControlName="choiceValue" id="choice-value-{{dropdownInd}}" name="choiceValue{{dropdownInd}}" class="form-control" required>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -180,6 +176,18 @@
           </div>
         </div>
       </div>
+      <div class="form-group add-feature-form">
+          <label for="add-feature-form">Add a feature</label>
+          <div class="input-group">
+            <select #featureToAdd>
+              <option value="none">Select</option>
+              <option *ngFor="let featureType of getKeys(possibleFeatures)" value="{{ featureType }}">
+                {{ possibleFeatures[featureType].name }}
+              </option>
+            </select>
+            <button (click)="addFeature(featureToAdd.value)" type="button" class="btn btn-primary">Add Feature</button>
+          </div>
+        </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { VendorAdminProductService } from '../../services/vendor-admin-product.service';
-import { Feature, listAllFeatures } from '../../models/Product';
+import { listAllFeatures } from '../../models/Product';
 
 @Component({
   selector: 'app-vendor-admin-add-product-form',
@@ -50,6 +50,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     console.log('Product added');
     console.log(this.newProductForm.value);
     this._productService.addProduct(this.newProductForm.value);
+
   }
 
   // helper function to get features of a product
@@ -116,6 +117,10 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   addFeatureInput(feature: string, featureIndex: number): void {
     this.featureInputs(featureIndex).push(this.newFeatureInput(feature));
     console.log('Input Added: ', this.features().at(0).get('inputs')['controls']);
+  }
+
+  removeFeatureInput(featureIndex: number, inputIndex: number): void {
+    this.featureInputs(featureIndex).removeAt(inputIndex);
   }
 
   // get keys of an object
