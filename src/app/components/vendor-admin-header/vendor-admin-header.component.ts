@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { UserDetailsService } from 'src/app/store/user-details.service';
 
 @Component({
   selector: "app-vendor-admin-header",
@@ -8,7 +9,7 @@ import { Component, OnInit } from "@angular/core";
 export class VendorAdminHeaderComponent implements OnInit {
   sidebarLinks: Array<any>;
 
-  constructor() {}
+  constructor(public user: UserDetailsService) {}
 
   ngOnInit(): void {
     this.sidebarLinks = [

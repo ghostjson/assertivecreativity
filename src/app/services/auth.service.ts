@@ -35,11 +35,11 @@ export class AuthService {
     return Token != null ? true : false;
   }
 
-  public async getRole() {
+
+  public async getUser() {
     if (this.isAuthenticated()) {
-      let res: any = await this.http.get(this.host("/user/role")).toPromise();
-      console.log(res);
-      return res; 
+      let res: any = await this.http.get(this.host("/user")).toPromise();
+      return res;
     }
   }
 
