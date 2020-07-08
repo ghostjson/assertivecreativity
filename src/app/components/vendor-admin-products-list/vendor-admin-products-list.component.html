@@ -7,7 +7,11 @@
       <div class="card-header">
         <div class="card-tools product-search">
           <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search Products">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search Products"
+            />
             <div class="input-group-append">
               <div class="btn btn-primary">
                 <i class="fas fa-search"></i>
@@ -17,7 +21,7 @@
           <!-- /.card-tools -->
         </div>
         <div class="card-tools add-product">
-          <a [routerLink]="['/vendor/admin/products/add']" class="btn btn-primary">
+          <a [routerLink]="['/admin/products/add']" class="btn btn-primary">
             Add New Product
           </a>
         </div>
@@ -28,8 +32,12 @@
           <div class="float-right">
             1-50/200
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
             <!-- /.btn-group -->
           </div>
@@ -49,7 +57,11 @@
             <tbody>
               <tr *ngFor="let product of products">
                 <td>
-                  <img src="{{ product.image }}" alt="{{ product.name }}" class="img-circle img-size-32 mr-2">
+                  <img
+                    src="{{ product.image }}"
+                    alt="{{ product.name }}"
+                    class="img-circle img-size-32 mr-2"
+                  />
                   <a [routerLink]="[product.id]" class="link-to-product">
                     {{ product.name }}
                   </a>
@@ -62,7 +74,14 @@
                   {{ product.sales }}
                 </td>
                 <td>
-                  <button (click)="deleteProduct(product)" attr.data-product-id="{{ product.id }}" type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+                  <button
+                    (click)="deleteProduct(product)"
+                    attr.data-product-id="{{ product.id }}"
+                    type="button"
+                    class="btn btn-default btn-sm"
+                  >
+                    <i class="far fa-trash-alt"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -77,8 +96,12 @@
           <div class="float-right">
             1-50/200
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
             <!-- /.btn-group -->
           </div>

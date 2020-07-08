@@ -34,12 +34,12 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
   { path: 'communication', component: CommunicationComponent},
   { path: 'product/detail', component: ProductDetailComponent},
-  { path: 'vendor/admin', component: VendorAdminDashboardComponent},
-  { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
-  { path: 'vendor/admin/mail/compose', component: VendorAdminMailComposeComponent},
-  { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
-  { path: 'vendor/admin/products/add', component: VendorAdminAddProductComponent},
-  { path: 'vendor/admin/products/:id', component: VendorAdminProductComponent},
+  { path: 'admin', component: VendorAdminDashboardComponent},
+  { path: 'admin/mail', component: VendorAdminMailComponent},
+  { path: 'admin/mail/compose', component: VendorAdminMailComposeComponent},
+  { path: 'admin/products', component: VendorAdminProductsComponent},
+  { path: 'admin/products/add', component: VendorAdminAddProductComponent},
+  { path: 'admin/products/:id', component: VendorAdminProductComponent},
 ];
 
 @NgModule({
