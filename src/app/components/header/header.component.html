@@ -19,7 +19,7 @@
                 <li [routerLink]="['/shop']" routerLinkActive="active">
                     <a>Shop</a>
                 </li>
-                <ng-container *ngIf="!auth.isAuthenticated">
+                <ng-container *ngIf="!auth.isAuthenticated()">
                     <li [routerLink]="['/signin']" routerLinkActive="active">
                         <a>Sign In</a>
                     </li>
@@ -27,7 +27,7 @@
                         <a>Sign Up</a>
                     </li>
                 </ng-container>
-                <ng-container *ngIf="auth.isAuthenticated">
+                <ng-container *ngIf="auth.isAuthenticated()">
                     <li [routerLink]="['/user-profile']" routerLinkActive="active">
                         <a>Profile</a>
                     </li>

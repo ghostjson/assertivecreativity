@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { SignupFormInterface } from './signup_form.interface';
+import { Router } from '@angular/router';
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
@@ -17,7 +18,7 @@ export class SignupComponent implements OnInit {
 
   error: string = "";
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -25,7 +26,8 @@ export class SignupComponent implements OnInit {
     this.error = "";
     if (this.signup_form.confirm === this.signup_form.password) {
       try {
-        this.auth.register(this.signup_form);
+        this.auth.register(this.signup_form)
+        .then( _ => this.router.navigate(['/']))
       } catch (e) {
         this.error = "Signup failed, try again";
       }
