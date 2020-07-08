@@ -1,0 +1,957 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>acreativity documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">acreativity documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>VendorAdminProductColorChooserComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-vendor-admin-product-color-chooser</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./vendor-admin-product-color-chooser.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./vendor-admin-product-color-chooser.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#colorIndex">colorIndex</a>
+                            </li>
+                            <li>
+                                <a href="#colorPicker">colorPicker</a>
+                            </li>
+                            <li>
+                                <a href="#colors">colors</a>
+                            </li>
+                            <li>
+                                <a href="#newColorForm">newColorForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addNewColor">addNewColor</a>
+                            </li>
+                            <li>
+                                <a href="#createNewColor">createNewColor</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#removeColor">removeColor</a>
+                            </li>
+                            <li>
+                                <a href="#saveProductFeature">saveProductFeature</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#colorControls">colorControls</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, _productService: <a href="../injectables/VendorAdminProductService.html">VendorAdminProductService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_productService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/VendorAdminProductService.html" target="_self" >VendorAdminProductService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addNewColor"></a>
+                    <span class="name">
+                        <b>
+                            addNewColor
+                        </b>
+                        <a href="#addNewColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addNewColor()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createNewColor"></a>
+                    <span class="name">
+                        <b>
+                            createNewColor
+                        </b>
+                        <a href="#createNewColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createNewColor()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:34</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:31</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeColor"></a>
+                    <span class="name">
+                        <b>
+                            removeColor
+                        </b>
+                        <a href="#removeColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeColor(i: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>i</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveProductFeature"></a>
+                    <span class="name">
+                        <b>
+                            saveProductFeature
+                        </b>
+                        <a href="#saveProductFeature"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveProductFeature()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorIndex"></a>
+                        <span class="name">
+                            <b>
+                            colorIndex</b>
+                            <a href="#colorIndex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:12</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorPicker"></a>
+                        <span class="name">
+                            <b>
+                            colorPicker</b>
+                            <a href="#colorPicker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    cpOutputFormat: &#x27;hex&#x27;,
+    cpAlphaChannel: &#x27;disabled&#x27;
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colors"></a>
+                        <span class="name">
+                            <b>
+                            colors</b>
+                            <a href="#colors"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormArray" target="_blank" >FormArray</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="newColorForm"></a>
+                        <span class="name">
+                            <b>
+                            newColorForm</b>
+                            <a href="#newColorForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorControls"></a>
+                        <span class="name"><b>colorControls</b><a href="#colorControls"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>colorControls()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts:59</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { FormGroup, FormControl, FormBuilder, FormArray } from &#x27;@angular/forms&#x27;;
+import { ProductColor, Color } from &#x27;../../models/Product&#x27;;
+import { VendorAdminProductService } from &#x27;../../services/vendor-admin-product.service&#x27;;
+
+@Component({
+  selector: &#x27;app-vendor-admin-product-color-chooser&#x27;,
+  templateUrl: &#x27;./vendor-admin-product-color-chooser.component.html&#x27;,
+  styleUrls: [&#x27;./vendor-admin-product-color-chooser.component.scss&#x27;]
+})
+export class VendorAdminProductColorChooserComponent implements OnInit, OnDestroy {
+  colorIndex: number &#x3D; 0;
+  newColorForm: FormGroup;
+  colors: FormArray;
+
+  colorPicker &#x3D; {
+    cpOutputFormat: &#x27;hex&#x27;,
+    cpAlphaChannel: &#x27;disabled&#x27;
+  }
+
+  constructor(private fb: FormBuilder, private _productService: VendorAdminProductService ) {
+    this.newColorForm &#x3D; this.fb.group({
+      colors: this.fb.array([this.createNewColor()])
+    });
+
+    console.log(this.newColorForm);
+
+    this.colors &#x3D; this.newColorForm.get(&#x27;colors&#x27;) as FormArray;
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  createNewColor(): FormGroup {
+    let newColor &#x3D; new Color(
+      this.colorIndex,
+      &#x27;&#x27;,
+      &#x27;#cc9933&#x27;
+    );
+    return this.fb.group(newColor);
+  }
+
+  addNewColor(): void {
+    this.colors &#x3D; this.newColorForm.get(&#x27;colors&#x27;) as FormArray;
+    this.colors.push(this.createNewColor());
+
+    // increase color id
+    this.colorIndex +&#x3D; 1;
+    console.log(&#x27;New color added&#x27;, this.colors);
+  }
+
+  removeColor(i: number): void {
+    this.colors.removeAt(i);
+  }
+
+  get colorControls() {
+    return this.newColorForm.get(&#x27;colors&#x27;)[&#x27;controls&#x27;];
+  }
+
+  saveProductFeature(): void {
+    console.log(&#x27;Colors array to be added: &#x27;, this.newColorForm.value)
+    let feature &#x3D; new ProductColor(
+      String(this.colorIndex + 100),
+      &#x27;color&#x27;,
+      this.newColorForm.value.colors
+    );
+    // console.log(&#x27;before: &#x27;, this._productService.newProduct.features);
+
+    console.log(this._productService.addFeature(feature));
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card card-success&quot;&gt;
+  &lt;div class&#x3D;&quot;card-header&quot;&gt;
+    &lt;h2 class&#x3D;&quot;card-title&quot;&gt;Add Colors&lt;/h2&gt;
+    &lt;button class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addNewColor()&quot;&gt;
+      &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;/i&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;!-- &lt;div class&#x3D;&quot;colors-added&quot;&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; --&gt;
+  &lt;!-- form start --&gt;
+  &lt;form [formGroup]&#x3D;&quot;newColorForm&quot; role&#x3D;&quot;form&quot;&gt;
+    &lt;div class&#x3D;&quot;card-body&quot;&gt;
+      &lt;div formArrayName&#x3D;&quot;colors&quot; *ngFor&#x3D;&quot;let color of colorControls; let i &#x3D; index;&quot;&gt;
+        &lt;div [formGroupName]&#x3D;&quot;i&quot; class&#x3D;&quot;form-group color card card-outline card-success&quot;&gt;
+          &lt;div class&#x3D;&quot;card-header&quot;&gt;
+            &lt;h2 class&#x3D;&quot;card-title&quot;&gt;Color&lt;/h2&gt;
+            &lt;button class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;removeColor(i)&quot;&gt;
+              &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;/i&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;input-group&quot;&gt;
+            &lt;label for&#x3D;&quot;color-name-{{ i }}&quot;&gt;Name of Color&lt;sup&gt;*&lt;/sup&gt;&lt;/label&gt;
+            &lt;input formControlName&#x3D;&quot;colorName&quot; id&#x3D;&quot;color-name-{{ i }}&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;color-name&quot; required&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;input-group&quot;&gt;
+            &lt;label for&#x3D;&quot;color-chooser-{{ i }}&quot;&gt;Color Code&lt;sup&gt;*&lt;/sup&gt;&lt;/label&gt;
+            &lt;div class&#x3D;&quot;input-group-prepend color-chooser-preview&quot; [style.background]&#x3D;&quot;colors.value[i].colorHex&quot;&gt;
+            &lt;/div&gt;
+            &lt;input formControlName&#x3D;&quot;colorHex&quot; [(colorPicker)]&#x3D;&quot;colors.value[i].colorHex&quot; [(cpOutputFormat)]&#x3D;&quot;colorPicker.cpOutputFormat&quot; [(cpAlphaChannel)]&#x3D;&quot;colorPicker.cpAlphaChannel&quot; [value]&#x3D;&quot;colors.value[i].colorHex&quot; id&#x3D;&quot;color-chooser-{{ i }}&quot; name&#x3D;&quot;color&quot; class&#x3D;&quot;form-control color-picker-input&quot; required&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- /.card-body --&gt;
+    &lt;div class&#x3D;&quot;card-footer&quot;&gt;
+      &lt;button (click)&#x3D;&quot;addNewColor()&quot; type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Add another color&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  &lt;button class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;saveProductFeature()&quot; type&#x3D;&quot;button&quot;&gt;Add Feature&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./vendor-admin-product-color-chooser.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.card {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &amp;::before, &amp;::after {
+    display: none;
+  }
+}
+
+.color-chooser-preview {
+  height: 2.4rem;
+  width: 6rem;
+}
+
+.color-picker-input {
+  border-left: none;
+}
+
+.form-group.color {
+  margin-bottom: 1em;
+
+  .input-group {
+    padding: 1em;
+
+    label {
+      width: 100%;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="card card-success">  <div class="card-header">    <h2 class="card-title">Add Colors</h2>    <button class="btn btn-primary" type="button" (click)="addNewColor()">      <i class="fas fa-trash-alt"></i>    </button>  </div>  <!-- <div class="colors-added">    <ul>      <li></li>    </ul>  </div> -->  <!-- form start -->  <form [formGroup]="newColorForm" role="form">    <div class="card-body">      <div formArrayName="colors" *ngFor="let color of colorControls; let i = index;">        <div [formGroupName]="i" class="form-group color card card-outline card-success">          <div class="card-header">            <h2 class="card-title">Color</h2>            <button class="btn btn-primary" type="button" (click)="removeColor(i)">              <i class="fas fa-trash-alt"></i>            </button>          </div>          <div class="input-group">            <label for="color-name-{{ i }}">Name of Color<sup>*</sup></label>            <input formControlName="colorName" id="color-name-{{ i }}" type="text" name="color-name" required>          </div>          <div class="input-group">            <label for="color-chooser-{{ i }}">Color Code<sup>*</sup></label>            <div class="input-group-prepend color-chooser-preview" [style.background]="colors.value[i].colorHex">            </div>            <input formControlName="colorHex" [(colorPicker)]="colors.value[i].colorHex" [(cpOutputFormat)]="colorPicker.cpOutputFormat" [(cpAlphaChannel)]="colorPicker.cpAlphaChannel" [value]="colors.value[i].colorHex" id="color-chooser-{{ i }}" name="color" class="form-control color-picker-input" required>          </div>        </div>      </div>    </div>    <!-- /.card-body -->    <div class="card-footer">      <button (click)="addNewColor()" type="submit" class="btn btn-primary">Add another color</button>    </div>  </form>  <button class="btn btn-primary" (click)="saveProductFeature()" type="button">Add Feature</button></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CommunicationComponent', 'selector': 'app-communication'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactSectionComponent', 'selector': 'app-contact-section'},{'name': 'FeaturedProductComponent', 'selector': 'app-featured-product'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormViewComponent', 'selector': 'app-form-view'},{'name': 'GraphicContentComponent', 'selector': 'app-graphic-content'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeadingComponent', 'selector': 'app-heading'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'MailBoxComponent', 'selector': 'app-mail-box'},{'name': 'MainBannerComponent', 'selector': 'app-main-banner'},{'name': 'ProductDetailComponent', 'selector': 'app-product-detail'},{'name': 'ProductSliderComponent', 'selector': 'app-product-slider'},{'name': 'ShopComponent', 'selector': 'app-shop'},{'name': 'SigninComponent', 'selector': 'app-signin'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SpacerComponent', 'selector': 'app-spacer'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'VendorAdminAddProductComponent', 'selector': 'app-vendor-admin-add-product'},{'name': 'VendorAdminChartCardComponent', 'selector': 'app-vendor-admin-chart-card'},{'name': 'VendorAdminDashboardComponent', 'selector': 'app-vendor-admin-dashboard'},{'name': 'VendorAdminFooterComponent', 'selector': 'app-vendor-admin-footer'},{'name': 'VendorAdminHeaderComponent', 'selector': 'app-vendor-admin-header'},{'name': 'VendorAdminMailComponent', 'selector': 'app-vendor-admin-mail'},{'name': 'VendorAdminMailComposeComponent', 'selector': 'app-vendor-admin-mail-compose'},{'name': 'VendorAdminMailSidebarComponent', 'selector': 'app-vendor-admin-mail-sidebar'},{'name': 'VendorAdminMailWriterComponent', 'selector': 'app-vendor-admin-mail-writer'},{'name': 'VendorAdminProductColorChooserComponent', 'selector': 'app-vendor-admin-product-color-chooser'},{'name': 'VendorAdminProductComponent', 'selector': 'app-vendor-admin-product'},{'name': 'VendorAdminProductDetailsFormComponent', 'selector': 'app-vendor-admin-product-details-form'},{'name': 'VendorAdminProductFeaturesFormComponent', 'selector': 'app-vendor-admin-product-features-form'},{'name': 'VendorAdminProductImageComponent', 'selector': 'app-vendor-admin-product-image'},{'name': 'VendorAdminProductsComponent', 'selector': 'app-vendor-admin-products'},{'name': 'VendorAdminProductsListComponent', 'selector': 'app-vendor-admin-products-list'},{'name': 'VendorAdminStatusCardComponent', 'selector': 'app-vendor-admin-status-card'}];
+    var DIRECTIVES = [{'name': 'VendorAdminColorChooserDirective', 'selector': '[appVendorAdminColorChooser]'}];
+    var ACTUAL_COMPONENT = {'name': 'VendorAdminProductColorChooserComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VendorAdminProductColorChooserComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<app-vendor-admin-header></app-vendor-admin-header>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <h1 class="col-12">
+      {{ product.name }}
+    </h1>
+    <div class="col-12 col-md-8">
+      <app-vendor-admin-product-image [product]="product"></app-vendor-admin-product-image>
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h2 class="card-title">Product Details</h2>
+        </div>
+        <div class="card-body">
+          <div class="product-property">
+            <h3 class="product-property-name">
+              Description
+            </h3>
+            <p>
+              {{ product.description }}
+            </p>
+          </div>
+          <div class="product-property">
+            <h3 class="product-property-name">
+              Price
+            </h3>
+            <p>
+              {{ product.price }}
+            </p>
+          </div>
+          <div class="product-property">
+            <h3 class="product-property-name">
+              Stock
+            </h3>
+            <p>
+              {{ product.stock }}
+            </p>
+          </div>
+          <div class="product-property">
+            <h3 class="product-property-name">
+              Sales
+            </h3>
+            <p>
+              {{ product.sales }}
+            </p>
+          </div>
+          <div class="product-property">
+            <h3 class="product-property-name">
+              Features
+            </h3>
+            <div *ngFor="let feature of product.features">
+              <div *ngIf="feature.type === 'color'">
+                <h4>Color</h4>
+                <ul class="list-colors">
+                  <li *ngFor="let color of feature.colors">
+                    <div class="color-name">{{color.colorName}}</div>
+                    <div class="color-preview" [style.background]="color.colorHex"></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+@import 'src/assets/css/admin-common.scss';
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  label {
+    text-transform: capitalize;
+  }
+}

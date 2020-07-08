@@ -34,7 +34,29 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.component';
+
+/** Vendor Admin module imports */
+import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
+import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
+import { MailBoxComponent } from './components/mail-box/mail-box.component';
+import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
+import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
+import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
+import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
+import { VendorAdminProductImageComponent } from './components/vendor-admin-product-image/vendor-admin-product-image.component';
+import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
+import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
+import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
+import { VendorAdminStatusCardComponent } from './components/vendor-admin-status-card/vendor-admin-status-card.component';
+import { ChartjsModule } from '@ctrl/ngx-chartjs';
+import { VendorAdminFooterComponent } from './components/vendor-admin-footer/vendor-admin-footer.component';
+import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
+import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +84,41 @@ import { VendorAdminComponent } from './pages/vendor-admin/vendor-admin.componen
     CheckoutComponent,
     CommunicationComponent,
     ProductDetailComponent,
-    VendorAdminComponent
+    VendorAdminDashboardComponent,
+    VendorAdminHeaderComponent,
+    MailBoxComponent,
+    VendorAdminMailComponent,
+    VendorAdminProductsComponent,
+    VendorAdminProductsListComponent,
+    VendorAdminProductComponent,
+    VendorAdminProductImageComponent,
+    VendorAdminProductFeaturesFormComponent,
+    VendorAdminMailComposeComponent,
+    VendorAdminMailWriterComponent,
+    VendorAdminMailSidebarComponent,
+    VendorAdminStatusCardComponent,
+    VendorAdminFooterComponent,
+    VendorAdminChartCardComponent,
+    VendorAdminAddProductComponent,
+    VendorAdminAddProductFormComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, NbThemeModule.forRoot({ name: 'default' }), NbLayoutModule, NbEvaIconsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NgxSummernoteModule,
+    ChartjsModule,
+    ReactiveFormsModule,
+    ColorPickerModule
+  ],
+  entryComponents: [
+    // VendorAdminProductColorChooserComponent
+  ],
   providers: [FormComponent],
   bootstrap: [AppComponent]
 })

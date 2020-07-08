@@ -14,7 +14,12 @@ import { AuthGuard } from './guard/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { FormViewComponent } from './pages/form-view/form-view.component';
 import { CommunicationComponent } from './pages/communication/communication.component';
-
+import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
+import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
+import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
+import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
+import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
+import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent},
@@ -28,7 +33,13 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent},
   { path: 'checkout', component: CheckoutComponent},
   { path: 'communication', component: CommunicationComponent},
-  { path: 'product/detail', component: ProductDetailComponent}
+  { path: 'product/detail', component: ProductDetailComponent},
+  { path: 'vendor/admin', component: VendorAdminDashboardComponent},
+  { path: 'vendor/admin/mail', component: VendorAdminMailComponent},
+  { path: 'vendor/admin/mail/compose', component: VendorAdminMailComposeComponent},
+  { path: 'vendor/admin/products', component: VendorAdminProductsComponent},
+  { path: 'vendor/admin/products/add', component: VendorAdminAddProductComponent},
+  { path: 'vendor/admin/products/:id', component: VendorAdminProductComponent},
 ];
 
 @NgModule({
