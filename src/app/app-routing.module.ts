@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent},
   { path: 'checkout', component: CheckoutComponent},
   { path: 'communication', component: CommunicationComponent},
-  { path: 'product/detail', component: ProductDetailComponent},
+  { path: 'product/:id', component: ProductDetailComponent},
   { path: 'admin', component: VendorAdminDashboardComponent},
   { path: 'admin/mail', component: VendorAdminMailComponent},
   { path: 'admin/mail/compose', component: VendorAdminMailComposeComponent},

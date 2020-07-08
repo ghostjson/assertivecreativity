@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/Product';
+
 @Injectable({
   providedIn: 'root'
 })
-
-export class VendorAdminProductService {
+export class ProductService {
   products: Product[] = [
     {
       id: 385561953,
       name: 'Super Demo Shirt',
       description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt earum natus ut architecto.',
       price: 100,
-      stock: 1000,
+      stock: 100,
       sales: 0,
       image: 'assets/images/demo-product-images/p2.jpg',
       features: [
@@ -34,6 +34,41 @@ export class VendorAdminProductService {
               colorName: 'green',
               type: 'text',
               colorHex: '#44d015'
+            },
+            {
+              colorName: 'red',
+              type: 'text',
+              colorHex: '#c40a0a'
+            },
+            {
+              colorName: 'blue',
+              type: 'text',
+              colorHex: '#3d0eda'
+            },
+            {
+              colorName: 'green',
+              type: 'text',
+              colorHex: '#44d015'
+            },
+            {
+              colorName: 'red',
+              type: 'text',
+              colorHex: '#c40a0a'
+            },
+            {
+              colorName: 'blue',
+              type: 'text',
+              colorHex: '#3d0eda'
+            },
+            {
+              colorName: 'green',
+              type: 'text',
+              colorHex: '#44d015'
+            },
+            {
+              colorName: 'red',
+              type: 'text',
+              colorHex: '#c40a0a'
             }
           ]
         },
@@ -89,7 +124,7 @@ export class VendorAdminProductService {
       ]
     },
     {
-      id: 385561953,
+      id: 385561993,
       name: 'That product',
       description: 'assets/images/demo-product-images/p2.jpg',
       price: 100,
@@ -161,7 +196,7 @@ export class VendorAdminProductService {
       ]
     },
     {
-      id: 385561953,
+      id: 385561923,
       name: 'This product',
       description: 'This is the description of a product. It works good',
       price: 100,
@@ -237,19 +272,6 @@ export class VendorAdminProductService {
   constructor() { }
 
   getProducts(): Product[] {
-    return this.products;
-  }
-
-  addProduct(product: Product): Product {
-    this.products.push(product);
-    return this.products[this.products.length - 1];
-  }
-
-  deleteProduct(product: Product): Product[] {
-    this.products = this.products.filter(p => {
-      return p.id != product.id;
-    });
-
     return this.products;
   }
 

@@ -1,22 +1,12 @@
 <app-header></app-header>
-
-
-
-
 <app-spacer data="50"></app-spacer>
-
 <div class="container">
-
-
   <div class="row">
     <div class="col-md-12">
       <app-product-slider [data]="featured"></app-product-slider>
     </div>
   </div>
-
   <app-spacer data="50"></app-spacer>
-
-
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-3" style="margin-left: 10px;">
@@ -26,24 +16,33 @@
       <input type="submit" value="Search">
     </div>
   </div>
-
   <app-spacer data="20"></app-spacer>
-
   <div class="row">
     <div class="col-md-2">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab"
-          aria-controls="home">Shirts</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab"
-          aria-controls="profile">Caps</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" role="tab"
-          aria-controls="messages">Scarf</a>
-        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" role="tab"
-          aria-controls="settings">Pants</a>
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab" aria-controls="home">Shirts</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab" aria-controls="profile">Caps</a>
+        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" role="tab" aria-controls="messages">Scarf</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" role="tab" aria-controls="settings">Pants</a>
       </div>
     </div>
     <div class="col-md-10 card-list">
-      <div class="card text-center">
+      <div class="row">
+        <div class="col-12 col-md-4" *ngFor="let product of products">
+          <div class="card text-center">
+            <img class="card-img-top" src="https://via.placeholder.com/280x280" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">{{product.description}}</p>
+              <p class="card-text">${{product.price}}/piece</p>
+            </div>
+            <a class="card-footer" [routerLink]="['/product', product.id]">
+              KNOW MORE
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="card text-center">
         <img class="card-img-top" src="https://via.placeholder.com/280x280" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">Product Name</h5>
@@ -108,25 +107,10 @@
         <div class="card-footer">
           KNOW MORE
         </div>
-      </div>
-      <div class="card text-center">
-        <img class="card-img-top" src="https://via.placeholder.com/280x280" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Product Name</h5>
-          <p class="card-text">Some Product Details</p>
-          <p class="card-text">10$/piece</p>
-        </div>
-        <div class="card-footer">
-          KNOW MORE
-        </div>
-      </div>
+      </div> -->
     </div>
   </div>
-
   <app-spacer data="10"></app-spacer>
-
-
-  
   <div class="row">
     <div class="col-md-12">
       <nav aria-label="Page navigation">
@@ -143,13 +127,7 @@
         </ul>
       </nav>
     </div>
-
   </div>
-
 </div>
-
-
-
 <app-spacer data="50"></app-spacer>
-
 <app-footer></app-footer>
