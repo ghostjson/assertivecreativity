@@ -13,7 +13,7 @@ export class VendorAdminProductService {
       price: 100,
       stock: 1000,
       sales: 0,
-      image: 'this is an image link',
+      image: 'assets/images/demo-product-images/2.jpg',
       features: [
         {
           type: 'color',
@@ -43,14 +43,24 @@ export class VendorAdminProductService {
           name: 'Radio Buttons',
           inputs: [
             {
-              choiceText: 'colorful',
+              choiceText: 'Red',
               type: 'text',
-              choiceValue: 'colorful'
+              choiceValue: 'red'
             },
             {
-              choiceText: 'not coloful',
+              choiceText: 'Blue',
               type: 'text',
-              choiceValue: 'not-colorful'
+              choiceValue: 'blue'
+            },
+            {
+              choiceText: 'Green',
+              type: 'text',
+              choiceValue: 'green'
+            },
+            {
+              choiceText: 'Violet',
+              type: 'text',
+              choiceValue: 'violet'
             }
           ]
         },
@@ -85,7 +95,7 @@ export class VendorAdminProductService {
       price: 100,
       stock: 1000,
       sales: 0,
-      image: 'this is an image link',
+      image: 'assets/images/demo-product-images/2.jpg',
       features: [
         {
           type: 'color',
@@ -157,7 +167,7 @@ export class VendorAdminProductService {
       price: 100,
       stock: 1000,
       sales: 0,
-      image: 'this is an image link',
+      image: 'assets/images/demo-product-images/2.jpg',
       features: [
         {
           type: 'color',

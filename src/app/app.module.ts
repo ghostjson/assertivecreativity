@@ -43,7 +43,6 @@ import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
 import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
-import { VendorAdminProductImageComponent } from './components/vendor-admin-product-image/vendor-admin-product-image.component';
 import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
@@ -91,7 +90,6 @@ import { VendorAdminAddProductFormComponent } from './components/vendor-admin-ad
     VendorAdminProductsComponent,
     VendorAdminProductsListComponent,
     VendorAdminProductComponent,
-    VendorAdminProductImageComponent,
     VendorAdminProductFeaturesFormComponent,
     VendorAdminMailComposeComponent,
     VendorAdminMailWriterComponent,
