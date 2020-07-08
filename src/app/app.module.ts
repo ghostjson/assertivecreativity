@@ -57,6 +57,7 @@ import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
+import { httpInterceptProvider } from './http-interceptor';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,7 @@ import { VendorAdminAddProductFormComponent } from './components/vendor-admin-ad
     VendorAdminFooterComponent,
     VendorAdminChartCardComponent,
     VendorAdminAddProductComponent,
-    VendorAdminAddProductFormComponent
+    VendorAdminAddProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,18 +109,18 @@ import { VendorAdminAddProductFormComponent } from './components/vendor-admin-ad
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: "default" }),
     NbLayoutModule,
     NbEvaIconsModule,
     NgxSummernoteModule,
     ChartjsModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent
   ],
-  providers: [FormComponent],
-  bootstrap: [AppComponent]
+  providers: [FormComponent, httpInterceptProvider],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

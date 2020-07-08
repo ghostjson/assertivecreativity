@@ -1,47 +1,61 @@
 <header>
-    <div class="left-grp">
+  <div class="left-grp">
+    <i class="fas fa-bars desktop-only"></i>
+    <img src="./../../../assets/images/logo.png" alt="logo" />
+  </div>
+  <div class="center">
+    <div class="menu">
+      <ul>
+        <li
+          [routerLink]="['']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a>Home</a>
+        </li>
+        <li [routerLink]="['/about']" routerLinkActive="active">
+          <a>About Us</a>
+        </li>
+        <li [routerLink]="['/contact']" routerLinkActive="active">
+          <a>Contact Us</a>
+        </li>
+        <li [routerLink]="['/shop']" routerLinkActive="active">
+          <a>Shop</a>
+        </li>
+        <ng-container *ngIf="!auth.isAuthenticated()">
+          <li [routerLink]="['/signin']" routerLinkActive="active">
+            <a>Sign In</a>
+          </li>
+          <li [routerLink]="['/signup']" routerLinkActive="active">
+            <a>Sign Up</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="auth.isAuthenticated()">
+          <li
+            *ngIf="user_role === 'user'; else showAdmin"
+            [routerLink]="['/user-profile']"
+            routerLinkActive="active"
+          >
+            <a>Profile</a>
+          </li>
+          <li
+            #showAdmin
+            [routerLink]="['/vendor/admin']"
+            routerLinkActive="active"
+          >
+            <a>admin    </a>
+          </li>
 
-        <i class="fas fa-bars desktop-only"></i>
-        <img src="./../../../assets/images/logo.png" alt="logo">
+          <li [routerLink]="['/logout']" routerLinkActive="active">
+            <a>Logout</a>
+          </li>
+          <div class="right-grp">
+            <!-- <i class="fas fa-search"></i> -->
+            <i class="fas fa-shopping-cart" [routerLink]="['/cart']"></i>
+            <span class="cart-count">3</span>
+          </div>
+        </ng-container>
+      </ul>
     </div>
-    <div class="center">
-        <div class="menu">
-            <ul>
-                <li [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a>Home</a>
-                </li>
-                <li [routerLink]="['/about']" routerLinkActive="active">
-                    <a>About Us</a>
-                </li>
-                <li [routerLink]="['/contact']" routerLinkActive="active">
-                    <a>Contact Us</a>
-                </li>
-                <li [routerLink]="['/shop']" routerLinkActive="active">
-                    <a>Shop</a>
-                </li>
-                <ng-container *ngIf="!auth.isAuthenticated()">
-                    <li [routerLink]="['/signin']" routerLinkActive="active">
-                        <a>Sign In</a>
-                    </li>
-                    <li [routerLink]="['/signup']" routerLinkActive="active">
-                        <a>Sign Up</a>
-                    </li>
-                </ng-container>
-                <ng-container *ngIf="auth.isAuthenticated()">
-                    <li [routerLink]="['/user-profile']" routerLinkActive="active">
-                        <a>Profile</a>
-                    </li>
-                    <li [routerLink]="['/logout']" routerLinkActive="active">
-                        <a>Logout</a>
-                    </li>
-                    <div class="right-grp">
-                        <!-- <i class="fas fa-search"></i> -->
-                        <i class="fas fa-shopping-cart" [routerLink]="['/cart']"></i>
-                        <span class="cart-count">3</span>
-                    </div>
-                </ng-container>
-            </ul>
-        </div>
-    </div>
-    
+  </div>
 </header>

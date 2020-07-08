@@ -8,10 +8,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  user_role: string;
 
   constructor(public auth: AuthService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.auth.getRole().then(res => {
+      this.user_role = res
+    })
   }
 
 }

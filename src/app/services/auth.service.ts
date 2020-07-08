@@ -35,6 +35,14 @@ export class AuthService {
     return Token != null ? true : false;
   }
 
+  public async getRole() {
+    if (this.isAuthenticated()) {
+      let res: any = await this.http.get(this.host("/user/role")).toPromise();
+      console.log(res);
+      return res; 
+    }
+  }
+
   private host(endpoint: string): string {
     return this.host_name + endpoint;
   }
