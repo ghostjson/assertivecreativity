@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.isAuthenticated = false;
+    localStorage.removeItem('Token');
     this.router.navigate(['/']);
   }
 
