@@ -9,12 +9,13 @@ import { UserDetailsService } from 'src/app/store/user-details.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user_role: string;
+  user_role: any;
 
   constructor(private user: UserDetailsService, public auth: AuthService) { }
 
   async ngOnInit() {
-    this.user_role = this.user.getRole();
+    this.user_role = await this.user.getRole();
+    console.log(this.user_role)
   }
 
 }

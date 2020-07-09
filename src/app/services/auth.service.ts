@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   host_name: string;
+  username: string;
 
   constructor(private http: HttpClient) {
     this.host_name = environment.apiUrl;

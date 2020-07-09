@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserDetailsService } from 'src/app/store/user-details.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-vendor-admin-header",
@@ -8,8 +10,9 @@ import { UserDetailsService } from 'src/app/store/user-details.service';
 })
 export class VendorAdminHeaderComponent implements OnInit {
   sidebarLinks: Array<any>;
+  name: any;
 
-  constructor(public user: UserDetailsService) {}
+  constructor(public user: UserDetailsService, public auth: AuthService) {}
 
   ngOnInit(): void {
     this.sidebarLinks = [
@@ -29,5 +32,13 @@ export class VendorAdminHeaderComponent implements OnInit {
         icon: "fas fa-store",
       },
     ];
+
+    this.user.getUser().then((res) => {
+      this.name = res.data.name;
+    });
+  }
+
+  getUsername() {
+    
   }
 }

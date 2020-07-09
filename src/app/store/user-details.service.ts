@@ -6,21 +6,27 @@ import { AuthService } from '../services/auth.service';
 })
 export class UserDetailsService {
 
-  user: any = null;
-
   constructor(private auth: AuthService) {
-    this.auth.getUser().then(res => {
-      this.user = res.data;
-    });
   }
 
-  public getRole(): string{
-    return this.user.role;
+  public getUser() {
+    return this.auth.getUser();
   }
 
-  public getName(): string{
-    return this.user.name;
+  public async getRole() {
+    let user = await this.auth.getUser();
+
+    return new Promise((resolve, reject) => {
+      resolve(user.data.role);
+    })
   }
 
+  // public async getName() {
+  //   let user = await this.auth.getUser();
+
+  //   return new Promise((resolve, reject) => {
+  //     resolve(user.data.name);
+  //   });
+  // }
 
 }

@@ -32,14 +32,14 @@
         </ng-container>
         <ng-container *ngIf="auth.isAuthenticated()">
           <li
-            *ngIf="user_role === 'user'; else showAdmin"
+            *ngIf="user_role === 'user'"
             [routerLink]="['/user-profile']"
             routerLinkActive="active"
           >
             <a>Profile</a>
           </li>
           <li
-            #showAdmin
+            *ngIf="user_role === 'admin' || user_role == 'vendor'"
             [routerLink]="['/admin']"
             routerLinkActive="active"
           >
