@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-vendor-admin-mail',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorAdminMailComponent implements OnInit {
 
-  constructor() { }
+  mails: any;
 
-  ngOnInit(): void {
+  constructor(private mailService: MailService) { }
+
+  async ngOnInit() {
+    this.mails = this.mailService.getMails();
   }
 
 }

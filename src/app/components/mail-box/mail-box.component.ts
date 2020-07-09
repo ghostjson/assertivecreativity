@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-mail-box',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MailBoxComponent implements OnInit {
 
+  @Input('mails') mails: Promise<object[]>;
+
+
   constructor() { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    console.log(await this.mails);
   }
 
 }
