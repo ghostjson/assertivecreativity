@@ -1,49 +1,30 @@
 <app-header></app-header>
-
 <div class="container">
   <div class="row">
     <div class="col-md-6">
       <div id="product-indicator" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li
-            data-target="#product-indicator"
-            data-slide-to="0"
-            class="active"
-          ></li>
+          <li data-target="#product-indicator" data-slide-to="0" class="active"></li>
           <li data-target="#product-indicator" data-slide-to="1"></li>
-          <li data-target="#product-indicator" data-slide-to="2"></li>
+          <!-- <li data-target="#product-indicator" data-slide-to="2"></li> -->
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img
-              class="d-block w-100"
-              src="./../../../assets/images/demo-product-images/p1.jpg"
-              alt="First slide"
-            />
+            <img class="d-block w-100" src="{{product.image}}" alt="First slide" />
           </div>
           <div class="carousel-item">
             <img
               class="d-block w-100"
-              src="./../../../assets/images/demo-product-images/p2.jpg"
+              src="assets/images/demo-product-images/p2.jpg"
               alt="First slide"
             />
           </div>
         </div>
-        <a
-          class="carousel-control-prev"
-          href="#product-indicator"
-          role="button"
-          data-slide="prev"
-        >
+        <a class="carousel-control-prev" href="#product-indicator" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a
-          class="carousel-control-next"
-          href="#product-indicator"
-          role="button"
-          data-slide="next"
-        >
+        <a class="carousel-control-next" href="#product-indicator" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -51,22 +32,22 @@
     </div>
     <div class="col-md-6 content-side">
       <div class="content">
-        <h3>Super Demo Shirt</h3>
-        <h4>$20/piece</h4>
+        <h3>{{product.name}}</h3>
+        <h4>${{product.price}}/piece</h4>
         <div class="params">
           <p class="category">Category: <span class="highlight">Shirt</span></p>
           <p class="availibility">
-            Availibility: <span class="highlight">In Stock</span>
+            Availibility:
+            <span *ngIf="product.stock > 0; else elseBlock" class="highlight">In Stock</span>
+            <ng-template #elseBlock>
+              <span class="highlight text-danger">Out Of Stock</span>
+            </ng-template>
           </p>
         </div>
-
         <p class="description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt earum
-          natus ut architecto, labore blanditiis numquam amet ipsum nulla.
+          {{product.description}}
         </p>
-
         <div class="options"></div>
-
         <div class="quatity">
           <div class="row">
             <div class="col-md-4">
@@ -79,27 +60,70 @@
             </div>
           </div>
         </div>
-
         <div class="row mt-3">
-          <div class="col">
-            <a href="#" class="more">
-              ADD TO CART
-            </a>
-            <a href="#" class="more">
-              NEGOTIATE
-            </a>
-          </div>
+          <!-- <div class="col"> -->
+          <a href="#" class="btn btn-primary mr-2">
+            ADD TO CART
+          </a>
+          <a href="#" class="btn btn-success mr-2">
+            NEGOTIATE
+          </a>
+          <!-- </div> -->
         </div>
+        <!-- Customization form -->
+        <form class="row customization-form mt-5 card">
+          <div *ngFor="let feature of product.features; let featureInd = index" class="card-body">
+            <!-- add color option -->
+            <div *ngIf="feature.type === 'color'" class="form-group pick-color">
+              <div>
+                <h5 class="col-12 customization-title">{{feature.title}}</h5>
+                <div class="color-list d-flex row justify-content-start">
+                  <div *ngFor="let input of feature.inputs; let colorInd = index" class="color-container col customization-input mb-2">
+                    <input class="sr-only" type="radio" name="color-{{featureInd}}" id="color-{{colorInd}}" value="{{input.colorHex}}" [attr.checked]="colorInd === 0 ? 'checked' : null">
+                    <label for="color-{{colorInd}}" class="form-check-label">
+                      <div class="color-preview fas fa-circle" [style.color]="input.colorHex"></div>
+                      <div class="color-name">{{input.colorName}}</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- add radio option -->
+            <div *ngIf="feature.type === 'radioBtn'" class="form-group radio-btn">
+              <div class="row">
+                <h5 class="col-12 customization-title">{{feature.title}}</h5>
+                <div class="radio-list pl-1">
+                  <div *ngFor="let input of feature.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
+                    <input class="form-check-input" type="radio" name="radio-{{featureInd}}" id="radio-{{radioInd}}" value="{{input.choiceValue}}" [attr.checked]="radioInd === 0 ? 'checked' : null">
+                    <label class="form-check-label" for="radio-{{radioInd}}">
+                      {{input.choiceText}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- add dropdown selection -->
+            <div *ngIf="feature.type === 'dropdown'" class="form-group radio-btn">
+              <div class="row">
+                <h5 class="col-12 customization-title">{{feature.title}}</h5>
+                <div class="dropdown-list pl-1">
+                  <select class="form-control form-control-sm">
+                    <option value="none">--{{feature.title}}--</option>
+                    <option *ngFor="let input of feature.inputs" value="input.choiceValue">{{input.choiceText}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-
-  <div class="row">
+  <!-- <div class="row">
     <div class="col">
       <h3>More Customization</h3>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-6">
       <div class="input-group mb-3">
@@ -127,7 +151,6 @@
         </select>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -141,7 +164,6 @@
         </select>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -155,7 +177,6 @@
         </select>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -169,7 +190,6 @@
         </select>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -183,7 +203,6 @@
         </select>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -198,7 +217,6 @@
       </div>
     </div>
   </div>
-
   <div class="row mt-3 mb-3">
     <div class="col" style="text-align: right;">
       <a href="#" class="more">
@@ -208,8 +226,7 @@
         NEGOTIATE
       </a>
     </div>
-  </div>
-
+  </div> -->
   <!-- <div class="row rating">
     <h3>Rating</h3>
     <div class="row mt-3">
@@ -356,5 +373,4 @@
     </div>
   </div> -->
 </div>
-
 <app-footer></app-footer>

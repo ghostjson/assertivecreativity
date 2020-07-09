@@ -1,55 +1,49 @@
 .card-footer{
-    background: var(--dark-color);
-    color: white;
-    cursor: pointer;
-    transition: all 0.5s;
-    border: 1px solid var(--dark-color);
+	background: var(--dark-color);
+	color: white;
+	cursor: pointer;
+	transition: all 0.5s;
+	border: 1px solid var(--dark-color);
 }
 
 .card-footer:hover{
-    background: white;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+	background: white;
+	color: var(--primary-color);
+	border: 1px solid var(--primary-color);
 }
 
 .list-group-item-action{
-    transition: all 0.5s;
-    text-align: center;
+	transition: all 0.5s;
+	text-align: center;
 }
 
 .list-group-item-action.active{
-    background: var(--dark-color);
-    border: 1px solid var(--dark-color);
+	background: var(--dark-color);
+	border: 1px solid var(--dark-color);
 }
 
 .list-group-item-action:hover{
-    color: var(--primary-color);
-    cursor: pointer;
+	color: var(--primary-color);
+	cursor: pointer;
 }
 
-.card-list{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card{
-    margin: 10px;
-    margin-top: 0px;
+.card {
+	height: 33rem;
 }
 
 .page-link{
-    color: var(--dark-color);
+	color: var(--dark-color);
 }
 
 .search{
-    padding: 0px;
-    margin: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 .search input{
-    padding: 5px 10px;
-    background: var(--dark-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
+	padding: 5px 10px;
+	background: var(--dark-color);
+	color: white;
+	border: none;
+	border-radius: 5px;
 }

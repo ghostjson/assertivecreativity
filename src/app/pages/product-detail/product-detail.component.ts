@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NbSelectModule } from "@nebular/theme";
+import { ProductService } from '../../services/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../models/Product';
 
 @Component({
   selector: "app-product-detail",
@@ -12,7 +15,12 @@ export class ProductDetailComponent implements OnInit {
 
   private slideDOM;
 
-  constructor() {}
+  product: Product;
+
+  constructor(
+    private _productService: ProductService,
+    private _activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.image_set = [
@@ -21,7 +29,12 @@ export class ProductDetailComponent implements OnInit {
       "./../../../assets/images/demo-product-images/p1.jpg"
     ];
 
+    // get product details from the product service
+    let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    this.product = this._productService.getProduct(id);
+
     console.log(document.getElementsByClassName("slide-image"));
+    console.log(this.product);
   }
 
   slideLeft() {}
