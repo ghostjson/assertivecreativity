@@ -258,7 +258,6 @@ export class VendorAdminProductService {
   }
 
   async deleteProduct(id: number) {
-    console.log(this.host + `/products/${id}`);
     let res = await this.http.delete(this.host + `/products/${id}`).toPromise();
   }
 
@@ -268,7 +267,6 @@ export class VendorAdminProductService {
     return new Promise((resolve, reject) => {
       res["data"]["features"] = JSON.parse(res["data"]["features"]);
       resolve(res);
-      console.log(res);
     });
   }
 }

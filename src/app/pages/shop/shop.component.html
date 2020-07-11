@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-12 col-md-4" *ngFor="let product of products">
           <div class="card text-center">
-            <img class="card-img-top" src="https://via.placeholder.com/280x280" alt="Card image cap">
+            <img class="card-img-top" [src]="product.image" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{product.name}}</h5>
               <p class="card-text">{{product.description}}</p>
