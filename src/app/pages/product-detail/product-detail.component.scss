@@ -1,9 +1,14 @@
-#product-indicator {
-  margin: 15%;
+.product-img {
+  top: 0;
+
+  #product-indicator {
+    // margin: 3em;
+    min-height: 3rem;
+  }
 }
 
 .content {
-  padding-top: 100px;
+  // padding-top: 100px;
 
   h3 {
     font-size: 2em;
@@ -16,12 +21,22 @@
   }
 
   .params {
-    margin-top: 10px;
+    margin-top: 2em;
     margin-bottom: 10px;
 
     p {
       margin-bottom: 3px;
     }
+  }
+
+  .product-price {
+    font-size: 1.75rem;
+    font-weight: bolder;
+
+  }
+
+  @media (max-width: 768px) {
+    // padding-top: 100px;
   }
 }
 
@@ -45,7 +60,13 @@
   }
 }
 
+.card {
+  box-shadow: none;
+}
+
 .customization-form {
+  display: block;
+
   .card-body {
     border-top: 1px solid whitesmoke;
   }
