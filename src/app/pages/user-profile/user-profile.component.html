@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <div class="profile-head">
                             <h5>
-                                User Full Name
+                                {{ user.name }}
                             </h5>
                             <h6>
                                 Company Of User
@@ -57,7 +57,7 @@
                                         <label>User Id</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="text" name="username" id="username" value="user123"></p>
+                                        <p>#<input [disabled]="formMode" type="text" name="username" id="username" [value]="user.id"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -65,7 +65,7 @@
                                         <label>Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="text" name="name" id="name" value="User Full Name"></p>
+                                        <p><input [disabled]="formMode" type="text" name="name" id="name" [value]="user.name"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -73,7 +73,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p> <input [disabled]="formMode" type="email" name="email" id="email" value="useremail@gmail.com"> </p>
+                                        <p> <input [disabled]="formMode" type="email" name="email" id="email" [value]="user.email"> </p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -81,7 +81,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="tel" name="phone" id="phone" value="123 123123"></p>
+                                        <p><input [disabled]="formMode" type="tel" name="phone" id="phone" [value]="user.phone"></p>
                                     </div>
                                 </div>
                                 <div class="row">
