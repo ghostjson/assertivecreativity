@@ -18,10 +18,15 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.common.setLoader(true)
-    this.user.getRole().then((res) => {
-      this.user_role = res;
-      this.common.setLoader(false)
-    });
+    this.common.setLoader(true);
+    this.user
+      .getRole()
+      .then((res) => {
+        this.user_role = res;
+        this.common.setLoader(false);
+      })
+      .catch((e) => {
+        this.common.setLoader(false);
+      });
   }
 }
