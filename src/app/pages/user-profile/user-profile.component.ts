@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,7 +11,9 @@ export class UserProfileComponent implements OnInit {
 
   formMode: boolean = true;
 
-  constructor() { }
+  constructor(private auth: AuthService, private common: CommonService) {
+    console.log(this.auth.getUser())
+  }
 
   ngOnInit(): void {
   }

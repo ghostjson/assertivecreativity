@@ -57,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { httpInterceptProvider } from './http-interceptor';
     VendorAdminChartCardComponent,
     VendorAdminAddProductComponent,
     VendorAdminAddProductFormComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
