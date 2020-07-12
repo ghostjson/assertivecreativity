@@ -18,10 +18,13 @@ export class ShopComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.common.setLoader(true);
+
     this.featured = this.common.featuredProduct();
     this._productService.getProducts().then((res) => {
       this.products = res["data"];
-      console.log(this.products)
+
+      this.common.setLoader(false);
     });
   }
 

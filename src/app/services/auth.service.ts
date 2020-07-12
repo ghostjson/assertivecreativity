@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { SignupFormInterface } from '../pages/signup/signup_form.interface';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { SignupFormInterface } from "../pages/signup/signup_form.interface";
+import { environment } from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { exception } from "console";
+import { throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -15,15 +17,7 @@ export class AuthService {
   }
 
   public async authentication(email: string, password: string) {
-    try {
-      let res: any = await this.http
-        .post(this.host("/login"), { email, password })
-        .toPromise();
-      localStorage.setItem("Token", await res.Token);
-      console.log(localStorage.getItem("Token"));
-    } catch (e) {
-      console.log(e);
-    }
+    return this.http.post(this.host("/login"), { email, password }).toPromise();
   }
 
   public async register(form: SignupFormInterface) {
@@ -35,7 +29,6 @@ export class AuthService {
     let Token = localStorage.getItem("Token");
     return Token != null ? true : false;
   }
-
 
   public async getUser() {
     if (this.isAuthenticated()) {

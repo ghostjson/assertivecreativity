@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { CommonService } from "src/app/common.service";
 
 @Component({
   selector: "app-signin",
@@ -13,9 +14,15 @@ export class SigninComponent implements OnInit {
     password: "",
   };
 
+  error: string;
+
   role: string;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private common: CommonService
+  ) {}
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {
@@ -23,9 +30,21 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  login(): void {
-    if (this.auth.authentication(this.user.email, this.user.password)) {
+  async login() {
+    this.common.setLoader(true);
+
+    try {
+      let res = await this.auth.authentication(
+        this.user.email,
+        this.user.password
+      );
+      localStorage.setItem("Token", await res["Token"]);
       this.router.navigate(["/"]);
+    } catch (e) {
+      console.log(e);
+      this.error = e.error.status;
+    } finally {
+      this.common.setLoader(false);
     }
   }
 }

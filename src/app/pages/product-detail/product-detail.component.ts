@@ -3,6 +3,7 @@ import { NbSelectModule } from "@nebular/theme";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../models/Product";
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: "app-product-detail",
@@ -19,7 +20,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private _productService: ProductService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private common: CommonService
   ) {
     this.getProduct();
   }
@@ -31,8 +33,11 @@ export class ProductDetailComponent implements OnInit {
 
     // get product details from the product service
     let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+
+    this.common.setLoader(true);
     this._productService.getProduct(id).then((res) => {
       this.product = res["data"];
+      this.common.setLoader(false);
     });
   }
 
