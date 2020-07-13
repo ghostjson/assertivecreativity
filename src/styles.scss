@@ -1,10 +1,5 @@
-@import 'themes';
+// @import 'themes';
 
-@import '~@nebular/theme/styles/globals';
-
-@include nb-install() {
-  @include nb-theme-global();
-};
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0px;
@@ -18,11 +13,23 @@
   --dark-color: #2b2b2b;
 }
 
+.card {
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,.125)
+}
+
 .highlight {
   color: var(--primary-color);
 }
 
-.btn-primary {
+.btn {
   cursor: pointer;
+}
+
+.btn-primary {
   background: var(--primary-color);
+}
+
+.btn-dark {
+  background: var(--dark-color) !important;
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { NbSelectModule } from "@nebular/theme";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../models/Product";

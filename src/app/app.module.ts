@@ -32,8 +32,6 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CommunicationComponent } from './pages/communication/communication.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 /** Vendor Admin module imports */
 import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
@@ -109,9 +107,6 @@ import { LoaderComponent } from './components/loader/loader.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: "default" }),
-    NbLayoutModule,
-    NbEvaIconsModule,
     NgxSummernoteModule,
     ChartjsModule,
     ReactiveFormsModule,
