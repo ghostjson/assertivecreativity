@@ -14,6 +14,8 @@ import { AuthGuard } from "./guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CommunicationComponent } from "./pages/communication/communication.component";
+import { MessagesComponent } from "./pages/messages/messages.component";
+import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { VendorAdminDashboardComponent } from "./pages/vendor-admin-dashboard/vendor-admin-dashboard.component";
 import { VendorAdminMailComponent } from "./pages/vendor-admin-mail/vendor-admin-mail.component";
 import { VendorAdminProductsComponent } from "./pages/vendor-admin-products/vendor-admin-products.component";
@@ -36,10 +38,13 @@ const routes: Routes = [
   { path: "form/:formId", component: FormViewComponent },
   { path: "cart", component: CartComponent },
   { path: "checkout", component: CheckoutComponent },
-  { path: "communication", component: CommunicationComponent },
+  // { path: "communication", component: CommunicationComponent },
+  { path: "communication", component: MessagesComponent },
+  { path: "communication/:id", component: ReadMailComponent },
   { path: "product/:id", component: ProductDetailComponent },
   { path: "admin", component: VendorAdminDashboardComponent },
   { path: "admin/mail", component: VendorAdminMailComponent },
+  { path: "admin/mail/:id", component: ReadMailComponent },
   { path: "admin/mail/compose", component: VendorAdminMailComposeComponent },
   { path: "admin/products", component: VendorAdminProductsComponent },
   { path: "admin/products/add", component: VendorAdminAddProductComponent },

@@ -56,6 +56,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ReadMailComponent } from './pages/read-mail/read-mail.component';
+import { DisplayMailComponent } from './components/display-mail/display-mail.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +103,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     VendorAdminAddProductComponent,
     VendorAdminAddProductFormComponent,
     LoaderComponent,
+    MessagesComponent,
+    ReadMailComponent,
+    DisplayMailComponent
   ],
   imports: [
     BrowserModule,
