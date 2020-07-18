@@ -8,6 +8,7 @@ import { AboutComponent } from "./pages/about/about.component";
 import { ContactComponent } from "./pages/contact/contact.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
+import { SelectShopTypeComponent } from "./pages/select-shop-type/select-shop-type.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { AuthGuard } from "./guard/auth.guard";
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
-  { path: "shop", component: ShopComponent },
+  { path: "shop/select-type", component: SelectShopTypeComponent },
+  { path: "shop/stocks", component: ShopComponent },
   {
     path: "user-profile",
     component: UserProfileComponent,

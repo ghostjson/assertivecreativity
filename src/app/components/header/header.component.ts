@@ -8,6 +8,7 @@ import { CommonService } from "src/app/common.service";
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
+
 export class HeaderComponent implements OnInit {
   user_role: any;
 

@@ -59,6 +59,17 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { DisplayMailComponent } from './components/display-mail/display-mail.component';
+import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
+
+/**
+ * Prime Ng Modules starts
+ */
+import { CardModule } from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+/**
+ * Prime Ng Modules ends
+ */
+
 
 @NgModule({
   declarations: [
@@ -105,7 +116,8 @@ import { DisplayMailComponent } from './components/display-mail/display-mail.com
     LoaderComponent,
     MessagesComponent,
     ReadMailComponent,
-    DisplayMailComponent
+    DisplayMailComponent,
+    SelectShopTypeComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +129,9 @@ import { DisplayMailComponent } from './components/display-mail/display-mail.com
     ChartjsModule,
     ReactiveFormsModule,
     ColorPickerModule,
+    // Prime Ng Modules
+    CardModule,
+    ButtonModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

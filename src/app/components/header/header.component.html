@@ -4,7 +4,7 @@
     <img src="./../../../assets/images/logo.png" alt="logo" />
   </div>
   <div class="center">
-    <div class="menu">
+    <nav class="menu">
       <ul>
         <li
           [routerLink]="['']"
@@ -19,7 +19,7 @@
         <li [routerLink]="['/contact']" routerLinkActive="active">
           <a>Contact Us</a>
         </li>
-        <li [routerLink]="['/shop']" routerLinkActive="active">
+        <li [routerLink]="['/shop/select-type']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
           <a>Shop</a>
         </li>
         <ng-container *ngIf="!auth.isAuthenticated()">
@@ -56,6 +56,6 @@
           </div>
         </ng-container>
       </ul>
-    </div>
+    </nav>
   </div>
 </header>
