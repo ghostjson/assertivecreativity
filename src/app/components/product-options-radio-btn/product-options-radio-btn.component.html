@@ -1,28 +1,15 @@
 <div [formGroup]="formGroup" class="row">
   <h5 class="col-12 customization-title">{{feature.title}}</h5>
   <div class="radio-list pl-1">
-    <input
-      formControlName="featureIndex"
-      class="sr-only"
-      type="number"
-      name="featureIndex"
-      value="featureInd"
-      disabled
-      hidden
-    >
     <div *ngFor="let input of feature.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
-      <input
-        formControlName="input"
-        class="form-check-input"
-        type="radio" name="input"
-        id="radio-{{radioInd}}"
+      <p-radioButton
+        name="radio-{{featureInd}}-{{chainedInd}}"
+        label="{{input.choiceText}}"
         value="{{input.choiceValue}}"
-        [attr.checked]="radioInd === 0 ? 'checked' : null"
-        required
-      >
-      <label class="form-check-label" for="radio-{{radioInd}}">
-        {{input.choiceText}}
-      </label>
+        formControlName="input"
+        styleClass="radio-btn"
+        labelStyleClass="radio-btn__label"
+      ></p-radioButton>
     </div>
   </div>
 </div>

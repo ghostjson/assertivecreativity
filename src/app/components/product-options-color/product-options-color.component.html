@@ -1,28 +1,22 @@
 <!-- add color option -->
-<form [formGroup]="formGroup">
-  <h5 class="col-12 customization-title">{{feature.title}}</h5>
-  <div class="color-list d-flex row justify-content-start">
-    <input
-      formControlName="featureIndex"
-      class="sr-only"
-      type="number"
-      name="featureIndex"
-      hidden
-      readonly
-    >
-    <div *ngFor="let input of feature.inputs; let colorInd = index" class="color-container col customization-input mb-2">
-      <input
-        formControlName="input"
-        class="sr-only" type="radio"
-        name="input"
-        id="color-{{ind}}-{{featureInd + colorInd + 1}}"
-        value="{{input.colorHex}}"
-        [attr.checked]="colorInd === 0 ? 'checked' : null"
-      >
-      <label for="color-{{ind}}-{{featureInd + colorInd + 1}}" class="form-check-label">
-        <div class="color-preview fas fa-circle" [style.color]="input.colorHex"></div>
-        <div class="color-name">{{input.colorName}}</div>
-      </label>
+<ng-container [formGroup]="formGroup">
+  <div>
+    <h5 class="customization-title">{{feature.title}}</h5>
+    <div class="color-list d-flex row justify-content-start">
+      <div *ngFor="let input of feature.inputs; let colorInd = index" class="color-container col customization-input mb-2">
+        <input
+          formControlName="input"
+          class="sr-only" type="radio"
+          id="color-{{featureInd}}-{{chainedInd}}-{{colorInd}}"
+          value="{{input.colorHex}}"
+          [attr.checked]="colorInd === 0 ? 'checked' : null"
+        >
+        <label for="color-{{featureInd}}-{{chainedInd}}-{{colorInd}}" class="form-check-label">
+          <div class="color-preview fas fa-circle" [style.color]="input.colorHex"></div>
+          <div class="color-name">{{input.colorName}}</div>
+        </label>
+      </div>
     </div>
   </div>
-</form>
+</ng-container>
+

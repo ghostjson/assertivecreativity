@@ -9,6 +9,7 @@ import { FormGroup, FormGroupName, FormArrayName } from '@angular/forms';
 export class ProductOptionsRadioBtnComponent implements OnInit {
   @Input() feature: any;
   @Input() featureInd: number;
+  @Input() chainedInd: number;
   @Input() formGroup: FormGroup;
 
   constructor() { }

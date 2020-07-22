@@ -9,18 +9,12 @@ import { FormGroup } from '@angular/forms';
 export class ProductOptionsColorComponent implements OnInit {
   @Input() feature: any;
   @Input() featureInd: number;
+  @Input() chainedInd: number;
   @Input() formGroup: FormGroup;
 
   constructor() {
   }
 
-  randomNum() {
-    return Math.floor(Math.random() * 1092312);
-  }
-
-  ind: number;
-
   ngOnInit(): void {
-    this.ind = this.randomNum();
   }
 }

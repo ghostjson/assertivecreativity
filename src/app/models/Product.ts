@@ -86,7 +86,7 @@ export interface Feature {
   price?: number,
   title: string,
   name: string,
-  inputs: Array<Object>,
+  inputs: Array<any>,
   chainedInputs?: Feature[]
 }
 

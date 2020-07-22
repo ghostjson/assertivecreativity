@@ -6,9 +6,6 @@ import { Product, Feature, listAllFeatures } from "../../models/Product";
 import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
-// import { ProductOptionsColorComponent } from '../../components/product-options-color/product-options-color.component';
-// import { ProductOptionsDropdownComponent } from '../../components/product-options-dropdown/product-options-dropdown.component';
-// import { ProductOptionsRadioBtnComponent } from '../../components/product-options-radio-btn/product-options-radio-btn.component';
 
 @Component({
   selector: "app-product-detail",
@@ -36,17 +33,14 @@ export class ProductDetailComponent implements OnInit {
     private _orderService: OrderService,
     private router: Router
   ) {
-    this.getProduct();
   }
 
   async ngOnInit() {
+    // get the products from the server
+    this.getProduct();
+
     // list of all possible feature
     this.possibleFeatures = listAllFeatures();
-
-    // this.features().valueChanges.subscribe((e) => {
-    //   console.log('form changed');
-    //   console.log(e);
-    // });
   }
 
   features(): FormArray {
@@ -60,16 +54,16 @@ export class ProductDetailComponent implements OnInit {
   // construct a form group for new featureType
   newFeature(feature: Feature): FormGroup {
     console.log("Creating ", feature.type, " for the form!!");
-    let featureTemplate: Object = {};
 
-    featureTemplate['featureIndex'] = [this.features().length, Validators.required];
-    featureTemplate['chainInpsHidden'] = ['true', Validators.required];
-    featureTemplate['type'] = [feature.type, Validators.required];
-    featureTemplate['title'] = [feature.title, Validators.required];
-    featureTemplate['name'] = [feature.name, Validators.required];
-    featureTemplate['price'] = [feature.price, Validators.required];
-    featureTemplate['input'] = ['', Validators.required];
-    featureTemplate['chainedInputs'] = this._fb.array([]);
+    let featureTemplate = {
+      chainInpsHidden: ['true', Validators.required],
+      type: [feature.type, Validators.required],
+      title: [feature.title, Validators.required],
+      name: [feature.name, Validators.required],
+      price: [feature.price, Validators.required],
+      input: ['', Validators.required],
+      chainedInputs: this._fb.array([])
+    };
 
     return this._fb.group(featureTemplate);
   }
@@ -97,24 +91,22 @@ export class ProductDetailComponent implements OnInit {
     });
 
     console.log('Order specs Object Created', this.orderFeaturesForm);
-    console.log('controls list ', this.features().controls);
+    console.log('feature at 0 ', this.features().at(0));
   }
 
   addChainedInputs(index: any): void {
-    // get the index of the feature to add chainedInputs
-    // let featureIndex = data['featureIndex'];
-    console.log('event emitter active', index);
-    // this.features().at(featureIndex).setValue(
-    //   this.features().at(featureIndex).value,
-    //   { emitEvent: false }
-    // );
+    console.log('Chained Inputs added', index);
 
-    console.log('chained inputs', this.chainedInputs(index).length, this.chainedInputs(index));
     this.product.features[index].chainedInputs.forEach((input) => {
       this.chainedInputs(index).push(
         this.newFeature(input)
       );
     });
+
+    for (let i = 0; i < this.chainedInputs(index).length; ++i) {
+      console.log('input at: ', i);
+      console.log(this.chainedInputs(index).at(i));
+    }
   }
 
   getProduct() {
@@ -151,8 +143,6 @@ export class ProductDetailComponent implements OnInit {
   slideRight() { }
 
   updatePrice() {
-    console.clear();
-
     console.log('intial price: ',this.priceTotal);
     this.priceTotal = this.orderFeaturesForm.value.price;
     console.log('base product price added: ', this.orderFeaturesForm.value.price);
@@ -170,9 +160,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit form')
-    // console.log(this.features().value);
+    console.log('submit form');
 
+    this.updatePrice();
     let order = this.orderFeaturesForm.value;
     order['totalPrice'] = this.priceTotal;
     console.log(order);

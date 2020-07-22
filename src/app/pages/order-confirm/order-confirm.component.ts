@@ -7,7 +7,7 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./order-confirm.component.scss']
 })
 export class OrderConfirmComponent implements OnInit {
-  order: Object;
+  order: any;
 
   constructor(
     private _orderService: OrderService

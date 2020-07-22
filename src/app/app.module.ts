@@ -63,6 +63,7 @@ import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-ty
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
 import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
@@ -134,7 +135,8 @@ import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.compo
     // Prime Ng Modules
     CardModule,
     ButtonModule,
-    DropdownModule
+    DropdownModule,
+    RadioButtonModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent
