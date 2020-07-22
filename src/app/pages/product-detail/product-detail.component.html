@@ -103,17 +103,9 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
+                      (click)="addChainedInputs(featureInd)"
                     >
                     </app-product-options-color>
-                    <button
-                      *ngIf="product.features[featureInd].chainedInputs.length > 0"
-                      [disabled]="!featureForm.valid"
-                      (click)="addChainedInputs(featureInd)"
-                      class="btn btn-success btn--more-options"
-                      type="button"
-                    >
-                      Show Options
-                    </button>
                   </div>
 
                   <!-- add radio option -->
@@ -122,16 +114,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                    ></app-product-options-radio-btn>
-                    <button
-                      *ngIf="product.features[featureInd].chainedInputs.length > 0"
-                      [disabled]="!featureForm.valid"
                       (click)="addChainedInputs(featureInd)"
-                      class="btn btn-success btn--more-options"
-                      type="button"
-                    >
-                      Show Options
-                    </button>
+                    ></app-product-options-radio-btn>
                   </div>
 
                   <!-- add dropdown selection -->
@@ -140,16 +124,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                    ></app-product-options-dropdown>
-                    <button
-                      *ngIf="product.features[featureInd].chainedInputs.length > 0"
-                      [disabled]="!featureForm.valid"
                       (click)="addChainedInputs(featureInd)"
-                      class="btn btn-success btn--more-options"
-                      type="button"
-                    >
-                      Show Options
-                    </button>
+                    ></app-product-options-dropdown>
                   </div>
                 </div>
 

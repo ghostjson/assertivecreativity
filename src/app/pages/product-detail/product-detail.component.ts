@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, AbstractControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Product, Feature, listAllFeatures } from "../../models/Product";
 import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
@@ -94,19 +94,27 @@ export class ProductDetailComponent implements OnInit {
     console.log('feature at 0 ', this.features().at(0));
   }
 
-  addChainedInputs(index: any): void {
-    console.log('Chained Inputs added', index);
+  addChainedInputs(index: number): void {
+    let feature: AbstractControl = this.features().at(index);
 
-    this.product.features[index].chainedInputs.forEach((input) => {
-      this.chainedInputs(index).push(
-        this.newFeature(input)
-      );
+    setTimeout(() => {
+      if (feature.value.chainInpsHidden && feature.valid) {
+        console.log('Chained Inputs added', index);
+        this.product.features[index].chainedInputs.forEach((input) => {
+          this.chainedInputs(index).push(
+            this.newFeature(input)
+          );
+        });
+
+        // set the check for hidden chained inputs as false so that once added
+        // inputs are not added again
+        feature.patchValue({
+          chainInpsHidden: false
+        });
+
+        console.log('Value after adding chains ', feature.value);
+      }
     });
-
-    for (let i = 0; i < this.chainedInputs(index).length; ++i) {
-      console.log('input at: ', i);
-      console.log(this.chainedInputs(index).at(i));
-    }
   }
 
   getProduct() {
