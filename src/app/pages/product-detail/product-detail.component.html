@@ -35,7 +35,7 @@
     <div class="col-md-6">
       <div class="content pt-5">
         <h3>{{product.name}}</h3>
-        <h4 class="product-price">${{product.price}}/piece</h4>
+        <h4 class="product-price">${{priceTotal}}/piece</h4>
         <div class="params card border">
           <div class="card-body">
             <p class="category">Category: <span class="highlight">Shirt</span></p>
@@ -65,62 +65,212 @@
               </div>
             </div>
           </div>
-          <!-- Customization form -->
-          <form class="customization-form mt-3 card border">
-            <div *ngFor="let feature of product.features; let featureInd = index" class="card-body">
-              <!-- add color option -->
-              <div *ngIf="feature.type === 'color'" class="form-group pick-color">
-                <div>
-                  <h5 class="col-12 customization-title">{{feature.title}}</h5>
-                  <div class="color-list d-flex row justify-content-start">
-                    <div *ngFor="let input of feature.inputs; let colorInd = index" class="color-container col customization-input mb-2">
-                      <input class="sr-only" type="radio" name="color-{{featureInd}}" id="color-{{colorInd}}" value="{{input.colorHex}}" [attr.checked]="colorInd === 0 ? 'checked' : null">
-                      <label for="color-{{colorInd}}" class="form-check-label">
-                        <div class="color-preview fas fa-circle" [style.color]="input.colorHex"></div>
-                        <div class="color-name">{{input.colorName}}</div>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- add radio option -->
-              <div *ngIf="feature.type === 'radioBtn'" class="form-group radio-btn">
-                <div class="row">
-                  <h5 class="col-12 customization-title">{{feature.title}}</h5>
-                  <div class="radio-list pl-1">
-                    <div *ngFor="let input of feature.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
-                      <input class="form-check-input" type="radio" name="radio-{{featureInd}}" id="radio-{{radioInd}}" value="{{input.choiceValue}}" [attr.checked]="radioInd === 0 ? 'checked' : null">
-                      <label class="form-check-label" for="radio-{{radioInd}}">
-                        {{input.choiceText}}
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- add dropdown selection -->
-              <div *ngIf="feature.type === 'dropdown'" class="form-group radio-btn">
-                <div class="row">
-                  <h5 class="col-12 customization-title">{{feature.title}}</h5>
-                  <div class="dropdown-list pl-1">
-                    <select class="form-control form-control-sm">
-                      <option value="none">--{{feature.title}}--</option>
-                      <option *ngFor="let input of feature.inputs" value="input.choiceValue">{{input.choiceText}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
         </div>
         <div class="product-controls mt-3">
           <!-- <div class="col"> -->
           <a href="#" class="btn btn-primary mr-2">
             ADD TO CART
           </a>
-          <a href="#" class="btn btn-success mr-2">
+          <a href="#negotiate-form" class="btn btn-success mr-2">
             NEGOTIATE
           </a>
           <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-7">
+          <!-- Customization form starts -->
+          <form
+            class="customization-form mt-3 card border"
+            [formGroup]="orderFeaturesForm"
+            id="negotiate-form"
+          >
+            <div
+              formArrayName="features"
+              >
+              <div
+                *ngFor="let featureForm of features().controls;
+                        let featureInd = index"
+                class="card-body"
+              >
+
+                <!-- add color option -->
+                <div *ngIf="product.features[featureInd].type === 'color'" class="form-group pick-color">
+                  <app-product-options-color
+                    [formGroup]="featureForm"
+                    [feature]="product.features[featureInd]"
+                    [featureInd]="featureInd"
+                  >
+                  </app-product-options-color>
+                  <button
+                    *ngIf="product.features[featureInd].chainedInputs.length > 0"
+                    [disabled]="!featureForm.valid"
+                    (click)="addChainedInputs(featureInd)"
+                    class="btn btn-success btn--more-options"
+                    type="button"
+                  >
+                    Show Options
+                  </button>
+
+                  <!-- add chained inputs which trigger in giving input -->
+                  <div class="chainedInputs" (featureForm.valid)="addChainedInputs(featureInd)">
+                    <div *ngFor="let chainedInput of featureForm.get('chainedInputs').controls; let chainedInd = index">
+                      <div *ngIf="chainedInput.value.type === 'color'" class="form-group pick-color">
+                        <app-product-options-color
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="'chainedInd + featureInd'"
+                        >
+                        </app-product-options-color>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'dropdown'" class="form-group dropdown">
+                        <app-product-options-dropdown
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="'chainedInd + featureInd'"
+                        >
+                        </app-product-options-dropdown>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'radioBtn'" class="form-group radioBtn">
+                        <app-product-options-radio-btn
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="'chainedInd + featureInd'"
+                        >
+                        </app-product-options-radio-btn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- add radio option -->
+                <div [formGroupName]="featureInd" *ngIf="product.features[featureInd].type === 'radioBtn'" class="form-group radio-btn">
+                  <app-product-options-radio-btn
+                    [formGroup]="featureForm"
+                    [feature]="product.features[featureInd]"
+                    [featureInd]="featureInd"
+                  ></app-product-options-radio-btn>
+                  <button
+                    *ngIf="product.features[featureInd].chainedInputs.length > 0"
+                    [disabled]="!featureForm.valid"
+                    (click)="addChainedInputs(featureInd)"
+                    class="btn btn-success btn--more-options"
+                    type="button"
+                  >
+                    Show Options
+                  </button>
+
+                  <!-- add chained inputs which trigger in giving input -->
+                  <div class="chainedInputs" (featureForm.valid)="addChainedInputs(featureInd)">
+                    <div *ngFor="let chainedInput of featureForm.get('chainedInputs').controls; let chainedInd = index">
+                      <div *ngIf="chainedInput.value.type === 'color'" class="form-group pick-color">
+                        <app-product-options-color
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-color>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'dropdown'" class="form-group dropdown">
+                        <app-product-options-dropdown
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-dropdown>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'radioBtn'" class="form-group radioBtn">
+                        <app-product-options-radio-btn
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-radio-btn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- add dropdown selection -->
+                <div *ngIf="product.features[featureInd].type === 'dropdown'" class="form-group radio-btn">
+                  <app-product-options-dropdown
+                    [formGroup]="featureForm"
+                    [feature]="product.features[featureInd]"
+                    [featureInd]="featureInd"
+                  ></app-product-options-dropdown>
+                  <button
+                    *ngIf="product.features[featureInd].chainedInputs.length > 0"
+                    [disabled]="!featureForm.valid"
+                    (click)="addChainedInputs(featureInd)"
+                    class="btn btn-success btn--more-options"
+                    type="button"
+                  >
+                    Show Options
+                  </button>
+
+                  <!-- add chained inputs which trigger in giving input -->
+                  <div class="chainedInputs" (featureForm.valid)="addChainedInputs(featureInd)">
+                    <div *ngFor="let chainedInput of featureForm.get('chainedInputs').controls; let chainedInd = index">
+                      <div *ngIf="chainedInput.value.type === 'color'" class="form-group pick-color">
+                        <app-product-options-color
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-color>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'dropdown'" class="form-group dropdown">
+                        <app-product-options-dropdown
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-dropdown>
+                      </div>
+                      <div *ngIf="chainedInput.value.type === 'radioBtn'" class="form-group radioBtn">
+                        <app-product-options-radio-btn
+                          [formGroup]="featureForm"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="chainedInd"
+                        >
+                        </app-product-options-radio-btn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              Total Price: <strong>{{priceTotal}}</strong>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-success card-footer__btn" type="button" (click)="updatePrice()">
+                Update Price
+              </button>
+              <button class="btn btn-primary card-footer__btn" type="submit" (click)="onSubmit()">
+                Negotiate
+              </button>
+            </div>
+          </form>
+          <!-- Customization form ends -->
+        </div>
+
+        <div class="col-5">
+          <div class="row d-flex flex-column justify-content-center align-items-center">
+            <div class="col-9 card border">
+              <div class="card-body">
+                <img class="product-img--form object--contain" src="{{product.image}}" alt="product image">
+                <hr>
+                <p>
+                  Price: {{priceTotal}}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

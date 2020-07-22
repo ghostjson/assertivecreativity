@@ -60,15 +60,13 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { DisplayMailComponent } from './components/display-mail/display-mail.component';
 import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
-
-/**
- * Prime Ng Modules starts
- */
 import { CardModule } from 'primeng/card';
-import {ButtonModule} from 'primeng/button';
-/**
- * Prime Ng Modules ends
- */
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
+import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
+import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
+import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 
 
 @NgModule({
@@ -118,6 +116,10 @@ import {ButtonModule} from 'primeng/button';
     ReadMailComponent,
     DisplayMailComponent,
     SelectShopTypeComponent,
+    ProductOptionsColorComponent,
+    ProductOptionsRadioBtnComponent,
+    ProductOptionsDropdownComponent,
+    OrderConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +133,8 @@ import {ButtonModule} from 'primeng/button';
     ColorPickerModule,
     // Prime Ng Modules
     CardModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

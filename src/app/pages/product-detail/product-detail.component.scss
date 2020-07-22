@@ -64,34 +64,31 @@
   box-shadow: none;
 }
 
+.form-group {
+  margin-top: 1.5em;
+}
+
+.btn--more-options {
+  margin-top: 1em;
+}
+
 .customization-form {
   display: block;
+}
 
-  .card-body {
-    border-top: 1px solid whitesmoke;
-  }
+.negotiate-form .card-body::nth-of-type(2n+1) {
+  border-top: 1px solid grey;
+}
 
-  .customization-title {
-    font-size: 1.1rem;
-    color: grey;
-  }
+.card-footer__btn {
+  margin-left: 1em;
+}
 
-  .customization-input label {
-    cursor: pointer;
-  }
+.product-img--form {
+  max-width: 100%;
+  max-height: 100%;
+}
 
-  .color-container {
-    text-align: center;
-
-    .color-preview {
-      border: 5px solid transparent;
-      border-radius: 50%;
-    }
-  }
-
-  input:checked~label {
-    .color-preview {
-      border-color: var(--primary);
-    }
-  }
+.object--contain {
+  object-fit: contain;
 }

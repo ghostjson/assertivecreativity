@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-12 card border">
+      <div class="row">
+        <div class="col-3">
+          <img src="{{order.image}}" alt="Product Image">
+        </div>
+        <div class="col-9">
+
+        </div>
+      </div>
+    </div> -->
+    <div class="col-7">
+      <div class="card border order-detail">
+        <div class="card-body">
+          <h3 class="card-title order-detail--title">Order Summary</h3>
+          <div *ngFor="let feature of order.features">
+            <div class="order-spec">
+              <p class="card-text order-detail--questn">
+                {{feature.title}}
+              </p>
+              <p class="card-text order-detail--ans">
+                {{feature.input}}
+              </p>
+            </div>
+            <div *ngFor="let chainedInput of feature.chainedInputs" class="order-spec">
+              <p class="card-text order-detail--questn">
+                {{chainedInput.title}}
+              </p>
+              <p class="card-text order-detail--ans">
+                {{chainedInput.input}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <img src="{{order.image}}" alt="Product Image">
+          <hr>
+          <p style="font-weight: bold; font-size: 1.2rem;">
+            Price: {{order.totalPrice}}
+          </p>
+          <button type="button" class="btn btn-primary btn--confirm">
+            Confirm Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

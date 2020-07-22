@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup" class="row">
+  <h5 class="col-12 customization-title">{{feature.title}}</h5>
+  <div class="dropdown-list pl-1">
+    <select formControlName="input" name="input" class="form-control form-control-sm">
+      <option value="none" selected>--{{feature.title}}--</option>
+      <option *ngFor="let input of feature.inputs" value="{{input.choiceValue}}">
+        {{input.choiceText}}
+      </option>
+    </select>
+    <!-- <p-dropdown [options]="dropdownL" formControlName="selectedCity"></p-dropdown> -->
+  </div>
+</div>

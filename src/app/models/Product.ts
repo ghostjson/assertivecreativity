@@ -13,6 +13,12 @@ const PRODUCT_FEATURES: Object = {
         type: 'text',
         name: 'colorHex'
       }
+    ],
+    chainedInputs: [
+      {
+        type: 'color',
+        trigger: '*'
+      }
     ]
   },
   radioBtn: {
@@ -28,6 +34,12 @@ const PRODUCT_FEATURES: Object = {
         type: 'text',
         name: 'choiceValue'
       }
+    ],
+    chainedInputs: [
+      {
+        type: 'color',
+        trigger: '*'
+      }
     ]
   },
   dropdown: {
@@ -42,6 +54,12 @@ const PRODUCT_FEATURES: Object = {
       {
         type: 'text',
         name: 'choiceValue'
+      }
+    ],
+    chainedInputs: [
+      {
+        type: 'color',
+        trigger: '*'
       }
     ]
   }
@@ -64,11 +82,13 @@ export interface Product {
 // model for features
 export interface Feature {
   type: string,
+  trigger?: string,
+  price?: number,
   title: string,
   name: string,
-  inputs: Array<Object>
+  inputs: Array<Object>,
+  chainedInputs?: Feature[]
 }
-
 
 // return all the possible feature a product can have
 export function listAllFeatures(): Object {

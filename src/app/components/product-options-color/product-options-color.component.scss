@@ -1,0 +1,27 @@
+.card-body {
+  border-top: 1px solid whitesmoke;
+}
+
+.customization-title {
+  font-size: 1.1rem;
+  color: grey;
+}
+
+.color-container {
+  text-align: center;
+
+  .color-preview {
+    border: 5px solid transparent;
+    border-radius: 50%;
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+input:checked~label {
+  .color-preview {
+    border-color: var(--primary);
+  }
+}
