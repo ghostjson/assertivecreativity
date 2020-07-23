@@ -88,7 +88,7 @@ export class OrderService {
                 title: 'What is the quantity of order expected ?',
                 name: 'Answer here in short text',
                 price: 500,
-                input: 'This much. How many times do I have to tell you ?',
+                input: 'Answer is entered here.',
                 chainedInputs: []
               }
             ]

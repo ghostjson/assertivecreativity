@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, AbstractControl, FormArray, FormGroup, Validators } from '@angular/forms';
@@ -12,8 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: "./product-detail.component.html",
   styleUrls: ["./product-detail.component.scss"],
 })
-export class ProductDetailComponent implements OnInit {
-  // image: string;
+export class ProductDetailComponent implements OnInit, OnDestroy {
   public image_set;
 
   private slideDOM;
@@ -22,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
   possibleFeatures: Object;
 
   orderFeaturesForm: FormGroup;
+  formSubscription: Subscription;
 
   priceTotal: number;
 
@@ -43,6 +45,11 @@ export class ProductDetailComponent implements OnInit {
     this.possibleFeatures = listAllFeatures();
   }
 
+  ngOnDestroy() {
+    // unsubscribe to form value changes
+    this.formSubscription.unsubscribe();
+  }
+
   features(): FormArray {
     return this.orderFeaturesForm.get('features') as FormArray;
   }
@@ -61,7 +68,7 @@ export class ProductDetailComponent implements OnInit {
       title: [feature.title, Validators.required],
       name: [feature.name, Validators.required],
       price: [feature.price, Validators.required],
-      input: ['', Validators.required],
+      input: [null, Validators.required],
       chainedInputs: this._fb.array([])
     };
 
@@ -79,7 +86,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addChainedInputs(index: number): void {
-    console.clear();
     console.log('Click event detected');
     let feature: AbstractControl = this.features().at(index);
 
@@ -145,20 +151,32 @@ export class ProductDetailComponent implements OnInit {
   slideRight() { }
 
   updatePrice() {
-    console.log('intial price: ',this.priceTotal);
+    // initialise on the first call
     this.priceTotal = this.orderFeaturesForm.value.price;
-    console.log('base product price added: ', this.orderFeaturesForm.value.price);
 
-    for (let i = 0; i < this.orderFeaturesForm.value.features.length; ++i) {
-      this.priceTotal += this.orderFeaturesForm.value.features[i].price;
-      console.log(this.orderFeaturesForm.value.features[i].price);
+    this.formSubscription = this.orderFeaturesForm.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe((e) => {
+        // add the base price
+        this.priceTotal = this.orderFeaturesForm.value.price;
 
-      for (let j = 0; j < this.orderFeaturesForm.value.features[i].chainedInputs.length; ++j) {
-        this.priceTotal += this.orderFeaturesForm.value.features[i].chainedInputs[j].price;
-        console.log(this.orderFeaturesForm.value.features[i].chainedInputs[j].price);
-      }
-    }
-    console.log('Total Price: ', this.priceTotal);
+        // loop through all features and add their prices
+        for (let i = 0; i < this.orderFeaturesForm.value.features.length; ++i) {
+          if (this.orderFeaturesForm.value.features[i].input !== null) {
+            this.priceTotal += this.orderFeaturesForm.value.features[i].price;
+          }
+
+          // loop through all the sub features of a feature and add their prices
+          for (let j = 0; j < this.orderFeaturesForm.value.features[i].chainedInputs.length; ++j) {
+            if (this.chainedInputs(i).at(j).valid) {
+              this.priceTotal += this.orderFeaturesForm.value.features[i].chainedInputs[j].price;
+            }
+          }
+        }
+        console.log('Total Price: ', this.priceTotal);
+      });
   }
 
   onSubmit() {
