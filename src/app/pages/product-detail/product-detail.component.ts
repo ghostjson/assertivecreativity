@@ -71,22 +71,6 @@ export class ProductDetailComponent implements OnInit {
   initializeFeaturesForm(): void {
     this.product.features.forEach((feature: any) => {
       let featureFormGroup: FormGroup = this.newFeature(feature);
-      // featureFormGroup.valueChanges
-      //   .subscribe((e) => {
-      //     console.log('add chain called');
-      //     // featureFormGroup.setValue(
-      //     //   featureFormGroup.value,
-      //     //   { emitEvent: false }
-      //     // );
-      //     if (featureFormGroup.value.chainInpsHidden === 'true') {
-      //       featureFormGroup.setValue(
-      //         {
-      //           chainInpsHidden: 'false'
-      //         }
-      //       )
-      //       this.addChainedInputs(e);
-      //     }
-      //   })
       this.features().push(featureFormGroup);
     });
 
@@ -228,6 +212,25 @@ export class ProductDetailComponent implements OnInit {
           ]
         }
       );
+
+
+      this.product.features[i]['chainedInputs'].push({
+        type: 'text',
+        title: 'What is the quantity of order expected ?',
+        name: 'Answer here in short text',
+        price: 500,
+        inputs: [],
+        chainedInputs: []
+      });
     }
+
+    this.product.features.push({
+      type: 'text',
+      title: 'What is the quantity of order expected ?',
+      name: 'Answer here in short text',
+      price: 500,
+      inputs: [],
+      chainedInputs: []
+    });
   }
 }

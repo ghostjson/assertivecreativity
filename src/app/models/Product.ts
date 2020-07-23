@@ -16,7 +16,7 @@ const PRODUCT_FEATURES: Object = {
     ],
     chainedInputs: [
       {
-        type: 'color',
+        type: 'any',
         trigger: '*'
       }
     ]
@@ -37,7 +37,7 @@ const PRODUCT_FEATURES: Object = {
     ],
     chainedInputs: [
       {
-        type: 'color',
+        type: 'any',
         trigger: '*'
       }
     ]
@@ -58,12 +58,26 @@ const PRODUCT_FEATURES: Object = {
     ],
     chainedInputs: [
       {
-        type: 'color',
+        type: 'any',
+        trigger: '*'
+      }
+    ]
+  },
+  text: {
+    type: 'text',
+    title: 'Text input goes here',
+    name: 'Text input',
+    inputs: [],
+    chainedInputs: [
+      {
+        type: 'any',
         trigger: '*'
       }
     ]
   }
 };
+
+// form template objects for
 
 
 // model describing a Product

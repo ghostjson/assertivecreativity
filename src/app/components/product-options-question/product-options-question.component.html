@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup">
+  <label
+    for="text-{{featureInd}}-{{chainedInd}}"
+    class="text-input__label"
+  >
+    {{feature.title}}
+  </label>
+  <input
+    id="text-{{featureInd}}-{{chainedInd}}"
+    class="text-input__input"
+    type="text"
+    formControlName="input"
+    placeholder="{{feature.name}}"
+    pInputText
+  >
+</div>

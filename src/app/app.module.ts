@@ -64,10 +64,12 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputTextModule } from 'primeng/inputtext';
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
 import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
+import { ProductOptionsQuestionComponent } from './components/product-options-question/product-options-question.component';
 
 
 @NgModule({
@@ -121,6 +123,7 @@ import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.compo
     ProductOptionsRadioBtnComponent,
     ProductOptionsDropdownComponent,
     OrderConfirmComponent,
+    ProductOptionsQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +139,8 @@ import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.compo
     CardModule,
     ButtonModule,
     DropdownModule,
-    RadioButtonModule
+    RadioButtonModule,
+    InputTextModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

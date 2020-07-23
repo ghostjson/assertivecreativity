@@ -127,6 +127,16 @@
                       (click)="addChainedInputs(featureInd)"
                     ></app-product-options-dropdown>
                   </div>
+
+                  <!-- add question option -->
+                  <div *ngIf="product.features[featureInd].type === 'text'" class="form-group question-input">
+                    <app-product-options-question
+                      [formGroup]="featureForm"
+                      [feature]="product.features[featureInd]"
+                      [featureInd]="featureInd"
+                      (click)="addChainedInputs(featureInd)"
+                    ></app-product-options-question>
+                  </div>
                 </div>
 
 
@@ -134,7 +144,6 @@
                 <div [formGroupName]="featureInd">
                   <div formArrayName="chainedInputs">
                     <div *ngFor="let chainedInput of chainedInputs(featureInd).controls; let chainedInd = index">
-                      {{chainedInd}}
                       <!-- adding chained color selector -->
                       <div
                         *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'color'"
@@ -175,6 +184,16 @@
                           [chainedInd]="chainedInd"
                         >
                         </app-product-options-radio-btn>
+                      </div>
+
+                      <!-- adding chained question option -->
+                      <div *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'text'" class="form-group question-input">
+                        <app-product-options-question
+                          [formGroup]="chainedInput"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="featureInd"
+                          (click)="addChainedInputs(featureInd)"
+                        ></app-product-options-question>
                       </div>
                     </div>
                   </div>
