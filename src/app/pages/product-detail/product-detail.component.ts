@@ -79,10 +79,20 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addChainedInputs(index: number): void {
+    console.clear();
+    console.log('Click event detected');
     let feature: AbstractControl = this.features().at(index);
 
     setTimeout(() => {
-      if (feature.value.chainInpsHidden && feature.valid) {
+      if (feature.value.chainInpsHidden) {
+        console.log('chains hidden');
+      }
+
+      if (feature.valid) {
+        console.log('feature is valid');
+      }
+
+      if (feature.value.chainInpsHidden) {
         console.log('Chained Inputs added', index);
         this.product.features[index].chainedInputs.forEach((input) => {
           this.chainedInputs(index).push(
@@ -164,6 +174,15 @@ export class ProductDetailComponent implements OnInit {
   }
 
   insertForTesting() {
+    this.product.features.push({
+      type: 'text',
+      title: 'What is the quantity of order expected ?',
+      name: 'Answer here in short text',
+      price: 500,
+      inputs: [],
+      chainedInputs: []
+    });
+
     for (let i = 0; i < this.product.features.length; ++i) {
       this.product.features[i]['chainedInputs'] = [];
       this.product.features[i]['price'] = 999;
@@ -213,7 +232,6 @@ export class ProductDetailComponent implements OnInit {
         }
       );
 
-
       this.product.features[i]['chainedInputs'].push({
         type: 'text',
         title: 'What is the quantity of order expected ?',
@@ -223,14 +241,5 @@ export class ProductDetailComponent implements OnInit {
         chainedInputs: []
       });
     }
-
-    this.product.features.push({
-      type: 'text',
-      title: 'What is the quantity of order expected ?',
-      name: 'Answer here in short text',
-      price: 500,
-      inputs: [],
-      chainedInputs: []
-    });
   }
 }

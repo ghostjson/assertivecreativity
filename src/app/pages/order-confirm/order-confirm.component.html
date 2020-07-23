@@ -1,55 +1,62 @@
 <app-header></app-header>
 <div class="container">
-  <div class="row">
-    <!-- <div class="col-12 card border">
-      <div class="row">
-        <div class="col-3">
+  <div class="row justify-content-center">
+    <h1 class="order-summary__title">Order Summary</h1>
+    <div class="col-12">
+      <div class="row justify-content-center align-items-stretch mt-5 mb-5 p-5 border rounded">
+        <div class="col-5 order-summary__order-image">
           <img src="{{order.image}}" alt="Product Image">
         </div>
-        <div class="col-9">
-
-        </div>
-      </div>
-    </div> -->
-    <div class="col-7">
-      <div class="card border order-detail">
-        <div class="card-body">
-          <h3 class="card-title order-detail--title">Order Summary</h3>
-          <div *ngFor="let feature of order.features">
-            <div class="order-spec">
-              <p class="card-text order-detail--questn">
-                {{feature.title}}
-              </p>
-              <p class="card-text order-detail--ans">
-                {{feature.input}}
-              </p>
-            </div>
-            <div *ngFor="let chainedInput of feature.chainedInputs" class="order-spec">
-              <p class="card-text order-detail--questn">
-                {{chainedInput.title}}
-              </p>
-              <p class="card-text order-detail--ans">
-                {{chainedInput.input}}
-              </p>
-            </div>
+        <div class="col-7 d-flex flex-column align-items-start justify-content-between product-desc">
+          <div>
+            <h2 class="product-desc__name">
+              {{order.name}}
+            </h2>
+            <p class="product-desc__content">
+              {{order.description}}
+            </p>
+            <p class="product-desc__price">
+              Total Price: $ {{order.totalPrice}}
+            </p>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-5">
-      <div class="row justify-content-center">
-        <div class="col-10">
-          <img src="{{order.image}}" alt="Product Image">
-          <hr>
-          <p style="font-weight: bold; font-size: 1.2rem;">
-            Price: {{order.totalPrice}}
-          </p>
-          <button type="button" class="btn btn-primary btn--confirm">
+          <button type="button" class="btn btn-primary btn--confirm align-self-end">
             Confirm Order
           </button>
         </div>
       </div>
     </div>
+    <div class="col-12 col-sm-12 order-summa">
+      <p-treeTable [value]="orderSummary">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Specification</th>
+              <th>Input</th>
+              <th>Price</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr [ttRow]="rowNode">
+              <td class="orderSummary__feature-title">
+                  <!-- <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler> -->
+                  {{rowData.feature}}
+              </td>
+              <td>{{rowData.input}}</td>
+              <td>{{rowData.price}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <tr>
+            <td colspan="2">Totals</td>
+            <td>${{order.totalPrice}}</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
+    <!-- <div class="col-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary btn--confirm">
+        Confirm Order
+      </button>
+    </div> -->
   </div>
 </div>
 <app-footer></app-footer>

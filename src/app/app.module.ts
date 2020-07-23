@@ -65,6 +65,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
+import { TreeTableModule } from 'primeng/treetable';
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
 import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
@@ -140,7 +141,8 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
     ButtonModule,
     DropdownModule,
     RadioButtonModule,
-    InputTextModule
+    InputTextModule,
+    TreeTableModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent
