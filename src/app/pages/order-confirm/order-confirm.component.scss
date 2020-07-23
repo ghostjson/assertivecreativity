@@ -28,11 +28,27 @@
   font-weight: bold;
 }
 
+.product-card__img {
+  text-align: center;
+}
+
 .product-desc__name {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.product-desc__content {
+  font-weight: lighter;
 }
 
 .product-desc__price {
   font-weight: bold;
   font-size: 1.3rem;
+}
+
+.date-picker__title {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.4rem;
 }

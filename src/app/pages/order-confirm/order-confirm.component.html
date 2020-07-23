@@ -2,26 +2,39 @@
 <div class="container">
   <div class="row justify-content-center">
     <h1 class="order-summary__title">Order Summary</h1>
-    <div class="col-12">
-      <div class="row justify-content-center align-items-stretch mt-5 mb-5 p-5 border rounded">
-        <div class="col-5 order-summary__order-image">
-          <img src="{{order.image}}" alt="Product Image">
-        </div>
-        <div class="col-7 d-flex flex-column align-items-start justify-content-between product-desc">
-          <div>
-            <h2 class="product-desc__name">
-              {{order.name}}
-            </h2>
-            <p class="product-desc__content">
-              {{order.description}}
-            </p>
-            <p class="product-desc__price">
-              Total Price: $ {{order.totalPrice}}
-            </p>
+    <div class="col-12 d-flex justify-content-center">
+      <div class="row justify-content-around align-items-stretch mt-5 mb-5">
+        <div class="col-12 col-sm-5 p-0 d-flex flex-column justify-content-center border rounded">
+          <div class="product-card">
+            <div class="product-card__img p-3 border-bottom">
+              <img class="img-fluid object--cover" src="{{order.image}}" alt="Product Image">
+            </div>
+            <div class="product-desc mt-3 p-3">
+              <div>
+                <h2 class="product-desc__name">
+                  {{order.name}}
+                </h2>
+                <p class="product-desc__content">
+                  {{order.description}}
+                </p>
+                <p class="product-desc__price mb-0 text-right">
+                  Total Price: $ {{order.totalPrice}}
+                </p>
+              </div>
+            </div>
           </div>
-          <button type="button" class="btn btn-primary btn--confirm align-self-end">
-            Confirm Order
-          </button>
+        </div>
+        <div class="col-12 col-sm-6">
+          <p-calendar
+            [inline]="true"
+            dateFormat="dd.mm.yy"
+            [disabledDays]="[0,6]"
+            [readonlyInput]="true"
+            showButtonBar="true"
+            [(ngModel)]="orderDeliveryDate"
+          >
+            <p-header [ngClass]="'date-picker__title mb-3'">Select Delivery Date</p-header>
+          </p-calendar>
         </div>
       </div>
     </div>
@@ -46,17 +59,23 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <tr>
-            <td colspan="2">Totals</td>
+            <td colspan="2">Total Price</td>
             <td>${{order.totalPrice}}</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-right">
+              <button
+                type="button"
+                class="btn btn-primary btn--confirm align-self-end"
+                [disabled]="!orderDeliveryDate"
+              >
+                Place Order
+              </button>
+            </td>
           </tr>
         </ng-template>
       </p-treeTable>
     </div>
-    <!-- <div class="col-12 d-flex justify-content-end">
-      <button type="button" class="btn btn-primary btn--confirm">
-        Confirm Order
-      </button>
-    </div> -->
   </div>
 </div>
 <app-footer></app-footer>

@@ -34,3 +34,14 @@ html, body {
 .btn-dark {
   background: var(--dark-color) !important;
 }
+
+
+/**
+ * utility classes for the project starts
+ */
+.object--cover {
+  object-fit: cover;
+}
+/**
+ * utility classes for the project ends
+ */

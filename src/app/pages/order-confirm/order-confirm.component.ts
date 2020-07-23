@@ -11,6 +11,7 @@ export class OrderConfirmComponent implements OnInit {
   order: any;
 
   orderSummary: TreeNode[];
+  orderDeliveryDate: Date;
 
   constructor(
     private _orderService: OrderService
@@ -47,6 +48,5 @@ export class OrderConfirmComponent implements OnInit {
       console.log(this.orderSummary);
     });
   }
-
 }
 
