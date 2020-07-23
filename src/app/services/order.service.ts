@@ -103,7 +103,7 @@ export class OrderService {
   }
 
   getOrder() {
-    // return this.orders[this.orders.length - 1];
-    return this.orders[0];
+    return this.orders[this.orders.length - 1];
+    // return this.orders[0];
   }
 }

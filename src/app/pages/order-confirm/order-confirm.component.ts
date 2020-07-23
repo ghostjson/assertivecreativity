@@ -18,8 +18,8 @@ export class OrderConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     this.order = this._orderService.getOrder();
-    console.log(this.order);
-    this.orderSummary = []
+    console.log('Order object: ', this.order);
+    this.orderSummary = [];
 
     // add data needed for table component from the order details
     this.order.features.forEach((feature) => {
@@ -44,7 +44,6 @@ export class OrderConfirmComponent implements OnInit {
       });
 
       this.orderSummary.push(tableData);
-      console.clear();
       console.log(this.orderSummary);
     });
   }

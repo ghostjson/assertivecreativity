@@ -52,40 +52,26 @@
             </p>
           </div>
         </div>
-        <div class="options mt-5">
-          <div class="quatity">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text ">Quantity</span>
-                  </div>
-                  <input class="form-control" type="number" value="100" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="product-controls mt-3">
           <!-- <div class="col"> -->
           <a href="#" class="btn btn-primary mr-2">
             ADD TO CART
           </a>
-          <a href="#negotiate-form" class="btn btn-success mr-2">
-            NEGOTIATE
+          <a href="#customisation-form" class="btn btn-success mr-2">
+            Customize
           </a>
           <!-- </div> -->
         </div>
       </div>
     </div>
     <div class="container">
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-7">
           <!-- Customization form starts -->
           <form
-            class="customization-form mt-3 card border"
+            class="customization-form card border"
             [formGroup]="orderFeaturesForm"
-            id="negotiate-form"
+            id="customisation-form"
           >
             <div
               formArrayName="features"
@@ -119,7 +105,7 @@
                   </div>
 
                   <!-- add dropdown selection -->
-                  <div *ngIf="product.features[featureInd].type === 'dropdown'" class="form-group radio-btn">
+                  <div *ngIf="product.features[featureInd].type === 'dropdown'" class="form-group dropdown">
                     <app-product-options-dropdown
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
@@ -148,6 +134,7 @@
                       <div
                         *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'color'"
                         [formGroupName]="chainedInd"
+                        class="form-group pick-color"
                       >
                         <app-product-options-color
                           [formGroup]="chainedInput"
@@ -162,6 +149,7 @@
                       <div
                         *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'dropdown'"
                         [formGroupName]="chainedInd"
+                        class="form-group dropdown"
                       >
                         <app-product-options-dropdown
                           [formGroup]="chainedInput"
@@ -176,6 +164,7 @@
                       <div
                         *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'radioBtn'"
                         [formGroupName]="chainedInd"
+                        class="form-group radio-btn"
                       >
                         <app-product-options-radio-btn
                           [formGroup]="chainedInput"
@@ -187,7 +176,11 @@
                       </div>
 
                       <!-- adding chained question option -->
-                      <div *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'text'" class="form-group question-input">
+                      <div
+                        *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'text'"
+                        [formGroupName]="chainedInd"
+                        class="form-group question-input"
+                      >
                         <app-product-options-question
                           [formGroup]="chainedInput"
                           [feature]="product.features[featureInd].chainedInputs[chainedInd]"
@@ -199,13 +192,11 @@
                 </div>
               </div>
             </div>
-            <div class="card-body">
-              Total Price: <strong>{{priceTotal}}</strong>
-            </div>
             <div class="card-footer d-flex justify-content-end">
               <button
                 class="btn btn-primary card-footer__btn"
                 type="submit"
+                [disabled]="!orderFeaturesForm.valid"
                 (click)="onSubmit()">
                 Order
               </button>
@@ -221,7 +212,8 @@
                 <img class="product-img--form object--contain" src="{{product.image}}" alt="product image">
                 <hr>
                 <p>
-                  Price: $ {{priceTotal}}
+                  <strong>Price: </strong>
+                  $ {{priceTotal}}
                 </p>
               </div>
             </div>

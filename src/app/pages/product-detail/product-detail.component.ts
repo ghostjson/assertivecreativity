@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, AbstractControl, FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, AbstractControl, FormArray, FormGroup, Validators, Validator } from '@angular/forms';
 import { Product, Feature, listAllFeatures } from "../../models/Product";
 import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
@@ -50,74 +50,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.formSubscription.unsubscribe();
   }
 
-  features(): FormArray {
-    return this.orderFeaturesForm.get('features') as FormArray;
-  }
-
-  chainedInputs(featureInd: number) {
-    return this.features().at(featureInd).get('chainedInputs') as FormArray;
-  }
-
-  // construct a form group for new featureType
-  newFeature(feature: Feature): FormGroup {
-    console.log("Creating ", feature.type, " for the form!!");
-
-    let featureTemplate = {
-      chainInpsHidden: ['true', Validators.required],
-      type: [feature.type, Validators.required],
-      title: [feature.title, Validators.required],
-      name: [feature.name, Validators.required],
-      price: [feature.price, Validators.required],
-      input: [null, Validators.required],
-      chainedInputs: this._fb.array([])
-    };
-
-    return this._fb.group(featureTemplate);
-  }
-
-  initializeFeaturesForm(): void {
-    this.product.features.forEach((feature: any) => {
-      let featureFormGroup: FormGroup = this.newFeature(feature);
-      this.features().push(featureFormGroup);
-    });
-
-    console.log('Order specs Object Created', this.orderFeaturesForm);
-    console.log('feature at 0 ', this.features().at(0));
-  }
-
-  addChainedInputs(index: number): void {
-    console.log('Click event detected');
-    let feature: AbstractControl = this.features().at(index);
-
-    setTimeout(() => {
-      if (feature.value.chainInpsHidden) {
-        console.log('chains hidden');
-      }
-
-      if (feature.valid) {
-        console.log('feature is valid');
-      }
-
-      if (feature.value.chainInpsHidden) {
-        console.log('Chained Inputs added', index);
-        this.product.features[index].chainedInputs.forEach((input) => {
-          this.chainedInputs(index).push(
-            this.newFeature(input)
-          );
-        });
-
-        // set the check for hidden chained inputs as false so that once added
-        // inputs are not added again
-        feature.patchValue({
-          chainInpsHidden: false
-        });
-
-        console.log('Value after adding chains ', feature.value);
-      }
-    });
-  }
-
-  getProduct() {
+  /**
+   * get product from the server
+   */
+  getProduct(): void {
     this.image_set = [];
 
     // get product details from the product service
@@ -141,57 +77,171 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           image: this.product.image,
           features: this._fb.array([])
         });
-        this.initializeFeaturesForm();
-        this.updatePrice();
+        this.initialiseFeaturesForm();
+        this.onFormChanges();
       });
   }
 
-  slideLeft() { }
+  /**
+   * helper for getting the formarray
+   * @return {FormArray} FormArray of features
+   */
+  features(): FormArray {
+    return this.orderFeaturesForm.get('features') as FormArray;
+  }
 
-  slideRight() { }
+  /**
+   * heler returning form array of chained Inputs in a feature
+   * @param {number} featureInd index of the feature which the chained input is part of
+   * @return {FormArray} Form array of chained features
+   */
+  chainedInputs(featureInd: number): FormArray {
+    return this.features().at(featureInd).get('chainedInputs') as FormArray;
+  }
 
-  updatePrice() {
-    // initialise on the first call
+  // construct a form group for new featureType
+  newFeature(feature: Feature, chained: boolean=false): FormGroup {
+    let validators: Validators[] = [];
+
+    if (!chained) {
+      validators.push(
+        Validators.required
+      );
+    }
+
+    let featureTemplate = {
+      chainInpsHidden: ['true'],
+      type: [feature.type],
+      title: [feature.title],
+      name: [feature.name],
+      price: [feature.price],
+      input: [null, validators],
+      chainedInputs: this._fb.array([])
+    };
+
+    return this._fb.group(featureTemplate);
+  }
+
+  /**
+   * Initialise the customisation form after fetching the product
+   */
+  initialiseFeaturesForm(): void {
+    this.product.features.forEach((feature: any) => {
+      let featureFormGroup: FormGroup = this.newFeature(feature);
+      this.features().push(featureFormGroup);
+    });
+
+    this.updateTotalPrice();
+
+    console.log('Form Initialised')
+  }
+
+  addChainedInputs(index: number): void {
+    console.log('Click event detected');
+    let feature: AbstractControl = this.features().at(index);
+
+    setTimeout(() => {
+      if (feature.value.chainInpsHidden) {
+        console.log('chains hidden');
+      }
+
+      if (feature.valid) {
+        console.log('feature is valid');
+      }
+
+      if (feature.value.chainInpsHidden) {
+        console.log('Chained Inputs added', index);
+        this.product.features[index].chainedInputs.forEach((input) => {
+          this.chainedInputs(index).push(
+            this.newFeature(input, true)
+          );
+        });
+
+        // set the check for hidden chained inputs as false so that once added
+        // inputs are not added again
+        feature.patchValue({
+          chainInpsHidden: false
+        });
+
+        console.log('Value after adding chains ', feature.value);
+      }
+    });
+  }
+
+  /**
+   * update the total price of the order
+   */
+  updateTotalPrice(): void {
+    console.clear()
+    // add the base price
     this.priceTotal = this.orderFeaturesForm.value.price;
+    console.log(this.orderFeaturesForm.value.price);
 
+    // loop through all features and add their prices
+    for (let i = 0; i < this.orderFeaturesForm.value.features.length; ++i) {
+      if (this.orderFeaturesForm.value.features[i].input) {
+        this.priceTotal += this.orderFeaturesForm.value.features[i].price;
+        console.log(this.orderFeaturesForm.value.features[i].price);
+      }
+
+      // loop through all the sub features of a feature and add their prices
+      for (let j = 0; j < this.orderFeaturesForm.value.features[i].chainedInputs.length; ++j) {
+        if (this.orderFeaturesForm.value.features[i].chainedInputs[j].input) {
+          this.priceTotal += this.orderFeaturesForm.value.features[i].chainedInputs[j].price;
+          console.log(this.orderFeaturesForm.value.features[i].chainedInputs[j].price);
+        }
+      }
+    }
+    console.log('Total Price: ', this.priceTotal);
+  }
+
+  /**
+   * do the necessary when the customisation form updates
+   */
+  onFormChanges(): void {
     this.formSubscription = this.orderFeaturesForm.valueChanges
       .pipe(
         debounceTime(500)
       )
-      .subscribe((e) => {
-        // add the base price
-        this.priceTotal = this.orderFeaturesForm.value.price;
-
-        // loop through all features and add their prices
-        for (let i = 0; i < this.orderFeaturesForm.value.features.length; ++i) {
-          if (this.orderFeaturesForm.value.features[i].input !== null) {
-            this.priceTotal += this.orderFeaturesForm.value.features[i].price;
-          }
-
-          // loop through all the sub features of a feature and add their prices
-          for (let j = 0; j < this.orderFeaturesForm.value.features[i].chainedInputs.length; ++j) {
-            if (this.chainedInputs(i).at(j).valid) {
-              this.priceTotal += this.orderFeaturesForm.value.features[i].chainedInputs[j].price;
-            }
-          }
-        }
-        console.log('Total Price: ', this.priceTotal);
+      .subscribe(() => {
+        this.updateTotalPrice();
       });
   }
 
-  onSubmit() {
-    console.log('submit form');
+  /**
+   * Removes the empty values from the form value object
+   * @param  {any} order dirty order object containing empty values
+   * @return {any} order clean order object with no empty values
+   */
+  cleanForm(order: any): any {
+    for (let i = 0; i < order.features.length; ++i) {
+      order.features[i].chainedInputs = order.features[i].chainedInputs.filter((chainedInput: any) => {
+        if (chainedInput.input) {
+          console.log('pass');
+          return true;
+        }
+      });
+    }
 
-    this.updatePrice();
+    return order;
+  }
+
+  /**
+   * Submit the customisation form
+   */
+  onSubmit(): void {
+    this.updateTotalPrice();
     let order = this.orderFeaturesForm.value;
+    order = this.cleanForm(order);
     order['totalPrice'] = this.priceTotal;
-    console.log(order);
     this._orderService.addOrder(order);
+    console.log('submit form');
+    console.log(order);
     console.log(this._orderService.getOrder());
     this.router.navigate(['/order/summary']);
   }
 
-  insertForTesting() {
+  insertForTesting(): void {
     this.product.features.push({
       type: 'text',
       title: 'What is the quantity of order expected ?',
