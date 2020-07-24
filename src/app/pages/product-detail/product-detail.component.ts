@@ -262,21 +262,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             type: 'text',
             colorHex: '#ff0000',
             colorName: 'Red'
-          },
-          {
-            type: 'text',
-            colorHex: '#1610f9',
-            colorName: 'Blue'
-          },
-          {
-            type: 'text',
-            colorHex: '#00ff00',
-            colorName: 'Green'
-          },
-          {
-            type: 'text',
-            colorHex: '#ff0000',
-            colorName: 'Red'
           }
         ],
         chainedInputs: [
