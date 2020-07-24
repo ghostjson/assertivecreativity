@@ -234,11 +234,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     let order = this.orderFeaturesForm.value;
     order = this.cleanForm(order);
     order['totalPrice'] = this.priceTotal;
-    this._orderService.addOrder(order);
+    this._orderService.stageOrder(order);
     console.log('submit form');
     console.log(order);
-    console.log(this._orderService.getOrder());
-    this.router.navigate(['/order/summary']);
+    this.router.navigate(['/orders/723dhg/summary']);
   }
 
   insertForTesting(): void {

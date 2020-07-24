@@ -60,6 +60,7 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { DisplayMailComponent } from './components/display-mail/display-mail.component';
 import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
+
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -67,11 +68,20 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { TreeTableModule } from 'primeng/treetable';
 import { CalendarModule } from 'primeng/calendar';
+import {TableModule} from 'primeng/table';
+import {SliderModule} from 'primeng/slider';
+import {DialogModule} from 'primeng/dialog';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {ToastModule} from 'primeng/toast';
+import {ProgressBarModule} from 'primeng/progressbar';
+
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
 import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { ProductOptionsQuestionComponent } from './components/product-options-question/product-options-question.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 
 @NgModule({
@@ -126,6 +136,7 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
     ProductOptionsDropdownComponent,
     OrderConfirmComponent,
     ProductOptionsQuestionComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,7 +155,14 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
     RadioButtonModule,
     InputTextModule,
     TreeTableModule,
-    CalendarModule
+    CalendarModule,
+    TableModule,
+    SliderModule,
+    DialogModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    ToastModule,
+    ProgressBarModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

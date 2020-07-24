@@ -1,0 +1,155 @@
+<app-header></app-header>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <p-table #dt
+        [value]="orders"
+        [(selection)]="selectedOrders"
+        dataKey="id"
+        styleClass="ui-table-customers"
+        [rowHover]="true" [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate="Showing &#123;first&#125; to &#123;last&#125; of &#123;totalRecords&#125; entries"
+        [filterDelay]="0"
+        [globalFilterFields]="['name','status']"
+      >
+        <ng-template pTemplate="caption">
+          Orders Placed
+          <div class="ui-table-globalfilter-container">
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name">Product <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <!-- <th pSortableColumn="country.name">Name <p-sortIcon field="country.name"></p-sortIcon>
+            </th> -->
+            <th pSortableColumn="orderDate">Order Date <p-sortIcon field="orderDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="deliveryDate">Delivery Date <p-sortIcon field="deliveryDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <!-- <th pSortableColumn="activity">Activity <p-sortIcon field="activity"></p-sortIcon>
+            </th> -->
+            <th pSortableColumn="totalPrice">Price <p-sortIcon field="totalPrice"></p-sortIcon>
+            </th>
+            <!-- <th></th> -->
+          </tr>
+          <tr>
+            <th>
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th></th>
+            <th>
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'name', 'startsWith')" placeholder="Search by Name" class="ui-column-filter">
+            </th>
+            <!-- <th>
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'country.name', 'contains')" placeholder="Search by Country" class="ui-column-filter">
+            </th> -->
+            <!-- <th>
+              <p-multiSelect [options]="representatives" placeholder="All" (onChange)="onRepresentativeChange($event)" styleClass="ui-column-filter" optionLabel="name">
+                <ng-template let-option pTemplate="item">
+                  <div class="ui-multiselect-representative-option">
+                    <img [alt]="option.label" src="assets/showcase/images/demo/avatar/&#123;&#123;option.value.image&#125;&#125;" width="32" />
+                    <span>&#123;&#123;option.label&#125;&#125;</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </th> -->
+            <th>
+              <p-calendar
+                (onSelect)="onDateSelect($event, 'orderDate')"
+                (onClearClick)="dt.filter('', 'orderDate', 'equals')"
+                [showButtonBar]="true"
+                [readonlyInput]="true"
+                [yearNavigator]="true"
+                yearRange="2000:2020"
+                styleClass="ui-column-filter"
+                placeholder="Order Date"
+                dateFormat="yy-mm-dd"
+              ></p-calendar>
+            </th>
+            <th>
+              <p-calendar
+                (onSelect)="onDateSelect($event, 'deliveryDate')"
+                (onClearClick)="dt.filter('', 'deliveryDate', 'equals')"
+                [showButtonBar]="true"
+                [readonlyInput]="true" dateFormat="yy-mm-dd"
+                [yearNavigator]="true"
+                yearRange="2000:2020"
+                styleClass="ui-column-filter"
+                placeholder="Delivery Date"
+              ></p-calendar>
+            </th>
+            <th>
+              <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'status', 'equals')" styleClass="ui-column-filter" placeholder="Select a Status" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
+                </ng-template>
+              </p-dropdown>
+            </th>
+            <th></th>
+            <th></th>
+            <!-- <th>
+              <input pInputText type="text" (input)="onActivityChange($event)" placeholder="Minimum" class="ui-column-filter">
+            </th> -->
+            <!-- <th></th> -->
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr class="ui-selectable-row">
+            <td>
+              <p-tableCheckbox [value]="order"></p-tableCheckbox>
+            </td>
+            <td>
+              <span class="ui-column-title">Id </span>
+              &#123;&#123;order.id&#125;&#125;
+            </td>
+            <td>
+              <span class="ui-column-title">Product </span>
+              <img [alt]="order.name" src="order.image" width="32" style="vertical-align: middle" />
+              <span style="vertical-align: middle; margin-left: .5em">&#123;&#123;order.name&#125;&#125;</span>
+            </td>
+            <td>
+              <span class="ui-column-title">Order Date</span>
+              &#123;&#123;order.orderDate&#125;&#125;
+            </td>
+            <td>
+              <span class="ui-column-title">Delivery Date</span>
+              &#123;&#123;order.deliveryDate&#125;&#125;
+            </td>
+            <td>
+              <span class="ui-column-title">Status</span>
+              <span [class]="'customer-badge status-' + order.status">&#123;&#123;order.status&#125;&#125;</span>
+            </td>
+            <td>
+              <span class="ui-column-title">Price </span>
+              $ &#123;&#123;order.totalPrice&#125;&#125;
+            </td>
+            <!-- <td>
+              <span class="ui-column-title">Activity</span>
+              <p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar>
+            </td> -->
+            <!-- <td>
+              <button pButton type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+            </td> -->
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8" style="text-align:left">No customers found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -23,7 +23,7 @@ export class OrderConfirmComponent implements OnInit {
     this.orderSummary = [];
 
     // add data needed for table component from the order details
-    this.order.features.forEach((feature) => {
+    this.order.features.forEach((feature: any) => {
       let tableData: TreeNode = {
         data: {
           feature: feature.title,
@@ -34,7 +34,7 @@ export class OrderConfirmComponent implements OnInit {
         expanded: true
       };
 
-      feature.chainedInputs.forEach((chainedInput) => {
+      feature.chainedInputs.forEach((chainedInput: any) => {
         tableData.children.push({
           data: {
             feature: chainedInput.title,
@@ -47,6 +47,14 @@ export class OrderConfirmComponent implements OnInit {
       this.orderSummary.push(tableData);
       console.log(this.orderSummary);
     });
+  }
+
+  confirmOrder(): void {
+    this.order['deliveryDate'] = this.orderDeliveryDate;
+    this.order['status'] = 'pending';
+    console.log(this.order);
+    // this._orderService.placeOrder(this.order);
+
   }
 }
 
