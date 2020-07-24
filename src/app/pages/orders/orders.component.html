@@ -97,7 +97,7 @@
               </p-dropdown>
             </th>
             <th></th>
-            <th></th>
+            <!-- <th></th> -->
             <!-- <th>
               <input pInputText type="text" (input)="onActivityChange($event)" placeholder="Minimum" class="ui-column-filter">
             </th> -->
@@ -115,7 +115,7 @@
             </td>
             <td>
               <span class="ui-column-title">Product </span>
-              <img [alt]="order.name" src="order.image" width="32" style="vertical-align: middle" />
+              <img [alt]="order.name" src="{{order.image}}" width="32" style="vertical-align: middle" />
               <span style="vertical-align: middle; margin-left: .5em">&#123;&#123;order.name&#125;&#125;</span>
             </td>
             <td>
