@@ -57,9 +57,9 @@
           <a href="#" class="btn btn-primary mr-2">
             ADD TO CART
           </a>
-          <a href="#customisation-form" class="btn btn-success mr-2">
+          <!-- <a href="#customisation-form" class="btn btn-success mr-2">
             Customize
-          </a>
+          </a> -->
           <!-- </div> -->
         </div>
       </div>
@@ -89,7 +89,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                      (click)="addChainedInputs(featureInd)"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
                     >
                     </app-product-options-color>
                   </div>
@@ -100,7 +101,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                      (click)="addChainedInputs(featureInd)"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
                     ></app-product-options-radio-btn>
                   </div>
 
@@ -110,7 +112,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                      (click)="addChainedInputs(featureInd)"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
                     ></app-product-options-dropdown>
                   </div>
 
@@ -120,7 +123,8 @@
                       [formGroup]="featureForm"
                       [feature]="product.features[featureInd]"
                       [featureInd]="featureInd"
-                      (click)="addChainedInputs(featureInd)"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
                     ></app-product-options-question>
                   </div>
                 </div>
@@ -155,7 +159,7 @@
                           [formGroup]="chainedInput"
                           [feature]="product.features[featureInd].chainedInputs[chainedInd]"
                           [featureInd]="featureInd"
-
+                          [chainedInd]="chainedInd"
                         >
                         </app-product-options-dropdown>
                       </div>
@@ -185,6 +189,7 @@
                           [formGroup]="chainedInput"
                           [feature]="product.features[featureInd].chainedInputs[chainedInd]"
                           [featureInd]="featureInd"
+                          [chainedInd]="chainedInd"
                         ></app-product-options-question>
                       </div>
                     </div>

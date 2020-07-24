@@ -22,15 +22,15 @@ export class OrderService {
     this.orders.push(
       {
         id: 3,
-        name: 'sasi T-Shirt',
+        name: 'Cool Neon T-Shirt',
         description: 'eFlow T-shirt is comfortable to wear and quality t-shirt',
         price: 20,
-        totalPrice: 10000,
+        totalPrice: 150,
         stock: 25,
         sales: 0,
         status: 'pending',
-        orderDate: '2015-09-13',
-        deliveryDate: '2015-09-13',
+        orderDate: '2020-09-13',
+        deliveryDate: '2020-09-25',
         image: 'https://cdn.muscleandstrength.com/store/media/catalog/product/cache/all/image/400x400/602f0fa2c1f0d1ba5e241f914e856ff9/m/s/ms-eflow-front_4.jpg',
         features: [
           {
@@ -38,7 +38,7 @@ export class OrderService {
             type: 'color',
             title: 'Color',
             name: 'Colors',
-            price: 999,
+            price: 10,
             input: '#000000',
             chainedInputs: [
               {
@@ -46,7 +46,7 @@ export class OrderService {
                 type: 'color',
                 title: 'Choose a color dynamically',
                 name: 'Colors',
-                price: 1000,
+                price: 15,
                 input: '#000000',
                 chainedInputs: []
               },
@@ -55,7 +55,7 @@ export class OrderService {
                 type: 'dropdown',
                 title: 'Gender',
                 name: 'Dropdown Selection',
-                price: 2000,
+                price: 20,
                 input: 'Men',
                 chainedInputs: []
               },
@@ -64,7 +64,7 @@ export class OrderService {
                 type: 'text',
                 title: 'What is the quantity of order expected ?',
                 name: 'Answer here in short text',
-                price: 500,
+                price: 30,
                 input: 'A thousand number',
                 chainedInputs: []
               }
@@ -75,7 +75,7 @@ export class OrderService {
             type: 'text',
             title: 'What is the quantity of order expected ?',
             name: 'Answer here in short text',
-            price: 999,
+            price: 5,
             input: 'How much do you need',
             chainedInputs: [
               {
@@ -83,7 +83,7 @@ export class OrderService {
                 type: 'color',
                 title: 'Choose a color dynamically',
                 name: 'Colors',
-                price: 1000,
+                price: 30,
                 input: '#000000',
                 chainedInputs: []
               },
@@ -92,7 +92,7 @@ export class OrderService {
                 type: 'dropdown',
                 title: 'Gender',
                 name: 'Dropdown Selection',
-                price: 2000,
+                price: 10,
                 input: 'Men',
                 chainedInputs: []
               },
@@ -101,7 +101,7 @@ export class OrderService {
                 type: 'text',
                 title: 'What is the quantity of order expected ?',
                 name: 'Answer here in short text',
-                price: 500,
+                price: 10,
                 input: 'Answer is entered here.',
                 chainedInputs: []
               }
@@ -116,8 +116,8 @@ export class OrderService {
         id: 4,
         name: 'eFlow T-Shirt',
         description: 'eFlow T-shirt is comfortable to wear and quality t-shirt',
-        price: 20,
-        totalPrice: 9018,
+        price: 10,
+        totalPrice: 200,
         stock: 25,
         sales: 0,
         status: 'declined',
@@ -128,7 +128,7 @@ export class OrderService {
             type: 'color',
             title: 'Color',
             name: 'Colors',
-            price: 999,
+            price: 25,
             input: '#000000',
             chainedInputs: [
               {
@@ -136,7 +136,7 @@ export class OrderService {
                 type: 'color',
                 title: 'Choose a color dynamically',
                 name: 'Colors',
-                price: 1000,
+                price: 7,
                 input: '#000000',
                 chainedInputs: []
               },
@@ -145,7 +145,7 @@ export class OrderService {
                 type: 'dropdown',
                 title: 'Gender',
                 name: 'Dropdown Selection',
-                price: 2000,
+                price: 15,
                 input: 'Men',
                 chainedInputs: []
               },
@@ -154,7 +154,7 @@ export class OrderService {
                 type: 'text',
                 title: 'What is the quantity of order expected ?',
                 name: 'Answer here in short text',
-                price: 500,
+                price: 15,
                 input: 'A thousand number',
                 chainedInputs: []
               }
@@ -165,7 +165,7 @@ export class OrderService {
             type: 'text',
             title: 'What is the quantity of order expected ?',
             name: 'Answer here in short text',
-            price: 999,
+            price: 20,
             input: 'How much do you need',
             chainedInputs: [
               {
@@ -173,7 +173,7 @@ export class OrderService {
                 type: 'color',
                 title: 'Choose a color dynamically',
                 name: 'Colors',
-                price: 1000,
+                price: 13,
                 input: '#000000',
                 chainedInputs: []
               },
@@ -182,7 +182,7 @@ export class OrderService {
                 type: 'dropdown',
                 title: 'Gender',
                 name: 'Dropdown Selection',
-                price: 2000,
+                price: 20,
                 input: 'Men',
                 chainedInputs: []
               },
@@ -191,7 +191,7 @@ export class OrderService {
                 type: 'text',
                 title: 'What is the quantity of order expected ?',
                 name: 'Answer here in short text',
-                price: 500,
+                price: 20,
                 input: 'Answer is entered here.',
                 chainedInputs: []
               }

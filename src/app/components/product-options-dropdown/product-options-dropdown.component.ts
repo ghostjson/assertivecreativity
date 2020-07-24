@@ -11,6 +11,8 @@ import { SelectItem } from 'primeng/api';
 export class ProductOptionsDropdownComponent implements OnInit {
   @Input() feature: Feature;
   @Input() featureInd: number;
+  @Input() chainedInd: number;
+  @Input() requiredInp: boolean;
   @Input() formGroup: FormGroup;
 
   // list of options for the Dropdown

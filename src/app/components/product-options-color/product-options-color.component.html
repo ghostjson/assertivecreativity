@@ -1,7 +1,12 @@
 <!-- add color option -->
 <ng-container [formGroup]="formGroup">
   <div>
-    <h5 class="customization-title">{{feature.title}}</h5>
+    <h5 class="customization-title">
+      {{feature.title}}
+      <sup *ngIf="requiredInp">
+        * required
+      </sup>
+    </h5>
     <div class="color-list d-flex row justify-content-start">
       <div *ngFor="let input of feature.inputs; let colorInd = index" class="color-container col customization-input mb-2">
         <input

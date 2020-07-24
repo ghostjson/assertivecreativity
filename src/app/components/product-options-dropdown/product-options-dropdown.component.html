@@ -1,5 +1,10 @@
 <div [formGroup]="formGroup" class="row">
-  <h5 class="col-12 customization-title">{{feature.title}}</h5>
+  <h5 class="col-12 customization-title">
+    {{feature.title}}
+    <sup *ngIf="requiredInp">
+      * required
+    </sup>
+  </h5>
   <div class="dropdown-list pl-1">
     <p-dropdown
       [options]="dropdownList"

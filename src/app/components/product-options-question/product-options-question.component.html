@@ -4,6 +4,9 @@
     class="text-input__label"
   >
     {{feature.title}}
+    <sup *ngIf="requiredInp">
+      * required
+    </sup>
   </label>
   <input
     id="text-{{featureInd}}-{{chainedInd}}"

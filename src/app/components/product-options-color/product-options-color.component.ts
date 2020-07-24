@@ -10,6 +10,7 @@ export class ProductOptionsColorComponent implements OnInit {
   @Input() feature: any;
   @Input() featureInd: number;
   @Input() chainedInd: number;
+  @Input() requiredInp: boolean;
   @Input() formGroup: FormGroup;
 
   constructor() {

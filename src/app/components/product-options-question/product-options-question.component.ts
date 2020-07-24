@@ -13,6 +13,7 @@ export class ProductOptionsQuestionComponent implements OnInit {
   @Input() feature: Feature;
   @Input() featureInd: number;
   @Input() chainedInd: number;
+  @Input() requiredInp: boolean;
 
   constructor() { }
 
