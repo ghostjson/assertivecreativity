@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { TreeNode } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-confirm',
@@ -14,7 +15,8 @@ export class OrderConfirmComponent implements OnInit {
   orderDeliveryDate: Date;
 
   constructor(
-    private _orderService: OrderService
+    private _orderService: OrderService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,12 +51,33 @@ export class OrderConfirmComponent implements OnInit {
     });
   }
 
+  /**
+   * Format date to the required format
+   * @param {any} date Date object
+   */
+  formatDate(date: any) {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    return date.getFullYear() + '-' + month + '-' + day;
+  }
+
   confirmOrder(): void {
     this.order['deliveryDate'] = this.orderDeliveryDate;
+    this.order['orderDate'] = this.formatDate(new Date());
     this.order['status'] = 'pending';
+    this.order.deliveryDate = this.formatDate(this.order.deliveryDate);
     console.log(this.order);
-    // this._orderService.placeOrder(this.order);
-
+    this._orderService.placeOrder(this.order);
+    this.router.navigate(['/orders/']);
   }
 }
 
