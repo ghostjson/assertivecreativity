@@ -100,7 +100,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   // construct a form group for new featureType
-  newFeature(feature: Feature, chained: boolean=false): FormGroup {
+  newFeature(feature: Feature, chained: boolean = false): FormGroup {
     let validators: Validators[] = [];
 
     if (!chained) {
@@ -172,7 +172,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    * update the total price of the order
    */
   updateTotalPrice(): void {
-    console.clear()
     // add the base price
     this.priceTotal = this.orderFeaturesForm.value.price;
     console.log(this.orderFeaturesForm.value.price);
@@ -234,6 +233,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     let order = this.orderFeaturesForm.value;
     order = this.cleanForm(order);
     order['totalPrice'] = this.priceTotal;
+    order.id = Math.floor(Math.random() * 100000);
     this._orderService.stageOrder(order);
     console.log('submit form');
     console.log(order);
@@ -241,72 +241,197 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   insertForTesting(): void {
-    this.product.features.push({
-      type: 'text',
-      title: 'What is the quantity of order expected ?',
-      name: 'Answer here in short text',
-      price: 500,
-      inputs: [],
-      chainedInputs: []
-    });
-
-    for (let i = 0; i < this.product.features.length; ++i) {
-      this.product.features[i]['chainedInputs'] = [];
-      this.product.features[i]['price'] = 999;
-      this.product.features[i]['chainedInputs'].push({
-        type: "color",
-        trigger: 'red',
-        name: "Colors",
-        title: "Choose a color dynamically",
-        price: 1000,
+    this.product.features = [
+      {
+        name: 'Color',
+        type: 'color',
+        title: 'Choose A Color',
+        price: 5,
         inputs: [
           {
-            type: "text",
-            colorHex: "#1610f9",
-            colorName: "Blue"
+            type: 'text',
+            colorHex: '#1610f9',
+            colorName: 'Blue'
           },
           {
-            type: "text",
-            colorHex: "#000000",
-            colorName: "Black"
+            type: 'text',
+            colorHex: '#00ff00',
+            colorName: 'Green'
           },
           {
-            type: "text",
-            colorHex: "#ff0000",
-            colorName: "Red"
+            type: 'text',
+            colorHex: '#ff0000',
+            colorName: 'Red'
+          }
+        ],
+        chainedInputs: [
+          {
+            name: 'Dropdown Selection',
+            type: 'dropdown',
+            title: 'Select Cloth Pattern Style',
+            price: 5,
+            inputs: [
+              {
+                type: 'text',
+                choiceText: 'Checks',
+                choiceValue: 'checks'
+              },
+              {
+                type: 'text',
+                choiceText: 'Polka Dots',
+                choiceValue: 'polkadots'
+              },
+              {
+                type: 'text',
+                choiceText: 'Flat Color',
+                choiceValue: 'flat'
+              },
+              {
+                type: 'text',
+                choiceText: 'Flat Color',
+                choiceValue: 'flat'
+              }
+            ]
+          },
+          {
+            type: 'text',
+            title: 'Enter any other remarks',
+            name: 'remarks',
+            price: 0,
+            inputs: [],
+            chainedInputs: []
           }
         ]
-      });
+      },
+      {
+        name: 'Dropdown Selection',
+        type: 'dropdown',
+        title: 'Size',
+        price: 0,
+        inputs: [
+          {
+            type: 'text',
+            choiceText: 'Large',
+            choiceValue: 'L'
+          },
+          {
+            type: 'text',
+            choiceText: 'Medium',
+            choiceValue: 'M'
+          },
+          {
+            type: 'text',
+            choiceText: 'Small',
+            choiceValue: 'S'
+          }
 
-      this.product.features[i]['chainedInputs'].push(
-        {
-          name: 'Dropdown Selection',
-          type: 'dropdown',
-          title: 'Gender',
-          price: 2000,
-          inputs: [
-            {
-              type: 'text',
-              choiceText: 'For Men',
-              choiceValue: 'Men'
-            },
-            {
-              type: 'text',
-              choiceText: 'For Women',
-              choiceValue: 'Women'
-            }
-          ]
-        }
-      );
-
-      this.product.features[i]['chainedInputs'].push({
-        type: 'text',
-        title: 'What is the quantity of order expected ?',
-        name: 'Answer here in short text',
-        price: 500,
-        inputs: [],
+        ],
         chainedInputs: []
-      });
-    }
+      },
+      {
+        name: 'Dropdown Selection',
+        type: 'dropdown',
+        title: 'Gender',
+        price: 0,
+        inputs: [
+          {
+            type: 'text',
+            choiceText: 'For Men',
+            choiceValue: 'Men'
+          },
+          {
+            type: 'text',
+            choiceText: 'For Women',
+            choiceValue: 'Women'
+          }
+        ],
+        chainedInputs: []
+      },
+      {
+        type: 'text',
+        title: 'Enter mobile number of the recipient.',
+        name: 'Mobile Number',
+        price: 0,
+        inputs: [],
+        chainedInputs: [
+          {
+            name: 'Dropdown Selection',
+            type: 'dropdown',
+            title: 'Number Type',
+            price: 0,
+            inputs: [
+              {
+                type: 'text',
+                choiceText: 'Home Phone',
+                choiceValue: 'home'
+              },
+              {
+                type: 'text',
+                choiceText: 'Office Phone',
+                choiceValue: 'office'
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // for (let i = 0; i < this.product.features.length; ++i) {
+    //   this.product.features[i]['chainedInputs'] = [];
+    //   this.product.features[i]['chainedInputs'].push({
+    //     type: "color",
+    //     trigger: 'red',
+    //     name: "Colors",
+    //     title: "Choose a color dynamically",
+    //     price: 1000,
+    //     inputs: [
+    //       {
+    //         type: "text",
+    //         colorHex: "#1610f9",
+    //         colorName: "Blue"
+    //       },
+    //       {
+    //         type: "text",
+    //         colorHex: "#000000",
+    //         colorName: "Black"
+    //       },
+    //       {
+    //         type: "text",
+    //         colorHex: "#ff0000",
+    //         colorName: "Red"
+    //       }
+    //     ]
+    //   });
+
+    //   this.product.features[i]['chainedInputs'].push(
+    //     {
+    //       name: 'Dropdown Selection',
+    //       type: 'dropdown',
+    //       title: 'Gender',
+    //       price: 2000,
+    //       inputs: [
+    //         {
+    //           type: 'text',
+    //           choiceText: 'For Men',
+    //           choiceValue: 'Men'
+    //         },
+    //         {
+    //           type: 'text',
+    //           choiceText: 'For Women',
+    //           choiceValue: 'Women'
+    //         }
+    //       ]
+    //     }
+    //   );
+
+    //   this.product.features[i]['chainedInputs'].push({
+    //     type: 'text',
+    //     title: 'What is the quantity of order expected ?',
+    //     name: 'Answer here in short text',
+    //     price: 500,
+    //     inputs: [],
+    //     chainedInputs: []
+    //   });
+    // }
   }
 }
