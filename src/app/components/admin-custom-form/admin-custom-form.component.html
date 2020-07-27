@@ -1,0 +1,32 @@
+<p-card
+  [formGroup]="formGroup"
+  styleClass="form-card"
+>
+  <p-header styleClass="form-card__header">
+    <label class="sr-only" for="custom-form-title">
+      Enter the custom form title
+    </label>
+    <input
+      type="text"
+      formControlName="title"
+      name="custom-form-title"
+      id="custom-form-title"
+      placeholder="Enter the custom form title"
+    >
+    <div>
+      {{formId}}
+    </div>
+  </p-header>
+  <div class="form-card__body">
+    <div class="form-group">
+      <label
+        for="parentForm"
+      >
+        Select a parent form {{formId}}
+      </label>
+      <div class="input-group">
+        <p-dropdown [options]="getFormIds()" formControlName="parentForm"></p-dropdown>
+      </div>
+    </div>
+  </div>
+</p-card>

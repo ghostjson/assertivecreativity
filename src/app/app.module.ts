@@ -66,15 +66,17 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TreeTableModule } from 'primeng/treetable';
 import { CalendarModule } from 'primeng/calendar';
-import {TableModule} from 'primeng/table';
-import {SliderModule} from 'primeng/slider';
-import {DialogModule} from 'primeng/dialog';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {ContextMenuModule} from 'primeng/contextmenu';
-import {ToastModule} from 'primeng/toast';
-import {ProgressBarModule} from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { SliderModule } from 'primeng/slider';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ToastModule } from 'primeng/toast';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -82,6 +84,8 @@ import { ProductOptionsDropdownComponent } from './components/product-options-dr
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { ProductOptionsQuestionComponent } from './components/product-options-question/product-options-question.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
+import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
 
 
 @NgModule({
@@ -137,6 +141,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
     OrderConfirmComponent,
     ProductOptionsQuestionComponent,
     OrdersComponent,
+    AdminCustomFormComponent,
+    AdminCategorySelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -154,6 +160,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
     DropdownModule,
     RadioButtonModule,
     InputTextModule,
+    InputTextareaModule,
     TreeTableModule,
     CalendarModule,
     TableModule,
@@ -162,7 +169,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
     MultiSelectModule,
     ContextMenuModule,
     ToastModule,
-    ProgressBarModule
+    ProgressBarModule,
+    FileUploadModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

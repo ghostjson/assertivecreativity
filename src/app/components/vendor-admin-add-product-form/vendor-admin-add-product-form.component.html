@@ -1,417 +1,147 @@
-<div class="card card-primary">
-  <div class="card-header">
-    <h2 class="card-title">Product Detail</h2>
-  </div>
-  <!-- /.card-header -->
-  <!-- form start -->
+<ng-container>
   <form
     [formGroup]="newProductForm"
-    (ngSubmit)="onSubmit()"
-    role="form"
-    action="/admin/products"
-    method="POST"
   >
-    <div class="card-body">
-      <div class="form-group">
-        <label for="product-name">Name</label>
-        <input
-          formControlName="name"
-          type="text"
-          class="form-control"
-          name="name"
-          id="product-name"
-          placeholder="Enter product name"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="product-description">Description</label>
-        <textarea
-          formControlName="description"
-          class="form-control"
-          name="description"
-          id="product-description"
-          placeholder="Enter the product details"
-          required
-        ></textarea>
-      </div>
-      <div class="form-group">
-        <label for="product-price">Price</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-money-bill-alt"></i>
-            </span>
-          </div>
+    <p-card styleClass="form-card base-details">
+      <p-header styleClass="form-card__header">
+        Enter the product details
+      </p-header>
+      <div class="form-card__body">
+        <div class="form-group">
+          <label class="form-group__label" for="name">
+            Enter product name:
+          </label>
           <input
-            formControlName="price"
-            type="text"
-            name="price"
-            id="product-price"
-            class="form-control"
-            required
-          />
+            id="name"
+            formControlName="name"
+            type="text" class="input-group__input"
+            pInputText
+          >
         </div>
-      </div>
-      <div class="form-group">
-        <label for="product-stock">stock</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-warehouse"></i>
-            </span>
-          </div>
+        <div class="form-group">
+          <label class="form-group__label" for="serial">
+            Enter product serial:
+          </label>
           <input
-            formControlName="stock"
-            type="number"
-            name="stock"
-            id="product-stock"
-            class="form-control"
-            required
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="product-image">image</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-image"></i>
-            </span>
-          </div>
-          <input
-            formControlName="image"
-            type="text"
-            name="image"
-            id="product-image"
-            class="form-control"
-            required
-          />
-        </div>
-      </div>
-      <div
-        formArrayName="features"
-        *ngFor="let feature of features().controls; let featInd = index"
-      >
-        <!-- add color to the product -->
-        <div *ngIf="feature.value.type === 'color'">
-          <form
-            [formGroupName]="featInd"
-            class="form-group color card card-outline card-success"
+            id="serial"
+            formControlName="serial"
+            type="text" class="input-group__input"
+            pInputText
           >
-            <div class="card-header">
-              <p class="card-title">Colors</p>
-              <button
-                class="btn btn-primary"
-                type="button"
-                (click)="removeFeature(featInd)"
-              >
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="feature-title form-group">
-                <label for="feature-title-{{ featInd }}"
-                  >Title of the feature:</label
-                >
-                <input
-                  class="form-control"
-                  formControlName="title"
-                  id="feature-title-{{ featInd }}"
-                  type="text"
-                  name="feature-title-{{ featInd }}"
-                  placeholder="Title goes here"
-                  required
-                />
-              </div>
-              <div
-                class="feature-input card-body"
-                formArrayName="inputs"
-                *ngFor="
-                  let input of featureInputs(featInd).controls;
-                  let colorInd = index
-                "
-              >
-                <form [formGroupName]="colorInd">
-                  <button
-                    class="btn btn-danger"
-                    type="button"
-                    (click)="removeFeatureInput(featInd, colorInd)"
-                  >
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                  <div class="form-group">
-                    <label for="color-name-{{ colorInd }}"
-                      >Name of the Color<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="colorName"
-                        id="color-name-{{ colorInd }}"
-                        type="input.type"
-                        name="color-name-{{ colorInd }}"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="color-chooser-{{ colorInd }}"
-                      >Color Code<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="colorHex"
-                        [(colorPicker)]="input.value.colorHex"
-                        [(cpOutputFormat)]="colorPicker.cpOutputFormat"
-                        [(cpAlphaChannel)]="colorPicker.cpAlphaChannel"
-                        [value]="input.value.colorHex"
-                        id="color-chooser-{{ colorInd }}"
-                        name="color-chooser-{{ colorInd }}"
-                        class="form-control color-picker-input"
-                        required
-                      />
-                      <div class="input-group-append">
-                        <span
-                          class="input-group-text color-chooser-preview"
-                          [style.background]="input.value.colorHex"
-                        >
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer">
-                <button
-                  (click)="addFeatureInput(feature.value.type, featInd)"
-                  type="button"
-                  class="btn btn-primary"
-                >
-                  Add color
-                </button>
-              </div>
-            </div>
-          </form>
         </div>
-        <!-- add radio buttons feature -->
-        <div *ngIf="feature.value.type === 'radioBtn'">
-          <form
-            [formGroupName]="featInd"
-            class="form-group color card card-outline card-success"
-          >
-            <div class="card-header">
-              <p class="class-title">
-                Radio Buttons
-              </p>
-              <button
-                class="btn btn-primary"
-                type="button"
-                (click)="removeFeature(featInd)"
-              >
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="feature-title">
-                <div class="form-group">
-                  <label for="feature-title-{{ featInd }}"
-                    >Title of the feature:</label
-                  >
-                  <input
-                    class="form-control"
-                    formControlName="title"
-                    id="feature-title-{{ featInd }}"
-                    type="text"
-                    name="feature-title-{{ featInd }}"
-                    placeholder="Title goes here"
-                    required
-                  />
-                </div>
-              </div>
-              <div
-                class="feature-input card-body"
-                formArrayName="inputs"
-                *ngFor="
-                  let input of featureInputs(featInd).controls;
-                  let radioInd = index
-                "
-              >
-                <form [formGroupName]="radioInd">
-                  <button
-                    class="btn btn-danger"
-                    type="button"
-                    (click)="removeFeatureInput(featInd, radioInd)"
-                  >
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                  <div class="form-group">
-                    <label for="choice-text-{{ radioInd }}"
-                      >Text To display<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="choiceText"
-                        id="choice-text-{{ radioInd }}"
-                        type="input.type"
-                        name="choiceText{{ radioInd }}"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="choice-value-{{ radioInd }}"
-                      >Value Of the choice<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="choiceValue"
-                        id="choice-value-{{ radioInd }}"
-                        name="choiceValue{{ radioInd }}"
-                        class="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button
-                (click)="addFeatureInput(feature.value.type, featInd)"
-                type="button"
-                class="btn btn-primary"
-              >
-                Add radio button
-              </button>
-            </div>
-          </form>
+        <div class="form-group">
+          <label class="form-group__label" for="description">
+            Enter product description:
+          </label>
+          <textarea
+            class="input-group__input"
+            id="description"
+            formControlName="description"
+            pInputTextarea
+            [rows]="5"
+            [cols]="30"
+            autoResize="autoResize"
+          ></textarea>
         </div>
-        <!-- add dropdown feature -->
-        <div *ngIf="feature.value.type === 'dropdown'">
-          <div
-            [formGroupName]="featInd"
-            class="form-group color card card-outline card-success"
-          >
-            <div class="card-header">
-              <p class="card-title">
-                Dropdown selection
-              </p>
-              <button
-                class="btn btn-primary"
-                type="button"
-                (click)="removeFeature(featInd)"
-              >
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="feature-title form-group">
-                <label for="feature-title-{{ featInd }}"
-                  >Title of the feature:</label
-                >
-                <input
-                  class="form-control"
-                  formControlName="title"
-                  id="feature-title-{{ featInd }}"
-                  type="text"
-                  name="feature-title-{{ featInd }}"
-                  placeholder="Title goes here"
-                  required
-                />
-              </div>
-              <div
-                class="feature-input card-body"
-                formArrayName="inputs"
-                *ngFor="
-                  let input of featureInputs(featInd).controls;
-                  let dropdownInd = index
-                "
-              >
-                <button
-                  class="btn btn-danger"
-                  type="button"
-                  (click)="removeFeatureInput(featInd, dropdownInd)"
-                >
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-                <div [formGroupName]="dropdownInd">
-                  <div class="form-group">
-                    <label for="choice-text-{{ dropdownInd }}"
-                      >Text To display<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="choiceText"
-                        id="choice-text-{{ dropdownInd }}"
-                        type="input.type"
-                        name="  choiceText{{ dropdownInd }}"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="choice-value-{{ dropdownInd }}"
-                      >Value Of the choice<sup>*</sup></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        formControlName="choiceValue"
-                        id="choice-value-{{ dropdownInd }}"
-                        name="choiceValue{{ dropdownInd }}"
-                        class="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button
-                (click)="addFeatureInput(feature.value.type, featInd)"
-                type="button"
-                class="btn btn-primary"
-              >
-                Add dropdown choice
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group add-feature-form">
-        <label for="add-feature-form">Add a feature</label>
-        <div class="input-group">
-          <select #featureToAdd>
-            <option value="none">Select</option>
-            <option
-              *ngFor="let featureType of getKeys(possibleFeatures)"
-              value="{{ featureType }}"
+        <div class="form-group">
+          <label class="form-group__label" for="basePrice"></label>
+          <div class="ui-inputgroup input-group">
+            <!-- <span class="ui-inputgroup-addon">$</span> -->
+            <input
+              id="basePrice"
+              formControlName="basePrice"
+              type="number"
+              pInputText
+              placeholder="Price Per Piece"
             >
-              {{ possibleFeatures[featureType].name }}
-            </option>
-          </select>
-          <button
-            (click)="addFeature(featureToAdd.value)"
-            type="button"
-            class="btn btn-primary"
-          >
-            Add Feature
-          </button>
+            <i class="material-icons ui-inputgroup-addon">
+              money
+            </i>
+            <!-- <span class="ui-inputgroup-addon">.00</span>       -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label" for="stock">
+            Stock Available
+          </label>
+          <div class="ui-inputgroup input-group">
+            <input
+              id="stock"
+              formControlName="stock"
+              type="number"
+              pInputText
+              placeholder="Stock Currently Available"
+            >
+            <i class="material-icons ui-inputgroup-addon">
+              store_mall_directory
+            </i>
+            <!-- <span class="ui-inputgroup-addon">.00</span>       -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label" for="categories">
+            Select product categories
+          </label>
+          <div class="input-group">
+            <app-admin-category-selector
+              [formGroup]="newProductForm"
+            ></app-admin-category-selector>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label" for="image">
+            Upload product images
+          </label>
+          <p-fileUpload
+            id="image"
+            name="image[]"
+            url="www.example.com"
+            customUpload="true"
+            (uploadHandler)="uploadImages($event)"
+            multiple="multiple"
+            accept="image/*"
+            maxFileSize="1000000000"
+          ></p-fileUpload>
         </div>
       </div>
+    </p-card>
+
+    <ng-container
+      *ngFor="let customForm of customForms().controls; let i = index"
+    >
+      <app-admin-custom-form
+        [formGroup]="customForm"
+        [formId]="i"
+        [formCount]="customForms().length"
+      ></app-admin-custom-form>
+    </ng-container>
+    <div class="add-new-custom-form mt-5 p-3 border">
+      <label class="sr-only" for="add-new-custom-form__input">
+        Add a new custom form
+      </label>
+      <input
+        type="text"
+        name="add-new-custom-form__input"
+        id="add-new-custom-form__input"
+        class="add-new-custom-form__input"
+        pInputText
+        #newCustomFormTitle
+      >
+      <div class="add-new-custom-form__add-btn ml-2">
+        <button (click)="addCustomForm()">
+          <i class="material-icons">
+            add
+          </i>
+        </button>
+      </div>
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-      <!-- TODO -->
-      <!-- Solve the error when adding validation -->
-      <!-- <button [disabled]="!newProductForm.valid" type="submit" class="btn btn-primary">Save</button> -->
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+
+    <button
+      (click)="onSubmit()"
+      class="btn btn-primary"
+    >
+      Add Product
+    </button>
   </form>
-</div>
+
+</ng-container>

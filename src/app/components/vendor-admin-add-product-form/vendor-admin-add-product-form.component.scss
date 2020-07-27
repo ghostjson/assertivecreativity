@@ -39,3 +39,20 @@
     margin-left: 1em;
   }
 }
+
+.form-group__label {
+  display: block;
+  text-transform: capitalize;
+}
+
+.add-new-custom-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.add-new-custom-form__input {
+  display: block;
+  flex-grow: 2;
+}

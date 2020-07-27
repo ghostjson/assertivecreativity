@@ -89,7 +89,8 @@ export interface Product {
   stock: number,
   sales: number,
   image: string,
-  features: Feature[]
+  features: Feature[],
+  forms?: Form[]
 }
 
 
@@ -102,6 +103,11 @@ export interface Feature {
   name: string,
   inputs: Array<any>,
   chainedInputs?: Feature[]
+}
+
+// model for customisation form
+export interface Form {
+
 }
 
 // return all the possible feature a product can have
