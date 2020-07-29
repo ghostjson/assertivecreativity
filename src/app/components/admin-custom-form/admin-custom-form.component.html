@@ -1,32 +1,97 @@
-<p-card
-  [formGroup]="formGroup"
-  styleClass="form-card"
->
-  <p-header styleClass="form-card__header">
-    <label class="sr-only" for="custom-form-title">
-      Enter the custom form title
-    </label>
-    <input
-      type="text"
-      formControlName="title"
-      name="custom-form-title"
-      id="custom-form-title"
-      placeholder="Enter the custom form title"
-    >
-    <div>
-      {{formId}}
-    </div>
-  </p-header>
-  <div class="form-card__body">
-    <div class="form-group">
-      <label
-        for="parentForm"
+<div class="custom-form">
+  <aside class="form-controls">
+    <div class="form-controls_btn">
+      <button
+        (click)="selectOptionOverlayTemplate.toggle($event)"
       >
-        Select a parent form {{formId}}
-      </label>
-      <div class="input-group">
-        <p-dropdown [options]="getFormIds()" formControlName="parentForm"></p-dropdown>
-      </div>
+        <i class="material-icons">
+          add
+        </i>
+        <span class="sr-only">
+          Add an option to the form
+        </span>
+      </button>
     </div>
-  </div>
-</p-card>
+    <div class="form-controls_btn">
+      <button>
+        <i class="material-icons">
+          edit
+        </i>
+        <span class="sr-only">
+          Edit the option on the form
+        </span>
+      </button>
+    </div>
+    <div class="form-controls_btn">
+      <button>
+        <i class="material-icons">
+          delete_forever
+        </i>
+      </button>
+      <span class="sr-only">
+        Delete the option on the form
+      </span>
+    </div>
+    <p-overlayPanel
+      #selectOptionOverlayTemplate
+      [dismissable]="true"
+      appendTo="body"
+    >
+      <ng-template pTemplate>
+        <p-listbox
+          [options]="customOptions"
+          [(ngModel)]="selectedCustomOption"
+          [filter]="true"
+          (onClick)="addOption($event)"
+        >
+          <p-header>
+            Select the option to insert
+          </p-header>
+        </p-listbox>
+      </ng-template>
+    </p-overlayPanel>
+  </aside>
+  <p-card
+    [formGroup]="formGroup"
+    styleClass="form-card"
+  >
+    <p-header styleClass="form-card__header">
+      <label class="sr-only" for="custom-form-title">
+        Enter the custom form title
+      </label>
+      <input
+        type="text"
+        formControlName="title"
+        name="custom-form-title"
+        id="custom-form-title"
+        placeholder="Enter the custom form title"
+      >
+      <div>
+        {{formId}}
+      </div>
+    </p-header>
+    <div class="form-card__body">
+      <div class="form-group">
+        <label
+          for="parentForm"
+        >
+          Select a parent form {{formId}}
+        </label>
+        <div class="input-group">
+          <p-dropdown [options]="getFormIds()" formControlName="parentForm"></p-dropdown>
+        </div>
+      </div>
+      <ng-container formArrayName="options">
+        <ng-container *ngFor="let option of options().controls; let optionInd = index">
+          <app-admin-color-option-maker
+            *ngIf="options().value[optionInd].type === 'color'"
+            [formGroup]="option"
+            [optionInd]="optionInd"
+          >
+          </app-admin-color-option-maker>
+          {{options().value.type}}
+        </ng-container>
+      </ng-container>
+    </div>
+  </p-card>
+</div>

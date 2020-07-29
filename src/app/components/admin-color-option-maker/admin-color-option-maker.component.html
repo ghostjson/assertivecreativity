@@ -1,0 +1,62 @@
+<ng-container
+  [formGroup]="formGroup"
+>
+  <div>
+    <div class="form-group">
+      <label for="color-title-{{optionInd}}">
+        Enter the title of the input:
+      </label>
+      <input
+        type="text"
+        formControlName="title"
+      >
+    </div>
+    <ng-container
+      *ngFor="let input of inputs().controls; let inputInd = index"
+      formArrayName="inputs"
+    >
+      <ng-container
+        [formGroupName]="inputInd"
+      >
+        <div class="form-group">
+          <label for="input-{{optionInd}}-{{inputInd}}">
+            Enter A Name for the color:
+          </label>
+          <input
+            type="text"
+            pInputText
+            formControlName="colorName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="input-{{optionInd}}-{{inputInd}}">
+            Enter Color In Hex Value(Or pick by clicking the preview):
+          </label>
+          <div class="input-group">
+            <div class="color-preview"></div>
+            <div class="ui-inputgroup">
+              <input
+                type="text"
+                pInputText
+                placeholder="Enter Color in HEX"
+                formControlName="colorHex"
+                [(colorPicker)]="color"
+                [cpOutputFormat]="'hex'"
+                [value]="color"
+              >
+              <span
+                class="ui-inputgroup-addon color-preview"
+                [style.background]="color"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <button
+      (click)="_productService.addOptionInput(inputs(), 'color')"
+    >
+      Add Color
+    </button>
+  </div>
+</ng-container>

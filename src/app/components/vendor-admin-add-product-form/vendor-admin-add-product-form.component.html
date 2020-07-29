@@ -107,6 +107,7 @@
     </p-card>
 
     <ng-container
+      formArrayName="customForms"
       *ngFor="let customForm of customForms().controls; let i = index"
     >
       <app-admin-custom-form

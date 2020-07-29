@@ -52,7 +52,6 @@ import { VendorAdminFooterComponent } from './components/vendor-admin-footer/ven
 import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
 import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ColorPickerModule } from 'ngx-color-picker';
 import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -77,6 +76,10 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ToastModule } from 'primeng/toast';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { FileUploadModule } from 'primeng/fileupload';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ListboxModule } from 'primeng/listbox';
+// import { ColorPickerModule } from 'primeng/colorpicker';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -86,6 +89,8 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
+import { TestComponentComponent } from './components/test-component/test-component.component';
+import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
 
 
 @NgModule({
@@ -142,7 +147,9 @@ import { AdminCategorySelectorComponent } from './components/admin-category-sele
     ProductOptionsQuestionComponent,
     OrdersComponent,
     AdminCustomFormComponent,
-    AdminCategorySelectorComponent
+    AdminCategorySelectorComponent,
+    TestComponentComponent,
+    AdminColorOptionMakerComponent
   ],
   imports: [
     BrowserModule,
@@ -153,8 +160,8 @@ import { AdminCategorySelectorComponent } from './components/admin-category-sele
     NgxSummernoteModule,
     ChartjsModule,
     ReactiveFormsModule,
-    ColorPickerModule,
     // Prime Ng Modules
+    ColorPickerModule,
     CardModule,
     ButtonModule,
     DropdownModule,
@@ -170,7 +177,9 @@ import { AdminCategorySelectorComponent } from './components/admin-category-sele
     ContextMenuModule,
     ToastModule,
     ProgressBarModule,
-    FileUploadModule
+    FileUploadModule,
+    OverlayPanelModule,
+    ListboxModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

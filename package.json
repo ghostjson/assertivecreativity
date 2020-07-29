@@ -26,6 +26,7 @@
     "eva-icons": "^1.1.2",
     "jquery": "^3.5.1",
     "ngx-color-picker": "^9.1.0",
+    "ngx-colorpicker": "^4.0.1",
     "ngx-summernote": "^0.7.7",
     "primeicons": "^4.0.0",
     "primeng": "^9.1.3",

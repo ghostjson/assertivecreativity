@@ -1,3 +1,19 @@
+.custom-form {
+  position: relative;
+}
+
+.form-controls {
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+
+#select-option-overlay--placeholder {
+  position: relative;
+  height: 100px;
+  width: 100px;
+}
+
 .form-card {
   margin-top: 3rem;
 }

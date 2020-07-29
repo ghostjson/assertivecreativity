@@ -1,3 +1,5 @@
+import { SelectItem } from 'primeng/api';
+
 // features avalilable for products
 const PRODUCT_FEATURES: Object = {
   color: {
@@ -77,7 +79,25 @@ const PRODUCT_FEATURES: Object = {
   }
 };
 
-// form template objects for
+// custom options list for custom form
+const CUSTOM_OPTIONS: SelectItem[] = [
+  {
+    label: 'Colors',
+    value: 'color'
+  },
+  {
+    label: 'Radio Buttons',
+    value: 'radioBtn'
+  },
+  {
+    label: 'Dropdown Selection',
+    value: 'dropdown'
+  },
+  {
+    label: 'Text input',
+    value: 'text',
+  }
+];
 
 
 // model describing a Product
@@ -113,4 +133,9 @@ export interface Form {
 // return all the possible feature a product can have
 export function listAllFeatures(): Object {
   return PRODUCT_FEATURES;
+}
+
+// return all possible custom options list
+export function listCustomOptions(): SelectItem[] {
+  return CUSTOM_OPTIONS;
 }

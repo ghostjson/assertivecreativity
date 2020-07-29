@@ -14,8 +14,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   @ViewChild('newCustomFormTitle', { static: true }) newCustomFormTitle: ElementRef;
 
   newProductForm: FormGroup;
-  possibleFeatures: Object;
-  productFeatures: FormArray;
+  possibleOptions: Object;
 
   colorPicker = {
     cpOutputFormat: "hex",
@@ -29,8 +28,9 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // list of all possible feature
-    this.possibleFeatures = listAllFeatures();
+    // list of all possible options we can add in custom forms
+    this.possibleOptions = this._productService.getOptionDefinitions();
+    console.log(this.possibleOptions);
 
     // create a form group for the new product
     this.newProductForm = this._fb.group({
@@ -69,10 +69,6 @@ export class VendorAdminAddProductFormComponent implements OnInit {
       ],
       customForms: this._fb.array([])
     });
-
-    this.productFeatures = this.features();
-
-    console.log(this.possibleFeatures);
   }
 
   // Submit the form
@@ -84,92 +80,6 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     // );
     // this._productService.addProduct(this.newProductForm.value);
     // this.router.navigate(['/admin/products']);
-  }
-
-  // helper function to get features of a product
-  features(): FormArray {
-    return this.newProductForm.get("features") as FormArray;
-  }
-
-  // construct a form group for new feature
-  newFeature(feature: string): FormGroup {
-    console.log("Creating ", feature, " for the product!!");
-    let featureTemplate: Object = {};
-    let featureToAdd = this.possibleFeatures[feature];
-
-    if (featureToAdd) {
-      console.log(featureToAdd.type, " feature found :-)");
-      // featureTemplate["type"] = featureToAdd.type;
-      // featureTemplate["title"] = null;
-      // featureTemplate["name"] = featureToAdd.name;
-      // featureTemplate["inputs"] = this._fb.array([]);
-      featureTemplate = {
-        type: [
-          featureToAdd.type,
-          [Validators.required]
-        ],
-        title: [
-          null,
-          [Validators.required]
-        ],
-        name: [
-          featureToAdd.name,
-          [Validators.required]
-        ]
-      }
-
-      return this._fb.group(featureTemplate);
-    } else {
-      console.error("Selected feature not found!");
-      return null;
-    }
-  }
-
-  // add feature to the product
-  addFeature(feature: string): void {
-    let newFeat: FormGroup = this.newFeature(feature);
-
-    if (newFeat != null) {
-      this.features().push(newFeat);
-    }
-  }
-
-  // remove feature from the product
-  removeFeature(i: number): void {
-    console.log("Product feature: ", this.productFeatures.at(i));
-    this.productFeatures.removeAt(i);
-  }
-
-  // helper function to get a list of all the inputs
-  featureInputs(featureIndex: number): FormArray {
-    return this.features().at(featureIndex).get("inputs") as FormArray;
-  }
-
-  // construct a form group for taking new feature's input
-  newFeatureInput(feature: string): FormGroup {
-    console.log("Creating ", feature, " Input");
-
-    let newInput: Object = {};
-    console.log(feature);
-    this.possibleFeatures[feature].inputs.forEach((input: any) => {
-      newInput[input.name] = null;
-      newInput["type"] = input.type;
-    });
-
-    return this._fb.group(newInput);
-  }
-
-  // add feature input to the corresponding feature
-  addFeatureInput(feature: string, featureIndex: number): void {
-    this.featureInputs(featureIndex).push(this.newFeatureInput(feature));
-    console.log(
-      "Input Added: ",
-      this.features().at(0).get("inputs")["controls"]
-    );
-  }
-
-  removeFeatureInput(featureIndex: number, inputIndex: number): void {
-    this.featureInputs(featureIndex).removeAt(inputIndex);
   }
 
   // helper function to get custom forms of a product

@@ -1,14 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Product } from "../models/Product";
+import { Product, listAllFeatures, listCustomOptions } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { readSync } from "fs";
+
+import { SelectItem } from 'primeng/api';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: "root",
 })
 export class VendorAdminProductService {
   host: string;
+
+  possibleOptions: Object;
   // products: Product[] = [
   //   {
   //     id: 385561953,
@@ -239,8 +244,14 @@ export class VendorAdminProductService {
   //   },
   // ];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private _fb: FormBuilder
+  ) {
     this.host = environment.apiUrl;
+
+    // initialise the possible options
+    this.possibleOptions = listAllFeatures();
   }
 
   async getProducts(): Promise<any> {
@@ -268,5 +279,60 @@ export class VendorAdminProductService {
       res["data"]["features"] = JSON.parse(res["data"]["features"]);
       resolve(res);
     });
+  }
+
+  /**
+   * return the list of the custom options possible
+   */
+  getCustomOptions(): SelectItem[] {
+    return listCustomOptions();
+  }
+
+  /**
+   * return the form template objects for inputs in options
+   */
+  getOptionDefinitions(): Object {
+    return this.possibleOptions;
+  }
+
+  /**
+   * construct a form group for taking new option's input
+   * @param inputType type of the option
+   */
+  newOptionInput(inputType: string): FormGroup {
+    console.log("Creating ", inputType, " Input");
+
+    let newOption: Object = {};
+    console.log(inputType);
+    this.possibleOptions[inputType].inputs.forEach((input: any) => {
+      newOption[input.name] = null;
+      newOption['type'] = input.type;
+    });
+
+    return this._fb.group(newOption);
+  }
+
+  /**
+   * add input to the corresponding option
+   * @param inputs form array to add the inputs to
+   * @param input type of option to insert
+   */
+  addOptionInput(inputs: FormArray, input: string): void {
+    inputs.push(this.newOptionInput(input));
+    console.log(
+      "Input Added: ",
+      inputs
+    );
+  }
+
+  /**
+   * remove the input from an option
+   * @param inputs Formarray of inputs
+   * @param inputId input index/id in the inputs form array
+   */
+  removeOptionInput(inputs: FormArray, inputId: number): void {
+    // let inputs = options.at(optionId).get('inputs') as FormArray;
+
+    inputs.removeAt(inputId);
   }
 }
