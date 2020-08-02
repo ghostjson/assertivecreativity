@@ -42,7 +42,7 @@
           [options]="customOptions"
           [(ngModel)]="selectedCustomOption"
           [filter]="true"
-          (onClick)="addOption($event)"
+          (onClick)="addOption(selectedCustomOption)"
         >
           <p-header>
             Select the option to insert
@@ -65,6 +65,7 @@
         name="custom-form-title"
         id="custom-form-title"
         placeholder="Enter the custom form title"
+        pInputText
       >
       <div>
         {{formId}}

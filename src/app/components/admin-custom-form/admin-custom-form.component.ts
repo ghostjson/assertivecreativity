@@ -18,7 +18,7 @@ export class AdminCustomFormComponent implements OnInit {
   @Input() formId: number;
 
   customOptions: SelectItem[];
-  selectedCustomOption: Object;
+  selectedCustomOption: string;
   possibleOptions: Object;
 
   constructor(
@@ -89,12 +89,19 @@ export class AdminCustomFormComponent implements OnInit {
   }
 
   // add option to the product
-  addOption(event: any): void {
-    let newOption: FormGroup = this.newOption(event.value);
+  addOption(optionType: string): void {
+    let newOption: FormGroup = this.newOption(optionType);
+    console.log('type of option from add custom form: ', optionType);
 
     if (newOption != null) {
+      // add the new option to options form array of the form
       this.options().push(newOption);
       console.info(this.options());
+
+      // Clear selected option stored
+      setTimeout(() => {
+        this.selectedCustomOption = null;
+      }, 300);
     }
     else {
       console.error('option could not be created!!');

@@ -1,61 +1,123 @@
-<ng-container
-  [formGroup]="formGroup"
->
+<ng-container [formGroup]="formGroup">
   <div>
     <div class="form-group">
-      <label for="color-title-{{optionInd}}">
+      <label for="color-title-{{ optionInd }}">
         Enter the title of the input:
       </label>
-      <input
-        type="text"
-        formControlName="title"
-      >
+      <input type="text" formControlName="title" pInputText />
     </div>
+
+    <!-- render the options in a form  -->
     <ng-container
-      *ngFor="let input of inputs().controls; let inputInd = index"
+      *ngFor="let input of getInputs().controls; let inputInd = index"
       formArrayName="inputs"
     >
-      <ng-container
-        [formGroupName]="inputInd"
-      >
+      <ng-container [formGroupName]="inputInd">
         <div class="form-group">
-          <label for="input-{{optionInd}}-{{inputInd}}">
+          <label for="input-{{ optionInd }}-{{ inputInd }}">
             Enter A Name for the color:
           </label>
           <input
+            id="input-{{ optionInd }}-{{ inputInd }}"
             type="text"
             pInputText
             formControlName="colorName"
           />
         </div>
         <div class="form-group">
-          <label for="input-{{optionInd}}-{{inputInd}}">
+          <label for="input-{{ optionInd }}-{{ inputInd }}">
             Enter Color In Hex Value(Or pick by clicking the preview):
           </label>
           <div class="input-group">
             <div class="color-preview"></div>
             <div class="ui-inputgroup">
               <input
+                id="input-{{ optionInd }}-{{ inputInd }}"
                 type="text"
                 pInputText
                 placeholder="Enter Color in HEX"
                 formControlName="colorHex"
-                [(colorPicker)]="color"
+                [(colorPicker)]="color[inputInd]"
                 [cpOutputFormat]="'hex'"
-                [value]="color"
-              >
+                [value]="color[inputInd]"
+              />
               <span
                 class="ui-inputgroup-addon color-preview"
-                [style.background]="color"
+                [style.background]="color[inputInd]"
               ></span>
             </div>
           </div>
         </div>
+
+        <!-- button to add select and add chained option  -->
+        <div
+          *ngIf="getChainedOptions(inputInd)"
+          class="chained-option-controls"
+        >
+          <button (click)="chainedOptionsOverlay.toggle($event)">
+            Add Chained option
+          </button>
+          <p-overlayPanel
+            #chainedOptionsOverlay
+            [dismissable]="true"
+            appendTo="body"
+          >
+            <ng-template pTemplate>
+              <p-listbox
+                [options]="chainedOptions"
+                formControlName="selectedChainedOption"
+                [filter]="true"
+                (onClick)="
+                  addChainedOption(
+                    getChainedOptions(inputInd),
+                    getInputs().at(inputInd).value.selectedChainedOption
+                  )
+                "
+              >
+                <p-header>
+                  Select the option to insert
+                </p-header>
+              </p-listbox>
+            </ng-template>
+          </p-overlayPanel>
+        </div>
+
+        <!-- render the chained options in an input -->
+        <ng-container
+          *ngFor="
+            let chainedOption of getChainedOptions(inputInd).controls;
+            let chainedInd = index
+          "
+          formArrayName="chainedOptions"
+        >
+          <app-admin-color-option-maker
+            *ngIf="
+              getChainedOptions(inputInd).value[chainedInd].type === 'color'
+            "
+            [formGroup]="chainedOption"
+            [optionInd]="chainedInd"
+          >
+          </app-admin-color-option-maker>
+
+          <!-- delete the option  -->
+          <button
+            (click)="_productService.removeOptionInput(getChainedOptions(inputInd), chainedInd)"
+          >
+            Delete Chained Option
+          </button>
+        </ng-container>
       </ng-container>
+
+      <!-- delete the option  -->
+      <button
+        (click)="_productService.removeOptionInput(getInputs(), inputInd)"
+      >
+        Delete Input
+      </button>
     </ng-container>
-    <button
-      (click)="_productService.addOptionInput(inputs(), 'color')"
-    >
+
+    <!-- button to add more colors to the input  -->
+    <button (click)="addOptionInput(getInputs(), 'color')">
       Add Color
     </button>
   </div>
