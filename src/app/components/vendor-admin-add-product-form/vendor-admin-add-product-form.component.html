@@ -1,8 +1,8 @@
-<ng-container>
-  <form
-    [formGroup]="newProductForm"
-  >
-    <p-card styleClass="form-card base-details">
+<div>
+  <form [formGroup]="newProductForm">
+    <p-card
+      styleClass="form-card base-details mb-5"
+    >
       <p-header styleClass="form-card__header">
         Enter the product details
       </p-header>
@@ -11,49 +11,57 @@
           <label class="form-group__label" for="name">
             Enter product name:
           </label>
-          <input
-            id="name"
-            formControlName="name"
-            type="text" class="input-group__input"
-            pInputText
-          >
+          <div class="input-group">
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              class="input-group__input"
+              pInputText
+            />
+          </div>
         </div>
         <div class="form-group">
           <label class="form-group__label" for="serial">
             Enter product serial:
           </label>
-          <input
-            id="serial"
-            formControlName="serial"
-            type="text" class="input-group__input"
-            pInputText
-          >
+          <div class="input-group">
+            <input
+              id="serial"
+              formControlName="serial"
+              type="text"
+              class="input-group__input"
+              pInputText
+            />
+          </div>
         </div>
         <div class="form-group">
           <label class="form-group__label" for="description">
             Enter product description:
           </label>
-          <textarea
-            class="input-group__input"
-            id="description"
-            formControlName="description"
-            pInputTextarea
-            [rows]="5"
-            [cols]="30"
-            autoResize="autoResize"
-          ></textarea>
+          <div class="input-group">
+            <textarea
+              class="input-group__input"
+              id="description"
+              formControlName="description"
+              pInputTextarea
+              [rows]="5"
+              [cols]="30"
+              autoResize="autoResize"
+            ></textarea>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-group__label" for="basePrice"></label>
           <div class="ui-inputgroup input-group">
-            <!-- <span class="ui-inputgroup-addon">$</span> -->
             <input
               id="basePrice"
               formControlName="basePrice"
               type="number"
               pInputText
               placeholder="Price Per Piece"
-            >
+              class="input-group__input"
+            />
             <i class="material-icons ui-inputgroup-addon">
               money
             </i>
@@ -71,7 +79,8 @@
               type="number"
               pInputText
               placeholder="Stock Currently Available"
-            >
+              class="input-group__input"
+            />
             <i class="material-icons ui-inputgroup-addon">
               store_mall_directory
             </i>
@@ -82,7 +91,7 @@
           <label class="form-group__label" for="categories">
             Select product categories
           </label>
-          <div class="input-group">
+          <div>
             <app-admin-category-selector
               [formGroup]="newProductForm"
             ></app-admin-category-selector>
@@ -92,16 +101,19 @@
           <label class="form-group__label" for="image">
             Upload product images
           </label>
-          <p-fileUpload
-            id="image"
-            name="image[]"
-            url="www.example.com"
-            customUpload="true"
-            (uploadHandler)="uploadImages($event)"
-            multiple="multiple"
-            accept="image/*"
-            maxFileSize="1000000000"
-          ></p-fileUpload>
+          <div class="input-group">
+            <p-fileUpload
+              id="image"
+              name="image[]"
+              url="www.example.com"
+              customUpload="true"
+              (uploadHandler)="uploadImages($event)"
+              multiple="multiple"
+              accept="image/*"
+              maxFileSize="1000000000"
+              class="input-group__input"
+            ></p-fileUpload>
+          </div>
         </div>
       </div>
     </p-card>
@@ -116,7 +128,7 @@
         [formCount]="customForms().length"
       ></app-admin-custom-form>
     </ng-container>
-    <div class="add-new-custom-form mt-5 p-3 border">
+    <div class="add-new-custom-form d-flex mb-5 p-3">
       <label class="sr-only" for="add-new-custom-form__input">
         Add a new custom form
       </label>
@@ -124,12 +136,12 @@
         type="text"
         name="add-new-custom-form__input"
         id="add-new-custom-form__input"
-        class="add-new-custom-form__input"
+        class="add-new-custom-form__input flex-grow-1"
         pInputText
         #newCustomFormTitle
-      >
+      />
       <div class="add-new-custom-form__add-btn ml-2">
-        <button (click)="addCustomForm()">
+        <button (click)="addCustomForm()" class="btn btn-primary">
           <i class="material-icons">
             add
           </i>
@@ -137,12 +149,8 @@
       </div>
     </div>
 
-    <button
-      (click)="onSubmit()"
-      class="btn btn-primary"
-    >
+    <button (click)="onSubmit()" class="btn btn-primary">
       Add Product
     </button>
   </form>
-
-</ng-container>
+</div>

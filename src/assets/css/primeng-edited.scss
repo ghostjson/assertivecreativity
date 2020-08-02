@@ -1,11 +1,27 @@
 body {
+  .ui-widget {
+    font-family: 'Roboto', sans-serif;
+  }
+
   .ui-card {
     box-shadow: none;
-    margin-top: 3rem;
-    border: 1px solid #c4c4c4;
+    border-radius: 6px;
   }
 
   .ui-card-header {
-    box-shadow: none;
+    background: var(--primary);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: bold;
+    padding: 0.7em;
+    border-radius: 6px 6px 0 0;
+  }
+
+  p-button {
+    background: none;
+  }
+
+  .ui-button {
+    cursor: pointer;
   }
 }

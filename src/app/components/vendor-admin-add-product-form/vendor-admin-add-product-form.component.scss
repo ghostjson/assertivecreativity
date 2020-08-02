@@ -1,58 +1,6 @@
 @import 'src/assets/css/admin-common.scss';
 
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-header::before, .card-header::after {
-  display: none;
-}
-
-.color-chooser-preview {
-  width: 3rem;
-  height: 100%;
-}
-
-.feature-title, .feature-input {
-  background: rgba(0, 0, 0, 0.03);
-  label {
-    font-size: 0.9rem;
-  }
-}
-
-.feature-title {
-  padding: 1em;
-}
-
-.feature-input {
-  border-bottom: 1px solid #ced4da;
-
-  .btn-danger {
-    margin-bottom: 0.5em;
-  }
-}
-
-.add-feature-form {
-  .btn-primary {
-    margin-left: 1em;
-  }
-}
-
-.form-group__label {
-  display: block;
-  text-transform: capitalize;
-}
-
 .add-new-custom-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.add-new-custom-form__input {
-  display: block;
-  flex-grow: 2;
+  background-color: white;
+  border-radius: 6px;
 }

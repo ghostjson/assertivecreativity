@@ -1,5 +1,12 @@
-<ng-container [formGroup]="formGroup">
-  <p-multiSelect [options]="cars" formControlName="categories">
+<div
+  [formGroup]="formGroup"
+  class="input-group"
+>
+  <p-multiSelect
+    [options]="cars"
+    formControlName="categories"
+    styleClass="input-group__input"
+  >
     <ng-template let-value pTemplate="selectedItems">
       <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
         <!-- <img src="assets/showcase/images/demo/car/{{val}}.png"
@@ -14,4 +21,4 @@
       <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
     </ng-template>
   </p-multiSelect>
-</ng-container>
+</div>

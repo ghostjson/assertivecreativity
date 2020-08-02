@@ -1,5 +1,24 @@
-:host {
-  position: relative;
-  top: 5em;
-  margin-bottom: 3rem;
+:host>div {
+  // position: relative;
+  // top: 5em;
+  // margin-bottom: 3rem;
+  // padding-top: 5em;
+}
+
+.form-group {
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.form-group__label {
+  display: block;
+}
+
+.input-group {
+  // width: 100%;
+  display: flex;
+}
+
+.input-group__input {
+  flex-grow: 1;
 }

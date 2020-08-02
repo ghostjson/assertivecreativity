@@ -1,18 +1,34 @@
-:host ::ng-deep .ui-multiselected-item-token,
-:host ::ng-deep .ui-multiselected-empty-token {
-  padding: 2px 4px;
-  margin: 0 0.286em 0 0;
-  display: inline-block;
-  vertical-align: middle;
-  height: 1.857em;
-}
+:host {
+  .add-new-custom-form {
+    background-color: white;
+  }
 
-:host ::ng-deep .ui-multiselected-item-token {
-  background: var(--primary);
-  color: #ffffff;
-}
+  ::ng-deep {
+    .ui-inputwrapper-filled {
+      width: 100%;
+    }
 
-:host ::ng-deep .ui-multiselected-empty-token {
-  background: #d95f00;
-  color: #ffffff;
+    .ui-multiselect {
+      width: 100%;
+    }
+
+    .ui-multiselected-item-token,
+    .ui-multiselected-empty-token {
+      padding: 2px 4px;
+      margin: 0 0.286em 0 0;
+      display: inline-block;
+      vertical-align: middle;
+      height: 1.857em;
+    }
+
+    .ui-multiselected-item-token {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .ui-multiselected-empty-token {
+      background: #d95f00;
+      color: #ffffff;
+    }
+  }
 }
