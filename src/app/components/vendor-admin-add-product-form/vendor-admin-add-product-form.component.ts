@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormBuilder, FormArray, FormGroup, Validators } from "@angular/forms";
-import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
-import { listAllFeatures } from "../../models/Product";
 import { Router } from '@angular/router';
 import { group } from 'console';
+import { HttpClient } from "@angular/common/http";
+
+import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -24,7 +25,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _productService: VendorAdminProductService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -131,12 +133,22 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   }
 
   // image upload handler for image upload input
-  uploadImages(e: Event): string {
+  uploadImages(e: Event): void {
     this.newProductForm.patchValue({
       image: 'www.example.com'
     });
 
     console.log('image uploaded');
-    return 'www.example.com';
+
+    /**
+     * TODO: Use this upload handler only if the prime ng provided one is not sufficient
+     *
+     * add the return value to the form using this
+     *
+     * this.newProductForm.patchValue({
+         image: '*********** link goes here *********'
+       });
+     *
+     */
   }
 }

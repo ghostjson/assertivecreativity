@@ -104,16 +104,21 @@
           <div class="input-group">
             <p-fileUpload
               id="image"
-              name="image[]"
-              url="www.example.com"
-              customUpload="true"
-              (uploadHandler)="uploadImages($event)"
-              multiple="multiple"
+              name="file"
+              url="http://assertivecreativity-frontend.s3-website.us-east-2.amazonaws.com/products/file/upload"
               accept="image/*"
               maxFileSize="1000000000"
               class="input-group__input"
             ></p-fileUpload>
           </div>
+          <!--
+            TODO: Add the below to p-fileUpload
+
+            (uploadHandler)="uploadImages($event)"
+            customUpload="true"
+
+            ***** uploadHandler is defined in the typescript file of this component ******
+          -->
         </div>
       </div>
     </p-card>
