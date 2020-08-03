@@ -88,7 +88,7 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
-import { TestComponentComponent } from './components/test-component/test-component.component';
+// import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
 
 
@@ -147,7 +147,7 @@ import { AdminColorOptionMakerComponent } from './components/admin-color-option-
     OrdersComponent,
     AdminCustomFormComponent,
     AdminCategorySelectorComponent,
-    TestComponentComponent,
+    // TestComponentComponent,
     AdminColorOptionMakerComponent
   ],
   imports: [
