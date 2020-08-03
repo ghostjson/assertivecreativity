@@ -1,4 +1,25 @@
+@import 'src/assets/css/variables.scss';
+
+.option-container {
+  border: 1px solid $light-grey;
+  padding: 1em;
+  border-radius: 6px;
+}
+
+.form-group {
+  width: auto;
+}
+
+.form-group__label {
+  display: block;
+}
+
 .color-preview {
   width: 2rem;
-  height: 2rem;
+  height: 100%;
+  border: none;
+}
+
+.color-picker-input {
+  z-index: 11;
 }

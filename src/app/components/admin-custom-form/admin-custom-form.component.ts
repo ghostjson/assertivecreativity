@@ -13,6 +13,7 @@ import { info } from 'console';
 export class AdminCustomFormComponent implements OnInit {
   // @ViewChild('selectOptionOverlayTemplate') selectOptionOverlayTemplate: any;
 
+  @Input() formArray: FormArray;
   @Input() formGroup: FormGroup;
   @Input() formCount: number;
   @Input() formId: number;
@@ -58,64 +59,30 @@ export class AdminCustomFormComponent implements OnInit {
 
   // construct a form group for new option
   newOption(option: string): FormGroup {
-    console.log("Creating ", option, " for the product!!");
-    let optionTemplate: Object = {};
-    let optionToAdd = this.possibleOptions[option];
-
-    if (optionToAdd) {
-      console.log(optionToAdd.type, " feature found :-)");
-      optionTemplate = {
-        type: [
-          optionToAdd.type,
-          [Validators.required]
-        ],
-        title: [
-          null,
-          [Validators.required]
-        ],
-        name: [
-          optionToAdd.name,
-          [Validators.required]
-        ],
-        inputs: this._fb.array([])
-      }
-
-      return this._fb.group(optionTemplate);
-    }
-    else {
-      console.error("Selected feature not found!");
-      return null;
-    }
+    return this._productService.newOption(option);
   }
 
   // add option to the product
   addOption(optionType: string): void {
-    let newOption: FormGroup = this.newOption(optionType);
-    console.log('type of option from add custom form: ', optionType);
+    this._productService.addOption(optionType, this.options());
 
-    if (newOption != null) {
-      // add the new option to options form array of the form
-      this.options().push(newOption);
-      console.info(this.options());
-
-      // Clear selected option stored
-      setTimeout(() => {
-        this.selectedCustomOption = null;
-      }, 300);
-    }
-    else {
-      console.error('option could not be created!!');
-    }
+    // Clear selected option stored
+    setTimeout(() => {
+      this.selectedCustomOption = null;
+    }, 300);
   }
 
   // remove option from the custom form
   removeOption(optionId: number): void {
-    console.log("Product feature: ", this.options().at(optionId));
-    this.options().removeAt(optionId);
+    console.log('remove option at ', optionId);
+
+    this._productService.removeOption(optionId, this.options());
   }
 
-  // helper function to get a list of all the inputs of an option
-  optionInputs(optionId: number): FormArray {
-    return this.options().at(optionId).get('inputs') as FormArray;
+  // remove custom form
+  removeCustomForm(formId: number): void {
+    this.formArray.removeAt(formId);
+    console.log('removed custom form ', formId);
+
   }
 }

@@ -13,11 +13,13 @@ import { SelectItem } from 'primeng/api';
 })
 export class AdminColorOptionMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
+  @Input() formArray: FormArray;
   @Input() optionInd: number;
 
   color: string[] = ['#AC7B19'];
   chainedOptions: SelectItem[];
   selectedChainedOption: Object;
+  dialogVisible: boolean[] = [];
 
   constructor(
     public _productService: VendorAdminProductService
@@ -36,16 +38,16 @@ export class AdminColorOptionMakerComponent implements OnInit {
 
   /**
    * Get the chained options of an input
-   * @param inputId Index of the chained option
+   * @param inputId Index of the parent input
    */
   getChainedOptions(inputId: number): FormArray {
-    let inputs = this.getInputs().at(inputId).get('chainedOptions') as FormArray;
-
-    return inputs;
+    let chainedOptions = this.getInputs().at(inputId).get('chainedOptions') as FormArray;
+    console.log('chained Options: ', chainedOptions);
+    return chainedOptions;
   }
 
-  addOption(options: FormArray, optionType: string): void {
-    this._productService.addOption(options, optionType);
+  addOption(optionType: string, options: FormArray): void {
+    this._productService.addOption(optionType, options);
 
     // Clear selected option stored
     setTimeout(() => {
@@ -53,24 +55,28 @@ export class AdminColorOptionMakerComponent implements OnInit {
     }, 300);
   }
 
-  addOptionInput(inputs: FormArray, inputType: string) {
-    let isChained = false;
-
-    // check if the current input is a chained input
-    if (this.formGroup.get('chainedOptions')) {
-      isChained = false;
-    }
-
+  addOptionInput(inputType: string, inputs: FormArray) {
     // add the input to the option
-    this._productService.addOptionInput(inputs, inputType, isChained);
+    this._productService.addOptionInput(inputType, inputs, this.formGroup);
   }
 
-  addChainedOption(options: FormArray, optionType: string): void {
-    this._productService.addOption(options, optionType);
+  addChainedOption(optionType: string, options: FormArray): void {
+    this._productService.addOption(optionType, options,  true);
+
+    // add to dialog controls and make it true to display it
+    this.dialogVisible.push(true);
 
     // Clear selected option stored
     setTimeout(() => {
       optionType = null;
     }, 300);
+  }
+
+  test(input: any) {
+    console.log('test function output: ', input)
+  }
+
+  showDialog(index: number): void {
+    this.dialogVisible[index] = true;
   }
 }

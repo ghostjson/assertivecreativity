@@ -1,124 +1,183 @@
-<ng-container [formGroup]="formGroup">
-  <div>
+<div [formGroup]="formGroup">
+  <div class="option-container">
+    <div
+      *ngIf="formGroup.value.meta.isChained"
+      class="chained-ribbon d-flex justify-content-end align-items-center"
+    >
+      <span class="chained-ribbon__text">Chained</span>
+    </div>
     <div class="form-group">
-      <label for="color-title-{{ optionInd }}">
+      <label class="form-group__label" for="color-title-{{ optionInd }}">
         Enter the title of the input:
       </label>
       <input type="text" formControlName="title" pInputText />
     </div>
 
-    <!-- render the options in a form  -->
+    <!-- render the inputs  -->
     <ng-container
       *ngFor="let input of getInputs().controls; let inputInd = index"
       formArrayName="inputs"
     >
       <ng-container [formGroupName]="inputInd">
-        <div class="form-group">
-          <label for="input-{{ optionInd }}-{{ inputInd }}">
-            Enter A Name for the color:
-          </label>
-          <input
-            id="input-{{ optionInd }}-{{ inputInd }}"
-            type="text"
-            pInputText
-            formControlName="colorName"
-          />
-        </div>
-        <div class="form-group">
-          <label for="input-{{ optionInd }}-{{ inputInd }}">
-            Enter Color In Hex Value(Or pick by clicking the preview):
-          </label>
-          <div class="input-group">
-            <div class="color-preview"></div>
-            <div class="ui-inputgroup">
-              <input
-                id="input-{{ optionInd }}-{{ inputInd }}"
-                type="text"
-                pInputText
-                placeholder="Enter Color in HEX"
-                formControlName="colorHex"
-                [(colorPicker)]="color[inputInd]"
-                [cpOutputFormat]="'hex'"
-                [value]="color[inputInd]"
-              />
-              <span
-                class="ui-inputgroup-addon color-preview"
-                [style.background]="color[inputInd]"
-              ></span>
+        <div
+          class="color-input d-flex align-items-end justify-content-between flex-wrap mb-3 mt-5"
+        >
+          <div class="form-group">
+            <label
+              class="form-group__label"
+              for="input-{{ optionInd }}-{{ inputInd }}"
+            >
+              Enter A Name for the color:
+            </label>
+            <input
+              id="input-{{ optionInd }}-{{ inputInd }}"
+              type="text"
+              pInputText
+              formControlName="colorName"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-group__label"
+              for="input-{{ optionInd }}-{{ inputInd }}"
+            >
+              Enter Color In Hex Value:
+            </label>
+            <div class="input-group">
+              <div class="ui-inputgroup">
+                <input
+                  id="input-{{ optionInd }}-{{ inputInd }}"
+                  type="text"
+                  pInputText
+                  placeholder="Enter Color in HEX"
+                  formControlName="colorHex"
+                  [(colorPicker)]="color[inputInd]"
+                  [cpOutputFormat]="'hex'"
+                  [value]="color[inputInd]"
+                  class="color-picker-input"
+                />
+                <span
+                  class="ui-inputgroup-addon color-preview"
+                  [style.background]="color[inputInd]"
+                ></span>
+              </div>
             </div>
+          </div>
+          <div class="form-group">
+            <button
+              class="btn btn-danger"
+              (click)="_productService.removeOptionInput(inputInd, getInputs())"
+            >
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
+          <!-- button to select and add chained option  -->
+          <div
+            class="chained-option-controls"
+            *ngIf="!formGroup.value.meta.isChained"
+          >
+            <button
+              (click)="chainedOptionsOverlay.toggle($event)"
+              class="btn btn-warning mr-1"
+            >
+              Add Chained option
+            </button>
+            <p-overlayPanel
+              #chainedOptionsOverlay
+              [dismissable]="true"
+              appendTo="body"
+            >
+              <ng-template pTemplate>
+                <p-listbox
+                  [options]="chainedOptions"
+                  formControlName="selectedChainedOption"
+                  [filter]="true"
+                  (onClick)="
+                    addChainedOption(
+                      getInputs().at(inputInd).value.selectedChainedOption,
+                      getChainedOptions(inputInd)
+                    )
+                  "
+                >
+                  <p-header>
+                    Select the option to insert
+                  </p-header>
+                </p-listbox>
+              </ng-template>
+            </p-overlayPanel>
           </div>
         </div>
 
-        <!-- button to add select and add chained option  -->
-        <div
-          *ngIf="getChainedOptions(inputInd)"
-          class="chained-option-controls"
-        >
-          <button (click)="chainedOptionsOverlay.toggle($event)">
-            Add Chained option
-          </button>
-          <p-overlayPanel
-            #chainedOptionsOverlay
-            [dismissable]="true"
-            appendTo="body"
-          >
-            <ng-template pTemplate>
-              <p-listbox
-                [options]="chainedOptions"
-                formControlName="selectedChainedOption"
-                [filter]="true"
-                (onClick)="
-                  addChainedOption(
-                    getChainedOptions(inputInd),
-                    getInputs().at(inputInd).value.selectedChainedOption
-                  )
-                "
-              >
-                <p-header>
-                  Select the option to insert
-                </p-header>
-              </p-listbox>
-            </ng-template>
-          </p-overlayPanel>
-        </div>
-
-        <!-- render the chained options in an input -->
-        <ng-container
-          *ngFor="
-            let chainedOption of getChainedOptions(inputInd).controls;
-            let chainedInd = index
-          "
-          formArrayName="chainedOptions"
-        >
-          <app-admin-color-option-maker
-            *ngIf="
-              getChainedOptions(inputInd).value[chainedInd].type === 'color'
+        <div class="d-flex flex-wrap justify-content-start" *ngIf="!formGroup.value.meta.isChained">
+          <!-- render the chained options in an input -->
+          <ng-container
+            *ngFor="
+              let chainedOption of getChainedOptions(inputInd).controls;
+              let chainedInd = index
             "
-            [formGroup]="chainedOption"
-            [optionInd]="chainedInd"
+            formArrayName="chainedOptions"
           >
-          </app-admin-color-option-maker>
-
-          <!-- delete the option  -->
-          <button
-            (click)="_productService.removeOptionInput(getChainedOptions(inputInd), chainedInd)"
-          >
-            Delete Chained Option
-          </button>
-        </ng-container>
+            <button
+              type="button"
+              (click)="showDialog(chainedInd)"
+              pButton
+              icon="pi pi-external-link"
+              iconPos="right"
+              label="{{getChainedOptions(inputInd).value[chainedInd].name | titlecase}}"
+              class="mr-1 mb-2"
+            >
+            </button>
+            <p-dialog
+              header="Edit {{getChainedOptions(inputInd).value[chainedInd].name | titlecase}}"
+              [(visible)]="dialogVisible[chainedInd]"
+              [style]="{ width: '50vw' }"
+              [baseZIndex]="10"
+              [modal]="true"
+              [draggable]="false"
+            >
+              <app-admin-color-option-maker
+                *ngIf="
+                  getChainedOptions(inputInd).value[chainedInd].type === 'color'
+                "
+                [formArray]="getChainedOptions(inputInd)"
+                [formGroup]="chainedOption"
+                [optionInd]="chainedInd"
+              >
+              </app-admin-color-option-maker>
+              <p-footer>
+                <button
+                  type="button"
+                  pButton
+                  icon="pi pi-times"
+                  iconPos="right"
+                  (click)="dialogVisible[chainedInd] = false"
+                  class="ui-button-secondary"
+                  label="Close"
+                >
+                </button>
+              </p-footer>
+            </p-dialog>
+          </ng-container>
+        </div>
+        <hr>
       </ng-container>
-
-      <!-- delete the option  -->
-      <button
-        (click)="_productService.removeOptionInput(getInputs(), inputInd)"
-      >
-        Delete Input
-      </button>
     </ng-container>
 
-    <!-- button to add more colors to the input  -->
-    <button (click)="addOptionInput(getInputs(), 'color')">
-      Add Color
-    </button>
+    <!-- button to add more colors to the option  -->
+    <div class="card-footer d-flex justify-content-end mt-3">
+      <!-- delete the option  -->
+      <button
+        (click)="_productService.removeOption(optionInd, formArray)"
+        class="btn btn-danger mr-1"
+      >
+        Delete Option
+      </button>
+      <button
+        (click)="addOptionInput('color', getInputs())"
+        class="btn btn-success mr-1"
+      >
+        Add Color
+      </button>
+    </div>
   </div>
-</ng-container>
+</div>

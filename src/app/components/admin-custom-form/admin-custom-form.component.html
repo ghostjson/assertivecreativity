@@ -1,8 +1,9 @@
-<div class="custom-form">
+<div class="custom-form mb-5">
   <aside class="form-controls">
     <div class="form-controls_btn">
       <button
         (click)="selectOptionOverlayTemplate.toggle($event)"
+        class="btn btn-primary"
       >
         <i class="material-icons">
           add
@@ -12,7 +13,7 @@
         </span>
       </button>
     </div>
-    <div class="form-controls_btn">
+    <!-- <div class="form-controls_btn">
       <button>
         <i class="material-icons">
           edit
@@ -21,9 +22,12 @@
           Edit the option on the form
         </span>
       </button>
-    </div>
+    </div> -->
     <div class="form-controls_btn">
-      <button>
+      <button
+        class="btn btn-danger"
+        (click)="removeCustomForm(formId)"
+      >
         <i class="material-icons">
           delete_forever
         </i>
@@ -55,7 +59,7 @@
     [formGroup]="formGroup"
     styleClass="form-card"
   >
-    <p-header styleClass="form-card__header">
+    <p-header class="form-card__header d-flex">
       <label class="sr-only" for="custom-form-title">
         Enter the custom form title
       </label>
@@ -66,8 +70,9 @@
         id="custom-form-title"
         placeholder="Enter the custom form title"
         pInputText
+        class="flex-grow-1"
       >
-      <div>
+      <div class="form-card__form-id">
         {{formId}}
       </div>
     </p-header>
@@ -76,7 +81,7 @@
         <label
           for="parentForm"
         >
-          Select a parent form {{formId}}
+          Select a parent form
         </label>
         <div class="input-group">
           <p-dropdown [options]="getFormIds()" formControlName="parentForm"></p-dropdown>
@@ -86,11 +91,14 @@
         <ng-container *ngFor="let option of options().controls; let optionInd = index">
           <app-admin-color-option-maker
             *ngIf="options().value[optionInd].type === 'color'"
+            [formArray]="options()"
             [formGroup]="option"
             [optionInd]="optionInd"
           >
           </app-admin-color-option-maker>
-          {{options().value.type}}
+          <ng-container>
+
+          </ng-container>
         </ng-container>
       </ng-container>
     </div>

@@ -1,9 +1,11 @@
-:host>div {
-  // position: relative;
-  // top: 5em;
-  // margin-bottom: 3rem;
-  // padding-top: 5em;
-}
+@import 'src/assets/css/variables.scss';
+
+// :host>div {
+//   position: relative;
+//   top: 5em;
+//   margin-bottom: 3rem;
+//   padding-top: 5em;
+// }
 
 .form-group {
   margin-bottom: 2em;
@@ -22,3 +24,19 @@
 .input-group__input {
   flex-grow: 1;
 }
+
+.chained-ribbon__text {
+  background-color: $accent-color;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.2em;
+  border-radius: 6px;
+}
+
+// .chainedOptions {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-evenly;
+// }

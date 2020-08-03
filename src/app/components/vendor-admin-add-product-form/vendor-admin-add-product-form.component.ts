@@ -74,7 +74,16 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   // Submit the form
   onSubmit(): void {
     console.log("Product added");
-    console.log(this.newProductForm.value);
+    console.group('Product')
+    console.table(this.newProductForm.value);
+    console.info('Product Forms');
+    this.newProductForm.value.customForms.forEach(form => {
+      console.table(form);
+      form.options.forEach(option => {
+        console.table(option)
+      });
+    });
+    console.groupEnd();
     // this.newProductForm.value["features"] = JSON.stringify(
     //   this.newProductForm.value["features"]
     // );

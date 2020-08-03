@@ -1,19 +1,40 @@
+@import 'src/assets/css/variables.scss';
+
 .custom-form {
   position: relative;
 }
 
+.form-card {
+  margin-top: 3rem;
+}
+
+.form-card__form-id {
+	height: 2.5rem;
+	width: 2.5rem;
+	background-color: $accent-color;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	margin-left: 1em;
+}
+
 .form-controls {
   position: absolute;
-  left: 100%;
+  left: 102%;
   top: 0;
+  background-color: white;
+  padding: 1em;
+  border-radius: 6px;
+}
+
+.form-controls_btn {
+  margin-bottom: 1em;
+  border-radius: 6px;
 }
 
 #select-option-overlay--placeholder {
   position: relative;
   height: 100px;
   width: 100px;
-}
-
-.form-card {
-  margin-top: 3rem;
 }

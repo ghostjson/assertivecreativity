@@ -78,7 +78,6 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ListboxModule } from 'primeng/listbox';
-// import { ColorPickerModule } from 'primeng/colorpicker';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';

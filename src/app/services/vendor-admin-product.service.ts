@@ -6,6 +6,7 @@ import { readSync } from "fs";
 
 import { SelectItem } from 'primeng/api';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { table } from 'console';
 
 @Injectable({
   providedIn: "root",
@@ -296,13 +297,14 @@ export class VendorAdminProductService {
   }
 
   /**
-   *
-   * @param option specify the option to insert
+   * Create an option to insert to the custom form
+   * @param optionType specify the option to insert
+   * @param isChained specify the if the option is chained
    */
-  newOption(option: string): FormGroup {
-    console.log("Creating ", option, " for the product!!");
+  newOption(optionType: string, isChained: boolean=false): FormGroup {
+    console.log("Creating ", optionType, " for the product!!");
     let optionTemplate: Object = {};
-    let optionToAdd = this.possibleOptions[option];
+    let optionToAdd = this.possibleOptions[optionType];
 
     if (optionToAdd) {
       console.log(optionToAdd.type, " feature found :-)");
@@ -319,8 +321,15 @@ export class VendorAdminProductService {
           optionToAdd.name,
           [Validators.required]
         ],
+        meta: this._fb.group({
+          isChained: isChained
+        }),
         inputs: this._fb.array([])
-      }
+      };
+
+      // if (isChained) {
+      //   optionTemplate['index'] = index;
+      // }
 
       return this._fb.group(optionTemplate);
     }
@@ -335,8 +344,8 @@ export class VendorAdminProductService {
    * @param options form array to add the option
    * @param optionType type of the option to add
    */
-  addOption(options: FormArray, optionType: string): void {
-    let newOption: FormGroup = this.newOption(optionType);
+  addOption(optionType: string, options: FormArray, isChained: boolean=false): void {
+    let newOption: FormGroup = this.newOption(optionType, isChained);
 
     if (newOption != null) {
       // add the new option to options form array of the form
@@ -348,7 +357,7 @@ export class VendorAdminProductService {
   }
 
   // remove option from the custom form
-  removeOption(options: FormArray, optionId: number): void {
+  removeOption(optionId: number, options: FormArray): void {
     console.log("Product feature: ", options.at(optionId));
     options.removeAt(optionId);
   }
@@ -378,7 +387,7 @@ export class VendorAdminProductService {
     }
 
 
-    console.log('new option input created: ', newOption);
+    console.info('new option input created: ', newOption);
     return this._fb.group(newOption);
   }
 
@@ -387,12 +396,12 @@ export class VendorAdminProductService {
    * @param inputs form array to add the inputs to
    * @param input type of option to insert
    */
-  addOptionInput(inputs: FormArray, inputType: string, isChained: boolean=false): void {
-    inputs.push(this.newOptionInput(inputType, isChained));
-    console.log(
-      "Input Added: ",
-      inputs
-    );
+  addOptionInput(inputType: string, inputs: FormArray, formGroup: FormGroup): void {
+    console.info('isCHained value: ',formGroup.value.meta.isChained);
+
+    inputs.push(this.newOptionInput(inputType, formGroup.value.meta.isChained));
+    console.log("Input Added: ");
+    console.table(inputs);
   }
 
   /**
@@ -400,7 +409,7 @@ export class VendorAdminProductService {
    * @param inputs Formarray of inputs
    * @param inputId input index/id in the inputs form array
    */
-  removeOptionInput(inputs: FormArray, inputId: number): void {
+  removeOptionInput(inputId: number, inputs: FormArray): void {
     inputs.removeAt(inputId);
   }
 }

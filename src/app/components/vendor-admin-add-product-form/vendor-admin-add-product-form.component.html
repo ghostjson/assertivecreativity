@@ -123,6 +123,7 @@
       *ngFor="let customForm of customForms().controls; let i = index"
     >
       <app-admin-custom-form
+        [formArray]="customForms()"
         [formGroup]="customForm"
         [formId]="i"
         [formCount]="customForms().length"

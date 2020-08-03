@@ -38,7 +38,8 @@
               "src/assets/css/icheck-bootstrap.min.css",
               "node_modules/summernote/dist/summernote-lite.min.css",
               "src/styles.scss",
-              "src/assets/css/primeng-edited.scss"
+              "src/assets/css/primeng-edited.scss",
+              "src/assets/css/admin-common.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js",
