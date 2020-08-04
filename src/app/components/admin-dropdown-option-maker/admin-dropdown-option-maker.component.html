@@ -8,7 +8,7 @@
     </div>
     <div class="form-group">
       <label class="form-group__label" for="color-title-{{ optionInd }}">
-        Enter the title of the input:
+        Enter the title/question of the dropdown:
       </label>
       <input type="text" formControlName="title" pInputText />
     </div>
@@ -22,48 +22,33 @@
         <div
           class="color-input d-flex align-items-end justify-content-between flex-wrap mb-3 mt-5"
         >
-          <div class="form-group">
+          <div class="form-group flex-grow-1">
             <label
               class="form-group__label"
               for="input-{{ optionInd }}-{{ inputInd }}"
             >
-              Enter A Name for the color:
+              Enter input label
             </label>
             <input
+              class="form-group__input"
               id="input-{{ optionInd }}-{{ inputInd }}"
               type="text"
               pInputText
-              formControlName="colorName"
+              formControlName="choiceText"
             />
           </div>
           <div class="form-group">
-            <label
-              class="form-group__label"
-              for="input-{{ optionInd }}-{{ inputInd }}"
-            >
-              Enter Color In Hex Value:
-            </label>
-            <div class="input-group">
-              <div class="ui-inputgroup">
-                <input
-                  id="input-{{ optionInd }}-{{ inputInd }}"
-                  type="text"
-                  pInputText
-                  placeholder="Enter Color in HEX"
-                  formControlName="colorHex"
-                  [(colorPicker)]="color[inputInd]"
-                  [cpOutputFormat]="'hex'"
-                  [value]="color[inputInd]"
-                  class="color-picker-input"
-                />
-                <span
-                  class="ui-inputgroup-addon color-preview"
-                  [style.background]="color[inputInd]"
-                ></span>
-              </div>
-            </div>
+            <input
+              class="sr-only"
+              id="input-{{ optionInd }}-{{ inputInd }}"
+              type="text"
+              pInputText
+              formControlName="choiceValue"
+              [value]="slugify(getInputs().value[inputInd].choiceText)"
+              readonly
+            />
           </div>
-          <div class="form-group">
+          <div class="form-group ml-1">
             <button
               class="btn btn-danger"
               (click)="_productService.removeOptionInput(inputInd, getInputs())"
@@ -146,15 +131,14 @@
               </app-admin-color-option-maker>
               <p-footer>
                 <button
-                  type="button"
-                  pButton
-                  icon="pi pi-times"
-                  iconPos="right"
                   (click)="dialogVisible[chainedInd] = false"
-                  class="ui-button-secondary"
-                  label="Close"
-                >
-                </button>
+                  type="button"
+                  label="Done"
+                  iconPos="right"
+                  icon="pi pi-check"
+                  pRipple
+                  pButton
+                ></button>
               </p-footer>
             </p-dialog>
           </ng-container>
@@ -173,10 +157,10 @@
         Delete Option
       </button>
       <button
-        (click)="addOptionInput('color', getInputs())"
+        (click)="addOptionInput(formGroup.value.type, getInputs())"
         class="btn btn-success mr-1"
       >
-        Add Color
+        Add dropdown input
       </button>
     </div>
   </div>

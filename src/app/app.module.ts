@@ -90,6 +90,7 @@ import { AdminCustomFormComponent } from './components/admin-custom-form/admin-c
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
 // import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
+import { AdminDropdownOptionMakerComponent } from './components/admin-dropdown-option-maker/admin-dropdown-option-maker.component';
 
 
 @NgModule({
@@ -149,6 +150,7 @@ import { AdminColorOptionMakerComponent } from './components/admin-color-option-
     AdminCategorySelectorComponent,
     // TestComponentComponent,
     AdminColorOptionMakerComponent,
+    AdminDropdownOptionMakerComponent,
   ],
   imports: [
     BrowserModule,

@@ -88,7 +88,7 @@
         </div>
       </div>
       <ng-container formArrayName="options">
-        <ng-container *ngFor="let option of options().controls; let optionInd = index">
+        <div class="mt-3" *ngFor="let option of options().controls; let optionInd = index">
           <app-admin-color-option-maker
             *ngIf="options().value[optionInd].type === 'color'"
             [formArray]="options()"
@@ -96,10 +96,14 @@
             [optionInd]="optionInd"
           >
           </app-admin-color-option-maker>
-          <ng-container>
-
-          </ng-container>
-        </ng-container>
+          <app-admin-dropdown-option-maker
+            *ngIf="options().value[optionInd].type === 'dropdown'"
+            [formArray]="options()"
+            [formGroup]="option"
+            [optionInd]="optionInd"
+          >
+          </app-admin-dropdown-option-maker>
+        </div>
       </ng-container>
     </div>
   </p-card>

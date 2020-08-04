@@ -1,22 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { VendorAdminProductService } from '../../services/vendor-admin-product.service';
-import { FormGroup, FormArray } from '@angular/forms';
-
-import { ColorPickerModule } from 'ngx-color-picker';
+import { FormArray, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
+import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
+import { info } from 'console';
 
 @Component({
-  selector: 'app-admin-color-option-maker',
-  templateUrl: './admin-color-option-maker.component.html',
-  styleUrls: ['./admin-color-option-maker.component.scss']
+  selector: 'app-admin-dropdown-option-maker',
+  templateUrl: './admin-dropdown-option-maker.component.html',
+  styleUrls: ['./admin-dropdown-option-maker.component.scss']
 })
-export class AdminColorOptionMakerComponent implements OnInit {
-  @Input() formGroup: FormGroup;
+export class AdminDropdownOptionMakerComponent implements OnInit {
   @Input() formArray: FormArray;
+  @Input() formGroup: FormGroup;
   @Input() optionInd: number;
 
-  color: string[] = ['#AC7B19'];
   chainedOptions: SelectItem[];
   selectedChainedOption: Object;
   dialogVisible: boolean[] = [];
@@ -42,7 +39,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
    */
   getChainedOptions(inputId: number): FormArray {
     let chainedOptions = this.getInputs().at(inputId).get('chainedOptions') as FormArray;
-    // console.info('chained Options: ', chainedOptions);
+    console.info('chained Options: ', chainedOptions);
     return chainedOptions;
   }
 
@@ -61,7 +58,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
   }
 
   addChainedOption(optionType: string, options: FormArray): void {
-    this._productService.addOption(optionType, options,  true);
+    this._productService.addOption(optionType, options, true);
 
     // add to dialog controls and make it true to display it
     this.dialogVisible.push(true);
@@ -72,11 +69,12 @@ export class AdminColorOptionMakerComponent implements OnInit {
     }, 300);
   }
 
-  test(input: any) {
-    console.log('test function output: ', input)
-  }
-
   showDialog(index: number): void {
     this.dialogVisible[index] = true;
+  }
+
+  slugify(str: any)  {
+    str += '';
+    return str.trim().toLowerCase().replaceAll(' ', '-');
   }
 }
