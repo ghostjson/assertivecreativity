@@ -16,14 +16,21 @@ export class VendorAdminProductsListComponent implements OnInit {
     this.getProducts();
   }
 
-  async getProducts() {
-    this.products = (await this._productService.getProducts()).data;
+  // async getProducts() {
+  //   // this.products = (await this._productService.getProducts()).data;
+  //   this.products = this._productService.getProducts();
+  // }
+
+  getProducts() {
+    // this.products = (await this._productService.getProducts()).data;
+    this.products = this._productService.getProducts();
+    console.info(this.products);
   }
 
   deleteProduct(product: Product): void {
     let res = this._productService.deleteProduct(product.id);
-    res.then(done => {
-      this.getProducts();
-    })
+    // res.then(done => {
+    //   this.getProducts();
+    // })
   }
 }

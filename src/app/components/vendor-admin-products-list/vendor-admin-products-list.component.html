@@ -47,7 +47,8 @@
           <table class="table table-hover table-striped">
             <thead>
               <tr>
-                <th>Product</th>
+                <th>Name</th>
+                <th>Serial</th>
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Sales</th>
@@ -62,11 +63,12 @@
                     alt="{{ product.name }}"
                     class="img-circle img-size-32 mr-2"
                   />
-                  <a [routerLink]="[product.id]" class="link-to-product">
+                  <a [routerLink]="[product.id, 'edit']" class="link-to-product">
                     {{ product.name }}
                   </a>
                 </td>
-                <td>${{ product.price }} USD</td>
+                <td>{{ product.serial }}</td>
+                <td>${{ product.basePrice }} USD</td>
                 <td>
                   {{ product.stock }}
                 </td>

@@ -42,7 +42,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
    */
   getChainedOptions(inputId: number): FormArray {
     let chainedOptions = this.getInputs().at(inputId).get('chainedOptions') as FormArray;
-    console.log('chained Options: ', chainedOptions);
+    console.info('chained Options: ', chainedOptions);
     return chainedOptions;
   }
 

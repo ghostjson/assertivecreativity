@@ -16,10 +16,17 @@ export class VendorAdminProductComponent implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {}
 
-  async ngOnInit(): Promise<any> {
+  // async ngOnInit(): Promise<any> {
+  //   let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+  //   console.log(id);
+  //   this.product = (await this._productService.getProduct(id)).data;
+  //   console.log(this.product);
+  // }
+
+  ngOnInit(): void {
     let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
     console.log(id);
-    this.product = (await this._productService.getProduct(id)).data;
+    this.product =  this._productService.getProduct(id);
     console.log(this.product);
   }
 }

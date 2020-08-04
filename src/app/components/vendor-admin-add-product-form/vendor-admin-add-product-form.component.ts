@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { FormBuilder, FormArray, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { group } from 'console';
 import { HttpClient } from "@angular/common/http";
 
 import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -12,6 +13,8 @@ import { VendorAdminProductService } from "../../services/vendor-admin-product.s
   styleUrls: ["./vendor-admin-add-product-form.component.scss"],
 })
 export class VendorAdminAddProductFormComponent implements OnInit {
+  @Input() product: any;
+
   @ViewChild('newCustomFormTitle', { static: true }) newCustomFormTitle: ElementRef;
 
   newProductForm: FormGroup;
@@ -34,48 +37,91 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     this.possibleOptions = this._productService.getOptionDefinitions();
     console.log(this.possibleOptions);
 
-    // create a form group for the new product
-    this.newProductForm = this._fb.group({
-      id: Math.floor(Math.random() * 1000000000),
-      name: [
-        null,
-        [Validators.required]
-      ],
-      serial: [
-        null,
-        [Validators.required]
-      ],
-      description: [
-        null,
-        [Validators.required]
-      ],
-      basePrice: [
-        0,
-        [Validators.required]
-      ],
-      stock: [
-         0,
-         [Validators.required]
-      ],
-      sales: [
-        0,
-        [Validators.required]
-      ],
-      image: [
-        null,
-        [Validators.required]
-      ],
-      categories: [
-        ['none'],
-        [Validators.required]
-      ],
-      customForms: this._fb.array([])
-    });
+    if (this.product) {
+      console.info('Product received in form: ', this.product);
+      // create a form group for the new product
+      this.newProductForm = this._fb.group({
+        id: this.product.id,
+        name: [
+          this.product.name,
+          [Validators.required]
+        ],
+        serial: [
+          this.product.serial,
+          [Validators.required]
+        ],
+        description: [
+          this.product.description,
+          [Validators.required]
+        ],
+        basePrice: [
+          this.product.basePrice,
+          [Validators.required]
+        ],
+        stock: [
+          this.product.stock,
+          [Validators.required]
+        ],
+        sales: [
+          this.product.sales,
+          [Validators.required]
+        ],
+        image: [
+          this.product.image,
+          [Validators.required]
+        ],
+        categories: [
+          this.product.categories,
+          [Validators.required]
+        ],
+        customForms: this._fb.array(this.product.customForms)
+      });
+    }
+    else {
+      // create a form group for the new product
+      this.newProductForm = this._fb.group({
+        id: Math.floor(Math.random() * 1000000000),
+        name: [
+          null,
+          [Validators.required]
+        ],
+        serial: [
+          null,
+          [Validators.required]
+        ],
+        description: [
+          null,
+          [Validators.required]
+        ],
+        basePrice: [
+          0,
+          [Validators.required]
+        ],
+        stock: [
+          0,
+          [Validators.required]
+        ],
+        sales: [
+          0,
+          [Validators.required]
+        ],
+        image: [
+          null,
+          [Validators.required]
+        ],
+        categories: [
+          ['none'],
+          [Validators.required]
+        ],
+        customForms: this._fb.array([])
+      });
+    }
   }
 
   // Submit the form
   onSubmit(): void {
     console.log("Product added");
+    console.info(this.newProductForm.value);
     console.group('Product')
     console.table(this.newProductForm.value);
     console.info('Product Forms');
@@ -89,8 +135,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     // this.newProductForm.value["features"] = JSON.stringify(
     //   this.newProductForm.value["features"]
     // );
-    // this._productService.addProduct(this.newProductForm.value);
-    // this.router.navigate(['/admin/products']);
+    this._productService.addProduct(this.newProductForm.value);
+    this.router.navigate(['/admin/products']);
   }
 
   // helper function to get custom forms of a product

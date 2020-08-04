@@ -148,7 +148,7 @@ import { AdminColorOptionMakerComponent } from './components/admin-color-option-
     AdminCustomFormComponent,
     AdminCategorySelectorComponent,
     // TestComponentComponent,
-    AdminColorOptionMakerComponent
+    AdminColorOptionMakerComponent,
   ],
   imports: [
     BrowserModule,
