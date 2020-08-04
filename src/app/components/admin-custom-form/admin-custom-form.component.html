@@ -89,34 +89,12 @@
       </div>
       <ng-container formArrayName="options">
         <div class="mt-3" *ngFor="let option of options().controls; let optionInd = index">
-          <app-admin-color-option-maker
-            *ngIf="options().value[optionInd].type === 'color'"
+          <app-admin-form-options
             [formArray]="options()"
-            [formGroup]="option"
-            [optionInd]="optionInd"
+            [option]="option"
+            [ind]="optionInd"
           >
-          </app-admin-color-option-maker>
-          <app-admin-dropdown-option-maker
-            *ngIf="options().value[optionInd].type === 'dropdown'"
-            [formArray]="options()"
-            [formGroup]="option"
-            [optionInd]="optionInd"
-          >
-          </app-admin-dropdown-option-maker>
-          <app-admin-radiobtn-option-maker
-            *ngIf="options().value[optionInd].type === 'radioBtn'"
-            [formArray]="options()"
-            [formGroup]="option"
-            [optionInd]="optionInd"
-          >
-          </app-admin-radiobtn-option-maker>
-          <app-admin-text-option-maker
-            *ngIf="options().value[optionInd].type === 'text'"
-            [formArray]="options()"
-            [formGroup]="option"
-            [optionInd]="optionInd"
-          >
-          </app-admin-text-option-maker>
+          </app-admin-form-options>
         </div>
       </ng-container>
     </div>

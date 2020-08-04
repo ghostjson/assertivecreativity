@@ -144,15 +144,14 @@
               ></app-admin-form-options>
               <p-footer>
                 <button
-                  type="button"
-                  pButton
-                  icon="pi pi-times"
-                  iconPos="right"
-                  (click)="dialogVisible[chainedInd] = false"
-                  class="ui-button-secondary"
-                  label="Close"
-                >
-                </button>
+                type="button"
+                label="Done"
+                iconPos="right"
+                icon="pi pi-check"
+                pRipple
+                pButton
+                (click)="dialogVisible[chainedInd] = false"
+                ></button>
               </p-footer>
             </p-dialog>
           </ng-container>
