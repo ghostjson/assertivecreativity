@@ -7,7 +7,7 @@
       <span class="chained-ribbon__text">Chained</span>
     </div>
     <div class="form-group">
-      <label class="form-group__label" for="color-title-{{ optionInd }}">
+      <label class="form-group__label" for="radio-title-{{ optionInd }}">
         Enter the title/question of the radio button:
       </label>
       <input type="text" formControlName="title" pInputText />
@@ -20,7 +20,7 @@
     >
       <ng-container [formGroupName]="inputInd">
         <div
-          class="color-input d-flex align-items-end justify-content-between flex-wrap mb-3 mt-5"
+          class="radio-input d-flex align-items-end justify-content-between flex-wrap mb-3 mt-5"
         >
           <div class="form-group flex-grow-1">
             <label
@@ -35,6 +35,9 @@
               type="text"
               pInputText
               formControlName="choiceText"
+              (input)="getInputs().at(inputInd).patchValue({
+                choiceValue: slugify(getInputs().value[inputInd].choiceText)
+              })"
             />
           </div>
           <div class="form-group">
@@ -44,7 +47,6 @@
               type="text"
               pInputText
               formControlName="choiceValue"
-              [value]="slugify(getInputs().value[inputInd].choiceText)"
             />
           </div>
           <div class="form-group ml-1">
@@ -142,7 +144,7 @@
       </ng-container>
     </ng-container>
 
-    <!-- button to add more colors to the option  -->
+    <!-- button to add more radio buttons to the option  -->
     <div class="card-footer d-flex justify-content-end mt-3">
       <!-- delete the option  -->
       <button
