@@ -91,6 +91,7 @@ import { AdminCategorySelectorComponent } from './components/admin-category-sele
 // import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
 import { AdminDropdownOptionMakerComponent } from './components/admin-dropdown-option-maker/admin-dropdown-option-maker.component';
+import { AdminRadiobtnOptionMakerComponent } from './components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component';
 
 
 @NgModule({
@@ -151,6 +152,7 @@ import { AdminDropdownOptionMakerComponent } from './components/admin-dropdown-o
     // TestComponentComponent,
     AdminColorOptionMakerComponent,
     AdminDropdownOptionMakerComponent,
+    AdminRadiobtnOptionMakerComponent,
   ],
   imports: [
     BrowserModule,

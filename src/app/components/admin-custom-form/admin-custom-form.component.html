@@ -103,6 +103,13 @@
             [optionInd]="optionInd"
           >
           </app-admin-dropdown-option-maker>
+          <app-admin-radiobtn-option-maker
+            *ngIf="options().value[optionInd].type === 'radioBtn'"
+            [formArray]="options()"
+            [formGroup]="option"
+            [optionInd]="optionInd"
+          >
+          </app-admin-radiobtn-option-maker>
         </div>
       </ng-container>
     </div>
