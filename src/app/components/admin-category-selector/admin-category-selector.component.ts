@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { FormGroup } from '@angular/forms';
+import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
 
 @Component({
   selector: 'app-admin-category-selector',
@@ -10,23 +11,13 @@ import { FormGroup } from '@angular/forms';
 export class AdminCategorySelectorComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
-  cars: SelectItem[];
+  categories: SelectItem[];
 
-  constructor() { }
+  constructor (
+    private _productService: VendorAdminProductService
+  ) {}
 
-  ngOnInit(): void {
-    this.cars = [
-      { label: 'None', value: 'none' },
-      { label: 'Cloth', value: 'cloth' },
-      { label: 'Scarf', value: 'scarf' },
-      { label: 'Shorts', value: 'shorts' },
-      { label: 'Socks', value: 'socks' },
-      { label: 'Kashmiri Scarf', value: 'kashmiriscarf' },
-      { label: 'Caps', value: 'caps' },
-      { label: 'Underwear', value: 'underwear' },
-      { label: 'T-Shirt', value: 'tshirt' },
-      { label: 'Shirt', value: 'shirt' },
-    ];
+  ngOnInit() {
+    this.categories = this._productService.getAllCategories();
   }
-
 }

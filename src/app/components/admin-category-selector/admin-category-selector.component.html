@@ -2,23 +2,5 @@
   [formGroup]="formGroup"
   class="input-group"
 >
-  <p-multiSelect
-    [options]="cars"
-    formControlName="categories"
-    styleClass="input-group__input"
-  >
-    <ng-template let-value pTemplate="selectedItems">
-      <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
-        <!-- <img src="assets/showcase/images/demo/car/{{val}}.png"
-          style="width:20px;vertical-align:middle;margin-right:.5em" /> -->
-        <span>{{val}}</span>
-      </div>
-      <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Choose</span>
-    </ng-template>
-    <ng-template let-car pTemplate="item">
-      <!-- <img src="assets/showcase/images/demo/car/{{car.label}}.png"
-        style="width:24px;display:inline-block;vertical-align:middle" /> -->
-      <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
-    </ng-template>
-  </p-multiSelect>
+  <p-dropdown class="flex-grow-1" [options]="categories" formControlName="category"></p-dropdown>
 </div>

@@ -90,13 +90,25 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-group__label" for="categories">
-            Select product categories
+          <label class="form-group__label" for="category">
+            Select a product category
           </label>
           <div>
             <app-admin-category-selector
+              id="category"
               [formGroup]="newProductForm"
             ></app-admin-category-selector>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-group__label" for="tags">
+            Select product tags
+          </label>
+          <div>
+            <app-admin-tag-selector
+              id="tags"
+              [formGroup]="newProductForm"
+            ></app-admin-tag-selector>
           </div>
         </div>
         <div class="form-group">

@@ -1,0 +1,21 @@
+<div
+  [formGroup]="formGroup"
+  class="input-group"
+>
+  <p-multiSelect
+    [options]="tags"
+    formControlName="tags"
+    styleClass="input-group__input"
+    class="flex-grow-1"
+  >
+    <ng-template let-value pTemplate="selectedItems">
+      <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+        <span>{{val}}</span>
+      </div>
+      <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Choose</span>
+    </ng-template>
+    <ng-template let-tag pTemplate="item">
+      <div style="font-size:14px;float:right;margin-top:4px">{{tag.label}}</div>
+    </ng-template>
+  </p-multiSelect>
+</div>

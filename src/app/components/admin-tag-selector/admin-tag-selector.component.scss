@@ -1,0 +1,34 @@
+:host {
+  .add-new-custom-form {
+    background-color: white;
+  }
+
+  ::ng-deep {
+    .ui-inputwrapper-filled {
+      width: 100%;
+    }
+
+    .ui-multiselect {
+      width: 100%;
+    }
+
+    .ui-multiselected-item-token,
+    .ui-multiselected-empty-token {
+      padding: 2px 4px;
+      margin: 0 0.286em 0 0;
+      display: inline-block;
+      vertical-align: middle;
+      height: 1.857em;
+    }
+
+    .ui-multiselected-item-token {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .ui-multiselected-empty-token {
+      background: #d95f00;
+      color: #ffffff;
+    }
+  }
+}

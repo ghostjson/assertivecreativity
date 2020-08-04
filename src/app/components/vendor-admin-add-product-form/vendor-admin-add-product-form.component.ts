@@ -70,8 +70,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
           this.product.image,
           [Validators.required]
         ],
-        categories: [
-          this.product.categories,
+        tags: [
+          this.product.tags,
           [Validators.required]
         ],
         customForms: this._fb.array(this.product.customForms)
@@ -109,8 +109,12 @@ export class VendorAdminAddProductFormComponent implements OnInit {
           null,
           [Validators.required]
         ],
-        categories: [
-          ['none'],
+        category: [
+          null,
+          [Validators.required]
+        ],
+        tags: [
+          [],
           [Validators.required]
         ],
         customForms: this._fb.array([])
