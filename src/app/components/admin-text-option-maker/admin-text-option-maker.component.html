@@ -1,0 +1,141 @@
+<div [formGroup]="formGroup">
+  <div class="option-container border rounded p-3">
+    <div
+      *ngIf="formGroup.value.meta.isChained"
+      class="chained-ribbon d-flex justify-content-end align-items-center"
+    >
+      <span class="chained-ribbon__text">Chained</span>
+    </div>
+    <div class="form-group">
+      <label class="form-group__label" for="input-title-{{ optionInd }}">
+        Enter the title/question:
+      </label>
+      <input
+        type="text"
+        placeholder="Enter the title/question"
+        formControlName="title"
+        pInputText
+      />
+    </div>
+
+    <!-- render the inputs  -->
+    <ng-container
+      *ngFor="let input of getInputs().controls; let inputInd = index"
+      formArrayName="inputs"
+    >
+      <ng-container [formGroupName]="inputInd">
+        <div
+          class="d-flex align-items-end justify-content-between flex-wrap mb-3 mt-5"
+        >
+          <div class="form-group">
+            <label class="form-group__label" for="input-{{ optionInd }}-{{ inputInd }}">
+              Enter placeholder text to be shown:
+            </label>
+            <div class="input-group">
+              <input
+                id="input-{{ optionInd }}-{{ inputInd }}"
+                type="text"
+                placeholder="Enter the placeholder text to be shown"
+                pInputText
+                formControlName="placeholder"
+              />
+            </div>
+          </div>
+          <!-- button to select and add chained option  -->
+          <div
+            class="chained-option-controls"
+            *ngIf="!formGroup.value.meta.isChained"
+          >
+            <button
+              (click)="chainedOptionsOverlay.toggle($event)"
+              class="btn btn-warning mr-1"
+            >
+              Add Chained option
+            </button>
+            <p-overlayPanel
+              #chainedOptionsOverlay
+              [dismissable]="true"
+              appendTo="body"
+            >
+              <ng-template pTemplate>
+                <p-listbox
+                  [options]="chainedOptions"
+                  formControlName="selectedChainedOption"
+                  [filter]="true"
+                  (onClick)="
+                    addChainedOption(
+                      getInputs().at(inputInd).value.selectedChainedOption,
+                      getChainedOptions(inputInd)
+                    )
+                  "
+                >
+                  <p-header>
+                    Select the option to insert
+                  </p-header>
+                </p-listbox>
+              </ng-template>
+            </p-overlayPanel>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-start" *ngIf="!formGroup.value.meta.isChained">
+          <!-- render the chained options in an input -->
+          <ng-container
+            *ngFor="
+              let chainedOption of getChainedOptions(inputInd).controls;
+              let chainedInd = index
+            "
+            formArrayName="chainedOptions"
+          >
+            <button
+              type="button"
+              (click)="showDialog(chainedInd)"
+              pButton
+              icon="pi pi-external-link"
+              iconPos="right"
+              label="{{getChainedOptions(inputInd).value[chainedInd].name | titlecase}}"
+              class="mr-1 mb-2"
+            >
+            </button>
+            <p-dialog
+              header="Edit {{getChainedOptions(inputInd).value[chainedInd].name | titlecase}}"
+              [(visible)]="dialogVisible[chainedInd]"
+              [style]="{ width: '50vw' }"
+              [baseZIndex]="10"
+              [modal]="true"
+              [draggable]="false"
+            >
+              <app-admin-form-options
+                [formArray]="getChainedOptions(inputInd)"
+                [option]="chainedOption"
+                [ind]="chainedInd"
+              ></app-admin-form-options>
+              <p-footer>
+                <button
+                  (click)="dialogVisible[chainedInd] = false"
+                  type="button"
+                  label="Done"
+                  iconPos="right"
+                  icon="pi pi-check"
+                  pRipple
+                  pButton
+                ></button>
+              </p-footer>
+            </p-dialog>
+          </ng-container>
+        </div>
+        <hr>
+      </ng-container>
+    </ng-container>
+
+    <div class="card-footer d-flex justify-content-end mt-3">
+      <!-- delete the option  -->
+      <button
+        (click)="_productService.removeOption(optionInd, formArray)"
+        class="btn btn-danger mr-1"
+      >
+        Delete Option
+      </button>
+    </div>
+  </div>
+</div>

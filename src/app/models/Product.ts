@@ -69,7 +69,12 @@ const PRODUCT_FEATURES: Object = {
     type: 'text',
     title: 'Text input goes here',
     name: 'Text input',
-    inputs: [],
+    inputs: [
+      {
+        type: 'text',
+        name: 'placeholder'
+      }
+    ],
     chainedInputs: [
       {
         type: 'any',

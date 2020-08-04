@@ -19,3 +19,10 @@
   [optionInd]="ind"
 >
 </app-admin-radiobtn-option-maker>
+<app-admin-text-option-maker
+  *ngIf="formArray.value[ind].type === 'text'"
+  [formArray]="formArray"
+  [formGroup]="option"
+  [optionInd]="ind"
+>
+</app-admin-text-option-maker>
