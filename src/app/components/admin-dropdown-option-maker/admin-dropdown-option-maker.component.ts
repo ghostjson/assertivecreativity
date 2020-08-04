@@ -75,6 +75,7 @@ export class AdminDropdownOptionMakerComponent implements OnInit {
 
   slugify(str: any)  {
     str += '';
-    return str.trim().toLowerCase().replaceAll(' ', '-');
+
+    return str.trim().toLowerCase().replace(/\s+/g, '-');
   }
 }
