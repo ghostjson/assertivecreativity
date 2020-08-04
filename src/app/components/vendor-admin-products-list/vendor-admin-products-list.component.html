@@ -59,10 +59,17 @@
               <tr *ngFor="let product of products">
                 <td>
                   <img
+                    *ngIf="product.image; else placeholderImg"
                     src="{{ product.image }}"
                     alt="{{ product.name }}"
                     class="img-circle img-size-32 mr-2"
                   />
+                  <img
+                    #placeholderImg
+                    src="../../../assets/images/demo-product-images/3.jpg"
+                    alt="{{ product.name }}"
+                    class="img-circle img-size-32 mr-2"
+                  >
                   <a [routerLink]="[product.id, 'edit']" class="link-to-product">
                     {{ product.name }}
                   </a>
