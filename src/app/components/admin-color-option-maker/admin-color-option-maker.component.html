@@ -53,7 +53,9 @@
                   formControlName="colorHex"
                   [(colorPicker)]="color[inputInd]"
                   [cpOutputFormat]="'hex'"
-                  [value]="color[inputInd]"
+                  (colorPickerChange)="getInputs().at(inputInd).patchValue({
+                    colorHex: color[inputInd]
+                  })"
                   class="color-picker-input"
                 />
                 <span
