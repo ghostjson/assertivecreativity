@@ -135,15 +135,11 @@
               [modal]="true"
               [draggable]="false"
             >
-              <app-admin-color-option-maker
-                *ngIf="
-                  getChainedOptions(inputInd).value[chainedInd].type === 'color'
-                "
+              <app-admin-form-options
                 [formArray]="getChainedOptions(inputInd)"
-                [formGroup]="chainedOption"
-                [optionInd]="chainedInd"
-              >
-              </app-admin-color-option-maker>
+                [option]="chainedOption"
+                [ind]="chainedInd"
+              ></app-admin-form-options>
               <p-footer>
                 <button
                   type="button"
@@ -173,7 +169,7 @@
         Delete Option
       </button>
       <button
-        (click)="addOptionInput('color', getInputs())"
+        (click)="addOptionInput(formGroup.value.type, getInputs())"
         class="btn btn-success mr-1"
       >
         Add Color

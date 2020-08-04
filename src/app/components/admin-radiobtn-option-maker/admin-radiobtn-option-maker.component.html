@@ -45,7 +45,6 @@
               pInputText
               formControlName="choiceValue"
               [value]="slugify(getInputs().value[inputInd].choiceText)"
-              readonly
             />
           </div>
           <div class="form-group ml-1">
@@ -120,33 +119,11 @@
               [modal]="true"
               [draggable]="false"
             >
-              <app-admin-color-option-maker
-                *ngIf="
-                  getChainedOptions(inputInd).value[chainedInd].type === 'color'
-                "
+              <app-admin-form-options
                 [formArray]="getChainedOptions(inputInd)"
-                [formGroup]="chainedOption"
-                [optionInd]="chainedInd"
-              >
-              </app-admin-color-option-maker>
-              <app-admin-dropdown-option-maker
-                *ngIf="
-                  getChainedOptions(inputInd).value[chainedInd].type === 'dropdown'
-                "
-                [formArray]="getChainedOptions(inputInd)"
-                [formGroup]="chainedOption"
-                [optionInd]="chainedInd"
-              >
-              </app-admin-dropdown-option-maker>
-              <app-admin-radiobtn-option-maker
-                *ngIf="
-                  getChainedOptions(inputInd).value[chainedInd].type === 'radioBtn'
-                "
-                [formArray]="getChainedOptions(inputInd)"
-                [formGroup]="chainedOption"
-                [optionInd]="chainedInd"
-              >
-              </app-admin-radiobtn-option-maker>
+                [option]="chainedOption"
+                [ind]="chainedInd"
+              ></app-admin-form-options>
               <p-footer>
                 <button
                   (click)="dialogVisible[chainedInd] = false"
