@@ -14,6 +14,7 @@ import { Product } from 'src/app/models/Product';
 })
 export class VendorAdminAddProductFormComponent implements OnInit {
   @Input() product: FormGroup;
+  @Input() isEdit: boolean;
 
   @ViewChild('newCustomFormTitle', { static: true }) newCustomFormTitle: ElementRef;
 
@@ -108,7 +109,13 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     // this.productForm.value["features"] = JSON.stringify(
     //   this.productForm.value["features"]
     // );
-    this._productService.addProduct(this.productForm.value);
+    if (this.isEdit) {
+      this._productService.editProduct(this.productForm.value.id, this.productForm.value)
+      console.log('Form Edited');
+    }
+    else {
+      this._productService.addProduct(this.productForm.value);
+    }
     this.router.navigate(['/admin/products']);
   }
 

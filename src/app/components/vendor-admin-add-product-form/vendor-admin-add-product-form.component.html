@@ -170,7 +170,12 @@
     </div>
 
     <button (click)="onSubmit()" class="btn btn-primary">
-      Add Product
+      <ng-container *ngIf="isEdit; else addProduct">
+        Edit Product
+      </ng-container>
+      <ng-template #addProduct>
+        Add Product
+      </ng-template>
     </button>
   </form>
 </div>

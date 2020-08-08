@@ -52,6 +52,25 @@ export class VendorAdminProductService {
     console.info(this.products);
   }
 
+  editProduct(id: number, editedProduct: any): void {
+    let found: boolean = true;
+
+    for (let i: number = 0; i < this.products.length; ++i) {
+      if (this.products[i].id === id) {
+        this.products.splice(i, 1, editedProduct);
+        break;
+      }
+    }
+
+    if (found) {
+      console.log('Product ', id, ' edited.');
+    }
+    else {
+      console.log('Product not found');
+      
+    }
+  }
+
   // async deleteProduct(id: number) {
   deleteProduct(id: number): void {
     // let res = await this.http.delete(this.host + `/products/${id}`).toPromise();
