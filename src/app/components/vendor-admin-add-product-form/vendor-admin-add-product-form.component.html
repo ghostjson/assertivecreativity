@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="newProductForm">
+  <form [formGroup]="productForm">
     <p-card
       styleClass="form-card base-details mb-5"
     >
@@ -96,7 +96,7 @@
           <div>
             <app-admin-category-selector
               id="category"
-              [formGroup]="newProductForm"
+              [formGroup]="productForm"
             ></app-admin-category-selector>
           </div>
         </div>
@@ -107,7 +107,7 @@
           <div>
             <app-admin-tag-selector
               id="tags"
-              [formGroup]="newProductForm"
+              [formGroup]="productForm"
             ></app-admin-tag-selector>
           </div>
         </div>

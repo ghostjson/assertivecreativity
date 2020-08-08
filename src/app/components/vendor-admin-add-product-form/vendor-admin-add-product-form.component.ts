@@ -13,11 +13,11 @@ import { Product } from 'src/app/models/Product';
   styleUrls: ["./vendor-admin-add-product-form.component.scss"],
 })
 export class VendorAdminAddProductFormComponent implements OnInit {
-  @Input() product: any;
+  @Input() product: FormGroup;
 
   @ViewChild('newCustomFormTitle', { static: true }) newCustomFormTitle: ElementRef;
 
-  newProductForm: FormGroup;
+  productForm: FormGroup;
   possibleOptions: Object;
 
   colorPicker = {
@@ -30,56 +30,25 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     private _productService: VendorAdminProductService,
     private router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // list of all possible options we can add in custom forms
     this.possibleOptions = this._productService.getOptionDefinitions();
     console.log(this.possibleOptions);
 
+    // intialise the product form to avoid errors in the template
+    this.productForm = null;
+
+    // check if a product form group is passed to the component
     if (this.product) {
-      console.info('Product received in form: ', this.product);
-      // create a form group for the new product
-      this.newProductForm = this._fb.group({
-        id: this.product.id,
-        name: [
-          this.product.name,
-          [Validators.required]
-        ],
-        serial: [
-          this.product.serial,
-          [Validators.required]
-        ],
-        description: [
-          this.product.description,
-          [Validators.required]
-        ],
-        basePrice: [
-          this.product.basePrice,
-          [Validators.required]
-        ],
-        stock: [
-          this.product.stock,
-          [Validators.required]
-        ],
-        sales: [
-          this.product.sales,
-          [Validators.required]
-        ],
-        image: [
-          this.product.image,
-          [Validators.required]
-        ],
-        tags: [
-          this.product.tags,
-          [Validators.required]
-        ],
-        customForms: this._fb.array(this.product.customForms)
-      });
+      this.productForm = this.product;
     }
     else {
+      console.log('product form not found');
+
       // create a form group for the new product
-      this.newProductForm = this._fb.group({
+      this.productForm = this._fb.group({
         id: Math.floor(Math.random() * 1000000000),
         name: [
           null,
@@ -125,31 +94,31 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   // Submit the form
   onSubmit(): void {
     console.log("Product added");
-    console.info(this.newProductForm.value);
+    console.info(this.productForm.value);
     console.group('Product')
-    console.table(this.newProductForm.value);
+    console.table(this.productForm.value);
     console.info('Product Forms');
-    this.newProductForm.value.customForms.forEach(form => {
+    this.productForm.value.customForms.forEach(form => {
       console.table(form);
       form.options.forEach(option => {
         console.table(option)
       });
     });
     console.groupEnd();
-    // this.newProductForm.value["features"] = JSON.stringify(
-    //   this.newProductForm.value["features"]
+    // this.productForm.value["features"] = JSON.stringify(
+    //   this.productForm.value["features"]
     // );
-    this._productService.addProduct(this.newProductForm.value);
+    this._productService.addProduct(this.productForm.value);
     this.router.navigate(['/admin/products']);
   }
 
   // helper function to get custom forms of a product
   customForms(): FormArray {
-    return this.newProductForm.get('customForms') as FormArray;
+    return this.productForm.get('customForms') as FormArray;
   }
 
   // create a new custom form form group
-  newCustomForm(formTitle: string=null): FormGroup {
+  newCustomForm(formTitle: string = null): FormGroup {
     let newFormTemplate: Object = {
       id: [this.customForms().length],
       title: [
@@ -184,7 +153,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
   // image upload handler for image upload input
   uploadImages(e: Event): void {
-    this.newProductForm.patchValue({
+    this.productForm.patchValue({
       image: 'www.example.com'
     });
 
@@ -195,7 +164,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
      *
      * add the return value to the form using this
      *
-     * this.newProductForm.patchValue({
+     * this.productForm.patchValue({
          image: '*********** link goes here *********'
        });
      *

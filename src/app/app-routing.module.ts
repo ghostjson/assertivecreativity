@@ -25,6 +25,7 @@ import { VendorAdminMailComposeComponent } from "./pages/vendor-admin-mail-compo
 import { VendorAdminAddProductComponent } from "./pages/vendor-admin-add-product/vendor-admin-add-product.component";
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -55,7 +56,7 @@ const routes: Routes = [
   { path: "admin/mail/compose", component: VendorAdminMailComposeComponent },
   { path: "admin/products", component: VendorAdminProductsComponent },
   { path: "admin/products/add", component: VendorAdminAddProductComponent },
-  // { path: "admin/products/:id/edit", component: AdminProductEditComponent },
+  { path: "admin/products/:id/edit", component: AdminProductEditComponent },
   { path: "admin/products/:id", component: VendorAdminProductComponent},
 ];
 

@@ -96,35 +96,68 @@ export class VendorAdminProductService {
    * @param optionType specify the option to insert
    * @param isChained specify the if the option is chained
    */
-  newOption(optionType: string, isChained: boolean=false): FormGroup {
+  newOption(
+    optionType: string,
+    isChained: boolean=false,
+    initialValue: any=null
+  ): FormGroup {
     console.log("Creating ", optionType, " for the product!!");
-    let optionTemplate: Object = {};
+    let optionTemplate: any = {};
     let optionToAdd = this.possibleOptions[optionType];
 
     if (optionToAdd) {
       console.log(optionToAdd.type, " feature found :-)");
-      optionTemplate = {
-        type: [
-          optionToAdd.type,
-          [Validators.required]
-        ],
-        title: [
-          null,
-          [Validators.required]
-        ],
-        name: [
-          optionToAdd.name,
-          [Validators.required]
-        ],
-        meta: this._fb.group({
-          isChained: isChained
-        }),
-        inputs: this._fb.array([])
-      };
 
-      // if (isChained) {
-      //   optionTemplate['index'] = index;
-      // }
+      if (initialValue) {
+        optionTemplate = {
+          type: [
+            optionToAdd.type,
+            [Validators.required]
+          ],
+          title: [
+            initialValue.title,
+            [Validators.required]
+          ],
+          name: [
+            initialValue.name,
+            [Validators.required]
+          ],
+          meta: this._fb.group({
+            isChained: initialValue.meta.isChained
+          }),
+          inputs: this._fb.array([])
+        };
+
+        initialValue.inputs.forEach((input) => {
+          optionTemplate.inputs.push(
+            this.newOptionInput(
+              initialValue.type,
+              initialValue.meta.isChained,
+              input
+            )
+          );
+        });
+      }
+      else {
+        optionTemplate = {
+          type: [
+            optionToAdd.type,
+            [Validators.required]
+          ],
+          title: [
+            null,
+            [Validators.required]
+          ],
+          name: [
+            optionToAdd.name,
+            [Validators.required]
+          ],
+          meta: this._fb.group({
+            isChained: isChained
+          }),
+          inputs: this._fb.array([])
+        };
+      }
 
       return this._fb.group(optionTemplate);
     }
@@ -160,36 +193,58 @@ export class VendorAdminProductService {
   /**
    * construct a form group for taking new option's input
    * @param inputType type of the option
+   * @param isChained true if the input is chained
    */
-  newOptionInput(inputType: string, isChained: boolean=false): FormGroup {
+  newOptionInput(
+    inputType: string,
+    isChained: boolean=false,
+    initialValue: any=null
+  ): FormGroup {
     console.log("Creating ", inputType, " Input");
 
-    let newOption: Object = {};
     console.log(inputType);
-    this.possibleOptions[inputType].inputs.forEach((input: any) => {
-      newOption[input.name] = null;
-    });
+
+    // create the input formgroup
+    let newInput: Object = {};
+
+    if (initialValue) {
+      this.possibleOptions[inputType].inputs.forEach((input: any) => {
+        newInput[input.name] = initialValue[input.name];
+      });
+    }
+    else {
+      this.possibleOptions[inputType].inputs.forEach((input: any) => {
+        newInput[input.name] = null;
+      });
+    }
 
     // add a form array for chained options if the option is not chained
     if (!isChained) {
       // add a form array for storing the chained options
-      newOption['chainedOptions'] = this._fb.array([]);
+      newInput['chainedOptions'] = this._fb.array([]) as FormArray;
+      if (initialValue) {
+        initialValue.chainedOptions.forEach((chainedOption: any) => {
+          newInput['chainedOptions'].push(
+            this.newOption(chainedOption.type, true, chainedOption)
+          )
+        });
+      }
 
       // form control for specifying the chained option to insert during runtime
-      newOption['selectedChainedOption'] = null;
+      newInput['selectedChainedOption'] = null;
 
       console.log('chained options form array added');
     }
 
-
-    console.info('new option input created: ', newOption);
-    return this._fb.group(newOption);
+    console.info('new option input created: ', newInput);
+    return this._fb.group(newInput);
   }
 
   /**
    * add input to the corresponding option
-   * @param inputs form array to add the inputs to
-   * @param input type of option to insert
+   * @param inputType type of option to insert
+   * @param inputs form array to add the inputs
+   * @param formGroup form group of the inputs form array
    */
   addOptionInput(inputType: string, inputs: FormArray, formGroup: FormGroup): void {
     console.info('isCHained value: ',formGroup.value.meta.isChained);

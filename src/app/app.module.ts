@@ -95,6 +95,7 @@ import { AdminRadiobtnOptionMakerComponent } from './components/admin-radiobtn-o
 import { AdminFormOptionsComponent } from './components/admin-form-options/admin-form-options.component';
 import { AdminTagSelectorComponent } from './components/admin-tag-selector/admin-tag-selector.component';
 import { AdminTextOptionMakerComponent } from './components/admin-text-option-maker/admin-text-option-maker.component';
+import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 
 
 @NgModule({
@@ -159,6 +160,7 @@ import { AdminTextOptionMakerComponent } from './components/admin-text-option-ma
     AdminFormOptionsComponent,
     AdminTagSelectorComponent,
     AdminTextOptionMakerComponent,
+    AdminProductEditComponent
   ],
   imports: [
     BrowserModule,
