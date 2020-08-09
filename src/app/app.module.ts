@@ -79,6 +79,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ListboxModule } from 'primeng/listbox';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -96,6 +99,8 @@ import { AdminFormOptionsComponent } from './components/admin-form-options/admin
 import { AdminTagSelectorComponent } from './components/admin-tag-selector/admin-tag-selector.component';
 import { AdminTextOptionMakerComponent } from './components/admin-text-option-maker/admin-text-option-maker.component';
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
+import { AdminPriceTableInputComponent } from './components/admin-price-table-input/admin-price-table-input.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
@@ -160,7 +165,8 @@ import { AdminProductEditComponent } from './pages/admin-product-edit/admin-prod
     AdminFormOptionsComponent,
     AdminTagSelectorComponent,
     AdminTextOptionMakerComponent,
-    AdminProductEditComponent
+    AdminProductEditComponent,
+    AdminPriceTableInputComponent
   ],
   imports: [
     BrowserModule,
@@ -190,7 +196,11 @@ import { AdminProductEditComponent } from './pages/admin-product-edit/admin-prod
     ProgressBarModule,
     FileUploadModule,
     OverlayPanelModule,
-    ListboxModule
+    ListboxModule,
+    MessagesModule,
+    MessageModule,
+    InputNumberModule,
+    InputSwitchModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

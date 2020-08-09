@@ -135,6 +135,62 @@ export interface Form {
 
 }
 
+export class PriceGroup {
+  label: string;
+  pricePerPiece: number;
+  quantity: number;
+  relation: string;
+
+  constructor(initial: PriceGroup=null) {
+    if (initial) {
+      this.label = initial.label;
+      this.pricePerPiece = initial.pricePerPiece;
+      this.quantity = initial.quantity;
+      this.relation = initial.relation;
+    }
+    else {
+      this.label = null;
+      this.pricePerPiece = null;
+      this.quantity = null;
+      this.relation = null;
+    }
+  }
+}
+
+export class PriceTable {
+  public priceGroups: PriceGroup[];
+
+  constructor() {
+    this.priceGroups = [];
+
+    this.priceGroups.push({
+      label: null,
+      pricePerPiece: null,
+      quantity: null,
+      relation: null
+    });
+  }
+
+  add(initial: PriceGroup=null): void {
+    if (initial) {
+      this.priceGroups.push(initial);
+    }
+    else {
+      this.priceGroups.push({
+        label: null,
+        pricePerPiece: null,
+        quantity: null,
+        relation: null
+      });
+    }
+  }
+
+  // add(priceGroup: PriceGroup): void {
+  //   this.priceGroups.push(priceGroup);
+  //   console.log('price group added to table', priceGroup);
+  // }
+}
+
 // return all the possible feature a product can have
 export function listAllFeatures(): Object {
   return PRODUCT_FEATURES;

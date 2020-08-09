@@ -5,7 +5,7 @@ import { group } from 'console';
 import { HttpClient } from "@angular/common/http";
 
 import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
-import { Product } from 'src/app/models/Product';
+import { Product, PriceTable, PriceGroup } from 'src/app/models/Product';
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -65,6 +65,13 @@ export class VendorAdminAddProductFormComponent implements OnInit {
         ],
         basePrice: [
           0,
+          [Validators.required]
+        ],
+        priceTable: this._fb.array([
+          this._fb.group(new PriceGroup())
+        ]),
+        priceTableMode: [
+          false,
           [Validators.required]
         ],
         stock: [
