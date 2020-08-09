@@ -103,15 +103,6 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   onSubmit(): void {
     console.log("Product added");
     console.info(this.productForm.value);
-    console.group('Product')
-    console.table(this.productForm.value);
-    console.info('Product Forms');
-    this.productForm.value.customForms.forEach(form => {
-      console.table(form);
-      form.options.forEach(option => {
-        console.table(option)
-      });
-    });
     console.groupEnd();
     // this.productForm.value["features"] = JSON.stringify(
     //   this.productForm.value["features"]
@@ -124,6 +115,13 @@ export class VendorAdminAddProductFormComponent implements OnInit {
       this._productService.addProduct(this.productForm.value);
     }
     this.router.navigate(['/admin/products']);
+  }
+
+  /**
+   * helper function to return price table form array
+   */
+  priceTable(): FormArray {
+    return this.productForm.get('priceTable') as FormArray;
   }
 
   // helper function to get custom forms of a product

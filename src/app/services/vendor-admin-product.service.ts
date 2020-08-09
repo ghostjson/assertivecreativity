@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Product, listAllFeatures, listCustomOptions } from "../models/Product";
+import { Product, listAllFeatures, listCustomOptions, PriceGroup } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { readSync } from "fs";
@@ -94,6 +94,48 @@ export class VendorAdminProductService {
     return this.products.find((product) => {
       return product.id === id;
     });
+  }
+
+  /**
+   * Create a price group for adding to a price table
+   */
+  newPriceGroup(initial: PriceGroup=null): FormGroup {
+    let priceGroup: FormGroup = null;
+
+    if (initial) {
+      priceGroup = this._fb.group({
+        label: [
+          initial.label,
+          [Validators.required]
+        ],
+        pricePerPiece: [
+          initial.pricePerPiece,
+          [Validators.required]
+        ],
+        quantity: [
+          initial.quantity,
+          [Validators.required]
+        ],
+        relation: [
+          initial.relation,
+          [Validators.required]
+        ]
+      });   
+    }
+    else {
+      priceGroup = this._fb.group(new PriceGroup());
+    }
+
+    return priceGroup;
+  }
+
+  /**
+   * Add price group to a price table
+   * @param priceTable Form array representing a price table
+   */
+  addPriceGroup(priceTable: FormArray): void {
+    priceTable.push(this.newPriceGroup());
+    console.log('new price group added');
   }
 
   /**

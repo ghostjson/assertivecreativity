@@ -71,7 +71,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           id: this.product.id,
           name: this.product.name,
           description: this.product.description,
-          price: this.product.price,
+          price: this.product.basePrice,
           stock: this.product.stock,
           sales: this.product.sales,
           image: this.product.image,

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { SelectItem } from "primeng/api";
 import { PriceGroup, PriceTable } from 'src/app/models/Product';
 import { FormGroup, FormBuilder, FormArray, Form } from '@angular/forms';
+import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
 
 @Component({
   selector: "app-admin-price-table-input",
@@ -15,7 +16,8 @@ export class AdminPriceTableInputComponent implements OnInit {
   relations: SelectItem[];
 
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _productService: VendorAdminProductService
   ) {}
 
   ngOnInit() {
@@ -91,20 +93,27 @@ export class AdminPriceTableInputComponent implements OnInit {
     ];
   }
 
+  /**
+   * Tracking function for primeng editable table
+   * @param index index of the row
+   * @param row row data
+   */
   trackByFn(index: number, row: PriceGroup): number {
     return index;
   }
 
+  /**
+   * get the pricing table form array
+   */
   priceTable(): FormArray {
     return this.formGroup.get('priceTable') as FormArray;
   }
 
-  newPriceGroup(): FormGroup {
-    return this._fb.group(new PriceGroup());
-  }
-
+  /**
+   * Add price group to the pricing table
+   */
   addPriceGroup(): void {
-    this.priceTable().push(this.newPriceGroup());
+    this._productService.addPriceGroup(this.priceTable());
     console.log('new price group added');
   }
 }

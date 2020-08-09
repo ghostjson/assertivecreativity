@@ -109,13 +109,18 @@ const CUSTOM_OPTIONS: SelectItem[] = [
 export interface Product {
   id?: number,
   name: string,
+  serial: string,
   description: string,
-  price: number,
+  category: string,
+  tags: string[],
+  basePrice: number,
   stock: number,
   sales: number,
   image: string,
+  priceTableMode: boolean,
+  priceTable: PriceGroup[],
   features: Feature[],
-  forms?: Form[]
+  customForms?: Form[]
 }
 
 
