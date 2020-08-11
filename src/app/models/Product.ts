@@ -1,4 +1,5 @@
 import { SelectItem } from 'primeng/api';
+import { FormArray, Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 // features avalilable for products
 const PRODUCT_FEATURES: Object = {
@@ -105,22 +106,151 @@ const CUSTOM_OPTIONS: SelectItem[] = [
 ];
 
 
+let _fb: FormBuilder = new FormBuilder();
+
 // model describing a Product
-export interface Product {
-  id?: number,
-  name: string,
-  serial: string,
-  description: string,
-  category: string,
-  tags: string[],
-  basePrice: number,
-  stock: number,
-  sales: number,
-  image: string,
-  priceTableMode: boolean,
-  priceTable: PriceGroup[],
-  features: Feature[],
-  customForms?: Form[]
+export class Product {
+  id?: number;
+  name: string;
+  serial: string;
+  description: string;
+  category: string;
+  tags: string[];
+  basePrice: number;
+  stock: number;
+  stockStatus: string;
+  sales: number;
+  image: string;
+  priceTableMode: boolean;
+  priceTable: PriceGroup[];
+  features?: Feature[];
+  customForms?: Form[];
+
+  constructor(initial: Product=null) {
+    if (initial) {
+      this.id = initial.id;
+      this.name = initial.name;
+      this.serial = initial.serial;
+      this.description = initial.description;
+      this.category = initial.category;
+      this.tags = initial.tags;
+      this.basePrice = initial.basePrice;
+      this.stock = initial.stock;
+      this.stockStatus = this.availability();
+      this.sales = initial.stock;
+      this.sales = initial.sales;
+      this.image = initial.image;
+      this.priceTableMode = initial.priceTableMode;
+      this.priceTable = initial.priceTable;
+      this.customForms = initial.customForms;
+    }
+    else {
+      this.id = null;
+      this.name = null;
+      this.serial = null;
+      this.description = null;
+      this.category = null;
+      this.tags = null;
+      this.basePrice = null;
+      this.stock = null;
+      this.stockStatus = this.availability();
+      this.sales = null;
+      this.sales = null;
+      this.image = null;
+      this.priceTableMode = false;
+      this.priceTable = [new PriceGroup()];
+      this.customForms = [new Form()];
+    }
+  }
+
+  /**
+   * Return the availability of the product
+   */
+  availability(): string {
+    let status: string = 'instock';
+
+    if (this.stock < 10) {
+      status = 'lowstock';
+    }
+
+    if (this.stock <= 0) {
+      status = 'outofstock';
+    }
+
+    return status;
+  }
+
+  /**
+   * Update the stock status according to the stock
+   */
+  updateStockStatus(): string {
+    this.stockStatus = this.availability();
+    console.log('stock status updated');
+
+    return this.stockStatus;
+  }
+}
+
+/**
+ * Model for product forms
+ */
+export class ProductForm {
+  id?: FormControl;
+  name: FormControl;
+  serial: FormControl;
+  description: FormControl;
+  category: FormControl;
+  tags: FormControl;
+  basePrice: FormControl;
+  stock: FormControl;
+  stockStatus: FormControl;
+  sales: FormControl;
+  image: FormControl;
+  priceTableMode: FormControl;
+  priceTable: FormArray;
+  features?: FormArray;
+  customForms?: FormArray;
+
+  constructor(initial: ProductForm=null) {
+    if (initial) {
+      this.id = initial.id;
+      this.name = initial.name;
+      this.serial = initial.serial;
+      this.description = initial.description;
+      this.category = initial.category;
+      this.tags = initial.tags;
+      this.basePrice = initial.basePrice;
+      this.stock = initial.stock;
+      this.stockStatus = initial.stock;
+      this.sales = initial.stock;
+      this.sales = initial.sales;
+      this.image = initial.image;
+      this.priceTableMode = initial.priceTableMode;
+      this.priceTable = initial.priceTable;
+      this.customForms = initial.customForms;
+    }
+    else {
+      this.id = _fb.control(null);
+      this.name = _fb.control(null);
+      this.serial = _fb.control(null);
+      this.description = _fb.control(null);
+      this.category = _fb.control(null);
+      this.tags = _fb.control(null);
+      this.basePrice = _fb.control(null);
+      this.stock = _fb.control(null);
+      this.stockStatus = _fb.control('outofstock');
+      this.sales = _fb.control(null);
+      this.sales = _fb.control(null);
+      this.image = _fb.control(null);
+      this.priceTableMode = _fb.control(false);
+      this.priceTable = _fb.array([
+        _fb.group(
+          new PriceGroup()
+        )
+      ])
+      this.customForms = _fb.array([]);
+    }
+  }
 }
 
 
@@ -136,7 +266,7 @@ export interface Feature {
 }
 
 // model for customisation form
-export interface Form {
+export class Form {
 
 }
 

@@ -1,124 +1,135 @@
-<div class="row d-flex justify-content-center">
-  <div class="col-md-11">
-    <h1>
-      Products
-    </h1>
-    <div class="card card-primary card-outline">
-      <div class="card-header">
-        <div class="card-tools product-search">
-          <div class="input-group input-group-sm">
+<div class="p-grid">
+  <p-toast baseZIndex="100000"></p-toast>
+  
+  <div class="p-col card p-3">
+    <p-toolbar styleClass="p-mb-4">
+      <ng-template pTemplate="left">
+        <h1 class="p-m-0">Manage Products</h1>
+      </ng-template>
+  
+      <ng-template pTemplate="right">
+        <a
+          [routerLink]="['add']"
+          pButton
+          pRipple
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success p-mr-2"
+        ></a>
+        <button
+          pButton
+          pRipple
+          label="Delete"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          (click)="deleteSelectedProducts()"
+          [disabled]="!selectedProducts || !selectedProducts.length"
+        ></button>
+      </ng-template>
+    </p-toolbar>
+  
+    <p-table
+      #dt
+      [value]="products"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="[
+        'name',
+        'serial',
+        'category'
+      ]"
+      [(selection)]="selectedProducts"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
             <input
+              pInputText
               type="text"
-              class="form-control"
-              placeholder="Search Products"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..."
             />
-            <div class="input-group-append">
-              <div class="btn btn-primary">
-                <i class="fas fa-search"></i>
-              </div>
-            </div>
-          </div>
-          <!-- /.card-tools -->
+          </span>
         </div>
-        <div class="card-tools add-product">
-          <a [routerLink]="['/admin/products/add']" class="btn btn-primary">
-            Add New Product
-          </a>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem;">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="name">
+            Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="serial">
+            Serial <p-sortIcon field="serial"></p-sortIcon>
+          </th>
+          <th>Image</th>
+          <th pSortableColumn="price">
+            Price <p-sortIcon field="basePrice"></p-sortIcon>
+          </th>
+          <th pSortableColumn="category">
+            Category <p-sortIcon field="category"></p-sortIcon>
+          </th>
+          <th pSortableColumn="stockStatus">
+            Status <p-sortIcon field="stockStatus"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="product"></p-tableCheckbox>
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.serial }}</td>
+          <td>
+            <img
+              [src]="'assets/images/demo-product-images/3.jpg'"
+              [alt]="product.name"
+              width="100"
+              class="p-shadow-4"
+            />
+          </td>
+          <td>{{ product.basePrice | currency: "USD" }}</td>
+          <td>{{ product.category }}</td>
+          <td>
+            <span
+              [class]="
+                'product-badge status-' + product.availability()
+              "
+              >{{ product.availability() }}</span
+            >
+          </td>
+          <td>
+            <a
+              [routerLink]="[product.id, 'edit']"
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success p-mr-2"
+            ></a>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deleteProduct(product)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{ products ? products.length : 0 }} products.
         </div>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body p-0">
-        <div class="mailbox-controls">
-          <div class="float-right">
-            1-50/200
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-            <!-- /.btn-group -->
-          </div>
-          <!-- /.float-right -->
-        </div>
-        <div class="table-responsive mailbox-messages">
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Serial</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Sales</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of products">
-                <td>
-                  <img
-                    *ngIf="product.image; else placeholderImg"
-                    src="{{ product.image }}"
-                    alt="{{ product.name }}"
-                    class="img-circle img-size-32 mr-2"
-                  />
-                  <ng-template #placeholderImg>
-                    <img
-                      src="../../../assets/images/demo-product-images/3.jpg"
-                      alt="{{ product.name }}"
-                      class="img-circle img-size-32 mr-2"
-                    >
-                  </ng-template>
-                  <a [routerLink]="[product.id, 'edit']" class="link-to-product">
-                    {{ product.name }}
-                  </a>
-                </td>
-                <td>{{ product.serial }}</td>
-                <td>${{ product.basePrice }} USD</td>
-                <td>
-                  {{ product.stock }}
-                </td>
-                <td>
-                  {{ product.sales }}
-                </td>
-                <td>
-                  <button
-                    (click)="deleteProduct(product)"
-                    attr.data-product-id="{{ product.id }}"
-                    type="button"
-                    class="btn btn-default btn-sm"
-                  >
-                    <i class="far fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- /.table -->
-        </div>
-        <!-- /.mail-box-messages -->
-      </div>
-      <!-- /.card-body -->
-      <div class="card-footer p-0">
-        <div class="mailbox-controls">
-          <div class="float-right">
-            1-50/200
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-            <!-- /.btn-group -->
-          </div>
-          <!-- /.float-right -->
-        </div>
-      </div>
-    </div>
-    <!-- /.card -->
+      </ng-template>
+    </p-table>
   </div>
+  <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
 </div>

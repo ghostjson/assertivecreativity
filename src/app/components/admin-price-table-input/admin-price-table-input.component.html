@@ -1,5 +1,5 @@
 <div [formGroup]="formGroup">
-  <p-table 
+  <p-table
     [value]="formGroup.controls.priceTable.value"
     [rowTrackBy]="trackByFn"
   >
@@ -13,10 +13,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-ri="rowIndex" formArrayName="priceTable">
       <tr [formGroupName]="ri">
-        <td pEditableColumn>
+        <td pEditableColumn style="position: relative; z-index: 2;">
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" formControlName="label" required/>
+              <input pInputText type="text" formControlName="label" required />
             </ng-template>
             <ng-template pTemplate="output">
               {{ formGroup.value.priceTable[ri].label }}
@@ -27,14 +27,13 @@
           <p-cellEditor>
             <ng-template pTemplate="input">
               <!-- <input pInputText type="number" [(ngModel)]="rowData.pricePerPiece" required /> -->
-              <p-inputNumber 
+              <p-inputNumber
                 formControlName="pricePerPiece"
-                mode="currency" 
+                mode="currency"
                 currency="USD"
-                locale="en-US" 
+                locale="en-US"
                 [minFractionDigits]="2"
                 [maxFractionDigits]="2"
-                style="position: relative; z-index: 2"
               ></p-inputNumber>
             </ng-template>
             <ng-template pTemplate="output">
@@ -46,9 +45,8 @@
           <p-cellEditor>
             <ng-template pTemplate="input">
               <!-- <input pInputText type="number" [(ngModel)]="rowData.quantity" /> -->
-              <p-inputNumber 
+              <p-inputNumber
                 formControlName="quantity"
-                style="position: relative; z-index: 2"
               ></p-inputNumber>
             </ng-template>
             <ng-template pTemplate="output">
@@ -73,9 +71,9 @@
       </tr>
     </ng-template>
   </p-table>
-  <p-button 
-    label="Add Price Group" 
-    icon="pi pi-plus" 
+  <p-button
+    label="Add Price Group"
+    icon="pi pi-plus"
     iconPos="right"
     (click)="addPriceGroup()"
     class="add-price-grp-btn"

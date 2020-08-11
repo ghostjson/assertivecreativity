@@ -5,7 +5,8 @@ import { group } from 'console';
 import { HttpClient } from "@angular/common/http";
 
 import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
-import { Product, PriceTable, PriceGroup } from 'src/app/models/Product';
+import { Product, PriceTable, PriceGroup, ProductForm } from 'src/app/models/Product';
+import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -30,7 +31,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     private _fb: FormBuilder,
     private _productService: VendorAdminProductService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private idGen: IdGeneratorService
   ) { }
 
   ngOnInit(): void {
@@ -49,72 +51,11 @@ export class VendorAdminAddProductFormComponent implements OnInit {
       console.log('product form not found');
 
       // create a form group for the new product
-      this.productForm = this._fb.group({
-        id: Math.floor(Math.random() * 1000000000),
-        name: [
-          null,
-          [Validators.required]
-        ],
-        serial: [
-          null,
-          [Validators.required]
-        ],
-        description: [
-          null,
-          [Validators.required]
-        ],
-        basePrice: [
-          0,
-          [Validators.required]
-        ],
-        priceTable: this._fb.array([
-          this._fb.group(new PriceGroup())
-        ]),
-        priceTableMode: [
-          false,
-          [Validators.required]
-        ],
-        stock: [
-          0,
-          [Validators.required]
-        ],
-        sales: [
-          0,
-          [Validators.required]
-        ],
-        image: [
-          null,
-          [Validators.required]
-        ],
-        category: [
-          null,
-          [Validators.required]
-        ],
-        tags: [
-          [],
-          [Validators.required]
-        ],
-        customForms: this._fb.array([])
-      });
-    }
-  }
+      this.productForm = this._fb.group(new ProductForm());
 
-  // Submit the form
-  onSubmit(): void {
-    console.log("Product added");
-    console.info(this.productForm.value);
-    console.groupEnd();
-    // this.productForm.value["features"] = JSON.stringify(
-    //   this.productForm.value["features"]
-    // );
-    if (this.isEdit) {
-      this._productService.editProduct(this.productForm.value.id, this.productForm.value)
-      console.log('Form Edited');
+      // assign id to the product 
+      this.productForm.patchValue({id: this.idGen.getId()});
     }
-    else {
-      this._productService.addProduct(this.productForm.value);
-    }
-    this.router.navigate(['/admin/products']);
   }
 
   /**
@@ -181,5 +122,33 @@ export class VendorAdminAddProductFormComponent implements OnInit {
        });
      *
      */
+  }
+
+  /**
+   * Submit the form
+   */
+  onSubmit(): void {
+    // this.productForm.value["features"] = JSON.stringify(
+    //   this.productForm.value["features"]
+    // );
+
+    // construct product from form value 
+    let submitValue = new Product(this.productForm.value);
+
+    // update the stock status of the product
+    submitValue.updateStockStatus();
+
+    if (this.isEdit) {
+      this._productService.editProduct(submitValue.id, submitValue)
+      console.log('Form Edited');
+    }
+    else {
+      this._productService.addProduct(submitValue);
+    }
+
+    console.log("Product added");
+    console.info(this.productForm.value);
+    
+    this.router.navigate(['/admin/products']);
   }
 }

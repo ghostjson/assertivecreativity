@@ -1,27 +1,23 @@
-h1 {
-  text-align: center;
-}
+.product-badge {
+  border-radius: 2px;
+  padding: .25em .5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-
-  .card-title {
-    font-weight: bold;
-    font-size: 1.5rem;
+  &.status-instock {
+      background-color: #C8E6C9;
+      color: #256029;
   }
 
-  &::before, &::after {
-    display: none;
+  &.status-outofstock {
+      background-color: #FFCDD2;
+      color: #C63737;
   }
-}
 
-.btn.btn-default.btn-sm {
-  margin-left: 0.5em;
-}
-
-.btn {
-  text-transform: capitalize;
+  &.status-lowstock {
+      background-color: #FFD8B2;
+      color: #805B36;
+  }
 }

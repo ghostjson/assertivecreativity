@@ -82,6 +82,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -101,6 +103,7 @@ import { AdminTextOptionMakerComponent } from './components/admin-text-option-ma
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 import { AdminPriceTableInputComponent } from './components/admin-price-table-input/admin-price-table-input.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 
 @NgModule({
@@ -200,7 +203,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     MessagesModule,
     MessageModule,
     InputNumberModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    SplitButtonModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

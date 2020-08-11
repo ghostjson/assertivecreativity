@@ -79,7 +79,23 @@ export class VendorAdminProductService {
         return product.id === id;
       }),
       1
-    )
+    );
+
+    console.log('deleted product ', id, 'from server');
+  }
+
+  /**
+   * Delete a list of products
+   * @param ids array of product ids to be removed
+   */
+  deleteProductsBatch(ids: number[]): void {
+    this.products = this.products.filter((product: Product) => {
+      return !ids.includes(product.id);
+    });
+
+    console.log(`delete products ${ids}`);
+    console.log('Products left:', this.products);
+    
   }
 
   // async getProduct(id: number): Promise<any> {

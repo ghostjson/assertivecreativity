@@ -4,16 +4,25 @@
   }
 
   ::ng-deep {
-    .ui-inputwrapper-filled {
+    .p-inputwrapper-filled {
       width: 100%;
     }
 
-    .ui-multiselect {
+    .input-group__input {
       width: 100%;
+      
+      .p-multiselect {
+        width: 100%;
+      }
     }
 
-    .ui-multiselected-item-token,
-    .ui-multiselected-empty-token {
+
+    .p-corner-all {
+      border-radius: 6px;
+    }
+
+    .p-multiselected-item-token,
+    .p-multiselected-empty-token {
       padding: 2px 4px;
       margin: 0 0.286em 0 0;
       display: inline-block;
@@ -21,12 +30,12 @@
       height: 1.857em;
     }
 
-    .ui-multiselected-item-token {
+    .p-multiselected-item-token {
       background: var(--primary);
       color: #ffffff;
     }
 
-    .ui-multiselected-empty-token {
+    .p-multiselected-empty-token {
       background: #d95f00;
       color: #ffffff;
     }

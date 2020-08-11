@@ -8,7 +8,7 @@ body {
     border-radius: 6px;
   }
 
-  .ui-card-header {
+  .p-card-header {
     background: var(--primary);
     color: white;
     font-size: 1.125rem;
@@ -25,8 +25,11 @@ body {
     cursor: pointer;
   }
 
-  .ui-dropdown {
+  .p-dropdown {
     width: 100%;
   }
 
+  .p-toast {
+    z-index: 100000;
+  }
 }
