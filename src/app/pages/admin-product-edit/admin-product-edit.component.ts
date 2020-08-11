@@ -118,6 +118,10 @@ export class AdminProductEditComponent implements OnInit {
         [Validators.required]
       ],
       stock: [
+        this.productObj.stock,
+        [Validators.required]
+      ],
+      sales: [
         this.productObj.sales,
         [Validators.required]
       ],
