@@ -78,7 +78,7 @@
           <th pSortableColumn="stockStatus">
             Status <p-sortIcon field="stockStatus"></p-sortIcon>
           </th>
-          <th></th>
+          <th style="width: 170px;"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
@@ -118,8 +118,15 @@
               pButton
               pRipple
               icon="pi pi-trash"
-              class="p-button-rounded p-button-warning"
+              class="p-button-rounded p-button-warning p-mr-2"
               (click)="deleteProduct(product)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-copy"
+              class="p-button-rounded p-button-warning"
+              (click)="duplicateProduct(product)"
             ></button>
           </td>
         </tr>

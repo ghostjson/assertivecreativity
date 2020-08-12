@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Product } from "../../models/Product";
 import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
 import { MessageService, ConfirmationService } from "primeng/api";
+import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
   selector: "app-vendor-admin-products-list",
@@ -16,7 +17,8 @@ export class VendorAdminProductsListComponent implements OnInit {
   constructor(
     private _productService: VendorAdminProductService,
     private _messageService: MessageService,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    public _idGen: IdGeneratorService
   ) {}
 
   ngOnInit() {
@@ -97,6 +99,20 @@ export class VendorAdminProductsListComponent implements OnInit {
         }
       },
     });
+  }
+
+  /**
+   * Duplicate a product
+   * @param product Product to duplicate
+   */
+  duplicateProduct(product: Product): void {
+    let duplicate: Product = new Product(product);
+    
+    // give the duplicated product a new id 
+    duplicate.id = this._idGen.getId();
+    // add the product to products 
+    this._productService.addProduct(duplicate);
+    console.log('Product ', product.id, ' duplicated');
   }
 
   // findIndexById(id: number): number {
