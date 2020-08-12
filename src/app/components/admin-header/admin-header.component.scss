@@ -1,0 +1,47 @@
+.sidebar-toggle {
+  cursor: pointer;
+}
+
+.sidebar-logo {
+  text-align: center;
+  padding: 1em;
+}
+
+.sidebar-content__profile-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid whitesmoke;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.sidebar-content {
+  padding-top: 3em;
+}
+
+.sidebar-item {
+  border: 1px solid whitesmoke;
+  border-right: none;
+  border-left: none;
+}
+
+.sidebar-item__link {
+  color: var(--dark-color);
+  padding: 1em;
+
+  &:hover {
+    color: white;
+    background-color: var(--dark-color);
+  }
+}
+
+.sidebar-item__link--active {
+  color: white;
+  background-color: var(--primary);
+}

@@ -35,7 +35,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /** Vendor Admin module imports */
 import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
-import { VendorAdminHeaderComponent } from './components/vendor-admin-header/vendor-admin-header.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
 import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
@@ -84,6 +83,8 @@ import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenubarModule } from 'primeng/menubar';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -104,6 +105,9 @@ import { AdminProductEditComponent } from './pages/admin-product-edit/admin-prod
 import { AdminPriceTableInputComponent } from './components/admin-price-table-input/admin-price-table-input.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 
 
 @NgModule({
@@ -133,7 +137,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     CommunicationComponent,
     ProductDetailComponent,
     VendorAdminDashboardComponent,
-    VendorAdminHeaderComponent,
     MailBoxComponent,
     VendorAdminMailComponent,
     VendorAdminProductsComponent,
@@ -169,7 +172,10 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     AdminTagSelectorComponent,
     AdminTextOptionMakerComponent,
     AdminProductEditComponent,
-    AdminPriceTableInputComponent
+    AdminPriceTableInputComponent,
+    AdminHeaderComponent,
+    AdminSidebarComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -206,7 +212,9 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     InputSwitchModule,
     ToolbarModule,
     ConfirmDialogModule,
-    SplitButtonModule
+    SplitButtonModule,
+    SidebarModule,
+    MenubarModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

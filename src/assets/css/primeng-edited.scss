@@ -32,4 +32,25 @@ body {
   .p-toast {
     z-index: 100000;
   }
+
+  .p-sidebar {
+    padding-right: 0; 
+    padding-left: 0;
+  }
+
+  .p-sidebar-left {
+    .p-sidebar-close {
+      right: 10px;
+    }
+  }
+
+  .p-overlaypanel::before,
+  .p-overlaypanel::after {
+    display: none;
+  }
+
+  .notification-overlay {
+    width: 500px;
+    height: 400px;
+  }
 }
