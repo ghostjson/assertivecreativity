@@ -6,6 +6,7 @@ html, body {
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif !important;
+  height: 100%;
 }
 
 :root {
@@ -15,8 +16,7 @@ html, body {
 }
 
 .card {
-  box-shadow: none;
-  border: 1px solid rgba(0,0,0,.125)
+  padding: 1.5em;
 }
 
 .highlight {

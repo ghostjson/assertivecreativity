@@ -126,7 +126,7 @@ export class Product {
   features?: Feature[];
   customForms?: Form[];
 
-  constructor(initial: Product=null) {
+  constructor(initial: any=null) {
     if (initial) {
       this.id = initial.id;
       this.name = initial.name;
@@ -222,7 +222,6 @@ export class ProductForm {
       this.basePrice = initial.basePrice;
       this.stock = initial.stock;
       this.stockStatus = initial.stock;
-      this.sales = initial.stock;
       this.sales = initial.sales;
       this.image = initial.image;
       this.priceTableMode = initial.priceTableMode;
@@ -253,6 +252,10 @@ export class ProductForm {
   }
 }
 
+export class Option {
+  
+}
+
 
 // model for features
 export interface Feature {
@@ -267,7 +270,10 @@ export interface Feature {
 
 // model for customisation form
 export class Form {
-
+  id: number;
+  title: string;
+  parentForm: number;
+  options: any[]
 }
 
 export class PriceGroup {

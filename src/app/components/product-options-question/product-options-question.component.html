@@ -1,19 +1,19 @@
 <div [formGroup]="formGroup">
   <label
-    for="text-{{featureInd}}-{{chainedInd}}"
+    for="text-{{id}}"
     class="text-input__label"
   >
-    {{feature.title}}
+    {{option.title}}
     <sup *ngIf="requiredInp">
       * required
     </sup>
   </label>
   <input
-    id="text-{{featureInd}}-{{chainedInd}}"
+    id="text-{{id}}"
     class="text-input__input"
     type="text"
     formControlName="input"
-    placeholder="{{feature.name}}"
+    placeholder="{{option.name}}"
     pInputText
   >
 </div>

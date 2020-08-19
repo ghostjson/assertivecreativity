@@ -9,9 +9,7 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./product-options-dropdown.component.scss']
 })
 export class ProductOptionsDropdownComponent implements OnInit {
-  @Input() feature: Feature;
-  @Input() featureInd: number;
-  @Input() chainedInd: number;
+  @Input() option: any;
   @Input() requiredInp: boolean;
   @Input() formGroup: FormGroup;
 
@@ -25,10 +23,10 @@ export class ProductOptionsDropdownComponent implements OnInit {
 
     // copy the list passed to the component
     this.dropdownList.push({
-      label: `--${this.feature.title}--`,
+      label: `--${this.option.title}--`,
       value: null
     })
-    this.feature.inputs.forEach((input) => {
+    this.option.inputs.forEach((input) => {
       this.dropdownList.push({
         label: input.choiceText,
         value: input.choiceValue

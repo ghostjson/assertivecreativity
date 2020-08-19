@@ -10,7 +10,7 @@ import { Product } from "../../models/Product";
 })
 export class ShopComponent implements OnInit {
   featured: any;
-  products: any;
+  products: Product[];
 
   constructor(
     private common: CommonService,
@@ -21,11 +21,15 @@ export class ShopComponent implements OnInit {
     this.common.setLoader(true);
 
     this.featured = this.common.featuredProduct();
-    this._productService.getProducts().then((res) => {
-      this.products = res["data"];
+    // this._productService.getProducts().then((res) => {
+    //   this.products = res["data"];
 
-      this.common.setLoader(false);
-    });
+    //   this.common.setLoader(false);
+    // });
+
+    this.products = this._productService.getProducts();
+    console.info(this.products)
+    this.common.setLoader(false);
   }
 
   ngAfterViewInit(): void {}

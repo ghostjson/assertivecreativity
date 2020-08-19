@@ -85,6 +85,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenubarModule } from 'primeng/menubar';
+import { GalleriaModule } from 'primeng/galleria';
+import { AccordionModule } from 'primeng/accordion';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -108,6 +110,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { ProductOptionsComponent } from './components/product-options/product-options.component';
+// import { ProductComponent } from './components/product/product.component';
 
 
 @NgModule({
@@ -175,7 +179,9 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     AdminPriceTableInputComponent,
     AdminHeaderComponent,
     AdminSidebarComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    ProductOptionsComponent,
+    // ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -214,7 +220,9 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     ConfirmDialogModule,
     SplitButtonModule,
     SidebarModule,
-    MenubarModule
+    MenubarModule,
+    GalleriaModule,
+    AccordionModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

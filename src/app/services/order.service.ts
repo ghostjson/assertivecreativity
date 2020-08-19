@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Product } from '../models/Product';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,10 @@ export class OrderService {
   orders: Array<any>;
   stagedOrders: Array<any>;
 
-  constructor() {
+  constructor(
+    private _fb: FormBuilder,
+    private _productService: ProductService
+  ) {
     this.orders = [];
     this.stagedOrders = [];
 
@@ -200,6 +206,27 @@ export class OrderService {
         ]
       }
     );
+  }
+
+
+  newOrderForm(product: Product): FormGroup {
+    let orderFormTemplate = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      basePrice: product.basePrice,
+      image: product.image,
+      customForms: this._fb.array([])
+    };
+
+    product.customForms.forEach((customForm) => {
+      this._productService.addForm(
+        customForm, 
+        orderFormTemplate.customForms
+      );
+    });
+
+    return this._fb.group(orderFormTemplate);
   }
 
   /**

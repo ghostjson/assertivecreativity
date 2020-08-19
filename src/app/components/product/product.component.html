@@ -1,0 +1,236 @@
+<div class="container mb-5">
+  <div class="row justify-content-between align-items-center">
+    <div class="product-img col-md-5">
+      <div
+        id="product-indicator"
+        class="carousel slide card border"
+        data-ride="carousel"
+      >
+        <div class="card-body">
+          <ol class="carousel-indicators">
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="{{ product.image }}"
+                alt="{{ product.name }}"
+              />
+            </div>
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#product-indicator"
+            role="button"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#product-indicator"
+            role="button"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="content pt-5">
+        <h3>{{product.name}}</h3>
+        <h4 class="product-price">${{priceTotal}}/piece</h4>
+        <div class="params card border">
+          <div class="card-body">
+            <p class="category">
+              Category: <span class="highlight">Shirt</span>
+            </p>
+            <p class="availibility">
+              Availibility:
+              <span *ngIf="product.stock > 0; else elseBlock" class="highlight"
+                >In Stock</span
+              >
+              <ng-template #elseBlock>
+                <span class="highlight text-danger">Out Of Stock</span>
+              </ng-template>
+            </p>
+            <h4 class="mt-3">Description</h4>
+            <p class="description">
+              {{ product.description }}
+            </p>
+          </div>
+        </div>
+        <div class="product-controls mt-3">
+          <a href="#" class="btn btn-primary mr-2">
+            ADD TO CART
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-7">
+          <!-- Customization form starts -->
+          <form
+            class="customization-form card border"
+            [formGroup]="orderFeaturesForm"
+            id="customisation-form"
+          >
+            <div
+              formArrayName="features"
+              >
+              <div
+                *ngFor="let featureForm of features().controls;
+                        let featureInd = index"
+                class="card-body"
+              >
+                <!-- render the base options of the form -->
+                <div [formGroupName]="featureInd">
+                  <!-- add color option -->
+                  <div *ngIf="product.features[featureInd].type === 'color'" class="form-group pick-color">
+                    <app-product-options-color
+                      [formGroup]="featureForm"
+                      [feature]="product.features[featureInd]"
+                      [featureInd]="featureInd"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
+                    >
+                    </app-product-options-color>
+                  </div>
+
+                  <!-- add radio option -->
+                  <div *ngIf="product.features[featureInd].type === 'radioBtn'" class="form-group radio-btn">
+                    <app-product-options-radio-btn
+                      [formGroup]="featureForm"
+                      [feature]="product.features[featureInd]"
+                      [featureInd]="featureInd"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
+                    ></app-product-options-radio-btn>
+                  </div>
+
+                  <!-- add dropdown selection -->
+                  <div *ngIf="product.features[featureInd].type === 'dropdown'" class="form-group dropdown">
+                    <app-product-options-dropdown
+                      [formGroup]="featureForm"
+                      [feature]="product.features[featureInd]"
+                      [featureInd]="featureInd"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
+                    ></app-product-options-dropdown>
+                  </div>
+
+                  <!-- add question option -->
+                  <div *ngIf="product.features[featureInd].type === 'text'" class="form-group question-input">
+                    <app-product-options-question
+                      [formGroup]="featureForm"
+                      [feature]="product.features[featureInd]"
+                      [featureInd]="featureInd"
+                      [requiredInp]="true"
+                      (input)="addChainedInputs(featureInd)"
+                    ></app-product-options-question>
+                  </div>
+                </div>
+
+
+                <!-- render the chained inputs on activity in the form -->
+                <div [formGroupName]="featureInd">
+                  <div formArrayName="chainedInputs">
+                    <div *ngFor="let chainedInput of chainedInputs(featureInd).controls; let chainedInd = index">
+                      <!-- adding chained color selector -->
+                      <div
+                        *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'color'"
+                        [formGroupName]="chainedInd"
+                        class="form-group pick-color"
+                      >
+                        <app-product-options-color
+                          [formGroup]="chainedInput"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="featureInd"
+                          [chainedInd]="chainedInd"
+                        >
+                        </app-product-options-color>
+                      </div>
+
+                      <!-- adding chained dropdown selector -->
+                      <div
+                        *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'dropdown'"
+                        [formGroupName]="chainedInd"
+                        class="form-group dropdown"
+                      >
+                        <app-product-options-dropdown
+                          [formGroup]="chainedInput"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="featureInd"
+                          [chainedInd]="chainedInd"
+                        >
+                        </app-product-options-dropdown>
+                      </div>
+
+                      <!-- adding chained radio button selector -->
+                      <div
+                        *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'radioBtn'"
+                        [formGroupName]="chainedInd"
+                        class="form-group radio-btn"
+                      >
+                        <app-product-options-radio-btn
+                          [formGroup]="chainedInput"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="featureInd"
+                          [chainedInd]="chainedInd"
+                        >
+                        </app-product-options-radio-btn>
+                      </div>
+
+                      <!-- adding chained question option -->
+                      <div
+                        *ngIf="product.features[featureInd].chainedInputs[chainedInd].type === 'text'"
+                        [formGroupName]="chainedInd"
+                        class="form-group question-input"
+                      >
+                        <app-product-options-question
+                          [formGroup]="chainedInput"
+                          [feature]="product.features[featureInd].chainedInputs[chainedInd]"
+                          [featureInd]="featureInd"
+                          [chainedInd]="chainedInd"
+                        ></app-product-options-question>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+              <button
+                class="btn btn-primary card-footer__btn"
+                type="submit"
+                [disabled]="!orderFeaturesForm.valid"
+                (click)="onSubmit()">
+                Order
+              </button>
+            </div>
+          </form>
+          <!-- Customization form ends -->
+        </div>
+
+        <div class="col-5">
+          <div class="row d-flex flex-column justify-content-center align-items-center">
+            <div class="col-9 card border">
+              <div class="card-body">
+                <img class="product-img--form object--contain" src="{{product.image}}" alt="product image">
+                <hr>
+                <p>
+                  <strong>Price: </strong>
+                  $ {{priceTotal}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

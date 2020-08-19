@@ -1,0 +1,30 @@
+<div>
+  <app-product-options-color
+    *ngIf="option.type === 'color'"
+    [option]="option"
+    [requiredInp]="requiredInp"
+    [formGroup]="formGroup"
+  >
+  </app-product-options-color>
+  <app-product-options-dropdown
+    *ngIf="option.type === 'dropdown'"
+    [option]="option"
+    [requiredInp]="requiredInp"
+    [formGroup]="formGroup"
+  >
+  </app-product-options-dropdown>
+  <app-product-options-radio-btn
+    *ngIf="option.type === 'radioBtn'"
+    [option]="option"
+    [requiredInp]="requiredInp"
+    [formGroup]="formGroup"
+  >
+  </app-product-options-radio-btn>
+  <app-product-options-question
+    *ngIf="option.type === 'text'"
+    [option]="option"
+    [requiredInp]="requiredInp"
+    [formGroup]="formGroup"
+  >
+  </app-product-options-question>
+</div>

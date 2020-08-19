@@ -1,3 +1,9 @@
+@import '../../../assets/css/variables.scss';
+
+:host>div {
+  background-color: $light-grey;
+}
+
 .product-img {
   top: 0;
 

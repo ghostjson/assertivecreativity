@@ -1,14 +1,15 @@
 <div [formGroup]="formGroup" class="row">
   <h5 class="col-12 customization-title">
-    {{feature.title}}
+    {{option.title}}
     <sup *ngIf="requiredInp">
       * required
     </sup>
   </h5>
   <div class="radio-list pl-1">
-    <div *ngFor="let input of feature.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
+    <div *ngFor="let input of option.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
       <p-radioButton
-        name="radio-{{featureInd}}-{{chainedInd}}"
+        name="radio-group-{{id}}"
+        inputId="radio-{{_idGen.getId()}}"
         label="{{input.choiceText}}"
         value="{{input.choiceValue}}"
         formControlName="input"
