@@ -81,7 +81,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     console.info('Product Received: ', this.product);
 
     this.orderForm = this._orderService.newOrderForm(this.product);
-    console.log('Order Form: ', this.orderForm);
+    console.info('Order Form: ', this.orderForm);
     
     this.initialiseForms();
     this.common.setLoader(false);
@@ -93,7 +93,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   customForms(): FormArray {
-    console.info('custom forms: ', this.orderForm.get('customForms'));
     return this.orderForm.get('customForms') as FormArray;
   }
 
@@ -108,20 +107,17 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   updateTotalPrice(): void {
     // add the base price
     this.priceTotal = this.orderForm.value.price;
-    console.log(this.orderForm.value.price);
 
     // loop through all features and add their prices
     for (let i = 0; i < this.orderForm.value.features.length; ++i) {
       if (this.orderForm.value.features[i].input) {
         this.priceTotal += this.orderForm.value.features[i].price;
-        console.log(this.orderForm.value.features[i].price);
       }
 
       // loop through all the sub features of a feature and add their prices
       for (let j = 0; j < this.orderForm.value.features[i].chainedInputs.length; ++j) {
         if (this.orderForm.value.features[i].chainedInputs[j].input) {
           this.priceTotal += this.orderForm.value.features[i].chainedInputs[j].price;
-          console.log(this.orderForm.value.features[i].chainedInputs[j].price);
         }
       }
     }

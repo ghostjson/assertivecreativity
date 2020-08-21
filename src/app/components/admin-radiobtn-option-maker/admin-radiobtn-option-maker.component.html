@@ -34,9 +34,9 @@
               id="input-{{ optionInd }}-{{ inputInd }}"
               type="text"
               pInputText
-              formControlName="choiceText"
+              formControlName="label"
               (input)="getInputs().at(inputInd).patchValue({
-                choiceValue: slugify(getInputs().value[inputInd].choiceText)
+                value: slugify(getInputs().value[inputInd].label)
               })"
             />
           </div>
@@ -46,7 +46,7 @@
               id="input-{{ optionInd }}-{{ inputInd }}"
               type="text"
               pInputText
-              formControlName="choiceValue"
+              formControlName="value"
             />
           </div>
           <div class="form-group ml-1">

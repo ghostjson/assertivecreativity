@@ -64,13 +64,13 @@
                 <h4>{{feature.title}}</h4>
                 <div class="colors-list">
                   <div class="color-container card" *ngFor="let color of feature.inputs">
-                    <div class="color-preview" [style.background]="color.colorHex">
+                    <div class="color-preview" [style.background]="color.value">
                     </div>
                     <div class="color-name">
-                      {{color.colorName}}
+                      {{color.label}}
                     </div>
                     <div class="color-hex">
-                      {{color.colorHex}}
+                      {{color.value}}
                     </div>
                   </div>
                 </div>
@@ -80,8 +80,8 @@
                 <h4>{{feature.title}}</h4>
                 <div class="radio-btn-list">
                   <div class="radio-btn-container card" *ngFor="let radioBtn of feature.inputs; let i = index">
-                    <input type="radio" id="radio-btn-{{i}}" name="radioBtn" value="{{radioBtn.choiceValue}}">
-                    <label for="radio-btn-{{i}}">{{radioBtn.choiceText}}</label>
+                    <input type="radio" id="radio-btn-{{i}}" name="radioBtn" value="{{radioBtn.value}}">
+                    <label for="radio-btn-{{i}}">{{radioBtn.label}}</label>
                   </div>
                 </div>
               </div>
@@ -93,8 +93,8 @@
                     <label for="dropdown-{{featureInd}}"></label>
                     <select name="pets" id="pet-select">
                       <option value="">--{{feature.title}}--</option>
-                      <option *ngFor="let dropdown of feature.inputs; let i = index" value="dropdown.choiceValue">
-                        {{dropdown.choiceText}}
+                      <option *ngFor="let dropdown of feature.inputs; let i = index" value="dropdown.value">
+                        {{dropdown.label}}
                       </option>
                     </select>
                   </div>

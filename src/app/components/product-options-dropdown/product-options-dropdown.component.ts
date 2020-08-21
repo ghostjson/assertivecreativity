@@ -35,4 +35,8 @@ export class ProductOptionsDropdownComponent implements OnInit {
     console.log(this.dropdownList);
   }
 
+  emitIndex(event: Event, index: number): void {
+    // event.stopPropagation();
+    console.info('index of input: ', index);
+  }
 }

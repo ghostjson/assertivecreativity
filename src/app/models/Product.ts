@@ -10,17 +10,11 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'colorName'
+        name: 'label'
       },
       {
         type: 'text',
-        name: 'colorHex'
-      }
-    ],
-    chainedInputs: [
-      {
-        type: 'any',
-        trigger: '*'
+        name: 'value'
       }
     ]
   },
@@ -31,17 +25,11 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'choiceText'
+        name: 'label'
       },
       {
         type: 'text',
-        name: 'choiceValue'
-      }
-    ],
-    chainedInputs: [
-      {
-        type: 'any',
-        trigger: '*'
+        name: 'value'
       }
     ]
   },
@@ -52,17 +40,11 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'choiceText'
+        name: 'label'
       },
       {
         type: 'text',
-        name: 'choiceValue'
-      }
-    ],
-    chainedInputs: [
-      {
-        type: 'any',
-        trigger: '*'
+        name: 'value'
       }
     ]
   },
@@ -74,12 +56,6 @@ const PRODUCT_FEATURES: Object = {
       {
         type: 'text',
         name: 'placeholder'
-      }
-    ],
-    chainedInputs: [
-      {
-        type: 'any',
-        trigger: '*'
       }
     ]
   }
@@ -253,7 +229,18 @@ export class ProductForm {
 }
 
 export class Option {
-  
+  name: string;
+  title: string;
+  type: string;
+  price: number;
+  inputs: any[];
+  meta: OptionMeta;
+  chainedOptions?: Option[]
+}
+
+export class OptionMeta {
+  isChained: boolean;
+  chainedOpsHidden?: boolean;
 }
 
 

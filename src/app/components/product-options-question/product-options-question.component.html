@@ -8,12 +8,28 @@
       * required
     </sup>
   </label>
-  <input
-    id="text-{{id}}"
-    class="text-input__input"
-    type="text"
-    formControlName="input"
-    placeholder="{{option.name}}"
-    pInputText
+  <ng-container
+    *ngIf="option.meta.isChained; else withEmit"
   >
+    <input
+      id="text-{{id}}"
+      class="text-input__input"
+      type="text"
+      formControlName="input"
+      placeholder="{{option.name}}"
+      pInputText
+    >
+  </ng-container>
+  <ng-template
+    #withEmit
+  >
+    <input
+      id="text-{{id}}"
+      class="text-input__input"
+      type="text"
+      formControlName="input"
+      placeholder="{{option.name}}"
+      pInputText
+    >
+  </ng-template>
 </div>

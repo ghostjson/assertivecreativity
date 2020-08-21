@@ -9,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
+import { log } from 'util';
 
 @Injectable({
   providedIn: "root",
@@ -70,21 +71,30 @@ export class ProductService {
   ): FormGroup {
     let validators: Validators[] = [];
 
-    if (!option.meta.isChained) {
-      validators.push(
-        Validators.required
-      );
-    }
-
-    let optionTemplate = {
-      chainInpsHidden: ['true'],
+    let optionTemplate: any = {
       type: [option.type],
       title: [option.title],
       name: [option.name],
       price: [option.price],
       input: [null, validators],
-      chainedOptions: this._fb.array([])
+      meta: {
+        isChained: option.meta.isChained,
+        chainedOpsHidden: true,
+      }
     };
+    
+    if (!option.meta.isChained) {
+      // push the validators 
+      validators.push(
+        Validators.required
+      );
+
+      // add chained options form array
+      optionTemplate.chainedOptions = this._fb.array([]);
+      
+    }
+
+    console.log('option created: ', this._fb.group(optionTemplate).value);
 
     return this._fb.group(optionTemplate);
   }
@@ -334,12 +344,7 @@ export class ProductService {
                       },
                     ],
                     selectedChainedOption: null,
-                  },
-                  {
-                    placeholder: null,
-                    chainedOptions: [],
-                    selectedChainedOption: null,
-                  },
+                  }
                 ],
               },
             ],
@@ -511,11 +516,6 @@ export class ProductService {
                         ],
                       },
                     ],
-                    selectedChainedOption: null,
-                  },
-                  {
-                    placeholder: null,
-                    chainedOptions: [],
                     selectedChainedOption: null,
                   },
                 ],

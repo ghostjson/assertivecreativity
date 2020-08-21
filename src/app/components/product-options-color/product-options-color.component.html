@@ -13,12 +13,12 @@
           formControlName="input"
           class="sr-only" type="radio"
           id="color-{{ids[colorInd]}}"
-          value="{{input.colorHex}}"
+          value="{{input.value}}"
           [attr.checked]="colorInd === 0 ? 'checked' : null"
         >
         <label for="color-{{ids[colorInd]}}" class="form-check-label">
-          <div class="color-preview fas fa-circle" [style.color]="input.colorHex"></div>
-          <div class="color-name">{{input.colorName}}</div>
+          <div class="color-preview fas fa-circle" [style.color]="input.value"></div>
+          <div class="color-name">{{input.label}}</div>
         </label>
       </div>
     </div>

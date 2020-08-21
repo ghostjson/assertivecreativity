@@ -33,7 +33,7 @@
               id="input-{{ optionInd }}-{{ inputInd }}"
               type="text"
               pInputText
-              formControlName="colorName"
+              formControlName="label"
             />
           </div>
           <div class="form-group">
@@ -50,11 +50,11 @@
                   type="text"
                   pInputText
                   placeholder="Enter Color in HEX"
-                  formControlName="colorHex"
+                  formControlName="value"
                   [(colorPicker)]="color[inputInd]"
                   [cpOutputFormat]="'hex'"
                   (colorPickerChange)="getInputs().at(inputInd).patchValue({
-                    colorHex: color[inputInd]
+                    value: color[inputInd]
                   })"
                   class="color-picker-input"
                 />
