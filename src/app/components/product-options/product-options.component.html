@@ -12,6 +12,7 @@
     [option]="option"
     [requiredInp]="requiredInp"
     [formGroup]="formGroup"
+    (onChange)="catchValue($event)"
   >
   </app-product-options-dropdown>
   <app-product-options-radio-btn
@@ -28,42 +29,20 @@
     [formGroup]="formGroup"
   >
   </app-product-options-question>
-  <!-- value: {{inputValue}} -->
+  value: {{inputValue}}
 
   <!-- render the chained options of each input  -->
-  <!-- <ng-container
+  <ng-container
     *ngFor="
       let chainedOption of chainedOptions().controls;
       let chainedInd = index
     "
   >
-    <app-product-options-color
-      *ngIf="option.inputs[inputValue].chainedOptions[chainedInd].type === 'color'"
-      [option]="option.inputs[inputValue].chainedOptions[chainedInd]"
+    <app-product-options
+      [option]="chainedOptionsRef[inputValue][chainedInd]"
       [requiredInp]="false"
       [formGroup]="chainedOption"
     >
-    </app-product-options-color>
-    <app-product-options-dropdown
-      *ngIf="option.inputs[inputValue].chainedOptions[chainedInd].type === 'dropdown'"
-      [option]="option.inputs[inputValue].chainedOptions[chainedInd]"
-      [requiredInp]="false"
-      [formGroup]="chainedOption"
-    >
-    </app-product-options-dropdown>
-    <app-product-options-radio-btn
-      *ngIf="option.inputs[inputValue].chainedOptions[chainedInd].type === 'radioBtn'"
-      [option]="option.inputs[inputValue].chainedOptions[chainedInd]"
-      [requiredInp]="false"
-      [formGroup]="chainedOption"
-    >
-    </app-product-options-radio-btn>
-    <app-product-options-question
-      *ngIf="option.inputs[inputValue].chainedOptions[chainedInd].type === 'text'"
-      [option]="option.inputs[inputValue].chainedOptions[chainedInd]"
-      [requiredInp]="false"
-      [formGroup]="chainedOption"
-    >
-    </app-product-options-question>
-  </ng-container> -->
+    </app-product-options>
+  </ng-container>
 </div>

@@ -55,7 +55,7 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'placeholder'
+        name: 'label'
       }
     ]
   }

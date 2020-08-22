@@ -220,14 +220,14 @@ export class ProductService {
                 price: 10,
                 inputs: [
                   {
-                    colorName: "Reddish",
-                    colorHex: "#b61414",
+                    label: "Reddish",
+                    value: "#b61414",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
                   {
-                    colorName: "Violet",
-                    colorHex: "#bc26c7",
+                    label: "Violet",
+                    value: "#bc26c7",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
@@ -243,14 +243,14 @@ export class ProductService {
                 price: 20,
                 inputs: [
                   {
-                    choiceText: "Large",
-                    choiceValue: "large",
+                    label: "Large",
+                    value: "large",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
                   {
-                    choiceText: "Small",
-                    choiceValue: "small",
+                    label: "Small",
+                    value: "small",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -262,16 +262,16 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Female",
-                            choiceValue: "female",
+                            label: "Female",
+                            value: "female",
                           },
                           {
-                            choiceText: "Male",
-                            choiceValue: "male",
+                            label: "Male",
+                            value: "male",
                           },
                           {
-                            choiceText: "Other",
-                            choiceValue: "other",
+                            label: "Other",
+                            value: "other",
                           },
                         ],
                       },
@@ -291,16 +291,16 @@ export class ProductService {
                 price: 0,
                 inputs: [
                   {
-                    choiceText: "Male",
-                    choiceValue: "male",
+                    label: "Male",
+                    value: "male",
                   },
                   {
-                    choiceText: "Female",
-                    choiceValue: "female",
+                    label: "Female",
+                    value: "female",
                   },
                   {
-                    choiceText: "Other",
-                    choiceValue: "other",
+                    label: "Other",
+                    value: "other",
                   },
                 ],
               }
@@ -321,7 +321,7 @@ export class ProductService {
                 price: 0,
                 inputs: [
                   {
-                    placeholder: "Contact Number",
+                    label: "Contact Number",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -333,12 +333,12 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Home",
-                            choiceValue: "home",
+                            label: "Home",
+                            value: "home",
                           },
                           {
-                            choiceText: "Office",
-                            choiceValue: "office",
+                            label: "Office",
+                            value: "office",
                           },
                         ],
                       },
@@ -394,14 +394,14 @@ export class ProductService {
                 price: 13,
                 inputs: [
                   {
-                    colorName: "Reddish",
-                    colorHex: "#b61414",
+                    label: "Reddish",
+                    value: "#b61414",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
                   {
-                    colorName: "Violet",
-                    colorHex: "#bc26c7",
+                    label: "Violet",
+                    value: "#bc26c7",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
@@ -416,8 +416,8 @@ export class ProductService {
                 },
                 inputs: [
                   {
-                    choiceText: "Large",
-                    choiceValue: "large",
+                    label: "Large",
+                    value: "large",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -429,16 +429,16 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Male",
-                            choiceValue: "male",
+                            label: "Male",
+                            value: "male",
                           },
                           {
-                            choiceText: "Female",
-                            choiceValue: "female",
+                            label: "Female",
+                            value: "female",
                           },
                           {
-                            choiceText: "Other",
-                            choiceValue: "other",
+                            label: "Other",
+                            value: "other",
                           },
                         ],
                       },
@@ -446,8 +446,8 @@ export class ProductService {
                     selectedChainedOption: null,
                   },
                   {
-                    choiceText: "Small",
-                    choiceValue: "small",
+                    label: "Small",
+                    value: "small",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -459,16 +459,16 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Female",
-                            choiceValue: "female",
+                            label: "Female",
+                            value: "female",
                           },
                           {
-                            choiceText: "Male",
-                            choiceValue: "male",
+                            label: "Male",
+                            value: "male",
                           },
                           {
-                            choiceText: "Other",
-                            choiceValue: "other",
+                            label: "Other",
+                            value: "other",
                           },
                         ],
                       },
@@ -494,7 +494,7 @@ export class ProductService {
                 price: 11,
                 inputs: [
                   {
-                    placeholder: "Contact Number",
+                    label: "Contact Number",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -506,12 +506,12 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Home",
-                            choiceValue: "home",
+                            label: "Home",
+                            value: "home",
                           },
                           {
-                            choiceText: "Office",
-                            choiceValue: "office",
+                            label: "Office",
+                            value: "office",
                           },
                         ],
                       },
@@ -567,14 +567,14 @@ export class ProductService {
                 price: 45,
                 inputs: [
                   {
-                    colorName: "Reddish",
-                    colorHex: "#b61414",
+                    label: "Reddish",
+                    value: "#b61414",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
                   {
-                    colorName: "Violet",
-                    colorHex: "#bc26c7",
+                    label: "Violet",
+                    value: "#bc26c7",
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },
@@ -590,8 +590,8 @@ export class ProductService {
                 price: 6,
                 inputs: [
                   {
-                    choiceText: "Large",
-                    choiceValue: "large",
+                    label: "Large",
+                    value: "large",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -603,16 +603,16 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Male",
-                            choiceValue: "male",
+                            label: "Male",
+                            value: "male",
                           },
                           {
-                            choiceText: "Female",
-                            choiceValue: "female",
+                            label: "Female",
+                            value: "female",
                           },
                           {
-                            choiceText: "Other",
-                            choiceValue: "other",
+                            label: "Other",
+                            value: "other",
                           },
                         ],
                       },
@@ -620,8 +620,8 @@ export class ProductService {
                     selectedChainedOption: null,
                   },
                   {
-                    choiceText: "Small",
-                    choiceValue: "small",
+                    label: "Small",
+                    value: "small",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -633,16 +633,16 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Female",
-                            choiceValue: "female",
+                            label: "Female",
+                            value: "female",
                           },
                           {
-                            choiceText: "Male",
-                            choiceValue: "male",
+                            label: "Male",
+                            value: "male",
                           },
                           {
-                            choiceText: "Other",
-                            choiceValue: "other",
+                            label: "Other",
+                            value: "other",
                           },
                         ],
                       },
@@ -668,7 +668,7 @@ export class ProductService {
                 price: 0,
                 inputs: [
                   {
-                    placeholder: "Contact Number",
+                    label: "Contact Number",
                     chainedOptions: [
                       {
                         type: "radioBtn",
@@ -680,12 +680,12 @@ export class ProductService {
                         price: 0,
                         inputs: [
                           {
-                            choiceText: "Home",
-                            choiceValue: "home",
+                            label: "Home",
+                            value: "home",
                           },
                           {
-                            choiceText: "Office",
-                            choiceValue: "office",
+                            label: "Office",
+                            value: "office",
                           },
                         ],
                       },
@@ -693,7 +693,7 @@ export class ProductService {
                     selectedChainedOption: null,
                   },
                   {
-                    placeholder: null,
+                    label: null,
                     chainedOptions: [],
                     selectedChainedOption: null,
                   },

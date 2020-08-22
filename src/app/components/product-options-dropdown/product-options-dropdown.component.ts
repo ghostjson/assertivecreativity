@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Feature } from '../../models/Product';
 import { SelectItem } from 'primeng/api';
+import { clear } from 'console';
 
 @Component({
   selector: 'app-product-options-dropdown',
@@ -12,6 +13,8 @@ export class ProductOptionsDropdownComponent implements OnInit {
   @Input() option: any;
   @Input() requiredInp: boolean;
   @Input() formGroup: FormGroup;
+
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 
   // list of options for the Dropdown
   dropdownList: SelectItem[];
@@ -28,15 +31,17 @@ export class ProductOptionsDropdownComponent implements OnInit {
     })
     this.option.inputs.forEach((input) => {
       this.dropdownList.push({
-        label: input.choiceText,
-        value: input.choiceValue
+        label: input.label,
+        value: input.value
       });
     });
     console.log(this.dropdownList);
   }
 
-  emitIndex(event: Event, index: number): void {
+  emitValue(event: any): void {
     // event.stopPropagation();
-    console.info('index of input: ', index);
+    this.onChange.emit(event.value);
+    // console.clear();
+    console.info('index of input: ', event.value);
   }
 }
