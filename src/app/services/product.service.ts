@@ -3,13 +3,14 @@ import {
   Product,
   listCustomOptions,
   listAllFeatures,
-  Form
+  Form,
+  ProductForm
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
-import { log } from 'util';
+import { VendorAdminProductService } from '../services/vendor-admin-product.service'
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +20,11 @@ export class ProductService {
   products: Product[];
   possibleOptions: Object;
 
-  constructor(private http: HttpClient, private _fb: FormBuilder) {
+  constructor(
+    private http: HttpClient, 
+    private _fb: FormBuilder,
+    private _vendorProdService: VendorAdminProductService
+  ) {
     this.host = environment.apiUrl;
 
     // initialise the possible options
@@ -188,7 +193,7 @@ export class ProductService {
         stock: 10000,
         stockStatus: "instock",
         sales: null,
-        image: null,
+        image: '/assets/images/demo-product-images/1.jpg',
         priceTableMode: true,
         priceTable: [
           {
@@ -353,356 +358,284 @@ export class ProductService {
       }),
       new Product({
         id: 2,
-        name: "Shirt",
-        serial: "ss-ff-12",
-        description: "This is the description for the product",
-        category: "shirt",
-        tags: ["sleeveless", "full-sleeve", "half-sleeve"],
+        name: 'Shorts',
+        serial: 'ss-hh-ii-rr-tt',
+        description: 'This is the product description for the shirt now',
+        category: 'shorts',
+        tags: [
+          'half-sleeve',
+          'full-sleeve'
+        ],
         basePrice: null,
-        stock: 10000,
-        stockStatus: "instock",
+        stock: 1000,
+        stockStatus: 'outofstock',
         sales: null,
-        image: null,
+        image: '/assets/images/demo-product-images/1.jpg',
         priceTableMode: true,
         priceTable: [
           {
-            label: "base",
+            label: 'base',
             pricePerPiece: 12,
             quantity: 100,
-            relation: "lte",
+            relation: 'lte'
           },
           {
-            label: "wholesale",
+            label: 'wholesale',
             pricePerPiece: 5,
             quantity: 100,
-            relation: "mte",
-          },
+            relation: 'mte'
+          }
         ],
         customForms: [
           {
             id: 0,
-            title: "Custom Form 1",
+            title: 'Order Specifications',
             parentForm: null,
             options: [
               {
-                type: "color",
-                title: "Pick a color",
-                name: "Colors",
+                type: 'color',
+                title: 'Pick a color',
+                name: 'Colors',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
-                price: 13,
                 inputs: [
                   {
-                    label: "Reddish",
-                    value: "#b61414",
-                    chainedOptions: [],
-                    selectedChainedOption: null,
+                    label: 'Red',
+                    value: '#9c102e',
+                    chainedOptions: [
+                      {
+                        type: 'dropdown',
+                        title: 'Pick pattern',
+                        name: 'Dropdown Selection',
+                        meta: {
+                          isChained: true
+                        },
+                        inputs: [
+                          {
+                            label: 'checkered',
+                            value: 'checkered'
+                          },
+                          {
+                            label: 'plain',
+                            value: 'plain'
+                          }
+                        ]
+                      }
+                    ],
+                    selectedChainedOption: 'dropdown'
                   },
                   {
-                    label: "Violet",
-                    value: "#bc26c7",
+                    label: 'Blue',
+                    value: null,
                     chainedOptions: [],
-                    selectedChainedOption: null,
-                  },
-                ],
+                    selectedChainedOption: null
+                  }
+                ]
               },
               {
-                type: "dropdown",
-                title: "Pick a size",
-                name: "Dropdown Selection",
+                type: 'text',
+                title: 'Enter any additional details for the order',
+                name: 'Text input',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
                 inputs: [
                   {
-                    label: "Large",
-                    value: "large",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Pick a gender",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Male",
-                            value: "male",
-                          },
-                          {
-                            label: "Female",
-                            value: "female",
-                          },
-                          {
-                            label: "Other",
-                            value: "other",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
-                  },
-                  {
-                    label: "Small",
-                    value: "small",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Gender",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Female",
-                            value: "female",
-                          },
-                          {
-                            label: "Male",
-                            value: "male",
-                          },
-                          {
-                            label: "Other",
-                            value: "other",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
-                  },
-                ],
-              },
-            ],
+                    label: 'Enter details',
+                    chainedOptions: [],
+                    selectedChainedOption: null
+                  }
+                ]
+              }
+            ]
           },
           {
             id: 1,
-            title: "Custom Form 2",
-            parentForm: 0,
+            title: 'Enter Delivery Instructions',
+            parentForm: null,
             options: [
               {
-                type: "text",
-                title: "Enter Contact number",
-                name: "Text input",
+                type: 'radioBtn',
+                title: 'Type of address',
+                name: 'Radio Buttons',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
-                price: 11,
                 inputs: [
                   {
-                    label: "Contact Number",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Type of Number",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Home",
-                            value: "home",
-                          },
-                          {
-                            label: "Office",
-                            value: "office",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
+                    label: 'Home (9 AM to 9 PM delivery)',
+                    value: 'home-(9-am-to-9-pm-delivery)',
+                    chainedOptions: [],
+                    selectedChainedOption: null
                   },
-                ],
-              },
-            ],
-          },
-        ],
+                  {
+                    label: 'Work  (9 AM to 5 PM delivery)',
+                    value: 'work--(9-am-to-5-pm-delivery)',
+                    chainedOptions: [],
+                    selectedChainedOption: null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }),
       new Product({
         id: 3,
-        name: "Shirt",
-        serial: "ss-ff-12",
-        description: "This is the description for the product",
-        category: "shirt",
-        tags: ["sleeveless", "full-sleeve", "half-sleeve"],
+        name: 'Cloth',
+        serial: 'ss-hh-ii-rr-tt',
+        description: 'This is the product description for the shirt now',
+        category: 'scarf',
+        tags: [
+          'sleeveless',
+          'full-sleeve'
+        ],
         basePrice: null,
-        stock: 10000,
-        stockStatus: "instock",
+        stock: 1000,
+        stockStatus: 'outofstock',
         sales: null,
-        image: null,
+        image: '/assets/images/demo-product-images/1.jpg',
         priceTableMode: true,
         priceTable: [
           {
-            label: "base",
+            label: 'base',
             pricePerPiece: 12,
             quantity: 100,
-            relation: "lte",
+            relation: 'lte'
           },
           {
-            label: "wholesale",
+            label: 'wholesale',
             pricePerPiece: 5,
             quantity: 100,
-            relation: "mte",
-          },
+            relation: 'mte'
+          }
         ],
         customForms: [
           {
             id: 0,
-            title: "Custom Form 1",
+            title: 'Order Specifications',
             parentForm: null,
             options: [
               {
-                type: "color",
-                title: "Pick a color",
-                name: "Colors",
+                type: 'color',
+                title: 'Pick a color',
+                name: 'Colors',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
-                price: 45,
                 inputs: [
                   {
-                    label: "Reddish",
-                    value: "#b61414",
-                    chainedOptions: [],
-                    selectedChainedOption: null,
+                    label: 'Violet',
+                    value: '#670a2e',
+                    chainedOptions: [
+                      {
+                        type: 'dropdown',
+                        title: 'Select a patter',
+                        name: 'Dropdown Selection',
+                        meta: {
+                          isChained: true
+                        },
+                        inputs: [
+                          {
+                            label: 'checkered',
+                            value: 'checkered'
+                          },
+                          {
+                            label: 'plain',
+                            value: 'plain'
+                          }
+                        ]
+                      }
+                    ],
+                    selectedChainedOption: 'dropdown'
                   },
                   {
-                    label: "Violet",
-                    value: "#bc26c7",
-                    chainedOptions: [],
-                    selectedChainedOption: null,
-                  },
-                ],
+                    label: 'Blue',
+                    value: '#0e2794',
+                    chainedOptions: [
+                      {
+                        type: 'dropdown',
+                        title: 'Select a pattern',
+                        name: 'Dropdown Selection',
+                        meta: {
+                          isChained: true
+                        },
+                        inputs: [
+                          {
+                            label: 'checkered',
+                            value: 'checkered'
+                          },
+                          {
+                            label: 'plain',
+                            value: 'plain'
+                          }
+                        ]
+                      }
+                    ],
+                    selectedChainedOption: 'dropdown'
+                  }
+                ]
               },
               {
-                type: "dropdown",
-                title: "Pick a size",
-                name: "Dropdown Selection",
+                type: 'text',
+                title: 'Order Quantity',
+                name: 'Text input',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
-                price: 6,
                 inputs: [
                   {
-                    label: "Large",
-                    value: "large",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Pick a gender",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Male",
-                            value: "male",
-                          },
-                          {
-                            label: "Female",
-                            value: "female",
-                          },
-                          {
-                            label: "Other",
-                            value: "other",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
-                  },
-                  {
-                    label: "Small",
-                    value: "small",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Gender",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Female",
-                            value: "female",
-                          },
-                          {
-                            label: "Male",
-                            value: "male",
-                          },
-                          {
-                            label: "Other",
-                            value: "other",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
-                  },
-                ],
-              },
-            ],
+                    label: 'Enter quantity in numbers',
+                    chainedOptions: [],
+                    selectedChainedOption: null
+                  }
+                ]
+              }
+            ]
           },
           {
             id: 1,
-            title: "Custom Form 2",
-            parentForm: 0,
+            title: 'Enter Delivery Instructions',
+            parentForm: null,
             options: [
               {
-                type: "text",
-                title: "Enter Contact number",
-                name: "Text input",
+                type: 'radioBtn',
+                title: 'Type of Address',
+                name: 'Radio Buttons',
                 meta: {
-                  isChained: false,
+                  isChained: false
                 },
-                price: 0,
                 inputs: [
                   {
-                    label: "Contact Number",
-                    chainedOptions: [
-                      {
-                        type: "radioBtn",
-                        title: "Type of Number",
-                        name: "Radio Buttons",
-                        meta: {
-                          isChained: true,
-                        },
-                        price: 0,
-                        inputs: [
-                          {
-                            label: "Home",
-                            value: "home",
-                          },
-                          {
-                            label: "Office",
-                            value: "office",
-                          },
-                        ],
-                      },
-                    ],
-                    selectedChainedOption: null,
+                    label: 'Home (9 AM to 9 PM delivery)',
+                    value: 'home-(9-am-to-9-pm-delivery)',
+                    chainedOptions: [],
+                    selectedChainedOption: null
                   },
                   {
-                    label: null,
+                    label: 'Work (9 AM to 5 PM delivery)',
+                    value: 'work-(9-am-to-5-pm-delivery)',
                     chainedOptions: [],
-                    selectedChainedOption: null,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+                    selectedChainedOption: null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }),
     ];
+
+    let adminProducts = this._vendorProdService.getProducts();
+
+    adminProducts.forEach((product) => {
+      this.products.push(
+        new Product(product)
+      )
+    });
+
+    console.log('Products received: ', this.products);
+    
   }
 }

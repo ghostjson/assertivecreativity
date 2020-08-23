@@ -47,38 +47,29 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to form value changes
-    this.formSubscription.unsubscribe();
+    // this.formSubscription.unsubscribe();
   }
 
   /**
    * get product from the server
    */
   getProduct(): void {
+    
+    // get product details from the product service
+    let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    
+    this.common.setLoader(true);
+    
+    this.product = this._productService.getProduct(id);
+    console.info('Product Received: ', this.product);
+    
     this.image_set = [
       {
-        src: '/assets/images/alex-azabache-sonQndOBZyA-unsplash.jpg',
+        src: this.product.image,
         title: 'Image 1 title',
-        alt: 'Image alt for testing'
-      },
-      {
-        src: '/assets/images/patrick-langwallner-CgrqCu5LVB8-unsplash.jpg',
-        title: 'Image 2 title',
-        alt: 'Image alt for testing'
-      },
-      {
-        src: '/assets/images/silvana-carlos-ZtKIMl9oAxk-unsplash.jpg',
-        title: 'Image 3 title',
         alt: 'Image alt for testing'
       }
     ];
-
-    // get product details from the product service
-    let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
-
-    this.common.setLoader(true);
-
-    this.product = this._productService.getProduct(id);
-    console.info('Product Received: ', this.product);
 
     this.orderForm = this._orderService.newOrderForm(this.product);
     console.info('Order Form: ', this.orderForm);

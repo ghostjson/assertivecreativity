@@ -76,39 +76,48 @@
       </div>
     </div>
 
+    <h2>
+      Customize The Order
+    </h2>
+    
     <div 
       [formGroup]="orderForm"
-      class="p-grid p-ai-start"
+      class="p-grid"
     >
-      <div class="p-lg-8 p-p-2">
-        <div class="card">
+      <!-- <div class="p-lg-8 p-p-2">
+        <div class="card form-overview">
           Form Overview is WIP
         </div>
-      </div>
-      <ng-container>
-
-      </ng-container>
+      </div> -->
       <div
-        *ngFor="let customForm of customForms().controls; let formInd = index"
         class="p-lg-8 p-p-2"
       >
-        <ng-container formArrayName="customForms">
-          {{formInd}}
-          <div
-            *ngFor="let option of options(formInd).controls; let optionInd = index"
-            class="card p-mt-5"
+        <p-accordion>
+          <p-accordionTab 
+            *ngFor="let customForm of customForms().controls; let formInd = index"
+            [header]="product.customForms[formInd].title"
           >
-            <app-product-options
-              [option]="product.customForms[formInd].options[optionInd]"
-              [requiredInp]="true"
-              [formGroup]="option"
-            ></app-product-options>
-            
-          </div>
-        </ng-container>
+            <ng-container formArrayName="customForms">
+              <div
+                *ngFor="let option of options(formInd).controls; let optionInd = index"
+                class="card p-mt-5"
+              >
+                <app-product-options
+                  [option]="product.customForms[formInd].options[optionInd]"
+                  [requiredInp]="true"
+                  [formGroup]="option"
+                ></app-product-options>
+                
+              </div>
+            </ng-container>
+          </p-accordionTab>
+        </p-accordion>
       </div>
       <div class="p-lg-4 p-p-2">
         <div class="card">
+          <p-header class="card-img">
+            <img class="card-img__img" src="{{product.image}}" alt="{{product.name}}">
+          </p-header>
           <p-button 
             label="Confirm Order" 
             icon="pi pi-pencil"

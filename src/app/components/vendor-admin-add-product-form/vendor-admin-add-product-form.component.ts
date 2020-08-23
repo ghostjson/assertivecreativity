@@ -55,6 +55,9 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
       // assign id to the product 
       this.productForm.patchValue({id: this.idGen.getId()});
+
+      // temporarily add an image as a placeholder until image upload is fixed
+      this.productForm.patchValue({image: '/assets/images/demo-product-images/1.jpg'});
     }
   }
 
