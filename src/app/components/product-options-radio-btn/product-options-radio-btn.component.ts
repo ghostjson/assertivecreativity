@@ -14,6 +14,8 @@ export class ProductOptionsRadioBtnComponent implements OnInit {
   @Input() requiredInp: boolean;
   @Input() formGroup: FormGroup;
 
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
+
   selectedCategory: any;
 
   id: number;
@@ -27,8 +29,7 @@ export class ProductOptionsRadioBtnComponent implements OnInit {
     console.info('radio options: ', this.option);
   }
 
-  emitIndex(event: Event, index: number): void {
-    event.stopPropagation();
-    console.log('index of input: ', index);
+  emitValue(event: any): void {
+    this.onChange.emit(event);
   }
 }

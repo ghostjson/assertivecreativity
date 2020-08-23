@@ -30,6 +30,7 @@
       formControlName="input"
       placeholder="{{option.name}}"
       pInputText
+      (input)="emitValue($event)"
     >
   </ng-template>
 </div>

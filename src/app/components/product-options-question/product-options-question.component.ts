@@ -15,6 +15,7 @@ export class ProductOptionsQuestionComponent implements OnInit {
   @Input() option: any;
   @Input() requiredInp: boolean;
 
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 
   id: number;
 
@@ -24,5 +25,11 @@ export class ProductOptionsQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this._idGen.getId();
+  }
+
+  emitValue(event: Event): void {
+    event.stopPropagation();
+    event.preventDefault()
+    this.onChange.emit('undefined');
   }
 }

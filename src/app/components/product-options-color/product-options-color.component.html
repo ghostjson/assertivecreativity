@@ -15,6 +15,7 @@
           id="color-{{ids[colorInd]}}"
           value="{{input.value}}"
           [attr.checked]="colorInd === 0 ? 'checked' : null"
+          (input)="emitValue(input.value)"
         >
         <label for="color-{{ids[colorInd]}}" class="form-check-label">
           <div class="color-preview fas fa-circle" [style.color]="input.value"></div>

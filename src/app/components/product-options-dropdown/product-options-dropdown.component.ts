@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Feature } from '../../models/Product';
 import { SelectItem } from 'primeng/api';
-import { clear } from 'console';
 
 @Component({
   selector: 'app-product-options-dropdown',
@@ -39,9 +37,6 @@ export class ProductOptionsDropdownComponent implements OnInit {
   }
 
   emitValue(event: any): void {
-    // event.stopPropagation();
     this.onChange.emit(event.value);
-    // console.clear();
-    console.info('index of input: ', event.value);
   }
 }

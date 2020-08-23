@@ -16,7 +16,7 @@ export class ProductOptionsComponent implements OnInit {
   @Input() formGroup: CustomOptionForm;
 
   chainedOptionsRef: any = {};
-  inputValue: any = null;
+  inputValue: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -52,7 +52,12 @@ export class ProductOptionsComponent implements OnInit {
   }
 
   renderChained(input: string): void {
-    this.chainedOptionsRef[input].forEach((chainedOption) => {
+    // empty the current options
+    this.chainedOptions().clear();
+
+    console.info('chained options cleared: ', this.chainedOptions());
+
+    this.chainedOptionsRef[input].forEach((chainedOption: CustomOption) => {
       this._productService.addFormOption(chainedOption, this.chainedOptions());
     });
 
@@ -60,9 +65,11 @@ export class ProductOptionsComponent implements OnInit {
   }
 
   catchValue(event: any) {
-    this.inputValue = event;
     console.info('Value emitted: ', event);
     console.info('chained options of the value: ', this.chainedOptionsRef[event]);
-    this.renderChained(event);
+    if (event !== this.inputValue) {
+      this.renderChained(event);
+    }
+    this.inputValue = event;
   }
 }
