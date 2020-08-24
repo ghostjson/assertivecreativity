@@ -26,6 +26,7 @@ import { VendorAdminAddProductComponent } from "./pages/vendor-admin-add-product
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
+import { CategoryAdderComponent } from './pages/category-adder/category-adder.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: "admin/products/add", component: VendorAdminAddProductComponent },
   { path: "admin/products/:id/edit", component: AdminProductEditComponent },
   { path: "admin/products/:id", component: VendorAdminProductComponent},
+  { path: "admin/categories", component: CategoryAdderComponent}
 ];
 
 @NgModule({

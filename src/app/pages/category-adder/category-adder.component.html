@@ -1,0 +1,191 @@
+<div>
+  <app-admin-header></app-admin-header>
+  
+  <div class="categories-table container p-my-5">
+    <p-toast></p-toast>
+    
+    <div class="card">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+          <button
+            pButton
+            pRipple
+            label="Export"
+            icon="pi pi-upload"
+            class="p-button-help"
+          ></button>
+        </ng-template>
+    
+        <ng-template pTemplate="right">
+          <button
+            pButton
+            pRipple
+            label="New"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNew()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Delete"
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="deleteSelectedCategories()"
+            [disabled]="!selectedCategories || !selectedCategories.length"
+          ></button>
+        </ng-template>
+      </p-toolbar>
+    
+      <p-table
+        #dt
+        [value]="categories"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+          'label'
+        ]"
+        [(selection)]="selectedCategories"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            <h5 class="p-m-0">Manage Categories</h5>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Search..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem;">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="label">
+              CATEGORY <p-sortIcon field="label"></p-sortIcon>
+            </th>
+            <th>
+              DESCRIPTION
+            </th>
+            <th pSortableColumn="productCount">
+              NO. OF PRODUCTS<p-sortIcon field="productCount"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="category"></p-tableCheckbox>
+            </td>
+            <td>{{ category.label }}</td>
+            <td>{{ summary(category.description) }}...</td>
+            <td>{{ category.productCount }}</td>
+            <td>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success p-mr-2"
+                (click)="editCategory(category)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteCategory(category)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{ categories ? categories.length : 0 }} categories.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+    
+    <p-dialog
+      [(visible)]="categoryDialog"
+      [style]="{ width: '450px' }"
+      header="Category Details"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div class="p-field">
+          <label for="label">Category Name</label>
+          <input
+            type="text"
+            pInputText
+            id="label"
+            [(ngModel)]="category.label"
+            required
+            autofocus
+            (input)="generateSlug()"
+          />
+          <small class="p-invalid" *ngIf="submitted && !category.label"
+            >Category Name is required.</small
+          >
+        </div>
+        <div class="p-field">
+          <label for="value">Category Slug</label>
+          <input
+            type="text"
+            pInputText
+            id="value"
+            [(ngModel)]="category.value"
+            disabled="true"
+            required
+            readonly
+          />
+        </div>
+        <div class="p-field">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            pInputTextarea
+            [(ngModel)]="category.description"
+            required
+            rows="3"
+            cols="20"
+          ></textarea>
+        </div>
+      </ng-template>
+    
+      <ng-template pTemplate="footer">
+        <button
+          pButton
+          pRipple
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Add"
+          icon="pi pi-check"
+          class="p-button-text"
+          (click)="saveCategory()"
+        ></button>
+      </ng-template>
+    </p-dialog>
+    
+    <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+  </div>
+  
+  <app-footer></app-footer>
+</div>

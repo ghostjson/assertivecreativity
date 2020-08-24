@@ -111,8 +111,8 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { ProductOptionsComponent } from './components/product-options/product-options.component';
-// import { ProductComponent } from './components/product/product.component';
-
+import { CategoryAdderComponent } from './pages/category-adder/category-adder.component';
+// import { ProductComponent } from './components/product/product.component';}
 
 @NgModule({
   declarations: [
@@ -181,6 +181,7 @@ import { ProductOptionsComponent } from './components/product-options/product-op
     AdminSidebarComponent,
     AdminNavbarComponent,
     ProductOptionsComponent,
+    CategoryAdderComponent,
     // ProductComponent
   ],
   imports: [

@@ -365,21 +365,4 @@ export class VendorAdminProductService {
 
     return tags;
   }
-
-  getAllCategories(): SelectItem[] {
-    let categories = [
-      { label: 'None', value: 'none' },
-      { label: 'Cloth', value: 'cloth' },
-      { label: 'Scarf', value: 'scarf' },
-      { label: 'Shorts', value: 'shorts' },
-      { label: 'Socks', value: 'socks' },
-      { label: 'Kashmiri Scarf', value: 'kashmiriscarf' },
-      { label: 'Caps', value: 'caps' },
-      { label: 'Underwear', value: 'underwear' },
-      { label: 'T-Shirt', value: 'tshirt' },
-      { label: 'Shirt', value: 'shirt' }
-    ];
-
-    return categories;
-  }
 }

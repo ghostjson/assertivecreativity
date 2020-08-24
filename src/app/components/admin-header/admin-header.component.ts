@@ -42,6 +42,11 @@ export class AdminHeaderComponent implements OnInit {
       {
         label: 'Products',
         routerLink: '/admin/products',
+        icon: 'pi pi-briefcase'
+      },
+      {
+        label: 'Categories',
+        routerLink: '/admin/categories',
         icon: 'pi pi-folder'
       }
     ];
