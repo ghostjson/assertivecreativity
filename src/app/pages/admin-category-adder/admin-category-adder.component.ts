@@ -69,6 +69,7 @@ export class AdminCategoryAdderComponent implements OnInit {
         this.categories = this.categories.filter(
           (val) => val.id !== category.id
         );
+        this._prodCategorisationService.deleteCategory(category);
         this.category = new Category();
         this._messageService.add({
           severity: "success",

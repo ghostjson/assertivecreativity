@@ -83,6 +83,10 @@ export class ProductCategorisationService {
   editCategory(category: Category): void {
     this.categories[this.findIndexById(category.id, this.categories)] = category;
   }
+  
+  deleteCategory(category: Category): void {
+    this.categories.splice(this.findIndexById(category.id, this.categories), 1);
+  }
 
   getTags(): Tag[] {
     return this.tags;
