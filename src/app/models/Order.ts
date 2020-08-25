@@ -1,4 +1,18 @@
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { TreeNode } from 'primeng/api';
+
+export class Order {
+  id: number | string;
+  name: string;
+  description: string;
+  totalPrice: number;
+  customForms: CustomFormInput[]
+}
+
+export class CustomFormInput {
+  title: string;
+  options: CustomOption[]
+}
 
 export class CustomOption {
   name: string;
@@ -24,3 +38,5 @@ export class CustomOptionForm extends FormGroup {
   meta: FormGroup;
   chainedOptions?: FormArray
 }
+
+export type OrderSummaryTable = TreeNode[];

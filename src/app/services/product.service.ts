@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { VendorAdminProductService } from '../services/vendor-admin-product.service'
+import { log } from 'console';
 
 @Injectable({
   providedIn: "root",
@@ -628,6 +629,7 @@ export class ProductService {
     ];
 
     let adminProducts = this._vendorProdService.getProducts();
+    console.log('Products from ', adminProducts);
 
     adminProducts.forEach((product) => {
       this.products.push(

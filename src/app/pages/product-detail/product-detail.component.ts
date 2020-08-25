@@ -8,6 +8,7 @@ import { Product, Feature, listAllFeatures } from "../../models/Product";
 import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
+import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
   selector: "app-product-detail",
@@ -33,7 +34,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private common: CommonService,
     private _fb: FormBuilder,
     private _orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private _idService: IdGeneratorService
   ) {
   }
 
@@ -56,7 +58,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   getProduct(): void {
     
     // get product details from the product service
-    let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    let id: number = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     
     this.common.setLoader(true);
     
@@ -151,14 +153,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    */
   onSubmit(): void {
     // this.updateTotalPrice();
-    // let order = this.orderForm.value;
+    let order = this.orderForm.value;
     // order = this.cleanForm(order);
     // order['totalPrice'] = this.priceTotal;
-    // order.id = Math.floor(Math.random() * 100000);
-    // this._orderService.stageOrder(order);
+    order.id = this._idService.getId();
+    this._orderService.stageOrder(order);
     // console.log('submit form');
     // console.log(order);
-    // this.router.navigate(['/orders/723dhg/summary']);
+    this.router.navigate(['/orders', order.id, 'confirm']);
     console.log('order confirm: ', this.orderForm.value)
   }
 }

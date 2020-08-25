@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { TreeNode } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderSummaryTable, CustomOption, CustomFormInput } from 'src/app/models/Order';
 
 @Component({
   selector: 'app-order-confirm',
@@ -12,42 +13,48 @@ export class OrderConfirmComponent implements OnInit {
   order: any;
 
   orderSummary: TreeNode[];
+
+  formSummary: OrderSummaryTable[];
   orderDeliveryDate: Date;
 
   constructor(
     private _orderService: OrderService,
-    private router: Router
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.order = this._orderService.getOrder();
-    console.log('Order object: ', this.order);
+    this.order = this._orderService.getOrder(Number(this._activatedRoute.snapshot.paramMap.get('id')));
+    console.info('Order object: ', this.order);
     this.orderSummary = [];
 
     // add data needed for table component from the order details
-    this.order.features.forEach((feature: any) => {
-      let tableData: TreeNode = {
-        data: {
-          feature: feature.title,
-          input: feature.input,
-          price: feature.price
-        },
-        children: [],
-        expanded: true
-      };
+    this.populateOrderTable()
+  }
 
-      feature.chainedInputs.forEach((chainedInput: any) => {
-        tableData.children.push({
-          data: {
-            feature: chainedInput.title,
-            input: chainedInput.input,
-            price: chainedInput.price
-          }
+  populateOption(option: CustomOption): TreeNode {
+    let tableRow: TreeNode = {
+      data: {
+        title: option.title,
+        input: option.input,
+        price: option.price
+      }
+    };
+
+    return tableRow;
+  }
+
+  // populate order table 
+  populateOrderTable(): void {
+    this.order.customForms.forEach((form: CustomFormInput) => {
+      form.options.forEach((option) => {
+        this.orderSummary.push(this.populateOption(option));
+
+        // populate chained options 
+        option.chainedOptions.forEach((chainedOption) => {
+          this.orderSummary.push(this.populateOption(chainedOption));
         });
       });
-
-      this.orderSummary.push(tableData);
-      console.log(this.orderSummary);
     });
   }
 
@@ -77,7 +84,7 @@ export class OrderConfirmComponent implements OnInit {
     this.order.deliveryDate = this.formatDate(this.order.deliveryDate);
     console.log(this.order);
     this._orderService.placeOrder(this.order);
-    this.router.navigate(['/orders/']);
+    this._router.navigate(['/orders/']);
   }
 }
 

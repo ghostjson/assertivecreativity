@@ -233,9 +233,16 @@ export class OrderService {
    * return an order from orders
    * @return {Object} order placed by the user
    */
-  getOrder(): Object {
-    // return this.orders.find(order => order.id === orderId);
-    return this.stagedOrders[this.stagedOrders.length - 1];
+  getOrder(id: number | string): any {
+    console.info('id received: ', id);
+    let foundOrder = this.stagedOrders.find((order) => {
+      console.info('order iterate: ', order);
+      console.log(order.id === id);
+      return order.id === id;
+    });
+    console.log('found order: ', foundOrder);
+    return foundOrder;
+    // return this.stagedOrders[this.stagedOrders.length - 1];
   }
 
   getOrders(): Object[] {

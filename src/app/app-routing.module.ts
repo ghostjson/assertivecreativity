@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: "form/:formId", component: FormViewComponent },
   { path: "cart", component: CartComponent },
   { path: "orders", component: OrdersComponent },
-  { path: "orders/:id/summary", component: OrderConfirmComponent },
+  { path: "orders/:id/confirm", component: OrderConfirmComponent },
   { path: "checkout", component: CheckoutComponent },
   // { path: "communication", component: CommunicationComponent },
   { path: "communication", component: MessagesComponent },
