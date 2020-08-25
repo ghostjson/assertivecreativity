@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryAdderComponent } from './category-adder.component';
+import { AdminCategoryAdderComponent } from './admin-category-adder.component';
 
 describe('CategoryAdderComponent', () => {
-  let component: CategoryAdderComponent;
-  let fixture: ComponentFixture<CategoryAdderComponent>;
+  let component: AdminCategoryAdderComponent;
+  let fixture: ComponentFixture<AdminCategoryAdderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryAdderComponent ]
+      declarations: [ AdminCategoryAdderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryAdderComponent);
+    fixture = TestBed.createComponent(AdminCategoryAdderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

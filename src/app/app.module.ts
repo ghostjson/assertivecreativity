@@ -111,7 +111,8 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { ProductOptionsComponent } from './components/product-options/product-options.component';
-import { CategoryAdderComponent } from './pages/category-adder/category-adder.component';
+import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
+import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 // import { ProductComponent } from './components/product/product.component';}
 
 @NgModule({
@@ -181,7 +182,8 @@ import { CategoryAdderComponent } from './pages/category-adder/category-adder.co
     AdminSidebarComponent,
     AdminNavbarComponent,
     ProductOptionsComponent,
-    CategoryAdderComponent,
+    AdminCategoryAdderComponent,
+    AdminTagAdderComponent,
     // ProductComponent
   ],
   imports: [

@@ -1,0 +1,213 @@
+<div>
+  <app-admin-header></app-admin-header>
+
+  <div class="tags-table container p-my-5">
+    <p-toast></p-toast>
+
+    <div class="card">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+          <button
+            pButton
+            pRipple
+            label="Export"
+            icon="pi pi-upload"
+            class="p-button-help"
+          ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button
+            pButton
+            pRipple
+            label="New"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNew()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Delete"
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="deleteSelectedTags()"
+            [disabled]="!selectedTags || !selectedTags.length"
+          ></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table
+        #dt
+        [value]="tags"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['label']"
+        [(selection)]="selectedTags"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            <h5 class="p-m-0">Manage Tags</h5>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Search..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem;">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="label">
+              TAG <p-sortIcon field="label"></p-sortIcon>
+            </th>
+            <th>
+              DESCRIPTION
+            </th>
+            <th pSortableColumn="productCount">
+              NO. OF PRODUCTS<p-sortIcon field="productCount"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tag>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="tag"></p-tableCheckbox>
+            </td>
+            <td>{{ tag.label }}</td>
+            <td>{{ summary(tag.description) }}...</td>
+            <td>{{ tag.productCount }}</td>
+            <td>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success p-mr-2"
+                (click)="editTag(tag)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteTag(tag)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{ tags ? tags.length : 0 }} tags.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-dialog
+      [(visible)]="tagDialog"
+      [style]="{ width: '450px' }"
+      header="Tag Details"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div class="p-field">
+          <label for="label">Tag Name</label>
+          <input
+            type="text"
+            pInputText
+            id="label"
+            [(ngModel)]="tag.label"
+            required
+            autofocus
+            (input)="generateSlug()"
+          />
+          <small class="p-invalid" *ngIf="submitted && !tag.label">
+            Tag Name is required.
+          </small>
+        </div>
+        <div class="p-field">
+          <label for="value">Tag Slug</label>
+          <input
+            type="text"
+            pInputText
+            id="value"
+            [(ngModel)]="tag.value"
+            disabled="true"
+            required
+            readonly
+          />
+        </div>
+        <div class="p-field">
+          <label for="value">Tag Category</label>
+          <p-dropdown
+            [options]="categories"
+            [(ngModel)]="tag.parentCategory"
+            [filter]="true"
+            optionLabel="label"
+            [showClear]="true"
+            placeholder="Select a Category"
+          >
+            <ng-template pTemplate="selectedItem">
+              <div
+                *ngIf="tag.parentCategory"
+              >
+                <div>{{ tag.parentCategory.label }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-category pTemplate="item">
+              <div>
+                <div>{{ category.label }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div class="p-field">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            pInputTextarea
+            [(ngModel)]="tag.description"
+            required
+            rows="3"
+            cols="20"
+          ></textarea>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button
+          pButton
+          pRipple
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Add"
+          icon="pi pi-check"
+          class="p-button-text"
+          (click)="saveTag()"
+        ></button>
+      </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -6,12 +6,12 @@ import { Category } from "src/app/models/Category";
 import { IdGeneratorService } from "src/app/services/id-generator.service";
 
 @Component({
-  selector: "app-category-adder",
-  templateUrl: "./category-adder.component.html",
-  styleUrls: ["./category-adder.component.scss"],
+  selector: "app-admin-category-adder",
+  templateUrl: "./admin-category-adder.component.html",
+  styleUrls: ["./admin-category-adder.component.scss"],
   providers: [MessageService, ConfirmationService],
 })
-export class CategoryAdderComponent implements OnInit {
+export class AdminCategoryAdderComponent implements OnInit {
   category: Category;
   categories: Category[];
   selectedCategories: Category[];
