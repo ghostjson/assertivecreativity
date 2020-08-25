@@ -38,7 +38,10 @@
             </p>
             <div class="product-detail__price">
               <h2>Price: </h2>
-              <p-table [value]="product.priceTable">
+              <p-table
+                *ngIf="product.priceTableMode; else basePrice"
+                [value]="product.priceTable"
+              >
                 <ng-template pTemplate="header">
                     <tr>
                         <th></th>
@@ -49,7 +52,7 @@
                 <ng-template pTemplate="body" let-price>
                     <tr>
                         <td>{{price.label}}</td>
-                        <td>{{price.pricePerPiece}}</td>
+                        <td>{{price.pricePerPiece | currency: 'USD'}}</td>
                         <td>
                           <span
                             *ngIf="price.relation === 'mte'; else elseRelation"
@@ -63,6 +66,9 @@
                     </tr>
                 </ng-template>
               </p-table>
+              <span #basePrice>
+                {{product.basePrice | currency: 'USD'}}
+              </span>
             </div>
           </div>
           <div class="card__footer p-mt-5">
