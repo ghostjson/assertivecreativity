@@ -36,6 +36,16 @@ export class ProductService {
   }
 
   getProducts(): Product[] {
+    let adminProducts = this._vendorProdService.getProducts();
+    console.log('Products from ', adminProducts);    
+
+    adminProducts.forEach((product) => {
+      this.products.push(
+        new Product(product)
+      )
+    });
+
+    console.log('Products received: ', this.products);
     return this.products;
   }
 
@@ -184,7 +194,7 @@ export class ProductService {
   initialiseProducts(): void {
     this.products = [
       new Product({
-        id: 1,
+        id: 2384298374,
         name: "Shirt",
         serial: "ss-ff-12",
         description: "This is the description for the product",
@@ -358,7 +368,7 @@ export class ProductService {
         ],
       }),
       new Product({
-        id: 2,
+        id: 8374927,
         name: 'Shorts',
         serial: 'ss-hh-ii-rr-tt',
         description: 'This is the product description for the shirt now',
@@ -483,7 +493,7 @@ export class ProductService {
         ]
       }),
       new Product({
-        id: 3,
+        id: 2763498236,
         name: 'Cloth',
         serial: 'ss-hh-ii-rr-tt',
         description: 'This is the product description for the shirt now',
@@ -627,17 +637,5 @@ export class ProductService {
         ]
       }),
     ];
-
-    let adminProducts = this._vendorProdService.getProducts();
-    console.log('Products from ', adminProducts);
-
-    adminProducts.forEach((product) => {
-      this.products.push(
-        new Product(product)
-      )
-    });
-
-    console.log('Products received: ', this.products);
-    
   }
 }
