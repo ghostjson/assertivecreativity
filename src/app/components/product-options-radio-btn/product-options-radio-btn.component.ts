@@ -17,16 +17,26 @@ export class ProductOptionsRadioBtnComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 
   selectedCategory: any;
-
+  // id of the radio option component
   id: number;
+  // ids for inputs of the option 
+  inputIds: (number | string)[] = [];
 
   constructor(
     public _idGen: IdGeneratorService
   ) { }
 
   ngOnInit(): void {
+    // assign an id to the option component 
     this.id = this._idGen.getId();
     console.info('radio options: ', this.option);
+
+    // generate ids for the inputs of the option 
+    for (let index = 0; index < this.option.inputs.length; index++) {
+      this.inputIds.push(
+        this._idGen.getId()
+      );
+    }
   }
 
   emitValue(event: any): void {

@@ -7,7 +7,7 @@
   </h5>
   <div class="radio-list pl-1">
     <div *ngFor="let input of option.inputs; let radioInd = index" class="customization-input pl-4 mb-1">
-      <p-radioButton
+      <!-- <p-radioButton
         name="radio-group-{{id}}"
         inputId="radio-{{_idGen.getId()}}"
         label="{{input.label}}"
@@ -16,7 +16,18 @@
         styleClass="radio-btn"
         labelStyleClass="radio-btn__label"
         (onClick)="emitValue(input.value)"
-      ></p-radioButton>
+      ></p-radioButton> -->
+      <input 
+        type="radio" 
+        id="radio-input-{{inputIds[radioInd]}}"
+        formControlName="input"
+        class="radio-btn"
+        value="{{input.value}}"
+        (input)="emitValue(input.value)"
+      >
+      <label for="radio-input-{{inputIds[radioInd]}}">
+        {{input.label}}
+      </label>
     </div>
   </div>
 </div>
