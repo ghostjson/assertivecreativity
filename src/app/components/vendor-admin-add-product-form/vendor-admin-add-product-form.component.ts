@@ -67,8 +67,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     this.categories = this._pcService.getCategories();
 
     // intialise tags list
-    this.tags = this.getTags(this.productForm.value.category);
-    console.info(`tags in product form of ${this.productForm.value.category} : ${this.tags}`);
+    this.getTags(this.productForm.value.category);
   }
 
   /**
