@@ -209,7 +209,7 @@ export class ProductForm {
       this.name = _fb.control(null);
       this.serial = _fb.control(null);
       this.description = _fb.control(null);
-      this.category = _fb.control(null);
+      this.category = _fb.control('none');
       this.tags = _fb.control(null);
       this.basePrice = _fb.control(null);
       this.stock = _fb.control(null);

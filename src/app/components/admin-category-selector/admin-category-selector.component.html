@@ -2,5 +2,9 @@
   [formGroup]="formGroup"
   class="input-group"
 >
-  <p-dropdown class="flex-grow-1" [options]="categories" formControlName="category"></p-dropdown>
+  <p-dropdown class="flex-grow-1" 
+    [options]="categories" 
+    formControlName="category"
+    (onChange)="emitCategory()"
+  ></p-dropdown>
 </div>

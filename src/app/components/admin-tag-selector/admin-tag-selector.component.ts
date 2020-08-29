@@ -8,16 +8,9 @@ import { VendorAdminProductService } from 'src/app/services/vendor-admin-product
   templateUrl: './admin-tag-selector.component.html',
   styleUrls: ['./admin-tag-selector.component.scss']
 })
-export class AdminTagSelectorComponent implements OnInit {
+export class AdminTagSelectorComponent {
   @Input() formGroup: FormGroup;
+  @Input() tags: SelectItem[];
 
-  tags: SelectItem[];
-
-  constructor(
-    private _productService: VendorAdminProductService
-  ) { }
-
-  ngOnInit(): void {
-    this.tags = this._productService.getAllTags()
-  }
+  constructor() { }
 }

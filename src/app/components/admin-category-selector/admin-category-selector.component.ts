@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
@@ -9,19 +9,15 @@ import { Category } from 'src/app/models/Category';
   templateUrl: './admin-category-selector.component.html',
   styleUrls: ['./admin-category-selector.component.scss']
 })
-export class AdminCategorySelectorComponent implements OnInit {
+export class AdminCategorySelectorComponent {
   @Input() formGroup: FormGroup;
+  @Input() categories: Category[];
 
-  categories: Category[];
+  @Output() onSelect: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor (
-    private _productService: VendorAdminProductService,
-    private _prodCategorisation: ProductCategorisationService
-  ) {}
+  constructor () {}
 
-  ngOnInit() {
-    this.categories = this._prodCategorisation.getCategories();
-    console.clear();
-    console.info('categories: ', this.categories);
+  emitCategory(): void {
+    this.onSelect.emit(this.formGroup.value.category);
   }
 }

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { FormBuilder, FormArray, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
-import { group } from 'console';
-import { HttpClient } from "@angular/common/http";
 
 import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
-import { Product, PriceTable, PriceGroup, ProductForm } from 'src/app/models/Product';
+import { Product, ProductForm } from 'src/app/models/Product';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
+import { Tag } from 'src/app/models/Tag';
+import { Category } from 'src/app/models/Category';
+import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -21,6 +22,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
   productForm: FormGroup;
   possibleOptions: Object;
+  categories: Category[];
+  tags: Tag[];
 
   colorPicker = {
     cpOutputFormat: "hex",
@@ -30,9 +33,9 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _productService: VendorAdminProductService,
-    private router: Router,
-    private http: HttpClient,
-    private idGen: IdGeneratorService
+    private _router: Router,
+    private _idService: IdGeneratorService,
+    private _pcService: ProductCategorisationService
   ) { }
 
   ngOnInit(): void {
@@ -54,11 +57,18 @@ export class VendorAdminAddProductFormComponent implements OnInit {
       this.productForm = this._fb.group(new ProductForm());
 
       // assign id to the product 
-      this.productForm.patchValue({id: this.idGen.getId()});
+      this.productForm.patchValue({id: this._idService.getId()});
 
       // temporarily add an image as a placeholder until image upload is fixed
       this.productForm.patchValue({image: '/assets/images/demo-product-images/1.jpg'});
     }
+
+    // intialise categories list
+    this.categories = this._pcService.getCategories();
+
+    // intialise tags list
+    this.tags = this.getTags(this.productForm.value.category);
+    console.info(`tags in product form of ${this.productForm.value.category} : ${this.tags}`);
   }
 
   /**
@@ -127,14 +137,15 @@ export class VendorAdminAddProductFormComponent implements OnInit {
      */
   }
 
+  getTags(category: string): void {
+    console.log(`event caught: ${category}`);
+    this.tags = this._pcService.getTagsOf(category);
+  }
+
   /**
    * Submit the form
    */
   onSubmit(): void {
-    // this.productForm.value["features"] = JSON.stringify(
-    //   this.productForm.value["features"]
-    // );
-
     // construct product from form value 
     let submitValue = new Product(this.productForm.value);
 
@@ -152,6 +163,6 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     console.log("Product added");
     console.info(this.productForm.value);
     
-    this.router.navigate(['/admin/products']);
+    this._router.navigate(['/admin/products']);
   }
 }
