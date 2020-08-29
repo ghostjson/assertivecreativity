@@ -65,7 +65,7 @@ export class ProductCategorisationService {
    * Return all the categories as a list
    */
   getCategories(): Category[] {
-    return this.categories;
+    return this.categories.slice();
   }
 
   /**
@@ -74,6 +74,10 @@ export class ProductCategorisationService {
    */
   addCategory(category: Category): void {
     this.categories.push(category);
+
+    // create the tag DB for this category 
+    this.tagDB[category.value] = [];
+    console.log('category added: ', this.categories, this.tagDB);
   }
 
   /**
@@ -89,7 +93,7 @@ export class ProductCategorisationService {
   }
 
   getTags(): Tag[] {
-    return this.tags;
+    return this.tags.slice();
   }
 
   getTagsOf(category: string): Tag[] {
@@ -98,10 +102,18 @@ export class ProductCategorisationService {
 
   addTag(tag: Tag): void {
     this.tags.push(tag);
+    // update tag DB 
+    this.tagDB[tag.parentCategory.value].push(tag);
+    console.log('tag added: ', this.tags, this.tagDB);
   }
 
   editTag(tag: Tag): void {
     this.tags[this.findIndexById(tag.id, this.tags)] = tag;
+    
+    let dbList: Tag[] = this.tagDB[tag.parentCategory.value];
+    dbList[this.findIndexById(tag.id, dbList)] = tag;
+
+    console.log('tag DB updated: ', this.tagDB);
   }
 
   deleteTag(tag: Tag): void {

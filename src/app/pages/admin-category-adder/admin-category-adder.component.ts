@@ -103,6 +103,7 @@ export class AdminCategoryAdderComponent implements OnInit {
       else {
         this.category.id = this._idService.getId();
         this.category.productCount = 0;
+        this.categories.push(this.category);
         this._prodCategorisationService.addCategory(this.category);
         console.info('Categories: ', this.categories);
         this._messageService.add({

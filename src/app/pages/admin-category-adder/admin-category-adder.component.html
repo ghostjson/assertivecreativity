@@ -116,73 +116,79 @@
       </p-table>
     </div>
     
-    <p-dialog
-      [(visible)]="categoryDialog"
-      [style]="{ width: '450px' }"
-      header="Category Details"
-      [modal]="true"
-      styleClass="p-fluid"
-    >
-      <ng-template pTemplate="content">
-        <div class="p-field">
-          <label for="label">Category Name</label>
-          <input
-            type="text"
-            pInputText
-            id="label"
-            [(ngModel)]="category.label"
-            required
-            autofocus
-            (input)="generateSlug()"
-          />
-          <small class="p-invalid" *ngIf="submitted && !category.label"
-            >Category Name is required.</small
-          >
-        </div>
-        <div class="p-field">
-          <label for="value">Category Slug</label>
-          <input
-            type="text"
-            pInputText
-            id="value"
-            [(ngModel)]="category.value"
-            disabled="true"
-            required
-            readonly
-          />
-        </div>
-        <div class="p-field">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            pInputTextarea
-            [(ngModel)]="category.description"
-            required
-            rows="3"
-            cols="20"
-          ></textarea>
-        </div>
-      </ng-template>
-    
-      <ng-template pTemplate="footer">
-        <button
-          pButton
-          pRipple
-          label="Cancel"
-          icon="pi pi-times"
-          class="p-button-text"
-          (click)="hideDialog()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          label="Add"
-          icon="pi pi-check"
-          class="p-button-text"
-          (click)="saveCategory()"
-        ></button>
-      </ng-template>
-    </p-dialog>
+    <form #categoryForm="ngForm">
+      <p-dialog
+        [(visible)]="categoryDialog"
+        [style]="{ width: '450px' }"
+        header="Category Details"
+        [modal]="true"
+        styleClass="p-fluid"
+      >
+        <ng-template pTemplate="content">
+          <div class="p-field">
+            <label for="label">Category Name</label>
+            <input
+              type="text"
+              pInputText
+              id="label"
+              name="label"
+              [(ngModel)]="category.label"
+              required
+              autofocus
+              (input)="generateSlug()"
+            />
+            <small class="p-invalid" *ngIf="submitted && !category.label"
+              >Category Name is required.</small
+            >
+          </div>
+          <div class="p-field">
+            <label for="value">Category Slug</label>
+            <input
+              type="text"
+              pInputText
+              id="value"
+              name="value"
+              [(ngModel)]="category.value"
+              disabled="true"
+              required
+              readonly
+            />
+          </div>
+          <div class="p-field">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              pInputTextarea
+              [(ngModel)]="category.description"
+              required
+              rows="3"
+              cols="20"
+            ></textarea>
+          </div>
+        </ng-template>
+      
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Add"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="saveCategory()"
+            [disabled]="!categoryForm.form.valid"
+          ></button>
+        </ng-template>
+      </p-dialog>
+    </form>
     
     <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
   </div>

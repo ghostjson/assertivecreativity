@@ -93,7 +93,7 @@ export class AdminTagAdderComponent implements OnInit {
 
     if (this.tag.label.trim()) {
       if (this.tag.id) {
-        this.tag[this.findIndexById(this.tag.id)] = this.tag;
+        this.tags[this.findIndexById(this.tag.id)] = this.tag;
         this._prodCategorisationService.editTag(this.tag);
         this._messageService.add({
           severity: "success",
@@ -105,8 +105,8 @@ export class AdminTagAdderComponent implements OnInit {
       else {
         this.tag.id = this._idService.getId();
         this.tag.productCount = 0;
+        this.tags.push(this.tag);
         this._prodCategorisationService.addTag(this.tag);
-        console.info('Tags: ', this._prodCategorisationService.getTags());
         this._messageService.add({
           severity: "success",
           summary: "Successful",
@@ -114,8 +114,8 @@ export class AdminTagAdderComponent implements OnInit {
           life: 3000
         });
       }
-
-      this.tags = [...this._prodCategorisationService.getTags()];
+      
+      this.tags = [...this.tags];
       this.tagDialog = false;
     }
   }
