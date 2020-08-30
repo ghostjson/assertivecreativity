@@ -115,6 +115,7 @@ import { ProductOptionsComponent } from './components/product-options/product-op
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 // import { ProductComponent } from './components/product/product.component';}
 
 @NgModule({
@@ -187,6 +188,7 @@ import { FeaturedProductSliderComponent } from './components/featured-product-sl
     AdminCategoryAdderComponent,
     AdminTagAdderComponent,
     FeaturedProductSliderComponent,
+    ProductCardComponent,
     // ProductComponent
   ],
   imports: [

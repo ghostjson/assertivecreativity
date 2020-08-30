@@ -67,27 +67,9 @@
       <!-- product card list starts -->
       <div class="row row-cols-1 row-cols-lg-3 justify-content-start mb-5">
         <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
-          <div class="card text-left">
-            <img
-              class="card-img-top pt-3 px-3"
-              [src]="product.image"
-              alt="Card image cap"
-            />
-            working
-            <div class="card-body border-top mt-3">
-              <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
-              <p class="card-text text-secondary">{{ product.description }}</p>
-              <p class="card-text font-weight-bolder text-lg">
-                ${{ product.price }}/piece
-              </p>
-            </div>
-            <a
-              class="card-footer more-btn text-center"
-              [routerLink]="['/product', product.id]"
-            >
-              KNOW MORE
-            </a>
-          </div>
+          <app-product-card [product]="product"
+            styleClass="p-mt-3"
+          ></app-product-card>
         </div>
       </div>
       <!-- product card list ends -->

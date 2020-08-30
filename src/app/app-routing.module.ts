@@ -51,7 +51,7 @@ const routes: Routes = [
   // { path: "communication", component: CommunicationComponent },
   { path: "communication", component: MessagesComponent },
   { path: "communication/:id", component: ReadMailComponent },
-  { path: "product/:id", component: ProductDetailComponent },
+  { path: "products/:id", component: ProductDetailComponent },
   { path: "admin", component: VendorAdminDashboardComponent },
   { path: "admin/mail", component: VendorAdminMailComponent },
   { path: "admin/mail/:id", component: ReadMailComponent },

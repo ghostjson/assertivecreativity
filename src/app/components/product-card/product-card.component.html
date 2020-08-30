@@ -1,0 +1,22 @@
+<div class="product-card p-p-3 {{styleClass}}">
+  <div class="product-card__img">
+    <img src="{{product.image}}" alt="{{product.name}}" srcset="">
+  </div>
+  <div class="product-card__name">
+    {{product.name}}
+  </div>
+  <div class="product-card__price"
+    *ngIf="product.basePrice"
+  >
+    {{product.basePrice}}
+  </div>
+  <div class="product-card__desc">
+    {{product.description}}
+  </div>
+  <a 
+    class="btn btn--primary p-mt-2"
+    [routerLink]="['/products', product.id]"
+  >
+    Know More
+  </a>
+</div>

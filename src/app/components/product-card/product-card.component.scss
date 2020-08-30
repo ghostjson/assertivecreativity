@@ -1,0 +1,32 @@
+.product-card {
+  max-width: 300px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+}
+
+.product-card__name {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.btn--primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn--primary:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+img {
+  width: 100%;
+}
