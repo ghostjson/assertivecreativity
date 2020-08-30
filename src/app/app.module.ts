@@ -87,6 +87,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MenubarModule } from 'primeng/menubar';
 import { GalleriaModule } from 'primeng/galleria';
 import { AccordionModule } from 'primeng/accordion';
+import { CarouselModule } from 'primeng/carousel';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -113,6 +114,7 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { ProductOptionsComponent } from './components/product-options/product-options.component';
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
+import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
 // import { ProductComponent } from './components/product/product.component';}
 
 @NgModule({
@@ -184,6 +186,7 @@ import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.
     ProductOptionsComponent,
     AdminCategoryAdderComponent,
     AdminTagAdderComponent,
+    FeaturedProductSliderComponent,
     // ProductComponent
   ],
   imports: [
@@ -225,7 +228,8 @@ import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.
     SidebarModule,
     MenubarModule,
     GalleriaModule,
-    AccordionModule
+    AccordionModule,
+    CarouselModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

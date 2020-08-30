@@ -3,7 +3,9 @@
   <!-- product slider starts -->
   <div class="row mt-5">
     <div class="col-md-12">
-      <app-product-slider [data]="featured"></app-product-slider>
+      <app-featured-product-slider
+        [featured]="featured"
+      ></app-featured-product-slider>
     </div>
   </div>
   <!-- product slider ends -->
@@ -11,10 +13,38 @@
     <!-- category tablist starts -->
     <div class="col-md-3 mb-5">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab" aria-controls="home">Shirts</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" role="tab" aria-controls="profile">Caps</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" role="tab" aria-controls="messages">Scarf</a>
-        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" role="tab" aria-controls="settings">Pants</a>
+        <a
+          class="list-group-item list-group-item-action active"
+          id="list-home-list"
+          data-toggle="list"
+          role="tab"
+          aria-controls="home"
+          >Shirts</a
+        >
+        <a
+          class="list-group-item list-group-item-action"
+          id="list-profile-list"
+          data-toggle="list"
+          role="tab"
+          aria-controls="profile"
+          >Caps</a
+        >
+        <a
+          class="list-group-item list-group-item-action"
+          id="list-messages-list"
+          data-toggle="list"
+          role="tab"
+          aria-controls="messages"
+          >Scarf</a
+        >
+        <a
+          class="list-group-item list-group-item-action"
+          id="list-settings-list"
+          data-toggle="list"
+          role="tab"
+          aria-controls="settings"
+          >Pants</a
+        >
       </div>
     </div>
     <!-- category tablist starts -->
@@ -22,7 +52,12 @@
       <!-- product search bar starts -->
       <div class="row justify-content-start align-items-center search-bar mb-3">
         <div class="col-12 col-md-8 col-lg-6">
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+          />
         </div>
         <div class="col-1 mt-1 mt-md-0">
           <button class="btn btn-dark search-btn" type="submit">Search</button>
@@ -33,14 +68,23 @@
       <div class="row row-cols-1 row-cols-lg-3 justify-content-start mb-5">
         <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
           <div class="card text-left">
-            <img class="card-img-top pt-3 px-3" [src]="product.image" alt="Card image cap">
+            <img
+              class="card-img-top pt-3 px-3"
+              [src]="product.image"
+              alt="Card image cap"
+            />
             working
             <div class="card-body border-top mt-3">
-              <h5 class="card-title font-weight-bold">{{product.name}}</h5>
-              <p class="card-text text-secondary">{{product.description}}</p>
-              <p class="card-text font-weight-bolder text-lg">${{product.price}}/piece</p>
+              <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
+              <p class="card-text text-secondary">{{ product.description }}</p>
+              <p class="card-text font-weight-bolder text-lg">
+                ${{ product.price }}/piece
+              </p>
             </div>
-            <a class="card-footer more-btn text-center" [routerLink]="['/product', product.id]">
+            <a
+              class="card-footer more-btn text-center"
+              [routerLink]="['/product', product.id]"
+            >
               KNOW MORE
             </a>
           </div>

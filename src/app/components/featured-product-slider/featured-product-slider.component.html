@@ -1,0 +1,29 @@
+<p-carousel
+  [value]="featured.slides"
+  styleClass="custom-carousel"
+  [numVisible]="3"
+  [numScroll]="1"
+  [circular]="true"
+  [autoplayInterval]="3000"
+  [responsiveOptions]="responsiveOptions"
+>
+  <ng-template pTemplate="header">
+    <h5>{{ featured.title }}</h5>
+  </ng-template>
+  <ng-template let-product pTemplate="item">
+    <div class="product-item">
+      <div class="product-item-content">
+        <div class="p-mb-3">
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+            class="product-image"
+          />
+        </div>
+        <div>
+          <h4 class="p-mb-1">{{ product.name }}</h4>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

@@ -638,4 +638,50 @@ export class ProductService {
       }),
     ];
   }
+
+  /**
+   * Return the feature products
+   */
+  getFeaturedProducts(): any {
+    return {
+      title: "Today's Offer",
+      slides: [
+        {
+          name: 'test featured product 1',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 2',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 3',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 4',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 5',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 6',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+        {
+          name: 'test featured product 7',
+          image: "https://via.placeholder.com/200x200.png",
+          url: "",
+        },
+      ],
+    };
+  }
 }

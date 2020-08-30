@@ -20,7 +20,7 @@ export class ShopComponent implements OnInit {
   ngOnInit() {
     this.common.setLoader(true);
 
-    this.featured = this.common.featuredProduct();
+    this.featured = this._productService.getFeaturedProducts();
     // this._productService.getProducts().then((res) => {
     //   this.products = res["data"];
 
@@ -28,7 +28,7 @@ export class ShopComponent implements OnInit {
     // });
 
     this.products = this._productService.getProducts();
-    console.info(this.products)
+    console.info(this.products);
     this.common.setLoader(false);
   }
 
