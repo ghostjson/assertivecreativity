@@ -1,0 +1,486 @@
+{
+  "tags": [
+    {
+      "id": 0,
+      "parentCategory": {
+        "id": 0,
+        "label": "None",
+        "description": "Uncategorised",
+        "productCount": 0,
+        "value": "none"
+      },
+      "label": "None",
+      "description": "Untagged",
+      "productCount": 0,
+      "value": null
+    },
+    {
+      "id": 1,
+      "parentCategory": {
+        "id": 1,
+        "label": "Shirts",
+        "description": "This is the shirts category",
+        "productCount": 0,
+        "value": "shirts"
+      },
+      "label": "Sleeveless",
+      "description": "Tag for sleeveless shirts",
+      "productCount": 0,
+      "value": "sleeveless"
+    },
+    {
+      "id": 2,
+      "parentCategory": {
+        "id": 1,
+        "label": "Shirts",
+        "description": "This is the shirts category",
+        "productCount": 0,
+        "value": "shirts"
+      },
+      "label": "Sleeved",
+      "description": "Tag for sleeved shirts",
+      "productCount": 0,
+      "value": "sleeved"
+    },
+    {
+      "id": 3,
+      "label": "Cashmere Feel",
+      "value": "cashmere-feel",
+      "parentCategory": {
+        "id": 3,
+        "label": "Scarves",
+        "description": "This is the scarves category",
+        "value": "scarves",
+        "productCount": 0
+      },
+      "description": "This contains cashmere scarves",
+      "productCount": 0
+    },
+    {
+      "id": 4,
+      "label": "Pashmeena Feel",
+      "value": "pashmeena-feel",
+      "parentCategory": {
+        "id": 3,
+        "label": "Scarves",
+        "description": "This is the scarves category",
+        "value": "scarves",
+        "productCount": 0
+      },
+      "description": "This is Pashmeena Feel scarves",
+      "productCount": 0
+    },
+    {
+      "id": 5,
+      "label": "Solid Color Glossy Polyester",
+      "value": "solid-color-glossy-polyester",
+      "parentCategory": {
+        "id": 3,
+        "label": "Scarves",
+        "description": "This is the scarves category",
+        "value": "scarves",
+        "productCount": 0
+      },
+      "description": "This is Solid Color Glossy Polyester scarves",
+      "productCount": 0
+    },
+    {
+      "id": 6,
+      "label": "Neck Ties",
+      "value": "neck-ties",
+      "parentCategory": {
+        "id": 2,
+        "label": "Ties",
+        "description": "This is the ties category",
+        "value": "ties",
+        "productCount": 0
+      },
+      "description": "This is the neck tie tag",
+      "productCount": 0
+    },
+    {
+      "id": 7,
+      "label": "Bow Tie",
+      "value": "bow-tie",
+      "parentCategory": {
+        "id": 2,
+        "label": "Ties",
+        "description": "This is the ties category",
+        "value": "ties",
+        "productCount": 0
+      },
+      "description": "This is the bow tie tag",
+      "productCount": 0
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "label": "None",
+      "description": "Uncategorised",
+      "productCount": 0,
+      "value": "none"
+    },
+    {
+      "id": 1,
+      "label": "Shirts",
+      "description": "This is the shirts category",
+      "productCount": 0,
+      "value": "shirts"
+    },
+    {
+      "id": 3,
+      "label": "Scarves",
+      "description": "This is the scarves category",
+      "value": "scarves",
+      "productCount": 0
+    },
+    {
+      "id": 2,
+      "label": "Ties",
+      "description": "This is the ties category",
+      "value": "ties",
+      "productCount": 0
+    }
+  ],
+  "products": [
+    {
+      "id": 2,
+      "name": "Cashmere Feel Wholesale Scarves",
+      "serial": "c-f-w-s",
+      "description": "This is Cashmere Feel Wholesale Scarves",
+      "category": "scarves",
+      "tags": ["cashmere-feel"],
+      "basePrice": null,
+      "stock": 1000,
+      "stockStatus": "instock",
+      "sales": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "priceTableMode": true,
+      "priceTable": [
+        {
+          "label": "base",
+          "pricePerPiece": 12,
+          "quantity": 100,
+          "relation": "lte"
+        },
+        {
+          "label": "wholesale",
+          "pricePerPiece": 5,
+          "quantity": 100,
+          "relation": "mte"
+        }
+      ],
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Enter Order Specifications",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Enter the color of the scarf",
+              "name": "Colors",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Violet",
+                  "value": "#c70b84",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select A pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Patterned",
+                          "value": "patterned"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                },
+                {
+                  "label": "Greenish",
+                  "value": "#42bf10",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Checkered",
+                          "value": "checkered"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "title": "Select a size",
+              "name": "Dropdown Selection",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Large",
+                  "value": "large",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Medium",
+                  "value": "medium",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Small",
+                  "value": "small",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "radioBtn",
+              "title": "Select type of location",
+              "name": "Radio Buttons",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Home (9 AM to 9 PM delivery)",
+                  "value": "home-(9-am-to-9-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Office (10 AM to 5 PM delivery)",
+                  "value": "office-(10-am-to-5-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "title": "Enter any further instructions for delivery",
+              "name": "Text input",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Enter instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Pashmeena Scarf",
+      "serial": "p-s-s-s",
+      "description": "This is Pashmeena Scarf",
+      "category": "scarves",
+      "tags": ["pashmeena-feel"],
+      "basePrice": null,
+      "stock": 1000,
+      "stockStatus": "instock",
+      "sales": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "priceTableMode": true,
+      "priceTable": [
+        {
+          "label": "base",
+          "pricePerPiece": 12,
+          "quantity": 100,
+          "relation": "lte"
+        },
+        {
+          "label": "wholesale",
+          "pricePerPiece": 5,
+          "quantity": 100,
+          "relation": "mte"
+        }
+      ],
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Enter Order Specifications",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Enter the color of the scarf",
+              "name": "Colors",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Violet",
+                  "value": "#c70b84",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select A pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Patterned",
+                          "value": "patterned"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                },
+                {
+                  "label": "Greenish",
+                  "value": "#42bf10",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Checkered",
+                          "value": "checkered"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "title": "Select a size",
+              "name": "Dropdown Selection",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Large",
+                  "value": "large",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Medium",
+                  "value": "medium",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Small",
+                  "value": "small",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "radioBtn",
+              "title": "Select type of location",
+              "name": "Radio Buttons",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Home (9 AM to 9 PM delivery)",
+                  "value": "home-(9-am-to-9-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Office (10 AM to 5 PM delivery)",
+                  "value": "office-(10-am-to-5-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "title": "Enter any further instructions for delivery",
+              "name": "Text input",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Enter instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

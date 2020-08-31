@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../models/Category';
 import { Tag } from '../models/Tag';
+import { HttpClient } from '@angular/common/http';
+import { Observable, pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,37 +13,39 @@ export class ProductCategorisationService {
   tags: Tag[];
   tagDB: Object;
 
-  constructor() {
+  constructor(
+    private _http: HttpClient
+  ) {
     // categories list 
     this.categories = [
-      new Category({
+      {
         id: 0,
         label: 'None',
         description: 'Uncategorised',
         productCount: 0,
         value: 'none'
-      }),
-      new Category({
+      },
+      {
         id: 1,
         label: 'Shirts',
         description: 'This is the shirts category',
         productCount: 0,
         value: 'shirts'
-      }),
-      new Category({
-        id: 2,
-        label: 'Pants',
-        description: 'This is the pants category ',
-        productCount: 0,
-        value: 'pants'
-      }),
-      new Category({
+      },
+      {
         id: 3,
-        label: 'Night Wear',
-        description: 'This is the night wear category',
-        productCount: 0,
-        value: 'night-wear'
-      })
+        label: 'Scarves',
+        description: 'This is the scarves category',
+        value: 'scarves',
+        productCount: 0
+      },
+      {
+        id: 2,
+        label: 'Ties',
+        description: 'This is the ties category',
+        value: 'ties',
+        productCount: 0
+      }
     ];
     
     // tags dictionary
@@ -95,10 +100,10 @@ export class ProductCategorisationService {
 
     // tags list
     this.tags = [
-      new Tag({
-        id: null,
+      {
+        id: 0,
         parentCategory: {
-          id: null,
+          id: 0,
           label: 'None',
           description: 'Uncategorised',
           productCount: 0,
@@ -108,9 +113,9 @@ export class ProductCategorisationService {
         description: 'Untagged',
         productCount: 0,
         value: null
-      }),
-      new Tag({
-        id: 0,
+      },
+      {
+        id: 1,
         parentCategory: {
           id: 1,
           label: 'Shirts',
@@ -122,9 +127,9 @@ export class ProductCategorisationService {
         description: 'Tag for sleeveless shirts',
         productCount: 0,
         value: 'sleeveless'
-      }),
-      new Tag({
-        id: 1,
+      },
+      {
+        id: 2,
         parentCategory: {
           id: 1,
           label: 'Shirts',
@@ -136,7 +141,77 @@ export class ProductCategorisationService {
         description: 'Tag for sleeved shirts',
         productCount: 0,
         value: 'sleeved'
-      })
+      },
+      {
+        id: 3,
+        label: 'Cashmere Feel',
+        value: 'cashmere-feel',
+        parentCategory: {
+          id: 3,
+          label: 'Scarves',
+          description: 'This is the scarves category',
+          value: 'scarves',
+          productCount: 0
+        },
+        description: 'This contains cashmere scarves',
+        productCount: 0
+      },
+      {
+        id: 4,
+        label: 'Pashmeena Feel',
+        value: 'pashmeena-feel',
+        parentCategory: {
+          id: 3,
+          label: 'Scarves',
+          description: 'This is the scarves category',
+          value: 'scarves',
+          productCount: 0
+        },
+        description: 'This is Pashmeena Feel scarves',
+        productCount: 0
+      },
+      {
+        id: 5,
+        label: 'Solid Color Glossy Polyester',
+        value: 'solid-color-glossy-polyester',
+        parentCategory: {
+          id: 3,
+          label: 'Scarves',
+          description: 'This is the scarves category',
+          value: 'scarves',
+          productCount: 0
+        },
+        description: 'This is Solid Color Glossy Polyester scarves',
+        productCount: 0
+      },
+      {
+        id: 6,
+        label: 'Neck Ties',
+        value: 'neck-ties',
+        parentCategory: {
+          id: 2,
+          label: 'Ties',
+          description: 'This is the ties category',
+          value: 'ties',
+          productCount: 0
+        },
+        description: 'This is the neck tie tag',
+        productCount: 0
+      },
+      {
+        id: 7,
+        label: 'Bow Tie',
+        value: 'bow-tie',
+        parentCategory: {
+          id: 2,
+          label: 'Ties',
+          description: 'This is the ties category',
+          value: 'ties',
+          productCount: 0
+        },
+        description: 'This is the bow tie tag',
+        productCount: 0
+      }
     ];
   }
 
@@ -175,15 +250,18 @@ export class ProductCategorisationService {
     return this.tags.slice();
   }
 
-  getTagsOf(category: string): Tag[] {
-    let tags: Tag[] = this.tagDB[category];
+  getTagsOf(category: string): Observable<any> {
+    const BASE_URL: string = 'http://localhost:3000';
+    // let tags: Tag[] = this.tagDB[category];
 
     // set tags to empty array if not found 
-    if (!tags) {
-      tags = [];
-    }
-    
-    return tags;
+    // if (!tags) {
+    //   tags = [];
+    // }
+    // return tags;
+    console.info('request url: ', `${BASE_URL}/tags/?parentCategory.value=${category}`);
+    return this._http
+      .get(`${BASE_URL}/tags/?parentCategory.value=${category}`);
   }
 
   addTag(tag: Tag): void {

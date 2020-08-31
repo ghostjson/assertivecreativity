@@ -8,6 +8,7 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { Tag } from 'src/app/models/Tag';
 import { Category } from 'src/app/models/Category';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-vendor-admin-add-product-form",
@@ -24,6 +25,8 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   possibleOptions: Object;
   categories: Category[];
   tags: Tag[];
+
+  tagSub: any;
 
   colorPicker = {
     cpOutputFormat: "hex",
@@ -68,6 +71,10 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
     // intialise tags list
     this.getTags(this.productForm.value.category);
+  }
+
+  ngOnDestroy(): void {
+    this.tagSub.unsubscribe();
   }
 
   /**
@@ -138,7 +145,11 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
   getTags(category: string): void {
     console.log(`event caught: ${category}`);
-    this.tags = this._pcService.getTagsOf(category);
+    this.tagSub = this._pcService.getTagsOf(category)
+      .subscribe(tags => {
+        this.tags = tags;
+        console.log('tags found in admin form: ', this.tags);
+      });
   }
 
   /**
