@@ -88,6 +88,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { GalleriaModule } from 'primeng/galleria';
 import { AccordionModule } from 'primeng/accordion';
 import { CarouselModule } from 'primeng/carousel';
+import { PaginatorModule } from 'primeng/paginator';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -231,7 +233,9 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     MenubarModule,
     GalleriaModule,
     AccordionModule,
-    CarouselModule
+    CarouselModule,
+    PaginatorModule,
+    CheckboxModule
   ],
   entryComponents: [
     // VendorAdminProductColorChooserComponent

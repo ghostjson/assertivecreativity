@@ -14,11 +14,32 @@ export class ProductCategorisationService {
     // categories list 
     this.categories = [
       new Category({
-        id: null,
+        id: 0,
         label: 'None',
         description: 'Uncategorised',
         productCount: 0,
         value: 'none'
+      }),
+      new Category({
+        id: 1,
+        label: 'Shirts',
+        description: 'This is the shirts category',
+        productCount: 0,
+        value: 'shirts'
+      }),
+      new Category({
+        id: 2,
+        label: 'Pants',
+        description: 'This is the pants category ',
+        productCount: 0,
+        value: 'pants'
+      }),
+      new Category({
+        id: 3,
+        label: 'Night Wear',
+        description: 'This is the night wear category',
+        productCount: 0,
+        value: 'night-wear'
       })
     ];
     
@@ -28,7 +49,7 @@ export class ProductCategorisationService {
         new Tag({
           id: null,
           parentCategory: {
-            id: null,
+            id: 0,
             label: 'None',
             description: 'Uncategorised',
             productCount: 0,
@@ -38,6 +59,36 @@ export class ProductCategorisationService {
           description: 'Untagged',
           productCount: 0,
           value: null
+        })
+      ],
+      'shirts': [
+        new Tag({
+          id: 0,
+          parentCategory: {
+            id: 1,
+            label: 'Shirts',
+            description: 'This is the shirts category',
+            productCount: 0,
+            value: 'shirts'
+          },
+          label: 'Sleeveless',
+          description: 'Tag for sleeveless shirts',
+          productCount: 0,
+          value: 'sleeveless'
+        }),
+        new Tag({
+          id: 1,
+          parentCategory: {
+            id: 1,
+            label: 'Shirts',
+            description: 'This is the shirts category',
+            productCount: 0,
+            value: 'shirts'
+          },
+          label: 'Sleeved',
+          description: 'Tag for sleeved shirts',
+          productCount: 0,
+          value: 'sleeved'
         })
       ]
     };
@@ -57,6 +108,34 @@ export class ProductCategorisationService {
         description: 'Untagged',
         productCount: 0,
         value: null
+      }),
+      new Tag({
+        id: 0,
+        parentCategory: {
+          id: 1,
+          label: 'Shirts',
+          description: 'This is the shirts category',
+          productCount: 0,
+          value: 'shirts'
+        },
+        label: 'Sleeveless',
+        description: 'Tag for sleeveless shirts',
+        productCount: 0,
+        value: 'sleeveless'
+      }),
+      new Tag({
+        id: 1,
+        parentCategory: {
+          id: 1,
+          label: 'Shirts',
+          description: 'This is the shirts category',
+          productCount: 0,
+          value: 'shirts'
+        },
+        label: 'Sleeved',
+        description: 'Tag for sleeved shirts',
+        productCount: 0,
+        value: 'sleeved'
       })
     ];
   }
@@ -97,7 +176,14 @@ export class ProductCategorisationService {
   }
 
   getTagsOf(category: string): Tag[] {
-    return this.tagDB[category];
+    let tags: Tag[] = this.tagDB[category];
+
+    // set tags to empty array if not found 
+    if (!tags) {
+      tags = [];
+    }
+    
+    return tags;
   }
 
   addTag(tag: Tag): void {
