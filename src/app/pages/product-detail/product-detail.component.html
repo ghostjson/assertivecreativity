@@ -1,7 +1,10 @@
 <div>
   <app-header></app-header>
   
-  <div class="container p-mt-5">
+  <div
+    *ngIf="product !== null && orderForm !== null"
+    class="container p-mt-5"
+  >
     <div class="p-grid p-justify-between">
       <div class="p-lg-5 p-p-2">
         <p-galleria 
@@ -91,6 +94,7 @@
     <div 
       [formGroup]="orderForm"
       class="p-grid"
+      id="forms"
     >
       <!-- <div class="p-lg-8 p-p-2">
         <div class="card form-overview">
@@ -100,10 +104,11 @@
       <div
         class="p-lg-8 p-p-2"
       >
-        <p-accordion>
+        <p-accordion multiple="true">
           <p-accordionTab 
             *ngFor="let customForm of customForms().controls; let formInd = index"
-            [header]="product.customForms[formInd].title"
+            selected="true"
+            header="{{product.customForms[formInd].title}}"
           >
             <ng-container formArrayName="customForms">
               <div

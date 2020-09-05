@@ -150,7 +150,9 @@
       "serial": "c-f-w-s",
       "description": "This is Cashmere Feel Wholesale Scarves",
       "category": "scarves",
-      "tags": ["cashmere-feel"],
+      "tags": [
+        "cashmere-feel"
+      ],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -319,7 +321,9 @@
       "serial": "p-s-s-s",
       "description": "This is Pashmeena Scarf",
       "category": "scarves",
-      "tags": ["pashmeena-feel"],
+      "tags": [
+        "pashmeena-feel"
+      ],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -481,6 +485,348 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Cashmere Feel Wholesale Scarves",
+      "serial": "c-f-w-s",
+      "description": "This is Cashmere Feel Wholesale Scarves",
+      "category": "scarves",
+      "tags": [
+        "cashmere-feel"
+      ],
+      "basePrice": null,
+      "stock": 1000,
+      "stockStatus": "instock",
+      "sales": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "priceTableMode": true,
+      "priceTable": [
+        {
+          "label": "base",
+          "pricePerPiece": 12,
+          "quantity": 100,
+          "relation": "lte"
+        },
+        {
+          "label": "wholesale",
+          "pricePerPiece": 5,
+          "quantity": 100,
+          "relation": "mte"
+        }
+      ],
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Enter Order Specifications",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Enter the color of the scarf",
+              "name": "Colors",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Violet",
+                  "value": "#c70b84",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select A pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Patterned",
+                          "value": "patterned"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                },
+                {
+                  "label": "Greenish",
+                  "value": "#42bf10",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Checkered",
+                          "value": "checkered"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "title": "Select a size",
+              "name": "Dropdown Selection",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Large",
+                  "value": "large",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Medium",
+                  "value": "medium",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Small",
+                  "value": "small",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "radioBtn",
+              "title": "Select type of location",
+              "name": "Radio Buttons",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Home (9 AM to 9 PM delivery)",
+                  "value": "home-(9-am-to-9-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Office (10 AM to 5 PM delivery)",
+                  "value": "office-(10-am-to-5-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "title": "Enter any further instructions for delivery",
+              "name": "Text input",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Enter instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Cashmere Feel Wholesale Tie",
+      "serial": "c-f-w-t",
+      "description": "This is Cashmere Feel Wholesale Bow Tie",
+      "category": "ties",
+      "tags": [
+        "bow-tie"
+      ],
+      "basePrice": null,
+      "stock": 1000,
+      "stockStatus": "instock",
+      "sales": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "priceTableMode": true,
+      "priceTable": [
+        {
+          "label": "base",
+          "pricePerPiece": 12,
+          "quantity": 100,
+          "relation": "lte"
+        },
+        {
+          "label": "wholesale",
+          "pricePerPiece": 5,
+          "quantity": 100,
+          "relation": "mte"
+        }
+      ],
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Enter Order Specifications",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Enter the color of the scarf",
+              "name": "Colors",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Violet",
+                  "value": "#c70b84",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select A pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Patterned",
+                          "value": "patterned"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                },
+                {
+                  "label": "Greenish",
+                  "value": "#42bf10",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Plain",
+                          "value": "plain"
+                        },
+                        {
+                          "label": "Checkered",
+                          "value": "checkered"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": "dropdown"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "title": "Select a size",
+              "name": "Dropdown Selection",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Large",
+                  "value": "large",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Medium",
+                  "value": "medium",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Small",
+                  "value": "small",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "radioBtn",
+              "title": "Select type of location",
+              "name": "Radio Buttons",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Home (9 AM to 9 PM delivery)",
+                  "value": "home-(9-am-to-9-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Office (10 AM to 5 PM delivery)",
+                  "value": "office-(10-am-to-5-pm-delivery)",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "title": "Enter any further instructions for delivery",
+              "name": "Text input",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Enter instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 5
     }
   ]
 }

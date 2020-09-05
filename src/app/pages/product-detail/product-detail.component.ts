@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, take } from 'rxjs/operators';
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, AbstractControl, FormArray, FormGroup, Validators, Validator } from '@angular/forms';
-import { Product, Feature, listAllFeatures } from "../../models/Product";
+import { FormArray, FormGroup } from '@angular/forms';
+import { Product, listAllFeatures } from "../../models/Product";
 import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
   styleUrls: ["./product-detail.component.scss"],
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
-  public image_set;
+  public image_set: any[];
 
   private slideDOM;
 
@@ -28,60 +28,79 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   priceTotal: number;
 
+  currentUrl: string;
+
   constructor(
     public _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
-    private common: CommonService,
-    private _fb: FormBuilder,
+    private _common: CommonService,
     private _orderService: OrderService,
-    private router: Router,
+    private _router: Router,
     private _idService: IdGeneratorService
   ) {
   }
 
-  async ngOnInit() {
-    // get the products from the server
-    this.getProduct();
+  ngOnInit(): void {
+    this.currentUrl =  this._router.url;
+    
+    // get the product from the server
+    // and do the intialise everything
+    this.initialise();
 
     // list of all possible feature
     this.possibleFeatures = listAllFeatures();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     // unsubscribe to form value changes
-    // this.formSubscription.unsubscribe();
+    this.formSubscription.unsubscribe();
   }
 
   /**
    * get product from the server
    */
-  getProduct(): void {
+  initialise(): void {
+    this.orderForm = null;
+    this.product = null;
     
     // get product details from the product service
     let id: number = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     
-    this.common.setLoader(true);
+    this._common.setLoader(true);
     
-    this.product = this._productService.getProduct(id);
-    console.info('Product Received: ', this.product);
-    
-    this.image_set = [
-      {
-        src: this.product.image,
-        title: 'Image 1 title',
-        alt: 'Image alt for testing'
-      }
-    ];
-
-    this.orderForm = this._orderService.newOrderForm(this.product);
-    console.info('Order Form: ', this.orderForm);
-    
-    this.initialiseForms();
-    this.common.setLoader(false);
+    this._productService.getProduct(id)
+      .pipe(take(1))
+      .subscribe(product => {
+        this.product = product;
+        console.info('Product Received: ', this.product);
+        
+        this.image_set = [
+          {
+            src: this.product.image,
+            title: 'Image 1 title',
+            alt: 'Image alt for testing'
+          }
+        ];
+        
+        this.orderForm = this._orderService.newOrderForm(this.product);
+        console.info('Order Form: ', this.orderForm);
+        
+        this.initialiseForms();
+        this._common.setLoader(false);
+      });  
   }
 
-
+  /**
+   * Initialisation steps for the order form
+   */
   initialiseForms(): void {
+    this.formSubscription = this.orderForm.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(() => {
+        this.updateTotalPrice();
+      });
     console.log('form initiliased');
   }
 
@@ -98,36 +117,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    * update the total price of the order
    */
   updateTotalPrice(): void {
-    // add the base price
-    this.priceTotal = this.orderForm.value.price;
-
-    // loop through all features and add their prices
-    for (let i = 0; i < this.orderForm.value.features.length; ++i) {
-      if (this.orderForm.value.features[i].input) {
-        this.priceTotal += this.orderForm.value.features[i].price;
-      }
-
-      // loop through all the sub features of a feature and add their prices
-      for (let j = 0; j < this.orderForm.value.features[i].chainedInputs.length; ++j) {
-        if (this.orderForm.value.features[i].chainedInputs[j].input) {
-          this.priceTotal += this.orderForm.value.features[i].chainedInputs[j].price;
-        }
-      }
-    }
-    console.log('Total Price: ', this.priceTotal);
-  }
-
-  /**
-   * do the necessary when the customisation form updates
-   */
-  onFormChanges(): void {
-    this.formSubscription = this.orderForm.valueChanges
-      .pipe(
-        debounceTime(500)
-      )
-      .subscribe(() => {
-        this.updateTotalPrice();
-      });
+    /**
+     * TODO: Implement updating prices
+     */
+    this.priceTotal = 0;
   }
 
   /**
@@ -155,12 +148,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     // this.updateTotalPrice();
     let order = this.orderForm.value;
     // order = this.cleanForm(order);
-    // order['totalPrice'] = this.priceTotal;
+    order['totalPrice'] = this.priceTotal;
     order.id = this._idService.getId();
     this._orderService.stageOrder(order);
-    // console.log('submit form');
-    // console.log(order);
-    this.router.navigate(['/orders', order.id, 'confirm']);
+    this._router.navigate(['/orders', order.id, 'confirm']);
     console.log('order confirm: ', this.orderForm.value)
   }
 }

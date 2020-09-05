@@ -3,16 +3,14 @@ import {
   Product,
   listCustomOptions,
   listAllFeatures,
-  Form,
-  ProductForm
+  Form
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
-import { VendorAdminProductService } from '../services/vendor-admin-product.service'
-import { log } from 'console';
-import { Observable } from 'rxjs';
+import { VendorAdminProductService } from "../services/vendor-admin-product.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -21,12 +19,11 @@ export class ProductService {
   host: string;
   products: Product[];
   possibleOptions: Object;
-  API_URL = 'http://localhost:3000';
+  API_URL = "http://localhost:3000";
 
   constructor(
-    private _http: HttpClient, 
-    private _fb: FormBuilder,
-    private _vendorProdService: VendorAdminProductService
+    private _http: HttpClient,
+    private _fb: FormBuilder
   ) {
     this.host = environment.apiUrl;
 
@@ -34,22 +31,45 @@ export class ProductService {
     this.possibleOptions = listAllFeatures();
   }
 
-  getProducts(): Observable<any> {
-    return this._http.get(`${this.API_URL}/products`);
+  getProducts(filter: any={categories: [], tags: []}): Observable<any> {
+    let reqLink: string = `${this.productsLink()}?`;
+
+    // add the categories 
+    filter.categories.forEach((category: string) => {
+      reqLink += `category=${category}&`;
+    });
+
+    // add the tags 
+    filter.tags.forEach((tag: string) => {
+      reqLink += `tags=${tag}&`;
+    });
+
+    console.info('products request link: ', reqLink);
+    return this._http.get(reqLink);
   }
 
-  // async getProduct(id: number): Promise<any> {
-  getProduct(id: number): Product {
-    // let res = await this._http.get(this.host + `/products/${id}`).toPromise();
+  /**
+   * Return the product from the server
+   * @param id Id of the product
+   */
+  getProduct(id: number): Observable<any> {
+    console.log('product link: ', this.productLink(id));
+    return this._http.get(this.productLink(id));
+  }
 
-    // return new Promise((resolve, reject) => {
-    //   res["data"]["features"] = JSON.parse(res["data"]["features"]);
-    //   resolve(res);
-    // });
+  /**
+   * Return the products link
+   */
+  productsLink(): string {
+    return `${this.API_URL}/products`;
+  }
 
-    return this.products.find((product) => {
-      return product.id === id;
-    });
+  /**
+   * Return link to the product details in the api
+   * @param id Id of the product
+   */
+  productLink(id: number): string {
+    return `${this.productsLink()}/${id}`;
   }
 
   /**
@@ -66,14 +86,11 @@ export class ProductService {
     return this.possibleOptions;
   }
 
-
   /**
    * Create an option to insert to the custom form
    * @param option option to insert
    */
-  newFormOption(
-    option: any
-  ): FormGroup {
+  newFormOption(option: any): FormGroup {
     let validators: Validators[] = [];
 
     let optionTemplate: any = {
@@ -85,21 +102,18 @@ export class ProductService {
       meta: {
         isChained: option.meta.isChained,
         chainedOpsHidden: true,
-      }
+      },
     };
-    
+
     if (!option.meta.isChained) {
-      // push the validators 
-      validators.push(
-        Validators.required
-      );
+      // push the validators
+      validators.push(Validators.required);
 
       // add chained options form array
       optionTemplate.chainedOptions = this._fb.array([]);
-      
     }
 
-    console.log('option created: ', this._fb.group(optionTemplate).value);
+    console.log("option created: ", this._fb.group(optionTemplate).value);
 
     return this._fb.group(optionTemplate);
   }
@@ -110,9 +124,7 @@ export class ProductService {
    * @param optionsArray Options formArray to add the option to
    */
   addFormOption(option: any, optionsArray: FormArray): void {
-    optionsArray.push(
-      this.newFormOption(option)
-    );
+    optionsArray.push(this.newFormOption(option));
   }
 
   /**
@@ -124,13 +136,11 @@ export class ProductService {
       id: form.id,
       title: form.title,
       parentForm: form.parentForm,
-      options: this._fb.array([])
+      options: this._fb.array([]),
     };
 
     form.options.forEach((option) => {
-      formTemplate.options.push(
-        this.newFormOption(option)
-      );
+      formTemplate.options.push(this.newFormOption(option));
     });
 
     return this._fb.group(formTemplate);
@@ -142,9 +152,9 @@ export class ProductService {
    * @param formArray formArray to insert the formGroup
    */
   addForm(form: Form, formArray: FormArray): void {
-    formArray.push(this.newForm(form))
+    formArray.push(this.newForm(form));
   }
-  
+
   /**
    * Return tags available
    */
@@ -158,7 +168,6 @@ export class ProductService {
 
     return tags;
   }
-
 
   /**
    * Return all the categories
@@ -188,37 +197,37 @@ export class ProductService {
       title: "Today's Offer",
       slides: [
         {
-          name: 'test featured product 1',
+          name: "test featured product 1",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 2',
+          name: "test featured product 2",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 3',
+          name: "test featured product 3",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 4',
+          name: "test featured product 4",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 5',
+          name: "test featured product 5",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 6',
+          name: "test featured product 6",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
         {
-          name: 'test featured product 7',
+          name: "test featured product 7",
           image: "https://via.placeholder.com/200x200.png",
           url: "",
         },
