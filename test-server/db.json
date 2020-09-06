@@ -141,6 +141,13 @@
       "description": "This is the ties category",
       "value": "ties",
       "productCount": 0
+    },
+    {
+      "id": 4,
+      "label": "Lower Wear",
+      "description": "This is the lower wear category",
+      "value": "lower-wear",
+      "productCount": 0
     }
   ],
   "products": [

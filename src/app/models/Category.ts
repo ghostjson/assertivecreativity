@@ -1,5 +1,5 @@
 export class Category {
-  id: number;
+  id?: number;
   label: string;
   description: string;
   value: string;
@@ -14,7 +14,6 @@ export class Category {
       this.productCount = initial.productCount;
     }
     else {
-      this.id = null;
       this.label = null;
       this.description = null;
       this.value = null;

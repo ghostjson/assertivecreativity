@@ -1,7 +1,7 @@
 import { Category } from './Category';
 
 export class Tag {
-  id: number | string;
+  id?: number;
   parentCategory: Category;
   label: string;
   description: string;

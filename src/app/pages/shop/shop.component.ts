@@ -31,7 +31,11 @@ export class ShopComponent implements OnInit {
 
     this.getProducts();
 
-    this.categories = this._pcService.getCategories();
+    this._pcService.getCategories()
+      .pipe(take(1))
+      .subscribe((categories: Tag[]) => {
+        this.categories = categories;
+      });
   }
 
   /**

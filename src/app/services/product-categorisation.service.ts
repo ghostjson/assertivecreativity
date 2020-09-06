@@ -9,279 +9,110 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductCategorisationService {
-  categories: Category[];
-  tags: Tag[];
-  tagDB: Object;
+  API_URL: string = 'http://localhost:3000';
 
   constructor(
     private _http: HttpClient
-  ) {
-    // categories list 
-    this.categories = [
-      {
-        id: 0,
-        label: 'None',
-        description: 'Uncategorised',
-        productCount: 0,
-        value: 'none'
-      },
-      {
-        id: 1,
-        label: 'Shirts',
-        description: 'This is the shirts category',
-        productCount: 0,
-        value: 'shirts'
-      },
-      {
-        id: 3,
-        label: 'Scarves',
-        description: 'This is the scarves category',
-        value: 'scarves',
-        productCount: 0
-      },
-      {
-        id: 2,
-        label: 'Ties',
-        description: 'This is the ties category',
-        value: 'ties',
-        productCount: 0
-      }
-    ];
-    
-    // tags dictionary
-    this.tagDB = {
-      'none': [
-        new Tag({
-          id: null,
-          parentCategory: {
-            id: 0,
-            label: 'None',
-            description: 'Uncategorised',
-            productCount: 0,
-            value: 'none'
-          },
-          label: 'None',
-          description: 'Untagged',
-          productCount: 0,
-          value: null
-        })
-      ],
-      'shirts': [
-        new Tag({
-          id: 0,
-          parentCategory: {
-            id: 1,
-            label: 'Shirts',
-            description: 'This is the shirts category',
-            productCount: 0,
-            value: 'shirts'
-          },
-          label: 'Sleeveless',
-          description: 'Tag for sleeveless shirts',
-          productCount: 0,
-          value: 'sleeveless'
-        }),
-        new Tag({
-          id: 1,
-          parentCategory: {
-            id: 1,
-            label: 'Shirts',
-            description: 'This is the shirts category',
-            productCount: 0,
-            value: 'shirts'
-          },
-          label: 'Sleeved',
-          description: 'Tag for sleeved shirts',
-          productCount: 0,
-          value: 'sleeved'
-        })
-      ]
-    };
+  ) {}
+  
+  /**
+   * Return the categories url
+   */
+  categoriesUrl(): string {
+    return `${this.API_URL}/categories`;
+  }
 
-    // tags list
-    this.tags = [
-      {
-        id: 0,
-        parentCategory: {
-          id: 0,
-          label: 'None',
-          description: 'Uncategorised',
-          productCount: 0,
-          value: 'none'
-        },
-        label: 'None',
-        description: 'Untagged',
-        productCount: 0,
-        value: null
-      },
-      {
-        id: 1,
-        parentCategory: {
-          id: 1,
-          label: 'Shirts',
-          description: 'This is the shirts category',
-          productCount: 0,
-          value: 'shirts'
-        },
-        label: 'Sleeveless',
-        description: 'Tag for sleeveless shirts',
-        productCount: 0,
-        value: 'sleeveless'
-      },
-      {
-        id: 2,
-        parentCategory: {
-          id: 1,
-          label: 'Shirts',
-          description: 'This is the shirts category',
-          productCount: 0,
-          value: 'shirts'
-        },
-        label: 'Sleeved',
-        description: 'Tag for sleeved shirts',
-        productCount: 0,
-        value: 'sleeved'
-      },
-      {
-        id: 3,
-        label: 'Cashmere Feel',
-        value: 'cashmere-feel',
-        parentCategory: {
-          id: 3,
-          label: 'Scarves',
-          description: 'This is the scarves category',
-          value: 'scarves',
-          productCount: 0
-        },
-        description: 'This contains cashmere scarves',
-        productCount: 0
-      },
-      {
-        id: 4,
-        label: 'Pashmeena Feel',
-        value: 'pashmeena-feel',
-        parentCategory: {
-          id: 3,
-          label: 'Scarves',
-          description: 'This is the scarves category',
-          value: 'scarves',
-          productCount: 0
-        },
-        description: 'This is Pashmeena Feel scarves',
-        productCount: 0
-      },
-      {
-        id: 5,
-        label: 'Solid Color Glossy Polyester',
-        value: 'solid-color-glossy-polyester',
-        parentCategory: {
-          id: 3,
-          label: 'Scarves',
-          description: 'This is the scarves category',
-          value: 'scarves',
-          productCount: 0
-        },
-        description: 'This is Solid Color Glossy Polyester scarves',
-        productCount: 0
-      },
-      {
-        id: 6,
-        label: 'Neck Ties',
-        value: 'neck-ties',
-        parentCategory: {
-          id: 2,
-          label: 'Ties',
-          description: 'This is the ties category',
-          value: 'ties',
-          productCount: 0
-        },
-        description: 'This is the neck tie tag',
-        productCount: 0
-      },
-      {
-        id: 7,
-        label: 'Bow Tie',
-        value: 'bow-tie',
-        parentCategory: {
-          id: 2,
-          label: 'Ties',
-          description: 'This is the ties category',
-          value: 'ties',
-          productCount: 0
-        },
-        description: 'This is the bow tie tag',
-        productCount: 0
-      }
-    ];
+  /**
+   * Return url of a category using id
+   * @param id id of the tag
+   */
+  categoryUrlById(id: number) {
+    return `${this.categoriesUrl()}/${id}`
+  }
+
+  /**
+   * Return the tags url
+   */
+  tagsUrl(): string {
+    return `${this.API_URL}/tags`;
+  }
+
+  /**
+   * Return url of the tag using id
+   * @param id id of the tag
+   */
+  tagUrlById(id: number): string {
+    return `${this.tagsUrl()}/${id}`;
   }
 
   /**
    * Return all the categories as a list
    */
-  getCategories(): Category[] {
-    return this.categories.slice();
+  getCategories(): Observable<any> {
+    return this._http.get(`${this.categoriesUrl()}`);
   }
 
   /**
    * Add a category to the list
    * @param category Category Object
    */
-  addCategory(category: Category): void {
-    this.categories.push(category);
-
-    // create the tag DB for this category 
-    this.tagDB[category.value] = [];
-    console.log('category added: ', this.categories, this.tagDB);
+  addCategory(category: Category): Observable<any> {
+    return this._http.post(`${this.categoriesUrl()}`, category);
   }
 
   /**
    * Edit an existing category
    * @param category Category Object
    */
-  editCategory(category: Category): void {
-    this.categories[this.findIndexById(category.id, this.categories)] = category;
+  editCategory(category: Category): Observable<any> {
+    return this._http.put(`${this.categoryUrlById(category.id)}`, category);
   }
   
-  deleteCategory(category: Category): void {
-    this.categories.splice(this.findIndexById(category.id, this.categories), 1);
+  /**
+   * Delete category
+   * @param category Category Object to delete
+   */
+  deleteCategory(category: Category): Observable<any> {
+    return this._http.delete(`${this.categoryUrlById(category.id)}`);
   }
 
-  getTags(): Tag[] {
-    return this.tags.slice();
+  /**
+   * Get tags from  
+   */
+  getTags(): Observable<any> {
+    return this._http.get(`${this.tagsUrl()}`);
   }
 
+  /** 
+   * Get tags of a category 
+  */
   getTagsOf(category: string): Observable<any> {
-    const BASE_URL: string = 'http://localhost:3000';
-    // let tags: Tag[] = this.tagDB[category];
-
-    // set tags to empty array if not found 
-    // if (!tags) {
-    //   tags = [];
-    // }
-    // return tags;
-    console.info('request url: ', `${BASE_URL}/tags/?parentCategory.value=${category}`);
     return this._http
-      .get(`${BASE_URL}/tags/?parentCategory.value=${category}`);
+      .get(`${this.tagsUrl()}/?parentCategory.value=${category}`);
   }
 
-  addTag(tag: Tag): void {
-    this.tags.push(tag);
-    // update tag DB 
-    this.tagDB[tag.parentCategory.value].push(tag);
-    console.log('tag added: ', this.tags, this.tagDB);
+  /**
+   * Add tag 
+   * @param tag Tag object to add
+   */
+  addTag(tag: Tag): Observable<any> {
+    return this._http.post(`${this.tagsUrl()}`, tag);
   }
 
-  editTag(tag: Tag): void {
-    this.tags[this.findIndexById(tag.id, this.tags)] = tag;
-    
-    let dbList: Tag[] = this.tagDB[tag.parentCategory.value];
-    dbList[this.findIndexById(tag.id, dbList)] = tag;
-
-    console.log('tag DB updated: ', this.tagDB);
+  /**
+   * Edit tag on the server
+   * @param tag Tag object to edit
+   */
+  editTag(tag: Tag): Observable<any> {
+    return this._http.put(`${this.tagUrlById(tag.id)}`, tag);
   }
 
-  deleteTag(tag: Tag): void {
-    this.tags.splice(this.findIndexById(tag.id, this.tags), 1);
+  /**
+   * Delete tag from the server
+   * @param tag Tag object to delete
+   */
+  deleteTag(tag: Tag): Observable<any> {
+    return this._http.delete(`${this.tagUrlById(tag.id)}`);
   }
 
   /**
