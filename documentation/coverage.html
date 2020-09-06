@@ -8,25 +8,948 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
+	    <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="./" class="navbar-brand">acreativity documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./">acreativity documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="./overview.html" 
+                                         href="./overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="modules/AppModule.html" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="components/AboutComponent.html" >AboutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminCategoryAdderComponent.html" >AdminCategoryAdderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminCategorySelectorComponent.html" >AdminCategorySelectorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminColorOptionMakerComponent.html" >AdminColorOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminCustomFormComponent.html" >AdminCustomFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminDropdownOptionMakerComponent.html" >AdminDropdownOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminFormOptionsComponent.html" >AdminFormOptionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminHeaderComponent.html" >AdminHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminNavbarComponent.html" >AdminNavbarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminPriceTableInputComponent.html" >AdminPriceTableInputComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminProductEditComponent.html" >AdminProductEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminRadiobtnOptionMakerComponent.html" >AdminRadiobtnOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminSidebarComponent.html" >AdminSidebarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminTagAdderComponent.html" >AdminTagAdderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminTagSelectorComponent.html" >AdminTagSelectorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AdminTextOptionMakerComponent.html" >AdminTextOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CartComponent.html" >CartComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CheckoutComponent.html" >CheckoutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/CommunicationComponent.html" >CommunicationComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ContactComponent.html" >ContactComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ContactFormComponent.html" >ContactFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ContactSectionComponent.html" >ContactSectionComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/DisplayMailComponent.html" >DisplayMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FeaturedProductComponent.html" >FeaturedProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FeaturedProductSliderComponent.html" >FeaturedProductSliderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/FormViewComponent.html" >FormViewComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/GraphicContentComponent.html" >GraphicContentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HeadingComponent.html" >HeadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/HomeComponent.html" >HomeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LoaderComponent.html" >LoaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/LogoutComponent.html" >LogoutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MailBoxComponent.html" >MailBoxComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MainBannerComponent.html" >MainBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/MessagesComponent.html" >MessagesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/OrderConfirmComponent.html" >OrderConfirmComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/OrdersComponent.html" >OrdersComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductCardComponent.html" >ProductCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductComponent.html" >ProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductDetailComponent.html" >ProductDetailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductOptionsColorComponent.html" >ProductOptionsColorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductOptionsComponent.html" >ProductOptionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductOptionsDropdownComponent.html" >ProductOptionsDropdownComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductOptionsQuestionComponent.html" >ProductOptionsQuestionComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductOptionsRadioBtnComponent.html" >ProductOptionsRadioBtnComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ProductSliderComponent.html" >ProductSliderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ReadMailComponent.html" >ReadMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SelectShopTypeComponent.html" >SelectShopTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/ShopComponent.html" >ShopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SigninComponent.html" >SigninComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SignupComponent.html" >SignupComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/SpacerComponent.html" >SpacerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/UserProfileComponent.html" >UserProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminAddProductComponent.html" >VendorAdminAddProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminAddProductFormComponent.html" >VendorAdminAddProductFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminChartCardComponent.html" >VendorAdminChartCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminDashboardComponent.html" >VendorAdminDashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminFooterComponent.html" >VendorAdminFooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminMailComponent.html" >VendorAdminMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminMailComposeComponent.html" >VendorAdminMailComposeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminMailSidebarComponent.html" >VendorAdminMailSidebarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminMailWriterComponent.html" >VendorAdminMailWriterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminProductComponent.html" >VendorAdminProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminProductFeaturesFormComponent.html" >VendorAdminProductFeaturesFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminProductsComponent.html" >VendorAdminProductsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminProductsListComponent.html" >VendorAdminProductsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="components/VendorAdminStatusCardComponent.html" >VendorAdminStatusCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="directives/VendorAdminColorChooserDirective.html" >VendorAdminColorChooserDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-classes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="classes/AppPage.html" >AppPage</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Category.html" >Category</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/ChartConfiguration.html" >ChartConfiguration</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/CustomFormInput.html" >CustomFormInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/CustomOption.html" >CustomOption</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/CustomOptionForm.html" >CustomOptionForm</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Form.html" >Form</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/FormComponent.html" >FormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Option.html" >Option</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/OptionMeta.html" >OptionMeta</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/OptionMeta.html" >OptionMeta</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Order.html" >Order</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/PriceGroup.html" >PriceGroup</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/PriceTable.html" >PriceTable</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Product.html" >Product</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/ProductForm.html" >ProductForm</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/StatusCard.html" >StatusCard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="classes/Tag.html" >Tag</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="injectables/AboutService.html" >AboutService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthGuard.html" >AuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthService.html" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CommonService.html" >CommonService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ContactService.html" >ContactService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/FormResolverService.html" >FormResolverService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HomeService.html" >HomeService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/IdGeneratorService.html" >IdGeneratorService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MailService.html" >MailService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/OrderService.html" >OrderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ProductCategorisationService.html" >ProductCategorisationService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ProductService.html" >ProductService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserDetailsService.html" >UserDetailsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/VendorAdminDashboardService.html" >VendorAdminDashboardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/VendorAdminProductService.html" >VendorAdminProductService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/WidgetManagerService.html" >WidgetManagerService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="interfaces/Feature.html" >Feature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/FormInputInterface.html" >FormInputInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="interfaces/SignupFormInterface.html" >SignupFormInterface</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html"  class="active" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./">acreativity documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="./overview.html" 
+                                                href="./overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="modules/AppModule.html" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="components/AboutComponent.html" >AboutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminCategoryAdderComponent.html" >AdminCategoryAdderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminCategorySelectorComponent.html" >AdminCategorySelectorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminColorOptionMakerComponent.html" >AdminColorOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminCustomFormComponent.html" >AdminCustomFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminDropdownOptionMakerComponent.html" >AdminDropdownOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminFormOptionsComponent.html" >AdminFormOptionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminHeaderComponent.html" >AdminHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminNavbarComponent.html" >AdminNavbarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminPriceTableInputComponent.html" >AdminPriceTableInputComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminProductEditComponent.html" >AdminProductEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminRadiobtnOptionMakerComponent.html" >AdminRadiobtnOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminSidebarComponent.html" >AdminSidebarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminTagAdderComponent.html" >AdminTagAdderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminTagSelectorComponent.html" >AdminTagSelectorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AdminTextOptionMakerComponent.html" >AdminTextOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CartComponent.html" >CartComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CheckoutComponent.html" >CheckoutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/CommunicationComponent.html" >CommunicationComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ContactComponent.html" >ContactComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ContactFormComponent.html" >ContactFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ContactSectionComponent.html" >ContactSectionComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/DisplayMailComponent.html" >DisplayMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FeaturedProductComponent.html" >FeaturedProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FeaturedProductSliderComponent.html" >FeaturedProductSliderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/FormViewComponent.html" >FormViewComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/GraphicContentComponent.html" >GraphicContentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HeadingComponent.html" >HeadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/HomeComponent.html" >HomeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LoaderComponent.html" >LoaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/LogoutComponent.html" >LogoutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MailBoxComponent.html" >MailBoxComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MainBannerComponent.html" >MainBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/MessagesComponent.html" >MessagesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/OrderConfirmComponent.html" >OrderConfirmComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/OrdersComponent.html" >OrdersComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductCardComponent.html" >ProductCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductComponent.html" >ProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductDetailComponent.html" >ProductDetailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductOptionsColorComponent.html" >ProductOptionsColorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductOptionsComponent.html" >ProductOptionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductOptionsDropdownComponent.html" >ProductOptionsDropdownComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductOptionsQuestionComponent.html" >ProductOptionsQuestionComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductOptionsRadioBtnComponent.html" >ProductOptionsRadioBtnComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ProductSliderComponent.html" >ProductSliderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ReadMailComponent.html" >ReadMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SelectShopTypeComponent.html" >SelectShopTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/ShopComponent.html" >ShopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SigninComponent.html" >SigninComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SignupComponent.html" >SignupComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/SpacerComponent.html" >SpacerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/UserProfileComponent.html" >UserProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminAddProductComponent.html" >VendorAdminAddProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminAddProductFormComponent.html" >VendorAdminAddProductFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminChartCardComponent.html" >VendorAdminChartCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminDashboardComponent.html" >VendorAdminDashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminFooterComponent.html" >VendorAdminFooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminMailComponent.html" >VendorAdminMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminMailComposeComponent.html" >VendorAdminMailComposeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminMailSidebarComponent.html" >VendorAdminMailSidebarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminMailWriterComponent.html" >VendorAdminMailWriterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminProductComponent.html" >VendorAdminProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminProductFeaturesFormComponent.html" >VendorAdminProductFeaturesFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminProductsComponent.html" >VendorAdminProductsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminProductsListComponent.html" >VendorAdminProductsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="components/VendorAdminStatusCardComponent.html" >VendorAdminStatusCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="directives/VendorAdminColorChooserDirective.html" >VendorAdminColorChooserDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#classes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="classes/AppPage.html" >AppPage</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Category.html" >Category</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/ChartConfiguration.html" >ChartConfiguration</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/CustomFormInput.html" >CustomFormInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/CustomOption.html" >CustomOption</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/CustomOptionForm.html" >CustomOptionForm</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Form.html" >Form</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/FormComponent.html" >FormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Option.html" >Option</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/OptionMeta.html" >OptionMeta</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/OptionMeta.html" >OptionMeta</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Order.html" >Order</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/PriceGroup.html" >PriceGroup</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/PriceTable.html" >PriceTable</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Product.html" >Product</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/ProductForm.html" >ProductForm</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/StatusCard.html" >StatusCard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="classes/Tag.html" >Tag</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="injectables/AboutService.html" >AboutService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AuthGuard.html" >AuthGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/AuthService.html" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/CommonService.html" >CommonService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ContactService.html" >ContactService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/FormResolverService.html" >FormResolverService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/HomeService.html" >HomeService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/IdGeneratorService.html" >IdGeneratorService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/MailService.html" >MailService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/OrderService.html" >OrderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ProductCategorisationService.html" >ProductCategorisationService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/ProductService.html" >ProductService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/UserDetailsService.html" >UserDetailsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/VendorAdminDashboardService.html" >VendorAdminDashboardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/VendorAdminProductService.html" >VendorAdminProductService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="injectables/WidgetManagerService.html" >WidgetManagerService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="interfaces/Feature.html" >Feature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/FormInputInterface.html" >FormInputInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="interfaces/SignupFormInterface.html" >SignupFormInterface</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html"  class="active" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content coverage">
                    <div class="content-data">
 
@@ -39,847 +962,1636 @@
 
 
 
-
-
-
-
-                   
-
-
 <ol class="breadcrumb">
-    <li>Documentation coverage</li>
+  <li>Documentation coverage</li> 
 </ol>
 
-<div>
-    <img src="./images/coverage-badge-documentation.svg">
+<div class="coverage-badge">
+    <span>Project</span>
+    <span class="count low">8%</span>
 </div>
 
-<table class="table table-bordered coverage" id="coverage-table">
+<table class="table table-bordered coverage">
     <thead class="coverage-header">
         <tr>
             <th>File</th>
             <th>Type</th>
             <th>Identifier</th>
-            <th style="text-align:right" class="statements" data-sort-default>Statements</th>
+            <th style="text-align:right">Statements</th>
         </tr>
     </thead>
     <tbody>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./classes/AppPage.html">e2e/src/app.po.ts</a>
             </td>
-            <td>class</td>
-            <td>AppPage</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
+                classe
             </td>
-            <td>component</td>
-            <td>AppComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                AppPage
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AppComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./injectables/CommonService.html">src/app/common.service.ts</a>
             </td>
-            <td>injectable</td>
-            <td>CommonService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/ContactFormComponent.html">src/app/components/contact-form/contact-form.component.ts</a>
+                injectable
             </td>
-            <td>component</td>
-            <td>ContactFormComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/ContactSectionComponent.html">src/app/components/contact-section/contact-section.component.ts</a>
+                CommonService
             </td>
-            <td>component</td>
-            <td>ContactSectionComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/FeaturedProductComponent.html">src/app/components/featured-product/featured-product.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>FeaturedProductComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/FooterComponent.html">src/app/components/footer/footer.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>FooterComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/GraphicContentComponent.html">src/app/components/graphic-content/graphic-content.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>GraphicContentComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/HeaderComponent.html">src/app/components/header/header.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>HeaderComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/HeadingComponent.html">src/app/components/heading/heading.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>HeadingComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MailBoxComponent.html">src/app/components/mail-box/mail-box.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MailBoxComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/MainBannerComponent.html">src/app/components/main-banner/main-banner.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>MainBannerComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/16)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ProductSliderComponent.html">src/app/components/product-slider/product-slider.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ProductSliderComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SpacerComponent.html">src/app/components/spacer/spacer.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SpacerComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminChartCardComponent.html">src/app/components/vendor-admin-chart-card/vendor-admin-chart-card.component.ts</a>
+                <a href="./components/AdminCategorySelectorComponent.html">src/app/components/admin-category-selector/admin-category-selector.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminChartCardComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AdminCategorySelectorComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminFooterComponent.html">src/app/components/vendor-admin-footer/vendor-admin-footer.component.ts</a>
+                <a href="./components/AdminColorOptionMakerComponent.html">src/app/components/admin-color-option-maker/admin-color-option-maker.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminFooterComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AdminColorOptionMakerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">18 %</span>
+                <span class="coverage-count">(3/16)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminCustomFormComponent.html">src/app/components/admin-custom-form/admin-custom-form.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminCustomFormComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminDropdownOptionMakerComponent.html">src/app/components/admin-dropdown-option-maker/admin-dropdown-option-maker.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminDropdownOptionMakerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">20 %</span>
+                <span class="coverage-count">(3/15)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminFormOptionsComponent.html">src/app/components/admin-form-options/admin-form-options.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminFormOptionsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/AdminHeaderComponent.html">src/app/components/admin-header/admin-header.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminHeaderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">37 %</span>
+                <span class="coverage-count">(3/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminNavbarComponent.html">src/app/components/admin-navbar/admin-navbar.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminNavbarComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/AdminPriceTableInputComponent.html">src/app/components/admin-price-table-input/admin-price-table-input.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminPriceTableInputComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(3/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminRadiobtnOptionMakerComponent.html">src/app/components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminRadiobtnOptionMakerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">20 %</span>
+                <span class="coverage-count">(3/15)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminSidebarComponent.html">src/app/components/admin-sidebar/admin-sidebar.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminSidebarComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminTagSelectorComponent.html">src/app/components/admin-tag-selector/admin-tag-selector.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminTagSelectorComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminHeaderComponent.html">src/app/components/vendor-admin-header/vendor-admin-header.component.ts</a>
+                <a href="./components/AdminTextOptionMakerComponent.html">src/app/components/admin-text-option-maker/admin-text-option-maker.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminHeaderComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
+            <td>
+                component
+            </td>
+            <td>
+                AdminTextOptionMakerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">21 %</span>
+                <span class="coverage-count">(3/14)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminMailSidebarComponent.html">src/app/components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component.ts</a>
+                <a href="./components/ContactFormComponent.html">src/app/components/contact-form/contact-form.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminMailSidebarComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                ContactFormComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ContactSectionComponent.html">src/app/components/contact-section/contact-section.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ContactSectionComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/DisplayMailComponent.html">src/app/components/display-mail/display-mail.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                DisplayMailComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/FeaturedProductSliderComponent.html">src/app/components/featured-product-slider/featured-product-slider.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                FeaturedProductSliderComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminMailWriterComponent.html">src/app/components/vendor-admin-mail-writer/vendor-admin-mail-writer.component.ts</a>
+                <a href="./components/FeaturedProductComponent.html">src/app/components/featured-product/featured-product.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminMailWriterComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                FeaturedProductComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/FooterComponent.html">src/app/components/footer/footer.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                FooterComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(1/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductColorChooserComponent.html">src/app/components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component.ts</a>
+                <a href="./components/GraphicContentComponent.html">src/app/components/graphic-content/graphic-content.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminProductColorChooserComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                GraphicContentComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/HeaderComponent.html">src/app/components/header/header.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                HeaderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">33 %</span>
+                <span class="coverage-count">(1/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/HeadingComponent.html">src/app/components/heading/heading.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                HeadingComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/LoaderComponent.html">src/app/components/loader/loader.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                LoaderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MailBoxComponent.html">src/app/components/mail-box/mail-box.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MailBoxComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/MainBannerComponent.html">src/app/components/main-banner/main-banner.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MainBannerComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/12)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductDetailsFormComponent.html">src/app/components/vendor-admin-product-details-form/vendor-admin-product-details-form.component.ts</a>
+                <a href="./components/ProductCardComponent.html">src/app/components/product-card/product-card.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminProductDetailsFormComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductFeaturesFormComponent.html">src/app/components/vendor-admin-product-features-form/vendor-admin-product-features-form.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>VendorAdminProductFeaturesFormComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                ProductCardComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductImageComponent.html">src/app/components/vendor-admin-product-image/vendor-admin-product-image.component.ts</a>
+                <a href="./components/ProductOptionsColorComponent.html">src/app/components/product-options-color/product-options-color.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminProductImageComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductsListComponent.html">src/app/components/vendor-admin-products-list/vendor-admin-products-list.component.ts</a>
+                component
             </td>
-            <td>component</td>
-            <td>VendorAdminProductsListComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminStatusCardComponent.html">src/app/components/vendor-admin-status-card/vendor-admin-status-card.component.ts</a>
+                ProductOptionsColorComponent
             </td>
-            <td>component</td>
-            <td>VendorAdminStatusCardComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./directives/VendorAdminColorChooserDirective.html">src/app/directives/vendor-admin-color-chooser.directive.ts</a>
-            </td>
-            <td>directive</td>
-            <td>VendorAdminColorChooserDirective</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./guards/AuthGuard.html">src/app/guard/auth.guard.ts</a>
-            </td>
-            <td>guard</td>
-            <td>AuthGuard</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./classes/FormComponent.html">src/app/library/FormComponents.ts</a>
-            </td>
-            <td>class</td>
-            <td>FormComponent</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./interfaces/FormInputInterface.html">src/app/library/FormComponents.ts</a>
+                <a href="./components/ProductOptionsDropdownComponent.html">src/app/components/product-options-dropdown/product-options-dropdown.component.ts</a>
             </td>
-            <td>interface</td>
-            <td>FormInputInterface</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/17)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/ChartConfiguration.html">src/app/models/ChartConfiguration.ts</a>
+                component
             </td>
-            <td>class</td>
-            <td>ChartConfiguration</td>
-            <td align="right" data-sort="0">
+            <td>
+                ProductOptionsDropdownComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/Color.html">src/app/models/Product.ts</a>
+                <a href="./components/ProductOptionsQuestionComponent.html">src/app/components/product-options-question/product-options-question.component.ts</a>
             </td>
-            <td>class</td>
-            <td>Color</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+            <td>
+                component
+            </td>
+            <td>
+                ProductOptionsQuestionComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">12 %</span>
+                <span class="coverage-count">(1/8)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/Product.html">src/app/models/Product.ts</a>
+                <a href="./components/ProductOptionsRadioBtnComponent.html">src/app/components/product-options-radio-btn/product-options-radio-btn.component.ts</a>
             </td>
-            <td>class</td>
-            <td>Product</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                ProductOptionsRadioBtnComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">10 %</span>
+                <span class="coverage-count">(1/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ProductOptionsComponent.html">src/app/components/product-options/product-options.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ProductOptionsComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/ProductColor.html">src/app/models/Product.ts</a>
+                <a href="./components/ProductSliderComponent.html">src/app/components/product-slider/product-slider.component.ts</a>
             </td>
-            <td>class</td>
-            <td>ProductColor</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                ProductSliderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/ProductComponent.html">src/app/components/product/product.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ProductComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SpacerComponent.html">src/app/components/spacer/spacer.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SpacerComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminAddProductFormComponent.html">src/app/components/vendor-admin-add-product-form/vendor-admin-add-product-form.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminAddProductFormComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/18)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminChartCardComponent.html">src/app/components/vendor-admin-chart-card/vendor-admin-chart-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminChartCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminFooterComponent.html">src/app/components/vendor-admin-footer/vendor-admin-footer.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminFooterComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminMailSidebarComponent.html">src/app/components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminMailSidebarComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminMailWriterComponent.html">src/app/components/vendor-admin-mail-writer/vendor-admin-mail-writer.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminMailWriterComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminProductFeaturesFormComponent.html">src/app/components/vendor-admin-product-features-form/vendor-admin-product-features-form.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminProductFeaturesFormComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./components/VendorAdminProductsListComponent.html">src/app/components/vendor-admin-products-list/vendor-admin-products-list.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminProductsListComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">57 %</span>
+                <span class="coverage-count">(4/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminStatusCardComponent.html">src/app/components/vendor-admin-status-card/vendor-admin-status-card.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminStatusCardComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/AuthGuard.html">src/app/guard/auth.guard.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AuthGuard
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/TokenInterceptor.html">src/app/http-interceptor/token.interceptor.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                TokenInterceptor
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/FormComponent.html">src/app/library/FormComponents.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                FormComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/FormInputInterface.html">src/app/library/FormComponents.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                FormInputInterface
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/16)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/Category.html">src/app/models/Category.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Category
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <a href="./classes/ChartConfiguration.html">src/app/models/ChartConfiguration.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                ChartConfiguration
+            </td>
+            <td align="right">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(5/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/CustomFormInput.html">src/app/models/Order.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                CustomFormInput
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/ProductSize.html">src/app/models/Product.ts</a>
+                <a href="./classes/CustomOption.html">src/app/models/Order.ts</a>
             </td>
-            <td>class</td>
-            <td>ProductSize</td>
-            <td align="right" data-sort="0">
+            <td>
+                classe
+            </td>
+            <td>
+                CustomOption
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./classes/Size.html">src/app/models/Product.ts</a>
+                <a href="./classes/CustomOptionForm.html">src/app/models/Order.ts</a>
             </td>
-            <td>class</td>
-            <td>Size</td>
-            <td align="right" data-sort="0">
+            <td>
+                classe
+            </td>
+            <td>
+                CustomOptionForm
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./classes/OptionMeta.html">src/app/models/Order.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                OptionMeta
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/Order.html">src/app/models/Order.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Order
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/Form.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Form
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/Option.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Option
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/OptionMeta.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                OptionMeta
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/PriceGroup.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                PriceGroup
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/PriceTable.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                PriceTable
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/Product.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Product
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./classes/ProductForm.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                ProductForm
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(2/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./interfaces/Feature.html">src/app/models/Product.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                Feature
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./classes/StatusCard.html">src/app/models/StatusCard.ts</a>
             </td>
-            <td>class</td>
-            <td>StatusCard</td>
-            <td align="right" data-sort="0">
+            <td>
+                classe
+            </td>
+            <td>
+                StatusCard
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./classes/Tag.html">src/app/models/Tag.ts</a>
+            </td>
+            <td>
+                classe
+            </td>
+            <td>
+                Tag
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/AboutComponent.html">src/app/pages/about/about.component.ts</a>
             </td>
-            <td>component</td>
-            <td>AboutComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                AboutComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./components/AdminCategoryAdderComponent.html">src/app/pages/admin-category-adder/admin-category-adder.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminCategoryAdderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/15)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./components/AdminProductEditComponent.html">src/app/pages/admin-product-edit/admin-product-edit.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminProductEditComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(4/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/AdminTagAdderComponent.html">src/app/pages/admin-tag-adder/admin-tag-adder.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                AdminTagAdderComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/16)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/CartComponent.html">src/app/pages/cart/cart.component.ts</a>
             </td>
-            <td>component</td>
-            <td>CartComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                CartComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/CheckoutComponent.html">src/app/pages/checkout/checkout.component.ts</a>
             </td>
-            <td>component</td>
-            <td>CheckoutComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                CheckoutComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/CommunicationComponent.html">src/app/pages/communication/communication.component.ts</a>
             </td>
-            <td>component</td>
-            <td>CommunicationComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                CommunicationComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/ContactComponent.html">src/app/pages/contact/contact.component.ts</a>
             </td>
-            <td>component</td>
-            <td>ContactComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                ContactComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/FormViewComponent.html">src/app/pages/form-view/form-view.component.ts</a>
             </td>
-            <td>component</td>
-            <td>FormViewComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                FormViewComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/HomeComponent.html">src/app/pages/home/home.component.ts</a>
             </td>
-            <td>component</td>
-            <td>HomeComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                HomeComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/LogoutComponent.html">src/app/pages/logout/logout.component.ts</a>
             </td>
-            <td>component</td>
-            <td>LogoutComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                LogoutComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./components/MessagesComponent.html">src/app/pages/messages/messages.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                MessagesComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/OrderConfirmComponent.html">src/app/pages/order-confirm/order-confirm.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                OrderConfirmComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">11 %</span>
+                <span class="coverage-count">(1/9)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/OrdersComponent.html">src/app/pages/orders/orders.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                OrdersComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
                 <a href="./components/ProductDetailComponent.html">src/app/pages/product-detail/product-detail.component.ts</a>
             </td>
-            <td>component</td>
-            <td>ProductDetailComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
+            <td>
+                component
+            </td>
+            <td>
+                ProductDetailComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">35 %</span>
+                <span class="coverage-count">(6/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./components/ReadMailComponent.html">src/app/pages/read-mail/read-mail.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                ReadMailComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/SelectShopTypeComponent.html">src/app/pages/select-shop-type/select-shop-type.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                SelectShopTypeComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/ShopComponent.html">src/app/pages/shop/shop.component.ts</a>
             </td>
-            <td>component</td>
-            <td>ShopComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+            <td>
+                component
+            </td>
+            <td>
+                ShopComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">22 %</span>
+                <span class="coverage-count">(2/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/SigninComponent.html">src/app/pages/signin/signin.component.ts</a>
             </td>
-            <td>component</td>
-            <td>SigninComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                SigninComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/SignupComponent.html">src/app/pages/signup/signup.component.ts</a>
             </td>
-            <td>component</td>
-            <td>SignupComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                SignupComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
+                <a href="./interfaces/SignupFormInterface.html">src/app/pages/signup/signup_form.interface.ts</a>
+            </td>
+            <td>
+                interface
+            </td>
+            <td>
+                SignupFormInterface
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
                 <a href="./components/UserProfileComponent.html">src/app/pages/user-profile/user-profile.component.ts</a>
             </td>
-            <td>component</td>
-            <td>UserProfileComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                UserProfileComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./components/VendorAdminAddProductComponent.html">src/app/pages/vendor-admin-add-product/vendor-admin-add-product.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminAddProductComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminAddProductComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminDashboardComponent.html">src/app/pages/vendor-admin-dashboard/vendor-admin-dashboard.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminDashboardComponent
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminDashboardComponent.html">src/app/pages/vendor-admin-dashboard/vendor-admin-dashboard.component.ts</a>
+                <a href="./components/VendorAdminMailComposeComponent.html">src/app/pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component.ts</a>
             </td>
-            <td>component</td>
-            <td>VendorAdminDashboardComponent</td>
-            <td align="right" data-sort="0">
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminMailComposeComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminMailComponent.html">src/app/pages/vendor-admin-mail/vendor-admin-mail.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminMailComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminProductComponent.html">src/app/pages/vendor-admin-product/vendor-admin-product.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminProductComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./components/VendorAdminProductsComponent.html">src/app/pages/vendor-admin-products/vendor-admin-products.component.ts</a>
+            </td>
+            <td>
+                component
+            </td>
+            <td>
+                VendorAdminProductsComponent
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/AboutService.html">src/app/services/about.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AboutService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/AuthService.html">src/app/services/auth.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                AuthService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/ContactService.html">src/app/services/contact.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                ContactService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/FormResolverService.html">src/app/services/form-resolver.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                FormResolverService
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminMailComposeComponent.html">src/app/pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>VendorAdminMailComposeComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminMailComponent.html">src/app/pages/vendor-admin-mail/vendor-admin-mail.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>VendorAdminMailComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductComponent.html">src/app/pages/vendor-admin-product/vendor-admin-product.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>VendorAdminProductComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/VendorAdminProductsComponent.html">src/app/pages/vendor-admin-products/vendor-admin-products.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>VendorAdminProductsComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/AboutService.html">src/app/services/about.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>AboutService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/AuthService.html">src/app/services/auth.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>AuthService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/4)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/ContactService.html">src/app/services/contact.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>ContactService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./injectables/FormResolverService.html">src/app/services/form-resolver.service.ts</a>
-            </td>
-            <td>injectable</td>
-            <td>FormResolverService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
                 <a href="./injectables/HomeService.html">src/app/services/home.service.ts</a>
             </td>
-            <td>injectable</td>
-            <td>HomeService</td>
-            <td align="right" data-sort="0">
+            <td>
+                injectable
+            </td>
+            <td>
+                HomeService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./injectables/IdGeneratorService.html">src/app/services/id-generator.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                IdGeneratorService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(1/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <a href="./injectables/MailService.html">src/app/services/mail.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                MailService
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
+        <tr class="medium">
+            <td>
+                <a href="./injectables/OrderService.html">src/app/services/order.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                OrderService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(4/8)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <a href="./injectables/ProductCategorisationService.html">src/app/services/product-categorisation.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                ProductCategorisationService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">30 %</span>
+                <span class="coverage-count">(4/13)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <a href="./injectables/ProductService.html">src/app/services/product.service.ts</a>
+            </td>
+            <td>
+                injectable
+            </td>
+            <td>
+                ProductService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">70 %</span>
+                <span class="coverage-count">(12/17)</span>
+            </td>
+        </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./injectables/VendorAdminDashboardService.html">src/app/services/vendor-admin-dashboard.service.ts</a>
             </td>
-            <td>injectable</td>
-            <td>VendorAdminDashboardService</td>
-            <td align="right" data-sort="0">
+            <td>
+                injectable
+            </td>
+            <td>
+                VendorAdminDashboardService
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
-        <tr class="low">
+        <tr class="good">
             <td>
-                <!-- miscellaneous -->
                 <a href="./injectables/VendorAdminProductService.html">src/app/services/vendor-admin-product.service.ts</a>
             </td>
-            <td>injectable</td>
-            <td>VendorAdminProductService</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
+            <td>
+                injectable
+            </td>
+            <td>
+                VendorAdminProductService
+            </td>
+            <td align="right">
+                <span class="coverage-percent">52 %</span>
+                <span class="coverage-count">(11/21)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
                 <a href="./injectables/WidgetManagerService.html">src/app/services/widget-manager.service.ts</a>
             </td>
-            <td>injectable</td>
-            <td>WidgetManagerService</td>
-            <td align="right" data-sort="0">
+            <td>
+                injectable
+            </td>
+            <td>
+                WidgetManagerService
+            </td>
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">src/environments/environment.prod.ts</a>
+                <a href="./injectables/UserDetailsService.html">src/app/store/user-details.service.ts</a>
             </td>
-            <td>variable</td>
-            <td>environment</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">src/environments/environment.ts</a>
+                injectable
             </td>
-            <td>variable</td>
-            <td>environment</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
             <td>
-                <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#context">src/test.ts</a>
+                UserDetailsService
             </td>
-            <td>variable</td>
-            <td>context</td>
-            <td align="right" data-sort="0">
+            <td align="right">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#require">src/test.ts</a>
-            </td>
-            <td>variable</td>
-            <td>require</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
     </tbody>
 </table>
 
-<script src="js/libs/tablesort.min.js"></script>
-<script src="js/libs/tablesort.number.min.js"></script>
-<script>
-    new Tablesort(document.getElementById('coverage-table'));
-</script>
-
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -887,22 +2599,8 @@
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'coverage';
-            var COMPODOC_CURRENT_PAGE_URL = 'coverage.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
-       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
@@ -913,17 +2611,20 @@
 
        <script src="./js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
 
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/highlight.pack.js"></script>
+       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="./js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>

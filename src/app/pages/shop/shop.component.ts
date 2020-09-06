@@ -34,10 +34,6 @@ export class ShopComponent implements OnInit {
     this.categories = this._pcService.getCategories();
   }
 
-  log(arg: any) {
-    console.log(arg);
-  }
-
   /**
    * Get products from the server after calculating the filter
    */

@@ -57,7 +57,7 @@
                 [value]="tag.value"
                 [(ngModel)]="selectedTags"
                 [inputId]="tag.value"
-                (onChange)="updateProducts(); log(selectedTags)"
+                (onChange)="updateProducts()"
               ></p-checkbox>
               <label [for]="tag.value">{{tag.label}}</label>
             </div>

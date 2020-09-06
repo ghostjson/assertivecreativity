@@ -8,626 +8,960 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">acreativity documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">acreativity documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html"  class="active" >AppModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/AboutComponent.html" >AboutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminCategoryAdderComponent.html" >AdminCategoryAdderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminCategorySelectorComponent.html" >AdminCategorySelectorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminColorOptionMakerComponent.html" >AdminColorOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminCustomFormComponent.html" >AdminCustomFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminDropdownOptionMakerComponent.html" >AdminDropdownOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminFormOptionsComponent.html" >AdminFormOptionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminHeaderComponent.html" >AdminHeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminNavbarComponent.html" >AdminNavbarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminPriceTableInputComponent.html" >AdminPriceTableInputComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminProductEditComponent.html" >AdminProductEditComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminRadiobtnOptionMakerComponent.html" >AdminRadiobtnOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminSidebarComponent.html" >AdminSidebarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminTagAdderComponent.html" >AdminTagAdderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminTagSelectorComponent.html" >AdminTagSelectorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdminTextOptionMakerComponent.html" >AdminTextOptionMakerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CartComponent.html" >CartComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CheckoutComponent.html" >CheckoutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/CommunicationComponent.html" >CommunicationComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ContactComponent.html" >ContactComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ContactFormComponent.html" >ContactFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ContactSectionComponent.html" >ContactSectionComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DisplayMailComponent.html" >DisplayMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FeaturedProductComponent.html" >FeaturedProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FeaturedProductSliderComponent.html" >FeaturedProductSliderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FormViewComponent.html" >FormViewComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/GraphicContentComponent.html" >GraphicContentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HeadingComponent.html" >HeadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HomeComponent.html" >HomeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LoaderComponent.html" >LoaderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LogoutComponent.html" >LogoutComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MailBoxComponent.html" >MailBoxComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MainBannerComponent.html" >MainBannerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/MessagesComponent.html" >MessagesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/OrderConfirmComponent.html" >OrderConfirmComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/OrdersComponent.html" >OrdersComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductCardComponent.html" >ProductCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductComponent.html" >ProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductDetailComponent.html" >ProductDetailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductOptionsColorComponent.html" >ProductOptionsColorComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductOptionsComponent.html" >ProductOptionsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductOptionsDropdownComponent.html" >ProductOptionsDropdownComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductOptionsQuestionComponent.html" >ProductOptionsQuestionComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductOptionsRadioBtnComponent.html" >ProductOptionsRadioBtnComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ProductSliderComponent.html" >ProductSliderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ReadMailComponent.html" >ReadMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SelectShopTypeComponent.html" >SelectShopTypeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ShopComponent.html" >ShopComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SigninComponent.html" >SigninComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SignupComponent.html" >SignupComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/SpacerComponent.html" >SpacerComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/UserProfileComponent.html" >UserProfileComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminAddProductComponent.html" >VendorAdminAddProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminAddProductFormComponent.html" >VendorAdminAddProductFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminChartCardComponent.html" >VendorAdminChartCardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminDashboardComponent.html" >VendorAdminDashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminFooterComponent.html" >VendorAdminFooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminMailComponent.html" >VendorAdminMailComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminMailComposeComponent.html" >VendorAdminMailComposeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminMailSidebarComponent.html" >VendorAdminMailSidebarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminMailWriterComponent.html" >VendorAdminMailWriterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminProductComponent.html" >VendorAdminProductComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminProductFeaturesFormComponent.html" >VendorAdminProductFeaturesFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminProductsComponent.html" >VendorAdminProductsComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminProductsListComponent.html" >VendorAdminProductsListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VendorAdminStatusCardComponent.html" >VendorAdminStatusCardComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/VendorAdminColorChooserDirective.html" >VendorAdminColorChooserDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-classes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/AppPage.html" >AppPage</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Category.html" >Category</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/ChartConfiguration.html" >ChartConfiguration</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/CustomFormInput.html" >CustomFormInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/CustomOption.html" >CustomOption</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/CustomOptionForm.html" >CustomOptionForm</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Form.html" >Form</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/FormComponent.html" >FormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Option.html" >Option</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/OptionMeta.html" >OptionMeta</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/OptionMeta.html" >OptionMeta</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Order.html" >Order</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/PriceGroup.html" >PriceGroup</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/PriceTable.html" >PriceTable</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Product.html" >Product</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/ProductForm.html" >ProductForm</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/StatusCard.html" >StatusCard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Tag.html" >Tag</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/AboutService.html" >AboutService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthGuard.html" >AuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthService.html" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CommonService.html" >CommonService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ContactService.html" >ContactService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/FormResolverService.html" >FormResolverService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/HomeService.html" >HomeService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/IdGeneratorService.html" >IdGeneratorService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MailService.html" >MailService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/OrderService.html" >OrderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ProductCategorisationService.html" >ProductCategorisationService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ProductService.html" >ProductService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserDetailsService.html" >UserDetailsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/VendorAdminDashboardService.html" >VendorAdminDashboardService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/VendorAdminProductService.html" >VendorAdminProductService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/WidgetManagerService.html" >WidgetManagerService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/Feature.html" >Feature</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FormInputInterface.html" >FormInputInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/SignupFormInterface.html" >SignupFormInterface</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">acreativity documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html"  class="active" >AppModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/AboutComponent.html" >AboutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminCategoryAdderComponent.html" >AdminCategoryAdderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminCategorySelectorComponent.html" >AdminCategorySelectorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminColorOptionMakerComponent.html" >AdminColorOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminCustomFormComponent.html" >AdminCustomFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminDropdownOptionMakerComponent.html" >AdminDropdownOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminFormOptionsComponent.html" >AdminFormOptionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminHeaderComponent.html" >AdminHeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminNavbarComponent.html" >AdminNavbarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminPriceTableInputComponent.html" >AdminPriceTableInputComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminProductEditComponent.html" >AdminProductEditComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminRadiobtnOptionMakerComponent.html" >AdminRadiobtnOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminSidebarComponent.html" >AdminSidebarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminTagAdderComponent.html" >AdminTagAdderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminTagSelectorComponent.html" >AdminTagSelectorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdminTextOptionMakerComponent.html" >AdminTextOptionMakerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CartComponent.html" >CartComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CheckoutComponent.html" >CheckoutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/CommunicationComponent.html" >CommunicationComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ContactComponent.html" >ContactComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ContactFormComponent.html" >ContactFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ContactSectionComponent.html" >ContactSectionComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DisplayMailComponent.html" >DisplayMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FeaturedProductComponent.html" >FeaturedProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FeaturedProductSliderComponent.html" >FeaturedProductSliderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FormViewComponent.html" >FormViewComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/GraphicContentComponent.html" >GraphicContentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeaderComponent.html" >HeaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HeadingComponent.html" >HeadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HomeComponent.html" >HomeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LoaderComponent.html" >LoaderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LogoutComponent.html" >LogoutComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MailBoxComponent.html" >MailBoxComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MainBannerComponent.html" >MainBannerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/MessagesComponent.html" >MessagesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/OrderConfirmComponent.html" >OrderConfirmComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/OrdersComponent.html" >OrdersComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductCardComponent.html" >ProductCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductComponent.html" >ProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductDetailComponent.html" >ProductDetailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductOptionsColorComponent.html" >ProductOptionsColorComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductOptionsComponent.html" >ProductOptionsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductOptionsDropdownComponent.html" >ProductOptionsDropdownComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductOptionsQuestionComponent.html" >ProductOptionsQuestionComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductOptionsRadioBtnComponent.html" >ProductOptionsRadioBtnComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ProductSliderComponent.html" >ProductSliderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ReadMailComponent.html" >ReadMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SelectShopTypeComponent.html" >SelectShopTypeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ShopComponent.html" >ShopComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SigninComponent.html" >SigninComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SignupComponent.html" >SignupComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/SpacerComponent.html" >SpacerComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/UserProfileComponent.html" >UserProfileComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminAddProductComponent.html" >VendorAdminAddProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminAddProductFormComponent.html" >VendorAdminAddProductFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminChartCardComponent.html" >VendorAdminChartCardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminDashboardComponent.html" >VendorAdminDashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminFooterComponent.html" >VendorAdminFooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminMailComponent.html" >VendorAdminMailComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminMailComposeComponent.html" >VendorAdminMailComposeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminMailSidebarComponent.html" >VendorAdminMailSidebarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminMailWriterComponent.html" >VendorAdminMailWriterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminProductComponent.html" >VendorAdminProductComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminProductFeaturesFormComponent.html" >VendorAdminProductFeaturesFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminProductsComponent.html" >VendorAdminProductsComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminProductsListComponent.html" >VendorAdminProductsListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VendorAdminStatusCardComponent.html" >VendorAdminStatusCardComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/VendorAdminColorChooserDirective.html" >VendorAdminColorChooserDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#classes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/AppPage.html" >AppPage</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Category.html" >Category</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/ChartConfiguration.html" >ChartConfiguration</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/CustomFormInput.html" >CustomFormInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/CustomOption.html" >CustomOption</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/CustomOptionForm.html" >CustomOptionForm</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Form.html" >Form</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/FormComponent.html" >FormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Option.html" >Option</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/OptionMeta.html" >OptionMeta</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/OptionMeta.html" >OptionMeta</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Order.html" >Order</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/PriceGroup.html" >PriceGroup</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/PriceTable.html" >PriceTable</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Product.html" >Product</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/ProductForm.html" >ProductForm</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/StatusCard.html" >StatusCard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Tag.html" >Tag</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/AboutService.html" >AboutService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthGuard.html" >AuthGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthService.html" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CommonService.html" >CommonService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ContactService.html" >ContactService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/FormResolverService.html" >FormResolverService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/HomeService.html" >HomeService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/IdGeneratorService.html" >IdGeneratorService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MailService.html" >MailService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/OrderService.html" >OrderService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ProductCategorisationService.html" >ProductCategorisationService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ProductService.html" >ProductService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserDetailsService.html" >UserDetailsService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/VendorAdminDashboardService.html" >VendorAdminDashboardService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/VendorAdminProductService.html" >VendorAdminProductService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/WidgetManagerService.html" >WidgetManagerService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/Feature.html" >Feature</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FormInputInterface.html" >FormInputInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/SignupFormInterface.html" >SignupFormInterface</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content module">
                    <div class="content-data">
 
-
-
 <ol class="breadcrumb">
-    <li>Modules</li>
-    <li>AppModule</li>
+  <li>Modules</li>
+  <li>AppModule</li>
 </ol>
 
-<div class="text-center module-graph-container">
-    <div id="module-graph-svg">
-        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
- "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: dependencies Pages: 1 -->
-<svg width="8495pt" height="284pt"
- viewBox="0.00 0.00 8495.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
-<title>dependencies</title>
-<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-280 8491,-280 8491,4 -4,4"/>
-<text text-anchor="start" x="4222.5091" y="-42.4" font-family="sans-serif" font-weight="bold" font-size="14.00" fill="#000000">Legend</text>
-<polygon fill="#ffffb3" stroke="transparent" points="4009.5,-10 4009.5,-30 4029.5,-30 4029.5,-10 4009.5,-10"/>
-<text text-anchor="start" x="4033.129" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Declarations</text>
-<polygon fill="#8dd3c7" stroke="transparent" points="4122.5,-10 4122.5,-30 4142.5,-30 4142.5,-10 4122.5,-10"/>
-<text text-anchor="start" x="4146.2251" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Module</text>
-<polygon fill="#80b1d3" stroke="transparent" points="4208.5,-10 4208.5,-30 4228.5,-30 4228.5,-10 4208.5,-10"/>
-<text text-anchor="start" x="4232.2812" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Bootstrap</text>
-<polygon fill="#fdb462" stroke="transparent" points="4305.5,-10 4305.5,-30 4325.5,-30 4325.5,-10 4305.5,-10"/>
-<text text-anchor="start" x="4329.1732" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Providers</text>
-<polygon fill="#fb8072" stroke="transparent" points="4401.5,-10 4401.5,-30 4421.5,-30 4421.5,-10 4401.5,-10"/>
-<text text-anchor="start" x="4425.2258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
-<g id="clust1" class="cluster">
-<title>cluster_AppModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="8,-70 8,-268 8479,-268 8479,-70 8,-70"/>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_AppModule_declarations</title>
-<polygon fill="none" stroke="#000000" points="168,-78 168,-130 8471,-130 8471,-78 168,-78"/>
-</g>
-<g id="clust46" class="cluster">
-<title>cluster_AppModule_imports</title>
-<polygon fill="none" stroke="#000000" points="16,-78 16,-130 160,-130 160,-78 16,-78"/>
-</g>
-<g id="clust48" class="cluster">
-<title>cluster_AppModule_bootstrap</title>
-<polygon fill="none" stroke="#000000" points="5015,-208 5015,-260 5139,-260 5139,-208 5015,-208"/>
-</g>
-<!-- AboutComponent -->
-<g id="node1" class="node">
-<title>AboutComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="8463.3301,-122 8346.6699,-122 8346.6699,-86 8463.3301,-86 8463.3301,-122"/>
-<text text-anchor="middle" x="8405" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">AboutComponent</text>
-</g>
-<!-- AppModule -->
-<g id="node44" class="node">
-<title>AppModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="5118.6571,-187 5115.6571,-191 5094.6571,-191 5091.6571,-187 5035.3429,-187 5035.3429,-151 5118.6571,-151 5118.6571,-187"/>
-<text text-anchor="middle" x="5077" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppModule</text>
-</g>
-<!-- AboutComponent&#45;&gt;AppModule -->
-<g id="edge1" class="edge">
-<title>AboutComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M8405,-122.1985C8405,-146.3563 8405,-186 8405,-186 8405,-186 5128.7765,-186 5128.7765,-186"/>
-<polygon fill="#000000" stroke="#000000" points="5128.7765,-182.5001 5118.7765,-186 5128.7765,-189.5001 5128.7765,-182.5001"/>
-</g>
-<!-- AppComponent -->
-<g id="node2" class="node">
-<title>AppComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="8328.9399,-122 8223.0601,-122 8223.0601,-86 8328.9399,-86 8328.9399,-122"/>
-<text text-anchor="middle" x="8276" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent</text>
-</g>
-<!-- AppComponent&#45;&gt;AppModule -->
-<g id="edge2" class="edge">
-<title>AppComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M8276,-122.1532C8276,-145.7566 8276,-184 8276,-184 8276,-184 5128.9122,-184 5128.9122,-184"/>
-<polygon fill="#000000" stroke="#000000" points="5128.9122,-180.5001 5118.9122,-184 5128.9121,-187.5001 5128.9122,-180.5001"/>
-</g>
-<!-- CartComponent -->
-<g id="node3" class="node">
-<title>CartComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="8205.9357,-122 8100.0643,-122 8100.0643,-86 8205.9357,-86 8205.9357,-122"/>
-<text text-anchor="middle" x="8153" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CartComponent</text>
-</g>
-<!-- CartComponent&#45;&gt;AppModule -->
-<g id="edge3" class="edge">
-<title>CartComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M8153,-122.3228C8153,-145.6602 8153,-183 8153,-183 8153,-183 5128.7331,-183 5128.7331,-183"/>
-<polygon fill="#000000" stroke="#000000" points="5128.7331,-179.5001 5118.7331,-183 5128.7331,-186.5001 5128.7331,-179.5001"/>
-</g>
-<!-- CheckoutComponent -->
-<g id="node4" class="node">
-<title>CheckoutComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="8082.4888,-122 7947.5112,-122 7947.5112,-86 8082.4888,-86 8082.4888,-122"/>
-<text text-anchor="middle" x="8015" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CheckoutComponent</text>
-</g>
-<!-- CheckoutComponent&#45;&gt;AppModule -->
-<g id="edge4" class="edge">
-<title>CheckoutComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M8015,-122.2479C8015,-145.0179 8015,-181 8015,-181 8015,-181 5128.8143,-181 5128.8143,-181"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8143,-177.5001 5118.8143,-181 5128.8142,-184.5001 5128.8143,-177.5001"/>
-</g>
-<!-- CommunicationComponent -->
-<g id="node5" class="node">
-<title>CommunicationComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7929.5518,-122 7758.4482,-122 7758.4482,-86 7929.5518,-86 7929.5518,-122"/>
-<text text-anchor="middle" x="7844" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CommunicationComponent</text>
-</g>
-<!-- CommunicationComponent&#45;&gt;AppModule -->
-<g id="edge5" class="edge">
-<title>CommunicationComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M7844,-122.1554C7844,-144.3519 7844,-179 7844,-179 7844,-179 5128.8072,-179 5128.8072,-179"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8072,-175.5001 5118.8072,-179 5128.8071,-182.5001 5128.8072,-175.5001"/>
-</g>
-<!-- ContactComponent -->
-<g id="node6" class="node">
-<title>ContactComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7740.3795,-122 7615.6205,-122 7615.6205,-86 7740.3795,-86 7740.3795,-122"/>
-<text text-anchor="middle" x="7678" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ContactComponent</text>
-</g>
-<!-- ContactComponent&#45;&gt;AppModule -->
-<g id="edge6" class="edge">
-<title>ContactComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M7678,-122.2921C7678,-144.2057 7678,-178 7678,-178 7678,-178 5128.909,-178 5128.909,-178"/>
-<polygon fill="#000000" stroke="#000000" points="5128.909,-174.5001 5118.909,-178 5128.909,-181.5001 5128.909,-174.5001"/>
-</g>
-<!-- ContactFormComponent -->
-<g id="node7" class="node">
-<title>ContactFormComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7597.7133,-122 7442.2867,-122 7442.2867,-86 7597.7133,-86 7597.7133,-122"/>
-<text text-anchor="middle" x="7520" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ContactFormComponent</text>
-</g>
-<!-- ContactFormComponent&#45;&gt;AppModule -->
-<g id="edge7" class="edge">
-<title>ContactFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M7520,-122.1686C7520,-143.498 7520,-176 7520,-176 7520,-176 5128.8888,-176 5128.8888,-176"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8889,-172.5001 5118.8888,-176 5128.8888,-179.5001 5128.8889,-172.5001"/>
-</g>
-<!-- ContactSectionComponent -->
-<g id="node8" class="node">
-<title>ContactSectionComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7424.3724,-122 7257.6276,-122 7257.6276,-86 7424.3724,-86 7424.3724,-122"/>
-<text text-anchor="middle" x="7341" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ContactSectionComponent</text>
-</g>
-<!-- ContactSectionComponent&#45;&gt;AppModule -->
-<g id="edge8" class="edge">
-<title>ContactSectionComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M7341,-122.0267C7341,-142.7672 7341,-174 7341,-174 7341,-174 5128.7186,-174 5128.7186,-174"/>
-<polygon fill="#000000" stroke="#000000" points="5128.7186,-170.5001 5118.7186,-174 5128.7185,-177.5001 5128.7186,-170.5001"/>
-</g>
-<!-- FeaturedProductComponent -->
-<g id="node9" class="node">
-<title>FeaturedProductComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7239.8585,-122 7066.1415,-122 7066.1415,-86 7239.8585,-86 7239.8585,-122"/>
-<text text-anchor="middle" x="7153" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FeaturedProductComponent</text>
-</g>
-<!-- FeaturedProductComponent&#45;&gt;AppModule -->
-<g id="edge9" class="edge">
-<title>FeaturedProductComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M7153,-122.1289C7153,-142.5724 7153,-173 7153,-173 7153,-173 5128.938,-173 5128.938,-173"/>
-<polygon fill="#000000" stroke="#000000" points="5128.9381,-169.5001 5118.938,-173 5128.938,-176.5001 5128.9381,-169.5001"/>
-</g>
-<!-- FooterComponent -->
-<g id="node10" class="node">
-<title>FooterComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="7047.8809,-122 6930.1191,-122 6930.1191,-86 7047.8809,-86 7047.8809,-122"/>
-<text text-anchor="middle" x="6989" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FooterComponent</text>
-</g>
-<!-- FooterComponent&#45;&gt;AppModule -->
-<g id="edge10" class="edge">
-<title>FooterComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6989,-122.308C6989,-142.1455 6989,-171 6989,-171 6989,-171 5128.713,-171 5128.713,-171"/>
-<polygon fill="#000000" stroke="#000000" points="5128.713,-167.5001 5118.713,-171 5128.713,-174.5001 5128.713,-167.5001"/>
-</g>
-<!-- FormViewComponent -->
-<g id="node11" class="node">
-<title>FormViewComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6911.9846,-122 6770.0154,-122 6770.0154,-86 6911.9846,-86 6911.9846,-122"/>
-<text text-anchor="middle" x="6841" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormViewComponent</text>
-</g>
-<!-- FormViewComponent&#45;&gt;AppModule -->
-<g id="edge11" class="edge">
-<title>FormViewComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6841,-122.1061C6841,-141.3391 6841,-169 6841,-169 6841,-169 5128.8649,-169 5128.8649,-169"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8649,-165.5001 5118.8649,-169 5128.8648,-172.5001 5128.8649,-165.5001"/>
-</g>
-<!-- GraphicContentComponent -->
-<g id="node12" class="node">
-<title>GraphicContentComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6752.252,-122 6581.748,-122 6581.748,-86 6752.252,-86 6752.252,-122"/>
-<text text-anchor="middle" x="6667" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">GraphicContentComponent</text>
-</g>
-<!-- GraphicContentComponent&#45;&gt;AppModule -->
-<g id="edge12" class="edge">
-<title>GraphicContentComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6667,-122.1686C6667,-141.0898 6667,-168 6667,-168 6667,-168 5128.7114,-168 5128.7114,-168"/>
-<polygon fill="#000000" stroke="#000000" points="5128.7114,-164.5001 5118.7114,-168 5128.7113,-171.5001 5128.7114,-164.5001"/>
-</g>
-<!-- HeaderComponent -->
-<g id="node13" class="node">
-<title>HeaderComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6563.7437,-122 6442.2563,-122 6442.2563,-86 6563.7437,-86 6563.7437,-122"/>
-<text text-anchor="middle" x="6503" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">HeaderComponent</text>
-</g>
-<!-- HeaderComponent&#45;&gt;AppModule -->
-<g id="edge13" class="edge">
-<title>HeaderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6503,-122.2667C6503,-140.5552 6503,-166 6503,-166 6503,-166 5128.9052,-166 5128.9052,-166"/>
-<polygon fill="#000000" stroke="#000000" points="5128.9052,-162.5001 5118.9052,-166 5128.9052,-169.5001 5128.9052,-162.5001"/>
-</g>
-<!-- HeadingComponent -->
-<g id="node14" class="node">
-<title>HeadingComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6424.259,-122 6295.741,-122 6295.741,-86 6424.259,-86 6424.259,-122"/>
-<text text-anchor="middle" x="6360" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">HeadingComponent</text>
-</g>
-<!-- HeadingComponent&#45;&gt;AppModule -->
-<g id="edge14" class="edge">
-<title>HeadingComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6360,-122.302C6360,-140.2699 6360,-165 6360,-165 6360,-165 5128.9583,-165 5128.9583,-165"/>
-<polygon fill="#000000" stroke="#000000" points="5128.9583,-161.5001 5118.9583,-165 5128.9582,-168.5001 5128.9583,-161.5001"/>
-</g>
-<!-- HomeComponent -->
-<g id="node15" class="node">
-<title>HomeComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6277.5451,-122 6162.4549,-122 6162.4549,-86 6277.5451,-86 6277.5451,-122"/>
-<text text-anchor="middle" x="6220" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">HomeComponent</text>
-</g>
-<!-- HomeComponent&#45;&gt;AppModule -->
-<g id="edge15" class="edge">
-<title>HomeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6220,-122.0225C6220,-139.3734 6220,-163 6220,-163 6220,-163 5128.6948,-163 5128.6948,-163"/>
-<polygon fill="#000000" stroke="#000000" points="5128.6948,-159.5001 5118.6948,-163 5128.6947,-166.5001 5128.6948,-159.5001"/>
-</g>
-<!-- LogoutComponent -->
-<g id="node16" class="node">
-<title>LogoutComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6143.7758,-122 6022.2242,-122 6022.2242,-86 6143.7758,-86 6143.7758,-122"/>
-<text text-anchor="middle" x="6083" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">LogoutComponent</text>
-</g>
-<!-- LogoutComponent&#45;&gt;AppModule -->
-<g id="edge16" class="edge">
-<title>LogoutComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M6083,-122.0352C6083,-138.7344 6083,-161 6083,-161 6083,-161 5128.9458,-161 5128.9458,-161"/>
-<polygon fill="#000000" stroke="#000000" points="5128.9458,-157.5001 5118.9458,-161 5128.9457,-164.5001 5128.9458,-157.5001"/>
-</g>
-<!-- MailBoxComponent -->
-<g id="node17" class="node">
-<title>MailBoxComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="6004.6094,-122 5873.3906,-122 5873.3906,-86 6004.6094,-86 6004.6094,-122"/>
-<text text-anchor="middle" x="5939" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">MailBoxComponent</text>
-</g>
-<!-- MailBoxComponent&#45;&gt;AppModule -->
-<g id="edge17" class="edge">
-<title>MailBoxComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5939,-122.027C5939,-138.3976 5939,-160 5939,-160 5939,-160 5128.8674,-160 5128.8674,-160"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8674,-156.5001 5118.8674,-160 5128.8673,-163.5001 5128.8674,-156.5001"/>
-</g>
-<!-- MainBannerComponent -->
-<g id="node18" class="node">
-<title>MainBannerComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5855.8089,-122 5704.1911,-122 5704.1911,-86 5855.8089,-86 5855.8089,-122"/>
-<text text-anchor="middle" x="5780" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">MainBannerComponent</text>
-</g>
-<!-- MainBannerComponent&#45;&gt;AppModule -->
-<g id="edge18" class="edge">
-<title>MainBannerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5780,-122.2819C5780,-137.9478 5780,-158 5780,-158 5780,-158 5128.8706,-158 5128.8706,-158"/>
-<polygon fill="#000000" stroke="#000000" points="5128.8706,-154.5001 5118.8706,-158 5128.8705,-161.5001 5128.8706,-154.5001"/>
-</g>
-<!-- ProductDetailComponent -->
-<g id="node19" class="node">
-<title>ProductDetailComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5686.5884,-122 5527.4116,-122 5527.4116,-86 5686.5884,-86 5686.5884,-122"/>
-<text text-anchor="middle" x="5607" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ProductDetailComponent</text>
-</g>
-<!-- ProductDetailComponent&#45;&gt;AppModule -->
-<g id="edge19" class="edge">
-<title>ProductDetailComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5607,-122.1871C5607,-137.1824 5607,-156 5607,-156 5607,-156 5129.0312,-156 5129.0312,-156"/>
-<polygon fill="#000000" stroke="#000000" points="5129.0313,-152.5001 5119.0312,-156 5129.0312,-159.5001 5129.0313,-152.5001"/>
-</g>
-<!-- ProductSliderComponent -->
-<g id="node20" class="node">
-<title>ProductSliderComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5509.3201,-122 5350.6799,-122 5350.6799,-86 5509.3201,-86 5509.3201,-122"/>
-<text text-anchor="middle" x="5430" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ProductSliderComponent</text>
-</g>
-<!-- ProductSliderComponent&#45;&gt;AppModule -->
-<g id="edge20" class="edge">
-<title>ProductSliderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5430,-122.1243C5430,-136.7832 5430,-155 5430,-155 5430,-155 5128.8799,-155 5128.8799,-155"/>
-<polygon fill="#000000" stroke="#000000" points="5128.88,-151.5001 5118.8799,-155 5128.8799,-158.5001 5128.88,-151.5001"/>
-</g>
-<!-- ShopComponent -->
-<g id="node21" class="node">
-<title>ShopComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5333.1151,-122 5222.8849,-122 5222.8849,-86 5333.1151,-86 5333.1151,-122"/>
-<text text-anchor="middle" x="5278" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ShopComponent</text>
-</g>
-<!-- ShopComponent&#45;&gt;AppModule -->
-<g id="edge21" class="edge">
-<title>ShopComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5278,-122.2458C5278,-136.1772 5278,-153 5278,-153 5278,-153 5129.1362,-153 5129.1362,-153"/>
-<polygon fill="#000000" stroke="#000000" points="5129.1362,-149.5001 5119.1362,-153 5129.1362,-156.5001 5129.1362,-149.5001"/>
-</g>
-<!-- SigninComponent -->
-<g id="node22" class="node">
-<title>SigninComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5204.8962,-122 5087.1038,-122 5087.1038,-86 5204.8962,-86 5204.8962,-122"/>
-<text text-anchor="middle" x="5146" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SigninComponent</text>
-</g>
-<!-- SigninComponent&#45;&gt;AppModule -->
-<g id="edge22" class="edge">
-<title>SigninComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5102.9401,-122.1061C5102.9401,-122.1061 5102.9401,-140.991 5102.9401,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="5099.4401,-140.9909 5102.9401,-150.991 5106.4401,-140.991 5099.4401,-140.9909"/>
-</g>
-<!-- SignupComponent -->
-<g id="node23" class="node">
-<title>SignupComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="5069.5056,-122 4948.4944,-122 4948.4944,-86 5069.5056,-86 5069.5056,-122"/>
-<text text-anchor="middle" x="5009" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SignupComponent</text>
-</g>
-<!-- SignupComponent&#45;&gt;AppModule -->
-<g id="edge23" class="edge">
-<title>SignupComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M5052.3373,-122.1061C5052.3373,-122.1061 5052.3373,-140.991 5052.3373,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="5048.8374,-140.9909 5052.3373,-150.991 5055.8374,-140.991 5048.8374,-140.9909"/>
-</g>
-<!-- SpacerComponent -->
-<g id="node24" class="node">
-<title>SpacerComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="4930.9201,-122 4811.0799,-122 4811.0799,-86 4930.9201,-86 4930.9201,-122"/>
-<text text-anchor="middle" x="4871" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SpacerComponent</text>
-</g>
-<!-- SpacerComponent&#45;&gt;AppModule -->
-<g id="edge24" class="edge">
-<title>SpacerComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M4871,-122.2458C4871,-136.1772 4871,-153 4871,-153 4871,-153 5025.3128,-153 5025.3128,-153"/>
-<polygon fill="#000000" stroke="#000000" points="5025.3129,-156.5001 5035.3128,-153 5025.3128,-149.5001 5025.3129,-156.5001"/>
-</g>
-<!-- UserProfileComponent -->
-<g id="node25" class="node">
-<title>UserProfileComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="4792.8585,-122 4647.1415,-122 4647.1415,-86 4792.8585,-86 4792.8585,-122"/>
-<text text-anchor="middle" x="4720" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">UserProfileComponent</text>
-</g>
-<!-- UserProfileComponent&#45;&gt;AppModule -->
-<g id="edge25" class="edge">
-<title>UserProfileComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M4720,-122.1243C4720,-136.7832 4720,-155 4720,-155 4720,-155 5024.9978,-155 5024.9978,-155"/>
-<polygon fill="#000000" stroke="#000000" points="5024.9978,-158.5001 5034.9978,-155 5024.9977,-151.5001 5024.9978,-158.5001"/>
-</g>
-<!-- VendorAdminAddProductComponent -->
-<g id="node26" class="node">
-<title>VendorAdminAddProductComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="4628.857,-122 4399.143,-122 4399.143,-86 4628.857,-86 4628.857,-122"/>
-<text text-anchor="middle" x="4514" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminAddProductComponent</text>
-</g>
-<!-- VendorAdminAddProductComponent&#45;&gt;AppModule -->
-<g id="edge26" class="edge">
-<title>VendorAdminAddProductComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M4514,-122.1871C4514,-137.1824 4514,-156 4514,-156 4514,-156 5025.1435,-156 5025.1435,-156"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1435,-159.5001 5035.1435,-156 5025.1434,-152.5001 5025.1435,-159.5001"/>
-</g>
-<!-- VendorAdminChartCardComponent -->
-<g id="node27" class="node">
-<title>VendorAdminChartCardComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="4381.0167,-122 4160.9833,-122 4160.9833,-86 4381.0167,-86 4381.0167,-122"/>
-<text text-anchor="middle" x="4271" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminChartCardComponent</text>
-</g>
-<!-- VendorAdminChartCardComponent&#45;&gt;AppModule -->
-<g id="edge27" class="edge">
-<title>VendorAdminChartCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M4271,-122.2819C4271,-137.9478 4271,-158 4271,-158 4271,-158 5025.0824,-158 5025.0824,-158"/>
-<polygon fill="#000000" stroke="#000000" points="5025.0824,-161.5001 5035.0824,-158 5025.0823,-154.5001 5025.0824,-161.5001"/>
-</g>
-<!-- VendorAdminColorChooserDirective -->
-<g id="node28" class="node">
-<title>VendorAdminColorChooserDirective</title>
-<polygon fill="#ffffb3" stroke="#000000" points="4142.9971,-122 3915.0029,-122 3915.0029,-86 4142.9971,-86 4142.9971,-122"/>
-<text text-anchor="middle" x="4029" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminColorChooserDirective</text>
-</g>
-<!-- VendorAdminColorChooserDirective&#45;&gt;AppModule -->
-<g id="edge28" class="edge">
-<title>VendorAdminColorChooserDirective&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M4029,-122.027C4029,-138.3976 4029,-160 4029,-160 4029,-160 5025.2704,-160 5025.2704,-160"/>
-<polygon fill="#000000" stroke="#000000" points="5025.2705,-163.5001 5035.2704,-160 5025.2704,-156.5001 5025.2705,-163.5001"/>
-</g>
-<!-- VendorAdminDashboardComponent -->
-<g id="node29" class="node">
-<title>VendorAdminDashboardComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="3897.3431,-122 3674.6569,-122 3674.6569,-86 3897.3431,-86 3897.3431,-122"/>
-<text text-anchor="middle" x="3786" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminDashboardComponent</text>
-</g>
-<!-- VendorAdminDashboardComponent&#45;&gt;AppModule -->
-<g id="edge29" class="edge">
-<title>VendorAdminDashboardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M3786,-122.0352C3786,-138.7344 3786,-161 3786,-161 3786,-161 5025.1449,-161 5025.1449,-161"/>
-<polygon fill="#000000" stroke="#000000" points="5025.145,-164.5001 5035.1449,-161 5025.1449,-157.5001 5025.145,-164.5001"/>
-</g>
-<!-- VendorAdminFooterComponent -->
-<g id="node30" class="node">
-<title>VendorAdminFooterComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="3656.2506,-122 3457.7494,-122 3457.7494,-86 3656.2506,-86 3656.2506,-122"/>
-<text text-anchor="middle" x="3557" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminFooterComponent</text>
-</g>
-<!-- VendorAdminFooterComponent&#45;&gt;AppModule -->
-<g id="edge30" class="edge">
-<title>VendorAdminFooterComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M3557,-122.0225C3557,-139.3734 3557,-163 3557,-163 3557,-163 5025.1586,-163 5025.1586,-163"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1586,-166.5001 5035.1586,-163 5025.1586,-159.5001 5025.1586,-166.5001"/>
-</g>
-<!-- VendorAdminHeaderComponent -->
-<g id="node31" class="node">
-<title>VendorAdminHeaderComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="3439.1134,-122 3236.8866,-122 3236.8866,-86 3439.1134,-86 3439.1134,-122"/>
-<text text-anchor="middle" x="3338" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminHeaderComponent</text>
-</g>
-<!-- VendorAdminHeaderComponent&#45;&gt;AppModule -->
-<g id="edge31" class="edge">
-<title>VendorAdminHeaderComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M3338,-122.302C3338,-140.2699 3338,-165 3338,-165 3338,-165 5025.3027,-165 5025.3027,-165"/>
-<polygon fill="#000000" stroke="#000000" points="5025.3027,-168.5001 5035.3027,-165 5025.3027,-161.5001 5025.3027,-168.5001"/>
-</g>
-<!-- VendorAdminMailComponent -->
-<g id="node32" class="node">
-<title>VendorAdminMailComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="3218.1427,-122 3029.8573,-122 3029.8573,-86 3218.1427,-86 3218.1427,-122"/>
-<text text-anchor="middle" x="3124" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminMailComponent</text>
-</g>
-<!-- VendorAdminMailComponent&#45;&gt;AppModule -->
-<g id="edge32" class="edge">
-<title>VendorAdminMailComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M3124,-122.2667C3124,-140.5552 3124,-166 3124,-166 3124,-166 5025.3053,-166 5025.3053,-166"/>
-<polygon fill="#000000" stroke="#000000" points="5025.3053,-169.5001 5035.3053,-166 5025.3053,-162.5001 5025.3053,-169.5001"/>
-</g>
-<!-- VendorAdminMailComposeComponent -->
-<g id="node33" class="node">
-<title>VendorAdminMailComposeComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="3011.5293,-122 2770.4707,-122 2770.4707,-86 3011.5293,-86 3011.5293,-122"/>
-<text text-anchor="middle" x="2891" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminMailComposeComponent</text>
-</g>
-<!-- VendorAdminMailComposeComponent&#45;&gt;AppModule -->
-<g id="edge33" class="edge">
-<title>VendorAdminMailComposeComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M2891,-122.1686C2891,-141.0898 2891,-168 2891,-168 2891,-168 5025.2837,-168 5025.2837,-168"/>
-<polygon fill="#000000" stroke="#000000" points="5025.2838,-171.5001 5035.2837,-168 5025.2837,-164.5001 5025.2838,-171.5001"/>
-</g>
-<!-- VendorAdminMailSidebarComponent -->
-<g id="node34" class="node">
-<title>VendorAdminMailSidebarComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2752.9058,-122 2521.0942,-122 2521.0942,-86 2752.9058,-86 2752.9058,-122"/>
-<text text-anchor="middle" x="2637" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminMailSidebarComponent</text>
-</g>
-<!-- VendorAdminMailSidebarComponent&#45;&gt;AppModule -->
-<g id="edge34" class="edge">
-<title>VendorAdminMailSidebarComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M2637,-122.1061C2637,-141.3391 2637,-169 2637,-169 2637,-169 5025.1626,-169 5025.1626,-169"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1626,-172.5001 5035.1626,-169 5025.1626,-165.5001 5025.1626,-172.5001"/>
-</g>
-<!-- VendorAdminMailWriterComponent -->
-<g id="node35" class="node">
-<title>VendorAdminMailWriterComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2503.6741,-122 2278.3259,-122 2278.3259,-86 2503.6741,-86 2503.6741,-122"/>
-<text text-anchor="middle" x="2391" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminMailWriterComponent</text>
-</g>
-<!-- VendorAdminMailWriterComponent&#45;&gt;AppModule -->
-<g id="edge35" class="edge">
-<title>VendorAdminMailWriterComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M2391,-122.308C2391,-142.1455 2391,-171 2391,-171 2391,-171 5025.0793,-171 5025.0793,-171"/>
-<polygon fill="#000000" stroke="#000000" points="5025.0793,-174.5001 5035.0793,-171 5025.0793,-167.5001 5025.0793,-174.5001"/>
-</g>
-<!-- VendorAdminProductColorChooserComponent -->
-<g id="node36" class="node">
-<title>VendorAdminProductColorChooserComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2260.2948,-122 1975.7052,-122 1975.7052,-86 2260.2948,-86 2260.2948,-122"/>
-<text text-anchor="middle" x="2118" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductColorChooserComponent</text>
-</g>
-<!-- VendorAdminProductColorChooserComponent&#45;&gt;AppModule -->
-<g id="edge36" class="edge">
-<title>VendorAdminProductColorChooserComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M2118,-122.1289C2118,-142.5724 2118,-173 2118,-173 2118,-173 5025.1706,-173 5025.1706,-173"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1707,-176.5001 5035.1706,-173 5025.1706,-169.5001 5025.1707,-176.5001"/>
-</g>
-<!-- VendorAdminProductComponent -->
-<g id="node37" class="node">
-<title>VendorAdminProductComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1957.7506,-122 1752.2494,-122 1752.2494,-86 1957.7506,-86 1957.7506,-122"/>
-<text text-anchor="middle" x="1855" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductComponent</text>
-</g>
-<!-- VendorAdminProductComponent&#45;&gt;AppModule -->
-<g id="edge37" class="edge">
-<title>VendorAdminProductComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M1855,-122.0267C1855,-142.7672 1855,-174 1855,-174 1855,-174 5025.0836,-174 5025.0836,-174"/>
-<polygon fill="#000000" stroke="#000000" points="5025.0836,-177.5001 5035.0836,-174 5025.0836,-170.5001 5025.0836,-177.5001"/>
-</g>
-<!-- VendorAdminProductDetailsFormComponent -->
-<g id="node38" class="node">
-<title>VendorAdminProductDetailsFormComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1733.7365,-122 1458.2635,-122 1458.2635,-86 1733.7365,-86 1733.7365,-122"/>
-<text text-anchor="middle" x="1596" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductDetailsFormComponent</text>
-</g>
-<!-- VendorAdminProductDetailsFormComponent&#45;&gt;AppModule -->
-<g id="edge38" class="edge">
-<title>VendorAdminProductDetailsFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M1596,-122.1686C1596,-143.498 1596,-176 1596,-176 1596,-176 5025.1737,-176 5025.1737,-176"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1737,-179.5001 5035.1737,-176 5025.1737,-172.5001 5025.1737,-179.5001"/>
-</g>
-<!-- VendorAdminProductFeaturesFormComponent -->
-<g id="node39" class="node">
-<title>VendorAdminProductFeaturesFormComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1439.5068,-122 1156.4932,-122 1156.4932,-86 1439.5068,-86 1439.5068,-122"/>
-<text text-anchor="middle" x="1298" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductFeaturesFormComponent</text>
-</g>
-<!-- VendorAdminProductFeaturesFormComponent&#45;&gt;AppModule -->
-<g id="edge39" class="edge">
-<title>VendorAdminProductFeaturesFormComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M1298,-122.2921C1298,-144.2057 1298,-178 1298,-178 1298,-178 5025.2064,-178 5025.2064,-178"/>
-<polygon fill="#000000" stroke="#000000" points="5025.2064,-181.5001 5035.2064,-178 5025.2064,-174.5001 5025.2064,-181.5001"/>
-</g>
-<!-- VendorAdminProductImageComponent -->
-<g id="node40" class="node">
-<title>VendorAdminProductImageComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1138.231,-122 897.769,-122 897.769,-86 1138.231,-86 1138.231,-122"/>
-<text text-anchor="middle" x="1018" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductImageComponent</text>
-</g>
-<!-- VendorAdminProductImageComponent&#45;&gt;AppModule -->
-<g id="edge40" class="edge">
-<title>VendorAdminProductImageComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M1018,-122.1554C1018,-144.3519 1018,-179 1018,-179 1018,-179 5025.1708,-179 5025.1708,-179"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1708,-182.5001 5035.1708,-179 5025.1707,-175.5001 5025.1708,-182.5001"/>
-</g>
-<!-- VendorAdminProductsComponent -->
-<g id="node41" class="node">
-<title>VendorAdminProductsComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="879.6951,-122 668.3049,-122 668.3049,-86 879.6951,-86 879.6951,-122"/>
-<text text-anchor="middle" x="774" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductsComponent</text>
-</g>
-<!-- VendorAdminProductsComponent&#45;&gt;AppModule -->
-<g id="edge41" class="edge">
-<title>VendorAdminProductsComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M774,-122.2479C774,-145.0179 774,-181 774,-181 774,-181 5025.1044,-181 5025.1044,-181"/>
-<polygon fill="#000000" stroke="#000000" points="5025.1044,-184.5001 5035.1044,-181 5025.1043,-177.5001 5025.1044,-184.5001"/>
-</g>
-<!-- VendorAdminProductsListComponent -->
-<g id="node42" class="node">
-<title>VendorAdminProductsListComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="650.4734,-122 417.5266,-122 417.5266,-86 650.4734,-86 650.4734,-122"/>
-<text text-anchor="middle" x="534" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminProductsListComponent</text>
-</g>
-<!-- VendorAdminProductsListComponent&#45;&gt;AppModule -->
-<g id="edge42" class="edge">
-<title>VendorAdminProductsListComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M534,-122.3228C534,-145.6602 534,-183 534,-183 534,-183 5025.2819,-183 5025.2819,-183"/>
-<polygon fill="#000000" stroke="#000000" points="5025.2819,-186.5001 5035.2819,-183 5025.2818,-179.5001 5025.2819,-186.5001"/>
-</g>
-<!-- VendorAdminStatusCardComponent -->
-<g id="node43" class="node">
-<title>VendorAdminStatusCardComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="399.6371,-122 176.3629,-122 176.3629,-86 399.6371,-86 399.6371,-122"/>
-<text text-anchor="middle" x="288" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">VendorAdminStatusCardComponent</text>
-</g>
-<!-- VendorAdminStatusCardComponent&#45;&gt;AppModule -->
-<g id="edge43" class="edge">
-<title>VendorAdminStatusCardComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M288,-122.1532C288,-145.7566 288,-184 288,-184 288,-184 5025.2354,-184 5025.2354,-184"/>
-<polygon fill="#000000" stroke="#000000" points="5025.2354,-187.5001 5035.2354,-184 5025.2354,-180.5001 5025.2354,-187.5001"/>
-</g>
-<!-- AppComponent  -->
-<g id="node46" class="node">
-<title>AppComponent </title>
-<polygon fill="#80b1d3" stroke="#000000" points="5131.439,-252 5022.561,-252 5022.561,-216 5131.439,-216 5131.439,-252"/>
-<text text-anchor="middle" x="5077" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent </text>
-</g>
-<!-- AppModule&#45;&gt;AppComponent  -->
-<g id="edge45" class="edge">
-<title>AppModule&#45;&gt;AppComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M5077,-187.1061C5077,-187.1061 5077,-205.991 5077,-205.991"/>
-<polygon fill="#000000" stroke="#000000" points="5073.5001,-205.9909 5077,-215.991 5080.5001,-205.991 5073.5001,-205.9909"/>
-</g>
-<!-- AppRoutingModule -->
-<g id="node45" class="node">
-<title>AppRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="152.2744,-122 149.2744,-126 128.2744,-126 125.2744,-122 23.7256,-122 23.7256,-86 152.2744,-86 152.2744,-122"/>
-<text text-anchor="middle" x="88" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppRoutingModule</text>
-</g>
-<!-- AppRoutingModule&#45;&gt;AppModule -->
-<g id="edge44" class="edge">
-<title>AppRoutingModule&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M88,-122.1985C88,-146.3563 88,-186 88,-186 88,-186 5024.9961,-186 5024.9961,-186"/>
-<polygon fill="#000000" stroke="#000000" points="5024.9961,-189.5001 5034.9961,-186 5024.996,-182.5001 5024.9961,-189.5001"/>
-</g>
-</g>
-</svg>
-
-    </div>
-    <i id="fullscreen" class="icon ion-ios-resize module-graph-fullscreen-btn" aria-hidden="true"></i>
+<div class="text-center">
+    <object id="demo-svg" type="image/svg+xml" data="../modules/AppModule/dependencies.svg" style="width: 100%; height: 250px;">
+            Your browser does not support SVG
+    </object>
     <div class="btn-group">
         <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
         <button id="reset" class="btn btn-default btn-sm">Reset</button>
@@ -638,17 +972,16 @@
 <script src="../js/svg-pan-zoom.controls.js"></script>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li  class="active" >
-        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    <li class="active">
+        <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
     </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    <li>
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
     </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
-
+    <div class="tab-pane fade active in" id="infos">
         <p class="comment">
             <h3>File</h3>
         </p>
@@ -657,181 +990,230 @@
         </p>
 
 
-
-
         <div class="container-fluid module">
             <div class="row">
                 <div class="col-sm-3">
-                    <h3>Declarations<a href="https://angular.io/api/core/NgModule#declarations" target="_blank"
-                            title="Official documentation about module declarations"><span class="icon ion-ios-information-circle-outline"></span></a></h3>
+                    <h3>Declarations<a href="https://angular.io/docs/ts/latest/api/core/index/NgModule-interface.html#!#declarations-anchor" target="_blank"><span class="fa fa-info-circle"></span></a></h3>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="../components/AboutComponent.html">AboutComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/AppComponent.html">AppComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/CartComponent.html">CartComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/CheckoutComponent.html">CheckoutComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/CommunicationComponent.html">CommunicationComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ContactComponent.html">ContactComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ContactFormComponent.html">ContactFormComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ContactSectionComponent.html">ContactSectionComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/FeaturedProductComponent.html">FeaturedProductComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/FooterComponent.html">FooterComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/FormViewComponent.html">FormViewComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/GraphicContentComponent.html">GraphicContentComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/HeaderComponent.html">HeaderComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/HeadingComponent.html">HeadingComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/HomeComponent.html">HomeComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/LogoutComponent.html">LogoutComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/MailBoxComponent.html">MailBoxComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/MainBannerComponent.html">MainBannerComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ProductDetailComponent.html">ProductDetailComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ProductSliderComponent.html">ProductSliderComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/ShopComponent.html">ShopComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/SigninComponent.html">SigninComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/SignupComponent.html">SignupComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/SpacerComponent.html">SpacerComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/UserProfileComponent.html">UserProfileComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminAddProductComponent.html">VendorAdminAddProductComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminChartCardComponent.html">VendorAdminChartCardComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../directives/VendorAdminColorChooserDirective.html">VendorAdminColorChooserDirective</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminDashboardComponent.html">VendorAdminDashboardComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminFooterComponent.html">VendorAdminFooterComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminHeaderComponent.html">VendorAdminHeaderComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminMailComponent.html">VendorAdminMailComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminMailComposeComponent.html">VendorAdminMailComposeComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminMailSidebarComponent.html">VendorAdminMailSidebarComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminMailWriterComponent.html">VendorAdminMailWriterComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductColorChooserComponent.html">VendorAdminProductColorChooserComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductComponent.html">VendorAdminProductComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductDetailsFormComponent.html">VendorAdminProductDetailsFormComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductFeaturesFormComponent.html">VendorAdminProductFeaturesFormComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductImageComponent.html">VendorAdminProductImageComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductsComponent.html">VendorAdminProductsComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductsListComponent.html">VendorAdminProductsListComponent</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminStatusCardComponent.html">VendorAdminStatusCardComponent</a>
-                        </li>
+                            <li class="list-group-item">
+                                <a href="../components/AppComponent.html">AppComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/HomeComponent.html">HomeComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/MainBannerComponent.html">MainBannerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/FeaturedProductComponent.html">FeaturedProductComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/FooterComponent.html">FooterComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/HeaderComponent.html">HeaderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AboutComponent.html">AboutComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductSliderComponent.html">ProductSliderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/SpacerComponent.html">SpacerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/GraphicContentComponent.html">GraphicContentComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/HeadingComponent.html">HeadingComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ContactComponent.html">ContactComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ContactFormComponent.html">ContactFormComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ContactSectionComponent.html">ContactSectionComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/SigninComponent.html">SigninComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/SignupComponent.html">SignupComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ShopComponent.html">ShopComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/UserProfileComponent.html">UserProfileComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/LogoutComponent.html">LogoutComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/FormViewComponent.html">FormViewComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/CartComponent.html">CartComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/CheckoutComponent.html">CheckoutComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/CommunicationComponent.html">CommunicationComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductDetailComponent.html">ProductDetailComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminDashboardComponent.html">VendorAdminDashboardComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/MailBoxComponent.html">MailBoxComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminMailComponent.html">VendorAdminMailComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminProductsComponent.html">VendorAdminProductsComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminProductsListComponent.html">VendorAdminProductsListComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminProductComponent.html">VendorAdminProductComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminProductFeaturesFormComponent.html">VendorAdminProductFeaturesFormComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminMailComposeComponent.html">VendorAdminMailComposeComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminMailWriterComponent.html">VendorAdminMailWriterComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminMailSidebarComponent.html">VendorAdminMailSidebarComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminStatusCardComponent.html">VendorAdminStatusCardComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminFooterComponent.html">VendorAdminFooterComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminChartCardComponent.html">VendorAdminChartCardComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminAddProductComponent.html">VendorAdminAddProductComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/VendorAdminAddProductFormComponent.html">VendorAdminAddProductFormComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/LoaderComponent.html">LoaderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/MessagesComponent.html">MessagesComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ReadMailComponent.html">ReadMailComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/DisplayMailComponent.html">DisplayMailComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/SelectShopTypeComponent.html">SelectShopTypeComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductOptionsColorComponent.html">ProductOptionsColorComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductOptionsRadioBtnComponent.html">ProductOptionsRadioBtnComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductOptionsDropdownComponent.html">ProductOptionsDropdownComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/OrderConfirmComponent.html">OrderConfirmComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductOptionsQuestionComponent.html">ProductOptionsQuestionComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/OrdersComponent.html">OrdersComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminCustomFormComponent.html">AdminCustomFormComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminCategorySelectorComponent.html">AdminCategorySelectorComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminColorOptionMakerComponent.html">AdminColorOptionMakerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminDropdownOptionMakerComponent.html">AdminDropdownOptionMakerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminRadiobtnOptionMakerComponent.html">AdminRadiobtnOptionMakerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminFormOptionsComponent.html">AdminFormOptionsComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminTagSelectorComponent.html">AdminTagSelectorComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminTextOptionMakerComponent.html">AdminTextOptionMakerComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminProductEditComponent.html">AdminProductEditComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminPriceTableInputComponent.html">AdminPriceTableInputComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminHeaderComponent.html">AdminHeaderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminSidebarComponent.html">AdminSidebarComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminNavbarComponent.html">AdminNavbarComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductOptionsComponent.html">ProductOptionsComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminCategoryAdderComponent.html">AdminCategoryAdderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/AdminTagAdderComponent.html">AdminTagAdderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/FeaturedProductSliderComponent.html">FeaturedProductSliderComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ProductCardComponent.html">ProductCardComponent</a>
+                            </li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h3>EntryComponents<a href="https://angular.io/api/core/NgModule#entryComponents" target="_blank"
-                            title="Official documentation about module entryComponents"><span class="icon ion-ios-information-circle-outline"></span></a></h3>
+                    <h3>Bootstrap<a href="https://angular.io/docs/ts/latest/api/core/index/NgModule-interface.html#!#bootstrap-anchor" target="_blank"><span class="fa fa-info-circle"></a></h3>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="../components/VendorAdminProductColorChooserComponent.html">VendorAdminProductColorChooserComponent</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
-                                class="icon ion-ios-information-circle-outline"></a></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="../modules/AppRoutingModule.html">AppRoutingModule</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h3>Bootstrap<a href="https://angular.io/api/core/NgModule#bootstrap" target="_blank"
-                            title="Official documentation about module bootstrap"><span class="icon ion-ios-information-circle-outline"></a></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="../components/AppComponent.html">AppComponent</a>
-                        </li>
+                            <li class="list-group-item">
+                                <a href="../components/AppComponent.html" >AppComponent</a>
+                            </li>
                     </ul>
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FormComponent } from &quot;./library/FormComponents&quot;;
+    <div class="tab-pane fade tab-source-code" id="source">
+        <pre><code class="hljs javascript">import { FormComponent } from &quot;./library/FormComponents&quot;;
 import { BrowserModule } from &quot;@angular/platform-browser&quot;;
 import { NgModule } from &quot;@angular/core&quot;;
 import { HttpClientModule } from &quot;@angular/common/http&quot;;
@@ -865,19 +1247,14 @@ import { CheckoutComponent } from &#x27;./pages/checkout/checkout.component&#x27
 import { CommunicationComponent } from &#x27;./pages/communication/communication.component&#x27;;
 import { ProductDetailComponent } from &#x27;./pages/product-detail/product-detail.component&#x27;;
 import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
-import { NbThemeModule, NbLayoutModule } from &#x27;@nebular/theme&#x27;;
-import { NbEvaIconsModule } from &#x27;@nebular/eva-icons&#x27;;
 
 /** Vendor Admin module imports */
 import { VendorAdminDashboardComponent } from &#x27;./pages/vendor-admin-dashboard/vendor-admin-dashboard.component&#x27;;
-import { VendorAdminHeaderComponent } from &#x27;./components/vendor-admin-header/vendor-admin-header.component&#x27;;
 import { MailBoxComponent } from &#x27;./components/mail-box/mail-box.component&#x27;;
 import { VendorAdminMailComponent } from &#x27;./pages/vendor-admin-mail/vendor-admin-mail.component&#x27;;
 import { VendorAdminProductsComponent } from &#x27;./pages/vendor-admin-products/vendor-admin-products.component&#x27;;
 import { VendorAdminProductsListComponent } from &#x27;./components/vendor-admin-products-list/vendor-admin-products-list.component&#x27;;
 import { VendorAdminProductComponent } from &#x27;./pages/vendor-admin-product/vendor-admin-product.component&#x27;;
-import { VendorAdminProductImageComponent } from &#x27;./components/vendor-admin-product-image/vendor-admin-product-image.component&#x27;;
-import { VendorAdminProductDetailsFormComponent } from &#x27;./components/vendor-admin-product-details-form/vendor-admin-product-details-form.component&#x27;;
 import { VendorAdminProductFeaturesFormComponent } from &#x27;./components/vendor-admin-product-features-form/vendor-admin-product-features-form.component&#x27;;
 import { NgxSummernoteModule } from &#x27;ngx-summernote&#x27;;
 import { VendorAdminMailComposeComponent } from &#x27;./pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component&#x27;;
@@ -889,9 +1266,74 @@ import { VendorAdminFooterComponent } from &#x27;./components/vendor-admin-foote
 import { VendorAdminChartCardComponent } from &#x27;./components/vendor-admin-chart-card/vendor-admin-chart-card.component&#x27;;
 import { VendorAdminAddProductComponent } from &#x27;./pages/vendor-admin-add-product/vendor-admin-add-product.component&#x27;;
 import { ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
-import { VendorAdminProductColorChooserComponent } from &#x27;./components/vendor-admin-product-color-chooser/vendor-admin-product-color-chooser.component&#x27;;
+import { VendorAdminAddProductFormComponent } from &#x27;./components/vendor-admin-add-product-form/vendor-admin-add-product-form.component&#x27;;
+import { httpInterceptProvider } from &#x27;./http-interceptor&#x27;;
+import { LoaderComponent } from &#x27;./components/loader/loader.component&#x27;;
+import { MessagesComponent } from &#x27;./pages/messages/messages.component&#x27;;
+import { ReadMailComponent } from &#x27;./pages/read-mail/read-mail.component&#x27;;
+import { DisplayMailComponent } from &#x27;./components/display-mail/display-mail.component&#x27;;
+import { SelectShopTypeComponent } from &#x27;./pages/select-shop-type/select-shop-type.component&#x27;;
+
+import { CardModule } from &#x27;primeng/card&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { DropdownModule } from &#x27;primeng/dropdown&#x27;;
+import { RadioButtonModule } from &#x27;primeng/radiobutton&#x27;;
+import { InputTextModule } from &#x27;primeng/inputtext&#x27;;
+import { InputTextareaModule } from &#x27;primeng/inputtextarea&#x27;;
+import { TreeTableModule } from &#x27;primeng/treetable&#x27;;
+import { CalendarModule } from &#x27;primeng/calendar&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+import { SliderModule } from &#x27;primeng/slider&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { MultiSelectModule } from &#x27;primeng/multiselect&#x27;;
+import { ContextMenuModule } from &#x27;primeng/contextmenu&#x27;;
+import { ToastModule } from &#x27;primeng/toast&#x27;;
+import { ProgressBarModule } from &#x27;primeng/progressbar&#x27;;
+import { FileUploadModule } from &#x27;primeng/fileupload&#x27;;
+import { OverlayPanelModule } from &#x27;primeng/overlaypanel&#x27;;
+import { ListboxModule } from &#x27;primeng/listbox&#x27;;
 import { ColorPickerModule } from &#x27;ngx-color-picker&#x27;;
-import { VendorAdminColorChooserDirective } from &#x27;./directives/vendor-admin-color-chooser.directive&#x27;;
+import { MessagesModule } from &#x27;primeng/messages&#x27;;
+import { MessageModule } from &#x27;primeng/message&#x27;;
+import { InputNumberModule } from &#x27;primeng/inputnumber&#x27;;
+import { ToolbarModule } from &#x27;primeng/toolbar&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { SidebarModule } from &#x27;primeng/sidebar&#x27;;
+import { MenubarModule } from &#x27;primeng/menubar&#x27;;
+import { GalleriaModule } from &#x27;primeng/galleria&#x27;;
+import { AccordionModule } from &#x27;primeng/accordion&#x27;;
+import { CarouselModule } from &#x27;primeng/carousel&#x27;;
+import { PaginatorModule } from &#x27;primeng/paginator&#x27;;
+import { CheckboxModule } from &#x27;primeng/checkbox&#x27;;
+
+import { ProductOptionsColorComponent } from &#x27;./components/product-options-color/product-options-color.component&#x27;;
+import { ProductOptionsRadioBtnComponent } from &#x27;./components/product-options-radio-btn/product-options-radio-btn.component&#x27;;
+import { ProductOptionsDropdownComponent } from &#x27;./components/product-options-dropdown/product-options-dropdown.component&#x27;;
+import { OrderConfirmComponent } from &#x27;./pages/order-confirm/order-confirm.component&#x27;;
+import { ProductOptionsQuestionComponent } from &#x27;./components/product-options-question/product-options-question.component&#x27;;
+import { OrdersComponent } from &#x27;./pages/orders/orders.component&#x27;;
+import { AdminCustomFormComponent } from &#x27;./components/admin-custom-form/admin-custom-form.component&#x27;;
+import { AdminCategorySelectorComponent } from &#x27;./components/admin-category-selector/admin-category-selector.component&#x27;;
+// import { TestComponentComponent } from &#x27;./components/test-component/test-component.component&#x27;;
+import { AdminColorOptionMakerComponent } from &#x27;./components/admin-color-option-maker/admin-color-option-maker.component&#x27;;
+import { AdminDropdownOptionMakerComponent } from &#x27;./components/admin-dropdown-option-maker/admin-dropdown-option-maker.component&#x27;;
+import { AdminRadiobtnOptionMakerComponent } from &#x27;./components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component&#x27;;
+import { AdminFormOptionsComponent } from &#x27;./components/admin-form-options/admin-form-options.component&#x27;;
+import { AdminTagSelectorComponent } from &#x27;./components/admin-tag-selector/admin-tag-selector.component&#x27;;
+import { AdminTextOptionMakerComponent } from &#x27;./components/admin-text-option-maker/admin-text-option-maker.component&#x27;;
+import { AdminProductEditComponent } from &#x27;./pages/admin-product-edit/admin-product-edit.component&#x27;;
+import { AdminPriceTableInputComponent } from &#x27;./components/admin-price-table-input/admin-price-table-input.component&#x27;;
+import { InputSwitchModule } from &#x27;primeng/inputswitch&#x27;;
+import { SplitButtonModule } from &#x27;primeng/splitbutton&#x27;;
+import { AdminHeaderComponent } from &#x27;./components/admin-header/admin-header.component&#x27;;
+import { AdminSidebarComponent } from &#x27;./components/admin-sidebar/admin-sidebar.component&#x27;;
+import { AdminNavbarComponent } from &#x27;./components/admin-navbar/admin-navbar.component&#x27;;
+import { ProductOptionsComponent } from &#x27;./components/product-options/product-options.component&#x27;;
+import { AdminCategoryAdderComponent } from &#x27;./pages/admin-category-adder/admin-category-adder.component&#x27;;
+import { AdminTagAdderComponent } from &#x27;./pages/admin-tag-adder/admin-tag-adder.component&#x27;;
+import { FeaturedProductSliderComponent } from &#x27;./components/featured-product-slider/featured-product-slider.component&#x27;;
+import { ProductCardComponent } from &#x27;./components/product-card/product-card.component&#x27;;
+// import { ProductComponent } from &#x27;./components/product/product.component&#x27;;}
 
 @NgModule({
   declarations: [
@@ -920,14 +1362,11 @@ import { VendorAdminColorChooserDirective } from &#x27;./directives/vendor-admin
     CommunicationComponent,
     ProductDetailComponent,
     VendorAdminDashboardComponent,
-    VendorAdminHeaderComponent,
     MailBoxComponent,
     VendorAdminMailComponent,
     VendorAdminProductsComponent,
     VendorAdminProductsListComponent,
     VendorAdminProductComponent,
-    VendorAdminProductImageComponent,
-    VendorAdminProductDetailsFormComponent,
     VendorAdminProductFeaturesFormComponent,
     VendorAdminMailComposeComponent,
     VendorAdminMailWriterComponent,
@@ -936,8 +1375,38 @@ import { VendorAdminColorChooserDirective } from &#x27;./directives/vendor-admin
     VendorAdminFooterComponent,
     VendorAdminChartCardComponent,
     VendorAdminAddProductComponent,
-    VendorAdminProductColorChooserComponent,
-    VendorAdminColorChooserDirective
+    VendorAdminAddProductFormComponent,
+    LoaderComponent,
+    MessagesComponent,
+    ReadMailComponent,
+    DisplayMailComponent,
+    SelectShopTypeComponent,
+    ProductOptionsColorComponent,
+    ProductOptionsRadioBtnComponent,
+    ProductOptionsDropdownComponent,
+    OrderConfirmComponent,
+    ProductOptionsQuestionComponent,
+    OrdersComponent,
+    AdminCustomFormComponent,
+    AdminCategorySelectorComponent,
+    // TestComponentComponent,
+    AdminColorOptionMakerComponent,
+    AdminDropdownOptionMakerComponent,
+    AdminRadiobtnOptionMakerComponent,
+    AdminFormOptionsComponent,
+    AdminTagSelectorComponent,
+    AdminTextOptionMakerComponent,
+    AdminProductEditComponent,
+    AdminPriceTableInputComponent,
+    AdminHeaderComponent,
+    AdminSidebarComponent,
+    AdminNavbarComponent,
+    ProductOptionsComponent,
+    AdminCategoryAdderComponent,
+    AdminTagAdderComponent,
+    FeaturedProductSliderComponent,
+    ProductCardComponent,
+    // ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -945,19 +1414,49 @@ import { VendorAdminColorChooserDirective } from &#x27;./directives/vendor-admin
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: &#x27;default&#x27; }),
-    NbLayoutModule,
-    NbEvaIconsModule,
     NgxSummernoteModule,
     ChartjsModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    // Prime Ng Modules
+    ColorPickerModule,
+    CardModule,
+    ButtonModule,
+    DropdownModule,
+    RadioButtonModule,
+    InputTextModule,
+    InputTextareaModule,
+    TreeTableModule,
+    CalendarModule,
+    TableModule,
+    SliderModule,
+    DialogModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    ToastModule,
+    ProgressBarModule,
+    FileUploadModule,
+    OverlayPanelModule,
+    ListboxModule,
+    MessagesModule,
+    MessageModule,
+    InputNumberModule,
+    InputSwitchModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    SplitButtonModule,
+    SidebarModule,
+    MenubarModule,
+    GalleriaModule,
+    AccordionModule,
+    CarouselModule,
+    PaginatorModule,
+    CheckboxModule
   ],
   entryComponents: [
-    VendorAdminProductColorChooserComponent
+    // VendorAdminProductColorChooserComponent
   ],
-  providers: [FormComponent],
-  bootstrap: [AppComponent]
+  providers: [FormComponent, httpInterceptProvider],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 </code></pre>
@@ -973,14 +1472,9 @@ export class AppModule {}
 
 
 
-                   
-
-
-
-
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -988,22 +1482,8 @@ export class AppModule {}
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppModule.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
-       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -1014,17 +1494,20 @@ export class AppModule {}
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>
