@@ -19,10 +19,10 @@ import { MessagesComponent } from "./pages/messages/messages.component";
 import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { VendorAdminDashboardComponent } from "./pages/vendor-admin-dashboard/vendor-admin-dashboard.component";
 import { VendorAdminMailComponent } from "./pages/vendor-admin-mail/vendor-admin-mail.component";
-import { VendorAdminProductsComponent } from "./pages/vendor-admin-products/vendor-admin-products.component";
+import { AdminProductsComponent } from "./pages/admin-products/admin-products.component";
 import { VendorAdminProductComponent } from "./pages/vendor-admin-product/vendor-admin-product.component";
 import { VendorAdminMailComposeComponent } from "./pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component";
-import { VendorAdminAddProductComponent } from "./pages/vendor-admin-add-product/vendor-admin-add-product.component";
+import { AdminAddProductComponent } from "./pages/admin-add-product/admin-add-product.component";
 import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
@@ -56,8 +56,8 @@ const routes: Routes = [
   { path: "admin/mail", component: VendorAdminMailComponent },
   { path: "admin/mail/:id", component: ReadMailComponent },
   { path: "admin/mail/compose", component: VendorAdminMailComposeComponent },
-  { path: "admin/products", component: VendorAdminProductsComponent },
-  { path: "admin/products/add", component: VendorAdminAddProductComponent },
+  { path: "admin/products", component: AdminProductsComponent },
+  { path: "admin/products/add", component: AdminAddProductComponent },
   { path: "admin/products/:id/edit", component: AdminProductEditComponent },
   { path: "admin/products/:id", component: VendorAdminProductComponent},
   { path: "admin/categories", component: AdminCategoryAdderComponent},

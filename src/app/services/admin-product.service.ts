@@ -2,17 +2,18 @@ import { Injectable } from "@angular/core";
 import { Product, listAllFeatures, listCustomOptions, PriceGroup } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { readSync } from "fs";
 
 import { SelectItem } from 'primeng/api';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { table } from 'console';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
 })
-export class VendorAdminProductService {
+export class AdminProductService {
   host: string;
+  API_URL: string;
 
   possibleOptions: Object;
   products: Product[] = [
@@ -20,68 +21,74 @@ export class VendorAdminProductService {
   ];
 
   constructor(
-    private http: HttpClient,
+    private _http: HttpClient,
     private _fb: FormBuilder
   ) {
     this.host = environment.apiUrl;
+
+    this.API_URL = 'http://localhost:3000';
 
     // initialise the possible options
     this.possibleOptions = listAllFeatures();
   }
 
-  // async getProducts(): Promise<any> {
-  //   let products = await this.http.get(this.host + "/products").toPromise();
-  //   return products;
-  // }
-
-  getProducts(): Product[] {
-    return this.products;
+  /**
+   * Return the products API link
+   */
+  getProductsLink(): string {
+    return `${this.API_URL}/products`
   }
 
-  // async addProduct(product: Product): Promise<any> {
-  addProduct(product: Product): void {
-    // console.log(product);
-    // let res = await this.http
-    //   .post(this.host + "/products", product)
-    //   .toPromise();
-    // console.log(res);
-    // return res;
-
-    this.products.push(product);
-    console.log('Product Added to vendor admin product service');
-    console.info(this.products);
+  /**
+   * Return the product link
+   * @param id id of the product
+   */
+  getProductLinkById(id: number): string {
+    return `${this.getProductsLink()}/${id}`
   }
 
-  editProduct(id: number, editedProduct: any): void {
-    let found: boolean = true;
-
-    for (let i: number = 0; i < this.products.length; ++i) {
-      if (this.products[i].id === id) {
-        this.products.splice(i, 1, editedProduct);
-        break;
-      }
-    }
-
-    if (found) {
-      console.log('Product ', id, ' edited.');
-    }
-    else {
-      console.log('Product not found');
-      
-    }
+  /**
+   * Fetch Product by ID from the API
+   * @param id id of the product
+   */
+  getProduct(id: number): Observable<any> {
+    return this._http.get(`${this.getProductLinkById(id)}`)
+      .pipe(take(1));
   }
 
-  // async deleteProduct(id: number) {
-  deleteProduct(id: number): void {
-    // let res = await this.http.delete(this.host + `/products/${id}`).toPromise();
-    this.products.splice(
-      this.products.findIndex((product) => {
-        return product.id === id;
-      }),
-      1
-    );
+  /**
+   * Fetch products from API
+   */
+  getProducts(): Observable<any> {
+    return this._http.get(`${this.getProductsLink()}`)
+      .pipe(take(1));
+  }
 
-    console.log('deleted product ', id, 'from server');
+  /**
+   * Add product to server
+   * @param product product object to add
+   */
+  addProduct(product: Product): Observable<any> {
+    return this._http.post(`${this.getProductsLink()}`, product)
+      .pipe(take(1));
+  }
+
+  /**
+   * Edit product
+   * @param editedProduct edited product object
+   */
+  editProduct(editedProduct: Product): Observable<any> {
+    return this._http.put(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
+      .pipe(take(1));
+  }
+
+  /**
+   * Delete Product
+   * @param id id of the product
+   */
+  deleteProduct(id: number): Observable<any> {
+    return this._http.delete(`${this.getProductLinkById(id)}`)
+      .pipe(take(1));
   }
 
   /**
@@ -96,20 +103,6 @@ export class VendorAdminProductService {
     console.log(`delete products ${ids}`);
     console.log('Products left:', this.products);
     
-  }
-
-  // async getProduct(id: number): Promise<any> {
-  getProduct(id: number): Product {
-    // let res = await this.http.get(this.host + `/products/${id}`).toPromise();
-
-    // return new Promise((resolve, reject) => {
-    //   res["data"]["features"] = JSON.parse(res["data"]["features"]);
-    //   resolve(res);
-    // });
-
-    return this.products.find((product) => {
-      return product.id === id;
-    });
   }
 
   /**
@@ -338,31 +331,5 @@ export class VendorAdminProductService {
    */
   removeOptionInput(inputId: number, inputs: FormArray): void {
     inputs.removeAt(inputId);
-  }
-
-  /**
-   * Generate an array of demo products for testing
-   */
-  seedProducts(): Product[] {
-    let products: Product[] = [];
-
-    // for (let index = 0; index < 10; index++) {
-    //   products.push({
-
-    //   })
-    // }
-
-    return products;
-  }
-
-  getAllTags(): SelectItem[] {
-    let tags = [
-      { label: 'None', value: 'none' },
-      { label: 'Sleeveless', value: 'sleeveless' },
-      { label: 'Full Sleeve', value: 'full-sleeve' },
-      { label: 'Half Sleeve', value: 'half-sleeve' }
-    ];
-
-    return tags;
   }
 }

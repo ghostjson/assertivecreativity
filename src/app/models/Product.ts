@@ -121,7 +121,6 @@ export class Product {
       this.customForms = initial.customForms;
     }
     else {
-      this.id = null;
       this.name = null;
       this.serial = null;
       this.description = null;

@@ -2,14 +2,16 @@
   <app-admin-header></app-admin-header>
 
   <div class="container">
-    <h1 class="mb-3 text-center">Edit {{productObj.name}}</h1>
-    <div class="row d-flex justify-content-center">
-      <div class="col-12 col-md-10 col-lg-7">
-        <app-vendor-admin-add-product-form
-          [product]="product"
-          [isEdit]="true"
-        ></app-vendor-admin-add-product-form>
+    <ng-container *ngIf="productObj">
+      <h1 class="mb-3 text-center">Edit {{ productObj.name }}</h1>
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-10 col-lg-9">
+          <app-admin-add-product-form
+            [product]="product"
+            [isEdit]="true"
+          ></app-admin-add-product-form>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>

@@ -2,20 +2,21 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { FormBuilder, FormArray, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 
-import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
+import { AdminProductService } from "../../services/admin-product.service";
 import { Product, ProductForm } from 'src/app/models/Product';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { Tag } from 'src/app/models/Tag';
 import { Category } from 'src/app/models/Category';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: "app-vendor-admin-add-product-form",
-  templateUrl: "./vendor-admin-add-product-form.component.html",
-  styleUrls: ["./vendor-admin-add-product-form.component.scss"],
+  selector: "app-admin-add-product-form",
+  templateUrl: "./admin-add-product-form.component.html",
+  styleUrls: ["./admin-add-product-form.component.scss"],
 })
-export class VendorAdminAddProductFormComponent implements OnInit {
+export class AdminAddProductFormComponent implements OnInit {
   @Input() product: FormGroup;
   @Input() isEdit: boolean;
 
@@ -26,7 +27,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   categories: Category[];
   tags: Tag[];
 
-  tagSub: any;
+  tagSub: Subscription;
 
   colorPicker = {
     cpOutputFormat: "hex",
@@ -35,7 +36,7 @@ export class VendorAdminAddProductFormComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _productService: VendorAdminProductService,
+    private _productService: AdminProductService,
     private _router: Router,
     private _idService: IdGeneratorService,
     private _pcService: ProductCategorisationService
@@ -67,7 +68,11 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     }
 
     // intialise categories list
-    this.categories = this._pcService.getCategories();
+    this._pcService.getCategories()
+      .pipe(take(1))
+      .subscribe((categories: Category[]) => {
+        this.categories = categories;
+      });
 
     // intialise tags list
     this.getTags(this.productForm.value.category);
@@ -78,18 +83,23 @@ export class VendorAdminAddProductFormComponent implements OnInit {
   }
 
   /**
-   * helper function to return price table form array
+   * Helper function to return price table form array
    */
   priceTable(): FormArray {
     return this.productForm.get('priceTable') as FormArray;
   }
 
-  // helper function to get custom forms of a product
+  /**
+   * Helper function to get custom forms of a product
+   */
   customForms(): FormArray {
     return this.productForm.get('customForms') as FormArray;
   }
 
-  // create a new custom form form group
+  /**
+   * Create a new custom form form group
+   * @param formTitle title of the form
+   */
   newCustomForm(formTitle: string = null): FormGroup {
     let newFormTemplate: Object = {
       id: [this.customForms().length],
@@ -104,7 +114,9 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     return this._fb.group(newFormTemplate);
   }
 
-  // add custom form to the form object
+  /**
+   * Add custom form to the form object
+   */
   addCustomForm(): void {
     console.log('add new custom form with title', this.newCustomFormTitle.nativeElement.value);
 
@@ -118,12 +130,18 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     this.newCustomFormTitle.nativeElement.value = null;
   }
 
-  // get keys of an object
+  /**
+   * Return keys of an object
+   * @param obj object to get the keys of
+   */
   getKeys(obj: Object): Array<string> {
     return Object.keys(obj);
   }
 
-  // image upload handler for image upload input
+  /**
+   * Image upload handler for image upload input
+   * @param e Event object
+   */
   uploadImages(e: Event): void {
     this.productForm.patchValue({
       image: 'www.example.com'
@@ -143,6 +161,10 @@ export class VendorAdminAddProductFormComponent implements OnInit {
      */
   }
 
+  /**
+   * Fetch tags of a category
+   * @param category category to fethch the tags of 
+   */
   getTags(category: string): void {
     console.log(`event caught: ${category}`);
     this.tagSub = this._pcService.getTagsOf(category)
@@ -163,16 +185,18 @@ export class VendorAdminAddProductFormComponent implements OnInit {
     submitValue.updateStockStatus();
 
     if (this.isEdit) {
-      this._productService.editProduct(submitValue.id, submitValue)
-      console.log('Form Edited');
+      this._productService.editProduct(submitValue)
+        .subscribe((res: Product) => {
+          this._router.navigate(['/admin/products']);
+          console.log("Product added: ", this.productForm.value);
+        });
     }
     else {
-      this._productService.addProduct(submitValue);
+      this._productService.addProduct(submitValue)
+        .subscribe((res: Product) => {
+          this._router.navigate(['/admin/products']);
+          console.log("Product added: ", this.productForm.value);
+        });
     }
-
-    console.log("Product added");
-    console.info(this.productForm.value);
-    
-    this._router.navigate(['/admin/products']);
   }
 }

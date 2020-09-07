@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
+import { AdminProductService } from 'src/app/services/admin-product.service';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -18,7 +18,7 @@ export class AdminTextOptionMakerComponent implements OnInit {
   dialogVisible: boolean[] = [];
 
   constructor(
-    public _productService: VendorAdminProductService
+    public _productService: AdminProductService
   ) { }
 
   ngOnInit(): void {

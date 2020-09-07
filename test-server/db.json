@@ -153,12 +153,13 @@
   "products": [
     {
       "id": 2,
-      "name": "Cashmere Feel Wholesale Scarves",
+      "name": "Cashmere Feel Wholesale Scarves 1",
       "serial": "c-f-w-s",
       "description": "This is Cashmere Feel Wholesale Scarves",
       "category": "scarves",
       "tags": [
-        "cashmere-feel"
+        "cashmere-feel",
+        "pashmeena-feel"
       ],
       "basePrice": null,
       "stock": 1000,
@@ -217,7 +218,7 @@
                       ]
                     }
                   ],
-                  "selectedChainedOption": "dropdown"
+                  "selectedChainedOption": null
                 },
                 {
                   "label": "Greenish",
@@ -242,7 +243,7 @@
                       ]
                     }
                   ],
-                  "selectedChainedOption": "dropdown"
+                  "selectedChainedOption": null
                 }
               ]
             },
@@ -313,6 +314,16 @@
               "inputs": [
                 {
                   "label": "Enter instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": null,
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": null,
                   "chainedOptions": [],
                   "selectedChainedOption": null
                 }
@@ -834,6 +845,172 @@
         }
       ],
       "id": 5
+    },
+    {
+      "id": 6,
+      "name": "100% Silk Plaid Woven Reversible Freestyle Bow Tie 36.5\" x 2.5\"",
+      "serial": "d-y-s-qh-u",
+      "description": "100% Silk Plaid Woven Reversible Freestyle Bow Tie 36.5\" x 2.5\". Perfect for casual occasions. These are local stock items. The pricing reflects the cost of a single item only! Which will change by the amount you order! Minimum order is 12pcs per style/color. Embroidery options are available for all our ties, feel free to ask.",
+      "category": "ties",
+      "tags": [
+        "bow-tie"
+      ],
+      "basePrice": null,
+      "stock": 100,
+      "stockStatus": "instock",
+      "sales": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "priceTableMode": true,
+      "priceTable": [
+        {
+          "label": "Base",
+          "pricePerPiece": 5,
+          "quantity": 200,
+          "relation": "lte"
+        },
+        {
+          "label": "Wholesale",
+          "pricePerPiece": 2,
+          "quantity": 200,
+          "relation": "mte"
+        }
+      ],
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Product Customisations",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Pick a color",
+              "name": "Colors",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "red",
+                  "value": "#b29761",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Solid",
+                          "value": "solid"
+                        },
+                        {
+                          "label": "Check Pattern",
+                          "value": "check-pattern"
+                        },
+                        {
+                          "label": "Dots",
+                          "value": "dots"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Magenta",
+                  "value": "#ae0e52",
+                  "chainedOptions": [
+                    {
+                      "type": "dropdown",
+                      "title": "Select a pattern",
+                      "name": "Dropdown Selection",
+                      "meta": {
+                        "isChained": true
+                      },
+                      "inputs": [
+                        {
+                          "label": "Solid",
+                          "value": "solid"
+                        },
+                        {
+                          "label": "Check Pattern",
+                          "value": "check-pattern"
+                        },
+                        {
+                          "label": "Dots",
+                          "value": "dots"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "text",
+              "title": "Additional Instructions for delivery",
+              "name": "Text input",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Enter Instructions",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": null,
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": null,
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": null,
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            },
+            {
+              "type": "radioBtn",
+              "title": "Type of address",
+              "name": "Radio Buttons",
+              "meta": {
+                "isChained": false
+              },
+              "inputs": [
+                {
+                  "label": "Home",
+                  "value": "home",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                },
+                {
+                  "label": "Work",
+                  "value": "work",
+                  "chainedOptions": [],
+                  "selectedChainedOption": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

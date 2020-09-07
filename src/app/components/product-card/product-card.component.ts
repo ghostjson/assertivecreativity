@@ -10,5 +10,11 @@ export class ProductCardComponent {
   @Input() product: Product;
   @Input() styleClass: string;
 
-  constructor() { }
+  /**
+   * Return a short part of the string
+   * @param str string to get the short version of
+   */
+  summary(str: string): string {
+    return str.slice(0, 50);
+  }
 }

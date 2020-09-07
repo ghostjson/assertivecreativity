@@ -37,8 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
 import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
-import { VendorAdminProductsComponent } from './pages/vendor-admin-products/vendor-admin-products.component';
-import { VendorAdminProductsListComponent } from './components/vendor-admin-products-list/vendor-admin-products-list.component';
+import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
+import { AdminProductsListComponent } from './components/admin-products-list/admin-products-list.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
 import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
@@ -49,9 +49,9 @@ import { VendorAdminStatusCardComponent } from './components/vendor-admin-status
 import { ChartjsModule } from '@ctrl/ngx-chartjs';
 import { VendorAdminFooterComponent } from './components/vendor-admin-footer/vendor-admin-footer.component';
 import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
-import { VendorAdminAddProductComponent } from './pages/vendor-admin-add-product/vendor-admin-add-product.component';
+import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { VendorAdminAddProductFormComponent } from './components/vendor-admin-add-product-form/vendor-admin-add-product-form.component';
+import { AdminAddProductFormComponent } from './components/admin-add-product-form/admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MessagesComponent } from './pages/messages/messages.component';
@@ -118,7 +118,6 @@ import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-// import { ProductComponent } from './components/product/product.component';}
 
 @NgModule({
   declarations: [
@@ -149,8 +148,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     VendorAdminDashboardComponent,
     MailBoxComponent,
     VendorAdminMailComponent,
-    VendorAdminProductsComponent,
-    VendorAdminProductsListComponent,
+    AdminProductsComponent,
+    AdminProductsListComponent,
     VendorAdminProductComponent,
     VendorAdminProductFeaturesFormComponent,
     VendorAdminMailComposeComponent,
@@ -159,8 +158,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     VendorAdminStatusCardComponent,
     VendorAdminFooterComponent,
     VendorAdminChartCardComponent,
-    VendorAdminAddProductComponent,
-    VendorAdminAddProductFormComponent,
+    AdminAddProductComponent,
+    AdminAddProductFormComponent,
     LoaderComponent,
     MessagesComponent,
     ReadMailComponent,
@@ -174,7 +173,6 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     OrdersComponent,
     AdminCustomFormComponent,
     AdminCategorySelectorComponent,
-    // TestComponentComponent,
     AdminColorOptionMakerComponent,
     AdminDropdownOptionMakerComponent,
     AdminRadiobtnOptionMakerComponent,
@@ -190,8 +188,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     AdminCategoryAdderComponent,
     AdminTagAdderComponent,
     FeaturedProductSliderComponent,
-    ProductCardComponent,
-    // ProductComponent
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -238,7 +235,6 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     CheckboxModule
   ],
   entryComponents: [
-    // VendorAdminProductColorChooserComponent
   ],
   providers: [FormComponent, httpInterceptProvider],
   bootstrap: [AppComponent],

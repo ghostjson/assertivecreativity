@@ -1,28 +1,37 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../../models/Product";
-import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
+import { AdminProductService } from "../../services/admin-product.service";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
-  selector: "app-vendor-admin-products-list",
-  templateUrl: "./vendor-admin-products-list.component.html",
-  styleUrls: ["./vendor-admin-products-list.component.scss"],
+  selector: "app-admin-products-list",
+  templateUrl: "./admin-products-list.component.html",
+  styleUrls: ["./admin-products-list.component.scss"],
   providers: [MessageService, ConfirmationService],
 })
-export class VendorAdminProductsListComponent implements OnInit {
+export class AdminProductsListComponent implements OnInit {
   products: Product[];
   selectedProducts: Product[];
 
   constructor(
-    private _productService: VendorAdminProductService,
+    private _productService: AdminProductService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     public _idGen: IdGeneratorService
   ) {}
 
   ngOnInit() {
-    this.products = this._productService.getProducts();
+    this.products = [];
+
+    this._productService.getProducts()
+      .subscribe((products: Product[]) => {
+        products.forEach((product: Product) => {
+          this.products.push(
+            new Product(product)
+          );
+        })
+      });
   }
 
   /**
@@ -49,7 +58,7 @@ export class VendorAdminProductsListComponent implements OnInit {
         });
 
         // delete from server
-        this._productService.deleteProductsBatch(deleteIndices);
+        // this._productService.deleteProductsBatch(deleteIndices);
 
         this.selectedProducts = null;
         this._messageService.add({
@@ -74,14 +83,16 @@ export class VendorAdminProductsListComponent implements OnInit {
       accept: () => {
         // find index of the product to delete
         let deleteIndex: number = this.products.findIndex((val) => {
-          console.log(val.id, "prid: ", product.id);
           return val.id === product.id;
         });
 
         // delete the found index
         if (deleteIndex > -1) {
           this.products.splice(deleteIndex, 1);
-          this._productService.deleteProduct(deleteIndex);
+          
+          // delete from the server
+          this._productService.deleteProduct(product.id)
+            .subscribe();
 
           this._messageService.add({
             severity: "success",
@@ -107,23 +118,14 @@ export class VendorAdminProductsListComponent implements OnInit {
    */
   duplicateProduct(product: Product): void {
     let duplicate: Product = new Product(product);
-    
-    // give the duplicated product a new id 
-    duplicate.id = this._idGen.getId();
+
+    duplicate.id = undefined;
+
     // add the product to products 
-    this._productService.addProduct(duplicate);
-    console.log('Product ', product.id, ' duplicated');
+    this._productService.addProduct(duplicate)
+      .subscribe((duplicateProduct: Product) => {
+        this.products.push(new Product(duplicateProduct));
+        console.log('Duplicated Product returned: ', duplicateProduct.id, duplicateProduct);
+      });
   }
-
-  // findIndexById(id: number): number {
-  //   let index = -1;
-  //   for (let i = 0; i < this.products.length; i++) {
-  //     if (this.products[i].id === id) {
-  //       index = i;
-  //       break;
-  //     }
-  //   }
-
-  //   return index;
-  // }
 }

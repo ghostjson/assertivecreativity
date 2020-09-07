@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { VendorAdminProductService } from '../../services/vendor-admin-product.service';
+import { AdminProductService } from '../../services/admin-product.service';
 import { FormGroup, FormArray } from '@angular/forms';
 
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -22,7 +22,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
   dialogVisible: boolean[] = [];
 
   constructor(
-    public _productService: VendorAdminProductService
+    public _productService: AdminProductService
   ) { }
 
   ngOnInit(): void {

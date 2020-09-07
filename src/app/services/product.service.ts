@@ -9,7 +9,6 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
-import { VendorAdminProductService } from "../services/vendor-admin-product.service";
 import { Observable } from "rxjs";
 
 @Injectable({

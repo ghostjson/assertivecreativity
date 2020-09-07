@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../models/Product";
-import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
+import { AdminProductService } from "../../services/admin-product.service";
 
 @Component({
   selector: "app-vendor-admin-product",
@@ -12,7 +12,7 @@ export class VendorAdminProductComponent implements OnInit {
   product: any;
 
   constructor(
-    private _productService: VendorAdminProductService,
+    private _productService: AdminProductService,
     private _activatedRoute: ActivatedRoute
   ) {}
 

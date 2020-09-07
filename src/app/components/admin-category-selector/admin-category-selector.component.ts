@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { VendorAdminProductService } from 'src/app/services/vendor-admin-product.service';
-import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 import { Category } from 'src/app/models/Category';
 
 @Component({

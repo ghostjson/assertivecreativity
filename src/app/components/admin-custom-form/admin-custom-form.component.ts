@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 import { SelectItem } from 'primeng/api';
 
-import { VendorAdminProductService } from '../../services/vendor-admin-product.service';
+import { AdminProductService } from '../../services/admin-product.service';
 import { info } from 'console';
 @Component({
   selector: 'app-admin-custom-form',
@@ -23,7 +23,7 @@ export class AdminCustomFormComponent implements OnInit {
   possibleOptions: Object;
 
   constructor(
-    private _productService: VendorAdminProductService,
+    private _productService: AdminProductService,
     private _fb: FormBuilder
   ) { }
 

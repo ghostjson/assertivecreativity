@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { Product, Form, PriceGroup } from 'src/app/models/Product';
-import { VendorAdminProductService } from "../../services/vendor-admin-product.service";
+import { Product, Form, PriceGroup, ProductForm } from 'src/app/models/Product';
+import { AdminProductService } from "../../services/admin-product.service";
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,22 +12,25 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AdminProductEditComponent implements OnInit {
   productObj: Product;
-  product: any;
+  product: FormGroup;
   possibleOptions: Object;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _productService: VendorAdminProductService,
+    private _productService: AdminProductService,
     private _fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
-    this.productObj = this._productService.getProduct(id);
-    this.possibleOptions = this._productService.getOptionDefinitions();
-    console.info('Product received at edit page: ', this.productObj);
-    console.info('Product Form Group Created: ', this.buildProduct().value);
-    this.product = this.buildProduct();
+    this._productService.getProduct(id)
+    .subscribe((product: Product) => {
+        this.possibleOptions = this._productService.getOptionDefinitions();
+        this.productObj = product;
+        console.info('Product received at edit page: ', this.productObj);
+        this.product = this.buildProduct();
+        console.info('Product Form Group Created: ', this.buildProduct().value);
+      });
   }
 
   /**
