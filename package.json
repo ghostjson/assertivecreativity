@@ -8,8 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test-server": "json-server test-server/db.json",
-    "dev": "concurrently \"npm run test-server\" \"ng serve\""
+    "test-server": "node test-server/test-server.js",
+    "dev": "concurrently \"npm run test-server\" \"ng serve\"",
+    "doc": "npx compodoc -s",
+    "doc:gen": "npx compodoc -p tsconfig.json"
   },
   "private": true,
   "dependencies": {
