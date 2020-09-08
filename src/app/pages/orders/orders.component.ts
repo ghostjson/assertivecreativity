@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Table } from 'primeng/table';
+import { Order } from 'src/app/models/Order';
 
 @Component({
   selector: 'app-orders',
@@ -10,7 +11,7 @@ import { Table } from 'primeng/table';
 
 export class OrdersComponent implements OnInit {
 
-  orders: Object[];
+  orders: Order[];
   selectedOrders: Object[];
   statuses: Object[];
 
@@ -23,10 +24,12 @@ export class OrdersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.orders = this._orderService.getOrders();
-    this.loading = false;
-    this.selectedOrders = [];
-
+    this._orderService.getOrders()
+      .subscribe((orders: Order[]) => {
+        this.orders = orders;
+        this.loading = false;
+        this.selectedOrders = [];
+      });
 
     this.statuses = [
       { label: 'Declined', value: 'declined' },

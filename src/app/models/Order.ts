@@ -2,10 +2,15 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
 
 export class Order {
-  id: number | string;
+  id?: number;
+  cartId?: number;
   name: string;
   description: string;
   totalPrice: number;
+  orderDate: string;
+  deliveryDate: string;
+  image: string;
+  status: string;
   customForms: CustomFormInput[]
 }
 

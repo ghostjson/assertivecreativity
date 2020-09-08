@@ -1,7 +1,9 @@
 <app-header></app-header>
 <div class="container my-5">
   <div class="row">
-    <div class="col-12">
+    <div 
+      *ngIf="orders"
+      class="col-12">
       <p-table #dt
         [value]="orders"
         [(selection)]="selectedOrders"

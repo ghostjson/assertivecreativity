@@ -9,6 +9,8 @@ import { CommonService } from 'src/app/common.service';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Order } from 'src/app/models/Order';
 
 @Component({
   selector: "app-product-detail",
@@ -35,6 +37,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private _activatedRoute: ActivatedRoute,
     private _common: CommonService,
     private _orderService: OrderService,
+    private _cartService: CartService,
     private _router: Router,
     private _idService: IdGeneratorService
   ) {
@@ -146,12 +149,13 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    */
   onSubmit(): void {
     // this.updateTotalPrice();
-    let order = this.orderForm.value;
+    let order: Order = this.orderForm.value;
+    order.cartId = this._cartService.getCartId();
     // order = this.cleanForm(order);
-    order['totalPrice'] = this.priceTotal;
-    order.id = this._idService.getId();
-    this._orderService.stageOrder(order);
-    this._router.navigate(['/orders', order.id, 'confirm']);
-    console.log('order confirm: ', this.orderForm.value)
+    order.totalPrice = this.priceTotal;
+    this._cartService.addToCart(order).subscribe((item: Order) => {
+      this._router.navigate(['/cart', item.id]);
+      console.log('order confirm: ', order);
+    });
   }
 }

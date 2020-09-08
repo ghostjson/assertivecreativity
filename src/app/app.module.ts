@@ -94,7 +94,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
 import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
-import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component';
 import { ProductOptionsQuestionComponent } from './components/product-options-question/product-options-question.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
@@ -118,6 +117,7 @@ import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +168,6 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     ProductOptionsColorComponent,
     ProductOptionsRadioBtnComponent,
     ProductOptionsDropdownComponent,
-    OrderConfirmComponent,
     ProductOptionsQuestionComponent,
     OrdersComponent,
     AdminCustomFormComponent,
@@ -188,7 +187,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     AdminCategoryAdderComponent,
     AdminTagAdderComponent,
     FeaturedProductSliderComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    CartItemDetailComponent
   ],
   imports: [
     BrowserModule,
