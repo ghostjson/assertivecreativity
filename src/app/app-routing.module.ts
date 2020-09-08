@@ -40,7 +40,7 @@ const routes: Routes = [
   {
     path: "user-profile",
     component: UserProfileComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   { path: "logout", component: LogoutComponent },
   { path: "form/:formId", component: FormViewComponent },
