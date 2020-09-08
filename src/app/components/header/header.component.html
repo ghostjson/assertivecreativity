@@ -22,7 +22,7 @@
         <li [routerLink]="['/shop/select-type']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
           <a>Shop</a>
         </li>
-        <ng-container *ngIf="!auth.isAuthenticated()">
+        <ng-container *ngIf="!_auth.isAuthenticated()">
           <li [routerLink]="['/signin']" routerLinkActive="active">
             <a>Sign In</a>
           </li>
@@ -30,7 +30,7 @@
             <a>Sign Up</a>
           </li>
         </ng-container>
-        <ng-container *ngIf="auth.isAuthenticated()">
+        <ng-container *ngIf="_auth.isAuthenticated()">
           <li
             *ngIf="user_role === 'user'"
             [routerLink]="['/user-profile']"
@@ -52,7 +52,9 @@
           <div class="right-grp">
             <!-- <i class="fas fa-search"></i> -->
             <i class="fas fa-shopping-cart" [routerLink]="['/cart']"></i>
-            <span class="cart-count">3</span>
+            <span class="cart-count">
+              {{cartLength}}
+            </span>
           </div>
         </ng-container>
       </ul>

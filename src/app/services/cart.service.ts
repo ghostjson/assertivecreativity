@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/Order';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Cart } from '../models/Cart';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { take } from 'rxjs/operators';
 export class CartService {
   API_URL: string;
   CART_ID: number;
-  cart: Order[];
+  cart: Cart;
 
   constructor(
     private _http: HttpClient
@@ -19,10 +20,7 @@ export class CartService {
     this.CART_ID = 0;
 
     // intialise the cart 
-    this.refreshCart().subscribe((cart) => {
-      this.cart = cart;
-      console.log('cart refreshed: ', this.cart);
-    });
+    this.refreshCart();
   }
 
   /**
@@ -41,6 +39,14 @@ export class CartService {
   }
 
   /**
+   * Return all the items in the cart
+   */
+  getCart(): Observable<any> {
+    return this._http.get(`${this.getCartLinkById(this.CART_ID)}/items`)
+      .pipe(take(1));
+  }
+
+  /**
    * Return the cart item 
    * @param id id of the cart item
    */
@@ -52,9 +58,16 @@ export class CartService {
   /**
    * Refresh the cart
    */
-  refreshCart(): Observable<any> {
-    return this._http.get(this.getCartLinkById(this.CART_ID))
-      .pipe(take(1));
+  refreshCart(): void {
+    this.getCart()
+      .subscribe((cart: Cart) => {
+        this.cart = cart;
+        console.log('cart refreshed: ', this.cart);
+      });
+  }
+
+  getCartSize(): number {
+    return this.cart.items.length;
   }
 
   /**

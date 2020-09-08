@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: "app-header",
@@ -11,23 +12,26 @@ import { CommonService } from "src/app/common.service";
 
 export class HeaderComponent implements OnInit {
   user_role: any;
+  cartLength: number;
 
   constructor(
-    private user: UserDetailsService,
-    public auth: AuthService,
-    private common: CommonService
+    private _user: UserDetailsService,
+    public _auth: AuthService,
+    private _common: CommonService,
+    private _cartService: CartService
   ) {}
 
   async ngOnInit() {
-    this.common.setLoader(true);
-    this.user
+    this.cartLength = this._cartService.getCartSize();
+    this._common.setLoader(true);
+    this._user
       .getRole()
       .then((res) => {
         this.user_role = res;
-        this.common.setLoader(false);
+        this._common.setLoader(false);
       })
       .catch((e) => {
-        this.common.setLoader(false);
+        this._common.setLoader(false);
       });
   }
 }
