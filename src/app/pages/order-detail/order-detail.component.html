@@ -1,0 +1,21 @@
+<div>
+  <app-header></app-header>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <app-product-summary-card
+          [name]="order.name"
+          [description]="order.description"
+          [totalPrice]="order.totalPrice"
+          [image]="order.image"
+        ></app-product-summary-card>
+      </div>
+      <div class="col-12 col-md-8">
+        <app-order-summary-table
+          [order]="order"
+        ></app-order-summary-table>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

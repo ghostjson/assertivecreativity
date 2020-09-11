@@ -25,6 +25,7 @@ import { VendorAdminMailComposeComponent } from "./pages/vendor-admin-mail-compo
 import { AdminAddProductComponent } from "./pages/admin-add-product/admin-add-product.component";
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "cart/:id", component: CartItemDetailComponent },
   { path: "orders", component: OrdersComponent },
+  { path: "orders/:id", component: OrderDetailComponent },
   { path: "checkout", component: CheckoutComponent },
   // { path: "communication", component: CommunicationComponent },
   { path: "communication", component: MessagesComponent },

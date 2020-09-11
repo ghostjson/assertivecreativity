@@ -1,31 +1,18 @@
 <div>
   <app-header></app-header>
   <div class="container">
-    <div class="row justify-content-center">
+    <div *ngIf="order" class="row justify-content-center">
       <h1 class="order-summary__title">Order Summary</h1>
       <div class="col-12 d-flex justify-content-center">
         <div
-          *ngIf="order" 
           class="row justify-content-around align-items-stretch mt-5 mb-5">
-          <div class="col-12 col-sm-5 p-0 d-flex flex-column justify-content-center border rounded">
-            <div class="product-card">
-              <div class="product-card__img p-3 border-bottom">
-                <img class="img-fluid object--cover" src="{{order.image}}" alt="Product Image">
-              </div>
-              <div class="product-desc mt-3 p-3">
-                <div>
-                  <h2 class="product-desc__name">
-                    {{order.name}}
-                  </h2>
-                  <p class="product-desc__content">
-                    {{order.description}}
-                  </p>
-                  <p class="product-desc__price mb-0 text-right">
-                    Total Price: $ {{order.totalPrice}}
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 col-sm-5 p-0 d-flex flex-column justify-content-center">
+            <app-product-summary-card
+              [name]="order.name"
+              [image]="order.image"
+              [description]="order.description"
+              [totalPrice]="order.totalPrice"
+            ></app-product-summary-card>
           </div>
           <div class="col-12 col-sm-6">
             <p-calendar
@@ -41,48 +28,19 @@
           </div>
         </div>
       </div>
-      <!-- <div 
-        class="col-12 col-sm-12 order-summa"
-        *ngFor="formData of order.customForms"
-      > -->
-        <p-treeTable [value]="orderSummary">
-          <ng-template pTemplate="header">
-            <tr>
-                <th>Specification</th>
-                <th>Input</th>
-                <th>Price</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-            <tr [ttRow]="rowNode">
-                <td class="orderSummary__feature-title">
-                  <!-- <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler> -->
-                  {{rowData.title}}
-                </td>
-                <td>{{rowData.input}}</td>
-                <td>{{rowData.price}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="footer">
-            <!-- <tr>
-              <td colspan="2">Total Price</td>
-              <td>${{order.totalPrice}}</td>
-            </tr> -->
-            <tr>
-              <td colspan="3" class="text-right">
-                <button
-                  type="button"
-                  class="btn btn-primary btn--confirm align-self-end"
-                  [disabled]="!orderDeliveryDate"
-                  (click)="confirmOrder()"
-                >
-                  Place Order
-                </button>
-              </td>
-            </tr>
-          </ng-template>
-        </p-treeTable>
-      <!-- </div> -->
+      <app-order-summary-table
+        [order]="order"
+      ></app-order-summary-table>
+      <div class="text-right mt-4 mb-5">
+        <button
+          type="button"
+          class="btn btn-primary btn--confirm align-self-end"
+          [disabled]="!orderDeliveryDate"
+          (click)="confirmOrder()"
+        >
+          Place Order
+        </button>
+      </div>
     </div>
   </div>
   <app-footer></app-footer>

@@ -1,0 +1,18 @@
+<p-treeTable styleClass="border rounded" [value]="orderSummary">
+  <ng-template pTemplate="header">
+    <tr>
+        <th>Specification</th>
+        <th>Input</th>
+        <th>Price</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+    <tr [ttRow]="rowNode">
+        <td class="orderSummary__feature-title">
+          {{rowData.title}}
+        </td>
+        <td>{{rowData.input}}</td>
+        <td>{{rowData.price}}</td>
+    </tr>
+  </ng-template>
+</p-treeTable>

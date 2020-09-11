@@ -22,16 +22,16 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.cartLength = this._cartService.getCartSize();
     this._common.setLoader(true);
     this._user
-      .getRole()
-      .then((res) => {
-        this.user_role = res;
-        this._common.setLoader(false);
-      })
-      .catch((e) => {
-        this._common.setLoader(false);
-      });
+    .getRole()
+    .then((res) => {
+      this.cartLength = this._cartService.getCartSize();
+      this.user_role = res;
+      this._common.setLoader(false);
+    })
+    .catch((e) => {
+      this._common.setLoader(false);
+    });
   }
 }

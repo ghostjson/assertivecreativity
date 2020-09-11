@@ -33,6 +33,8 @@ import { CommunicationComponent } from './pages/communication/communication.comp
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/**Custom Pipes */
+
 /** Vendor Admin module imports */
 import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
 import { MailBoxComponent } from './components/mail-box/mail-box.component';
@@ -90,6 +92,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { CarouselModule } from 'primeng/carousel';
 import { PaginatorModule } from 'primeng/paginator';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TabViewModule } from 'primeng/tabview';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -118,6 +121,9 @@ import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.
 import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
+import { ProductSummaryCardComponent } from './components/product-summary-card/product-summary-card.component';
+import { OrderSummaryTableComponent } from './order-summary-table/order-summary-table.component';
 
 @NgModule({
   declarations: [
@@ -188,7 +194,10 @@ import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-deta
     AdminTagAdderComponent,
     FeaturedProductSliderComponent,
     ProductCardComponent,
-    CartItemDetailComponent
+    CartItemDetailComponent,
+    OrderDetailComponent,
+    ProductSummaryCardComponent,
+    OrderSummaryTableComponent
   ],
   imports: [
     BrowserModule,
@@ -232,7 +241,8 @@ import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-deta
     AccordionModule,
     CarouselModule,
     PaginatorModule,
-    CheckboxModule
+    CheckboxModule,
+    TabViewModule
   ],
   entryComponents: [
   ],

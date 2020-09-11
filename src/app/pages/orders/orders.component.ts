@@ -10,10 +10,12 @@ import { Order } from 'src/app/models/Order';
 })
 
 export class OrdersComponent implements OnInit {
-
   orders: Order[];
   selectedOrders: Object[];
   statuses: Object[];
+  first: number;
+  last: number;
+  totalRecords: number;
 
   loading: boolean = true;
 
@@ -39,6 +41,8 @@ export class OrdersComponent implements OnInit {
       { label: 'Renewal', value: 'renewal' },
       { label: 'Proposal', value: 'proposal' }
     ];
+
+    this.first = this.last = this.totalRecords = 0;
   }
 
 

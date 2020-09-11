@@ -30,6 +30,11 @@
             <a>Sign Up</a>
           </li>
         </ng-container>
+        <ng-container> 
+          <li [routerLink]="['/orders']" routerLinkActive="active">
+            <a>Orders</a>
+          </li>
+        </ng-container>
         <ng-container *ngIf="_auth.isAuthenticated()">
           <li
             *ngIf="user_role === 'user'"
