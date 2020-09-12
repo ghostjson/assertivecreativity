@@ -29,7 +29,6 @@ import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { CommunicationComponent } from './pages/communication/communication.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -43,7 +42,6 @@ import { AdminProductsComponent } from './pages/admin-products/admin-products.co
 import { AdminProductsListComponent } from './components/admin-products-list/admin-products-list.component';
 import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
 import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
-import { NgxSummernoteModule } from 'ngx-summernote';
 import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
 import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
 import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
@@ -56,7 +54,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminAddProductFormComponent } from './components/admin-add-product-form/admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
-import { MessagesComponent } from './pages/messages/messages.component';
 import { ReadMailComponent } from './pages/read-mail/read-mail.component';
 import { DisplayMailComponent } from './components/display-mail/display-mail.component';
 import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
@@ -93,6 +90,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { PaginatorModule } from 'primeng/paginator';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
+import { EditorModule } from 'primeng/editor';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -124,6 +122,7 @@ import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-deta
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 import { ProductSummaryCardComponent } from './components/product-summary-card/product-summary-card.component';
 import { OrderSummaryTableComponent } from './order-summary-table/order-summary-table.component';
+import { OrderMailListComponent } from './components/order-mail-list/order-mail-list.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +148,6 @@ import { OrderSummaryTableComponent } from './order-summary-table/order-summary-
     FormViewComponent,
     CartComponent,
     CheckoutComponent,
-    CommunicationComponent,
     ProductDetailComponent,
     VendorAdminDashboardComponent,
     MailBoxComponent,
@@ -167,7 +165,6 @@ import { OrderSummaryTableComponent } from './order-summary-table/order-summary-
     AdminAddProductComponent,
     AdminAddProductFormComponent,
     LoaderComponent,
-    MessagesComponent,
     ReadMailComponent,
     DisplayMailComponent,
     SelectShopTypeComponent,
@@ -197,7 +194,8 @@ import { OrderSummaryTableComponent } from './order-summary-table/order-summary-
     CartItemDetailComponent,
     OrderDetailComponent,
     ProductSummaryCardComponent,
-    OrderSummaryTableComponent
+    OrderSummaryTableComponent,
+    OrderMailListComponent
   ],
   imports: [
     BrowserModule,
@@ -205,7 +203,6 @@ import { OrderSummaryTableComponent } from './order-summary-table/order-summary-
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxSummernoteModule,
     ChartjsModule,
     ReactiveFormsModule,
     // Prime Ng Modules
@@ -242,7 +239,8 @@ import { OrderSummaryTableComponent } from './order-summary-table/order-summary-
     CarouselModule,
     PaginatorModule,
     CheckboxModule,
-    TabViewModule
+    TabViewModule,
+    EditorModule
   ],
   entryComponents: [
   ],

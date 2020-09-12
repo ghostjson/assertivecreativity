@@ -2,7 +2,6 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormGroupName, FormArrayName } from '@angular/forms';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { Option } from 'src/app/models/Product';
-import { info } from 'console';
 
 @Component({
   selector: 'app-product-options-radio-btn',

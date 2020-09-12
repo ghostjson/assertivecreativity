@@ -107,7 +107,7 @@
         <p-accordion multiple="true">
           <p-accordionTab 
             *ngFor="let customForm of customForms().controls; let formInd = index"
-            selected="true"
+            [selected]="true"
             header="{{product.customForms[formInd].title}}"
           >
             <ng-container formArrayName="customForms">

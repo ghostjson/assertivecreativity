@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 import { CustomOptionForm, CustomOption } from 'src/app/models/Order';
 import { Option } from 'src/app/models/Product';
-import { info } from 'console';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class ProductOptionsComponent implements OnInit {
   inputValue: any;
 
   constructor(
-    private _fb: FormBuilder,
     private _productService: ProductService
   ) { }
 

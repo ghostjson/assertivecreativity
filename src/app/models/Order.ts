@@ -11,6 +11,7 @@ export class Order {
   deliveryDate: string;
   image: string;
   status: string;
+  mailThread?: number;
   customForms: CustomFormInput[]
 }
 

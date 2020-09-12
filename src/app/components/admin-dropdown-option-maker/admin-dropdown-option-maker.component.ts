@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { AdminProductService } from 'src/app/services/admin-product.service';
-import { info } from 'console';
 
 @Component({
   selector: 'app-admin-dropdown-option-maker',

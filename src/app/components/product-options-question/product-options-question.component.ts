@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Feature } from '../../models/Product';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-product-options-question',

@@ -16,7 +16,7 @@
         Filter
       </h3>
       <p-accordion [multiple]="true">
-        <p-accordionTab selected="true">
+        <p-accordionTab [selected]="true">
           <p-header>
             Categories
             <span class="status-badge status-badge--inactive p-ml-1"
@@ -38,7 +38,7 @@
             <label [for]="category.value">{{ category.label }}</label>
           </div>
         </p-accordionTab>
-        <p-accordionTab selected="true">
+        <p-accordionTab [selected]="true">
           <p-header>
             Tags
             <span class="status-badge status-badge--inactive p-ml-1"

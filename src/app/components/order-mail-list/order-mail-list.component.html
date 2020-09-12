@@ -1,0 +1,44 @@
+<div>
+  <p-toast></p-toast>
+  <p-accordion [multiple]="true">
+    <ng-container *ngFor="let mail of mails; last as isLast">
+      <p-accordionTab [selected]="isLast">
+        <ng-template pTemplate="header">
+          <div class="message-header d-flex justify-content-between">
+            <div class="author-details">
+              <span class="author-details__title mr-1">
+                Author:
+              </span>
+              <span class="author-details__name">
+                <span *ngIf="mail.author === 0; else elseBlock">
+                  You
+                </span>
+                <ng-template #elseBlock>
+                  <span>
+                    Seller
+                  </span>
+                </ng-template>
+              </span>
+            </div>
+            <div class="message-meta">
+              {{mail.timestamp | date: 'short'}}
+            </div>
+          </div>
+        </ng-template>
+        <div [innerHtml]="mail.content"></div>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+
+  <div class="compose-mail mt-5">
+    <div class="compose-mail__writer">
+      <p-editor [(ngModel)]="mailText" [style]="{'min-height':'320px'}"></p-editor>
+    </div>
+    <div class="compose-mail__footer d-flex justify-content-end">
+      <p-button class="mt-3" label="Send Mail" 
+        icon="pi pi-chevron-right" iconPos="right"
+        [disabled]="!mailText" (click)="sendMail()"
+      ></p-button>
+    </div>
+  </div>
+</div>

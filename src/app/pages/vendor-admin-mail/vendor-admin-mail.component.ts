@@ -13,7 +13,7 @@ export class VendorAdminMailComponent implements OnInit {
   constructor(private mailService: MailService) { }
 
   async ngOnInit() {
-    this.mails = this.mailService.getMails();
+    // this.mails = this.mailService.getMails();
   }
 
 }

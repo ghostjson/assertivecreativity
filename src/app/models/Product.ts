@@ -87,6 +87,7 @@ let _fb: FormBuilder = new FormBuilder();
 // model describing a Product
 export class Product {
   id?: number;
+  sellerId?: number;
   name: string;
   serial: string;
   description: string;

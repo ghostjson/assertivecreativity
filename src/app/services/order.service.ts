@@ -62,6 +62,12 @@ export class OrderService {
     return this._http.post(this.getOrdersLink(), order);
   }
 
+  addMailThread(threadId: number, order: Order): Observable<Order> {
+    order.mailThread = threadId;
+  
+    return this._http.put<Order>(this.getOrderLinkById(order.id), order);
+  }
+
   /**
    * Create the order form group
    * @param product product object

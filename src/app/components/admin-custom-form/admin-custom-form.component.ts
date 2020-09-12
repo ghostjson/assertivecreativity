@@ -4,7 +4,6 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 import { AdminProductService } from '../../services/admin-product.service';
-import { info } from 'console';
 @Component({
   selector: 'app-admin-custom-form',
   templateUrl: './admin-custom-form.component.html',
@@ -23,8 +22,7 @@ export class AdminCustomFormComponent implements OnInit {
   possibleOptions: Object;
 
   constructor(
-    private _productService: AdminProductService,
-    private _fb: FormBuilder
+    private _productService: AdminProductService
   ) { }
 
   ngOnInit(): void {
