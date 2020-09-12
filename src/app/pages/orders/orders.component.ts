@@ -11,15 +11,6 @@ import { Order } from 'src/app/models/Order';
 
 export class OrdersComponent implements OnInit {
   orders: Order[];
-  selectedOrders: Object[];
-  statuses: Object[];
-  first: number;
-  last: number;
-  totalRecords: number;
-
-  loading: boolean = true;
-
-  @ViewChild('dt') table: Table;
 
   constructor(
     private _orderService: OrderService
@@ -29,55 +20,6 @@ export class OrdersComponent implements OnInit {
     this._orderService.getOrders()
       .subscribe((orders: Order[]) => {
         this.orders = orders;
-        this.loading = false;
-        this.selectedOrders = [];
       });
-
-    this.statuses = [
-      { label: 'Declined', value: 'declined' },
-      { label: 'Accepted', value: 'accepted' },
-      { label: 'New', value: 'new' },
-      { label: 'Pending', value: 'pending' },
-      { label: 'Renewal', value: 'renewal' },
-      { label: 'Proposal', value: 'proposal' }
-    ];
-
-    this.first = this.last = this.totalRecords = 0;
   }
-
-
-  onActivityChange(event) {
-    const value = event.target.value;
-    if (value && value.trim().length) {
-      const activity = parseInt(value);
-
-      if (!isNaN(activity)) {
-        this.table.filter(activity, 'activity', 'gte');
-      }
-    }
-  }
-
-  onDateSelect(value: any, dateType: string) {
-    this.table.filter(this.formatDate(value), dateType, 'equals')
-  }
-
-  formatDate(date: any) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    if (day < 10) {
-      day = '0' + day;
-    }
-
-    return date.getFullYear() + '-' + month + '-' + day;
-  }
-
-  onRepresentativeChange(event) {
-    this.table.filter(event.value, 'representative', 'in')
-  }
-
 }

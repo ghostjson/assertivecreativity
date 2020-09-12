@@ -43,8 +43,8 @@
           >
             <a>Profile</a>
           </li>
+          <li *ngIf="user_role === 'admin' || user_role == 'vendor'"></li>
           <li
-            *ngIf="user_role === 'admin' || user_role == 'vendor'"
             [routerLink]="['/admin']"
             routerLinkActive="active"
           >

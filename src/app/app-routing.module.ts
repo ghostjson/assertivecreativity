@@ -27,6 +27,7 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
 import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
+import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -58,7 +59,9 @@ const routes: Routes = [
   { path: "admin/products/:id/edit", component: AdminProductEditComponent },
   { path: "admin/products/:id", component: VendorAdminProductComponent},
   { path: "admin/categories", component: AdminCategoryAdderComponent},
-  { path: "admin/tags", component: AdminTagAdderComponent}
+  { path: "admin/tags", component: AdminTagAdderComponent},
+  { path: "admin/orders/:id", component: OrderDetailComponent},
+  { path: "admin/orders", component: AdminOrdersComponent}
 ];
 
 @NgModule({

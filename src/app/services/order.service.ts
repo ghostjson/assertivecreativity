@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  orders: Order[];
+  private orders: Order[];
 
-  API_URL: string;
+  private API_URL: string;
 
   constructor(
     private _fb: FormBuilder,
@@ -27,7 +27,7 @@ export class OrderService {
   /**
    * Return orders API link
    */
-  getOrdersLink(): string {
+  private getOrdersLink(): string {
     return `${this.API_URL}/orders`;
   }
 
@@ -35,7 +35,7 @@ export class OrderService {
    * Return order API link
    * @param id id of the order
    */
-  getOrderLinkById(id: number): string {
+  private getOrderLinkById(id: number): string {
     return `${this.getOrdersLink()}/${id}`;
   }
 

@@ -57,6 +57,30 @@
       "timestamp": "2020-09-12T16:55:51.399Z",
       "mail-threadId": 2,
       "id": 4
+    },
+    {
+      "author": 0,
+      "receiver": 1,
+      "content": "<p>Hello there customer !!!</p>",
+      "timestamp": "2020-09-12T19:51:05.265Z",
+      "mail-threadId": 1,
+      "id": 5
+    },
+    {
+      "author": 1,
+      "receiver": 0,
+      "content": "<p>Hello there buyer</p><p><br></p>",
+      "timestamp": "2020-09-12T19:57:24.643Z",
+      "mail-threadId": 1,
+      "id": 6
+    },
+    {
+      "author": 0,
+      "receiver": 1,
+      "content": "<p>Hi there seller</p>",
+      "timestamp": "2020-09-12T19:57:46.114Z",
+      "mail-threadId": 1,
+      "id": 7
     }
   ],
   "tags": [

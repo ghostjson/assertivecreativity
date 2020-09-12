@@ -121,8 +121,10 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 import { ProductSummaryCardComponent } from './components/product-summary-card/product-summary-card.component';
-import { OrderSummaryTableComponent } from './order-summary-table/order-summary-table.component';
+import { OrderSummaryTableComponent } from './components/order-summary-table/order-summary-table.component';
 import { OrderMailListComponent } from './components/order-mail-list/order-mail-list.component';
+import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
 
 @NgModule({
   declarations: [
@@ -195,7 +197,9 @@ import { OrderMailListComponent } from './components/order-mail-list/order-mail-
     OrderDetailComponent,
     ProductSummaryCardComponent,
     OrderSummaryTableComponent,
-    OrderMailListComponent
+    OrderMailListComponent,
+    AdminOrdersComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule,

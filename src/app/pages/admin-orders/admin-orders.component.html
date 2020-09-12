@@ -1,0 +1,35 @@
+<div>
+  <app-admin-header></app-admin-header>
+  <main class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Orders</h1>
+      </div>
+      <div class="col-12">
+        <p-tabView *ngIf="orders">
+          <p-tabPanel header="Pending" [selected]="true">
+            <app-orders-list
+              [orders]="orders.pending"
+            ></app-orders-list>
+          </p-tabPanel>
+          <p-tabPanel header="Accepted">
+            <app-orders-list
+              [orders]="orders.accepted"
+            ></app-orders-list>
+          </p-tabPanel>
+          <p-tabPanel header="Completed">
+            <app-orders-list
+              [orders]="orders.completed"
+            ></app-orders-list>
+          </p-tabPanel>
+          <p-tabPanel header="Declined/Cancelled">
+            <app-orders-list
+              [orders]="orders.cancelled"
+            ></app-orders-list>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</div>

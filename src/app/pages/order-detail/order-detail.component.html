@@ -1,7 +1,13 @@
 <div>
-  <app-header></app-header>
+  <app-header *ngIf="author === 0; else adminHeader"></app-header>
+  <ng-template #adminHeader>
+    <app-admin-header></app-admin-header>
+  </ng-template>
   <div *ngIf="order" class="container mt-5">
     <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">Order {{order.id}}</h1>
+      </div>
       <div class="col-12 col-md-4">
         <app-product-summary-card
           [name]="order.name"

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { OrderSummaryTable, CustomOption, CustomFormInput, Order } from '../models/Order';
+import { OrderSummaryTable, CustomOption, CustomFormInput, Order } from '../../models/Order';
 
 @Component({
   selector: 'app-order-summary-table',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { OrderService } from "src/app/services/order.service";
 import { Order } from "src/app/models/Order";
 import { MailService } from "../../services/mail.service";
@@ -14,11 +14,14 @@ export class OrderDetailComponent implements OnInit {
   id: number;
   order: Order;
   mails: Mail[];
+  author: number;
+  receiver: number;
 
   constructor(
     private _activatedRouteService: ActivatedRoute,
     private _orderService: OrderService,
-    private _mailService: MailService
+    private _mailService: MailService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +40,16 @@ export class OrderDetailComponent implements OnInit {
           });
       }
     });
+
+    if(this._router.url.includes('admin')) {
+      console.info('author is admin');
+      this.author = 1;
+      this.receiver = 0;
+    }
+    else {
+      console.info('author is user');
+      this.author = 0;
+      this.receiver = 1;
+    }
   }
 }

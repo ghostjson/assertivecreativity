@@ -35,9 +35,9 @@ export class AdminHeaderComponent implements OnInit {
         icon: 'pi pi-home'
       },
       {
-        label: 'Mail',
-        routerLink: '/admin/mail',
-        icon: 'pi pi-envelope'
+        label: 'Orders',
+        routerLink: '/admin/orders',
+        icon: 'pi pi-chart-line'
       },
       {
         label: 'Products',

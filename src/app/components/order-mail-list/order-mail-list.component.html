@@ -10,12 +10,12 @@
                 Author:
               </span>
               <span class="author-details__name">
-                <span *ngIf="mail.author === 0; else elseBlock">
+                <span *ngIf="mail.author === author; else elseBlock">
                   You
                 </span>
                 <ng-template #elseBlock>
                   <span>
-                    Seller
+                    Sender
                   </span>
                 </ng-template>
               </span>
