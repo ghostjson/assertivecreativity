@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
     phone: "",
     password: "",
     confirm: "",
+    companyName: ""
   };
 
   error: string = "";

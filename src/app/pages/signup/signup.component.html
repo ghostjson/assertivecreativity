@@ -1,72 +1,123 @@
 <app-header></app-header>
 
 <section class="login-block">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 login-sec">
-                <h2 class="text-center">Sign Up</h2>
-                
-                 <form class="login-form">
-                
-                    <div class="form-group">
-                        <label for="name" class="text-uppercase">Full Name</label>
-                        <input type="text" [(ngModel)]="signup_form.name" name="name" class="form-control" placeholder="Full Name">
-                    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 login-sec">
+        <h2 class="text-center">Sign Up</h2>
 
-                    <div class="form-group">
-                        <label for="email" class="text-uppercase">Email</label>
-                        <input type="email" [(ngModel)]="signup_form.email" name="email" class="form-control" placeholder="Email">
-                    </div>
+        <form class="login-form">
+          <div class="form-group">
+            <label for="name" class="text-uppercase">Full Name</label>
+            <input
+              type="text"
+              [(ngModel)]="signup_form.name"
+              name="name"
+              class="form-control"
+              placeholder="Full Name"
+            />
+          </div>
 
-                    <div class="form-group">
-                        <label for="phone" class="text-uppercase">Phone Number</label>
-                        <input type="text" [(ngModel)]="signup_form.phone" name="phone" class="form-control" placeholder="Phone">
-                    </div>
+          <div class="form-group">
+            <label for="email" class="text-uppercase">Email</label>
+            <input
+              type="email"
+              [(ngModel)]="signup_form.email"
+              name="email"
+              class="form-control"
+              placeholder="Email"
+            />
+          </div>
 
-                    <div class="form-group">
-                        <label for="password" class="text-uppercase">Password</label>
-                        <input type="password"  [(ngModel)]="signup_form.password"  name="password" class="form-control" placeholder="">
-                    </div>
+          <div class="form-group">
+            <label for="phone" class="text-uppercase">Phone Number</label>
+            <input
+              type="text"
+              [(ngModel)]="signup_form.phone"
+              name="phone"
+              class="form-control"
+              placeholder="Phone"
+            />
+          </div>
 
-                    <div class="form-group">
-                        <label for="confirm-password" class="text-uppercase">Confirm Password</label>
-                        <input type="password"  [(ngModel)]="signup_form.confirm"  name="confirm-password" class="form-control" placeholder="">
-                    </div>
+          <div class="form-group">
+            <label for="companyName" class="text-uppercase">Company Name</label>
+            <input
+              id="companyName"
+              type="text"
+              [(ngModel)]="signup_form.companyName"
+              name="companyName"
+              class="form-control"
+              placeholder="Company Name"
+            />
+          </div>
 
-                    <div class="danger" *ngIf="error!=''">
-                        <p>{{ error }}</p>
-                    </div>
+          <div class="form-group">
+            <label for="password" class="text-uppercase">Password</label>
+            <input
+              type="password"
+              [(ngModel)]="signup_form.password"
+              name="password"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
 
-                    <div class="form-check">
-                        <button (click)="submitForm()" class="btn btn-login float-right">Signup</button>
-                    </div>
+          <div class="form-group">
+            <label for="confirm-password" class="text-uppercase"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              [(ngModel)]="signup_form.confirm"
+              name="confirm-password"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
 
+          <div class="danger" *ngIf="error != ''">
+            <p>{{ error }}</p>
+          </div>
 
-                    <div> <a [routerLink]="['/signin']">Already have an account?</a> </div>
-                </form>
-            </div>
-            <div class="col-md-8 banner-sec">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
-                                alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <div class="banner-text">
-                                    <h2>This is Heaven</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="form-check">
+            <button (click)="submitForm()" class="btn btn-login float-right">
+              Signup
+            </button>
+          </div>
 
+          <div><a [routerLink]="['/signin']">Already have an account?</a></div>
+        </form>
+      </div>
+      <div class="col-md-8 banner-sec">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img
+                class="d-block img-fluid"
+                src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
+                alt="First slide"
+              />
+              <div class="carousel-caption d-none d-md-block">
+                <div class="banner-text">
+                  <h2>This is Heaven</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                  </p>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
-
 
 <app-footer></app-footer>

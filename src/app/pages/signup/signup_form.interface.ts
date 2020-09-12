@@ -4,4 +4,5 @@ export interface SignupFormInterface {
   phone: string;
   password: string;
   confirm: string;
+  companyName: string;
 }
