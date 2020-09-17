@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: "shop/select-type", component: SelectShopTypeComponent },
   { path: "shop/stocks", component: ShopComponent },
   {
-    path: "user-profile",
+    path: "profile",
     component: UserProfileComponent,
     canActivate: [AuthGuard]
   },

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { CommonService } from "src/app/common.service";
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: "app-user-profile",
@@ -8,13 +10,14 @@ import { CommonService } from "src/app/common.service";
   styleUrls: ["./user-profile.component.scss"],
 })
 export class UserProfileComponent implements OnInit {
-  formMode: boolean = true;
-  user: any;
+  viewMode: boolean;
+  user: User;
 
-  constructor(private auth: AuthService, private common: CommonService) {
+  constructor(private _userService: UserDetailsService, private common: CommonService) {
+    this.viewMode = true;
     this.common.setLoader(true);
-    this.auth.getUser().then((res) => {
-      this.user = res.data;
+    _userService.getUser().subscribe((user: User) => {
+      this.user = user;
       this.common.setLoader(false);
       console.log(this.user)
     });
@@ -23,6 +26,13 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {}
 
   editProfile(): void {
-    this.formMode = this.formMode ? false : true;
+    this.viewMode = !this.viewMode;
+
+    if(this.viewMode) {
+      this._userService.editUser(this.user)
+        .subscribe(() => {
+          console.log('User updated: ', this.user);
+        });
+    }
   }
 }

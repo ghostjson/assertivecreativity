@@ -9,7 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductCategorisationService {
-  API_URL: string = 'http://localhost:3000';
+  // API_URL: string = 'http://localhost:3000';
+  API_URL: string = 'http://3.129.34.125/mock-api';
 
   constructor(
     private _http: HttpClient

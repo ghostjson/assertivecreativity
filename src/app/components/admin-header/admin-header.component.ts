@@ -15,8 +15,8 @@ export class AdminHeaderComponent implements OnInit {
   name: string;
 
   constructor(
-    public user: UserDetailsService,
-    public auth: AuthService
+    public _user: UserDetailsService,
+    public _auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -56,8 +56,8 @@ export class AdminHeaderComponent implements OnInit {
       }
     ];
 
-    this.user.getUser().then((res) => {
-      this.name = res.data.name;
+    this._user.getUser().subscribe((user) => {
+      this.name = `${user.firstName} ${user.lastName}`;
     });
   }
 

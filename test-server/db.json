@@ -2,17 +2,49 @@
   "users": [
     {
       "id": 0,
-      "name": "User Ipsumio",
+      "firstName": "User",
+      "lastName": "Ipsumio",
       "email": "user_email@example.com",
       "email_verified_at": "2020-09-08T06:25:34.000000Z",
-      "role": "user"
+      "role": "user",
+      "image": "user2-160x160.jpg",
+      "companyDetails": {
+        "name": "Random Company Name",
+        "buildingNumber": "12",
+        "streetName": "street",
+        "buildingName": "random building",
+        "locality": "locality 1",
+        "provinceAbbr": "DC",
+        "zip": "12345",
+        "country": "USA",
+        "email": "comapany@email.com",
+        "phone": 1234567890
+      },
+      "phone": "1234567890",
+      "profession": "post"
     },
     {
       "id": 1,
-      "name": "Admin Ipsumio",
+      "firstName": "Admin",
+      "lastName": "Ipsumio",
       "email": "admin_email@example.com",
       "email_verified_at": "2020-09-08T06:25:34.000000Z",
-      "role": "admin"
+      "role": "admin",
+      "image": "user2-160x160.jpg",
+      "companyDetails": {
+        "name": "Random Company Name",
+        "buildingNumber": "12",
+        "streetName": "street",
+        "buildingName": "random building",
+        "locality": "locality 1",
+        "provinceAbbr": "DC",
+        "zip": "12345",
+        "country": "USA",
+        "email": "comapany@email.com",
+        "phone": "1234567890"
+      },
+      "phone": "1234567890",
+      "profession": "post"
     }
   ],
   "mail-threads": [
@@ -23,6 +55,10 @@
     {
       "orderId": 2,
       "id": 2
+    },
+    {
+      "orderId": 3,
+      "id": 3
     }
   ],
   "mails": [
@@ -81,6 +117,22 @@
       "timestamp": "2020-09-12T19:57:46.114Z",
       "mail-threadId": 1,
       "id": 7
+    },
+    {
+      "author": 0,
+      "receiver": 1,
+      "content": "<p>Hello there Seller</p>",
+      "timestamp": "2020-09-14T10:14:02.084Z",
+      "mail-threadId": 3,
+      "id": 8
+    },
+    {
+      "author": 1,
+      "receiver": 0,
+      "content": "<p>Hi there Buyer,</p><p>Is there anything that I would have to know ? </p>",
+      "timestamp": "2020-09-14T10:14:44.674Z",
+      "mail-threadId": 3,
+      "id": 9
     }
   ],
   "tags": [
@@ -1279,6 +1331,94 @@
       "deliveryDate": "2020-09-23",
       "id": 2,
       "mailThread": 2
+    },
+    {
+      "name": "Cashmere Feel Wholesale Scarves 1",
+      "description": "This is Cashmere Feel Wholesale Scarves",
+      "basePrice": null,
+      "image": "/assets/images/demo-product-images/1.jpg",
+      "customForms": [
+        {
+          "id": 0,
+          "title": "Enter Order Specifications",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "color",
+              "title": "Enter the color of the scarf",
+              "name": "Colors",
+              "price": null,
+              "input": "#42bf10",
+              "meta": {
+                "isChained": false,
+                "chainedOpsHidden": true
+              },
+              "chainedOptions": [
+                {
+                  "type": "dropdown",
+                  "title": "Select a pattern",
+                  "name": "Dropdown Selection",
+                  "price": null,
+                  "input": "checkered",
+                  "meta": {
+                    "isChained": true,
+                    "chainedOpsHidden": true
+                  }
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "title": "Select a size",
+              "name": "Dropdown Selection",
+              "price": null,
+              "input": "medium",
+              "meta": {
+                "isChained": false,
+                "chainedOpsHidden": true
+              },
+              "chainedOptions": []
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Enter Delivery Instructions",
+          "parentForm": null,
+          "options": [
+            {
+              "type": "radioBtn",
+              "title": "Select type of location",
+              "name": "Radio Buttons",
+              "price": null,
+              "input": "home-(9-am-to-9-pm-delivery)",
+              "meta": {
+                "isChained": false,
+                "chainedOpsHidden": true
+              },
+              "chainedOptions": []
+            },
+            {
+              "type": "text",
+              "title": "Enter any further instructions for delivery",
+              "name": "Text input",
+              "price": null,
+              "input": "Testun",
+              "meta": {
+                "isChained": false,
+                "chainedOpsHidden": true
+              },
+              "chainedOptions": []
+            }
+          ]
+        }
+      ],
+      "totalPrice": 0,
+      "orderDate": "2020-09-14",
+      "status": "pending",
+      "deliveryDate": "2020-09-15",
+      "id": 3,
+      "mailThread": 3
     }
   ]
 }

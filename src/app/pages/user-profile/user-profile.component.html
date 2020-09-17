@@ -1,150 +1,267 @@
-<app-header></app-header>
-
-<div class="container emp-profile">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="https://via.placeholder.com/100x100.png" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
+<div>
+  <app-header></app-header>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <p-card
+          header="{{user.firstName + ' ' + user.lastName}}"
+          subheader="{{user.role}}"
+          styleClass="p-card-shadow"
+        >
+          <p-header>
+            <img
+              alt="User Image"
+              src="../../../assets/images/user2-160x160.jpg"
+            />
+          </p-header>
+          <ng-template pTemplate="footer">
+            <div class="text-right">
+              <p-button
+                label="Change Photo"
+                iconPos="right"
+                icon="pi pi-pencil"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+      <div class="col-12 col-lg-8">
+        <p-card header="User Details" styleClass="p-card-shadow">
+          <p-tabView *ngIf="user">
+            <p-tabPanel header="Personal Details">
+              <form class="user-details-form row">
+                <div class="form-group col-12 col-lg-6">
+                  <label class="form-group__label" for="first-name">
+                    First Name:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="firstName"
+                    id="first-name"
+                    [(ngModel)]="user.firstName"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                            <h5>
-                                {{ user.name }}
-                            </h5>
-                            <h6>
-                                Company Of User
-                            </h6>
-                            <p class="proile-rating">Orders Completed : <span>3</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Company Details</a>
-                        </li>
-                    </ul>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="last-name">
+                    Last Name:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="lastName"
+                    id="last-name"
+                    [(ngModel)]="user.lastName"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
                 </div>
-            </div>
-            <div class="col-md-2">
-                <button (click)="editProfile()" class="profile-edit-btn" name="btnAddMore">{{ formMode ? 'Edit Profile' : 'Save' }}</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <!-- <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
-                </div> -->
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>#<input [disabled]="formMode" type="text" name="username" id="username" [value]="user.id"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="text" name="name" id="name" [value]="user.name"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p> <input [disabled]="formMode" type="email" name="email" id="email" [value]="user.email"> </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Phone</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="tel" name="phone" id="phone" [value]="user.phone"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Profession</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="text" name="profession" id="profession" value="CEO of Somecompany"></p>
-                                    </div>
-                                </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Company Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><input [disabled]="formMode" type="text" name="company_name" id="company_name" value="Somecompany"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Company Address</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><textarea [disabled]="formMode" name="company_address" id="company_address">Address of some company, 22 street someplace</textarea></p>
-                                    </div>
-                                </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
-                                </div> -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- <label>Your Bio</label><br/> -->
-                                <p>More info soon</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group col-12">
+                  <label class="form-group__label" for="profession">
+                    Profession:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="profession"
+                    id="profession"
+                    [(ngModel)]="user.profession"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
                 </div>
+                <div class="form-group col-12">
+                  <label class="form-group__label" for="email">
+                    Email:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="email"
+                    id="email"
+                    [(ngModel)]="user.email"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12">
+                  <label class="form-group__label" for="phone">
+                    Phone:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    [(ngModel)]="user.phone"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+              </form>
+            </p-tabPanel>
+            <p-tabPanel header="Company Details">
+              <form class="company-details-form row">
+                <div class="form-group col-12">
+                  <label class="form-group__label" for="company-name">
+                    First Name:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="companyName"
+                    id="company-name"
+                    [(ngModel)]="user.companyDetails.name"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-2">
+                  <label class="form-group__label" for="building-number">
+                    Building Number:
+                  </label>
+                  <p-inputNumber
+                    class="form-group__input"
+                    name="buildingNumber"
+                    inputId="building-number"
+                    [(ngModel)]="user.companyDetails.buildingNumber"
+                    [min]="0"
+                    [useGrouping]="false"
+                    [disabled]="viewMode"
+                  ></p-inputNumber>
+                </div>
+                <div class="form-group col-12 col-md-10">
+                  <label class="form-group__label" for="street-name">
+                    Street Name:
+                  </label
+                  >
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="streetName"
+                    id="street-name"
+                    [(ngModel)]="user.companyDetails.streetName"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12">
+                  <label class="form-group__label" for="builing-name">
+                    Building:
+                  </label
+                  >
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="buildingName"
+                    id="builing-name"
+                    [(ngModel)]="user.companyDetails.buildingName"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="locality">
+                    Locality:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="locality"
+                    id="locality"
+                    [(ngModel)]="user.companyDetails.locality"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="province-abbr">
+                    Province Abbreviation:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="provinceAbbr"
+                    id="province-abbr"
+                    [(ngModel)]="user.companyDetails.provinceAbbr"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="zip">
+                    Zip/Postal Code:
+                  </label>
+                  <p-inputNumber
+                    class="form-group__input"
+                    name="zip"
+                    inputId="zip"
+                    [(ngModel)]="user.companyDetails.zip"
+                    [min]="0"
+                    [useGrouping]="false"
+                    [disabled]="viewMode"
+                  ></p-inputNumber>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="country">
+                    Country:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="country"
+                    id="country"
+                    [(ngModel)]="user.companyDetails.country"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="email">
+                    Email:
+                  </label>
+                  <input
+                    class="form-group__input"
+                    type="text"
+                    name="email"
+                    id="email"
+                    [(ngModel)]="user.companyDetails.email"
+                    pInputText
+                    [disabled]="viewMode"
+                  />
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-group__label" for="company-phone">
+                    Phone:
+                  </label>
+                  <p-inputNumber
+                    class="form-group__input"
+                    name="companyPhone"
+                    inputId="company-phone"
+                    [(ngModel)]="user.companyDetails.phone"
+                    [min]="0"
+                    [useGrouping]="false"
+                    [disabled]="viewMode"
+                  ></p-inputNumber>
+                </div>
+              </form>
+            </p-tabPanel>
+          </p-tabView>
+          <ng-template pTemplate="footer">
+            <div class="text-right">
+              <p-button
+                label="Edit"
+                iconPos="right"
+                icon="pi pi-pencil"
+                (click)="editProfile()"
+              ></p-button>
             </div>
-        </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </div>
-
-
-<app-footer></app-footer>

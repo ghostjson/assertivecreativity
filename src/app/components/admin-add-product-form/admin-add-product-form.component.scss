@@ -1,6 +1,11 @@
 @import 'src/assets/css/admin-common.scss';
 
-.add-new-custom-form {
-  background-color: white;
-  border-radius: 6px;
+:host {
+  .product-form {
+    ::ng-deep {
+      .p-card-header {
+        padding: 0.7em;
+      }
+    }
+  }
 }

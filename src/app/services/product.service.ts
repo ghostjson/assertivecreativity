@@ -18,7 +18,8 @@ export class ProductService {
   host: string;
   products: Product[];
   possibleOptions: Object;
-  API_URL = "http://localhost:3000";
+  // API_URL = "http://localhost:3000";
+  API_URL = "http://3.129.34.125/mock-api";
 
   constructor(
     private _http: HttpClient,

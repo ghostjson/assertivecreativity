@@ -14,7 +14,8 @@ export class MailService {
 
   constructor(private _http: HttpClient) {
     this.host = environment.apiUrl;
-    this.API_URL = 'http://localhost:3000'
+    // this.API_URL = 'http://localhost:3000'
+    this.API_URL = 'http://3.129.34.125/mock-api'
   }
 
   getMailsLink(): string {

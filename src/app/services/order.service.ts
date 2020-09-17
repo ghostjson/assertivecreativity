@@ -21,7 +21,8 @@ export class OrderService {
   ) {
     this.orders = [];
 
-    this.API_URL = 'http://localhost:3000';
+    // this.API_URL = 'http://localhost:3000';
+    this.API_URL = 'http://3.129.34.125/mock-api';
   }
 
   /**

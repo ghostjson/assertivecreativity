@@ -16,7 +16,8 @@ export class CartService {
   constructor(
     private _http: HttpClient
   ) {
-    this.API_URL = 'http://localhost:3000';
+    // this.API_URL = 'http://localhost:3000';
+    this.API_URL = 'http://3.129.34.125/mock-api';
     this.CART_ID = 0;
 
     // intialise the cart 
