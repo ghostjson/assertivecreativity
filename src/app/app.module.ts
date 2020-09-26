@@ -35,27 +35,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**Custom Pipes */
 
 /** Vendor Admin module imports */
-import { VendorAdminDashboardComponent } from './pages/vendor-admin-dashboard/vendor-admin-dashboard.component';
-import { MailBoxComponent } from './components/mail-box/mail-box.component';
-import { VendorAdminMailComponent } from './pages/vendor-admin-mail/vendor-admin-mail.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminProductsListComponent } from './components/admin-products-list/admin-products-list.component';
-import { VendorAdminProductComponent } from './pages/vendor-admin-product/vendor-admin-product.component';
-import { VendorAdminProductFeaturesFormComponent } from './components/vendor-admin-product-features-form/vendor-admin-product-features-form.component';
-import { VendorAdminMailComposeComponent } from './pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component';
-import { VendorAdminMailWriterComponent } from './components/vendor-admin-mail-writer/vendor-admin-mail-writer.component';
-import { VendorAdminMailSidebarComponent } from './components/vendor-admin-mail-sidebar/vendor-admin-mail-sidebar.component';
-import { VendorAdminStatusCardComponent } from './components/vendor-admin-status-card/vendor-admin-status-card.component';
+import { AdminStatusCardComponent } from './components/admin-status-card/admin-status-card.component';
 import { ChartjsModule } from '@ctrl/ngx-chartjs';
-import { VendorAdminFooterComponent } from './components/vendor-admin-footer/vendor-admin-footer.component';
-import { VendorAdminChartCardComponent } from './components/vendor-admin-chart-card/vendor-admin-chart-card.component';
+import { AdminFooterComponent } from './components/admin-footer/admin-footer.component';
+import { AdminChartCardComponent } from './components/admin-chart-card/admin-chart-card.component';
 import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminAddProductFormComponent } from './components/admin-add-product-form/admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
-import { ReadMailComponent } from './pages/read-mail/read-mail.component';
-import { DisplayMailComponent } from './components/display-mail/display-mail.component';
 import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
 
 import { CardModule } from 'primeng/card';
@@ -151,24 +142,15 @@ import { OrdersListComponent } from './components/orders-list/orders-list.compon
     CartComponent,
     CheckoutComponent,
     ProductDetailComponent,
-    VendorAdminDashboardComponent,
-    MailBoxComponent,
-    VendorAdminMailComponent,
+    AdminDashboardComponent,
     AdminProductsComponent,
     AdminProductsListComponent,
-    VendorAdminProductComponent,
-    VendorAdminProductFeaturesFormComponent,
-    VendorAdminMailComposeComponent,
-    VendorAdminMailWriterComponent,
-    VendorAdminMailSidebarComponent,
-    VendorAdminStatusCardComponent,
-    VendorAdminFooterComponent,
-    VendorAdminChartCardComponent,
+    AdminStatusCardComponent,
+    AdminFooterComponent,
+    AdminChartCardComponent,
     AdminAddProductComponent,
     AdminAddProductFormComponent,
     LoaderComponent,
-    ReadMailComponent,
-    DisplayMailComponent,
     SelectShopTypeComponent,
     ProductOptionsColorComponent,
     ProductOptionsRadioBtnComponent,

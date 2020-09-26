@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusCard } from '../../models/StatusCard';
 import { ChartConfiguration } from '../../models/ChartConfiguration';
-import { VendorAdminDashboardService } from '../../services/vendor-admin-dashboard.service';
+import { AdminDashboardService } from '../../services/admin-dashboard.service';
 
 @Component({
-  selector: 'app-vendor-admin-dashboard',
-  templateUrl: './vendor-admin-dashboard.component.html',
-  styleUrls: ['./vendor-admin-dashboard.component.scss']
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.scss']
 })
-export class VendorAdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent implements OnInit {
   charts: ChartConfiguration[];
   cards: StatusCard[];
 
-  constructor(private _dashboardService: VendorAdminDashboardService) { }
+  constructor(private _dashboardService: AdminDashboardService) { }
 
   ngOnInit(): void {
     this.charts = this._dashboardService.getCharts();

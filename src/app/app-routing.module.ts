@@ -14,12 +14,8 @@ import { UserProfileComponent } from "./pages/user-profile/user-profile.componen
 import { AuthGuard } from "./guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
-import { ReadMailComponent } from './pages/read-mail/read-mail.component';
-import { VendorAdminDashboardComponent } from "./pages/vendor-admin-dashboard/vendor-admin-dashboard.component";
-import { VendorAdminMailComponent } from "./pages/vendor-admin-mail/vendor-admin-mail.component";
+import { AdminDashboardComponent } from "./pages/admin-dashboard/admin-dashboard.component";
 import { AdminProductsComponent } from "./pages/admin-products/admin-products.component";
-import { VendorAdminProductComponent } from "./pages/vendor-admin-product/vendor-admin-product.component";
-import { VendorAdminMailComposeComponent } from "./pages/vendor-admin-mail-compose/vendor-admin-mail-compose.component";
 import { AdminAddProductComponent } from "./pages/admin-add-product/admin-add-product.component";
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
 import { OrdersComponent } from './pages/orders/orders.component';
@@ -50,14 +46,10 @@ const routes: Routes = [
   { path: "orders/:id", component: OrderDetailComponent },
   { path: "checkout", component: CheckoutComponent },
   { path: "products/:id", component: ProductDetailComponent },
-  { path: "admin", component: VendorAdminDashboardComponent },
-  { path: "admin/mail", component: VendorAdminMailComponent },
-  { path: "admin/mail/:id", component: ReadMailComponent },
-  { path: "admin/mail/compose", component: VendorAdminMailComposeComponent },
+  { path: "admin", component: AdminDashboardComponent },
   { path: "admin/products", component: AdminProductsComponent },
   { path: "admin/products/add", component: AdminAddProductComponent },
   { path: "admin/products/:id/edit", component: AdminProductEditComponent },
-  { path: "admin/products/:id", component: VendorAdminProductComponent},
   { path: "admin/categories", component: AdminCategoryAdderComponent},
   { path: "admin/tags", component: AdminTagAdderComponent},
   { path: "admin/orders/:id", component: OrderDetailComponent},

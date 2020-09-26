@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisplayMailComponent } from './read-mail.component';
+import { AdminChartCardComponent } from './admin-chart-card.component';
 
-describe('DisplayMailComponent', () => {
-  let component: DisplayMailComponent;
-  let fixture: ComponentFixture<DisplayMailComponent>;
+describe('VendorAdminChartCardComponent', () => {
+  let component: AdminChartCardComponent;
+  let fixture: ComponentFixture<AdminChartCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DisplayMailComponent ]
+      declarations: [ AdminChartCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DisplayMailComponent);
+    fixture = TestBed.createComponent(AdminChartCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

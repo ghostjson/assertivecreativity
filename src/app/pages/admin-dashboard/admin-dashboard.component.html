@@ -3,12 +3,12 @@
   <div class="container">
     <div class="row">
       <div *ngFor="let card of cards" class="col-lg-3 col-6">
-        <app-vendor-admin-status-card [card]="card"></app-vendor-admin-status-card>
+        <app-admin-status-card [card]="card"></app-admin-status-card>
       </div>
       <div *ngFor="let chart of charts" class="col-md-6 col-12">
-        <app-vendor-admin-chart-card [chart]="chart"></app-vendor-admin-chart-card>
+        <app-admin-chart-card [chart]="chart"></app-admin-chart-card>
       </div>
     </div>
   </div>
-  <app-vendor-admin-footer></app-vendor-admin-footer>
+  <app-admin-footer></app-admin-footer>
 </div>

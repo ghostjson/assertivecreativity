@@ -94,6 +94,7 @@ export class Product {
   category: string;
   tags: string[];
   basePrice: number;
+  totalPrice?: number;
   stock: number;
   stockStatus: string;
   sales: number;

@@ -52,16 +52,16 @@ export class AdminProductService {
    * Fetch Product by ID from the API
    * @param id id of the product
    */
-  getProduct(id: number): Observable<any> {
-    return this._http.get(`${this.getProductLinkById(id)}`)
+  getProduct(id: number): Observable<Product> {
+    return this._http.get<Product>(`${this.getProductLinkById(id)}`)
       .pipe(take(1));
   }
 
   /**
    * Fetch products from API
    */
-  getProducts(): Observable<any> {
-    return this._http.get(`${this.getProductsLink()}`)
+  getProducts(): Observable<Product[]> {
+    return this._http.get<Product[]>(`${this.getProductsLink()}`)
       .pipe(take(1));
   }
 
@@ -69,8 +69,8 @@ export class AdminProductService {
    * Add product to server
    * @param product product object to add
    */
-  addProduct(product: Product): Observable<any> {
-    return this._http.post(`${this.getProductsLink()}`, product)
+  addProduct(product: Product): Observable<Product> {
+    return this._http.post<Product>(`${this.getProductsLink()}`, product)
       .pipe(take(1));
   }
 
@@ -78,8 +78,8 @@ export class AdminProductService {
    * Edit product
    * @param editedProduct edited product object
    */
-  editProduct(editedProduct: Product): Observable<any> {
-    return this._http.put(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
+  editProduct(editedProduct: Product): Observable<Product> {
+    return this._http.put<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
       .pipe(take(1));
   }
 
@@ -87,8 +87,8 @@ export class AdminProductService {
    * Delete Product
    * @param id id of the product
    */
-  deleteProduct(id: number): Observable<any> {
-    return this._http.delete(`${this.getProductLinkById(id)}`)
+  deleteProduct(id: number): Observable<Product> {
+    return this._http.delete<Product>(`${this.getProductLinkById(id)}`)
       .pipe(take(1));
   }
 

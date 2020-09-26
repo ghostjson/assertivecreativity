@@ -5,7 +5,7 @@ import { StatusCard } from '../models/StatusCard';
 @Injectable({
   providedIn: 'root'
 })
-export class VendorAdminDashboardService {
+export class AdminDashboardService {
   charts: ChartConfiguration[];
   cards: StatusCard[];
 
