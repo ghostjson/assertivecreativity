@@ -1,15 +1,15 @@
 /**
  * Model for User
  */
-export class User {
+export interface User {
   id?: number;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  email_verified_at: string;
+  email_verified_at?: string;
   role: string;
   image: string;
-  companyDetails: CompanyDetail;
+  company_details?: CompanyDetail;
   phone: string;
   profession: string;
 }
@@ -17,13 +17,13 @@ export class User {
 /**
  * Model for company detail
  */
-export class CompanyDetail {
+export interface CompanyDetail {
   name: string;
-  buildingNumber: string;
-  streetName: string;
-  buildingName: string;
+  building_number: string;
+  street_name: string;
+  building_name: string;
   locality: string;
-  provinceAbbr: string;
+  province_abbr: string;
   zip: string;
   country: string;
   email: string;

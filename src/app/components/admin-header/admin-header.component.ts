@@ -64,7 +64,7 @@ export class AdminHeaderComponent implements OnInit {
     ];
 
     this._user.getUser().subscribe((user) => {
-      this.name = `${user.firstName} ${user.lastName}`;
+      this.name = `${user.first_name} ${user.last_name}`;
     });
   }
 

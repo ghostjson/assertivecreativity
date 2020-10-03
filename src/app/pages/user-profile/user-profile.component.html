@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 col-lg-4">
         <p-card
-          header="{{user.firstName + ' ' + user.lastName}}"
+          header="{{user.first_name + ' ' + user.last_name}}"
           subheader="{{user.role}}"
           styleClass="p-card-shadow"
         >
@@ -39,7 +39,7 @@
                     type="text"
                     name="firstName"
                     id="first-name"
-                    [(ngModel)]="user.firstName"
+                    [(ngModel)]="user.first_name"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -53,7 +53,7 @@
                     type="text"
                     name="lastName"
                     id="last-name"
-                    [(ngModel)]="user.lastName"
+                    [(ngModel)]="user.last_name"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -113,7 +113,7 @@
                     type="text"
                     name="companyName"
                     id="company-name"
-                    [(ngModel)]="user.companyDetails.name"
+                    [(ngModel)]="user.company_details.name"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -126,7 +126,7 @@
                     class="form-group__input"
                     name="buildingNumber"
                     inputId="building-number"
-                    [(ngModel)]="user.companyDetails.buildingNumber"
+                    [(ngModel)]="user.company_details.building_number"
                     [min]="0"
                     [useGrouping]="false"
                     [disabled]="viewMode"
@@ -142,7 +142,7 @@
                     type="text"
                     name="streetName"
                     id="street-name"
-                    [(ngModel)]="user.companyDetails.streetName"
+                    [(ngModel)]="user.company_details.street_name"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -157,7 +157,7 @@
                     type="text"
                     name="buildingName"
                     id="builing-name"
-                    [(ngModel)]="user.companyDetails.buildingName"
+                    [(ngModel)]="user.company_details.building_name"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -171,7 +171,7 @@
                     type="text"
                     name="locality"
                     id="locality"
-                    [(ngModel)]="user.companyDetails.locality"
+                    [(ngModel)]="user.company_details.locality"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -185,7 +185,7 @@
                     type="text"
                     name="provinceAbbr"
                     id="province-abbr"
-                    [(ngModel)]="user.companyDetails.provinceAbbr"
+                    [(ngModel)]="user.company_details.province_abbr"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -198,7 +198,7 @@
                     class="form-group__input"
                     name="zip"
                     inputId="zip"
-                    [(ngModel)]="user.companyDetails.zip"
+                    [(ngModel)]="user.company_details.zip"
                     [min]="0"
                     [useGrouping]="false"
                     [disabled]="viewMode"
@@ -213,7 +213,7 @@
                     type="text"
                     name="country"
                     id="country"
-                    [(ngModel)]="user.companyDetails.country"
+                    [(ngModel)]="user.company_details.country"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -227,7 +227,7 @@
                     type="text"
                     name="email"
                     id="email"
-                    [(ngModel)]="user.companyDetails.email"
+                    [(ngModel)]="user.company_details.email"
                     pInputText
                     [disabled]="viewMode"
                   />
@@ -240,7 +240,7 @@
                     class="form-group__input"
                     name="companyPhone"
                     inputId="company-phone"
-                    [(ngModel)]="user.companyDetails.phone"
+                    [(ngModel)]="user.company_details.phone"
                     [min]="0"
                     [useGrouping]="false"
                     [disabled]="viewMode"

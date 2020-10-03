@@ -11,14 +11,14 @@
             <label for="name" class="text-uppercase">First Name</label>
             <input
               type="text"
-              [(ngModel)]="signup_form.name"
+              [(ngModel)]="signup_form.first_name"
               name="first_name"
               class="form-control"
               placeholder="First Name"
             />
           </div>
 
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="name" class="text-uppercase">Last Name</label>
             <input
               type="text"
@@ -27,7 +27,7 @@
               class="form-control"
               placeholder="Last Name"
             />
-          </div> -->
+          </div>
 
           <div class="form-group">
             <label for="email" class="text-uppercase">Email</label>
@@ -40,28 +40,28 @@
             />
           </div>
 
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="phone" class="text-uppercase">Phone Number</label>
             <input
-              type="text"
+              type="number"
               [(ngModel)]="signup_form.phone"
               name="phone"
               class="form-control"
               placeholder="Phone"
             />
-          </div> -->
+          </div>
 
-          <!-- <div class="form-group">
-            <label for="companyName" class="text-uppercase">Company Name</label>
+          <div class="form-group">
+            <label for="profession" class="text-uppercase">Profession</label>
             <input
-              id="companyName"
+              id="profession"
               type="text"
-              [(ngModel)]="signup_form.companyName"
-              name="companyName"
+              [(ngModel)]="signup_form.profession"
+              name="profession"
               class="form-control"
-              placeholder="Company Name"
+              placeholder="Profession"
             />
-          </div> -->
+          </div>
 
           <div class="form-group">
             <label for="password" class="text-uppercase">Password</label>
@@ -74,25 +74,27 @@
             />
           </div>
 
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="confirm-password" class="text-uppercase"
               >Confirm Password</label
             >
             <input
               type="password"
-              [(ngModel)]="signup_form.confirm"
+              [(ngModel)]="password_confirm"
               name="confirm-password"
               class="form-control"
               placeholder=""
             />
-          </div> -->
+          </div>
 
           <div class="danger" *ngIf="error != ''">
             <p>{{ error }}</p>
           </div>
 
           <div class="form-check">
-            <button (click)="submitForm()" class="btn btn-login float-right">
+            <button (click)="submitForm()" class="btn btn-login float-right"
+              [disabled]="!(password_confirm === signup_form.password)"
+            >
               Signup
             </button>
           </div>
