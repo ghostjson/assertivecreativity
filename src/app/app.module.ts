@@ -116,6 +116,7 @@ import { OrderSummaryTableComponent } from './components/order-summary-table/ord
 import { OrderMailListComponent } from './components/order-mail-list/order-mail-list.component';
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -181,7 +182,8 @@ import { OrdersListComponent } from './components/orders-list/orders-list.compon
     OrderSummaryTableComponent,
     OrderMailListComponent,
     AdminOrdersComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

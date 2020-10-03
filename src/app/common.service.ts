@@ -50,6 +50,7 @@ export class CommonService {
   }
 
   setLoader(status: boolean) {
+    console.log('setting loader to ', status);
     this.loaderSource.next(status);
   }
 

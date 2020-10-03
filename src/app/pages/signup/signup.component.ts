@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ["./signup.component.scss"],
 })
 export class SignupComponent implements OnInit {
-  signup_form: SignupFormInterface = {
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirm: "",
-    companyName: ""
+  // signup_form: SignupFormInterface = {
+  //   first_name: "",
+  //   last_name: "",
+  //   email: "",
+  //   phone: "",
+  //   password: "",
+  //   confirm: "",
+  //   companyName: ""
+  // };
+
+  signup_form = {
+    name: '',
+    email: '',
+    password: ''
   };
 
   error: string = "";
@@ -25,15 +32,17 @@ export class SignupComponent implements OnInit {
 
   submitForm(): void {
     this.error = "";
-    if (this.signup_form.confirm === this.signup_form.password) {
-      try {
-        this.auth.register(this.signup_form)
-        .then( _ => this.router.navigate(['/']))
-      } catch (e) {
-        this.error = "Signup failed, try again";
-      }
-    } else {
-      this.error = "Password does not match";
-    }
+    // if (this.signup_form.confirm === this.signup_form.password) {
+    //   try {
+    //     this.auth.register(this.signup_form)
+    //     .subscribe( _ => this.router.navigate(['/']));
+    //   } catch (e) {
+    //     this.error = "Signup failed, try again";
+    //   }
+    // } else {
+    //   this.error = "Password does not match";
+    // }
+    this.auth.register(this.signup_form)
+        .subscribe( _ => this.router.navigate(['/']));
   }
 }

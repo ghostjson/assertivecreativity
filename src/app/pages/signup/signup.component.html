@@ -8,15 +8,26 @@
 
         <form class="login-form">
           <div class="form-group">
-            <label for="name" class="text-uppercase">Full Name</label>
+            <label for="name" class="text-uppercase">First Name</label>
             <input
               type="text"
               [(ngModel)]="signup_form.name"
-              name="name"
+              name="first_name"
               class="form-control"
-              placeholder="Full Name"
+              placeholder="First Name"
             />
           </div>
+
+          <!-- <div class="form-group">
+            <label for="name" class="text-uppercase">Last Name</label>
+            <input
+              type="text"
+              [(ngModel)]="signup_form.last_name"
+              name="last_name"
+              class="form-control"
+              placeholder="Last Name"
+            />
+          </div> -->
 
           <div class="form-group">
             <label for="email" class="text-uppercase">Email</label>
@@ -29,7 +40,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="phone" class="text-uppercase">Phone Number</label>
             <input
               type="text"
@@ -38,9 +49,9 @@
               class="form-control"
               placeholder="Phone"
             />
-          </div>
+          </div> -->
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="companyName" class="text-uppercase">Company Name</label>
             <input
               id="companyName"
@@ -50,7 +61,7 @@
               class="form-control"
               placeholder="Company Name"
             />
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="password" class="text-uppercase">Password</label>
@@ -63,7 +74,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="confirm-password" class="text-uppercase"
               >Confirm Password</label
             >
@@ -74,7 +85,7 @@
               class="form-control"
               placeholder=""
             />
-          </div>
+          </div> -->
 
           <div class="danger" *ngIf="error != ''">
             <p>{{ error }}</p>

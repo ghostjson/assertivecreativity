@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { UserDetailsService } from 'src/app/store/user-details.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,8 +23,15 @@ export class AdminHeaderComponent implements OnInit {
     this.navItems = [
       {
         label: 'Go To Store',
-        routerLink: '/',
-        icon: 'pi pi-shopping-cart'
+        routerLink: '/'
+      },
+      {
+        label: 'Home',
+        routerLink: '/admin/',
+      },
+      {
+        label: 'Shop',
+        routerLink: '/shop/select-type'
       }
     ];
 
