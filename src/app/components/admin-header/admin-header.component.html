@@ -8,6 +8,10 @@
     </span>
   </ng-template>
   <ng-template pTemplate="end">
+    <span class="p-input-icon-right mr-5">
+      <i class="pi pi-search"></i>
+      <input type="text" placeholder="Search" pInputText />
+    </span>
     <p-overlayPanel
       styleClass="notification-overlay"
       #notificationCard>
@@ -15,7 +19,6 @@
         No Notifications
       </ng-template>
     </p-overlayPanel>
-
     <button
       type="button"
       pButton

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
 
@@ -15,33 +16,34 @@ export class UserDetailsService {
     private _auth: AuthService,
     private _http: HttpClient
   ) {
-    this.API_URL = 'http://localhost:3000';
+    this.API_URL = environment.apiUrl;
   }
 
-  getUsersLink(): string {
-    return `${this.API_URL}/users`;
+  private getUserLink(): string {
+    return `${this.API_URL}/auth/user`;
   }
 
-  getUsersLinkById(id: number): string {
-    return `${this.getUsersLink()}/${id}`;
-  }
-
-  public getUser(): Observable<User> {
-    // return this._auth.getUser();
-    return this._http.get<User>(this.getUsersLinkById(0))
-      .pipe(take(1));
+  getUser(): Observable<User> {
+    return this._http.get<User>(this.getUserLink())
+      .pipe(
+        take(1),
+        map((user: any) => {
+          return {...user.data};
+        })
+      );
   }
 
   editUser(user: User): Observable<User> {
-    return this._http.put<User>(this.getUsersLinkById(user.id), user)
+    return this._http.put<User>(this.getUserLink(), user)
       .pipe(take(1));
   } 
 
-  public async getRole() {
-    let user = await this._auth.getUser();
-
-    return new Promise((resolve, reject) => {
-      resolve(user.data.role);
-    })
+  getRole() {
+    this._auth.getUser()
+      .pipe(take(1))
+      .subscribe((user: User) => {
+        console.log('User role rceived: ', user.role);
+        return user.role;
+      });
   }
 }

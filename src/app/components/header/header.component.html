@@ -1,5 +1,5 @@
 <header>
-  <div class="left-grp">
+  <!-- <div class="left-grp">
     <i class="fas fa-bars desktop-only"></i>
     <img src="./../../../assets/images/logo.png" alt="logo" />
   </div>
@@ -55,7 +55,6 @@
             <a>Logout</a>
           </li>
           <div class="right-grp">
-            <!-- <i class="fas fa-search"></i> -->
             <i class="fas fa-shopping-cart" [routerLink]="['/cart']"></i>
             <span class="cart-count">
               {{cartLength}}
@@ -64,5 +63,10 @@
         </ng-container>
       </ul>
     </nav>
-  </div>
+  </div> -->
+  <app-navbar
+    [navStartItems]="navItems"
+    [logo]="logo"
+    [user]="user"
+  ></app-navbar>
 </header>

@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { SignupFormInterface } from '../pages/signup/signup_form.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { take, tap } from 'rxjs/operators';
+import { Token } from '../models/Token';
+import { Observable } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root',
@@ -10,32 +14,78 @@ export class AuthService {
   host_name: string;
   username: string;
 
-  constructor(private http: HttpClient) {
-    this.host_name = environment.apiUrl;
+  constructor(private _http: HttpClient) {
+    this.host_name = environment.apiUrl + '/auth/';
   }
 
-  public async authentication(email: string, password: string) {
-    return this.http.post(this.host('/login'), { email, password }).toPromise();
+  /**
+   * Return link to the API endpoint
+   * @param endpoint api endpoint to access
+   */
+  private host(endpoint: string): string {
+    return this.host_name + endpoint;
   }
 
-  public async register(form: SignupFormInterface) {
-    let res: any = await this.http.post(this.host('/signup'), form).toPromise();
-    localStorage.setItem('Token', await res.Token);
+  /**
+   * Authenticate the user
+   * @param email Email of the user
+   * @param password Password of the user
+   */
+  authenticate(email: string, password: string): Observable<Token> {
+    let credentials = {
+      email: email,
+      password: password
+    };
+    
+    return this._http.post<Token>(this.host('login'), credentials)
+      .pipe(
+        take(1),
+        tap((token: Token) => {
+          localStorage.setItem('Token', token.access_token);
+          console.log('token received: ', localStorage.getItem('Token'));
+        })
+      );
   }
 
-  public isAuthenticated(): boolean {
-    let Token = localStorage.getItem('Token');
+  /**
+   * Logout the current user
+   * TODO: Check if this is needed
+   */
+  logout(): Observable<any> {
+    return this._http.post(this.host('logout'), {})
+      .pipe(take(1));
+  }
+
+  /**
+   * Register new user
+   * @param form form data 
+   */
+  register(form: any): Observable<Token> {
+    return this._http.post<Token>(this.host('register/user'), form)
+      .pipe(
+        take(1),
+        tap((token: Token) => {
+          localStorage.setItem('Token', token.access_token);
+          console.log('token received: ', localStorage.getItem('Token'));
+        })
+      );
+  }
+
+  /**
+   * Return if the current user is authenticated 
+   */
+  isAuthenticated(): boolean {
+    let Token: string = localStorage.getItem('Token');
     return Token != null ? true : false;
   }
 
-  public async getUser() {
+  /**
+   * Return user details if authenticated
+   */
+  getUser(): Observable<User> {
     if (this.isAuthenticated()) {
-      let res: any = await this.http.get(this.host('/user')).toPromise();
-      return res;
+      return this._http.get<User>(this.host('user'))
+        .pipe(take(1));
     }
-  }
-
-  private host(endpoint: string): string {
-    return this.host_name + endpoint;
   }
 }

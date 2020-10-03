@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { CommonService } from "src/app/common.service";
+import { Token } from 'src/app/models/Token';
 
 @Component({
   selector: "app-signin",
@@ -19,32 +20,37 @@ export class SigninComponent implements OnInit {
   role: string;
 
   constructor(
-    private auth: AuthService,
-    private router: Router,
-    private common: CommonService
+    private _auth: AuthService,
+    private _router: Router,
+    private _common: CommonService
   ) {}
 
   ngOnInit(): void {
-    if (this.auth.isAuthenticated()) {
-      this.router.navigate(["/"]);
+    if (this._auth.isAuthenticated()) {
+      this._router.navigate(["/"]);
     }
+
+    this._common.setLoader(false);
   }
 
-  async login() {
-    this.common.setLoader(true);
+  login() {
+    this._common.setLoader(true);
 
     try {
-      let res = await this.auth.authentication(
+      this._auth.authenticate(
         this.user.email,
         this.user.password
-      );
-      localStorage.setItem("Token", await res["Token"]);
-      this.router.navigate(["/"]);
+      )
+      .subscribe((token: Token) => {
+        localStorage.setItem("Token", token.access_token);
+        this._common.setLoader(false);
+        this._router.navigate(["/"]);
+      })
     } catch (e) {
       console.log(e);
       this.error = e.error.status;
     } finally {
-      this.common.setLoader(false);
+      this._common.setLoader(false);
     }
   }
 }
