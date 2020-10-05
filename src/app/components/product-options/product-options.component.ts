@@ -24,7 +24,7 @@ export class ProductOptionsComponent implements OnInit {
   ngOnInit(): void {
     console.info('option received: ', this.option);
     
-    if (!this.option.meta.isChained) {
+    if (!this.option.meta.is_chained) {
       this.constructChained();
     }
   }

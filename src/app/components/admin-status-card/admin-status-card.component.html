@@ -1,10 +1,20 @@
-<div [ngClass]="card.classes">
-  <div class="inner">
-    <h3>{{ card.value }}</h3>
-    <p>{{ card.title }}</p>
+<div class="status-card {{styleClass}} p-2">
+  <div class="status-card__section status-card__title">
+    <div class="status-card-title__icon">
+      <i class="{{iconClass}}"></i>
+    </div>
+    <h3 class="status-card-title__text">
+      {{card.title}}
+    </h3>
   </div>
-  <div class="icon">
-    <i [ngClass]="card.icon"></i>
+  <div class="status-card__section status-card__content">
+    <div class="status-card-content__value">
+      {{ card.value }}
+    </div>
   </div>
-  <a [routerLink]="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+  <div class="status-card__section status-card__footer">
+    <a [routerLink]="" class="status-card-footer__more-btn">
+      More info
+    </a>
+  </div>
 </div>

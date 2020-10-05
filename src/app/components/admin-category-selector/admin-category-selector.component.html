@@ -4,7 +4,9 @@
 >
   <p-dropdown class="flex-grow-1" 
     [options]="categories" 
+    optionLabel="name"
+    dataKey="value"
     formControlName="category"
-    (onChange)="emitCategory()"
+    (onChange)="emitCategoryId()"
   ></p-dropdown>
 </div>

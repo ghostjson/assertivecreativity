@@ -1,0 +1,56 @@
+.status-card {
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  min-height: 150px;
+}
+
+.status-card--success,
+.status-card--warning,
+.status-card--danger,
+.status-card--info {
+  color: white;
+}
+
+.status-card--success {
+  background: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+}
+
+.status-card--danger {
+  background: linear-gradient(90deg, #FF414D 0%, #FF4B5C 96.87%);
+}
+
+.status-card--warning {
+  background: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
+}
+
+.status-card--info {
+  background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
+}
+
+.status-card__section {
+  display: flex;
+}
+
+.status-card-title__text {
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.status-card-content__value {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.status-card-footer {
+  justify-content: end;
+}
+
+.status-card-footer__more-btn {
+	background-color: white;
+	border-radius: 6px;
+	text-transform: capitalize;
+  padding: 0.5em 0.6em;
+  text-decoration: none;
+}

@@ -60,9 +60,6 @@ export class AdminAddProductFormComponent implements OnInit {
       // create a form group for the new product
       this.productForm = this._fb.group(new ProductForm());
 
-      // assign id to the product 
-      this.productForm.patchValue({id: this._idService.getId()});
-
       // temporarily add an image as a placeholder until image upload is fixed
       this.productForm.patchValue({image: '/assets/images/demo-product-images/1.jpg'});
     }
@@ -78,22 +75,18 @@ export class AdminAddProductFormComponent implements OnInit {
     this.getTags(this.productForm.value.category);
   }
 
-  ngOnDestroy(): void {
-    this.tagSub.unsubscribe();
-  }
-
   /**
    * Helper function to return price table form array
    */
   priceTable(): FormArray {
-    return this.productForm.get('priceTable') as FormArray;
+    return this.productForm.get('price_table') as FormArray;
   }
 
   /**
    * Helper function to get custom forms of a product
    */
   customForms(): FormArray {
-    return this.productForm.get('customForms') as FormArray;
+    return this.productForm.get('custom_forms') as FormArray;
   }
 
   /**
@@ -163,15 +156,15 @@ export class AdminAddProductFormComponent implements OnInit {
 
   /**
    * Fetch tags of a category
-   * @param category category to fethch the tags of 
+   * @param categoryId category id to fetch the tags of 
    */
-  getTags(category: string): void {
-    console.log(`event caught: ${category}`);
-    this.tagSub = this._pcService.getTagsOf(category)
-      .subscribe(tags => {
-        this.tags = tags;
-        console.log('tags found in admin form: ', this.tags);
-      });
+  getTags(categoryId: number): void {
+    console.log(`event caught: ${categoryId}`);
+    // this._pcService.getTagsOf(categoryId)
+    //   .subscribe(tags => {
+    //     this.tags = tags;
+    //     console.log('tags found in admin form: ', this.tags);
+    //   });
   }
 
   /**
@@ -181,8 +174,7 @@ export class AdminAddProductFormComponent implements OnInit {
     // construct product from form value 
     let submitValue = new Product(this.productForm.value);
 
-    // update the stock status of the product
-    submitValue.updateStockStatus();
+    submitValue.category = submitValue['category']['id'];
 
     if (this.isEdit) {
       this._productService.editProduct(submitValue)

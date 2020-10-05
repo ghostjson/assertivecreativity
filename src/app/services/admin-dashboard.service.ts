@@ -89,10 +89,7 @@ export class AdminDashboardService {
       {
         title: 'Orders this month',
         value: '100',
-        classes: {
-          'small-box': true,
-          'bg-info': true,
-        },
+        classes: 'status-card--success',
         icon: {
           'null': true
         }
@@ -100,10 +97,7 @@ export class AdminDashboardService {
       {
         title: 'Order requests',
         value: '55',
-        classes: {
-          'small-box': true,
-          'bg-success': true,
-        },
+        classes: 'status-card--warning',
         icon: {
           'null': true
         }
@@ -111,10 +105,7 @@ export class AdminDashboardService {
       {
         title: 'User registrations',
         value: '40',
-        classes: {
-          'small-box': true,
-          'bg-warning': true,
-        },
+        classes: 'small-box status-card--danger',
         icon: {
           'null': true
         }
@@ -122,10 +113,7 @@ export class AdminDashboardService {
       {
         title: 'Order cancellation',
         value: '20',
-        classes: {
-          'small-box': true,
-          'bg-danger': true,
-        },
+        classes: 'status-card--info',
         icon: {
           'null': true
         }

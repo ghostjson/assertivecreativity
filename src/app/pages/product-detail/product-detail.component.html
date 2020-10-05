@@ -42,8 +42,8 @@
             <div class="product-detail__price">
               <h2>Price: </h2>
               <p-table
-                *ngIf="product.priceTableMode; else basePrice"
-                [value]="product.priceTable"
+                *ngIf="product.price_table_mode; else basePrice"
+                [value]="product.price_table"
               >
                 <ng-template pTemplate="header">
                     <tr>
@@ -71,7 +71,7 @@
               </p-table>
               <ng-template #basePrice>
                 <span>
-                  {{product.basePrice | currency: 'USD'}}
+                  {{product.base_price | currency: 'USD'}}
                 </span>
               </ng-template>
             </div>
@@ -108,7 +108,7 @@
           <p-accordionTab 
             *ngFor="let customForm of customForms().controls; let formInd = index"
             [selected]="true"
-            header="{{product.customForms[formInd].title}}"
+            header="{{product.custom_forms[formInd].title}}"
           >
             <ng-container formArrayName="customForms">
               <div
@@ -116,7 +116,7 @@
                 class="card p-mt-5"
               >
                 <app-product-options
-                  [option]="product.customForms[formInd].options[optionInd]"
+                  [option]="product.custom_forms[formInd].options[optionInd]"
                   [requiredInp]="true"
                   [formGroup]="option"
                 ></app-product-options>

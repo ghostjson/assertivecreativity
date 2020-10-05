@@ -1,6 +1,6 @@
 export class StatusCard {
   title: string;
   value: string;
-  classes: object;
+  classes: string;
   icon: object;
 };

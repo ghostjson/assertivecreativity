@@ -1,11 +1,11 @@
-// @import 'themes';
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
 
 /* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Lato', sans-serif;
   height: 100%;
 }
 
@@ -47,6 +47,22 @@ html, body {
  */
 .object--cover {
   object-fit: cover;
+}
+
+.bg-success {
+  background: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+}
+
+.bg-danger {
+  background: linear-gradient(90deg, #FF414D 0%, #FF4B5C 96.87%);
+}
+
+.bg-warning {
+  background: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
+}
+
+.bg-info {
+  background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
 }
 /**
  * utility classes for the project ends

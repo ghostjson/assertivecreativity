@@ -46,14 +46,46 @@ const routes: Routes = [
   { path: "orders/:id", component: OrderDetailComponent },
   { path: "checkout", component: CheckoutComponent },
   { path: "products/:id", component: ProductDetailComponent },
-  { path: "admin", component: AdminDashboardComponent },
-  { path: "admin/products", component: AdminProductsComponent },
-  { path: "admin/products/add", component: AdminAddProductComponent },
-  { path: "admin/products/:id/edit", component: AdminProductEditComponent },
-  { path: "admin/categories", component: AdminCategoryAdderComponent},
-  { path: "admin/tags", component: AdminTagAdderComponent},
-  { path: "admin/orders/:id", component: OrderDetailComponent},
-  { path: "admin/orders", component: AdminOrdersComponent}
+  { 
+    path: "admin",
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "admin/products", 
+    component: AdminProductsComponent, 
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "admin/products/add", 
+    component: AdminAddProductComponent,
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: "admin/products/:id/edit", 
+    component: AdminProductEditComponent,
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: "admin/categories", 
+    component: AdminCategoryAdderComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "admin/tags", 
+    component: AdminTagAdderComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "admin/orders/:id", 
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "admin/orders", 
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonService } from '../../common.service';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/Product';
-import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
-import { Tag } from 'src/app/models/Tag';
-import { Category } from 'src/app/models/Category';
-import { take } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { CommonService } from "../../common.service";
+import { ProductService } from "../../services/product.service";
+import { Product } from "../../models/Product";
+import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
+import { Tag } from "src/app/models/Tag";
+import { Category } from "src/app/models/Category";
 
 @Component({
   selector: "app-shop",
@@ -31,42 +30,40 @@ export class ShopComponent implements OnInit {
 
     this.getProducts();
 
-    this._pcService.getCategories()
-      .pipe(take(1))
-      .subscribe((categories: Tag[]) => {
-        this.categories = categories;
-      });
+    this._pcService.getCategories().subscribe((categories: Category[]) => {
+      this.categories = categories;
+    });
   }
 
   /**
    * Get products from the server after calculating the filter
    */
   getProducts(): void {
-    console.log('update products');
-    // start the loader 
+    console.log("update products");
+    // start the loader
     this.common.setLoader(true);
-    
+
     let filter = {
       categories: [],
-      tags: []
+      tags: [],
     };
 
-    // add the selected categories 
+    // add the selected categories
     this.selectedCategories.forEach((category: Category) => {
-      filter.categories.push(category.value);
+      filter.categories.push(category.id);
     });
 
-    // add the selected tags 
+    // add the selected tags
     this.selectedTags.forEach((selectedTag: string) => {
       filter.tags.push(selectedTag);
     });
 
-    this._productService.getProducts(filter)
-      .pipe(take(1))
+    this._productService
+      .getProducts(filter)
       .subscribe((products: Product[]) => {
         this.products = products;
 
-        // hide the loader 
+        // hide the loader
         setTimeout(() => {
           this.common.setLoader(false);
         }, 200);
@@ -77,7 +74,7 @@ export class ShopComponent implements OnInit {
    * update the products list
    */
   updateProducts(): void {
-    // set the loader to true 
+    // set the loader to true
     this.common.setLoader(true);
 
     // empty the current tags list
@@ -86,16 +83,15 @@ export class ShopComponent implements OnInit {
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
       this.selectedCategories.forEach((category: Category) => {
-        // get the tags of the selected categories and populate tags list
-        this._pcService.getTagsOf(category.value)
-          .pipe(take(1))
-          .subscribe((tags) => {
+        if (category) {
+          // get the tags of the selected categories and populate tags list
+          this._pcService.getTagsOf(category.id).subscribe((tags) => {
             // insert each of the fetched tags into the tags list of the component
             tags.forEach((tag: Tag) => {
               this.tags.push(tag);
             });
-  
-            // filter selected tags 
+
+            // filter selected tags
             let newSelectedTags: string[] = [];
             this.tags.forEach((tag: Tag) => {
               if (this.selectedTags.includes(tag.value)) {
@@ -103,16 +99,25 @@ export class ShopComponent implements OnInit {
               }
             });
             this.selectedTags = newSelectedTags;
-  
-            // update the products list 
+
+            // update the products list
             this.getProducts();
-  
-            console.log('updated=>  ', 'tags: ', this.tags, 'selected tags: ', this.selectedTags, 'categs: ', 
-              this.categories, 'selected categs: ', this.selectedCategories);
+
+            console.log(
+              "updated=>  ",
+              "tags: ",
+              this.tags,
+              "selected tags: ",
+              this.selectedTags,
+              "categs: ",
+              this.categories,
+              "selected categs: ",
+              this.selectedCategories
+            );
           });
+        }
       });
-    }
-    else {
+    } else {
       this.getProducts();
     }
   }

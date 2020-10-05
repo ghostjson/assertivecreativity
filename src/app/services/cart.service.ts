@@ -21,7 +21,7 @@ export class CartService {
     this.CART_ID = 0;
 
     // intialise the cart 
-    this.refreshCart();
+    // this.refreshCart();
   }
 
   /**
