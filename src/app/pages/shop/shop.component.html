@@ -25,18 +25,23 @@
               Inactive
             </span>
           </p-header>
-          <div *ngFor="let category of categories" class="p-field-checkbox">
-            <p-checkbox
-              name="category"
-              value="category"
-              [value]="category"
-              [(ngModel)]="selectedCategories"
-              [inputId]="category.value"
-              [disabled]="category.value === 'none'"
-              (onChange)="updateProducts()"
-            ></p-checkbox>
-            <label [for]="category.value">{{ category.label }}</label>
-          </div>
+          <ng-container *ngIf="categories.length > 0; else noCategories">
+            <div *ngFor="let category of categories" class="p-field-checkbox">
+              <p-checkbox
+                name="category"
+                value="category"
+                [value]="category"
+                [(ngModel)]="selectedCategories"
+                [inputId]="category.value"
+                [disabled]="category.value === 'none'"
+                (onChange)="updateProducts()"
+              ></p-checkbox>
+              <label [for]="category.value">{{ category.label }}</label>
+            </div>
+          </ng-container>
+          <ng-template #noCategories>
+            No Categories found !
+          </ng-template>
         </p-accordionTab>
         <p-accordionTab [selected]="true">
           <p-header>
@@ -67,21 +72,6 @@
     </div>
     <!-- category tablist starts -->
     <div class="col-sm-12 col-md-9">
-      <!-- product search bar starts -->
-      <div class="row justify-content-start align-items-center search-bar mb-3">
-        <div class="col-12 col-md-8 col-lg-6">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Search"
-            aria-label="Search"
-          />
-        </div>
-        <div class="col-1 mt-1 mt-md-0">
-          <button class="btn btn-dark search-btn" type="submit">Search</button>
-        </div>
-      </div>
-      <!-- product search bar ends -->
       <!-- product card list starts -->
       <div class="row row-cols-1 row-cols-lg-3 justify-content-start mb-5">
         <div

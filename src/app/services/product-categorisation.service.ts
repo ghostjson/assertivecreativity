@@ -3,14 +3,15 @@ import { Category } from '../models/Category';
 import { Tag } from '../models/Tag';
 import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductCategorisationService {
-  // API_URL: string = 'http://localhost:3000';
-  API_URL: string = 'http://3.129.34.125/mock-api';
+  API_URL: string;
+  // API_URL: string = 'http://3.129.34.125/mock-api';
 
   constructor(
     private _http: HttpClient
@@ -20,7 +21,7 @@ export class ProductCategorisationService {
    * Return the categories url
    */
   categoriesUrl(): string {
-    return `${this.API_URL}/categories`;
+    return `${environment.apiUrl}/products/categories`;
   }
 
   /**
@@ -35,7 +36,7 @@ export class ProductCategorisationService {
    * Return the tags url
    */
   tagsUrl(): string {
-    return `${this.API_URL}/tags`;
+    return `${environment.apiUrl}/tags`;
   }
 
   /**
@@ -49,8 +50,19 @@ export class ProductCategorisationService {
   /**
    * Return all the categories as a list
    */
-  getCategories(): Observable<any> {
-    return this._http.get(`${this.categoriesUrl()}`);
+  getCategories(): Observable<Category[]> {
+    return this._http.get<Category[]>(`${this.categoriesUrl()}/get`)
+      .pipe(
+        take(1),
+        map((categories: any) => {
+          return categories.data.map((category: Category) => {
+            return {
+              ...category,
+              value: category.id
+            }
+          });
+        })
+      );
   }
 
   /**
@@ -58,7 +70,8 @@ export class ProductCategorisationService {
    * @param category Category Object
    */
   addCategory(category: Category): Observable<any> {
-    return this._http.post(`${this.categoriesUrl()}`, category);
+    return this._http.post(`${this.categoriesUrl()}/create`, category)
+      .pipe(take(1));
   }
 
   /**
@@ -66,7 +79,8 @@ export class ProductCategorisationService {
    * @param category Category Object
    */
   editCategory(category: Category): Observable<any> {
-    return this._http.put(`${this.categoryUrlById(category.id)}`, category);
+    return this._http.post(`${this.categoryUrlById(category.id)}`, category)
+      .pipe(take(1));
   }
   
   /**
@@ -74,22 +88,25 @@ export class ProductCategorisationService {
    * @param category Category Object to delete
    */
   deleteCategory(category: Category): Observable<any> {
-    return this._http.delete(`${this.categoryUrlById(category.id)}`);
+    return this._http.delete(`${this.categoryUrlById(category.id)}`)
+      .pipe(take(1));
   }
 
   /**
    * Get tags from  
    */
   getTags(): Observable<any> {
-    return this._http.get(`${this.tagsUrl()}`);
+    return this._http.get(`${this.tagsUrl()}`)
+      .pipe(take(1));
   }
 
   /** 
    * Get tags of a category 
   */
-  getTagsOf(category: string): Observable<any> {
+  getTagsOf(category: number): Observable<any> {
     return this._http
-      .get(`${this.tagsUrl()}/?parentCategory.value=${category}`);
+      .get(`${this.tagsUrl()}/?parentCategory.id=${category}`)
+        .pipe(take(1));
   }
 
   /**
@@ -97,7 +114,8 @@ export class ProductCategorisationService {
    * @param tag Tag object to add
    */
   addTag(tag: Tag): Observable<any> {
-    return this._http.post(`${this.tagsUrl()}`, tag);
+    return this._http.post(`${this.tagsUrl()}`, tag)
+      .pipe(take(1));
   }
 
   /**
@@ -105,7 +123,8 @@ export class ProductCategorisationService {
    * @param tag Tag object to edit
    */
   editTag(tag: Tag): Observable<any> {
-    return this._http.put(`${this.tagUrlById(tag.id)}`, tag);
+    return this._http.post(`${this.tagUrlById(tag.id)}`, tag)
+      .pipe(take(1));
   }
 
   /**
@@ -113,7 +132,8 @@ export class ProductCategorisationService {
    * @param tag Tag object to delete
    */
   deleteTag(tag: Tag): Observable<any> {
-    return this._http.delete(`${this.tagUrlById(tag.id)}`);
+    return this._http.delete(`${this.tagUrlById(tag.id)}`)
+      .pipe(take(1));
   }
 
   /**

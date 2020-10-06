@@ -1,5 +1,6 @@
 import { SelectItem } from 'primeng/api';
-import { FormArray, Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormArray, FormControl, FormBuilder } from '@angular/forms';
+import { Category } from './Category';
 
 // features avalilable for products
 const PRODUCT_FEATURES: Object = {
@@ -87,24 +88,23 @@ let _fb: FormBuilder = new FormBuilder();
 // model describing a Product
 export class Product {
   id?: number;
-  sellerId?: number;
+  seller_id?: number;
   name: string;
   serial: string;
   description: string;
-  category: string;
+  category: (number | string);
   tags: string[];
-  basePrice: number;
-  totalPrice?: number;
+  base_price: number;
+  total_price?: number;
   stock: number;
-  stockStatus: string;
   sales: number;
   image: string;
-  priceTableMode: boolean;
-  priceTable: PriceGroup[];
+  price_table_mode: boolean;
+  price_table: PriceGroup[];
   features?: Feature[];
-  customForms?: Form[];
+  custom_forms?: Form[];
 
-  constructor(initial: any=null) {
+  constructor(initial: Product=null) {
     if (initial) {
       this.id = initial.id;
       this.name = initial.name;
@@ -112,59 +112,29 @@ export class Product {
       this.description = initial.description;
       this.category = initial.category;
       this.tags = initial.tags;
-      this.basePrice = initial.basePrice;
+      this.base_price = initial.base_price;
       this.stock = initial.stock;
-      this.stockStatus = this.availability();
       this.sales = initial.stock;
       this.sales = initial.sales;
       this.image = initial.image;
-      this.priceTableMode = initial.priceTableMode;
-      this.priceTable = initial.priceTable;
-      this.customForms = initial.customForms;
+      this.price_table_mode = initial.price_table_mode;
+      this.price_table = initial.price_table;
+      this.custom_forms = initial.custom_forms;
     }
     else {
-      this.name = null;
-      this.serial = null;
-      this.description = null;
-      this.category = null;
-      this.tags = null;
-      this.basePrice = null;
-      this.stock = null;
-      this.stockStatus = this.availability();
-      this.sales = null;
-      this.sales = null;
-      this.image = null;
-      this.priceTableMode = false;
-      this.priceTable = [new PriceGroup()];
-      this.customForms = [new Form()];
+      this.name = '';
+      this.serial = '';
+      this.description = '';
+      this.category = '';
+      this.tags = [];
+      this.base_price = 0;
+      this.stock = 0;
+      this.sales = 0;
+      this.image = '';
+      this.price_table_mode = false;
+      this.price_table = [new PriceGroup()];
+      this.custom_forms = [new Form()];
     }
-  }
-
-  /**
-   * Return the availability of the product
-   */
-  availability(): string {
-    let status: string = 'instock';
-
-    if (this.stock < 10) {
-      status = 'lowstock';
-    }
-
-    if (this.stock <= 0) {
-      status = 'outofstock';
-    }
-
-    return status;
-  }
-
-  /**
-   * Update the stock status according to the stock
-   */
-  updateStockStatus(): string {
-    this.stockStatus = this.availability();
-    console.log('stock status updated');
-
-    return this.stockStatus;
   }
 }
 
@@ -178,15 +148,15 @@ export class ProductForm {
   description: FormControl;
   category: FormControl;
   tags: FormControl;
-  basePrice: FormControl;
+  base_price: FormControl;
   stock: FormControl;
-  stockStatus: FormControl;
+  stock_status: FormControl;
   sales: FormControl;
   image: FormControl;
-  priceTableMode: FormControl;
-  priceTable: FormArray;
+  price_table_mode: FormControl;
+  price_table: FormArray;
   features?: FormArray;
-  customForms?: FormArray;
+  custom_forms?: FormArray;
 
   constructor(initial: ProductForm=null) {
     if (initial) {
@@ -196,35 +166,33 @@ export class ProductForm {
       this.description = initial.description;
       this.category = initial.category;
       this.tags = initial.tags;
-      this.basePrice = initial.basePrice;
+      this.base_price = initial.base_price;
       this.stock = initial.stock;
-      this.stockStatus = initial.stock;
+      this.stock_status = initial.stock_status;
       this.sales = initial.sales;
       this.image = initial.image;
-      this.priceTableMode = initial.priceTableMode;
-      this.priceTable = initial.priceTable;
-      this.customForms = initial.customForms;
+      this.price_table_mode = initial.price_table_mode;
+      this.price_table = initial.price_table;
+      this.custom_forms = initial.custom_forms;
     }
     else {
-      this.id = _fb.control(null);
       this.name = _fb.control(null);
       this.serial = _fb.control(null);
       this.description = _fb.control(null);
       this.category = _fb.control('none');
-      this.tags = _fb.control(null);
-      this.basePrice = _fb.control(null);
-      this.stock = _fb.control(null);
-      this.stockStatus = _fb.control('outofstock');
-      this.sales = _fb.control(null);
-      this.sales = _fb.control(null);
+      this.tags = _fb.control([]);
+      this.base_price = _fb.control(0);
+      this.stock = _fb.control(0);
+      this.stock_status = _fb.control('outofstock');
+      this.sales = _fb.control(0);
       this.image = _fb.control(null);
-      this.priceTableMode = _fb.control(false);
-      this.priceTable = _fb.array([
+      this.price_table_mode = _fb.control(false);
+      this.price_table = _fb.array([
         _fb.group(
           new PriceGroup()
         )
       ])
-      this.customForms = _fb.array([]);
+      this.custom_forms = _fb.array([]);
     }
   }
 }
@@ -236,12 +204,12 @@ export class Option {
   price: number;
   inputs: any[];
   meta: OptionMeta;
-  chainedOptions?: Option[]
+  chained_options?: Option[]
 }
 
 export class OptionMeta {
-  isChained: boolean;
-  chainedOpsHidden?: boolean;
+  is_chained: boolean;
+  chained_ops_hidden?: boolean;
 }
 
 
@@ -253,33 +221,33 @@ export interface Feature {
   title: string,
   name: string,
   inputs: Array<any>,
-  chainedInputs?: Feature[]
+  chained_inputs?: Feature[]
 }
 
 // model for customisation form
 export class Form {
   id: number;
   title: string;
-  parentForm: number;
+  parent_form: number;
   options: any[]
 }
 
 export class PriceGroup {
   label: string;
-  pricePerPiece: number;
+  price_per_piece: number;
   quantity: number;
   relation: string;
 
   constructor(initial: PriceGroup=null) {
     if (initial) {
       this.label = initial.label;
-      this.pricePerPiece = initial.pricePerPiece;
+      this.price_per_piece = initial.price_per_piece;
       this.quantity = initial.quantity;
       this.relation = initial.relation;
     }
     else {
       this.label = null;
-      this.pricePerPiece = null;
+      this.price_per_piece = null;
       this.quantity = null;
       this.relation = null;
     }
@@ -287,14 +255,14 @@ export class PriceGroup {
 }
 
 export class PriceTable {
-  public priceGroups: PriceGroup[];
+  public price_groups: PriceGroup[];
 
   constructor() {
-    this.priceGroups = [];
+    this.price_groups = [];
 
-    this.priceGroups.push({
+    this.price_groups.push({
       label: null,
-      pricePerPiece: null,
+      price_per_piece: null,
       quantity: null,
       relation: null
     });
@@ -302,12 +270,12 @@ export class PriceTable {
 
   add(initial: PriceGroup=null): void {
     if (initial) {
-      this.priceGroups.push(initial);
+      this.price_groups.push(initial);
     }
     else {
-      this.priceGroups.push({
+      this.price_groups.push({
         label: null,
-        pricePerPiece: null,
+        price_per_piece: null,
         quantity: null,
         relation: null
       });

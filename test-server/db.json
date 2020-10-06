@@ -251,39 +251,64 @@
   ],
   "categories": [
     {
-      "id": 0,
-      "label": "None",
-      "description": "Uncategorised",
-      "productCount": 0,
-      "value": "none"
-    },
-    {
       "id": 1,
-      "label": "Shirts",
-      "description": "This is the shirts category",
-      "productCount": 0,
-      "value": "shirts"
-    },
-    {
-      "id": 3,
-      "label": "Scarves",
-      "description": "This is the scarves category",
-      "value": "scarves",
-      "productCount": 0
+      "name": "enim",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
     },
     {
       "id": 2,
-      "label": "Ties",
-      "description": "This is the ties category",
-      "value": "ties",
-      "productCount": 0
+      "name": "dolores",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 3,
+      "name": "ut",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
     },
     {
       "id": 4,
-      "label": "Lower Wear",
-      "description": "This is the lower wear category",
-      "value": "lower-wear",
-      "productCount": 0
+      "name": "qui",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 5,
+      "name": "voluptatibus",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 6,
+      "name": "voluptatem",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 7,
+      "name": "aperiam",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 8,
+      "name": "consectetur",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 9,
+      "name": "autem",
+      "created_at": "2020-10-04T14:07:13.000000Z",
+      "updated_at": "2020-10-04T14:07:13.000000Z"
+    },
+    {
+      "id": 10,
+      "name": "tenetur",
+      "created_at": "2020-10-04T14:07:14.000000Z",
+      "updated_at": "2020-10-04T14:07:14.000000Z"
     }
   ],
   "products": [
@@ -293,10 +318,7 @@
       "serial": "c-f-w-s",
       "description": "This is Cashmere Feel Wholesale Scarves",
       "category": "scarves",
-      "tags": [
-        "cashmere-feel",
-        "pashmeena-feel"
-      ],
+      "tags": ["cashmere-feel", "pashmeena-feel"],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -475,9 +497,7 @@
       "serial": "p-s-s-s",
       "description": "This is Pashmeena Scarf",
       "category": "scarves",
-      "tags": [
-        "pashmeena-feel"
-      ],
+      "tags": ["pashmeena-feel"],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -645,9 +665,7 @@
       "serial": "c-f-w-s",
       "description": "This is Cashmere Feel Wholesale Scarves",
       "category": "scarves",
-      "tags": [
-        "cashmere-feel"
-      ],
+      "tags": ["cashmere-feel"],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -816,9 +834,7 @@
       "serial": "c-f-w-t",
       "description": "This is Cashmere Feel Wholesale Bow Tie",
       "category": "ties",
-      "tags": [
-        "bow-tie"
-      ],
+      "tags": ["bow-tie"],
       "basePrice": null,
       "stock": 1000,
       "stockStatus": "instock",
@@ -988,9 +1004,7 @@
       "serial": "d-y-s-qh-u",
       "description": "100% Silk Plaid Woven Reversible Freestyle Bow Tie 36.5\" x 2.5\". Perfect for casual occasions. These are local stock items. The pricing reflects the cost of a single item only! Which will change by the amount you order! Minimum order is 12pcs per style/color. Embroidery options are available for all our ties, feel free to ask.",
       "category": "ties",
-      "tags": [
-        "bow-tie"
-      ],
+      "tags": ["bow-tie"],
       "basePrice": null,
       "stock": 100,
       "stockStatus": "instock",

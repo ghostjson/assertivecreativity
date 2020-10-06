@@ -43,7 +43,7 @@
         [rows]="10"
         [paginator]="true"
         [globalFilterFields]="[
-          'label'
+          'name'
         ]"
         [(selection)]="selectedCategories"
         [rowHover]="true"
@@ -70,8 +70,8 @@
             <th style="width: 3rem;">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="label">
-              CATEGORY <p-sortIcon field="label"></p-sortIcon>
+            <th pSortableColumn="name">
+              CATEGORY <p-sortIcon field="name"></p-sortIcon>
             </th>
             <th>
               DESCRIPTION
@@ -87,7 +87,7 @@
             <td>
               <p-tableCheckbox [value]="category"></p-tableCheckbox>
             </td>
-            <td>{{ category.label }}</td>
+            <td>{{ category.name }}</td>
             <td>{{ summary(category.description) }}...</td>
             <td>{{ category.productCount }}</td>
             <td>
@@ -130,29 +130,15 @@
             <input
               type="text"
               pInputText
-              id="label"
-              name="label"
-              [(ngModel)]="category.label"
+              id="name"
+              name="name"
+              [(ngModel)]="category.name"
               required
               autofocus
-              (input)="generateSlug()"
             />
-            <small class="p-invalid" *ngIf="submitted && !category.label"
+            <small class="p-invalid" *ngIf="submitted && !category.name"
               >Category Name is required.</small
             >
-          </div>
-          <div class="p-field">
-            <label for="value">Category Slug</label>
-            <input
-              type="text"
-              pInputText
-              id="value"
-              name="value"
-              [(ngModel)]="category.value"
-              disabled="true"
-              required
-              readonly
-            />
           </div>
           <div class="p-field">
             <label for="description">Description</label>
@@ -184,7 +170,7 @@
             icon="pi pi-check"
             class="p-button-text"
             (click)="saveCategory()"
-            [disabled]="!categoryForm.form.valid"
+            [disabled]="false && !categoryForm.form.valid"
           ></button>
         </ng-template>
       </p-dialog>

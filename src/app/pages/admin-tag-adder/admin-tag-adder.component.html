@@ -164,12 +164,12 @@
             >
               <ng-template pTemplate="selectedItem">
                 <div *ngIf="tag.parentCategory">
-                  <div>{{ tag.parentCategory.label }}</div>
+                  <div>{{ tag.parentCategory.name }}</div>
                 </div>
               </ng-template>
               <ng-template let-category pTemplate="item">
                 <div>
-                  <div>{{ category.label }}</div>
+                  <div>{{ category.name }}</div>
                 </div>
               </ng-template>
             </p-dropdown>

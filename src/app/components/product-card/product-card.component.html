@@ -6,9 +6,9 @@
     {{product.name}}
   </div>
   <div class="product-card__price"
-    *ngIf="product.basePrice"
+    *ngIf="product.base_price"
   >
-    {{product.basePrice}}
+    {{product.base_price | currency: 'USD'}}
   </div>
   <div class="product-card__desc">
     {{summary(product.description)}}...

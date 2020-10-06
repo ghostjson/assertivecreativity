@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Category } from 'src/app/models/Category';
 
@@ -15,7 +15,7 @@ export class AdminCategorySelectorComponent {
 
   constructor () {}
 
-  emitCategory(): void {
-    this.onSelect.emit(this.formGroup.value.category);
+  emitCategoryId(): void {
+    this.onSelect.emit(this.formGroup.value.category.id);
   }
 }

@@ -2,10 +2,10 @@
   <app-admin-header></app-admin-header>
   <div class="container">
     <div class="row">
-      <div *ngFor="let card of cards" class="col-lg-3 col-6">
+      <div *ngFor="let card of cards" class="col-12 col-md-6 col-lg-3">
         <app-admin-status-card [card]="card"></app-admin-status-card>
       </div>
-      <div *ngFor="let chart of charts" class="col-md-6 col-12">
+      <div *ngFor="let chart of charts" class="col-12 col-md-6">
         <app-admin-chart-card [chart]="chart"></app-admin-chart-card>
       </div>
     </div>

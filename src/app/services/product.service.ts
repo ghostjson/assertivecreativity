@@ -10,53 +10,26 @@ import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService {
-  host: string;
   products: Product[];
   possibleOptions: Object;
-  // API_URL = "http://localhost:3000";
-  API_URL = "http://3.129.34.125/mock-api";
+  API_URL: string;
 
   constructor(
     private _http: HttpClient,
     private _fb: FormBuilder
   ) {
-    this.host = environment.apiUrl;
+    this.API_URL = environment.apiUrl;
 
     // initialise the possible options
     this.possibleOptions = listAllFeatures();
   }
-
-  getProducts(filter: any={categories: [], tags: []}): Observable<any> {
-    let reqLink: string = `${this.productsLink()}?`;
-
-    // add the categories 
-    filter.categories.forEach((category: string) => {
-      reqLink += `category=${category}&`;
-    });
-
-    // add the tags 
-    filter.tags.forEach((tag: string) => {
-      reqLink += `tags=${tag}&`;
-    });
-
-    console.info('products request link: ', reqLink);
-    return this._http.get(reqLink);
-  }
-
-  /**
-   * Return the product from the server
-   * @param id Id of the product
-   */
-  getProduct(id: number): Observable<any> {
-    console.log('product link: ', this.productLink(id));
-    return this._http.get(this.productLink(id));
-  }
-
+  
   /**
    * Return the products link
    */
@@ -70,6 +43,44 @@ export class ProductService {
    */
   productLink(id: number): string {
     return `${this.productsLink()}/${id}`;
+  }
+
+  getProducts(filter: any={categories: [], tags: []}): Observable<Product[]> {
+    let reqLink: string = `${this.productsLink()}?`;
+
+    // add the categories 
+    filter.categories.forEach((category: string) => {
+      reqLink += `category=${category}&`;
+    });
+
+    // add the tags 
+    filter.tags.forEach((tag: string) => {
+      reqLink += `tags=${tag}&`;
+    });
+
+    console.info('products request link: ', reqLink);
+    return this._http.get<Product[]>(reqLink)
+      .pipe(
+        take(1),
+        map((products: any) => {
+          return products.data;
+        })
+      );
+  }
+
+  /**
+   * Return the product from the server
+   * @param id Id of the product
+   */
+  getProduct(id: number): Observable<any> {
+    console.log('product link: ', this.productLink(id));
+    return this._http.get(this.productLink(id))
+      .pipe(
+        take(1),
+        map((product: any) => {
+          return product.data;
+        })
+      );
   }
 
   /**
@@ -135,7 +146,7 @@ export class ProductService {
     let formTemplate = {
       id: form.id,
       title: form.title,
-      parentForm: form.parentForm,
+      parentForm: form.parent_form,
       options: this._fb.array([]),
     };
 

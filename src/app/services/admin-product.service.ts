@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 import { SelectItem } from 'primeng/api';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
@@ -26,8 +26,7 @@ export class AdminProductService {
   ) {
     this.host = environment.apiUrl;
 
-    // this.API_URL = 'http://localhost:3000';
-    this.API_URL = 'http://3.129.34.125/mock-api';
+    this.API_URL = environment.apiUrl;
 
     // initialise the possible options
     this.possibleOptions = listAllFeatures();
@@ -54,7 +53,12 @@ export class AdminProductService {
    */
   getProduct(id: number): Observable<Product> {
     return this._http.get<Product>(`${this.getProductLinkById(id)}`)
-      .pipe(take(1));
+      .pipe(
+        take(1),
+        map((product: any) => {
+          return product.data;
+        })
+      );
   }
 
   /**
@@ -62,7 +66,12 @@ export class AdminProductService {
    */
   getProducts(): Observable<Product[]> {
     return this._http.get<Product[]>(`${this.getProductsLink()}`)
-      .pipe(take(1));
+      .pipe(
+        take(1),
+        map((products: any) => {
+          return products.data;
+        })
+      );
   }
 
   /**
@@ -79,7 +88,7 @@ export class AdminProductService {
    * @param editedProduct edited product object
    */
   editProduct(editedProduct: Product): Observable<Product> {
-    return this._http.put<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
+    return this._http.patch<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
       .pipe(take(1));
   }
 
@@ -119,7 +128,7 @@ export class AdminProductService {
           [Validators.required]
         ],
         pricePerPiece: [
-          initial.pricePerPiece,
+          initial.price_per_piece,
           [Validators.required]
         ],
         quantity: [

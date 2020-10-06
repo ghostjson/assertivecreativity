@@ -77,12 +77,12 @@ export class OrderService {
     let orderFormTemplate = {
       name: product.name,
       description: product.description,
-      basePrice: product.basePrice,
+      basePrice: product.base_price,
       image: product.image,
       customForms: this._fb.array([])
     };
 
-    product.customForms.forEach((customForm) => {
+    product.custom_forms.forEach((customForm) => {
       this._productService.addForm(
         customForm, 
         orderFormTemplate.customForms

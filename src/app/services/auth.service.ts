@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SignupFormInterface } from '../pages/signup/signup_form.interface';
+import { SignupForm } from '../models/SignupForm';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { take, tap } from 'rxjs/operators';
@@ -60,7 +60,7 @@ export class AuthService {
    * Register new user
    * @param form form data 
    */
-  register(form: any): Observable<Token> {
+  register(form: SignupForm): Observable<Token> {
     return this._http.post<Token>(this.host('register/user'), form)
       .pipe(
         take(1),

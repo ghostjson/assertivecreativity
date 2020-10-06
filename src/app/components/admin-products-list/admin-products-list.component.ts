@@ -22,15 +22,9 @@ export class AdminProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.products = [];
-
     this._productService.getProducts()
       .subscribe((products: Product[]) => {
-        products.forEach((product: Product) => {
-          this.products.push(
-            new Product(product)
-          );
-        })
+        this.products = products;
       });
   }
 
@@ -127,5 +121,23 @@ export class AdminProductsListComponent implements OnInit {
         this.products.push(new Product(duplicateProduct));
         console.log('Duplicated Product returned: ', duplicateProduct.id, duplicateProduct);
       });
+  }
+
+  /**
+   * Returns the availability badge string
+   * @param product Product object
+   */
+  availability(product: Product): string {
+    let status: string = 'instock';
+
+    if (product.stock < 10) {
+      status = 'lowstock';
+    }
+
+    if (product.stock <= 0) {
+      status = 'outofstock';
+    }
+
+    return status;
   }
 }

@@ -20,7 +20,6 @@ export class AdminCategoryAdderComponent implements OnInit {
   submitted: boolean;
 
   constructor(
-    private _idService: IdGeneratorService,
     private _prodCategorisationService: ProductCategorisationService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService
@@ -31,6 +30,7 @@ export class AdminCategoryAdderComponent implements OnInit {
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        console.log('categories received: ', categories);
       });
   }
 
@@ -81,7 +81,7 @@ export class AdminCategoryAdderComponent implements OnInit {
    */
   deleteCategory(category: Category): void {
     this._confirmationService.confirm({
-      message: "Are you sure you want to delete " + category.label + "?",
+      message: "Are you sure you want to delete " + category.name + "?",
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
@@ -116,12 +116,15 @@ export class AdminCategoryAdderComponent implements OnInit {
   saveCategory(): void {
     this.submitted = true;
 
-    if (this.category.label.trim()) {
+    if (this.category.name.trim()) {
       if (this.category.id) {
         this.categories[this.findIndexById(this.category.id)] = this.category;
         this._prodCategorisationService.editCategory(this.category)
           .pipe(take(1))
-          .subscribe();
+          .subscribe((response: any) => {
+            this.categories = [...this.categories];
+            this.categoryDialog = false;
+          });
         this._messageService.add({
           severity: "success",
           summary: "Successful",
@@ -130,22 +133,18 @@ export class AdminCategoryAdderComponent implements OnInit {
         });
       } 
       else {
-        this.category.productCount = 0;
-        this.categories.push(this.category);
         this._prodCategorisationService.addCategory(this.category)
           .pipe(take(1))
-          .subscribe();
-        console.info('Categories: ', this.categories);
-        this._messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Category Created",
-          life: 3000,
-        });
+          .subscribe((createdCategory: Category) => {
+            /**
+             * TODO: uncomment when backend fully implemented
+             */
+            // this.category = createdCategory;
+            this.categories.push(this.category);
+            this.categories = [...this.categories];
+            this.categoryDialog = false;
+          });
       }
-
-      this.categories = [...this.categories];
-      this.categoryDialog = false;
     }
   }
 
@@ -166,17 +165,10 @@ export class AdminCategoryAdderComponent implements OnInit {
   }
 
   /**
-   * Turn the category label input into slug
-   */
-  generateSlug(): void {
-    this.category.value = this.category.label.trim().toLowerCase().replace(/\s+/g, '-');
-  }
-
-  /**
    * Return a short part from the beginning of the string
    * @param str string to make summary from
    */
-  summary(str: string): string {
+  summary(str: string=''): string {
     return str.slice(0, 50);
   }
 }
