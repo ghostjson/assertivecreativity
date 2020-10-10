@@ -1,0 +1,49 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .chart-card {
+      border: 1px solid $light-grey;
+      border-radius: 6px;
+      background: white;
+    }
+    
+    .chart-card-header {
+      display: flex;
+      align-items: end;
+      padding: 0.5em 1em;
+      border-bottom: 1px solid $light-grey;
+    }
+    
+    .chart-card-header__icon {
+      margin-right: 1em;
+      margin-bottom: 0;
+      order: 1;
+    }
+    
+    .chart-card-header__title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      order: 2;
+      margin-bottom: 0;
+    }
+    
+    .chart-card-body {
+      padding: 1em;
+    }
+  }
+
+  .chart-card-header__icon {
+    margin-right: 1em;
+    margin-bottom: 0;
+    order: 1;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    justify-content: center;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #FF414D 0%, #f85161 96.87%);
+    color: white;
+  }
+}

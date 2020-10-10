@@ -1,13 +1,15 @@
-<div class="card {{ chart.cardType }}">
-  <div class="card-header">
-    <h3 class="card-title">{{ chart.title }}</h3>
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus" aria-hidden="true"></i>
-      </button>
-      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times" aria-hidden="true"></i></button>
+<div class="chart-card {{styleClass}}">
+  <div class="chart-card-header">
+    <h3 class="chart-card-header__title">
+      {{ chart.title }}
+    </h3>
+    <div *ngIf="chartIcon"
+      class="chart-card-header__icon"
+    >
+      <i class="{{chartIcon}}"></i>
     </div>
   </div>
-  <div class="card-body">
+  <div class="chart-card-body">
     <ngx-chartjs [data]="chart.data" [options]="chart.options" type="{{ chart.chartType }}"></ngx-chartjs>
   </div>
 </div>

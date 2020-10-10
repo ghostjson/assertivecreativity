@@ -17,7 +17,7 @@
 }
 
 .status-card--danger {
-  background: linear-gradient(90deg, #FF414D 0%, #FF4B5C 96.87%);
+  background: linear-gradient(90deg, #FF414D 0%, #f85161 96.87%);
 }
 
 .status-card--warning {
@@ -45,13 +45,4 @@
 .status-card-content__value {
   font-size: 2.5rem;
   font-weight: 900;
-}
-
-.status-card-footer__more-btn {
-  background-color: white;
-  color: black;
-  font-weight: 700;
-	border-radius: 6px;
-	text-transform: capitalize;
-  text-decoration: none;
 }
