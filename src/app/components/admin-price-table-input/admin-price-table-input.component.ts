@@ -11,8 +11,7 @@ import { AdminProductService } from 'src/app/services/admin-product.service';
 })
 export class AdminPriceTableInputComponent implements OnInit {
   @Input() formGroup: FormGroup;
-
-  // priceTable = new PriceTable();
+  
   relations: SelectItem[];
 
   constructor(
@@ -41,7 +40,7 @@ export class AdminPriceTableInputComponent implements OnInit {
    * get the pricing table form array
    */
   priceTable(): FormArray {
-    return this.formGroup.get('priceTable') as FormArray;
+    return this.formGroup.get('price_table') as FormArray;
   }
 
   /**

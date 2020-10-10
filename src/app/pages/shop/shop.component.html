@@ -32,11 +32,11 @@
                 value="category"
                 [value]="category"
                 [(ngModel)]="selectedCategories"
-                [inputId]="category.value"
-                [disabled]="category.value === 'none'"
+                [inputId]="category.id"
+                [disabled]="category.name.toLowerCase() === 'none'"
                 (onChange)="updateProducts()"
               ></p-checkbox>
-              <label [for]="category.value">{{ category.label }}</label>
+              <label [for]="category.id">{{ category.name }}</label>
             </div>
           </ng-container>
           <ng-template #noCategories>
@@ -59,12 +59,12 @@
             <div *ngFor="let tag of tags" class="p-field-checkbox">
               <p-checkbox
                 name="tag"
-                [value]="tag.value"
+                [value]="tag.id"
                 [(ngModel)]="selectedTags"
-                [inputId]="tag.value"
+                [inputId]="tag.id"
                 (onChange)="updateProducts()"
               ></p-checkbox>
-              <label [for]="tag.value">{{tag.label}}</label>
+              <label [for]="tag.id">{{tag.name}}</label>
             </div>
           </ng-template>
         </p-accordionTab>

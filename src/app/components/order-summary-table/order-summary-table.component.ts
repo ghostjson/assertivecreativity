@@ -46,7 +46,7 @@ export class OrderSummaryTableComponent implements OnInit {
         this.orderSummary.push(this.populateOption(option));
 
         // populate chained options
-        option.chainedOptions.forEach((chainedOption) => {
+        option.chained_options.forEach((chainedOption) => {
           this.orderSummary.push(this.populateOption(chainedOption));
         });
       });

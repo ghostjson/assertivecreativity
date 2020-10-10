@@ -1,6 +1,6 @@
 <div [formGroup]="formGroup">
   <p-table
-    [value]="formGroup.controls.priceTable.value"
+    [value]="formGroup.controls.price_table.value"
     [rowTrackBy]="trackByFn"
   >
     <ng-template pTemplate="header">
@@ -11,7 +11,7 @@
         <th>Relation</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-ri="rowIndex" formArrayName="priceTable">
+    <ng-template pTemplate="body" let-ri="rowIndex" formArrayName="price_table">
       <tr [formGroupName]="ri">
         <td pEditableColumn style="position: relative; z-index: 2;">
           <p-cellEditor>
@@ -19,7 +19,7 @@
               <input pInputText type="text" formControlName="label" required />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ formGroup.value.priceTable[ri].label }}
+              {{ formGroup.value.price_table[ri].label }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -28,7 +28,7 @@
             <ng-template pTemplate="input">
               <!-- <input pInputText type="number" [(ngModel)]="rowData.pricePerPiece" required /> -->
               <p-inputNumber
-                formControlName="pricePerPiece"
+                formControlName="price_per_piece"
                 mode="currency"
                 currency="USD"
                 locale="en-US"
@@ -37,7 +37,7 @@
               ></p-inputNumber>
             </ng-template>
             <ng-template pTemplate="output">
-              $ {{ formGroup.value.priceTable[ri].pricePerPiece }}
+              $ {{ formGroup.value.price_table[ri].price_per_piece }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -50,7 +50,7 @@
               ></p-inputNumber>
             </ng-template>
             <ng-template pTemplate="output">
-              {{ formGroup.value.priceTable[ri].quantity }}
+              {{ formGroup.value.price_table[ri].quantity }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -64,7 +64,7 @@
               ></p-dropdown>
             </ng-template>
             <ng-template pTemplate="output">
-              {{ formGroup.value.priceTable[ri].relation }}
+              {{ formGroup.value.price_table[ri].relation }}
             </ng-template>
           </p-cellEditor>
         </td>

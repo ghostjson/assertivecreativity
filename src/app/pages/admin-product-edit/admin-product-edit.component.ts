@@ -41,7 +41,8 @@ export class AdminProductEditComponent implements OnInit {
 
     // loop through priceTable priceGroups and push
     // priceGroups to a form array 
-    this.productObj.price_table.forEach((priceGroup: PriceGroup) => {
+    let parsedPriceTable = JSON.parse(String(this.productObj.price_table));
+    parsedPriceTable.forEach((priceGroup: PriceGroup) => {
       priceTable.push(
         this._productService.newPriceGroup(priceGroup)
       )
@@ -116,7 +117,7 @@ export class AdminProductEditComponent implements OnInit {
         this.productObj.description,
         [Validators.required]
       ],
-      basePrice: [
+      base_price: [
         this.productObj.base_price,
         [Validators.required]
       ],
@@ -140,12 +141,12 @@ export class AdminProductEditComponent implements OnInit {
         this.productObj.tags,
         [Validators.required]
       ],
-      priceTableMode: [
+      price_table_mode: [
         this.productObj.price_table_mode,
         [Validators.required]
       ],
-      priceTable: this.productObj.price_table_mode ? this.buildPriceTable(): null,
-      customForms: this.buildCustomForms()
+      price_table: this.productObj.price_table_mode === '1' ? this.buildPriceTable(): null,
+      custom_forms: this.buildCustomForms()
     });
 
     return form;

@@ -32,6 +32,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   currentUrl: string;
 
+  productId: number;
+
   constructor(
     public _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
@@ -41,6 +43,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _idService: IdGeneratorService
   ) {
+    this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -67,14 +70,17 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.product = null;
     
     // get product details from the product service
-    let id: number = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     
     this._common.setLoader(true);
     
-    this._productService.getProduct(id)
+    this._productService.getProduct(this.productId)
       .pipe(take(1))
       .subscribe(product => {
         this.product = product;
+        /**
+         * Fix for bug
+         */
+        this.product.price_table = JSON.parse(String(this.product.price_table));
         console.info('Product Received: ', this.product);
         
         this.image_set = [
@@ -108,7 +114,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   customForms(): FormArray {
-    return this.orderForm.get('customForms') as FormArray;
+    return this.orderForm.get('custom_forms') as FormArray;
   }
 
   options(index: number): FormArray {
@@ -153,9 +159,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     order.cartId = this._cartService.getCartId();
     // order = this.cleanForm(order);
     order.totalPrice = this.priceTotal;
-    this._cartService.addToCart(order).subscribe((item: Order) => {
-      this._router.navigate(['/cart', item.id]);
-      console.log('order confirm: ', order);
-    });
+    this._orderService.placeOrder(order, this.productId)
+      .subscribe((res: any) => {
+        console.log('order placed: ', order);
+        // this._router.navigate(['/orders', item.id]);
+      });
+    // this._cartService.addToCart(order).subscribe((item: Order) => {
+    //   this._router.navigate(['/cart', item.id]);
+    //   console.log('order confirm: ', order);
+    // });
   }
 }

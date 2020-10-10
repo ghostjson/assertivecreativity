@@ -70,7 +70,7 @@
           </th>
           <th>Image</th>
           <th pSortableColumn="price">
-            Price <p-sortIcon field="basePrice"></p-sortIcon>
+            Price <p-sortIcon field="base_price"></p-sortIcon>
           </th>
           <th pSortableColumn="category">
             Category <p-sortIcon field="category"></p-sortIcon>
@@ -96,7 +96,7 @@
               class="p-shadow-4"
             />
           </td>
-          <td>{{ product.basePrice | currency: "USD" }}</td>
+          <td>{{ product.base_price | currency: "USD" }}</td>
           <td>{{ product.category }}</td>
           <td>
             <span

@@ -88,7 +88,7 @@ export class AdminProductService {
    * @param editedProduct edited product object
    */
   editProduct(editedProduct: Product): Observable<Product> {
-    return this._http.patch<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
+    return this._http.post<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
       .pipe(take(1));
   }
 
@@ -127,7 +127,7 @@ export class AdminProductService {
           initial.label,
           [Validators.required]
         ],
-        pricePerPiece: [
+        price_per_piece: [
           initial.price_per_piece,
           [Validators.required]
         ],
@@ -301,10 +301,10 @@ export class AdminProductService {
     // add a form array for chained options if the option is not chained
     if (!isChained) {
       // add a form array for storing the chained options
-      newInput['chainedOptions'] = this._fb.array([]) as FormArray;
+      newInput['chained_options'] = this._fb.array([]) as FormArray;
       if (initialValue) {
-        initialValue.chainedOptions.forEach((chainedOption: any) => {
-          newInput['chainedOptions'].push(
+        initialValue.chained_options.forEach((chainedOption: any) => {
+          newInput['chained_options'].push(
             this.newOption(chainedOption.type, true, chainedOption)
           )
         });

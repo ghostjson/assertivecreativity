@@ -33,24 +33,25 @@
 }
 
 .status-card-title__text {
+  text-transform: capitalize;
   font-weight: 600;
   font-size: 1.15rem;
 }
 
+.status-card-content {
+  justify-content: center;
+}
+
 .status-card-content__value {
-  text-align: center;
   font-size: 2.5rem;
   font-weight: 900;
 }
 
-.status-card-footer {
-  justify-content: end;
-}
-
 .status-card-footer__more-btn {
-	background-color: white;
+  background-color: white;
+  color: black;
+  font-weight: 700;
 	border-radius: 6px;
 	text-transform: capitalize;
-  padding: 0.5em 0.6em;
   text-decoration: none;
 }

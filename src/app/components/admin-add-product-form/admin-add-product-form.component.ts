@@ -70,9 +70,6 @@ export class AdminAddProductFormComponent implements OnInit {
       .subscribe((categories: Category[]) => {
         this.categories = categories;
       });
-
-    // intialise tags list
-    this.getTags(this.productForm.value.category);
   }
 
   /**
@@ -160,11 +157,11 @@ export class AdminAddProductFormComponent implements OnInit {
    */
   getTags(categoryId: number): void {
     console.log(`event caught: ${categoryId}`);
-    // this._pcService.getTagsOf(categoryId)
-    //   .subscribe(tags => {
-    //     this.tags = tags;
-    //     console.log('tags found in admin form: ', this.tags);
-    //   });
+    this._pcService.getTagsOfCategory(categoryId)
+      .subscribe(tags => {
+        this.tags = tags;
+        console.log('tags found in admin form: ', this.tags);
+      });
   }
 
   /**

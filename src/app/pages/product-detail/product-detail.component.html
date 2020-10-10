@@ -110,7 +110,7 @@
             [selected]="true"
             header="{{product.custom_forms[formInd].title}}"
           >
-            <ng-container formArrayName="customForms">
+            <ng-container formArrayName="custom_forms">
               <div
                 *ngFor="let option of options(formInd).controls; let optionInd = index"
                 class="card p-mt-5"

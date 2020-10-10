@@ -19,6 +19,7 @@ export class AdminTagAdderComponent implements OnInit {
   selectedTags: Tag[];
   tagDialog: boolean;
   submitted: boolean;
+  parentCategory: Category;
 
   constructor(
     private _idService: IdGeneratorService,
@@ -28,15 +29,25 @@ export class AdminTagAdderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._prodCategorisationService.getTags()
-      .pipe(take(1))
-      .subscribe((tags: Tag[]) => {
-        this.tags = tags;
-      });
+    this.tags = [];
+
     this._prodCategorisationService.getCategories()
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        console.info('categories: ', this.categories);
+
+        categories.forEach((category: Category) => {
+          this._prodCategorisationService.getTagsOfCategory(category.id)
+            .pipe(take(1))
+            .subscribe((tags: Tag[]) => {
+              tags.forEach((tag: Tag) => {
+                this.tags.push(tag);
+              });
+            });
+          
+          this.tags = [...this.tags]
+        });
       });
   }
 
@@ -87,7 +98,7 @@ export class AdminTagAdderComponent implements OnInit {
    */
   deleteTag(tag: Tag) {
     this._confirmationService.confirm({
-      message: "Are you sure you want to delete " + tag.label + "?",
+      message: "Are you sure you want to delete " + tag.name + "?",
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
@@ -98,6 +109,7 @@ export class AdminTagAdderComponent implements OnInit {
           .pipe(take(1))
           .subscribe();
         this.tag = new Tag();
+        this.parentCategory = null;
         this._messageService.add({
           severity: "success",
           summary: "Successful",
@@ -121,8 +133,10 @@ export class AdminTagAdderComponent implements OnInit {
    */
   saveTag() {
     this.submitted = true;
+    this.tag.category_id = this.parentCategory.id;
+    console.info('tag to save: ', this.tag);
 
-    if (this.tag.label.trim()) {
+    if (this.tag.name.trim()) {
       if (this.tag.id) {
         this.tags[this.findIndexById(this.tag.id)] = this.tag;
         this._prodCategorisationService.editTag(this.tag)
@@ -136,7 +150,6 @@ export class AdminTagAdderComponent implements OnInit {
         });
       } 
       else {
-        this.tag.productCount = 0;
         this.tags.push(this.tag);
         this._prodCategorisationService.addTag(this.tag)
           .pipe(take(1))
@@ -173,9 +186,9 @@ export class AdminTagAdderComponent implements OnInit {
   /**
    * Convert tag label into a slug
    */
-  generateSlug(): void {
-    this.tag.value = this.tag.label.trim().toLowerCase().replace(/\s+/g, '-');
-  }
+  // generateSlug(): void {
+  //   this.tag.value = this.tag.label.trim().toLowerCase().replace(/\s+/g, '-');
+  // }
 
   /**
    * Return a short first part of a string 

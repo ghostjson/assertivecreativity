@@ -76,7 +76,7 @@ export class CartItemDetailComponent implements OnInit {
       // set cart id to undefined since its not needed anymore
       this.order.cartId = undefined;
 
-      this._orderService.placeOrder(this.order).subscribe((order: Order) => {
+      this._orderService.placeOrder(this.order, 9).subscribe((order: Order) => {
         console.log("order placed: ", order);
         this._mailService.createMailThread(order.id)
           .subscribe((thread: MailThread) => {

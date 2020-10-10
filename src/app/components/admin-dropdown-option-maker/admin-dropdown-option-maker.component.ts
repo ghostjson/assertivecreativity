@@ -37,8 +37,7 @@ export class AdminDropdownOptionMakerComponent implements OnInit {
    * @param inputId Index of the parent input
    */
   getChainedOptions(inputId: number): FormArray {
-    let chainedOptions = this.getInputs().at(inputId).get('chainedOptions') as FormArray;
-    // console.info('chained Options: ', chainedOptions);
+    let chainedOptions = this.getInputs().at(inputId).get('chained_options') as FormArray;
     return chainedOptions;
   }
 

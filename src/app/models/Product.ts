@@ -99,7 +99,7 @@ export class Product {
   stock: number;
   sales: number;
   image: string;
-  price_table_mode: boolean;
+  price_table_mode: boolean | string;
   price_table: PriceGroup[];
   features?: Feature[];
   custom_forms?: Form[];
@@ -208,7 +208,7 @@ export class Option {
 }
 
 export class OptionMeta {
-  is_chained: boolean;
+  isChained: boolean;
   chained_ops_hidden?: boolean;
 }
 

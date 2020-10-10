@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-group__label" for="basePrice">
+          <label class="form-group__label" for="base_price">
             Enter the price of the product:
           </label>
           <div class="select-price-mode">
@@ -60,7 +60,7 @@
             <p-inputSwitch formControlName="price_table_mode"></p-inputSwitch>
           </div>
           <app-admin-price-table-input
-            *ngIf="productForm.value.price_table_mode; else normalPrice"
+            *ngIf="productForm.value.price_table_mode != '0'; else normalPrice"
             [formGroup]="productForm"
           ></app-admin-price-table-input>
           <ng-template
@@ -116,7 +116,7 @@
             ></app-admin-category-selector>
           </div>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
           <label class="form-group__label" for="tags">
             Select product tags
           </label>
@@ -127,7 +127,7 @@
               [tags]="tags"
             ></app-admin-tag-selector>
           </div>
-        </div> -->
+        </div>
         <div class="form-group">
           <label class="form-group__label" for="image">
             Upload product images

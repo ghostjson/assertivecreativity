@@ -4,4 +4,5 @@ export class Category {
   description?: string;
   created_at?: string;
   updated_at?: string;
+  vallu?: string | number;
 }

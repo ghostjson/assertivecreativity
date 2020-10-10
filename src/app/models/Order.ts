@@ -27,7 +27,7 @@ export class CustomOption {
   price: number;
   input: any;
   meta: OptionMeta;
-  chainedOptions?: CustomOption[]
+  chained_options?: CustomOption[]
 }
 
 export class OptionMeta {
@@ -42,7 +42,7 @@ export class CustomOptionForm extends FormGroup {
   price: FormControl;
   input: FormControl;
   meta: FormGroup;
-  chainedOptions?: FormArray
+  chained_options?: FormArray
 }
 
 export type OrderSummaryTable = TreeNode[];
