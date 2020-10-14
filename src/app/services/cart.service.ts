@@ -3,57 +3,44 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/Order';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Cart } from '../models/Cart';
+import { Cart, CartItem } from '../models/Cart';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  API_URL: string;
-  CART_ID: number;
   cart: Cart;
 
   constructor(
     private _http: HttpClient
   ) {
-    // this.API_URL = 'http://localhost:3000';
-    this.API_URL = 'http://3.129.34.125/mock-api';
-    this.CART_ID = 0;
-
     // intialise the cart 
-    // this.refreshCart();
+    this.refreshCart();
   }
 
   /**
    * Return cart API link
-   * @param id id of the cart object
    */
-  getCartLinkById(id: number): string {
-    return `${this.API_URL}/carts/${id}`;
-  }
-
-  /**
-   * Return the ID of the user's cart
-   */
-  getCartId(): number {
-    return this.CART_ID;
+  private cartLink(): string {
+    return `${environment.apiUrl}/orders/wishlist`;
   }
 
   /**
    * Return all the items in the cart
    */
-  getCart(): Observable<any> {
-    return this._http.get(`${this.getCartLinkById(this.CART_ID)}/items`)
+  getCart(): Observable<Cart> {
+    return this._http.get<Cart>(this.cartLink())
       .pipe(take(1));
   }
 
   /**
    * Return the cart item 
-   * @param id id of the cart item
    */
-  getCartItem(id: number): Observable<any> {
-    return this._http.get(`${this.getCartLinkById(this.CART_ID)}/items/${id}`)
-      .pipe(take(1));
+  getCartItem(id: number): CartItem {
+    return this.cart.data.find((cartItem: CartItem) => {
+      return cartItem.id === id;
+    })
   }
 
   /**
@@ -67,16 +54,19 @@ export class CartService {
       });
   }
 
+  /**
+   * Return size of the cart
+   */
   getCartSize(): number {
-    return this.cart.items.length;
+    return this.cart.data.length;
   }
 
   /**
    * Add an item to the user's cart
    * @param item item to add to cart
    */
-  addToCart(item: Order): Observable<any> {
-    return this._http.post(`${this.getCartLinkById(this.CART_ID)}/items`, item)
+  addToCart(item: CartItem): Observable<CartItem> {
+    return this._http.post<CartItem>(`${this.cartLink()}`, item)
       .pipe(take(1));
   }
 
@@ -85,7 +75,7 @@ export class CartService {
    * @param id id of the cart item
    */
   deleteFromCart(id: number): Observable<any> {
-    return this._http.delete(`${this.getCartLinkById(this.CART_ID)}/items/${id}`)
+    return this._http.delete(`${this.cartLink()}`)
       .pipe(take(1));
   }
 }

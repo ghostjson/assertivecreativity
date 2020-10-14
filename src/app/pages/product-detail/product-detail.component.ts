@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Order } from 'src/app/models/Order';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { CartItem } from 'src/app/models/Cart';
 
 @Component({
   selector: "app-product-detail",
@@ -19,8 +21,6 @@ import { Order } from 'src/app/models/Order';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   public image_set: any[];
-
-  private slideDOM;
 
   product: Product;
   possibleFeatures: Object;
@@ -41,7 +41,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private _orderService: OrderService,
     private _cartService: CartService,
     private _router: Router,
-    private _idService: IdGeneratorService
   ) {
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
   }
@@ -155,18 +154,18 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    */
   onSubmit(): void {
     // this.updateTotalPrice();
-    let order: Order = this.orderForm.value;
-    order.cartId = this._cartService.getCartId();
+
+    let cartItem: CartItem = {
+      product_id: this.productId,
+      quantity: 1,
+      custom_forms: JSON.stringify(this.orderForm.value)
+    };
+
     // order = this.cleanForm(order);
-    order.totalPrice = this.priceTotal;
-    this._orderService.placeOrder(order, this.productId)
-      .subscribe((res: any) => {
-        console.log('order placed: ', order);
-        // this._router.navigate(['/orders', item.id]);
-      });
-    // this._cartService.addToCart(order).subscribe((item: Order) => {
-    //   this._router.navigate(['/cart', item.id]);
-    //   console.log('order confirm: ', order);
-    // });
+    cartItem.total_price = this.priceTotal;
+    this._cartService.addToCart(cartItem).subscribe((item: CartItem) => {
+      this._router.navigate(['/cart']);
+      console.log('added to cart: ', item);
+    });
   }
 }

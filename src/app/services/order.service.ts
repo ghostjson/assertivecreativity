@@ -6,6 +6,7 @@ import { Order } from '../models/Order';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,31 +37,33 @@ export class OrderService {
    * Return the order by id
    * @param id id of the order
    */
-  getOrder(id: number): Observable<any> {
-    return this._http.get(this.orderLinkById(id));
+  getOrder(id: number): Observable<Order> {
+    return this._http.get<Order>(this.orderLinkById(id));
   }
 
   /**
    * Return all orders
    */
-  getOrders(): Observable<any> {
-    return this._http.get(this.ordersLink());
+  getOrders(): Observable<Order[]> {
+    return this._http.get<Order[]>(this.ordersLink())
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data;
+        })
+      );
   }
 
   /**
    * Places the order on the server
    * @param order order object to place
    */
-  placeOrder(order: Order, productId: number): Observable<any> {
-    let req = {
-      product_id: productId,
-      order: order
-    }
-    return this._http.post(this.ordersLink(), req);
+  placeOrder(order: Order): Observable<Order> {
+    return this._http.post<Order>(this.ordersLink(), order);
   }
 
   addMailThread(threadId: number, order: Order): Observable<Order> {
-    order.mailThread = threadId;
+    order.order.mail_thread = threadId;
   
     return this._http.put<Order>(this.orderLinkById(order.id), order);
   }

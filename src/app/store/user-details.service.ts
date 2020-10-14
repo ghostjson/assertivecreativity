@@ -33,6 +33,10 @@ export class UserDetailsService {
       );
   }
 
+  getUserLocal(): User {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   editUser(user: User): Observable<User> {
     return this._http.put<User>(this.getUserLink(), user)
       .pipe(take(1));
@@ -42,8 +46,8 @@ export class UserDetailsService {
     this._auth.getUser()
       .pipe(take(1))
       .subscribe((user: User) => {
-        console.log('User role rceived: ', user.role);
-        return user.role;
+        console.log('User role rceived: ', user.role_id);
+        return user.role_id;
       });
   }
 }

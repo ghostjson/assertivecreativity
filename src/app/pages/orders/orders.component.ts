@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
-import { Table } from 'primeng/table';
 import { Order } from 'src/app/models/Order';
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-orders',
@@ -11,15 +12,28 @@ import { Order } from 'src/app/models/Order';
 
 export class OrdersComponent implements OnInit {
   orders: Order[];
+  productDetails: Object;
 
   constructor(
-    private _orderService: OrderService
+    private _orderService: OrderService,
+    private _productService: ProductService
   ) { }
 
   ngOnInit(): void {
+    this.orders = [];
+
     this._orderService.getOrders()
       .subscribe((orders: Order[]) => {
-        this.orders = orders;
+        orders.forEach((order: Order) => {
+          order.product_details = null;
+
+          this._productService.getProduct(order.product_id)
+            .subscribe((product: Product) => {
+              order.product_details = product;
+              this.orders.push(order);
+            });
+        });
+        console.info('Orders: ', orders);
       });
   }
 }

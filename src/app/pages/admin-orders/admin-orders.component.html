@@ -9,20 +9,15 @@
         <p-tabView *ngIf="orders">
           <p-tabPanel header="Pending" [selected]="true">
             <app-orders-list
-              [orders]="orders.pending"
+              [orders]="orders.open"
             ></app-orders-list>
           </p-tabPanel>
           <p-tabPanel header="Accepted">
             <app-orders-list
-              [orders]="orders.accepted"
+              [orders]="orders.closed"
             ></app-orders-list>
           </p-tabPanel>
           <p-tabPanel header="Completed">
-            <app-orders-list
-              [orders]="orders.completed"
-            ></app-orders-list>
-          </p-tabPanel>
-          <p-tabPanel header="Declined/Cancelled">
             <app-orders-list
               [orders]="orders.cancelled"
             ></app-orders-list>

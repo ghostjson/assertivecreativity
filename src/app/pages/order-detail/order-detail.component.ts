@@ -30,10 +30,10 @@ export class OrderDetailComponent implements OnInit {
       this.order = order;
       console.log("order fetched: ", this.order);
 
-      if (order.mailThread != undefined || order.mailThread != null) {
+      if (order.order.mail_thread != undefined || order.order.mail_thread != null) {
         // get messages related to the order
         this._mailService
-          .getMails(order.mailThread)
+          .getMails(order.order.mail_thread)
           .subscribe((mails: Mail[]) => {
             this.mails = mails;
             console.info("mails: ", this.mails);
