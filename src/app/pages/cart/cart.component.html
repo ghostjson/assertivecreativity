@@ -24,13 +24,13 @@
                   </th>
                 </tr>
               </thead>
-              <tbody *ngIf="cart.length > 0; else cartEmpty">
-                <tr *ngFor="let item of cart; index as itemIndex">
+              <tbody *ngIf="cart.data.length > 0; else cartEmpty">
+                <tr *ngFor="let item of cart.data; index as itemIndex">
                   <th scope="row" class="border-0">
                     <div class="p-2">
                       <img
-                        src="{{ item.image }}"
-                        alt="{{ item.name }}"
+                        src="{{ item.product_details.image }}"
+                        alt="{{ item.product_details.name }}"
                         width="70"
                         class="img-fluid rounded shadow-sm"
                       />
@@ -40,13 +40,13 @@
                             routerLink="/cart/{{item.id}}"
                             class="text-dark d-inline-block align-middle"
                           >
-                            {{item.name}}
+                            {{item.product_details.name}}
                           </a>
                         </h5>
                         <span
                           class="text-muted font-weight-normal font-italic d-block"
                         >
-                          {{item.category}}
+                          {{item.product_details.category}}
                         </span>
                       </div>
                     </div>
@@ -71,44 +71,6 @@
             </table>
           </div>
           <!-- End -->
-        </div>
-      </div>
-
-      <div class="row py-5 p-4 bg-white rounded shadow-sm">
-        <div class="col-lg-6"></div>
-
-        <div class="col-lg-6">
-          <div
-            class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"
-          >
-            Order summary
-          </div>
-          <div class="p-4">
-            <p class="font-italic mb-4">
-              Shipping and additional costs are calculated based on values you
-              have entered.
-            </p>
-            <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom">
-                <strong class="text-muted">Order Subtotal </strong
-                ><strong>$390.00</strong>
-              </li>
-              <li class="d-flex justify-content-between py-3 border-bottom">
-                <strong class="text-muted">Shipping and handling</strong
-                ><strong>$10.00</strong>
-              </li>
-              <li class="d-flex justify-content-between py-3 border-bottom">
-                <strong class="text-muted">Tax</strong><strong>$0.00</strong>
-              </li>
-              <li class="d-flex justify-content-between py-3 border-bottom">
-                <strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">$400.00</h5>
-              </li>
-            </ul>
-            <a href="#" class="btn btn-dark rounded-pill py-2 btn-block"
-              >Procceed to checkout</a
-            >
-          </div>
         </div>
       </div>
     </div>

@@ -31,20 +31,20 @@
     <tr>
       <th></th>
       <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
-      <th pSortableColumn="name">
-        Product <p-sortIcon field="name"></p-sortIcon>
+      <th pSortableColumn="product_details.name">
+        Product <p-sortIcon field="product_details.name"></p-sortIcon>
       </th>
-      <th pSortableColumn="orderDate">
-        Order Date <p-sortIcon field="orderDate"></p-sortIcon>
+      <th pSortableColumn="created_at">
+        Order Date <p-sortIcon field="created_at"></p-sortIcon>
       </th>
-      <th pSortableColumn="deliveryDate">
-        Delivery Date <p-sortIcon field="deliveryDate"></p-sortIcon>
+      <th pSortableColumn="delivery_date">
+        Delivery Date <p-sortIcon field="delivery_date"></p-sortIcon>
       </th>
-      <th pSortableColumn="status">
-        Status <p-sortIcon field="status"></p-sortIcon>
+      <th pSortableColumn="order_status">
+        Status <p-sortIcon field="order_status"></p-sortIcon>
       </th>
-      <th pSortableColumn="totalPrice">
-        Price <p-sortIcon field="totalPrice"></p-sortIcon>
+      <th pSortableColumn="total_price">
+        Price <p-sortIcon field="total_price"></p-sortIcon>
       </th>
       <th></th>
     </tr>
@@ -62,7 +62,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-order>
-    <tr class="ui-selectable-row">
+    <tr *ngIf="order.product_details" class="ui-selectable-row">
       <td>
         <p-tableCheckbox [value]="order"></p-tableCheckbox>
       </td>
@@ -73,8 +73,8 @@
       <td>
         <span class="ui-column-title sr-only">Product </span>
         <img
-          [alt]="order.name"
-          src="{{ order.image }}"
+          alt="{{ order.product_details.name }}"
+          src="{{ order.product_details.image }}"
           width="32"
           style="vertical-align: middle; display: inline-block;"
         />
@@ -82,26 +82,26 @@
           style="vertical-align: middle; margin-left: 0.5em"
           routerLink="{{ order.id }}"
         >
-          {{ order.name }}
+          {{ order.product_details.name }}
         </a>
       </td>
       <td>
         <span class="ui-column-title sr-only">Order Date</span>
-        {{ order.orderDate }}
+        {{ order.created_at | date }}
       </td>
       <td>
         <span class="ui-column-title sr-only">Delivery Date</span>
-        {{ order.deliveryDate }}
+        {{ order.delivery_date | date }}
       </td>
       <td>
         <span class="ui-column-title sr-only">Status</span>
-        <span [class]="'customer-badge status-' + order.status">
-          {{ order.status }}
+        <span [class]="'customer-badge status-' + order.order_status">
+          {{ order.order_status }}
         </span>
       </td>
       <td>
         <span class="ui-column-title sr-only">Price </span>
-        {{ order.totalPrice | currency: "USD" }}
+        {{ order.total_price | currency: "USD" }}
       </td>
       <td></td>
     </tr>

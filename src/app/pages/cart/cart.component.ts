@@ -1,31 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
-import { Order } from 'src/app/models/Order';
+import { Component, OnInit } from "@angular/core";
+import { CartService } from "src/app/services/cart.service";
+import { Cart, CartItem } from "src/app/models/Cart";
+import { ProductService } from "src/app/services/product.service";
+import { Product } from "src/app/models/Product";
+import { CustomFormInput } from 'src/app/models/Order';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  selector: "app-cart",
+  templateUrl: "./cart.component.html",
+  styleUrls: ["./cart.component.scss"],
 })
 export class CartComponent implements OnInit {
-  cart: Order[];
+  cart: Cart;
 
   constructor(
-    private _cartService: CartService
-  ) { }
+    private _cartService: CartService,
+    private _productService: ProductService
+  ) {}
 
   ngOnInit(): void {
-    this._cartService.getCart().subscribe((cart: Order[]) => {
+    this.cart = {
+      data: [],
+    };
+
+    this._cartService.getCart().subscribe((cart: Cart) => {
       this.cart = cart;
+
+      // fill in details of the products inside the cart
+      this.cart.data.forEach((cartItem: CartItem) => {
+        this._productService
+          .getProduct(cartItem.id)
+          .subscribe((product: Product) => {
+            cartItem.product_details = product;
+          });
+      });
     });
   }
 
+  /**
+   * Delete an item from the cart
+   * @param index index of the cart item
+   */
   deleteItem(index: number): void {
-    this._cartService.deleteFromCart(this.cart[index].id)
+    this._cartService
+      .deleteFromCart(this.cart.data[index].id)
       .subscribe((res: any) => {
-        console.log('item deleted', )
+        this.cart.data.splice(index, 1);
+        console.log("item deleted");
       });
-    
-    this.cart.splice(index, 1);
   }
 }

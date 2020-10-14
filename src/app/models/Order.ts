@@ -1,21 +1,33 @@
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
+import { Product } from './Product';
 
 export class Order {
   id?: number;
-  cartId?: number;
-  name: string;
-  description: string;
-  totalPrice: number;
-  orderDate: string;
-  deliveryDate: string;
-  image: string;
-  status: string;
-  mailThread?: number;
-  customForms: CustomFormInput[]
+  product_id: number;
+  buyer_id: number;
+  seller_id: number;
+  created_at?: string;
+  updated_at?: string;
+  delivery_date?: string;
+  order_status: string;
+  payment_id?: number;
+  order: OrderData;
+  product_details?: Product;
+}
+
+export class OrderData {
+  quantity: number;
+  total_price: number;
+  mail_thread?: number;
+  /**
+   * TODO: fix after api is fixed with the array to string error
+   */
+  custom_forms: CustomFormInput[] | string;
 }
 
 export class CustomFormInput {
+  id?: number;
   title: string;
   options: CustomOption[]
 }
@@ -27,7 +39,7 @@ export class CustomOption {
   price: number;
   input: any;
   meta: OptionMeta;
-  chainedOptions?: CustomOption[]
+  chained_options?: CustomOption[]
 }
 
 export class OptionMeta {
@@ -42,7 +54,7 @@ export class CustomOptionForm extends FormGroup {
   price: FormControl;
   input: FormControl;
   meta: FormGroup;
-  chainedOptions?: FormArray
+  chained_options?: FormArray
 }
 
 export type OrderSummaryTable = TreeNode[];

@@ -24,13 +24,13 @@ export class ProductOptionsComponent implements OnInit {
   ngOnInit(): void {
     console.info('option received: ', this.option);
     
-    if (!this.option.meta.is_chained) {
+    if (!this.option.meta.isChained) {
       this.constructChained();
     }
   }
 
   chainedOptions(): FormArray {
-    return this.formGroup.get('chainedOptions') as FormArray;
+    return this.formGroup.get('chained_options') as FormArray;
   }
 
   constructChained(): void {

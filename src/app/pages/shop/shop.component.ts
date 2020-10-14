@@ -17,7 +17,7 @@ export class ShopComponent implements OnInit {
   categories: Category[] = [];
   selectedCategories: Category[] = [];
   tags: Tag[] = [];
-  selectedTags: string[] = [];
+  selectedTags: number[] = [];
 
   constructor(
     private common: CommonService,
@@ -54,7 +54,7 @@ export class ShopComponent implements OnInit {
     });
 
     // add the selected tags
-    this.selectedTags.forEach((selectedTag: string) => {
+    this.selectedTags.forEach((selectedTag: number) => {
       filter.tags.push(selectedTag);
     });
 
@@ -85,17 +85,17 @@ export class ShopComponent implements OnInit {
       this.selectedCategories.forEach((category: Category) => {
         if (category) {
           // get the tags of the selected categories and populate tags list
-          this._pcService.getTagsOf(category.id).subscribe((tags) => {
+          this._pcService.getTagsOfCategory(category.id).subscribe((tags) => {
             // insert each of the fetched tags into the tags list of the component
             tags.forEach((tag: Tag) => {
               this.tags.push(tag);
             });
 
             // filter selected tags
-            let newSelectedTags: string[] = [];
+            let newSelectedTags: number[] = [];
             this.tags.forEach((tag: Tag) => {
-              if (this.selectedTags.includes(tag.value)) {
-                newSelectedTags.push(tag.value);
+              if (this.selectedTags.includes(tag.id)) {
+                newSelectedTags.push(tag.id);
               }
             });
             this.selectedTags = newSelectedTags;

@@ -5,68 +5,67 @@ import { ProductService } from './product.service';
 import { Order } from '../models/Order';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private orders: Order[];
-
-  private API_URL: string;
-
   constructor(
     private _fb: FormBuilder,
     private _productService: ProductService,
     private _http: HttpClient
-  ) {
-    this.orders = [];
-
-    // this.API_URL = 'http://localhost:3000';
-    this.API_URL = 'http://3.129.34.125/mock-api';
-  }
+  ) {}
 
   /**
    * Return orders API link
    */
-  private getOrdersLink(): string {
-    return `${this.API_URL}/orders`;
+  private ordersLink(): string {
+    return `${environment.apiUrl}/orders`;
   }
 
   /**
    * Return order API link
    * @param id id of the order
    */
-  private getOrderLinkById(id: number): string {
-    return `${this.getOrdersLink()}/${id}`;
+  private orderLinkById(id: number): string {
+    return `${this.ordersLink()}/${id}`;
   }
 
   /**
    * Return the order by id
    * @param id id of the order
    */
-  getOrder(id: number): Observable<any> {
-    return this._http.get(this.getOrderLinkById(id));
+  getOrder(id: number): Observable<Order> {
+    return this._http.get<Order>(this.orderLinkById(id));
   }
 
   /**
    * Return all orders
    */
-  getOrders(): Observable<any> {
-    return this._http.get(this.getOrdersLink());
+  getOrders(): Observable<Order[]> {
+    return this._http.get<Order[]>(this.ordersLink())
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data;
+        })
+      );
   }
 
   /**
    * Places the order on the server
    * @param order order object to place
    */
-  placeOrder(order: Order): Observable<any> {
-    return this._http.post(this.getOrdersLink(), order);
+  placeOrder(order: Order): Observable<Order> {
+    return this._http.post<Order>(this.ordersLink(), order);
   }
 
   addMailThread(threadId: number, order: Order): Observable<Order> {
-    order.mailThread = threadId;
+    order.order.mail_thread = threadId;
   
-    return this._http.put<Order>(this.getOrderLinkById(order.id), order);
+    return this._http.put<Order>(this.orderLinkById(order.id), order);
   }
 
   /**
@@ -77,15 +76,15 @@ export class OrderService {
     let orderFormTemplate = {
       name: product.name,
       description: product.description,
-      basePrice: product.base_price,
+      base_price: product.base_price,
       image: product.image,
-      customForms: this._fb.array([])
+      custom_forms: this._fb.array([])
     };
 
     product.custom_forms.forEach((customForm) => {
       this._productService.addForm(
         customForm, 
-        orderFormTemplate.customForms
+        orderFormTemplate.custom_forms
       );
     });
 

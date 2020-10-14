@@ -12,6 +12,10 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { CommonService } from 'src/app/common.service';
 import { MailService } from 'src/app/services/mail.service';
 import { MailThread } from 'src/app/models/Mail';
+import { CartItem } from 'src/app/models/Cart';
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/Product';
+import { UserDetailsService } from 'src/app/store/user-details.service';
 
 @Component({
   selector: "app-cart-item-detail",
@@ -19,6 +23,8 @@ import { MailThread } from 'src/app/models/Mail';
   styleUrls: ["./cart-item-detail.component.scss"],
 })
 export class CartItemDetailComponent implements OnInit {
+  cartItemId: number;
+  cartItem: CartItem;
   order: Order;
 
   orderDeliveryDate: Date;
@@ -29,15 +35,20 @@ export class CartItemDetailComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _commonService: CommonService,
-    private _mailService: MailService
+    private _mailService: MailService,
+    private _productService: ProductService,
+    private _userDetailsService: UserDetailsService
   ) {}
 
   ngOnInit(): void {
-    this._cartService
-      .getCartItem(Number(this._activatedRoute.snapshot.paramMap.get("id")))
-      .subscribe((item: Order) => {
-        this.order = item;
-        console.info("Order object: ", this.order);
+    this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    
+    // get the product detail of the cart item 
+    this._productService.getProduct(this.cartItemId)
+      .subscribe((product: Product) => {
+        this.cartItem = this._cartService.getCartItem(this.cartItemId);
+        this.cartItem.custom_forms = JSON.parse(String(this.cartItem.custom_forms_entry));
+        this.cartItem.product_details = product;
       });
   }
 
@@ -65,28 +76,33 @@ export class CartItemDetailComponent implements OnInit {
    */
   confirmOrder(): void {
     this._commonService.setLoader(true);
-    this.order.orderDate = this.formatDate(new Date());
-    this.order.status = "pending";
-    this.order.deliveryDate = this.formatDate(this.orderDeliveryDate);
+    this.order = {
+      product_id: this.cartItem.product_details.id,
+      seller_id: this.cartItem.product_details.seller_id,
+      buyer_id: this._userDetailsService.getUserLocal().id,
+      order_status: 'open',
+      delivery_date: this.orderDeliveryDate.toISOString(),
+      order: {
+        custom_forms: this.cartItem.custom_forms,
+        total_price: this.cartItem.total_price, 
+        quantity: 1
+      }
+    };
 
     // remove order from cart and add it to orders
-    this._cartService.deleteFromCart(this.order.id).subscribe((order: any) => {
-      // set the id to undefined since it gets set at the server
-      this.order.id = undefined;
-      // set cart id to undefined since its not needed anymore
-      this.order.cartId = undefined;
-
+    this._cartService.deleteFromCart(this.cartItemId).subscribe((res: any) => {
       this._orderService.placeOrder(this.order).subscribe((order: Order) => {
         console.log("order placed: ", order);
-        this._mailService.createMailThread(order.id)
-          .subscribe((thread: MailThread) => {
-            console.log('mail thread created: ', thread);
-            this._orderService.addMailThread(thread.id, order)
-              .subscribe((editedOrder: Order) => {
-                console.log('mail thread added to order: ', editedOrder);
-                this._router.navigate(["/orders/", order.id]);
-              });
-          });
+        this._router.navigate(["/orders/"]);
+        // this._mailService.createMailThread(order.id)
+        //   .subscribe((thread: MailThread) => {
+        //     console.log('mail thread created: ', thread);
+        //     this._orderService.addMailThread(thread.id, order)
+        //       .subscribe((editedOrder: Order) => {
+        //         console.log('mail thread added to order: ', editedOrder);
+        //         this._router.navigate(["/orders/", order.id]);
+        //       });
+        //   });
       });
     });
   }

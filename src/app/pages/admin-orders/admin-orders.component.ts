@@ -10,15 +10,10 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class AdminOrdersComponent implements OnInit {
   orders: {
-    pending: Order[],
-    accepted: Order[],
-    completed: Order[],
+    open: Order[],
+    closed: Order[],
     cancelled: Order[]
   };
-  // pendingOrders: Order[];
-  // acceptedOrders: Order[];
-  // completedOrders: Order[];
-  // cancelledOrders: Order[];
 
 
   constructor(
@@ -31,14 +26,13 @@ export class AdminOrdersComponent implements OnInit {
       .subscribe((orders: Order[]) => {
         console.log('orders received: ', orders);
         this.orders = {
-          pending: [],
-          accepted: [],
-          completed: [],
+          open: [],
+          closed: [],
           cancelled: []
         };
         
         orders.forEach((order: Order) => {
-          this.orders[order.status].push(order);
+          this.orders[order.order_status].push(order);
         });
       });
   }

@@ -10,9 +10,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductCategorisationService {
-  API_URL: string;
-  // API_URL: string = 'http://3.129.34.125/mock-api';
-
   constructor(
     private _http: HttpClient
   ) {}
@@ -29,15 +26,24 @@ export class ProductCategorisationService {
    * @param id id of the tag
    */
   categoryUrlById(id: number) {
-    return `${this.categoriesUrl()}/${id}`
+    return `${this.categoriesUrl()}/${id}`;
+  }
+
+  /**
+   * 
+   * @param id id of the 
+   */
+  tagsOfCategoryUrl(id: number): string {
+    return `${this.categoriesUrl()}/tags/${id}`
   }
 
   /**
    * Return the tags url
    */
   tagsUrl(): string {
-    return `${environment.apiUrl}/tags`;
+    return `${environment.apiUrl}/products/tag`;
   }
+
 
   /**
    * Return url of the tag using id
@@ -51,7 +57,7 @@ export class ProductCategorisationService {
    * Return all the categories as a list
    */
   getCategories(): Observable<Category[]> {
-    return this._http.get<Category[]>(`${this.categoriesUrl()}/get`)
+    return this._http.get<Category[]>(`${this.categoriesUrl()}`)
       .pipe(
         take(1),
         map((categories: any) => {
@@ -69,8 +75,8 @@ export class ProductCategorisationService {
    * Add a category to the list
    * @param category Category Object
    */
-  addCategory(category: Category): Observable<any> {
-    return this._http.post(`${this.categoriesUrl()}/create`, category)
+  addCategory(category: Category): Observable<Category> {
+    return this._http.post<Category>(`${this.categoriesUrl()}`, category)
       .pipe(take(1));
   }
 
@@ -95,18 +101,28 @@ export class ProductCategorisationService {
   /**
    * Get tags from  
    */
-  getTags(): Observable<any> {
-    return this._http.get(`${this.tagsUrl()}`)
-      .pipe(take(1));
+  getTags(): Observable<Tag[]> {
+    return this._http.get<Tag[]>(`${this.tagsUrl()}`)
+      .pipe(
+        take(1),
+        map((tags: any) => {
+          return tags.data;
+        })
+      );
   }
 
   /** 
    * Get tags of a category 
   */
-  getTagsOf(category: number): Observable<any> {
+  getTagsOfCategory(categoryId: number): Observable<Tag[]> {
     return this._http
-      .get(`${this.tagsUrl()}/?parentCategory.id=${category}`)
-        .pipe(take(1));
+      .get<Tag[]>(this.tagsOfCategoryUrl(categoryId))
+        .pipe(
+          take(1),
+          map((tags: any) => {
+            return tags.data;
+          })
+        );
   }
 
   /**

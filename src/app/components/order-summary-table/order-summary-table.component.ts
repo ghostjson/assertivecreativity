@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { OrderSummaryTable, CustomOption, CustomFormInput, Order } from '../../models/Order';
+import { OrderSummaryTable, CustomOption, CustomFormInput, Order, OrderData } from '../../models/Order';
 
 @Component({
   selector: 'app-order-summary-table',
@@ -8,7 +8,7 @@ import { OrderSummaryTable, CustomOption, CustomFormInput, Order } from '../../m
   styleUrls: ['./order-summary-table.component.scss']
 })
 export class OrderSummaryTableComponent implements OnInit {
-  @Input() order: Order;
+  @Input() order: OrderData;
 
   orderSummary: TreeNode[];
   formSummary: OrderSummaryTable[];
@@ -41,12 +41,17 @@ export class OrderSummaryTableComponent implements OnInit {
   populateOrderTable(): void {
     this.orderSummary = [];
 
-    this.order.customForms.forEach((form: CustomFormInput) => {
+    /**
+     * TODO: change after array to string conversion error in cart api is fixed
+     */
+    let forms: CustomFormInput[] = this.order.custom_forms as CustomFormInput[];
+
+    forms.forEach((form: CustomFormInput) => {
       form.options.forEach((option) => {
         this.orderSummary.push(this.populateOption(option));
 
         // populate chained options
-        option.chainedOptions.forEach((chainedOption) => {
+        option.chained_options.forEach((chainedOption) => {
           this.orderSummary.push(this.populateOption(chainedOption));
         });
       });

@@ -83,9 +83,8 @@
             <td>
               <p-tableCheckbox [value]="tag"></p-tableCheckbox>
             </td>
-            <td>{{ tag.label }}</td>
-            <td>{{ summary(tag.description) }}...</td>
-            <td>{{ tag.productCount }}</td>
+            <td>{{ tag.name }}</td>
+            <td>...</td>
             <td>
               <button
                 pButton
@@ -127,49 +126,35 @@
               type="text"
               pInputText
               id="label"
-              [(ngModel)]="tag.label"
+              [(ngModel)]="tag.name"
               required
               autofocus
-              (input)="generateSlug()"
               name="label"
             />
-            <small class="p-invalid" *ngIf="submitted && !tag.label">
+            <small class="p-invalid" *ngIf="submitted && !tag.name">
               Tag Name is required.
             </small>
-          </div>
-          <div class="p-field">
-            <label for="value">Tag Slug</label>
-            <input
-              type="text"
-              pInputText
-              id="value"
-              [(ngModel)]="tag.value"
-              disabled="true"
-              required
-              readonly
-              name="value"
-            />
           </div>
           <div class="p-field">
             <label for="value">Tag Category</label>
             <p-dropdown
               [options]="categories"
-              [(ngModel)]="tag.parentCategory"
+              [(ngModel)]="parentCategory"
               [filter]="true"
-              optionLabel="label"
               [showClear]="true"
+              optionLabel="name"
               placeholder="Select a Category"
               required="true"
-              name="parentCategory"
+              name="category_id"
             >
               <ng-template pTemplate="selectedItem">
-                <div *ngIf="tag.parentCategory">
-                  <div>{{ tag.parentCategory.name }}</div>
+                <div *ngIf="parentCategory">
+                  <div>{{ parentCategory.name }}</div>
                 </div>
               </ng-template>
               <ng-template let-category pTemplate="item">
                 <div>
-                  <div>{{ category.name }}</div>
+                  {{ category.value.name }}
                 </div>
               </ng-template>
             </p-dropdown>

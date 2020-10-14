@@ -8,6 +8,8 @@ import { ChartConfiguration } from '../../models/ChartConfiguration';
 })
 export class AdminChartCardComponent implements OnInit {
   @Input() chart: ChartConfiguration;
+  @Input() chartIcon: string;
+  @Input() styleClass: string;
 
   constructor() { }
 

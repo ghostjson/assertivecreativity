@@ -1,17 +1,17 @@
 <div>
   <app-header></app-header>
   <div class="container">
-    <div *ngIf="order" class="row justify-content-center">
+    <div *ngIf="cartItem" class="row justify-content-center">
       <h1 class="order-summary__title">Order Summary</h1>
       <div class="col-12 d-flex justify-content-center">
         <div
           class="row justify-content-around align-items-stretch mt-5 mb-5">
           <div class="col-12 col-sm-5 p-0 d-flex flex-column justify-content-center">
             <app-product-summary-card
-              [name]="order.name"
-              [image]="order.image"
-              [description]="order.description"
-              [totalPrice]="order.totalPrice"
+              [name]="cartItem.product_details.name"
+              [image]="cartItem.product_details.image"
+              [description]="cartItem.product_details.description"
+              [totalPrice]="cartItem.total_price"
             ></app-product-summary-card>
           </div>
           <div class="col-12 col-sm-6">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <app-order-summary-table
-        [order]="order"
+        [order]="cartItem.custom_forms"
       ></app-order-summary-table>
       <div class="text-right mt-4 mb-5">
         <button

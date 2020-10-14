@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Order } from 'src/app/models/Order';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { CartItem } from 'src/app/models/Cart';
 
 @Component({
   selector: "app-product-detail",
@@ -19,8 +21,6 @@ import { Order } from 'src/app/models/Order';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   public image_set: any[];
-
-  private slideDOM;
 
   product: Product;
   possibleFeatures: Object;
@@ -32,6 +32,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   currentUrl: string;
 
+  productId: number;
+
   constructor(
     public _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
@@ -39,8 +41,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private _orderService: OrderService,
     private _cartService: CartService,
     private _router: Router,
-    private _idService: IdGeneratorService
   ) {
+    this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -67,14 +69,17 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.product = null;
     
     // get product details from the product service
-    let id: number = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     
     this._common.setLoader(true);
     
-    this._productService.getProduct(id)
+    this._productService.getProduct(this.productId)
       .pipe(take(1))
       .subscribe(product => {
         this.product = product;
+        /**
+         * Fix for bug
+         */
+        this.product.price_table = JSON.parse(String(this.product.price_table));
         console.info('Product Received: ', this.product);
         
         this.image_set = [
@@ -108,7 +113,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   customForms(): FormArray {
-    return this.orderForm.get('customForms') as FormArray;
+    return this.orderForm.get('custom_forms') as FormArray;
   }
 
   options(index: number): FormArray {
@@ -149,13 +154,18 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    */
   onSubmit(): void {
     // this.updateTotalPrice();
-    let order: Order = this.orderForm.value;
-    order.cartId = this._cartService.getCartId();
+
+    let cartItem: CartItem = {
+      product_id: this.productId,
+      quantity: 1,
+      custom_forms: JSON.stringify(this.orderForm.value)
+    };
+
     // order = this.cleanForm(order);
-    order.totalPrice = this.priceTotal;
-    this._cartService.addToCart(order).subscribe((item: Order) => {
-      this._router.navigate(['/cart', item.id]);
-      console.log('order confirm: ', order);
+    cartItem.total_price = this.priceTotal;
+    this._cartService.addToCart(cartItem).subscribe((item: CartItem) => {
+      this._router.navigate(['/cart']);
+      console.log('added to cart: ', item);
     });
   }
 }

@@ -4,13 +4,11 @@ export class Tag {
   id?: number;
   name: string;
   description?: string;
-  parentCategory: Category;
+  category_id: number;
 
-  constructor(initial: Tag=null) {
-    if (initial !== null) {
-      this.id = initial.id;
-      this.parentCategory = initial.parentCategory;
-      this.description = initial.description;
-    }
+  constructor() {
+    this.name = '';
+    this.description = '';
+    this.category_id = null;
   }
 }

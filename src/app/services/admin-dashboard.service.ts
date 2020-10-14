@@ -109,14 +109,6 @@ export class AdminDashboardService {
         icon: {
           'null': true
         }
-      },
-      {
-        title: 'Order cancellation',
-        value: '20',
-        classes: 'status-card--info',
-        icon: {
-          'null': true
-        }
       }
     ];
 

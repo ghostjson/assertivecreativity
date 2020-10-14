@@ -112,7 +112,7 @@ export class ProductService {
       input: [null, validators],
       meta: {
         isChained: option.meta.isChained,
-        chainedOpsHidden: true,
+        chained_ops_hidden: true,
       },
     };
 
@@ -121,7 +121,7 @@ export class ProductService {
       validators.push(Validators.required);
 
       // add chained options form array
-      optionTemplate.chainedOptions = this._fb.array([]);
+      optionTemplate.chained_options = this._fb.array([]);
     }
 
     console.log("option created: ", this._fb.group(optionTemplate).value);
@@ -146,7 +146,7 @@ export class ProductService {
     let formTemplate = {
       id: form.id,
       title: form.title,
-      parentForm: form.parent_form,
+      parent_form: form.parent_form,
       options: this._fb.array([]),
     };
 
@@ -164,40 +164,6 @@ export class ProductService {
    */
   addForm(form: Form, formArray: FormArray): void {
     formArray.push(this.newForm(form));
-  }
-
-  /**
-   * Return tags available
-   */
-  getAllTags(): SelectItem[] {
-    let tags = [
-      { label: "None", value: "none" },
-      { label: "Sleeveless", value: "sleeveless" },
-      { label: "Full Sleeve", value: "full-sleeve" },
-      { label: "Half Sleeve", value: "half-sleeve" },
-    ];
-
-    return tags;
-  }
-
-  /**
-   * Return all the categories
-   */
-  getAllCategories(): SelectItem[] {
-    let categories = [
-      { label: "None", value: "none" },
-      { label: "Cloth", value: "cloth" },
-      { label: "Scarf", value: "scarf" },
-      { label: "Shorts", value: "shorts" },
-      { label: "Socks", value: "socks" },
-      { label: "Kashmiri Scarf", value: "kashmiriscarf" },
-      { label: "Caps", value: "caps" },
-      { label: "Underwear", value: "underwear" },
-      { label: "T-Shirt", value: "tshirt" },
-      { label: "Shirt", value: "shirt" },
-    ];
-
-    return categories;
   }
 
   /**

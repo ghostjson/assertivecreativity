@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
-
 /* You can add global styles to this file, and also import other style files */
+
 html, body {
   margin: 0px;
   padding: 0px;
@@ -24,9 +24,20 @@ html, body {
 }
 
 .btn {
-  cursor: pointer;
-  text-transform: uppercase;
-  display: inline-flex;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+  border-radius: 6px;
+  border: none;
+	text-transform: capitalize;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s !important;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important
 }
 
 .btn-primary {
@@ -39,6 +50,11 @@ html, body {
 
 .btn-warning {
   color: white;
+}
+
+.btn-light, btn-light:hover {
+  color: black;
+  background-color: white;
 }
 
 
