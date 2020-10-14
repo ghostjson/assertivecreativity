@@ -18,26 +18,26 @@ export class SignupComponent implements OnInit {
   };
 
   password_confirm: string;
-
   error: string = "";
+  returnUrl: string;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private _router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.returnUrl = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+  }
 
   submitForm(): void {
     this.error = "";
     if (this.password_confirm === this.signup_form.password) {
       try {
         this.auth.register(this.signup_form)
-        .subscribe( _ => this.router.navigate(['/']));
+        .subscribe( _ => this._router.navigate([this.returnUrl]));
       } catch (e) {
         this.error = "Signup failed, try again";
       }
     } else {
       this.error = "Password does not match";
     }
-    // this.auth.register(this.signup_form)
-    //     .subscribe( _ => this.router.navigate(['/']));
   }
 }

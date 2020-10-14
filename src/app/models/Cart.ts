@@ -3,6 +3,7 @@ import { Product } from './Product';
 
 export interface Cart {
   data: CartItem[];
+  total_price?: number;
 }
 
 export interface CartItem {
@@ -10,11 +11,6 @@ export interface CartItem {
   product_id: number;
   quantity: number;
   total_price?: number;
-  product_details?: Product;
-  /**
-   * TODO: fix after api is fixed with the array to string error.
-   * Everything after this is an error
-   */
-  custom_forms: CustomFormInput[] | string;
+  product?: Product;
   custom_forms_entry?: CustomFormInput[];
 }

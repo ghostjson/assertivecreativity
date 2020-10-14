@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
 import { User } from 'src/app/models/User';
@@ -17,12 +18,15 @@ export class NavbarComponent implements OnInit {
   @Input() user: User;
   
   token: string;
+  currentUrl: string;
 
   constructor(
-    private _common: CommonService
+    private _common: CommonService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    
+    this.currentUrl = this._activatedRoute.snapshot.url.join('/');
+    console.info('Current URL: ', this.currentUrl);
   }
 }

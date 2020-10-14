@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/Order';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { Cart, CartItem } from '../models/Cart';
 import { environment } from 'src/environments/environment';
 
@@ -37,10 +37,19 @@ export class CartService {
   /**
    * Return the cart item 
    */
-  getCartItem(id: number): CartItem {
-    return this.cart.data.find((cartItem: CartItem) => {
-      return cartItem.id === id;
-    })
+  getCartItem(id: number): Observable<CartItem> {
+    /**
+     * TODO: Uncomment to this after returning the object from 
+     * POST request issue is fixed
+     */
+    // return this.cart.data.find((cartItem: CartItem) => {
+    //   return cartItem.id === id;
+    // })
+
+    return this._http.get<CartItem>(`${this.cartLink()}/${id}`)
+      .pipe(map((item: any) => {
+        return item.data;
+      }));
   }
 
   /**
@@ -65,7 +74,10 @@ export class CartService {
    * Add an item to the user's cart
    * @param item item to add to cart
    */
-  addToCart(item: CartItem): Observable<CartItem> {
+  addToCart(item: any): Observable<CartItem> {
+    item.custom_forms_entry = JSON.stringify(item.custom_forms_entry);
+    console.info('cart item to add: ', item);
+
     return this._http.post<CartItem>(`${this.cartLink()}`, item)
       .pipe(take(1));
   }

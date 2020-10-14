@@ -25,15 +25,7 @@ export class CartComponent implements OnInit {
 
     this._cartService.getCart().subscribe((cart: Cart) => {
       this.cart = cart;
-
-      // fill in details of the products inside the cart
-      this.cart.data.forEach((cartItem: CartItem) => {
-        this._productService
-          .getProduct(cartItem.id)
-          .subscribe((product: Product) => {
-            cartItem.product_details = product;
-          });
-      });
+      console.info('Cart received: ', cart);
     });
   }
 

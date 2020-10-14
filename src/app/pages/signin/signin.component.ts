@@ -16,8 +16,8 @@ export class SigninComponent implements OnInit {
   };
 
   error: string;
-
   role: string;
+  returnUrl: string;
 
   constructor(
     private _auth: AuthService,
@@ -26,8 +26,10 @@ export class SigninComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.returnUrl = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+
     if (this._auth.isAuthenticated()) {
-      this._router.navigate(["/"]);
+      this._router.navigate([this.returnUrl]);
     }
 
     this._common.setLoader(false);
@@ -44,7 +46,7 @@ export class SigninComponent implements OnInit {
       .subscribe((token: Token) => {
         localStorage.setItem("Token", token.access_token);
         this._common.setLoader(false);
-        this._router.navigate(["/"]);
+        this._router.navigate([this.returnUrl]);
       })
     } catch (e) {
       console.log(e);

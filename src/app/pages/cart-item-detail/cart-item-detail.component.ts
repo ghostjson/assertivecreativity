@@ -43,12 +43,10 @@ export class CartItemDetailComponent implements OnInit {
   ngOnInit(): void {
     this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
     
-    // get the product detail of the cart item 
-    this._productService.getProduct(this.cartItemId)
-      .subscribe((product: Product) => {
-        this.cartItem = this._cartService.getCartItem(this.cartItemId);
-        this.cartItem.custom_forms = JSON.parse(String(this.cartItem.custom_forms_entry));
-        this.cartItem.product_details = product;
+    this._cartService.getCartItem(this.cartItemId)
+      .subscribe((cartItem: CartItem) => {
+        this.cartItem = cartItem;
+        console.info('cart item received: ', cartItem);
       });
   }
 
@@ -77,13 +75,14 @@ export class CartItemDetailComponent implements OnInit {
   confirmOrder(): void {
     this._commonService.setLoader(true);
     this.order = {
-      product_id: this.cartItem.product_details.id,
-      seller_id: this.cartItem.product_details.seller_id,
+      product_id: this.cartItem.product.id,
+      seller_id: this.cartItem.product.seller_id,
       buyer_id: this._userDetailsService.getUserLocal().id,
       order_status: 'open',
       delivery_date: this.orderDeliveryDate.toISOString(),
-      order: {
-        custom_forms: this.cartItem.custom_forms,
+      data: {
+        product_details: this.cartItem.product,
+        custom_forms: this.cartItem.custom_forms_entry,
         total_price: this.cartItem.total_price, 
         quantity: 1
       }

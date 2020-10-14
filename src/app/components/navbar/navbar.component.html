@@ -55,12 +55,18 @@
               </ng-container>
               <ng-template #notAuth>
                 <div>
-                  <a class="account-overlay__item" [routerLink]="['/signup']">
+                  <a class="account-overlay__item" 
+                    [routerLink]="['/signup']" 
+                    [queryParams]="{return: currentUrl}"
+                  >
                     Sign Up
                   </a>
                 </div>
                 <div>
-                  <a class="account-overlay__item" [routerLink]="['/signin']">
+                  <a class="account-overlay__item" 
+                    [routerLink]="['/signin']"
+                    [queryParams]="{return: currentUrl}"
+                  >
                     Sign In
                   </a>
                 </div>

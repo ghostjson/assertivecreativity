@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime, map, take } from 'rxjs/operators';
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormArray, FormGroup } from '@angular/forms';
@@ -77,9 +77,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .subscribe(product => {
         this.product = product;
         /**
-         * Fix for bug
+         * TODO: Fix for Array to string conversion bug
          */
-        this.product.price_table = JSON.parse(String(this.product.price_table));
+        this.product.price_table = this.product.price_table;
         console.info('Product Received: ', this.product);
         
         this.image_set = [
@@ -158,14 +158,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     let cartItem: CartItem = {
       product_id: this.productId,
       quantity: 1,
-      custom_forms: JSON.stringify(this.orderForm.value)
+      custom_forms_entry: this.orderForm.value
     };
 
     // order = this.cleanForm(order);
     cartItem.total_price = this.priceTotal;
-    this._cartService.addToCart(cartItem).subscribe((item: CartItem) => {
-      this._router.navigate(['/cart']);
-      console.log('added to cart: ', item);
-    });
+    this._cartService.addToCart(cartItem)
+      .subscribe((item: CartItem) => {
+        this._router.navigate(['/cart']);
+        console.log('added to cart: ', item);
+      });
   }
 }
