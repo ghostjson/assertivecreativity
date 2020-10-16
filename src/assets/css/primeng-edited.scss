@@ -1,7 +1,6 @@
-body {
-  .ui-widget {
-  }
+@import './variables.scss';
 
+body {
   .ui-card {
     box-shadow: none;
     border-radius: 6px;
@@ -32,7 +31,7 @@ body {
   }
 
   .p-sidebar {
-    padding-right: 0; 
+    padding-right: 0;
     padding-left: 0;
   }
 
@@ -50,5 +49,79 @@ body {
   .notification-overlay {
     width: 500px;
     height: 400px;
+  }
+
+  .navigation-bar {
+    .p-menubar {
+      background: white;
+      border: none;
+      position: relative;
+      box-shadow: $regular-shadow;
+      padding: 1em;
+    }
+
+    .p-menubar-end {
+      display: flex;
+      flex-grow: 1;
+
+      .nav-searchbar {
+        flex-grow: 1;
+        margin: 0 1em;
+      }
+
+      .nav-searchbar__input {
+        width: 100%;
+      }
+    }
+
+    .account-btn {
+      background: $primary-color;
+      border: none;
+      position: relative;
+    }
+
+    .account-btn:enabled:hover,
+    .account-btn:enabled:focus {
+      background-color: $primary-color;
+      box-shadow: $regular-shadow;
+      border: none;
+    }
+  }
+
+  .p-menubar {
+    .p-submenu-list {
+      border-radius: 6px;
+
+      .p-menuitem-link {
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
+    }
+
+    .popup-box {
+      border-radius: 6px;
+  
+      .p-overlaypanel-content {
+        padding: 0.2em 0;
+  
+        .popup-box__item {
+          min-width: 200px;
+        }
+  
+        .popup-box__item a {
+          display: inline-block;
+          height: 100%;
+          width: 100%;
+          padding: 1em;
+          color: $dark-color;
+        }
+  
+        .popup-box__item a:hover {
+          color: $dark-color;
+          background-color: $light-grey;
+          text-decoration: none;
+        }
+      }
+    }
   }
 }

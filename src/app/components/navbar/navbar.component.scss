@@ -1,53 +1,23 @@
-.navbar {
-  background: white;
-}
-
-.navbar__section ul {
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
-  display: flex;
-}
-
-.navbar__section ul li {
-  margin-right: 0;
-}
-
-.navbar-item__link {
-  text-decoration: none;
-  color: black;
-}
-
-.search-bar {
-  width: 100%;
-}
-
-.search-bar__input {
-  width: 100%;
-}
+@import '../../../assets/css/variables.scss';
 
 :host {
   ::ng-deep {
-    .p-overlaypanel-content {
-      padding: 0;
+    .navigation-bar__brand--sm {
+      display: none;
     }
+    
+    @media (max-width: 960px) {
+      .navigation-bar__brand {
+        display: none;
+      }
+      .navigation-bar__brand--sm {
+        display: inline-block;
+        max-width: 100px;
 
-    .account-overlay {
-      width: 200px;
-      height: auto;
-    }
-
-    .account-overlay__item {
-      display: block;
-      border: 1px solid whitesmoke;
-      border-width: 1 0 1 0;
-      padding: 1em 0;
-      text-align: center;
-    }
-
-    .account-overlay__item:hover {
-      cursor: pointer;
-      background-color: whitesmoke;
+        img {
+          width: 100%;
+        }
+      }
     }
   }
 }

@@ -34,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**Custom Pipes */
 
-/** Vendor Admin module imports */
+/** Admin module imports */
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminProductsListComponent } from './components/admin-products-list/admin-products-list.component';
@@ -82,6 +82,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
 import { EditorModule } from 'primeng/editor';
+import { MenuModule } from 'primeng/menu';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -228,7 +229,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     PaginatorModule,
     CheckboxModule,
     TabViewModule,
-    EditorModule
+    EditorModule,
+    MenuModule
   ],
   entryComponents: [
   ],

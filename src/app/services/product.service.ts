@@ -46,7 +46,7 @@ export class ProductService {
   }
 
   getProducts(filter: any={categories: [], tags: []}): Observable<Product[]> {
-    let reqLink: string = `${this.productsLink()}?`;
+    let reqLink: string = `${this.productsLink()}`;
 
     // add the categories 
     filter.categories.forEach((category: string) => {
@@ -63,6 +63,15 @@ export class ProductService {
       .pipe(
         take(1),
         map((products: any) => {
+          /**
+           * TODO: Remove this after lorempixel.com is fixed
+           */
+          products.data = products.data.map((product: Product) => {
+            product.image = 'https://picsum.photos/480/640';
+
+            return product;
+          });
+
           return products.data;
         })
       );

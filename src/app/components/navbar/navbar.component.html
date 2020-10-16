@@ -1,88 +1,85 @@
-<div class="navbar d-flex justify-content-start align-items-center py-3">
-  <div class="nav-brand">
-    <a [routerLink]="['/']">
-      <img src="{{logo}}" alt="Company Logo" srcset="">
-    </a>
-  </div>
-  <div class="nav-items d-flex justify-content-between align-items-center flex-grow-1">
-    <div class="nabar__start navbar__section">
-      <ul>
-        <li *ngFor="let item of navStartItems"
-          class="navbar-item mr-3"
-        >
-          <a href="{{item.routerLink}}"
-            class="navbar-item__link"
-          >
-            {{item.label}}
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="navbar__center navbar__section flex-grow-1">
-      <ul>
-        <li class="search-bar p-input-icon-right mr-5">
-          <i class="pi pi-search"></i>
-          <input class="search-bar__input" type="text" placeholder="Search" pInputText />
-        </li>
-      </ul>
-    </div>
-    <div class="navbar__end navbar__section">
-      <ul>
-        <li>
-          <p-overlayPanel styleClass="account-overlay" #accountControls>
-            <ng-template pTemplate>
-              <ng-container *ngIf="user; else notAuth">
-                <div>
-                  <a class="account-overlay__item" [routerLink]="['/profile']">
-                    Profile
-                  </a>
-                </div>
-                <div>
-                  <a class="account-overlay__item" [routerLink]="['/orders']">
-                    Orders
-                  </a>
-                </div>
-                <div *ngIf="user.role === 'admin'">
-                  <a class="account-overlay__item" [routerLink]="['/admin']">
-                    Admin
-                  </a>
-                </div>
-                <div>
-                  <a class="account-overlay__item" [routerLink]="['/logout']">
-                    Log Out
-                  </a>
-                </div>
-              </ng-container>
-              <ng-template #notAuth>
-                <div>
-                  <a class="account-overlay__item" 
-                    [routerLink]="['/signup']" 
-                    [queryParams]="{return: currentUrl}"
-                  >
-                    Sign Up
-                  </a>
-                </div>
-                <div>
-                  <a class="account-overlay__item" 
-                    [routerLink]="['/signin']"
-                    [queryParams]="{return: currentUrl}"
-                  >
-                    Sign In
-                  </a>
-                </div>
-              </ng-template>
+<nav class="navigation-bar">
+  <p-menubar [model]="navStartItems">
+    <ng-template pTemplate="start">
+      <a class="navigation-bar__brand" routerLink="/">
+        <img src="{{ logo }}" class="p-mr-2" />
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <span class="p-input-icon-right nav-searchbar">
+        <i class="pi pi-search"></i>
+        <input 
+          class="nav-searchbar__input"
+          type="text" 
+          [(ngModel)]="searchValue"
+          placeholder="Search"
+          pInputText
+        >        
+      </span>
+      <button
+        class="account-btn"
+        type="button"
+        pButton
+        icon="pi pi-user"
+        (click)="accountPopup.toggle($event)"
+      ></button>
+      <p-overlayPanel styleClass="popup-box" class="account-popup" #accountPopup>
+        <ng-template pTemplate>
+          <ul>
+            <ng-template #notLogin>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/signin']"
+                  [queryParams]="{return: currentUrl}"
+                >
+                  Sign In
+                </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/signup']"
+                  [queryParams]="{return: currentUrl}"
+                >
+                  Sign Up
+                </a>
+              </li>
             </ng-template>
-          </p-overlayPanel>
-          <button
-            type="button"
-            pButton
-            icon="pi pi-user"
-            (click)="accountControls.toggle($event)"
-          >
-            <span class="sr-only">Show account controls</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+            <ng-container *ngIf="user; else notLogin">
+              <li class="popup-box__item" 
+                *ngIf="isAdmin()"
+              >
+                <a
+                  [routerLink]="['/admin']"
+                >
+                  Admin Dashboard
+                </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/profile']"
+                >
+                  Profile
+                </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/orders']"
+                >
+                  Orders
+                </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/logout']"
+                  [queryParams]="{return: currentUrl}"
+                >
+                  Logout
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-template>
+      </p-overlayPanel>
+    </ng-template>
+  </p-menubar>
+</nav>

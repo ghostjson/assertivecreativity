@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
 import { User } from 'src/app/models/User';
-import { AuthService } from 'src/app/services/auth.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -17,8 +16,8 @@ export class NavbarComponent implements OnInit {
   @Input() logo: string;
   @Input() user: User;
   
-  token: string;
   currentUrl: string;
+  searchValue: string;
 
   constructor(
     private _common: CommonService,
@@ -28,5 +27,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.currentUrl = this._activatedRoute.snapshot.url.join('/');
     console.info('Current URL: ', this.currentUrl);
+  }
+
+  /**
+   * Check if the logged in user is admin
+   */
+  isAdmin() {
+    if(this.user && this.user.role === 'admin') {
+      return true;
+    }
+
+    return false;
   }
 }

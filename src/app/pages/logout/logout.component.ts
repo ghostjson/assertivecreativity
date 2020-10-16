@@ -9,11 +9,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
+    let returnUrl = '/' + this._router.parseUrl(this._router.url).queryParamMap.get('return');
     localStorage.removeItem('Token');
-    this.router.navigate(['/']);
+    this._router.navigate([returnUrl]);
   }
-
 }
