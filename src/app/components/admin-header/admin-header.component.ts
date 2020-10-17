@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { UserDetailsService } from 'src/app/store/user-details.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/User';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -13,13 +16,32 @@ export class AdminHeaderComponent implements OnInit {
   sidebarItems: MenuItem[];
   navItems: MenuItem[];
   name: string;
+  currentUrl: string;
+  user: User;
 
   constructor(
-    public _user: UserDetailsService,
-    public _auth: AuthService
+    private _user: UserDetailsService,
+    private _activatedRoute: ActivatedRoute,
+    private _common: CommonService
   ) { }
 
   ngOnInit(): void {
+    this._common.setLoader(true);
+    this.currentUrl = this._activatedRoute.snapshot.url.join('/');
+
+    let token = localStorage.getItem('Token');
+    if (token) {
+      this._user.getUser().subscribe((user: User) => {
+        this.user = user;
+        console.info('User details: ', this.user);
+        this._common.setLoader(false);
+      })
+    }
+    else {
+      this.user = null;
+      this._common.setLoader(false);
+    }
+
     this.navItems = [
       {
         label: 'Go To Store',
@@ -73,5 +95,16 @@ export class AdminHeaderComponent implements OnInit {
    */
   toggleSidebar(): void {
     this.sidebar = !this.sidebar;
+  }
+
+  /**
+   * Check if the logged in user is admin
+   */
+  isAdmin() {
+    if(this.user && this.user.role === 'admin') {
+      return true;
+    }
+
+    return false;
   }
 }

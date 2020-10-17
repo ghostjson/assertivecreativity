@@ -1,64 +1,104 @@
-<p-menubar  
-  [model]="navItems" 
-  styleClass="p-mb-3 p-px-3 navbar"
->
-  <ng-template pTemplate="start">
-    <span class="sidebar-toggle p-mr-5" (click)="toggleSidebar()">
-      <i class="pi pi-bars"></i>
-    </span>
-  </ng-template>
-  <ng-template pTemplate="end">
-    <span class="p-input-icon-right mr-5">
-      <i class="pi pi-search"></i>
-      <input type="text" placeholder="Search" pInputText />
-    </span>
-    <p-overlayPanel
-      styleClass="notification-overlay"
-      #notificationCard>
-      <ng-template pTemplate>
-        No Notifications
-      </ng-template>
-    </p-overlayPanel>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-bell"
-      (click)="notificationCard.toggle($event)"
-    >
-      <span class="sr-only">Show Notifications</span>
-    </button>
-  </ng-template>
-</p-menubar>
-
-<p-sidebar [(visible)]="sidebar" [baseZIndex]="10000">
-  <div class="sidebar-content">
-    <div class="sidebar-logo">
-      <img src="../../../assets/images/logo.png" alt="Assertive Creativity Logo">
-    </div>
-    <div class="sidebar-content__account-details p-d-flex p-ai-center p-p-2">
-      <div class="sidebar-content__profile-img p-mr-2">
-        <img src="../../../assets/images/user2-160x160.jpg" alt="Profile Image">
-      </div>
-      <div class="sidebar-content__profile-name">
-        {{name}}
-      </div>
-    </div>
-    <div class="sidebar-items p-mt-4">
-      <div
-        class="sidebar-item"
-        *ngFor="let item of sidebarItems"
-        (click)="toggleSidebar()"
+<div class="admin-header mb-5">
+  <p-menubar [model]="navItems" styleClass="p-mb-3 p-px-3 navbar">
+    <ng-template pTemplate="start">
+      <span class="sidebar-toggle p-mr-5" (click)="toggleSidebar()">
+        <i class="pi pi-bars"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <button
+        class="account-btn"
+        type="button"
+        pButton
+        icon="pi pi-user"
+        (click)="accountPopup.toggle($event)"
+      ></button>
+      <p-overlayPanel
+        styleClass="popup-box"
+        class="account-popup"
+        #accountPopup
       >
-        <a 
-          [routerLink]="item.routerLink"
-          routerLinkActive="sidebar-item__link--active" 
-          [routerLinkActiveOptions]="{exact: true}"
-          class="sidebar-item__link p-d-block"
+        <ng-template pTemplate>
+          <ul>
+            <ng-template #notLogin>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/signin']"
+                  [queryParams]="{ return: currentUrl }"
+                >
+                  Sign In
+                </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/signup']"
+                  [queryParams]="{ return: currentUrl }"
+                >
+                  Sign Up
+                </a>
+              </li>
+            </ng-template>
+            <ng-container *ngIf="user; else notLogin">
+              <li class="popup-box__item" *ngIf="isAdmin()">
+                <a [routerLink]="['/admin']"> Admin Dashboard </a>
+              </li>
+              <li class="popup-box__item">
+                <a [routerLink]="['/profile']"> Profile </a>
+              </li>
+              <li class="popup-box__item">
+                <a [routerLink]="['/orders']"> Orders </a>
+              </li>
+              <li class="popup-box__item">
+                <a
+                  [routerLink]="['/logout']"
+                  [queryParams]="{ return: currentUrl }"
+                >
+                  Logout
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-template>
+      </p-overlayPanel>
+    </ng-template>
+  </p-menubar>
+
+  <p-sidebar [(visible)]="sidebar" [baseZIndex]="10000">
+    <div class="sidebar-content">
+      <div class="sidebar-logo">
+        <img
+          src="../../../assets/images/logo.png"
+          alt="Assertive Creativity Logo"
+        />
+      </div>
+      <div class="sidebar-content__account-details p-d-flex p-ai-center p-p-2">
+        <div class="sidebar-content__profile-img p-mr-2">
+          <img
+            src="../../../assets/images/user2-160x160.jpg"
+            alt="Profile Image"
+          />
+        </div>
+        <div class="sidebar-content__profile-name">
+          {{ name }}
+        </div>
+      </div>
+      <div class="sidebar-items p-mt-4">
+        <div
+          class="sidebar-item"
+          *ngFor="let item of sidebarItems"
+          (click)="toggleSidebar()"
         >
-          <i class="{{item.icon}}"></i>
-          {{item.label}}
-        </a>
+          <a
+            [routerLink]="item.routerLink"
+            routerLinkActive="sidebar-item__link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="sidebar-item__link p-d-block"
+          >
+            <i class="{{ item.icon }}"></i>
+            {{ item.label }}
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</p-sidebar>
+  </p-sidebar>
+</div>

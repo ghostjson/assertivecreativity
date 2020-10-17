@@ -3,7 +3,6 @@ import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
 import { CartService } from 'src/app/services/cart.service';
-import { NavMenu } from '../../models/NavMenu';
 import { User } from 'src/app/models/User';
 import { MenuItem } from 'primeng/api';
 
@@ -17,9 +16,8 @@ export class HeaderComponent implements OnInit {
   user_role: any;
   cartLength: number;
   navStartItems: MenuItem[];
-  navEndItems: NavMenu;
+  navEndItems: MenuItem[];
   logo: string;
-  token: string;
   user: User;
 
   constructor(
@@ -34,8 +32,8 @@ export class HeaderComponent implements OnInit {
     this.logo = './../../../assets/images/logo.png';
     this.cartLength = 0;
 
-    this.token = localStorage.getItem('Token');
-    if (this.token) {
+    let token = localStorage.getItem('Token');
+    if (token) {
       this._user.getUser().subscribe((user: User) => {
         this.user = user;
         console.info('User details: ', this.user);
