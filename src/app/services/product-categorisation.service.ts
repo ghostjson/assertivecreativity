@@ -60,13 +60,8 @@ export class ProductCategorisationService {
     return this._http.get<Category[]>(`${this.categoriesUrl()}`)
       .pipe(
         take(1),
-        map((categories: any) => {
-          return categories.data.map((category: Category) => {
-            return {
-              ...category,
-              value: category.id
-            }
-          });
+        map((res: any) => {
+          return res.data as Category[];
         })
       );
   }

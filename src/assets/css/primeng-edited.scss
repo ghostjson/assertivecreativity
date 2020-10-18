@@ -1720,43 +1720,43 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-buttonset.p-button-success > .p-button.p-button-outlined,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #689f38;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
-  background: rgba(104, 159, 56, 0.04);
-  color: #689f38;
+  background: $bg-success;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
-  background: rgba(104, 159, 56, 0.16);
-  color: #689f38;
+  background: $bg-success;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-text,
 .p-buttonset.p-button-success > .p-button.p-button-text,
 .p-splitbutton.p-button-success > .p-button.p-button-text {
   background-color: transparent;
-  color: #689f38;
+  color: white;
   border-color: transparent;
 }
 .p-button.p-button-success.p-button-text:enabled:hover,
 .p-buttonset.p-button-success > .p-button.p-button-text:enabled:hover,
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:hover {
-  background: rgba(104, 159, 56, 0.04);
+  background: $bg-success;
   border-color: transparent;
-  color: #689f38;
+  color: white;
 }
 .p-button.p-button-success.p-button-text:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active {
-  background: rgba(104, 159, 56, 0.16);
+  background: $bg-success;
   border-color: transparent;
-  color: #689f38;
+  color: white;
 }
 
 .p-button.p-button-warning,
@@ -1925,43 +1925,43 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-buttonset.p-button-danger > .p-button.p-button-outlined,
 .p-splitbutton.p-button-danger > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #d32f2f;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-danger.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:hover {
-  background: rgba(211, 47, 47, 0.04);
-  color: #d32f2f;
+  background: $bg-danger;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-danger.p-button-outlined:enabled:active,
 .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active {
-  background: rgba(211, 47, 47, 0.16);
-  color: #d32f2f;
+  background: $bg-danger;
+  color: white;
   border: 1px solid;
 }
 .p-button.p-button-danger.p-button-text,
 .p-buttonset.p-button-danger > .p-button.p-button-text,
 .p-splitbutton.p-button-danger > .p-button.p-button-text {
   background-color: transparent;
-  color: #d32f2f;
+  color: white;
   border-color: transparent;
 }
 .p-button.p-button-danger.p-button-text:enabled:hover,
 .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:hover,
 .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:hover {
-  background: rgba(211, 47, 47, 0.04);
+  background: $bg-danger;
   border-color: transparent;
-  color: #d32f2f;
+  color: white;
 }
 .p-button.p-button-danger.p-button-text:enabled:active,
 .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active {
-  background: rgba(211, 47, 47, 0.16);
+  background: $bg-danger;
   border-color: transparent;
-  color: #d32f2f;
+  color: white;
 }
 
 .p-button.p-button-link {
@@ -5315,7 +5315,9 @@ body {
 /**
   Admin Products list page
 **/
-.admin-products-list {
+.admin-products-list,
+.admin-category-adder,
+.admin-tag-adder {
   .admin-products-table {
     .admin-products-table__image-header {
       width: 4rem;
@@ -5333,19 +5335,28 @@ body {
         padding-right: 0;
       }
     }
-  
-    .admin-products-table-searchbar {
-      width: 100%;
-    }
-  
-    .admin-products-table-searchbar__input {
-      width: 100%;
-    }
+  }
+
+  .admin-data-table-searchbar {
+    width: 100%;
+  }
+
+  .admin-data-table-searchbar__input {
+    width: 100%;
+  }
+
+  .toolbar__title {
+    font-weight: 900;
+    font-size: 2rem;
   }
 
   .table-header {
     display: flex;
     justify-content: space-between;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td.admin-data-table__tools {
+    text-align: center;
   }
 
   /* Responsive */

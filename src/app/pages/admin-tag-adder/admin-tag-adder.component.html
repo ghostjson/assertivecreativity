@@ -1,22 +1,23 @@
-<div>
+<div class="admin-tag-adder">
   <app-admin-header></app-admin-header>
 
   <div class="tags-table container p-my-5">
     <p-toast></p-toast>
 
     <div class="card">
-      <p-toolbar styleClass="p-mb-4">
+      <p-toolbar styleClass="toolbar shadow p-mb-4">
         <ng-template pTemplate="left">
+          <h1 class="toolbar__title m-md-0 mb-3">Manage Tags</h1>
+        </ng-template>
+
+        <ng-template pTemplate="right">
           <button
             pButton
             pRipple
             label="Export"
             icon="pi pi-upload"
-            class="p-button-help"
+            class="p-button-help mr-2"
           ></button>
-        </ng-template>
-
-        <ng-template pTemplate="right">
           <button
             pButton
             pRipple
@@ -25,7 +26,7 @@
             class="p-button-success p-mr-2"
             (click)="openNew()"
           ></button>
-          <button
+          <!-- <button
             pButton
             pRipple
             label="Delete"
@@ -33,16 +34,17 @@
             class="p-button-danger"
             (click)="deleteSelectedTags()"
             [disabled]="!selectedTags || !selectedTags.length"
-          ></button>
+          ></button> -->
         </ng-template>
       </p-toolbar>
 
       <p-table
         #dt
         [value]="tags"
-        [rows]="10"
+        [rows]="25"
+        [rowsPerPageOptions]="[25,50, 100]"
         [paginator]="true"
-        [globalFilterFields]="['label']"
+        [globalFilterFields]="['name', 'description']"
         [(selection)]="selectedTags"
         [rowHover]="true"
         dataKey="id"
@@ -51,23 +53,23 @@
       >
         <ng-template pTemplate="caption">
           <div class="p-d-flex p-ai-center p-jc-between">
-            <h5 class="p-m-0">Manage Tags</h5>
-            <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
+            <span class="admin-data-table-searchbar p-input-icon-right">
+              <i class="admin-data-table-searchbar__icon pi pi-search"></i>
               <input
-                pInputText
+                class="admin-data-table-searchbar__input"
                 type="text"
                 (input)="dt.filterGlobal($event.target.value, 'contains')"
-                placeholder="Search..."
+                placeholder="Search name and description"
+                pInputText
               />
             </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 3rem">
+            <!-- <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
+            </th> -->
             <th pSortableColumn="label">
               TAG <p-sortIcon field="label"></p-sortIcon>
             </th>
@@ -75,17 +77,16 @@
             <th pSortableColumn="productCount">
               NO. OF PRODUCTS<p-sortIcon field="productCount"></p-sortIcon>
             </th>
-            <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-tag>
           <tr>
-            <td>
+            <!-- <td>
               <p-tableCheckbox [value]="tag"></p-tableCheckbox>
-            </td>
+            </td> -->
             <td>{{ tag.name }}</td>
             <td>...</td>
-            <td>
+            <td class="admin-data-table__tools">
               <button
                 pButton
                 pRipple
@@ -179,7 +180,7 @@
             pRipple
             label="Cancel"
             icon="pi pi-times"
-            class="p-button-text"
+            class="p-button-text p-button-danger"
             (click)="hideDialog()"
           ></button>
           <button
@@ -187,7 +188,7 @@
             pRipple
             label="Add"
             icon="pi pi-check"
-            class="p-button-text"
+            class="p-button-text p-button-success"
             (click)="saveTag()"
             [disabled]="!tagForm.form.valid"
           ></button>

@@ -3,7 +3,6 @@ import { ConfirmationService } from "primeng/api";
 import { MessageService } from "primeng/api";
 import { ProductCategorisationService } from "../../services/product-categorisation.service";
 import { Category } from "src/app/models/Category";
-import { IdGeneratorService } from "src/app/services/id-generator.service";
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -27,9 +26,15 @@ export class AdminCategoryAdderComponent implements OnInit {
 
   ngOnInit(): void {
     this._prodCategorisationService.getCategories()
-      .pipe(take(1))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        
+        this.categories.map((category: Category) => {
+          return {
+            ...category,
+            value: category.id
+          }
+        });
         console.log('categories received: ', categories);
       });
   }
@@ -140,7 +145,7 @@ export class AdminCategoryAdderComponent implements OnInit {
              * TODO: uncomment when backend fully implemented
              */
             // this.category = createdCategory;
-            this.categories.push(this.category);
+            this.categories.unshift(this.category);
             this.categories = [...this.categories];
             this.categoryDialog = false;
           });

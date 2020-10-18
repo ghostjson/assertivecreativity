@@ -4,7 +4,7 @@
   <div class="p-col card p-3">
     <p-toolbar styleClass="toolbar shadow p-mb-4">
       <ng-template pTemplate="left">
-        <h2 class="toolbar__title m-md-0 mb-3">Manage Products</h2>
+        <h1 class="toolbar__title m-md-0 mb-3">Manage Products</h1>
       </ng-template>
   
       <ng-template pTemplate="right">
@@ -49,10 +49,10 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <span class="admin-products-table-searchbar p-input-icon-right">
-            <i class="admin-products-table-searchbar__icon pi pi-search"></i>
+          <span class="admin-data-table-searchbar p-input-icon-right">
+            <i class="admin-data-table-searchbar__icon pi pi-search"></i>
             <input
-              class="admin-products-table-searchbar__input"
+              class="admin-data-table-searchbar__input"
               type="text"
               (input)="dt.filterGlobal($event.target.value, 'contains')"
               placeholder="Search name, serial, category and base price"
@@ -137,7 +137,7 @@
               </span
             >
           </td>
-          <td class="admin-products-table__tools">
+          <td class="admin-data-table__tools">
             <a
               [routerLink]="[product.id, 'edit']"
               pButton

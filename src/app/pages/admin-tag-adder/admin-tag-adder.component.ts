@@ -150,7 +150,7 @@ export class AdminTagAdderComponent implements OnInit {
         });
       } 
       else {
-        this.tags.push(this.tag);
+        this.tags.unshift(this.tag);
         this._prodCategorisationService.addTag(this.tag)
           .pipe(take(1))
           .subscribe();

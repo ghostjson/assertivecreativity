@@ -1,22 +1,25 @@
-<div>
+<div class="admin-category-adder">
   <app-admin-header></app-admin-header>
   
   <div class="categories-table container p-my-5">
     <p-toast></p-toast>
     
     <div class="card">
-      <p-toolbar styleClass="p-mb-4">
+      <p-toolbar styleClass="toolbar shadow p-mb-4">
         <ng-template pTemplate="left">
+          <h1 class="toolbar__title m-md-0 mb-3">
+            Manage Categories
+          </h1>
+        </ng-template>
+    
+        <ng-template pTemplate="right">
           <button
             pButton
             pRipple
             label="Export"
             icon="pi pi-upload"
-            class="p-button-help"
+            class="p-button-help mr-2"
           ></button>
-        </ng-template>
-    
-        <ng-template pTemplate="right">
           <button
             pButton
             pRipple
@@ -25,7 +28,7 @@
             class="p-button-success p-mr-2"
             (click)="openNew()"
           ></button>
-          <button
+          <!-- <button
             pButton
             pRipple
             label="Delete"
@@ -33,17 +36,19 @@
             class="p-button-danger"
             (click)="deleteSelectedCategories()"
             [disabled]="!selectedCategories || !selectedCategories.length"
-          ></button>
+          ></button> -->
         </ng-template>
       </p-toolbar>
     
       <p-table
         #dt
         [value]="categories"
-        [rows]="10"
+        [rows]="25"
+        [rowsPerPageOptions]="[25,50, 100]"
         [paginator]="true"
         [globalFilterFields]="[
-          'name'
+          'name',
+          'description'
         ]"
         [(selection)]="selectedCategories"
         [rowHover]="true"
@@ -53,44 +58,59 @@
       >
         <ng-template pTemplate="caption">
           <div class="p-d-flex p-ai-center p-jc-between">
-            <h5 class="p-m-0">Manage Categories</h5>
-            <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
+            <span class="admin-data-table-searchbar p-input-icon-right">
+              <i class="admin-data-table-searchbar__icon pi pi-search"></i>
               <input
-                pInputText
+                class="admin-data-table-searchbar__input"
                 type="text"
                 (input)="dt.filterGlobal($event.target.value, 'contains')"
-                placeholder="Search..."
+                placeholder="Search category name and description"
+                pInputText
               />
             </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 3rem;">
+            <!-- <th style="width: 3rem;">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
+            </th> -->
             <th pSortableColumn="name">
               CATEGORY <p-sortIcon field="name"></p-sortIcon>
             </th>
             <th>
               DESCRIPTION
             </th>
-            <th pSortableColumn="productCount">
+            <!-- <th pSortableColumn="productCount">
               NO. OF PRODUCTS<p-sortIcon field="productCount"></p-sortIcon>
-            </th>
+            </th> -->
             <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-category>
           <tr>
-            <td>
+            <!-- <td>
               <p-tableCheckbox [value]="category"></p-tableCheckbox>
-            </td>
-            <td>{{ category.name }}</td>
-            <td>{{ summary(category.description) }}...</td>
-            <td>{{ category.productCount }}</td>
+            </td> -->
             <td>
+              <span class="p-column-title">
+                CATEGORY
+              </span>
+              {{ category.name }}
+            </td>
+            <td>
+              <span class="p-column-title">
+                DESCRIPTION
+              </span>
+              {{ summary(category.description) }}...
+            </td>
+            <!-- <td>
+              <span class="p-column-title">
+                NO. OF PRODUCTS
+              </span>
+              {{ category.productCount }}
+            </td> -->
+            <td class="admin-data-table__tools"> 
               <button
                 pButton
                 pRipple
@@ -160,7 +180,7 @@
             pRipple
             label="Cancel"
             icon="pi pi-times"
-            class="p-button-text"
+            class="p-button-text p-button-danger mt-2"
             (click)="hideDialog()"
           ></button>
           <button
@@ -168,7 +188,7 @@
             pRipple
             label="Add"
             icon="pi pi-check"
-            class="p-button-text"
+            class="p-button-text p-button-success mt-2"
             (click)="saveCategory()"
             [disabled]="false && !categoryForm.form.valid"
           ></button>
