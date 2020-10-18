@@ -5219,12 +5219,6 @@ body {
     padding-left: 0;
   }
 
-  .p-sidebar-left {
-    .p-sidebar-close {
-      right: 10px;
-    }
-  }
-
   .p-overlaypanel::before,
   .p-overlaypanel::after {
     display: none;
@@ -5449,5 +5443,31 @@ body {
     box-shadow: $regular-shadow;
     background: white;
     border-radius: 6px;
+  }
+}
+
+.admin-header {
+  .p-sidebar-left {
+    .p-sidebar-close {
+      visibility: hidden;
+      right: -72px;
+      background: white;
+      color: $dark-color;
+      height: 3rem;
+      width: 3rem;
+
+      &.show-button {
+        visibility: visible;
+      }
+    }
+
+    .p-sidebar-close:hover {
+      background: $bg-primary;
+      color: white;
+    }
+  }
+
+  .p-menubar-button {
+    display: none;
   }
 }

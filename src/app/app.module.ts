@@ -83,6 +83,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
 import { EditorModule } from 'primeng/editor';
 import { MenuModule } from 'primeng/menu';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -230,7 +231,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CheckboxModule,
     TabViewModule,
     EditorModule,
-    MenuModule
+    MenuModule,
+    PanelMenuModule
   ],
   entryComponents: [
   ],

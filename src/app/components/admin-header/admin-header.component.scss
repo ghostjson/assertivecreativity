@@ -1,3 +1,5 @@
+@import '../../../assets/css/variables.scss';
+
 .sidebar-toggle {
   cursor: pointer;
 }
@@ -21,27 +23,32 @@
   }
 }
 
-.sidebar-content {
-  padding-top: 3em;
-}
-
 .sidebar-item {
-  border: 1px solid whitesmoke;
-  border-right: none;
-  border-left: none;
+  padding: 0.3em;
 }
 
 .sidebar-item__link {
-  color: var(--dark-color);
+  position: relative;
+  border-radius: 6px;
+  color: $dark-color;
   padding: 1em;
+  transition: all 0.3s;
 
   &:hover {
-    color: white;
-    background-color: var(--dark-color);
+    color: $dark-color;
+    background-color: $secondary-color;
+    text-decoration: none;
   }
 }
 
 .sidebar-item__link--active {
   color: white;
-  background-color: var(--primary);
+  background-color: $bg-primary;
+  box-shadow: $regular-shadow;
+  font-weight: bold;
+
+  &:hover {
+    color: white;
+    background-color: $bg-primary;
+  }
 }

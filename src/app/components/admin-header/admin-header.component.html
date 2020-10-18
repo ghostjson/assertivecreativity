@@ -63,7 +63,11 @@
     </ng-template>
   </p-menubar>
 
-  <p-sidebar [(visible)]="sidebar" [baseZIndex]="10000">
+  <p-sidebar
+    [(visible)]="sidebar"
+    [baseZIndex]="10000"
+    (onHide)="sideBarCloseBtn.classList.toggle('show-button')"
+  >
     <div class="sidebar-content">
       <div class="sidebar-logo">
         <img
@@ -83,6 +87,23 @@
         </div>
       </div>
       <div class="sidebar-items p-mt-4">
+        <ng-container *ngIf="windowWidth() < 961">
+          <div
+            class="sidebar-item"
+            *ngFor="let item of navItems"
+            (click)="toggleSidebar()"
+          >
+            <a
+              [routerLink]="item.routerLink"
+              routerLinkActive="sidebar-item__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="sidebar-item__link p-d-block"
+            >
+              <i class="{{ item.icon }}"></i>
+              {{ item.label }}
+            </a>
+          </div>
+        </ng-container>
         <div
           class="sidebar-item"
           *ngFor="let item of sidebarItems"

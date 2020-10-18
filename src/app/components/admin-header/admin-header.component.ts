@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { UserDetailsService } from 'src/app/store/user-details.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,6 +18,8 @@ export class AdminHeaderComponent implements OnInit {
   name: string;
   currentUrl: string;
   user: User;
+  sideBarCloseBtn: HTMLButtonElement;
+
 
   constructor(
     private _user: UserDetailsService,
@@ -86,11 +88,17 @@ export class AdminHeaderComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.sideBarCloseBtn = document.querySelector('.p-sidebar-close');
+  }
+
   /**
    * Toggle sidebar
    */
   toggleSidebar(): void {
     this.sidebar = !this.sidebar;
+    console.log('sidebar button: ', this.sideBarCloseBtn);
+    this.sideBarCloseBtn.classList.toggle('show-button');
   }
 
   /**
@@ -102,5 +110,9 @@ export class AdminHeaderComponent implements OnInit {
     }
 
     return false;
+  }
+
+  windowWidth(): number {
+    return window.innerWidth;
   }
 }
