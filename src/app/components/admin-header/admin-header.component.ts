@@ -48,10 +48,6 @@ export class AdminHeaderComponent implements OnInit {
         routerLink: '/'
       },
       {
-        label: 'Home',
-        routerLink: '/admin/',
-      },
-      {
         label: 'Shop',
         routerLink: '/shop/select-type'
       }

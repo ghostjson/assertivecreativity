@@ -26,6 +26,8 @@ export class AdminAddProductFormComponent implements OnInit {
   possibleOptions: Object;
   categories: Category[];
   tags: Tag[];
+  newProductImage: string | ArrayBuffer;
+  currentProductImage: string | ArrayBuffer;
 
   tagSub: Subscription;
 
@@ -69,6 +71,10 @@ export class AdminAddProductFormComponent implements OnInit {
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        this.categories.unshift({
+          name: 'Select a category',
+          id: null
+        });
       });
   }
 
@@ -130,25 +136,14 @@ export class AdminAddProductFormComponent implements OnInit {
 
   /**
    * Image upload handler for image upload input
-   * @param e Event object
+   * @param event Event object
    */
-  uploadImages(e: Event): void {
-    this.productForm.patchValue({
-      image: 'www.example.com'
-    });
-
-    console.log('image uploaded');
-
-    /**
-     * TODO: Use this upload handler only if the prime ng provided one is not sufficient
-     *
-     * add the return value to the form using this
-     *
-     * this.productForm.patchValue({
-         image: '*********** link goes here *********'
-       });
-     *
-     */
+  uploadImages(event: any): void {
+    let reader: FileReader = new FileReader();
+    reader.readAsDataURL(event.files[0]);
+    reader.onloadend = () => {
+      this.newProductImage = reader.result;
+    };
   }
 
   /**
@@ -168,24 +163,42 @@ export class AdminAddProductFormComponent implements OnInit {
    * Submit the form
    */
   onSubmit(): void {
+    if(this.newProductImage) {
+      this.productForm.patchValue({
+        image: this.newProductImage
+      });
+    }
+
     // construct product from form value 
     let submitValue = new Product(this.productForm.value);
+    console.log('Sending product object: ', submitValue);
 
-    submitValue.category = submitValue['category']['id'];
+    submitValue.category_id = submitValue.category.id;
+
+    if(submitValue.price_table_mode) {
+      submitValue.base_price = submitValue.price_table[0].price_per_piece;
+    }
 
     if (this.isEdit) {
       this._productService.editProduct(submitValue)
         .subscribe((res: Product) => {
           this._router.navigate(['/admin/products']);
-          console.log("Product added: ", this.productForm.value);
+          console.log("Product added: ", submitValue);
         });
     }
     else {
       this._productService.addProduct(submitValue)
         .subscribe((res: Product) => {
           this._router.navigate(['/admin/products']);
-          console.log("Product added: ", this.productForm.value);
+          console.log("Product added: ", submitValue);
         });
     }
+  }
+
+  /**
+   * Cancel creating/editing the product
+   */
+  cancelProduct(): void {
+    this._router.navigate(['/admin/products']);
   }
 }

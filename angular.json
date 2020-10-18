@@ -41,7 +41,7 @@
               "src/assets/css/admin-common.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jquery/dist/jquery.slim.min.js",
               "src/assets/js/jquery.overlayScrollbars.min.js",
               "node_modules/quill/dist/quill.js"
             ]

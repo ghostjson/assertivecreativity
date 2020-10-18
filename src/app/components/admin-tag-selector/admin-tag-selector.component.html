@@ -3,14 +3,16 @@
     [options]="tags"
     formControlName="tags"
     defaultLabel="Select Product Tags"
+    optionLabel="name"
+    dataKey="id"
     class="input-group__input"
   >
     <ng-template let-value pTemplate="selectedItems">
       <div
         class="p-multiselected-item-token p-corner-all"
-        *ngFor="let val of value"
+        *ngFor="let tag of formGroup.value.tags"
       >
-        <div>{{val}}</div>
+        <div>{{tag.name}}</div>
       </div>
       <div
         *ngIf="!value || value.length === 0"
@@ -21,7 +23,7 @@
     </ng-template>
     <ng-template let-tag pTemplate="item">
       <div style="font-size:14px;float:right;margin-top:4px">
-        <div>{{ tag.label }}</div>
+        <div>{{ tag.value.name }}</div>
       </div>
     </ng-template>
   </p-multiSelect>

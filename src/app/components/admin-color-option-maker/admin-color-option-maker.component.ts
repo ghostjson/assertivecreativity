@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { AdminProductService } from '../../services/admin-product.service';
 import { FormGroup, FormArray } from '@angular/forms';
-
-import { ColorPickerModule } from 'ngx-color-picker';
 import { SelectItem } from 'primeng/api';
 
 @Component({
@@ -19,7 +16,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
   color: string[] = ['#AC7B19'];
   chainedOptions: SelectItem[];
   selectedChainedOption: Object;
-  dialogVisible: boolean[] = [];
+  dialogVisible: boolean[][] = [[]];
 
   constructor(
     public _productService: AdminProductService
@@ -59,11 +56,18 @@ export class AdminColorOptionMakerComponent implements OnInit {
     this._productService.addOptionInput(inputType, inputs, this.formGroup);
   }
 
-  addChainedOption(optionType: string, options: FormArray): void {
-    this._productService.addOption(optionType, options,  true);
+  addChainedOption(optionType: string, options: FormArray, inputInd: number): void {
+    this._productService.addOption(optionType, options, true);
 
     // add to dialog controls and make it true to display it
-    this.dialogVisible.push(true);
+    if(this.dialogVisible[inputInd]) {
+      this.dialogVisible[inputInd].push(true);
+    }
+    else {
+      this.dialogVisible.push([]);
+      this.dialogVisible[inputInd].push(true);
+    }
+    console.log('dialog visibility statuses: ', this.dialogVisible);
 
     // Clear selected option stored
     setTimeout(() => {
@@ -75,7 +79,7 @@ export class AdminColorOptionMakerComponent implements OnInit {
     console.log('test function output: ', input)
   }
 
-  showDialog(index: number): void {
-    this.dialogVisible[index] = true;
+  toggleDialog(inputInd: number, chainedInd: number): void {
+    this.dialogVisible[inputInd][chainedInd] = !this.dialogVisible[inputInd][chainedInd];
   }
 }

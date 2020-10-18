@@ -1,45 +1,32 @@
-<div class="custom-form mb-5">
+<div class="admin-custom-form mb-5">
   <aside class="form-controls">
-    <div class="form-controls_btn">
+    <div class="form-controls__btn">
       <button
         (click)="selectOptionOverlayTemplate.toggle($event)"
         class="btn btn-primary"
       >
-        <i class="material-icons">
-          add
-        </i>
+        <i class="pi pi-plus"></i>
         <span class="sr-only">
           Add an option to the form
         </span>
       </button>
     </div>
-    <!-- <div class="form-controls_btn">
-      <button>
-        <i class="material-icons">
-          edit
-        </i>
-        <span class="sr-only">
-          Edit the option on the form
-        </span>
-      </button>
-    </div> -->
-    <div class="form-controls_btn">
+    <div class="form-controls__btn">
       <button
         class="btn btn-danger"
         (click)="removeCustomForm(formId)"
       >
-        <i class="material-icons">
-          delete_forever
-        </i>
+        <i class="pi pi-trash"></i>
       </button>
       <span class="sr-only">
-        Delete the option on the form
+        Delete the custom form
       </span>
     </div>
     <p-overlayPanel
       #selectOptionOverlayTemplate
       [dismissable]="true"
       appendTo="body"
+      styleClass="add-form-options-overlay"
     >
       <ng-template pTemplate>
         <p-listbox
@@ -88,7 +75,7 @@
         </div>
       </div>
       <ng-container formArrayName="options">
-        <div class="mt-3" *ngFor="let option of options().controls; let optionInd = index">
+        <div class="mt-5" *ngFor="let option of options().controls; let optionInd = index">
           <app-admin-form-options
             [formArray]="options()"
             [option]="option"

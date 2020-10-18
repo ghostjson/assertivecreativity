@@ -92,7 +92,8 @@ export class Product {
   name: string;
   serial: string;
   description: string;
-  category: (number | string);
+  category?: Category;
+  category_id: number;
   tags: string[];
   base_price: number;
   total_price?: number;
@@ -110,6 +111,7 @@ export class Product {
       this.name = initial.name;
       this.serial = initial.serial;
       this.description = initial.description;
+      this.category_id = initial.category_id;
       this.category = initial.category;
       this.tags = initial.tags;
       this.base_price = initial.base_price;
@@ -125,7 +127,8 @@ export class Product {
       this.name = '';
       this.serial = '';
       this.description = '';
-      this.category = '';
+      this.category_id = 0;
+      this.category = null;
       this.tags = [];
       this.base_price = 0;
       this.stock = 0;

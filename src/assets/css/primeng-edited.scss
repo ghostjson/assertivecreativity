@@ -848,7 +848,7 @@ p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
 }
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
   .p-inputswitch-slider {
-  background: #0d89ec;
+  background: $primary-color;
 }
 .p-inputswitch.p-error,
 .p-inputswitch.p-invalid {
@@ -2034,7 +2034,6 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 
 .p-datatable {
-  border: 1px solid $secondary-color;
   border-radius: 6px;
 }
 
@@ -3467,6 +3466,14 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   margin-left: 1rem;
 }
 
+.p-confirm-dialog-accept.p-button {
+  background: $bg-success;
+}
+
+.p-confirm-dialog-reject.p-button {
+  background: $bg-danger;
+}
+
 .p-dialog-mask.p-component-overlay {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -3568,13 +3575,12 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 
 .p-fileupload .p-fileupload-buttonbar {
-  background: #f8f9fa;
+  background: white;
   padding: 1rem;
-  border: 1px solid #dee2e6;
-  color: #495057;
-  border-bottom: 0 none;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border: 1px solid $light-grey;
+  color: $dark-color;
+  border-radius: 6px;
+  margin-bottom: 0.8em;
 }
 .p-fileupload .p-fileupload-buttonbar .p-button {
   margin-right: 0.5rem;
@@ -3585,12 +3591,11 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   box-shadow: 0 0 0 0.2rem $secondary-color;
 }
 .p-fileupload .p-fileupload-content {
-  background: #ffffff;
+  background: white;
   padding: 2rem 1rem;
-  border: 1px solid #dee2e6;
-  color: #495057;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border: 1px solid $light-grey;
+  color: $dark-color;
+  border-radius: 6px;
 }
 .p-fileupload .p-progressbar {
   height: 0.25rem;
@@ -5174,19 +5179,23 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   color: #ffffff;
 }
 
-/* Customizations to the designer theme should be defined here */
+/* 
+  Customizations to the designer theme
+*/
 body {
   .ui-card {
     box-shadow: none;
     border-radius: 6px;
+    color: $dark-color;
   }
 
   .p-card-header {
-    background: var(--primary);
-    color: white;
-    font-size: 1.125rem;
+    background: white;
+    font-size: 1.3rem;
     font-weight: bold;
     border-radius: 6px 6px 0 0;
+    border-bottom: 1px solid $light-grey;
+    padding: 0.7em;
   }
 
   p-button {
@@ -5220,47 +5229,45 @@ body {
   .p-overlaypanel::after {
     display: none;
   }
+}
 
-  .notification-overlay {
-    width: 500px;
-    height: 400px;
+/**
+  Navigation Bar
+**/
+.navigation-bar {
+  .p-menubar {
+    background: white;
+    border: none;
+    position: relative;
+    box-shadow: $regular-shadow;
+    padding: 1em;
   }
 
-  .navigation-bar {
-    .p-menubar {
-      background: white;
-      border: none;
-      position: relative;
-      box-shadow: $regular-shadow;
-      padding: 1em;
-    }
+  .p-menubar-end {
+    display: flex;
+    flex-grow: 1;
 
-    .p-menubar-end {
-      display: flex;
+    .nav-searchbar {
       flex-grow: 1;
-
-      .nav-searchbar {
-        flex-grow: 1;
-        margin: 0 1em;
-      }
-
-      .nav-searchbar__input {
-        width: 100%;
-      }
+      margin: 0 1em;
     }
 
-    .account-btn {
-      background: $primary-color;
-      border: none;
-      position: relative;
+    .nav-searchbar__input {
+      width: 100%;
     }
+  }
 
-    .account-btn:enabled:hover,
-    .account-btn:enabled:focus {
-      background-color: $primary-color;
-      box-shadow: $regular-shadow;
-      border: none;
-    }
+  .account-btn {
+    background: $primary-color;
+    border: none;
+    position: relative;
+  }
+
+  .account-btn:enabled:hover,
+  .account-btn:enabled:focus {
+    background-color: $primary-color;
+    box-shadow: $regular-shadow;
+    border: none;
   }
 
   .p-menubar {
@@ -5272,63 +5279,70 @@ body {
         padding-bottom: 1em;
       }
     }
+  }
+}
 
-    .popup-box {
-      border-radius: 6px;
+/**
+  Popup box styles
+**/
+.popup-box {
+  border-radius: 6px;
 
-      .p-overlaypanel-content {
-        padding: 0.2em 0;
+  .p-overlaypanel-content {
+    padding: 0.2em 0;
 
-        .popup-box__item {
-          min-width: 200px;
-        }
+    .popup-box__item {
+      min-width: 200px;
+    }
 
-        .popup-box__item a {
-          display: inline-block;
-          height: 100%;
-          width: 100%;
-          padding: 1em;
-          color: $dark-color;
-        }
+    .popup-box__item a {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      padding: 1em;
+      color: $dark-color;
+    }
 
-        .popup-box__item a:hover {
-          color: $dark-color;
-          background-color: $light-grey;
-          text-decoration: none;
-        }
-      }
+    .popup-box__item a:hover {
+      color: white;
+      background-color: $primary-color;
+      text-decoration: none;
     }
   }
 }
 
-.admin-products-table {
-  .admin-products-table__image-header {
-    width: 4rem;
-    height: auto;
-    padding-left: 0;
-    padding-right: 0;
-  }
 
-  .p-datatable-tbody {
-    .admin-products-table__image {
-      img {
-        border-radius: 6px;
-      }
-
+/**
+  Admin Products list page
+**/
+.admin-products-list {
+  .admin-products-table {
+    .admin-products-table__image-header {
+      width: 4rem;
+      height: auto;
+      padding-left: 0;
       padding-right: 0;
     }
+  
+    .p-datatable-tbody {
+      .admin-products-table__image {
+        img {
+          border-radius: 6px;
+        }
+  
+        padding-right: 0;
+      }
+    }
+  
+    .admin-products-table-searchbar {
+      width: 100%;
+    }
+  
+    .admin-products-table-searchbar__input {
+      width: 100%;
+    }
   }
 
-  .admin-products-table-searchbar {
-    width: 100%;
-  }
-
-  .admin-products-table-searchbar__input {
-    width: 100%;
-  }
-}
-
-.admin-products-list {
   .table-header {
     display: flex;
     justify-content: space-between;
@@ -5382,5 +5396,47 @@ body {
         width: 100%;
       }
     }
+  }
+}
+
+
+/**
+  Admin add product form component
+**/
+.admin-product-form {
+  .form-card__header {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .chained-option-controls {
+    width: 100%;
+  }
+}
+
+.admin-custom-form {
+  .option-input {
+    border: 1px solid $light-grey;
+    border-radius: 6px; 
+    position: relative;
+    box-shadow: $regular-shadow;
+  }
+  
+  .chained-options {
+    width: 100%;
+  
+    .form-group__label {
+      width: 100%;
+    }
+  }
+  
+  .card-footer {
+    border: 1px solid $light-grey;
+    position: relative;
+    box-shadow: $regular-shadow;
+    background: white;
+    border-radius: 6px;
   }
 }

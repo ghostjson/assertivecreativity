@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+@import './assets/css/variables.scss';
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
@@ -41,23 +43,48 @@ img {
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important
+  transform: translateY(-4px);
+  box-shadow: $regular-shadow
 }
 
 .btn-primary {
-  background: var(--primary-color);
+  color: white;
+  background: $primary-color;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+  background: $primary-color;
 }
 
 .btn-dark {
-  background: var(--dark-color) !important;
+  background: $dark-color !important;
 }
 
-.btn-warning {
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:not(:disabled):not(.disabled):active {
+  background: $bg-warning;
   color: white;
 }
 
-.btn-light, btn-light:hover {
+.btn-danger {
+  background: $bg-danger;
+  color: white;
+}
+
+.btn-success,
+.btn-success:hover,
+.btn-success:active {
+  background: $bg-success;
+  color: white;
+}
+
+.btn-light, 
+.btn-light:hover,
+.btn-light:active {
   color: black;
   background-color: white;
 }

@@ -59,7 +59,10 @@ export class AdminProductService {
           /**
            * TODO: Fix after lorem pixel is up
            */
-          product.data.image = 'https://picsum.photos/seed/480/640';
+          if(product.data.image.startsWith('http')) {
+            product.data.image = 'https://picsum.photos/seed/480/640';
+          }
+
           return product.data;
         })
       );
@@ -77,7 +80,9 @@ export class AdminProductService {
            * TODO: Remove this after lorempixel.com is fixed
            */
           products.data = products.data.map((product: Product) => {
-            product.image = 'https://picsum.photos/seed/480/640';
+            if(product.image.startsWith('http')) {
+              product.image = 'https://picsum.photos/seed/480/640';
+            }
 
             return product;
           });

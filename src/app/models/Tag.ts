@@ -1,5 +1,3 @@
-import { Category } from './Category';
-
 export class Tag {
   id?: number;
   name: string;
