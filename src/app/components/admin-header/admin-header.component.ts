@@ -18,7 +18,6 @@ export class AdminHeaderComponent implements OnInit {
   name: string;
   currentUrl: string;
   user: User;
-  sideBarCloseBtn: HTMLButtonElement;
 
 
   constructor(
@@ -80,6 +79,31 @@ export class AdminHeaderComponent implements OnInit {
         label: 'Tags',
         routerLink: '/admin/tags',
         icon: 'pi pi-tags'
+      },
+      {
+        label: 'Home',
+        routerLink: '/admin/',
+        icon: 'pi pi-home'
+      },
+      {
+        label: 'Orders',
+        routerLink: '/admin/orders',
+        icon: 'pi pi-chart-line'
+      },
+      {
+        label: 'Products',
+        routerLink: '/admin/products',
+        icon: 'pi pi-briefcase'
+      },
+      {
+        label: 'Categories',
+        routerLink: '/admin/categories',
+        icon: 'pi pi-folder'
+      },
+      {
+        label: 'Tags',
+        routerLink: '/admin/tags',
+        icon: 'pi pi-tags'
       }
     ];
 
@@ -89,7 +113,18 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.sideBarCloseBtn = document.querySelector('.p-sidebar-close');
+    let sideBarEl: HTMLDivElement = document.querySelector('.p-sidebar');
+    let sideBarDetailsEl: HTMLDivElement = document.querySelector('.sidebar-details');
+    let sideBarItemsEl: HTMLDivElement = document.querySelector('.sidebar-items');
+    let sideBarCloseBtn: HTMLButtonElement = document.querySelector('.p-sidebar-close')
+
+    let sideBarDetailsElHeight: number = Number(window.getComputedStyle(sideBarDetailsEl).height.split('px')[0]);
+    let sideBarElHeight: number = Number(window.getComputedStyle(sideBarEl).height.split('px')[0]);
+
+    let sideBarItemsElHeight: number = sideBarElHeight - sideBarDetailsElHeight - 100;
+    sideBarItemsEl.style.height = sideBarItemsElHeight + 'px';
+
+    sideBarCloseBtn.style.top = sideBarDetailsElHeight + sideBarItemsElHeight + 40 + 'px';
   }
 
   /**
@@ -97,8 +132,6 @@ export class AdminHeaderComponent implements OnInit {
    */
   toggleSidebar(): void {
     this.sidebar = !this.sidebar;
-    console.log('sidebar button: ', this.sideBarCloseBtn);
-    this.sideBarCloseBtn.classList.toggle('show-button');
   }
 
   /**
@@ -112,6 +145,9 @@ export class AdminHeaderComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Return width of the window
+   */
   windowWidth(): number {
     return window.innerWidth;
   }

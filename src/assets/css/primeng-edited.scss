@@ -5448,22 +5448,31 @@ body {
 
 .admin-header {
   .p-sidebar-left {
+    padding: 0;
+
     .p-sidebar-close {
       visibility: hidden;
-      right: -72px;
-      background: white;
-      color: $dark-color;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $primary-color;
+      color: white;
       height: 3rem;
       width: 3rem;
-
-      &.show-button {
-        visibility: visible;
-      }
+      z-index: 10002;
+      box-shadow: $large-shadow;
+      transition: all 0.3s;
     }
 
     .p-sidebar-close:hover {
+      transform: translate(-50%, -4px);
       background: $bg-primary;
       color: white;
+    }
+
+    &.p-sidebar-active {
+      .p-sidebar-close {
+        visibility: visible;
+      }
     }
   }
 

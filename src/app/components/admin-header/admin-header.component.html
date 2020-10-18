@@ -63,29 +63,30 @@
     </ng-template>
   </p-menubar>
 
-  <p-sidebar
-    [(visible)]="sidebar"
-    [baseZIndex]="10000"
-    (onHide)="sideBarCloseBtn.classList.toggle('show-button')"
-  >
+  <p-sidebar [(visible)]="sidebar" [baseZIndex]="10000">
     <div class="sidebar-content">
-      <div class="sidebar-logo">
-        <img
-          src="../../../assets/images/logo.png"
-          alt="Assertive Creativity Logo"
-        />
-      </div>
-      <div class="sidebar-content__account-details p-d-flex p-ai-center p-p-2">
-        <div class="sidebar-content__profile-img p-mr-2">
+      <div class="sidebar-details">
+        <div class="sidebar-logo">
           <img
-            src="../../../assets/images/user2-160x160.jpg"
-            alt="Profile Image"
+            src="../../../assets/images/logo.png"
+            alt="Assertive Creativity Logo"
           />
         </div>
-        <div class="sidebar-content__profile-name">
-          {{ name }}
+        <div
+          class="sidebar-content__account-details p-d-flex p-ai-center p-p-2"
+        >
+          <div class="sidebar-content__profile-img p-mr-2">
+            <img
+              src="../../../assets/images/user2-160x160.jpg"
+              alt="Profile Image"
+            />
+          </div>
+          <div class="sidebar-content__profile-name">
+            {{ name }}
+          </div>
         </div>
       </div>
+      <!-- <p-scrollPanel [style]="{width: '100%', height: '200px'}"> -->
       <div class="sidebar-items p-mt-4">
         <ng-container *ngIf="windowWidth() < 961">
           <div
@@ -120,6 +121,7 @@
           </a>
         </div>
       </div>
+      <!-- </p-scrollPanel> -->
     </div>
   </p-sidebar>
 </div>

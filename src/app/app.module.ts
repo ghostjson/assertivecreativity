@@ -119,6 +119,7 @@ import { OrderMailListComponent } from './components/order-mail-list/order-mail-
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -232,7 +233,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     TabViewModule,
     EditorModule,
     MenuModule,
-    PanelMenuModule
+    PanelMenuModule,
+    ScrollPanelModule
   ],
   entryComponents: [
   ],
