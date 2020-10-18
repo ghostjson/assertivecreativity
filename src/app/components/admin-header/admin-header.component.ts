@@ -79,31 +79,6 @@ export class AdminHeaderComponent implements OnInit {
         label: 'Tags',
         routerLink: '/admin/tags',
         icon: 'pi pi-tags'
-      },
-      {
-        label: 'Home',
-        routerLink: '/admin/',
-        icon: 'pi pi-home'
-      },
-      {
-        label: 'Orders',
-        routerLink: '/admin/orders',
-        icon: 'pi pi-chart-line'
-      },
-      {
-        label: 'Products',
-        routerLink: '/admin/products',
-        icon: 'pi pi-briefcase'
-      },
-      {
-        label: 'Categories',
-        routerLink: '/admin/categories',
-        icon: 'pi pi-folder'
-      },
-      {
-        label: 'Tags',
-        routerLink: '/admin/tags',
-        icon: 'pi pi-tags'
       }
     ];
 
