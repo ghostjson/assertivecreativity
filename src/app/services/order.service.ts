@@ -63,7 +63,7 @@ export class OrderService {
   }
 
   addMailThread(threadId: number, order: Order): Observable<Order> {
-    order.order.mail_thread = threadId;
+    order.data.mail_thread = threadId;
   
     return this._http.put<Order>(this.orderLinkById(order.id), order);
   }

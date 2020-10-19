@@ -44,9 +44,8 @@ export class OrderSummaryTableComponent implements OnInit {
     /**
      * TODO: change after array to string conversion error in cart api is fixed
      */
-    let forms: CustomFormInput[] = this.order.custom_forms as CustomFormInput[];
 
-    forms.forEach((form: CustomFormInput) => {
+    this.order.custom_forms.forEach((form: CustomFormInput) => {
       form.options.forEach((option) => {
         this.orderSummary.push(this.populateOption(option));
 

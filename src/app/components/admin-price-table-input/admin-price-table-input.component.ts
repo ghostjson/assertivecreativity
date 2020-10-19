@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { SelectItem } from "primeng/api";
-import { PriceGroup, PriceTable } from 'src/app/models/Product';
+import { PriceGroup } from 'src/app/models/Product';
 import { FormGroup, FormBuilder, FormArray, Form } from '@angular/forms';
 import { AdminProductService } from 'src/app/services/admin-product.service';
 
@@ -13,6 +13,7 @@ export class AdminPriceTableInputComponent implements OnInit {
   @Input() formGroup: FormGroup;
   
   relations: SelectItem[];
+  relationValueMap: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -21,10 +22,15 @@ export class AdminPriceTableInputComponent implements OnInit {
 
   ngOnInit() {
     this.relations = [
-      { label: "Select a relation", value: null },
-      { label: "Less than or equal", value: "lte" },
-      { label: "More than or equal", value: "mte" }
+      { label: 'Select a relation', value: null },
+      { label: 'Less than or equal', value: 'lte' },
+      { label: 'More than or equal', value: 'mte' }
     ];
+
+    this.relationValueMap = {
+      'lte': 'Less than or equal',
+      'mte': 'More than or equal'
+    };
   }
 
   /**

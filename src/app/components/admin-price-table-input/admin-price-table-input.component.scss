@@ -1,3 +1,11 @@
 .add-price-grp-btn {
   margin-top: 1em;
 }
+
+:host {
+  ::ng-deep {
+    .p-editable-column {
+      cursor: pointer;
+    }
+  }
+}

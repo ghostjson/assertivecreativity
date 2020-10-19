@@ -56,6 +56,13 @@ export class AdminProductService {
       .pipe(
         take(1),
         map((product: any) => {
+          /**
+           * TODO: Fix after lorem pixel is up
+           */
+          if(product.data.image.startsWith('http')) {
+            product.data.image = 'https://picsum.photos/seed/480/640';
+          }
+
           return product.data;
         })
       );
@@ -69,6 +76,17 @@ export class AdminProductService {
       .pipe(
         take(1),
         map((products: any) => {
+          /**
+           * TODO: Remove this after lorempixel.com is fixed
+           */
+          products.data = products.data.map((product: Product) => {
+            if(product.image.startsWith('http')) {
+              product.image = 'https://picsum.photos/seed/480/640';
+            }
+
+            return product;
+          });
+
           return products.data;
         })
       );

@@ -3,8 +3,8 @@ import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
 import { CartService } from 'src/app/services/cart.service';
-import { MenuItem } from 'primeng/api';
 import { User } from 'src/app/models/User';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: "app-header",
@@ -15,9 +15,9 @@ import { User } from 'src/app/models/User';
 export class HeaderComponent implements OnInit {
   user_role: any;
   cartLength: number;
-  navItems: MenuItem[];
+  navStartItems: MenuItem[];
+  navEndItems: MenuItem[];
   logo: string;
-  token: string;
   user: User;
 
   constructor(
@@ -32,8 +32,8 @@ export class HeaderComponent implements OnInit {
     this.logo = './../../../assets/images/logo.png';
     this.cartLength = 0;
 
-    this.token = localStorage.getItem('Token');
-    if (this.token) {
+    let token = localStorage.getItem('Token');
+    if (token) {
       this._user.getUser().subscribe((user: User) => {
         this.user = user;
         console.info('User details: ', this.user);
@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
       })
     }
     else {
+      this.user = null;
       this._common.setLoader(false);
     }
 
@@ -56,14 +57,19 @@ export class HeaderComponent implements OnInit {
     //   this._common.setLoader(false);
     // });
 
-    this.navItems = [
-      {
-        label: 'Home',
-        routerLink: '/'
-      },
+    this.navStartItems = [
       {
         label: 'Shop',
-        routerLink: '/shop/select-type'
+        items: [
+          {
+            label: 'Stock Items',
+            routerLink: '/shop/stocks'
+          },
+          {
+            label: 'Customize',
+            routerLink: ''
+          }
+        ]
       },
       {
         label: 'About Us',

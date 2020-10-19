@@ -8,10 +8,15 @@
   display: block;
 }
 
+.color-input__input {
+  &.form-group__input {
+    width: 100%;
+  }
+}
+
 .color-preview {
-  width: 2rem;
-  height: 100%;
   border: none;
+  border-radius: 0 6px 6px 0;
 }
 
 .color-picker-input {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { FormGroup } from '@angular/forms';
-import { AdminProductService } from 'src/app/services/admin-product.service';
+import { Tag } from 'src/app/models/Tag';
 
 @Component({
   selector: 'app-admin-tag-selector',
@@ -10,7 +10,12 @@ import { AdminProductService } from 'src/app/services/admin-product.service';
 })
 export class AdminTagSelectorComponent {
   @Input() formGroup: FormGroup;
-  @Input() tags: SelectItem[];
+  @Input() tags: Tag[];
+  selectedTags: Tag[];
 
   constructor() { }
+
+  logTags() {
+    console.log('tags selected: ', this.selectedTags);
+  }
 }

@@ -1,2 +1,19 @@
 $accent-color: #4056A1;
 $light-grey: #f1f1f1;
+$primary-color: #cc9933;
+$secondary-color: #deefb7;
+$dark-color: #2b2b2b;
+$bg-primary: #cc9933;
+$bg-danger: linear-gradient(90deg, #FF414D 0%, #f85161 100%);
+$bg-warning: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
+$bg-success: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+$danger-color-grad: linear-gradient(90deg, #FF414D 0%, #f85161 100%);
+$warning-color-grad: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
+$success-color-grad: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+
+/**
+  Shadows
+**/
+$small-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+$regular-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+$large-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;

@@ -10,10 +10,10 @@
       </div>
       <div class="col-12 col-md-4">
         <app-product-summary-card
-          [name]="order.product_details.name"
-          [description]="order.product_details.description"
-          [totalPrice]="order.order.total_price"
-          [image]="order.product_details.image"
+          [name]="order.data.product_details.name"
+          [description]="order.data.product_details.description"
+          [totalPrice]="order.data.total_price"
+          [image]="order.data.product_details.image"
         ></app-product-summary-card>
       </div>
       <div class="col-12 col-md-8">
@@ -29,7 +29,7 @@
         </h2>
         <app-order-mail-list
           [mails]="mails"
-          [mailThread]="order.order.mail_thread"
+          [mailThread]="order.data.mail_thread"
         ></app-order-mail-list>
       </div>
       <ng-template #messageBtn>

@@ -25,6 +25,7 @@ export class AdminProductsListComponent implements OnInit {
     this._productService.getProducts()
       .subscribe((products: Product[]) => {
         this.products = products;
+        console.log('products received: ', products);
       });
   }
 
@@ -111,14 +112,22 @@ export class AdminProductsListComponent implements OnInit {
    * @param product Product to duplicate
    */
   duplicateProduct(product: Product): void {
-    let duplicate: Product = new Product(product);
+    /**
+     * TODO: Fix duplicated product
+     * stock is being proxied now, so fix that
+     */
+    // let duplicate: Product = new Product(product);
 
-    duplicate.id = undefined;
+    // duplicate.id = null;
 
+    product.id = null;
+    product.category_id = product.category.id;
+    product.stock = 30;
+    console.log('duplicate product: ', product);
     // add the product to products 
-    this._productService.addProduct(duplicate)
+    this._productService.addProduct(product)
       .subscribe((duplicateProduct: Product) => {
-        this.products.push(new Product(duplicateProduct));
+        this.products.unshift(product);
         console.log('Duplicated Product returned: ', duplicateProduct.id, duplicateProduct);
       });
   }

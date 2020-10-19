@@ -1,23 +1,23 @@
 .product-badge {
   border-radius: 2px;
-  padding: .25em .5em;
+  padding: 0.25em 0.5em;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 12px;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
 
   &.status-instock {
-      background-color: #C8E6C9;
-      color: #256029;
+    background-color: #c8e6c9;
+    color: #256029;
   }
 
   &.status-outofstock {
-      background-color: #FFCDD2;
-      color: #C63737;
+    background-color: #ffcdd2;
+    color: #c63737;
   }
 
   &.status-lowstock {
-      background-color: #FFD8B2;
-      color: #805B36;
+    background-color: #ffd8b2;
+    color: #805b36;
   }
 }

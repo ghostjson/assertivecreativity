@@ -1,7 +1,10 @@
-<div [formGroup]="formGroup">
+<div class="admin-price-table-input" 
+  [formGroup]="formGroup"
+>
   <p-table
     [value]="formGroup.controls.price_table.value"
     [rowTrackBy]="trackByFn"
+    styleClass="p-datatable-gridlines mb-3"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -26,12 +29,9 @@
         <td pEditableColumn>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <!-- <input pInputText type="number" [(ngModel)]="rowData.pricePerPiece" required /> -->
               <p-inputNumber
                 formControlName="price_per_piece"
-                mode="currency"
-                currency="USD"
-                locale="en-US"
+                mode="decimal"
                 [minFractionDigits]="2"
                 [maxFractionDigits]="2"
               ></p-inputNumber>
@@ -44,7 +44,6 @@
         <td pEditableColumn>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <!-- <input pInputText type="number" [(ngModel)]="rowData.quantity" /> -->
               <p-inputNumber
                 formControlName="quantity"
               ></p-inputNumber>
@@ -64,7 +63,7 @@
               ></p-dropdown>
             </ng-template>
             <ng-template pTemplate="output">
-              {{ formGroup.value.price_table[ri].relation }}
+              {{ relationValueMap[formGroup.value.price_table[ri].relation] }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -72,7 +71,7 @@
     </ng-template>
   </p-table>
   <p-button
-    label="Add Price Group"
+    label="Add Price Row"
     icon="pi pi-plus"
     iconPos="right"
     (click)="addPriceGroup()"

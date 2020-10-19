@@ -29,8 +29,8 @@
                   <th scope="row" class="border-0">
                     <div class="p-2">
                       <img
-                        src="{{ item.product_details.image }}"
-                        alt="{{ item.product_details.name }}"
+                        src="{{ item.product.image }}"
+                        alt="{{ item.product.name }}"
                         width="70"
                         class="img-fluid rounded shadow-sm"
                       />
@@ -40,13 +40,13 @@
                             routerLink="/cart/{{item.id}}"
                             class="text-dark d-inline-block align-middle"
                           >
-                            {{item.product_details.name}}
+                            {{item.product.name}}
                           </a>
                         </h5>
                         <span
                           class="text-muted font-weight-normal font-italic d-block"
                         >
-                          {{item.product_details.category}}
+                          {{item.product.category}}
                         </span>
                       </div>
                     </div>

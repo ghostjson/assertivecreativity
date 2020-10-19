@@ -1,1 +1,8 @@
 @import 'src/assets/css/admin-common.scss';
+@import '../../../assets/css/variables.scss';
+
+:host {
+  &>div {
+    background-color: $light-grey;
+  }
+}

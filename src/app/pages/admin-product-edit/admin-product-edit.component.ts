@@ -38,10 +38,7 @@ export class AdminProductEditComponent implements OnInit {
    */
   buildPriceTable(): FormArray {
     let priceTable: FormArray = this._fb.array([]);
-
-    // loop through priceTable priceGroups and push
-    // priceGroups to a form array 
-    let parsedPriceTable = JSON.parse(String(this.productObj.price_table));
+    let parsedPriceTable = this.productObj.price_table;
     parsedPriceTable.forEach((priceGroup: PriceGroup) => {
       priceTable.push(
         this._productService.newPriceGroup(priceGroup)
@@ -136,6 +133,9 @@ export class AdminProductEditComponent implements OnInit {
       category: [
         this.productObj.category,
         [Validators.required]
+      ],
+      category_id: [
+        this.productObj.category_id
       ],
       tags: [
         this.productObj.tags,

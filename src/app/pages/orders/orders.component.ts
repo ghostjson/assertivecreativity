@@ -25,11 +25,11 @@ export class OrdersComponent implements OnInit {
     this._orderService.getOrders()
       .subscribe((orders: Order[]) => {
         orders.forEach((order: Order) => {
-          order.product_details = null;
+          order.data.product_details = null;
 
           this._productService.getProduct(order.product_id)
             .subscribe((product: Product) => {
-              order.product_details = product;
+              order.data.product_details = product;
               this.orders.push(order);
             });
         });

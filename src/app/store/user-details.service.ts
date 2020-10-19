@@ -28,7 +28,7 @@ export class UserDetailsService {
       .pipe(
         take(1),
         map((user: any) => {
-          return {...user.data};
+          return user.data;
         })
       );
   }

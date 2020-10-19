@@ -1,10 +1,10 @@
-<div class="p-grid">
+<div class="p-grid admin-products-list">
   <p-toast baseZIndex="100000"></p-toast>
   
   <div class="p-col card p-3">
-    <p-toolbar styleClass="p-mb-4">
+    <p-toolbar styleClass="toolbar shadow p-mb-4">
       <ng-template pTemplate="left">
-        <h1 class="p-m-0">Manage Products</h1>
+        <h1 class="toolbar__title m-md-0 mb-3">Manage Products</h1>
       </ng-template>
   
       <ng-template pTemplate="right">
@@ -21,7 +21,7 @@
           pRipple
           label="Delete"
           icon="pi pi-trash"
-          class="p-button-danger"
+          class="p-button-danger d-none"
           (click)="deleteSelectedProducts()"
           [disabled]="!selectedProducts || !selectedProducts.length"
         ></button>
@@ -31,49 +31,50 @@
     <p-table
       #dt
       [value]="products"
-      [rows]="10"
+      [rows]="25"
+      [rowsPerPageOptions]="[25,50, 100]"
       [paginator]="true"
       [globalFilterFields]="[
         'name',
         'serial',
-        'category'
+        'category.name',
+        'base_price'
       ]"
       [(selection)]="selectedProducts"
       [rowHover]="true"
       dataKey="id"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
+      styleClass="admin-products-table"
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <span class="p-input-icon-right">
-            <i class="pi pi-search"></i>
+          <span class="admin-data-table-searchbar p-input-icon-right">
+            <i class="admin-data-table-searchbar__icon pi pi-search"></i>
             <input
-              pInputText
+              class="admin-data-table-searchbar__input"
               type="text"
               (input)="dt.filterGlobal($event.target.value, 'contains')"
-              placeholder="Search..."
+              placeholder="Search name, serial, category and base price"
+              pInputText
             />
           </span>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem;">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
+          <th class="admin-products-table__image-header"></th>
           <th pSortableColumn="name">
             Name <p-sortIcon field="name"></p-sortIcon>
           </th>
           <th pSortableColumn="serial">
             Serial <p-sortIcon field="serial"></p-sortIcon>
           </th>
-          <th>Image</th>
           <th pSortableColumn="price">
             Price <p-sortIcon field="base_price"></p-sortIcon>
           </th>
-          <th pSortableColumn="category">
-            Category <p-sortIcon field="category"></p-sortIcon>
+          <th pSortableColumn="category.name">
+            Category <p-sortIcon field="category.name"></p-sortIcon>
           </th>
           <th pSortableColumn="stockStatus">
             Status <p-sortIcon field="stockStatus"></p-sortIcon>
@@ -83,30 +84,60 @@
       </ng-template>
       <ng-template pTemplate="body" let-product>
         <tr>
-          <td>
-            <p-tableCheckbox [value]="product"></p-tableCheckbox>
-          </td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.serial }}</td>
-          <td>
+          <td class="admin-products-table__image">
             <img
-              [src]="'assets/images/demo-product-images/3.jpg'"
+              [src]="product.image"
               [alt]="product.name"
               width="100"
-              class="p-shadow-4"
+              class="shadow"
             />
           </td>
-          <td>{{ product.base_price | currency: "USD" }}</td>
-          <td>{{ product.category }}</td>
           <td>
+            <span class="p-column-title">
+              Name
+            </span>
+            <span>
+              {{ product.name }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">
+              Serial
+            </span>
+            <span>
+              {{ product.serial }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">
+              Price
+            </span>
+            <span>
+              {{ product.base_price | currency: "USD" }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">
+              Category
+            </span>
+            <span>
+              {{ product.category.name }}
+            </span>
+          </td>
+          <td>
+            <span class="p-column-title">
+              Status
+            </span>
             <span
               [class]="
                 'product-badge status-' + availability(product)
               "
-              >{{ availability(product) }}</span
+              >
+                {{ availability(product) }}
+              </span
             >
           </td>
-          <td>
+          <td class="admin-data-table__tools">
             <a
               [routerLink]="[product.id, 'edit']"
               pButton
@@ -118,7 +149,7 @@
               pButton
               pRipple
               icon="pi pi-trash"
-              class="p-button-rounded p-button-warning p-mr-2"
+              class="p-button-rounded p-button-danger p-mr-2"
               (click)="deleteProduct(product)"
             ></button>
             <button

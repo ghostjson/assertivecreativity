@@ -12,18 +12,18 @@ export class Order {
   delivery_date?: string;
   order_status: string;
   payment_id?: number;
-  order: OrderData;
-  product_details?: Product;
+  data: OrderData;
 }
 
 export class OrderData {
   quantity: number;
   total_price: number;
   mail_thread?: number;
+  product_details: Product;
   /**
    * TODO: fix after api is fixed with the array to string error
    */
-  custom_forms: CustomFormInput[] | string;
+  custom_forms: CustomFormInput[];
 }
 
 export class CustomFormInput {
