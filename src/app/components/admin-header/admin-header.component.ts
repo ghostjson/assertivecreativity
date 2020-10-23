@@ -85,9 +85,17 @@ export class AdminHeaderComponent implements OnInit {
     this._user.getUser().subscribe((user) => {
       this.name = `${user.first_name} ${user.last_name}`;
     });
-  }
 
-  ngAfterViewInit(): void {
+  }
+  
+  ngAfterViewChecked(): void {
+    this.positionSidebarCloseBtn();
+  }
+  
+  /**
+   * Position the sidebar close button
+   */
+  positionSidebarCloseBtn(): void {
     let sideBarEl: HTMLDivElement = document.querySelector('.p-sidebar');
     let sideBarDetailsEl: HTMLDivElement = document.querySelector('.sidebar-details');
     let sideBarItemsEl: HTMLDivElement = document.querySelector('.sidebar-items');

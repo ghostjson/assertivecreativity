@@ -3,7 +3,7 @@ import {
   Product,
   listCustomOptions,
   listAllFeatures,
-  Form
+  CustomForm
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -58,7 +58,6 @@ export class ProductService {
       reqLink += `tags=${tag}&`;
     });
 
-    console.info('products request link: ', reqLink);
     return this._http.get<Product[]>(reqLink)
       .pipe(
         take(1),
@@ -82,11 +81,14 @@ export class ProductService {
    * @param id Id of the product
    */
   getProduct(id: number): Observable<any> {
-    console.log('product link: ', this.productLink(id));
     return this._http.get(this.productLink(id))
       .pipe(
         take(1),
         map((product: any) => {
+          /**
+           * TODO: Fix after lorempixel is fixed
+           */
+          product.data.image = 'https://picsum.photos/480/640';
           return product.data;
         })
       );
@@ -133,8 +135,6 @@ export class ProductService {
       optionTemplate.chained_options = this._fb.array([]);
     }
 
-    console.log("option created: ", this._fb.group(optionTemplate).value);
-
     return this._fb.group(optionTemplate);
   }
 
@@ -151,7 +151,7 @@ export class ProductService {
    * Create a formGroup for adding to custom form array
    * @param form form object to create formGroup
    */
-  newForm(form: Form): FormGroup {
+  newForm(form: CustomForm): FormGroup {
     let formTemplate = {
       id: form.id,
       title: form.title,
@@ -171,7 +171,7 @@ export class ProductService {
    * @param form form object to create formGroup
    * @param formArray formArray to insert the formGroup
    */
-  addForm(form: Form, formArray: FormArray): void {
+  addForm(form: CustomForm, formArray: FormArray): void {
     formArray.push(this.newForm(form));
   }
 

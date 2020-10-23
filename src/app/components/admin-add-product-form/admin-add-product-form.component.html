@@ -5,7 +5,12 @@
         <div class="form-card__header">
           <div class="form-card-header__left">
             <h1 class="form-card__title">
-              Enter the product details
+              <ng-container *ngIf="isEdit; else addProductTitle">
+                Edit {{productForm.value.name}}
+              </ng-container>
+              <ng-template #addProductTitle>
+                Enter the product details
+              </ng-template>
             </h1>
           </div>
           <div class="form-card-header__right">

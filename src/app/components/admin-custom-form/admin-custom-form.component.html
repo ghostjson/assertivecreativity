@@ -1,5 +1,7 @@
-<div class="admin-custom-form mb-5">
-  <aside class="form-controls">
+<div class="admin-custom-form-component mb-5">
+  <aside 
+    *ngIf="!formGroup.value.is_formgroup"
+    class="form-controls">
     <div class="form-controls__btn">
       <button
         (click)="selectOptionOverlayTemplate.toggle($event)"
@@ -66,23 +68,38 @@
     <div class="form-card__body">
       <div class="form-group">
         <label
-          for="parentForm"
+          for="isFormGroup"
         >
-          Select a parent form
+          Form Group
         </label>
-        <div class="input-group">
-          <p-dropdown [options]="getFormIds()" formControlName="parentForm"></p-dropdown>
+        <div id="isFormGroup" class="input-group">
+          <p-inputSwitch formControlName="is_formgroup"></p-inputSwitch>
         </div>
       </div>
-      <ng-container formArrayName="options">
-        <div class="mt-5" *ngFor="let option of options().controls; let optionInd = index">
-          <app-admin-form-options
-            [formArray]="options()"
-            [option]="option"
-            [ind]="optionInd"
+      <ng-container *ngIf="!formGroup.value.is_formgroup">
+        <div class="form-group">
+          <label
+            for="parentForm"
           >
-          </app-admin-form-options>
+            Select a parent form
+          </label>
+          <div class="input-group">
+            <p-dropdown 
+              [options]="parentForms" formControlName="parent_form"
+              (onClick)="updateParentForms()"
+            ></p-dropdown>
+          </div>
         </div>
+        <ng-container formArrayName="options">
+          <div class="mt-5" *ngFor="let option of options().controls; let optionInd = index">
+            <app-admin-form-options
+              [formArray]="options()"
+              [option]="option"
+              [ind]="optionInd"
+            >
+            </app-admin-form-options>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
   </p-card>

@@ -20,9 +20,6 @@ export class OrderData {
   total_price: number;
   mail_thread?: number;
   product_details: Product;
-  /**
-   * TODO: fix after api is fixed with the array to string error
-   */
   custom_forms: CustomFormInput[];
 }
 

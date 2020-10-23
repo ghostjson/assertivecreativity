@@ -102,8 +102,7 @@ export class Product {
   image: string;
   price_table_mode: boolean | string;
   price_table: PriceGroup[];
-  features?: Feature[];
-  custom_forms?: Form[];
+  custom_forms?: CustomForm[];
 
   constructor(initial: Product=null) {
     if (initial) {
@@ -136,7 +135,7 @@ export class Product {
       this.image = '';
       this.price_table_mode = false;
       this.price_table = [new PriceGroup()];
-      this.custom_forms = [new Form()];
+      this.custom_forms = [new CustomForm()];
     }
   }
 }
@@ -215,24 +214,14 @@ export class OptionMeta {
   chained_ops_hidden?: boolean;
 }
 
-
-// model for features
-export interface Feature {
-  type: string,
-  trigger?: string,
-  price?: number,
-  title: string,
-  name: string,
-  inputs: Array<any>,
-  chained_inputs?: Feature[]
-}
-
 // model for customisation form
-export class Form {
+export class CustomForm {
   id: number;
   title: string;
+  is_formgroup: boolean;
   parent_form: number;
-  options: any[]
+  options: any[];
+  custom_forms?: CustomForm[];
 }
 
 export class PriceGroup {
@@ -284,11 +273,6 @@ export class PriceTable {
       });
     }
   }
-
-  // add(priceGroup: PriceGroup): void {
-  //   this.priceGroups.push(priceGroup);
-  //   console.log('price group added to table', priceGroup);
-  // }
 }
 
 // return all the possible feature a product can have

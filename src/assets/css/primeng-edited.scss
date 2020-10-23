@@ -3213,8 +3213,6 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-card {
   background: #ffffff;
   color: #495057;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 1px 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 6px;
 }
 .p-card .p-card-body {
@@ -5046,8 +5044,9 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-prev:hover,
 .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-next:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f8f9fa;
+  background: $primary-color;
+  color: white;
+  cursor: pointer;
 }
 .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-item-content {
   transition: box-shadow 0.2s;
@@ -5198,8 +5197,10 @@ body {
     padding: 0.7em;
   }
 
-  p-button {
-    background: none;
+  .p-button {
+    .p-button-label {
+      font-weight: 600;
+    }
   }
 
   .ui-button {
@@ -5421,7 +5422,10 @@ body {
   }
 }
 
-.admin-custom-form {
+/**
+Admin Custom Form component
+**/
+.admin-custom-form-component {
   .option-input {
     border: 1px solid $light-grey;
     border-radius: 6px; 
@@ -5444,8 +5448,17 @@ body {
     background: white;
     border-radius: 6px;
   }
+
+  .add-form-options-overlay {
+    .p-overlaypanel-content {
+      padding: 0;
+    }
+  }
 }
 
+/**
+Admin Header
+**/
 .admin-header {
   .p-sidebar-left {
     padding: 0;
@@ -5478,5 +5491,68 @@ body {
 
   .p-menubar-button {
     display: none;
+  }
+}
+
+/**
+Product Detail component
+**/
+.product-detail-component {
+  .p-galleria-item-container {
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .p-galleria-item {
+    min-height: 300px;
+    background: white;
+  }
+
+  .p-galleria-thumbnail-container {
+    background: white;
+    margin-top: 1em;
+    border-radius: 6px;
+    justify-content: space-between;
+
+    .p-galleria-thumbnail-items-container {
+      flex-grow: 1;
+    }
+
+    .p-galleria-thumbnail-item-content {
+      width: 3rem;
+      height: 3rem;
+      overflow: hidden;
+      border-radius: 6px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+    .p-galleria-thumbnail-next,
+    .p-galleria-thumbnail-prev {
+      color: $dark-color;
+    }
+  }
+
+  .form-overview {
+    .p-scrollpanel-wrapper {
+      background: white;
+      border: 1px solid $light-grey;
+      border-radius: 6px;
+      width: 100%;
+      height: 90vh;
+    }
+
+    .p-tree {
+      border: none;
+
+      .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+        background: white;
+      }
+    }
   }
 }

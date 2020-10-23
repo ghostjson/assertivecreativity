@@ -84,6 +84,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { EditorModule } from 'primeng/editor';
 import { MenuModule } from 'primeng/menu';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TreeModule } from 'primeng/tree';
 
 import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
 import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
@@ -119,7 +121,6 @@ import { OrderMailListComponent } from './components/order-mail-list/order-mail-
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -234,7 +235,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     EditorModule,
     MenuModule,
     PanelMenuModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    TreeModule
   ],
   entryComponents: [
   ],

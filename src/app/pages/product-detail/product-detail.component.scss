@@ -1,73 +1,7 @@
 @import '../../../assets/css/variables.scss';
 
-:host>div {
-  background-color: $light-grey;
-}
-
-.product-img {
-  top: 0;
-
-  #product-indicator {
-    // margin: 3em;
-    min-height: 3rem;
-  }
-}
-
-.content {
-  // padding-top: 100px;
-
-  h3 {
-    font-size: 2em;
-    font-weight: 600;
-  }
-
-  h4 {
-    font-size: 1em;
-    color: var(--primary-color);
-  }
-
-  .params {
-    margin-top: 2em;
-    margin-bottom: 10px;
-
-    p {
-      margin-bottom: 3px;
-    }
-  }
-
-  .product-price {
-    font-size: 1.75rem;
-    font-weight: bolder;
-
-  }
-
-  @media (max-width: 768px) {
-    // padding-top: 100px;
-  }
-}
-
-.more {
-  font-size: 0.9em;
-  background: var(--dark-color);
-  width: fit-content;
-  margin: 5px 5px;
-  padding: 5px 10px;
-  color: white;
-  cursor: pointer;
-}
-
-.rating {
-  margin-top: 30px;
-
-  .total_rate {
-    &:first-child {
-      text-align: center;
-    }
-  }
-}
-
-.card {
-  box-shadow: none;
+.product-detail-component {
+  background: $light-grey;
 }
 
 .card-img__img {
@@ -104,8 +38,23 @@
   max-height: 100%;
 }
 
-.product-detail {
-  height: 100%;
+.product-details {
+  
+}
+
+.product-details__name {
+  font-weight: bold;
+}
+
+.product-details-section__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $dark-grey;
+}
+
+.product-details__price-value {
+  font-size: 1.8rem;
+  font-weight: 900;
 }
 
 .object--contain {
