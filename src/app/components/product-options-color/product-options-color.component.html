@@ -1,30 +1,42 @@
 <!-- add color option -->
-<ng-container [formGroup]="formGroup">
-  <div>
-    <h5 class="customization-title">
-      {{option.title}}
-      <sup *ngIf="requiredInp">
-        * required
-      </sup>
-    </h5>
-    <div class="color-list d-flex row justify-content-start">
-      <div *ngFor="let input of option.inputs; let colorInd = index" 
-        class="color-container col customization-input mb-2"
-      >
-        <input
-          formControlName="input"
-          class="sr-only" type="radio"
-          id="color-{{ids[colorInd]}}"
-          value="{{input.value}}"
-          [attr.checked]="colorInd === 0 ? 'checked' : null"
-          (input)="emitValue(input.value)"
-        >
-        <label for="color-{{ids[colorInd]}}" class="form-check-label">
-          <div class="color-preview fas fa-circle" [style.color]="input.value"></div>
-          <div class="color-name">{{input.label}}</div>
-        </label>
-      </div>
+<div 
+  [formGroup]="formGroup"
+  class="mb-5"
+>
+  <h5 class="customization-question">
+    <span class="customization-question__text">
+      {{ option.title }}
+    </span>
+    <sup class="customization-question__req-badge" *ngIf="requiredInp">
+      * required
+    </sup>
+  </h5>
+  <div
+    class="
+      customization-input-container color-list
+    "
+  >
+    <div
+      *ngFor="let input of option.inputs; index as colorInd"
+      [ngClass]="{
+        'customization-input customization-input-color': true,
+        'customization-input--selected': formGroup.value.input === input.value ? true : false
+      }"
+    >
+      <input
+        class="customization-input__input"
+        formControlName="input"
+        type="radio"
+        id="color-{{ ids[colorInd] }}"
+        value="{{ input.value }}"
+        (input)="emitValue(input.value)"
+      />
+      <label for="color-{{ ids[colorInd] }}" class="customization-input-label">
+        <div class="customization-input-label__text">
+          {{ input.label }}
+        </div>
+        <div class="color-preview" [style.background]="input.value"></div>
+      </label>
     </div>
   </div>
-</ng-container>
-
+</div>

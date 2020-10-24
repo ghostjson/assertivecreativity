@@ -1,15 +1,19 @@
-<div [formGroup]="formGroup" class="row">
-  <h5 class="col-12 customization-title">
-    {{option.title}}
-    <sup *ngIf="requiredInp">
+<div [formGroup]="formGroup">
+  <h5 class="customization-question">
+    <span class="customization-question__text">
+      {{option.title}}
+    </span>
+    <sup *ngIf="requiredInp"
+      class="customization-question__req-badge"
+    >
       * required
     </sup>
   </h5>
-  <div class="dropdown-list pl-1">
+  <div class="customization-input-container">
     <p-dropdown
+      class="customization-input"
       [options]="dropdownList"
       formControlName="input"
-      filter="true"
       (onChange)="emitValue($event)"
     ></p-dropdown>
   </div>

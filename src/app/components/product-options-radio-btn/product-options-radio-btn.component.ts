@@ -38,6 +38,10 @@ export class ProductOptionsRadioBtnComponent implements OnInit {
     }
   }
 
+  /**
+   * Emit the input given
+   * @param event event object containing the input given
+   */
   emitValue(event: any): void {
     this.onChange.emit(event);
   }

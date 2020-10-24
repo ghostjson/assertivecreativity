@@ -1,25 +1,59 @@
-.card-body {
-  border-top: 1px solid whitesmoke;
+@import '../../../assets/css/variables.scss';
+
+.customization-question__text {
+  font-weight: bold;
 }
 
-.customization-title {
+.customization-input-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
-.color-container {
-  text-align: center;
-
-  .color-preview {
-    border: 5px solid transparent;
-    border-radius: 50%;
+.customization-input {
+  min-width: 100px;
+  display: flex;
+  margin: 1em 0.5em 0 0;
+  border: 1px solid $light-grey;
+  border-radius: 6px;
+  
+  &.customization-input--selected {
+    position: relative;
+    box-shadow: $regular-shadow;
+    color: white;
+    background: $bg-primary;
+    border-color: $primary-color;
   }
 }
 
-label {
+.customization-input:hover {
+  position: relative;
+  box-shadow: $regular-shadow;
+  color: white;
+  background: $bg-primary;
+  border-color: $primary-color;
+}
+
+.customization-input-label {
+  display: flex;
+  margin-bottom: 0;
+  flex-grow: 1;
+  padding: 0.5em;
+  margin-left: 0.5em;
+}
+
+.customization-input__input {
+  margin-left: 0.5em;
+}
+
+.customization-input-label:hover,
+.customization-input__input:hover {
   cursor: pointer;
 }
 
-input:checked~label {
-  .color-preview {
-    border-color: var(--primary);
-  }
+.color-preview {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 6px;
+  margin-left: 0.5em;
 }
