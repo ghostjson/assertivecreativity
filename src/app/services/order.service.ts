@@ -78,19 +78,8 @@ export class OrderService {
       description: product.description,
       base_price: product.base_price,
       image: product.image,
-      custom_forms: this._fb.array([]),
-      custom_form_groups: this._fb.array([])
+      custom_forms: this._fb.array([])
     };
-
-    /**
-     * TODO: Remove once the new form structure is implemented
-     */
-    // product.custom_forms.forEach((customForm) => {
-    //   this._productService.addForm(
-    //     customForm, 
-    //     orderFormTemplate.custom_forms
-    //   );
-    // });
 
     let custom_form_groups_dict = {};
     product.custom_forms.forEach((customForm) => {
@@ -152,6 +141,4 @@ export class OrderService {
 
     return this._fb.group(orderFormTemplate);
   }
-
-  
 }

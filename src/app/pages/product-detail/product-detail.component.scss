@@ -1,7 +1,7 @@
 @import '../../../assets/css/variables.scss';
 
 .product-detail-component {
-  background: $light-grey;
+  background: $lighter-grey;
 }
 
 .card-img__img {
@@ -26,7 +26,7 @@
 }
 
 .negotiate-form .card-body::nth-of-type(2n+1) {
-  border-top: 1px solid grey;
+  border-top: 1px solid $light-grey;
 }
 
 .card-footer__btn {
@@ -59,4 +59,14 @@
 
 .object--contain {
   object-fit: contain;
+}
+
+.form-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.form-group__title {
+  font-size: 1.4rem;
+  font-weight: 400;
 }
