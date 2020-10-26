@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { OrderSummaryTable, CustomOption, CustomFormInput, Order, OrderData } from '../../models/Order';
+import { CartCustomFormsEntry } from 'src/app/models/Cart';
+import { OrderSummaryTable, CustomOption, CustomFormsEntry, CustomFormInput } from '../../models/Order';
 
 @Component({
   selector: 'app-order-summary-table',
@@ -8,12 +9,13 @@ import { OrderSummaryTable, CustomOption, CustomFormInput, Order, OrderData } fr
   styleUrls: ['./order-summary-table.component.scss']
 })
 export class OrderSummaryTableComponent implements OnInit {
-  @Input() order: OrderData;
+  @Input() formsData: CartCustomFormsEntry;
 
   orderSummary: TreeNode[];
   formSummary: OrderSummaryTable[];
 
   ngOnInit(): void {
+    console.info('cart item object in summary table: ', this.formsData);
     // add data needed for table component from the order details
     this.populateOrderTable();
   }
@@ -41,19 +43,40 @@ export class OrderSummaryTableComponent implements OnInit {
   populateOrderTable(): void {
     this.orderSummary = [];
 
-    /**
-     * TODO: change after array to string conversion error in cart api is fixed
-     */
-
-    this.order.custom_forms.forEach((form: CustomFormInput) => {
-      form.options.forEach((option) => {
-        this.orderSummary.push(this.populateOption(option));
-
-        // populate chained options
-        option.chained_options.forEach((chainedOption) => {
-          this.orderSummary.push(this.populateOption(chainedOption));
+    this.formsData.forms_input.custom_forms.forEach((formInput: CustomFormsEntry) => {
+      if(formInput.is_formgroup) {
+        formInput.subforms.forEach((subform: CustomFormInput) => {
+          subform.options.forEach((option) => {
+            this.orderSummary.push(this.populateOption(option));
+    
+            // populate chained options
+            option.chained_options.forEach((chainedOption) => {
+              this.orderSummary.push(this.populateOption(chainedOption));
+            });
+          });
         });
-      });
+      }
+      else {
+        formInput.options.forEach((option) => {
+          this.orderSummary.push(this.populateOption(option));
+  
+          // populate chained options
+          option.chained_options.forEach((chainedOption) => {
+            this.orderSummary.push(this.populateOption(chainedOption));
+          });
+        });
+      }
     });
+
+    // this.order.custom_forms.forEach((form: CustomFormInput) => {
+    //   form.options.forEach((option) => {
+    //     this.orderSummary.push(this.populateOption(option));
+
+    //     // populate chained options
+    //     option.chained_options.forEach((chainedOption) => {
+    //       this.orderSummary.push(this.populateOption(chainedOption));
+    //     });
+    //   });
+    // });
   }
 }

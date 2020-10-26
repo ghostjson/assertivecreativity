@@ -148,10 +148,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((product) => {
         this.product = product;
-        /**
-         * TODO: Fix for Array to string conversion bug
-         */
-        this.product.price_table = this.product.price_table;
         console.info("Product Received: ", this.product);
 
         this.image_set = [
@@ -243,12 +239,16 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     let cartItem: CartItem = {
       product_id: this.productId,
+      product: this.product,
       quantity: 1,
-      custom_forms_entry: this.orderForm.value,
+      custom_forms_entry: {
+        forms_input: this.orderForm.value,
+        total_price: 10
+      },
     };
 
     // order = this.cleanForm(order);
-    cartItem.total_price = this.priceTotal;
+    // cartItem.custom_forms_entry.total_price = this.priceTotal;
     console.log('add to cart: ', cartItem);
     this._cartService.addToCart(cartItem).subscribe((item: CartItem) => {
       this._router.navigate(["/cart"]);

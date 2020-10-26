@@ -66,7 +66,7 @@ export class ProductService {
            * TODO: Remove this after lorempixel.com is fixed
            */
           products.data = products.data.map((product: Product) => {
-            product.image = 'https://picsum.photos/480/640';
+            // product.image = 'https://picsum.photos/480/640';
 
             return product;
           });
@@ -88,7 +88,7 @@ export class ProductService {
           /**
            * TODO: Fix after lorempixel is fixed
            */
-          product.data.image = 'https://picsum.photos/480/640';
+          // product.data.image = 'https://picsum.photos/480/640';
           return product.data;
         })
       );

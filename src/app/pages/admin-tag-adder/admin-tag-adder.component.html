@@ -1,7 +1,7 @@
 <div class="admin-tag-adder">
   <app-admin-header></app-admin-header>
 
-  <div class="tags-table container p-my-5">
+  <div class="tags-table admin-data-table container p-my-5">
     <p-toast></p-toast>
 
     <div class="card">
@@ -91,14 +91,14 @@
                 pButton
                 pRipple
                 icon="pi pi-pencil"
-                class="p-button-rounded p-button-success p-mr-2"
+                class="p-button-success p-mr-2"
                 (click)="editTag(tag)"
               ></button>
               <button
                 pButton
                 pRipple
                 icon="pi pi-trash"
-                class="p-button-rounded p-button-warning"
+                class="p-button-danger"
                 (click)="deleteTag(tag)"
               ></button>
             </td>

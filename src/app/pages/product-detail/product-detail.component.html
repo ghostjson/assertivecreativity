@@ -9,6 +9,7 @@
             [(value)]="image_set"
             [responsiveOptions]="responsiveOptions"
             [circular]="true"
+            [showThumbnails]="false"
             [showItemNavigators]="true"
             [showItemNavigatorsOnHover]="true"
             [showThumbnailNavigators]="true ? image_set.length > 5 : false"
@@ -81,7 +82,9 @@
       </div>
     </div>
 
-    <div [formGroup]="orderForm" class="container mt-5" id="forms">
+    <div 
+      *ngIf="product.custom_forms.length > 0"
+      [formGroup]="orderForm" class="container mt-5" id="forms">
       <h2 class="form-section-title">
         Customize The Order
       </h2>
@@ -170,16 +173,18 @@
             </ng-template>
           </div>
         </div>
-        <div class="col-lg-12 p-2">
-          <p-card styleClass="forms-footer">
-            <p-button
-              label="Add To Cart"
-              icon="pi pi-shopping-cart"
-              iconPos="right"
-              (click)="onSubmit()"
-            ></p-button>
-          </p-card>
-        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 p-2">
+        <p-card styleClass="forms-footer">
+          <p-button
+            label="Add To Cart"
+            icon="pi pi-shopping-cart"
+            iconPos="right"
+            (click)="onSubmit()"
+          ></p-button>
+        </p-card>
       </div>
     </div>
   </div>

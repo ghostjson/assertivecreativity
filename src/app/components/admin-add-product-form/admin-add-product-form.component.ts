@@ -63,6 +63,7 @@ export class AdminAddProductFormComponent implements OnInit {
 
       // create a form group for the new product
       this.productForm = this._fb.group(new ProductForm());
+      console.log('new product form created: ', this.productForm.value);
     }
 
     // intialise categories list
@@ -171,10 +172,13 @@ export class AdminAddProductFormComponent implements OnInit {
       });
     }
 
+    
     // construct product from form value 
-    let submitValue = new Product(this.productForm.value);
-
+    let submitValue = new Product(this.productForm.value);   
+    
     submitValue.category_id = submitValue.category.id;
+    
+    console.info('product object: ', submitValue);
 
     if(submitValue.price_table_mode) {
       submitValue.base_price = submitValue.price_table[0].price_per_piece;

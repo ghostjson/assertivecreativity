@@ -1,3 +1,39 @@
-.delete-btn {
-  cursor: pointer;
+@import '../../../assets/css/variables.scss';
+
+h1 {
+  background: white;
+  position: relative;
+  box-shadow: $regular-shadow;
+  border-radius: 6px;
+  border: 1px solid $light-grey;
+  padding: 0.6em;
+  font-weight: bold;
+}
+
+.cart-item-card__img {
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: $regular-shadow;
+}
+
+.product-details__name {
+  a {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $dark-color;
+  }
+}
+
+.product-details__quantity {
+  font-size: 1.2rem;
+}
+
+.product-details__price {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.cart-empty-title {
+  text-align: center;
 }

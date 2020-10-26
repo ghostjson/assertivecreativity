@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { CommonService } from 'src/app/common.service';
 import { MailService } from 'src/app/services/mail.service';
 import { MailThread } from 'src/app/models/Mail';
-import { CartItem } from 'src/app/models/Cart';
+import { Cart, CartItem } from 'src/app/models/Cart';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/Product';
 import { UserDetailsService } from 'src/app/store/user-details.service';
@@ -24,9 +24,10 @@ import { UserDetailsService } from 'src/app/store/user-details.service';
 })
 export class CartItemDetailComponent implements OnInit {
   cartItemId: number;
-  cartItem: CartItem;
+  cartItem: any;
   order: Order;
 
+  minDate: Date;
   orderDeliveryDate: Date;
 
   constructor(
@@ -48,25 +49,16 @@ export class CartItemDetailComponent implements OnInit {
         this.cartItem = cartItem;
         console.info('cart item received: ', cartItem);
       });
+    
+    let today = new Date()
+    let tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+      
+    this.minDate = tomorrow;
   }
 
-  /**
-   * Format date to the required format
-   * @param {any} date Date object
-   */
-  formatDate(date: any) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    if (month < 10) {
-      month = "0" + month;
-    }
-
-    if (day < 10) {
-      day = "0" + day;
-    }
-
-    return date.getFullYear() + "-" + month + "-" + day;
+  logDate(): void {
+    console.log('date selected: ', this.orderDeliveryDate);
   }
 
   /**
@@ -82,14 +74,14 @@ export class CartItemDetailComponent implements OnInit {
       delivery_date: this.orderDeliveryDate.toISOString(),
       data: {
         product_details: this.cartItem.product,
-        custom_forms: this.cartItem.custom_forms_entry,
-        total_price: this.cartItem.total_price, 
+        custom_forms: this.cartItem.custom_forms_entry.forms_input,
+        total_price: this.cartItem.custom_forms_entry.total_price, 
         quantity: 1
       }
     };
 
     // remove order from cart and add it to orders
-    this._cartService.deleteFromCart(this.cartItemId).subscribe((res: any) => {
+    // this._cartService.deleteFromCart(this.cartItemId).subscribe((res: any) => {
       this._orderService.placeOrder(this.order).subscribe((order: Order) => {
         console.log("order placed: ", order);
         this._router.navigate(["/orders/"]);
@@ -103,6 +95,6 @@ export class CartItemDetailComponent implements OnInit {
         //       });
         //   });
       });
-    });
+    // });
   }
 }

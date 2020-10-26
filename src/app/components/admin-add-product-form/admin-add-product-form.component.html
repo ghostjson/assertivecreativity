@@ -93,10 +93,12 @@
           </label>
           <div class="select-price-mode">
             <span class="mr-1">Switch to price table </span>
-            <p-inputSwitch formControlName="price_table_mode"></p-inputSwitch>
+            <p-inputSwitch 
+              formControlName="price_table_mode"
+            ></p-inputSwitch>
           </div>
           <app-admin-price-table-input
-            *ngIf="productForm.value.price_table_mode; else normalPrice"
+            *ngIf="productForm.value.price_table_mode && productForm.value.price_table; else normalPrice"
             [formGroup]="productForm"
           ></app-admin-price-table-input>
           <ng-template #normalPrice>

@@ -842,14 +842,14 @@ p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
   background: #b6bfc8;
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-  background: $primary-color;
+  background: $bg-primary;
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
   background: #ffffff;
 }
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
   .p-inputswitch-slider {
-  background: $primary-color;
+  background: $bg-primary;
 }
 .p-inputswitch.p-error,
 .p-inputswitch.p-invalid {
@@ -1421,7 +1421,7 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 
 .p-button {
   color: #ffffff;
-  background: $primary-color;
+  background: $bg-primary;
   border: 1px solid transparent;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -1432,6 +1432,8 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 .p-button:enabled:hover,
 .p-button:hover {
+  color: white;
+  text-decoration: none;
   cursor: pointer;
   box-shadow: $regular-shadow;
   transform: translateY(-4px);
@@ -1925,16 +1927,16 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-button.p-button-danger.p-button-outlined,
 .p-buttonset.p-button-danger > .p-button.p-button-outlined,
 .p-splitbutton.p-button-danger > .p-button.p-button-outlined {
-  background-color: transparent;
-  color: white;
-  border: 1px solid;
+  background: transparent;
+  color: $danger-color;
+  border: 1px solid $danger-color;
 }
 .p-button.p-button-danger.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:hover {
   background: $bg-danger;
   color: white;
-  border: 1px solid;
+  border: 1px solid $danger-color;
 }
 .p-button.p-button-danger.p-button-outlined:enabled:active,
 .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active,
@@ -3215,6 +3217,7 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   background: #ffffff;
   color: #495057;
   border-radius: 6px;
+  border: 1px solid $light-grey;
 }
 .p-card .p-card-body {
   padding: 1rem;
@@ -3365,12 +3368,18 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   background: #ffffff;
   border-color: #6c757d;
   color: #6c757d;
+  text-decoration: none;
 }
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: #ffffff;
   border-color: $primary-color;
   color: $primary-color;
 }
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link:hover {
+  text-decoration: none;
+}
+
 .p-tabview .p-tabview-left-icon {
   margin-right: 0.5rem;
 }
@@ -3581,14 +3590,17 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   border-radius: 6px;
   margin-bottom: 0.8em;
 }
+
 .p-fileupload .p-fileupload-buttonbar .p-button {
   margin-right: 0.5rem;
 }
+
 .p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 0.2rem $secondary-color;
 }
+
 .p-fileupload .p-fileupload-content {
   background: white;
   padding: 2rem 1rem;
@@ -3596,20 +3608,23 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   color: $dark-color;
   border-radius: 6px;
 }
+
 .p-fileupload .p-progressbar {
   height: 0.25rem;
 }
+
 .p-fileupload .p-fileupload-row > div {
   padding: 1rem 1rem;
 }
+
 .p-fileupload.p-fileupload-advanced .p-message {
   margin-top: 0;
 }
 
 .p-fileupload-choose:not(.p-disabled):hover {
-  background: #0d89ec;
-  color: #ffffff;
-  border-color: #0d89ec;
+  background: $bg-primary;
+  color: white;
+  border-color: $primary-color;
 }
 .p-fileupload-choose:not(.p-disabled):active {
   background: #0b7ad1;
@@ -5225,6 +5240,17 @@ body {
   .p-overlaypanel::after {
     display: none;
   }
+
+  .p-menubar {
+    .p-submenu-list {
+      border-radius: 6px;
+
+      .p-menuitem-link {
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
+    }
+  }
 }
 
 /**
@@ -5265,17 +5291,6 @@ body {
     box-shadow: $regular-shadow;
     border: none;
   }
-
-  .p-menubar {
-    .p-submenu-list {
-      border-radius: 6px;
-
-      .p-menuitem-link {
-        padding-top: 1em;
-        padding-bottom: 1em;
-      }
-    }
-  }
 }
 
 /**
@@ -5311,10 +5326,11 @@ body {
 /**
   Admin Products list page
 **/
+.admin-data-table,
 .admin-products-list,
 .admin-category-adder,
 .admin-tag-adder {
-  .admin-products-table {
+  &.admin-products-table {
     .admin-products-table__image-header {
       width: 4rem;
       height: auto;
@@ -5330,6 +5346,29 @@ body {
   
         padding-right: 0;
       }
+    }
+  }
+
+  .admin-data-table__image-header {
+    width: 4rem;
+    height: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .p-datatable-tbody {
+    .admin-data-table__image {
+      img {
+        border-radius: 6px;
+      }
+
+      padding-right: 0;
+    }
+  }
+
+  .admin-data-table__tools {
+    .p-button {
+      height: 2.357rem;
     }
   }
 
@@ -5468,7 +5507,7 @@ Admin Header
       visibility: hidden;
       left: 50%;
       transform: translateX(-50%);
-      background: $primary-color;
+      background: $bg-primary;
       color: white;
       height: 3rem;
       width: 3rem;

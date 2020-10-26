@@ -1,4 +1,24 @@
+@import '../../../assets/css/variables.scss';
+
+.product-card {
+  border: 1px solid $light-grey;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .product-desc__name {
   font-size: 1.3rem;
   font-weight: 600;
+}
+
+.product-card__img {
+  overflow: hidden;
+}
+
+.product-desc__price {
+  font-size: 1.5rem;
+
+  &>span:nth-of-type(2) {
+    font-weight: bold;
+  }
 }

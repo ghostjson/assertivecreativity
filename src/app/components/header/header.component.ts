@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
         items: [
           {
             label: 'Stock Items',
-            routerLink: '/shop/stocks'
+            routerLink: '/shop/stock'
           },
           {
             label: 'Customize',

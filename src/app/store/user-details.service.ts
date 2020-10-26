@@ -38,7 +38,7 @@ export class UserDetailsService {
   }
 
   editUser(user: User): Observable<User> {
-    return this._http.put<User>(this.getUserLink(), user)
+    return this._http.post<User>(this.getUserLink(), user)
       .pipe(take(1));
   } 
 

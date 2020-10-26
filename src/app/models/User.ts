@@ -7,14 +7,14 @@ export interface User {
   last_name: string;
   email: string;
   email_verified_at?: string;
-  role_id: string;
+  role_id?: string;
   role?: string;
   image: string;
   company_details?: CompanyDetail;
   phone: string;
   profession: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 /**

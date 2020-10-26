@@ -193,7 +193,7 @@ export class ProductForm {
         _fb.group(
           new PriceGroup()
         )
-      ])
+      ]);
       this.custom_forms = _fb.array([]);
     }
   }

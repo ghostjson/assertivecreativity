@@ -1,13 +1,10 @@
+@import '../../../assets/css/variables.scss';
+
 :host {
   ::ng-deep {
     input {
       display: inline-block;
       width: 100%;
-    }
-
-    input:disabled {
-      color: black;
-      border: none;
     }
 
     .form-group {
@@ -18,11 +15,52 @@
 
     .form-group__label {
       width: 100%;
+      font-weight: bold;
     }
     
     .form-group__input,
     .p-inputnumber {
       width: 100%;
     }
+
+    .form-group__input:disabled {
+      padding-left: 0;
+      color: black;
+      border: none;
+    }
+
+    .profile-img {
+      border: 1px solid $light-grey;
+  
+      .p-card-header {
+        border-bottom: none;
+        border-radius: 6px;
+        padding-bottom: 0;
+
+        img {
+          border-radius: 6px;
+          position: relative;
+          box-shadow: $regular-shadow;
+        }
+      }
+    }
+
+    .user-details {
+      .p-tabview-nav {
+        li {
+          width: 50%;
+
+          .p-tabview-title {
+            margin: 0 auto;
+          }
+        }
+      }
+      @media screen and (max-width: 365px) {
+        .p-tabview-title {
+          font-size: 0.81rem;
+        }
+      }
+    }
+
   }
 }

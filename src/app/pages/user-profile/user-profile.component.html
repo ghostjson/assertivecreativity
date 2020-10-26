@@ -1,12 +1,14 @@
-<div>
+<div class="user-profile-component">
   <app-header></app-header>
-  <div class="container my-5">
+  <div 
+    *ngIf="user"
+    class="container my-5">
     <div class="row">
       <div class="col-12 col-lg-4">
         <p-card
           header="{{user.first_name + ' ' + user.last_name}}"
           subheader="{{user.role_id}}"
-          styleClass="p-card-shadow"
+          styleClass="profile-img"
         >
           <p-header>
             <img
@@ -26,13 +28,13 @@
         </p-card>
       </div>
       <div class="col-12 col-lg-8">
-        <p-card header="User Details" styleClass="p-card-shadow">
+        <p-card header="User Details" styleClass="user-details shadow mt-3 mt-lg-0">
           <p-tabView *ngIf="user">
             <p-tabPanel header="Personal Details">
               <form class="user-details-form row">
                 <div class="form-group col-12 col-lg-6">
                   <label class="form-group__label" for="first-name">
-                    First Name:
+                    First Name
                   </label>
                   <input
                     class="form-group__input"
@@ -46,7 +48,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="last-name">
-                    Last Name:
+                    Last Name
                   </label>
                   <input
                     class="form-group__input"
@@ -60,7 +62,7 @@
                 </div>
                 <div class="form-group col-12">
                   <label class="form-group__label" for="profession">
-                    Profession:
+                    Profession
                   </label>
                   <input
                     class="form-group__input"
@@ -74,7 +76,7 @@
                 </div>
                 <div class="form-group col-12">
                   <label class="form-group__label" for="email">
-                    Email:
+                    Email
                   </label>
                   <input
                     class="form-group__input"
@@ -88,7 +90,7 @@
                 </div>
                 <div class="form-group col-12">
                   <label class="form-group__label" for="phone">
-                    Phone:
+                    Phone
                   </label>
                   <input
                     class="form-group__input"
@@ -103,10 +105,12 @@
               </form>
             </p-tabPanel>
             <p-tabPanel header="Company Details">
-              <form class="company-details-form row">
+              <form
+                *ngIf="user.company_details"
+                class="company-details-form row">
                 <div class="form-group col-12">
                   <label class="form-group__label" for="company-name">
-                    First Name:
+                    Company Name
                   </label>
                   <input
                     class="form-group__input"
@@ -120,7 +124,7 @@
                 </div>
                 <div class="form-group col-12 col-md-2">
                   <label class="form-group__label" for="building-number">
-                    Building Number:
+                    Building Number
                   </label>
                   <p-inputNumber
                     class="form-group__input"
@@ -134,7 +138,7 @@
                 </div>
                 <div class="form-group col-12 col-md-10">
                   <label class="form-group__label" for="street-name">
-                    Street Name:
+                    Street Name
                   </label
                   >
                   <input
@@ -149,7 +153,7 @@
                 </div>
                 <div class="form-group col-12">
                   <label class="form-group__label" for="builing-name">
-                    Building:
+                    Building
                   </label
                   >
                   <input
@@ -164,7 +168,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="locality">
-                    Locality:
+                    Locality
                   </label>
                   <input
                     class="form-group__input"
@@ -178,7 +182,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="province-abbr">
-                    Province Abbreviation:
+                    Province Abbreviation
                   </label>
                   <input
                     class="form-group__input"
@@ -192,7 +196,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="zip">
-                    Zip/Postal Code:
+                    Zip/Postal Code
                   </label>
                   <p-inputNumber
                     class="form-group__input"
@@ -206,7 +210,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="country">
-                    Country:
+                    Country
                   </label>
                   <input
                     class="form-group__input"
@@ -220,7 +224,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="email">
-                    Email:
+                    Email
                   </label>
                   <input
                     class="form-group__input"
@@ -234,7 +238,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                   <label class="form-group__label" for="company-phone">
-                    Phone:
+                    Phone
                   </label>
                   <p-inputNumber
                     class="form-group__input"
@@ -252,11 +256,29 @@
           <ng-template pTemplate="footer">
             <div class="text-right">
               <p-button
+                *ngIf="!viewMode"
+                label="Cancel"
+                iconPos="right"
+                icon="pi pi-times"
+                styleClass="p-button-danger mr-2"
+                (click)="viewMode = true"
+              ></p-button>
+              <p-button
+                *ngIf="viewMode; else editMode"
                 label="Edit"
                 iconPos="right"
                 icon="pi pi-pencil"
                 (click)="editProfile()"
               ></p-button>
+              <ng-template #editMode>
+                <p-button
+                label="Save"
+                iconPos="right"
+                icon="pi pi-check"
+                styleClass="p-button-success"
+                (click)="editProfile()"
+              ></p-button>
+              </ng-template>
             </div>
           </ng-template>
         </p-card>

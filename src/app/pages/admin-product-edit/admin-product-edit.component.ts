@@ -146,7 +146,7 @@ export class AdminProductEditComponent implements OnInit {
         this.productObj.price_table_mode,
         [Validators.required]
       ],
-      price_table: this.productObj.price_table_mode === '1' ? this.buildPriceTable(): null,
+      price_table: this.productObj.price_table_mode ? this.buildPriceTable(): this._fb.array([]),
       custom_forms: this.buildCustomForms()
     });
 

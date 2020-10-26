@@ -1,0 +1,21 @@
+@import "../../../assets/css/variables.scss";
+
+:host {
+  ::ng-deep {
+    .p-treetable .p-treetable-thead > tr > th {
+      background: white;
+      color: $dark-color;
+    }
+
+    .p-treetable.p-component {
+      border-radius: 6px;
+      border: 1px solid $light-grey;
+      overflow: hidden;
+    }
+
+    .p-treetable .p-treetable-tfoot > tr > td {
+      background: white;
+      border: none;
+    }
+  }
+}

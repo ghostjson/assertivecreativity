@@ -21,11 +21,22 @@ export class OrderData {
   mail_thread?: number;
   product_details: Product;
   custom_forms: CustomFormInput[];
+  custom_forms_entry?: CustomFormsEntry[];
+}
+
+export class CustomFormsEntry {
+  id: number;
+  title: string;
+  is_formgroup?: boolean;
+  parent_form?: number;
+  options?: CustomOption[];
+  subforms?: CustomFormInput[];
 }
 
 export class CustomFormInput {
-  id?: number;
+  id: number;
   title: string;
+  parent_form: number;
   options: CustomOption[]
 }
 

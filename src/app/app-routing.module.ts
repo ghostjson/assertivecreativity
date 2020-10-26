@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
   { path: "shop/select-type", component: SelectShopTypeComponent },
-  { path: "shop/stocks", component: ShopComponent },
+  { path: "shop/stock", component: ShopComponent },
   {
     path: "profile",
     component: UserProfileComponent,
@@ -40,11 +40,31 @@ const routes: Routes = [
   },
   { path: "logout", component: LogoutComponent },
   { path: "form/:formId", component: FormViewComponent },
-  { path: "cart", component: CartComponent },
-  { path: "cart/:id", component: CartItemDetailComponent },
-  { path: "orders", component: OrdersComponent },
-  { path: "orders/:id", component: OrderDetailComponent },
-  { path: "checkout", component: CheckoutComponent },
+  { 
+    path: "cart", 
+    component: CartComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "cart/:id", 
+    component: CartItemDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "orders", 
+    component: OrdersComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "orders/:id", 
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "checkout", 
+    component: CheckoutComponent,
+    canActivate: [AuthGuard]
+  },
   { path: "products/:id", component: ProductDetailComponent },
   { 
     path: "admin",
