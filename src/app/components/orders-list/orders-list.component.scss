@@ -1,191 +1,41 @@
-:host ::ng-deep .ui-table-customers {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
-
-  .customer-badge {
-    border-radius: 2px;
-    padding: 0.25em 0.5em;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.3px;
-
-    &.status-closed {
-      background-color: #c8e6c9;
-      color: #256029;
-    }
-
-    &.status-cancelled {
-      background-color: #ffcdd2;
-      color: #c63737;
-    }
-
-    &.status-open {
-      background-color: #feedaf;
-      color: #8a5340;
-    }
-
-    &.status-completed {
-      background-color: #b3e5fc;
-      color: #23547b;
-    }
-
-    &.status-renewal {
-      background-color: #eccfff;
-      color: #694382;
-    }
-
-    &.status-proposal {
-      background-color: #ffd8b2;
-      color: #805b36;
-    }
-  }
-
-  .flag {
-    vertical-align: middle;
-    width: 30px;
-    height: 20px;
-  }
-
-  .ui-multiselect-representative-option {
-    display: inline-block;
-    vertical-align: middle;
-
-    img {
-      vertical-align: middle;
-      width: 24px;
-    }
-
-    span {
-      margin-top: 0.125em;
-      vertical-align: middle;
-      margin-left: 0.5em;
-    }
-  }
-
-  .ui-paginator {
-    .ui-dropdown {
-      float: left;
-    }
-
-    .ui-paginator-current {
-      float: right;
-    }
-  }
-
-  .ui-progressbar {
-    height: 8px;
-    background-color: #d8dadc;
-
-    .ui-progressbar-value {
-      background-color: #00acad;
-    }
-  }
-
-  .ui-column-filter {
-    display: block;
-
-    input {
-      width: 100%;
-    }
-  }
-
-  .ui-table-globalfilter-container {
-    float: right;
-
-    input {
-      width: 200px;
-    }
-  }
-
-  .ui-datepicker {
-    min-width: 25em;
-
-    td {
-      font-weight: 400;
-    }
-  }
-
-  .ui-table-caption {
-    border: 0 none;
-    padding: 12px;
-    text-align: left;
-    font-size: 20px;
-  }
-
-  .ui-paginator {
-    border: 0 none;
-    padding: 1em;
-  }
-
-  .ui-table-thead > tr > th {
-    border: 0 none;
-    text-align: left;
-
-    &.ui-filter-column {
-      border-top: 1px solid #c8c8c8;
-    }
-
-    &:first-child {
-      width: 5em;
-      text-align: center;
-    }
-
-    &:last-child {
-      width: 8em;
-      text-align: center;
-    }
-  }
-
-  .ui-table-tbody > tr > td {
-    border: 0 none;
-    cursor: auto;
-
-    &:first-child {
-      width: 3em;
-      text-align: center;
-    }
-
-    &:last-child {
-      width: 8em;
-      text-align: center;
-    }
-  }
-
-  .ui-dropdown-label:not(.ui-placeholder) {
-    text-transform: uppercase;
-  }
-
-  .ui-table-tbody > tr > td .ui-column-title {
-    display: none;
-  }
-}
-
-/* Responsive */
-@media screen and (max-width: 64em) {
-  :host ::ng-deep .ui-table {
-    &.ui-table-customers {
-      .ui-table-thead > tr > th,
-      .ui-table-tfoot > tr > td {
-        display: none !important;
+:host {
+  ::ng-deep {
+    .order-badge {
+      border-radius: 2px;
+      padding: 0.25em 0.5em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+  
+      &.status-closed {
+        background-color: #c8e6c9;
+        color: #256029;
       }
-
-      .ui-table-tbody > tr > td {
-        text-align: left;
-        display: block;
-        border: 0 none !important;
-        width: 100% !important;
-        float: left;
-        clear: left;
-        border: 0 none;
-
-        .ui-column-title {
-          padding: 0.4em;
-          min-width: 30%;
-          display: inline-block;
-          margin: -0.4em 1em -0.4em -0.4em;
-          font-weight: bold;
-        }
+  
+      &.status-cancelled {
+        background-color: #ffcdd2;
+        color: #c63737;
+      }
+  
+      &.status-pending {
+        background-color: #feedaf;
+        color: #8a5340;
+      }
+  
+      &.status-completed {
+        background-color: #b3e5fc;
+        color: #23547b;
+      }
+  
+      &.status-renewal {
+        background-color: #eccfff;
+        color: #694382;
+      }
+  
+      &.status-proposal {
+        background-color: #ffd8b2;
+        color: #805b36;
       }
     }
   }
