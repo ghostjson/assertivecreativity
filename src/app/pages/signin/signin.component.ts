@@ -26,7 +26,11 @@ export class SigninComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.returnUrl = '/' + (null ? '': this._router.parseUrl(this._router.url).queryParamMap.get('return'));
+    this.returnUrl = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+
+    if(!this.returnUrl) {
+      this.returnUrl = '/';
+    }
 
     if (this._auth.isAuthenticated()) {
       this._router.navigate([this.returnUrl]);

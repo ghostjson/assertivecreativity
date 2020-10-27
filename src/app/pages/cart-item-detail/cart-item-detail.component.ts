@@ -6,9 +6,7 @@ import { OrderService } from "src/app/services/order.service";
 import { CartService } from "src/app/services/cart.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { CommonService } from "src/app/common.service";
-import { MailService } from "src/app/services/mail.service";
-import { MailThread } from "src/app/models/Mail";
-import { Cart, CartItem } from "src/app/models/Cart";
+import { CartItem } from "src/app/models/Cart";
 import { UserDetailsService } from "src/app/store/user-details.service";
 
 @Component({
@@ -30,7 +28,6 @@ export class CartItemDetailComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _commonService: CommonService,
-    private _mailService: MailService,
     private _userDetailsService: UserDetailsService
   ) {}
 
@@ -64,7 +61,7 @@ export class CartItemDetailComponent implements OnInit {
       delivery_date: this.orderDeliveryDate.toISOString(),
       data: {
         product_details: this.cartItem.product,
-        custom_forms: this.cartItem.custom_forms_entry.forms_input,
+        custom_forms_entry: this.cartItem.custom_forms_entry.forms_input.custom_forms,
         total_price: this.cartItem.custom_forms_entry.total_price,
         quantity: 1,
       },

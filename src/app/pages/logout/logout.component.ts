@@ -12,7 +12,12 @@ export class LogoutComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
-    let returnUrl = '/' + (null ? '': this._router.parseUrl(this._router.url).queryParamMap.get('return'));
+    let returnUrl: string = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+
+    if(!returnUrl) {
+      returnUrl = '/';
+    }
+    
     localStorage.removeItem('Token');
     this._router.navigate([returnUrl]);
   }

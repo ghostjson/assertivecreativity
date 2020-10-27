@@ -250,8 +250,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     // order = this.cleanForm(order);
     // cartItem.custom_forms_entry.total_price = this.priceTotal;
     console.log('add to cart: ', cartItem);
-    this._cartService.addToCart(cartItem).subscribe((item: CartItem) => {
-      this._router.navigate(["/cart"]);
+    this._cartService.addToCart(cartItem).subscribe((item: any) => {
+      this._router.navigate(["/cart", item.data.id]);
       console.log("added to cart: ", item);
     });
   }

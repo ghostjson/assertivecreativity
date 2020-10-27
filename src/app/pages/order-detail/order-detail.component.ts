@@ -13,7 +13,7 @@ import { MailThread, Mail } from "src/app/models/Mail";
 export class OrderDetailComponent implements OnInit {
   id: number;
   order: Order;
-  mails: Mail[];
+  mails: MailThread;
   author: number;
   receiver: number;
 
@@ -25,20 +25,21 @@ export class OrderDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.mails = [];
     this.id = Number(this._activatedRouteService.snapshot.paramMap.get("id"));
     this._orderService.getOrder(this.id).subscribe((order: Order) => {
       this.order = order;
       console.log("order fetched: ", this.order);
 
-      if (order.data.mail_thread != undefined || order.data.mail_thread != null) {
-        // get messages related to the order
-        this._mailService
-          .getMails(order.data.mail_thread)
-          .subscribe((mails: Mail[]) => {
-            this.mails = mails;
-            console.info("mails: ", this.mails);
-          });
-      }
+      // get mail thread 
+      this._mailService.getThreadByOrderId(this.id).subscribe((mails: MailThread) => {
+        console.log('mail thread received', mails);
+        this.mails = mails;
+
+        mails.sort((mail1: Mail, mail2: Mail) => {
+          return Number(new Date(mail1.created_at) < new Date(mail2.created_at));
+        });
+      });
     });
 
     if(this._router.url.includes('admin')) {

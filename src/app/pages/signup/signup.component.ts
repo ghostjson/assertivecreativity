@@ -24,7 +24,12 @@ export class SignupComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router) {}
 
   ngOnInit(): void {
-    this.returnUrl = '/' + (null ? '': this._router.parseUrl(this._router.url).queryParamMap.get('return'));
+    console.log('return url: ', this._router.parseUrl(this._router.url).queryParamMap.get('return'));
+    this.returnUrl = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+
+    if(!this.returnUrl) {
+      this.returnUrl = '/';
+    }
   }
 
   submitForm(): void {

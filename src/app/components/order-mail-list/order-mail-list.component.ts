@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Mail } from 'src/app/models/Mail';
 import { MailService } from 'src/app/services/mail.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { ScrollPanel } from 'primeng/scrollpanel';
 
 @Component({
   selector: 'app-order-mail-list',
@@ -12,31 +11,20 @@ import { take } from 'rxjs/operators';
   providers: [MessageService]
 })
 export class OrderMailListComponent implements OnInit {
+  @ViewChild('mailContainer') mailContainer: ScrollPanel;
+
   @Input() mails: Mail[];
-  @Input() mailThread: number;
-  @Input() author: number;
-  @Input() receiver: number;
+  @Input() orderId: number;
+  @Input() styleClass: string;
 
   mailText: string;
 
   constructor(
     private _mailService: MailService,
-    private _messageService: MessageService,
-    private _router: Router
+    private _messageService: MessageService
   ) { }
 
   ngOnInit(): void {
-    this.mailText = '';
-    if(this._router.url.includes('admin')) {
-      console.info('author is admin');
-      this.author = 1;
-      this.receiver = 0;
-    }
-    else {
-      console.info('author is user');
-      this.author = 0;
-      this.receiver = 1;
-    }
   }
 
   sendMail(): void {
@@ -44,23 +32,20 @@ export class OrderMailListComponent implements OnInit {
     time = time.toISOString();
 
     let newMail: Mail = {
-      author: this.author,
-      receiver: this.receiver,
-      content: this.mailText,
-      timestamp: time
+      order_id: this.orderId,
+      message_content: this.mailText
     };
-    newMail['mail-threadId'] = this.mailThread;
 
-    console.info('mail to be send: ', newMail);
-    this._mailService.sendMail(this.mailThread, newMail)
-      .subscribe((mail: Mail) => {
-        this.mails.push(mail);
-        this.mailText = null;
-        this._messageService.add({
-          severity: 'success',
-          summary: 'Email Sent'
-        })
-        console.log('mail send: ', mail);
+    this._mailService.sendMail(newMail).subscribe((res: Mail) => {
+      this.mailContainer.scrollTop(0);
+      console.log('mail sent: ', res);
+      this.mails.unshift(res);
+      this._messageService.add({
+        severity: "success",
+        summary: "Sent",
+        detail: "Mail Sent",
+        life: 3000,
       });
+    });
   }
 }

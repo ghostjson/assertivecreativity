@@ -9,13 +9,15 @@ import { OrderSummaryTable, CustomOption, CustomFormsEntry, CustomFormInput } fr
   styleUrls: ['./order-summary-table.component.scss']
 })
 export class OrderSummaryTableComponent implements OnInit {
-  @Input() formsData: CartCustomFormsEntry;
+  @Input() customFormsEntry: CustomFormsEntry[];
 
   orderSummary: TreeNode[];
   formSummary: OrderSummaryTable[];
+  totalPrice: number;
 
   ngOnInit(): void {
-    console.info('cart item object in summary table: ', this.formsData);
+    console.info('cart item object in summary table: ', this.customFormsEntry);
+    this.totalPrice = 0;
     // add data needed for table component from the order details
     this.populateOrderTable();
   }
@@ -43,40 +45,41 @@ export class OrderSummaryTableComponent implements OnInit {
   populateOrderTable(): void {
     this.orderSummary = [];
 
-    this.formsData.forms_input.custom_forms.forEach((formInput: CustomFormsEntry) => {
-      if(formInput.is_formgroup) {
-        formInput.subforms.forEach((subform: CustomFormInput) => {
-          subform.options.forEach((option) => {
-            this.orderSummary.push(this.populateOption(option));
-    
+    this.customFormsEntry.forEach((customFormsEntry: CustomFormsEntry) => {
+      if(customFormsEntry.is_formgroup) {
+        customFormsEntry.subforms.forEach((subform: CustomFormInput) => {
+          subform.options.forEach((option: CustomOption) => {
+            if(option.input) {
+              this.orderSummary.push(this.populateOption(option));
+              this.totalPrice += option.price;
+            }
+
             // populate chained options
-            option.chained_options.forEach((chainedOption) => {
-              this.orderSummary.push(this.populateOption(chainedOption));
+            option.chained_options.forEach((chainedOption: CustomOption) => {
+              if(chainedOption.input) {
+                this.orderSummary.push(this.populateOption(chainedOption));
+                this.totalPrice += chainedOption.price;
+              }
             });
           });
         });
       }
       else {
-        formInput.options.forEach((option) => {
-          this.orderSummary.push(this.populateOption(option));
-  
+        customFormsEntry.options.forEach((option) => {
+          if(option.input) {
+            this.orderSummary.push(this.populateOption(option));
+            this.totalPrice += option.price;
+          }
+
           // populate chained options
           option.chained_options.forEach((chainedOption) => {
-            this.orderSummary.push(this.populateOption(chainedOption));
+            if(chainedOption.input) {
+              this.orderSummary.push(this.populateOption(chainedOption));
+              this.totalPrice += chainedOption.price;
+            }
           });
         });
       }
     });
-
-    // this.order.custom_forms.forEach((form: CustomFormInput) => {
-    //   form.options.forEach((option) => {
-    //     this.orderSummary.push(this.populateOption(option));
-
-    //     // populate chained options
-    //     option.chained_options.forEach((chainedOption) => {
-    //       this.orderSummary.push(this.populateOption(chainedOption));
-    //     });
-    //   });
-    // });
   }
 }

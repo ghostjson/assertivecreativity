@@ -68,6 +68,7 @@ export class AuthService {
         take(1),
         tap((token: Token) => {
           localStorage.setItem('Token', token.access_token);
+          localStorage.setItem('user', JSON.stringify(token.user));
           console.log('token received: ', localStorage.getItem('Token'));
         })
       );
