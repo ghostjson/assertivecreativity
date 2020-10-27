@@ -2,7 +2,7 @@
   <div class="product-card__img">
     <img src="{{product.image}}" alt="{{product.name}}" srcset="">
   </div>
-  <div class="product-card__name">
+  <div class="product-card__name mt-3">
     {{product.name}}
   </div>
   <div class="product-card__price"
@@ -14,9 +14,9 @@
     {{summary(product.description)}}...
   </div>
   <a 
-    class="btn btn--primary p-mt-2"
+    label="Know More"
+    class="more-btn p-button-primary mt-2"
     [routerLink]="['/products', product.id]"
-  >
-    Know More
-  </a>
+    pButton
+  ></a>
 </div>

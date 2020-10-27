@@ -38,11 +38,33 @@ export class ProductService {
   }
 
   /**
+   * Return link for filtering product based on category
+   * @param categoryId Id of the category
+   */
+  productsLinkByCategoryId(categoryId: number): string {
+    return `${this.productsLink()}/categories/${categoryId}`;
+  }
+
+  /**
    * Return link to the product details in the api
    * @param id Id of the product
    */
   productLink(id: number): string {
     return `${this.productsLink()}/${id}`;
+  }
+
+  /**
+   * Return all products of a particular category
+   * @param categoryId category id of the products
+   */
+  getProductsByCategoryId(categoryId: number): Observable<Product[]> {
+    return this._http.get<Product[]>(this.productsLinkByCategoryId(categoryId))
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data as Product[];
+        })
+      );
   }
 
   getProducts(filter: any={categories: [], tags: []}): Observable<Product[]> {
@@ -62,15 +84,6 @@ export class ProductService {
       .pipe(
         take(1),
         map((products: any) => {
-          /**
-           * TODO: Remove this after lorempixel.com is fixed
-           */
-          products.data = products.data.map((product: Product) => {
-            // product.image = 'https://picsum.photos/480/640';
-
-            return product;
-          });
-
           return products.data;
         })
       );
@@ -85,11 +98,21 @@ export class ProductService {
       .pipe(
         take(1),
         map((product: any) => {
-          /**
-           * TODO: Fix after lorempixel is fixed
-           */
-          // product.data.image = 'https://picsum.photos/480/640';
           return product.data;
+        })
+      );
+  }
+
+  /**
+   * Search products using a search string
+   * @param searchString search string
+   */
+  searchProducts(searchString: string): Observable<Product[]> {
+    return this._http.get<Product[]>(`${this.productsLink()}/search/${searchString}`)
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data;
         })
       );
   }

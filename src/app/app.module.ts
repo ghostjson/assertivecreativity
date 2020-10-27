@@ -47,7 +47,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminAddProductFormComponent } from './components/admin-add-product-form/admin-add-product-form.component';
 import { httpInterceptProvider } from './http-interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
-import { SelectShopTypeComponent } from './pages/select-shop-type/select-shop-type.component';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -94,7 +93,6 @@ import { ProductOptionsQuestionComponent } from './components/product-options-qu
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
-// import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
 import { AdminDropdownOptionMakerComponent } from './components/admin-dropdown-option-maker/admin-dropdown-option-maker.component';
 import { AdminRadiobtnOptionMakerComponent } from './components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component';
@@ -156,7 +154,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AdminAddProductComponent,
     AdminAddProductFormComponent,
     LoaderComponent,
-    SelectShopTypeComponent,
     ProductOptionsColorComponent,
     ProductOptionsRadioBtnComponent,
     ProductOptionsDropdownComponent,

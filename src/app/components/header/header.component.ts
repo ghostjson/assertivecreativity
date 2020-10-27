@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
@@ -13,6 +13,8 @@ import { MenuItem } from 'primeng/api';
 })
 
 export class HeaderComponent implements OnInit {
+  @Output() onSearchStringEmit: EventEmitter<string> = new EventEmitter<string>();
+
   user_role: any;
   cartLength: number;
   navStartItems: MenuItem[];
@@ -45,18 +47,6 @@ export class HeaderComponent implements OnInit {
       this._common.setLoader(false);
     }
 
-    // this._common.setLoader(true);
-    // this._user
-    // .getRole()
-    // .then((res) => {
-    //   this.cartLength = this._cartService.getCartSize();
-    //   this.user_role = res;
-    //   this._common.setLoader(false);
-    // })
-    // .catch((e) => {
-    //   this._common.setLoader(false);
-    // });
-
     this.navStartItems = [
       {
         label: 'Shop',
@@ -80,5 +70,9 @@ export class HeaderComponent implements OnInit {
         routerLink: '/contact'
       }
     ];
+  }
+
+  emitSearchString(event: any): void {
+    this.onSearchStringEmit.emit(event);
   }
 }
