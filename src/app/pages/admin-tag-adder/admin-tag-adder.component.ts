@@ -4,7 +4,7 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Tag } from 'src/app/models/Tag';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-tag-adder',
@@ -34,19 +34,20 @@ export class AdminTagAdderComponent implements OnInit {
     this._prodCategorisationService.getCategories()
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
+        let fetchedTags: Tag[] = [];
+
         this.categories = categories;
         console.info('categories: ', this.categories);
 
         categories.forEach((category: Category) => {
           this._prodCategorisationService.getTagsOfCategory(category.id)
-            .pipe(take(1))
-            .subscribe((tags: Tag[]) => {
-              tags.forEach((tag: Tag) => {
-                this.tags.push(tag);
-              });
+            .pipe(tap((tags: Tag[]) => {
+              fetchedTags = fetchedTags.concat(tags);
+            }))
+            .subscribe(() => {
+              this.tags = fetchedTags;
+              console.log('tags received: ', this.tags);
             });
-          
-          this.tags = [...this.tags]
         });
       });
   }
