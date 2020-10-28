@@ -5,6 +5,7 @@ import { Product } from "../../models/Product";
 import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
 import { Tag } from "src/app/models/Tag";
 import { Category } from "src/app/models/Category";
+import { map, tap } from "rxjs/operators";
 
 @Component({
   selector: "app-shop",
@@ -43,50 +44,44 @@ export class ShopComponent implements OnInit {
     // start the loader
     this._common.setLoader(true);
 
-    let filter = {
-      categories: [],
-      tags: [],
-    };
+    this._productService.getProducts().subscribe((products: Product[]) => {
+      this.products = products;
 
-    // add the selected categories
-    this.selectedCategories.forEach((category: Category) => {
-      filter.categories.push(category.id);
+      // hide the loader
+      setTimeout(() => {
+        this._common.setLoader(false);
+      }, 200);
     });
-
-    // add the selected tags
-    this.selectedTags.forEach((selectedTag: number) => {
-      filter.tags.push(selectedTag);
-    });
-
-    this._productService
-      .getProducts(filter)
-      .subscribe((products: Product[]) => {
-        this.products = products;
-
-        // hide the loader
-        setTimeout(() => {
-          this._common.setLoader(false);
-        }, 200);
-      });
   }
 
   /**
    * update the products list
    */
-  updateProducts(): void {
-    // this.products = [];
+  updateProducts(category: Category): void {
+    let filteredProducts: Product[] = [];
+    this.products = [];
     this._common.setLoader(true);
 
-    this.selectedCategories.forEach((selectedCategory: Category) => {
-      this._productService
-        .getProductsByCategoryId(selectedCategory.id)
-        .subscribe((res: Product[]) => {
+    this._productService
+      .getProductsByCategoryId(category.id)
+      .pipe(
+        tap((res: Product[]) => {
           console.log("Filtered Products received: ", res);
-        });
-    });
-    this._common.setLoader(false);
+          this.products = this.products.concat(res);
+          // res.forEach((product: Product) => {
+          //   console.log("product pushed: ", product);
+          //   filteredProducts.push(product);
+          // });
+        })
+      )
+      .subscribe(() => {
+        this._common.setLoader(false);
+      });
   }
 
+  /**
+   * Update tags and products
+   */
   update(): void {
     this._common.setLoader(true);
     // empty the current tags list
@@ -95,74 +90,66 @@ export class ShopComponent implements OnInit {
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
       this.selectedCategories.forEach((category: Category) => {
-        // get the tags of the selected categories and populate tags list
-        this._pcService.getTagsOfCategory(category.id).subscribe((tags) => {
-          // insert each of the fetched tags into the tags list of the component
-          tags.forEach((tag: Tag) => {
-            this.tags.push(tag);
+        this._pcService
+          .getTagsOfCategory(category.id)
+          .pipe(
+            // get the tags of the selected categories and populate tags list
+            tap((tags: Tag[]) => {
+              this.tags.concat(tags);
+
+              // filter selected tags
+              let newSelectedTags: number[] = [];
+              this.tags.forEach((tag: Tag) => {
+                let tagIsSelected: number = this.selectedTags.find(
+                  (selectedTagId: number) => {
+                    return selectedTagId === tag.id;
+                  }
+                );
+
+                if (tagIsSelected) {
+                  newSelectedTags.push(tag.id);
+                }
+              });
+              this.selectedTags = newSelectedTags;
+
+              console.log(
+                "updated=>  ",
+                "tags: ",
+                this.tags,
+                "selected tags: ",
+                this.selectedTags,
+                "categs: ",
+                this.categories,
+                "selected categs: ",
+                this.selectedCategories
+              );
+            })
+          )
+          .subscribe(() => {
+            this.updateProducts(category);
           });
-
-          // filter selected tags
-          let newSelectedTags: number[] = [];
-          this.tags.forEach((tag: Tag) => {
-            let tagIsSelected: number = this.selectedTags.find(
-              (selectedTagId: number) => {
-                return selectedTagId === tag.id;
-              }
-            );
-
-            if (tagIsSelected) {
-              newSelectedTags.push(tag.id);
-            }
-          });
-          this.selectedTags = newSelectedTags;
-
-          console.log(
-            "updated=>  ",
-            "tags: ",
-            this.tags,
-            "selected tags: ",
-            this.selectedTags,
-            "categs: ",
-            this.categories,
-            "selected categs: ",
-            this.selectedCategories
-          );
-
-          this.updateProducts();
-
-          /**
-           * TODO: Remove when category filter is fixed
-           */
-          setTimeout(() => {
-            this._common.setLoader(false);
-          }, 200);
-        });
       });
     } else {
-      /**
-       * TODO: Remove when category filter is fixed
-       */
-      this.updateProducts();
-      setTimeout(() => {
-        this._common.setLoader(false);
-      }, 200);
+      this.getProducts();
     }
   }
 
+  /**
+   * Get search results
+   * @param searchString search string
+   */
   getSearchResults(searchString: string): void {
     this._common.setLoader(true);
 
-    if(searchString.length > 0) {
+    if (searchString.length > 0) {
       this._productService
-      .searchProducts(searchString)
-      .subscribe((res: Product[]) => {
-        this.products = res;
+        .searchProducts(searchString)
+        .subscribe((res: Product[]) => {
+          this.products = res;
 
-        this._common.setLoader(false);
-      });
-    }
-    else {
+          this._common.setLoader(false);
+        });
+    } else {
       this.getProducts();
     }
   }

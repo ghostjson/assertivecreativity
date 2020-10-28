@@ -67,20 +67,8 @@ export class ProductService {
       );
   }
 
-  getProducts(filter: any={categories: [], tags: []}): Observable<Product[]> {
-    let reqLink: string = `${this.productsLink()}`;
-
-    // add the categories 
-    filter.categories.forEach((category: string) => {
-      reqLink += `category=${category}&`;
-    });
-
-    // add the tags 
-    filter.tags.forEach((tag: string) => {
-      reqLink += `tags=${tag}&`;
-    });
-
-    return this._http.get<Product[]>(reqLink)
+  getProducts(): Observable<Product[]> {
+    return this._http.get<Product[]>(this.productsLink())
       .pipe(
         take(1),
         map((products: any) => {

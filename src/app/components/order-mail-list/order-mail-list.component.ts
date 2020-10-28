@@ -37,6 +37,7 @@ export class OrderMailListComponent implements OnInit {
     };
 
     this._mailService.sendMail(newMail).subscribe((res: Mail) => {
+      this.mailText = null;
       this.mailContainer.scrollTop(0);
       console.log('mail sent: ', res);
       this.mails.unshift(res);

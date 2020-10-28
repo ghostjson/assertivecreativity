@@ -65,3 +65,8 @@ export class CustomOptionForm extends FormGroup {
 }
 
 export type OrderSummaryTable = TreeNode[];
+
+export interface OrderResponse {
+  data: Order[];
+  message?: string;
+}
