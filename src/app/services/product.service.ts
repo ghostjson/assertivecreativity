@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
 import { map, take } from 'rxjs/operators';
+import { Category } from '../models/Category';
 
 @Injectable({
   providedIn: "root",
@@ -33,7 +34,7 @@ export class ProductService {
   /**
    * Return the products link
    */
-  productsLink(): string {
+  private productsLink(): string {
     return `${this.API_URL}/products`;
   }
 
@@ -41,15 +42,22 @@ export class ProductService {
    * Return link for filtering product based on category
    * @param categoryId Id of the category
    */
-  productsLinkByCategoryId(categoryId: number): string {
+  private productsLinkByCategoryId(categoryId: number): string {
     return `${this.productsLink()}/categories/${categoryId}`;
+  }
+
+  /**
+   * Return link for filtering product based on a list of categories
+   */
+  private productsLinkByCategoryIdList(): string {
+    return `${this.productsLink()}/categories/list`;
   }
 
   /**
    * Return link to the product details in the api
    * @param id Id of the product
    */
-  productLink(id: number): string {
+  private productLink(id: number): string {
     return `${this.productsLink()}/${id}`;
   }
 
@@ -59,6 +67,25 @@ export class ProductService {
    */
   getProductsByCategoryId(categoryId: number): Observable<Product[]> {
     return this._http.get<Product[]>(this.productsLinkByCategoryId(categoryId))
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data as Product[];
+        })
+      );
+  }
+
+  /**
+   * Return products belonging to a list of category ids
+   * @param categoryIds categories id list
+   */
+  getProductByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
+    return this._http.post<Product[]>(this.productsLinkByCategoryIdList(), {
+      /**
+       * TODO: fix after json_decode expects string error in the backend 
+       */
+      category_ids: JSON.stringify(categoryIds)
+    })
       .pipe(
         take(1),
         map((res: any) => {

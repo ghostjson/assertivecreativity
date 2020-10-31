@@ -57,24 +57,18 @@ export class ShopComponent implements OnInit {
   /**
    * update the products list
    */
-  updateProducts(category: Category): void {
-    let filteredProducts: Product[] = [];
+  updateProducts(categories: Category[]): void {
     this.products = [];
     this._common.setLoader(true);
 
+    let categoryIds: number[] = categories.map((category: Category) => {
+      return category.id;
+    });
+
     this._productService
-      .getProductsByCategoryId(category.id)
-      .pipe(
-        tap((res: Product[]) => {
-          console.log("Filtered Products received: ", res);
-          this.products = this.products.concat(res);
-          // res.forEach((product: Product) => {
-          //   console.log("product pushed: ", product);
-          //   filteredProducts.push(product);
-          // });
-        })
-      )
-      .subscribe(() => {
+      .getProductByCategoryIdList(categoryIds)
+      .subscribe((res: Product[]) => {
+        this.products = res;
         this._common.setLoader(false);
       });
   }
@@ -89,46 +83,48 @@ export class ShopComponent implements OnInit {
 
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
-      this.selectedCategories.forEach((category: Category) => {
-        this._pcService
-          .getTagsOfCategory(category.id)
-          .pipe(
-            // get the tags of the selected categories and populate tags list
-            tap((tags: Tag[]) => {
-              this.tags.concat(tags);
+      /**
+       * TODO: Fix after too many attempts issue is fixed for tags
+       */
+      // this.selectedCategories.forEach((category: Category) => {
+      //   this._pcService
+      //     .getTagsOfCategory(category.id)
+      //     .pipe(
+      //       // get the tags of the selected categories and populate tags list
+      //       tap((tags: Tag[]) => {
+      //         this.tags.concat(tags);
 
-              // filter selected tags
-              let newSelectedTags: number[] = [];
-              this.tags.forEach((tag: Tag) => {
-                let tagIsSelected: number = this.selectedTags.find(
-                  (selectedTagId: number) => {
-                    return selectedTagId === tag.id;
-                  }
-                );
+      //         // filter selected tags
+      //         let newSelectedTags: number[] = [];
+      //         this.tags.forEach((tag: Tag) => {
+      //           let tagIsSelected: number = this.selectedTags.find(
+      //             (selectedTagId: number) => {
+      //               return selectedTagId === tag.id;
+      //             }
+      //           );
 
-                if (tagIsSelected) {
-                  newSelectedTags.push(tag.id);
-                }
-              });
-              this.selectedTags = newSelectedTags;
+      //           if (tagIsSelected) {
+      //             newSelectedTags.push(tag.id);
+      //           }
+      //         });
+      //         this.selectedTags = newSelectedTags;
 
-              console.log(
-                "updated=>  ",
-                "tags: ",
-                this.tags,
-                "selected tags: ",
-                this.selectedTags,
-                "categs: ",
-                this.categories,
-                "selected categs: ",
-                this.selectedCategories
-              );
-            })
-          )
-          .subscribe(() => {
-            this.updateProducts(category);
-          });
-      });
+      //         console.log(
+      //           "updated=>  ",
+      //           "tags: ",
+      //           this.tags,
+      //           "selected tags: ",
+      //           this.selectedTags,
+      //           "categs: ",
+      //           this.categories,
+      //           "selected categs: ",
+      //           this.selectedCategories
+      //         );
+      //       })
+      //     )
+      //     .subscribe();
+      // });
+      this.updateProducts(this.selectedCategories);
     } else {
       this.getProducts();
     }
