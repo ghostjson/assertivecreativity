@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { Cart, CartItem } from '../models/Cart';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,13 @@ export class CartService {
   cart: Cart;
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _authService: AuthService
   ) {
-    // intialise the cart 
-    this.refreshCart();
+    // intialise the cart if user is logged in
+    if(_authService.isAuthenticated()) {
+      this.refreshCart();
+    }
   }
 
   /**

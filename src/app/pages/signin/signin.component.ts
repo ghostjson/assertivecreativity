@@ -48,7 +48,7 @@ export class SigninComponent implements OnInit {
         this.user.password
       )
       .subscribe((token: Token) => {
-        localStorage.setItem("Token", token.access_token);
+        console.log('dingin from sign in component');
         this._router.navigate([this.returnUrl]);
       })
     } catch (e) {

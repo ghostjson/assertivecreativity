@@ -10,7 +10,7 @@ import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
-import { AuthGuard } from "./guard/auth.guard";
+import { AuthGuard } from "./helpers/guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { AdminDashboardComponent } from "./pages/admin-dashboard/admin-dashboard.component";
@@ -67,27 +67,32 @@ const routes: Routes = [
   { 
     path: "admin",
     component: AdminDashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/products", 
     component: AdminProductsComponent, 
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/products/add", 
     component: AdminAddProductComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { role: 'admin' } 
   },
   { 
     path: "admin/products/:id/edit", 
     component: AdminProductEditComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { role: 'admin' } 
   },
   { 
     path: "admin/categories", 
     component: AdminCategoryAdderComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/tags", 
@@ -97,12 +102,14 @@ const routes: Routes = [
   { 
     path: "admin/orders/:id", 
     component: OrderDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/orders", 
     component: AdminOrdersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   }
 ];
 

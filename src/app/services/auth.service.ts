@@ -41,6 +41,13 @@ export class AuthService {
       .pipe(
         take(1),
         tap((token: Token) => {
+          /**
+           * TODO: Remove once role is added from server
+           */
+          if(token.user.role_id === '1') {
+            token.user.role = 'admin';
+          }
+
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
           console.log('token received: ', localStorage.getItem('Token'));
@@ -51,11 +58,18 @@ export class AuthService {
 
   /**
    * Logout the current user
-   * TODO: Check if this is needed
    */
-  logout(): Observable<any> {
-    return this._http.post(this.host('logout'), {})
-      .pipe(take(1));
+  logout(): void {
+    // return this._http.post(this.host('logout'), {})
+    //   .pipe(
+    //     tap(() => {
+    //       localStorage.removeItem('Token');
+    //       localStorage.removeItem('user');
+    //     }),
+    //     take(1)
+    //   );
+    localStorage.removeItem('Token');
+    localStorage.removeItem('user');
   }
 
   /**
@@ -67,6 +81,13 @@ export class AuthService {
       .pipe(
         take(1),
         tap((token: Token) => {
+          /**
+           * TODO: Remove once role is added from server
+           */
+          if(token.user.role_id === '1') {
+            token.user.role = 'admin';
+          }
+
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
           console.log('token received: ', localStorage.getItem('Token'));

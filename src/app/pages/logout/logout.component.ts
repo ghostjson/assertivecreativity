@@ -9,7 +9,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(
+    private _router: Router,
+    private _authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     let returnUrl: string = this._router.parseUrl(this._router.url).queryParamMap.get('return');
@@ -18,7 +21,7 @@ export class LogoutComponent implements OnInit {
       returnUrl = '/';
     }
     
-    localStorage.removeItem('Token');
+    this._authService.logout();
     this._router.navigate([returnUrl]);
   }
 }
