@@ -68,9 +68,9 @@
             </span>
           </td>
           <td>
-            <span class="p-column-title"> Product </span>
+            <span class="p-column-title"> Order </span>
             <span>
-              <a href="/orders/{{ order.id }}">
+              <a href="{{admin ? '/admin/' : ''}}orders/{{ order.id }}">
                 {{ order.data.product_details.name }}
               </a>
             </span>

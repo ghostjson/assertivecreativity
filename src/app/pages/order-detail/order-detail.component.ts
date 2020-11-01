@@ -41,16 +41,5 @@ export class OrderDetailComponent implements OnInit {
         });
       });
     });
-
-    if(this._router.url.includes('admin')) {
-      console.info('author is admin');
-      this.author = 1;
-      this.receiver = 0;
-    }
-    else {
-      console.info('author is user');
-      this.author = 0;
-      this.receiver = 1;
-    }
   }
 }
