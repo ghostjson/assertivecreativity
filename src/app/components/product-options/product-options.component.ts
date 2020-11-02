@@ -22,23 +22,28 @@ export class ProductOptionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.info('option received: ', this.option);
-    
     if (!this.option.meta.isChained) {
       this.constructChained();
     }
   }
 
+  /**
+   * Get chanined options in an input
+   */
   chainedOptions(): FormArray {
     return this.formGroup.get('chained_options') as FormArray;
   }
 
+  /**
+   * Construct a dictionary for fetching chained options of an input
+   * during runtime
+   */
   constructChained(): void {
     this.option.inputs.forEach((input: any) => {
       this.chainedOptionsRef[input.value] = [];
 
-      if (input.chainedOptions) {
-        input.chainedOptions.forEach((option: CustomOption) => {
+      if (input.chained_options) {
+        input.chained_options.forEach((option: CustomOption) => {
           this.chainedOptionsRef[input.value].push(
             option
           )
@@ -52,8 +57,6 @@ export class ProductOptionsComponent implements OnInit {
   renderChained(input: string): void {
     // empty the current options
     this.chainedOptions().clear();
-
-    console.info('chained options cleared: ', this.chainedOptions());
 
     this.chainedOptionsRef[input].forEach((chainedOption: CustomOption) => {
       this._productService.addFormOption(chainedOption, this.chainedOptions());

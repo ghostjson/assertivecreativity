@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { Product, Form, PriceGroup, ProductForm } from 'src/app/models/Product';
+import { Product, PriceGroup } from 'src/app/models/Product';
 import { AdminProductService } from "../../services/admin-product.service";
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -83,7 +83,8 @@ export class AdminProductEditComponent implements OnInit {
         this._fb.group({
           id: form.id,
           title: form.title,
-          parentForm: form.parentForm,
+          is_formgroup: form.is_formgroup,
+          parent_form: form.parent_form,
           options: this.buildOptions(form.options)
         })
       );
@@ -145,7 +146,7 @@ export class AdminProductEditComponent implements OnInit {
         this.productObj.price_table_mode,
         [Validators.required]
       ],
-      price_table: this.productObj.price_table_mode === '1' ? this.buildPriceTable(): null,
+      price_table: this.productObj.price_table_mode ? this.buildPriceTable(): this._fb.array([]),
       custom_forms: this.buildCustomForms()
     });
 

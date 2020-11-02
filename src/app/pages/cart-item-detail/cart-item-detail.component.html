@@ -1,45 +1,65 @@
-<div>
+<div class="cart-item-detail-component">
   <app-header></app-header>
   <div class="container">
     <div *ngIf="cartItem" class="row justify-content-center">
-      <h1 class="order-summary__title">Order Summary</h1>
-      <div class="col-12 d-flex justify-content-center">
-        <div
-          class="row justify-content-around align-items-stretch mt-5 mb-5">
-          <div class="col-12 col-sm-5 p-0 d-flex flex-column justify-content-center">
-            <app-product-summary-card
-              [name]="cartItem.product.name"
-              [image]="cartItem.product.image"
-              [description]="cartItem.product.description"
-              [totalPrice]="cartItem.total_price"
-            ></app-product-summary-card>
-          </div>
-          <div class="col-12 col-sm-6">
-            <p-calendar
-              [inline]="true"
-              dateFormat="dd.mm.yy"
-              [disabledDays]="[0,6]"
-              [readonlyInput]="true"
-              showButtonBar="true"
-              [(ngModel)]="orderDeliveryDate"
+      <div class="col-12">
+        <p-card>
+          <p-header>
+            <h1 class="order-summary__title">Order Summary</h1>
+          </p-header>
+          <div class="d-flex justify-content-center">
+            <div
+              class="row justify-content-between align-items-stretch mt-5 mb-5"
             >
-              <p-header [ngClass]="'date-picker__title mb-3'">Select Delivery Date</p-header>
-            </p-calendar>
+              <div
+                class="col-12 col-md-6 d-flex flex-column justify-content-start"
+              >
+                <app-product-summary-card
+                  [name]="cartItem.product.name"
+                  [image]="cartItem.product.image"
+                  [description]="cartItem.product.description"
+                  [totalPrice]="
+                    cartItem.custom_forms_entry
+                      ? cartItem.custom_forms_entry.total_price
+                      : cartItem.product.base_price
+                  "
+                ></app-product-summary-card>
+              </div>
+              <div
+                class="pick-delivery-date col-12 col-md-6 text-right mt-5 mt-md-0"
+              >
+                <p-calendar
+                  [(ngModel)]="orderDeliveryDate"
+                  [inline]="true"
+                  [minDate]="minDate"
+                  inputId="date-range"
+                  styleClass="shadow"
+                ></p-calendar>
+                <h2 class="pick-delivery-date__title mt-1">
+                  Choose Delivery Date
+                </h2>
+              </div>
+            </div>
           </div>
-        </div>
+        </p-card>
       </div>
-      <app-order-summary-table
-        [order]="cartItem"
-      ></app-order-summary-table>
-      <div class="text-right mt-4 mb-5">
+      <div class="mt-5">
+        <app-order-summary-table
+          *ngIf="cartItem.custom_forms_entry"
+          [customFormsEntry]="cartItem.custom_forms_entry.forms_input.custom_forms"
+        ></app-order-summary-table>
+      </div>
+      <div class="place-order-footer col-12 p-3 shadow text-right mt-4 mb-5">
         <button
-          type="button"
-          class="btn btn-primary btn--confirm align-self-end"
+          label="Place Order"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          type="submit"
+          class="p-button-primary p-button-lg"
           [disabled]="!orderDeliveryDate"
           (click)="confirmOrder()"
-        >
-          Place Order
-        </button>
+          pButton
+        ></button>
       </div>
     </div>
   </div>

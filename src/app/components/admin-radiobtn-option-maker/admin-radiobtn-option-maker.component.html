@@ -79,7 +79,7 @@
             >
               <button
                 type="button"
-                (click)="showDialog(chainedInd)"
+                (click)="toggleDialog(inputInd, chainedInd)"
                 pButton
                 icon="pi pi-external-link"
                 iconPos="right"
@@ -89,7 +89,7 @@
               </button>
               <p-dialog
                 header="Edit {{getChainedOptions(inputInd).value[chainedInd].name | titlecase}}"
-                [(visible)]="dialogVisible[chainedInd]"
+                [(visible)]="dialogVisible[inputInd][chainedInd]"
                 [style]="{ width: '50vw' }"
                 [baseZIndex]="10"
                 [modal]="true"
@@ -103,7 +103,7 @@
                 <p-footer>
                   <button
                     class="mt-3"
-                    (click)="dialogVisible[chainedInd] = false"
+                    (click)="toggleDialog(inputInd, chainedInd)"
                     type="button"
                     label="Done"
                     iconPos="right"
@@ -139,7 +139,8 @@
                   (onClick)="
                     addChainedOption(
                       getInputs().at(inputInd).value.selectedChainedOption,
-                      getChainedOptions(inputInd)
+                      getChainedOptions(inputInd),
+                      inputInd
                     )
                   "
                 >

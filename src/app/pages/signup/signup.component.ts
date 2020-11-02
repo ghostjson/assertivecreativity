@@ -21,17 +21,22 @@ export class SignupComponent implements OnInit {
   error: string = "";
   returnUrl: string;
 
-  constructor(private auth: AuthService, private _router: Router) {}
+  constructor(private _auth: AuthService, private _router: Router) {}
 
   ngOnInit(): void {
+    console.log('return url: ', this._router.parseUrl(this._router.url).queryParamMap.get('return'));
     this.returnUrl = this._router.parseUrl(this._router.url).queryParamMap.get('return');
+
+    if(!this.returnUrl) {
+      this.returnUrl = '/';
+    }
   }
 
   submitForm(): void {
     this.error = "";
     if (this.password_confirm === this.signup_form.password) {
       try {
-        this.auth.register(this.signup_form)
+        this._auth.register(this.signup_form)
         .subscribe( _ => this._router.navigate([this.returnUrl]));
       } catch (e) {
         this.error = "Signup failed, try again";

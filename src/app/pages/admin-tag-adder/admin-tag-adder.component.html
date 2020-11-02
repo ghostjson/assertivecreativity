@@ -1,7 +1,7 @@
 <div class="admin-tag-adder">
   <app-admin-header></app-admin-header>
 
-  <div class="tags-table container p-my-5">
+  <div class="tags-table admin-data-table container p-my-5">
     <p-toast></p-toast>
 
     <div class="card">
@@ -26,15 +26,6 @@
             class="p-button-success p-mr-2"
             (click)="openNew()"
           ></button>
-          <!-- <button
-            pButton
-            pRipple
-            label="Delete"
-            icon="pi pi-trash"
-            class="p-button-danger"
-            (click)="deleteSelectedTags()"
-            [disabled]="!selectedTags || !selectedTags.length"
-          ></button> -->
         </ng-template>
       </p-toolbar>
 
@@ -67,9 +58,6 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <!-- <th style="width: 3rem">
-              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th> -->
             <th pSortableColumn="label">
               TAG <p-sortIcon field="label"></p-sortIcon>
             </th>
@@ -81,9 +69,6 @@
         </ng-template>
         <ng-template pTemplate="body" let-tag>
           <tr>
-            <!-- <td>
-              <p-tableCheckbox [value]="tag"></p-tableCheckbox>
-            </td> -->
             <td>{{ tag.name }}</td>
             <td>...</td>
             <td class="admin-data-table__tools">
@@ -91,14 +76,14 @@
                 pButton
                 pRipple
                 icon="pi pi-pencil"
-                class="p-button-rounded p-button-success p-mr-2"
+                class="p-button-success p-mr-2"
                 (click)="editTag(tag)"
               ></button>
               <button
                 pButton
                 pRipple
                 icon="pi pi-trash"
-                class="p-button-rounded p-button-warning"
+                class="p-button-danger"
                 (click)="deleteTag(tag)"
               ></button>
             </td>

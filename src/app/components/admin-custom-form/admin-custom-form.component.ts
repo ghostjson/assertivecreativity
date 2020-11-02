@@ -20,6 +20,7 @@ export class AdminCustomFormComponent implements OnInit {
   customOptions: SelectItem[];
   selectedCustomOption: string;
   possibleOptions: Object;
+  parentForms: SelectItem<number>[];
 
   constructor(
     private _productService: AdminProductService
@@ -28,26 +29,26 @@ export class AdminCustomFormComponent implements OnInit {
   ngOnInit(): void {
     this.customOptions = this._productService.getCustomOptions();
     this.possibleOptions = this._productService.getOptionDefinitions();
+    this.updateParentForms();
   }
 
   // initialise the form ids array for select parent input
-  getFormIds(): SelectItem[] {
-    let formIds = [];
-    formIds.push({
+  updateParentForms(): void{
+    console.info('custom forms: ', this.formArray.value);
+    this.parentForms = [];
+    this.parentForms.push({
       label: 'None',
       value: null
     });
 
     for (let i = 0; i < this.formCount; ++i) {
-      if (i !== this.formId) {
-        formIds.push({
+      if ((i < this.formId) && (this.formArray.value[i].is_formgroup)) {
+        this.parentForms.push({
           label: `Form ID ${i}`,
           value: i
         });
       }
     }
-
-    return formIds;
   }
 
   // helper function to get custom options in a custom form

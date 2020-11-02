@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/Order';
+import { AdminOrdersService } from 'src/app/services/admin-orders.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,31 +10,18 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./admin-orders.component.scss']
 })
 export class AdminOrdersComponent implements OnInit {
-  orders: {
-    open: Order[],
-    closed: Order[],
-    cancelled: Order[]
-  };
-
+  orders: Order[];
 
   constructor(
     private _http: HttpClient,
-    private _orderService: OrderService
+    private _orderService: AdminOrdersService
   ) { }
 
   ngOnInit(): void {
-    this._orderService.getOrders()
+    this._orderService.getAllOrders()
       .subscribe((orders: Order[]) => {
         console.log('orders received: ', orders);
-        this.orders = {
-          open: [],
-          closed: [],
-          cancelled: []
-        };
-        
-        orders.forEach((order: Order) => {
-          this.orders[order.order_status].push(order);
-        });
+        this.orders = orders;
       });
   }
 

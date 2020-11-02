@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/common.service';
 import { User } from 'src/app/models/User';
 import { MenuItem } from 'primeng/api';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,13 +16,14 @@ export class NavbarComponent implements OnInit {
   @Input() navEndItems: MenuItem[];
   @Input() logo: string;
   @Input() user: User;
+
+  @Output() onSearchStart: EventEmitter<string> = new EventEmitter<string>();
   
   currentUrl: string;
   searchValue: string;
 
   constructor(
-    private _common: CommonService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +40,15 @@ export class NavbarComponent implements OnInit {
     }
 
     return false;
+  }
+
+  /**
+   * Emit the search string
+   * @param event event object
+   */
+  emitValue(event: KeyboardEvent) {
+    if(event.key.toLowerCase() === 'enter') {
+      this.onSearchStart.emit(this.searchValue.trim());
+    }
   }
 }

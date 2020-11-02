@@ -56,13 +56,6 @@ export class AdminProductService {
       .pipe(
         take(1),
         map((product: any) => {
-          /**
-           * TODO: Fix after lorem pixel is up
-           */
-          if(product.data.image.startsWith('http')) {
-            product.data.image = 'https://picsum.photos/seed/480/640';
-          }
-
           return product.data;
         })
       );
@@ -76,17 +69,6 @@ export class AdminProductService {
       .pipe(
         take(1),
         map((products: any) => {
-          /**
-           * TODO: Remove this after lorempixel.com is fixed
-           */
-          products.data = products.data.map((product: Product) => {
-            if(product.image.startsWith('http')) {
-              product.image = 'https://picsum.photos/seed/480/640';
-            }
-
-            return product;
-          });
-
           return products.data;
         })
       );
@@ -127,10 +109,6 @@ export class AdminProductService {
     this.products = this.products.filter((product: Product) => {
       return !ids.includes(product.id);
     });
-
-    console.log(`delete products ${ids}`);
-    console.log('Products left:', this.products);
-    
   }
 
   /**
@@ -172,7 +150,6 @@ export class AdminProductService {
    */
   addPriceGroup(priceTable: FormArray): void {
     priceTable.push(this.newPriceGroup());
-    console.log('new price group added');
   }
 
   /**
@@ -199,13 +176,10 @@ export class AdminProductService {
     isChained: boolean=false,
     initialValue: any=null
   ): FormGroup {
-    console.log("Creating ", optionType, " for the product!!");
     let optionTemplate: any = {};
     let optionToAdd = this.possibleOptions[optionType];
 
     if (optionToAdd) {
-      console.log(optionToAdd.type, " feature found :-)");
-
       if (initialValue) {
         optionTemplate = {
           type: [
@@ -284,7 +258,6 @@ export class AdminProductService {
 
   // remove option from the custom form
   removeOption(optionId: number, options: FormArray): void {
-    console.log("Product feature: ", options.at(optionId));
     options.removeAt(optionId);
   }
 
@@ -298,9 +271,6 @@ export class AdminProductService {
     isChained: boolean=false,
     initialValue: any=null
   ): FormGroup {
-    console.log("Creating ", inputType, " Input");
-
-    console.log(inputType);
 
     // create the input formgroup
     let newInput: Object = {};
@@ -330,11 +300,8 @@ export class AdminProductService {
 
       // form control for specifying the chained option to insert during runtime
       newInput['selectedChainedOption'] = null;
-
-      console.log('chained options form array added');
     }
 
-    console.info('new option input created: ', newInput);
     return this._fb.group(newInput);
   }
 
@@ -345,11 +312,7 @@ export class AdminProductService {
    * @param formGroup form group of the inputs form array
    */
   addOptionInput(inputType: string, inputs: FormArray, formGroup: FormGroup): void {
-    console.info('isCHained value: ',formGroup.value.meta.isChained);
-
     inputs.push(this.newOptionInput(inputType, formGroup.value.meta.isChained));
-    console.log("Input Added: ");
-    console.table(inputs);
   }
 
   /**

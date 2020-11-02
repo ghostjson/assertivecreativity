@@ -2,28 +2,7 @@
   <app-admin-header></app-admin-header>
   <main class="container">
     <div class="row">
-      <div class="col-12">
-        <h1>Orders</h1>
-      </div>
-      <div class="col-12">
-        <p-tabView *ngIf="orders">
-          <p-tabPanel header="Pending" [selected]="true">
-            <app-orders-list
-              [orders]="orders.open"
-            ></app-orders-list>
-          </p-tabPanel>
-          <p-tabPanel header="Accepted">
-            <app-orders-list
-              [orders]="orders.closed"
-            ></app-orders-list>
-          </p-tabPanel>
-          <p-tabPanel header="Completed">
-            <app-orders-list
-              [orders]="orders.cancelled"
-            ></app-orders-list>
-          </p-tabPanel>
-        </p-tabView>
-      </div>
+      <app-orders-list *ngIf="orders" [orders]="orders" admin="'true'"></app-orders-list>
     </div>
   </main>
   <app-footer></app-footer>

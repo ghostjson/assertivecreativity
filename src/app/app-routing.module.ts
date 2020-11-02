@@ -8,10 +8,9 @@ import { AboutComponent } from "./pages/about/about.component";
 import { ContactComponent } from "./pages/contact/contact.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
-import { SelectShopTypeComponent } from "./pages/select-shop-type/select-shop-type.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
-import { AuthGuard } from "./guard/auth.guard";
+import { AuthGuard } from "./helpers/guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { AdminDashboardComponent } from "./pages/admin-dashboard/admin-dashboard.component";
@@ -31,8 +30,7 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
-  { path: "shop/select-type", component: SelectShopTypeComponent },
-  { path: "shop/stocks", component: ShopComponent },
+  { path: "shop/stock", component: ShopComponent },
   {
     path: "profile",
     component: UserProfileComponent,
@@ -40,36 +38,61 @@ const routes: Routes = [
   },
   { path: "logout", component: LogoutComponent },
   { path: "form/:formId", component: FormViewComponent },
-  { path: "cart", component: CartComponent },
-  { path: "cart/:id", component: CartItemDetailComponent },
-  { path: "orders", component: OrdersComponent },
-  { path: "orders/:id", component: OrderDetailComponent },
-  { path: "checkout", component: CheckoutComponent },
+  { 
+    path: "cart", 
+    component: CartComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "cart/:id", 
+    component: CartItemDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "orders", 
+    component: OrdersComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "orders/:id", 
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: "checkout", 
+    component: CheckoutComponent,
+    canActivate: [AuthGuard]
+  },
   { path: "products/:id", component: ProductDetailComponent },
   { 
     path: "admin",
     component: AdminDashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/products", 
     component: AdminProductsComponent, 
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/products/add", 
     component: AdminAddProductComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { role: 'admin' } 
   },
   { 
     path: "admin/products/:id/edit", 
     component: AdminProductEditComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { role: 'admin' } 
   },
   { 
     path: "admin/categories", 
     component: AdminCategoryAdderComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/tags", 
@@ -79,12 +102,14 @@ const routes: Routes = [
   { 
     path: "admin/orders/:id", 
     component: OrderDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   },
   { 
     path: "admin/orders", 
     component: AdminOrdersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { role: 'admin' }
   }
 ];
 

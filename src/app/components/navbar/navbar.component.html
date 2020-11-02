@@ -14,8 +14,18 @@
           [(ngModel)]="searchValue"
           placeholder="Search"
           pInputText
+          (keypress)="emitValue($event)"
         >        
       </span>
+      <a
+        routerLink="/cart"
+        type="button"
+        icon="pi pi-shopping-cart"
+        iconPos="right"
+        label="Cart"
+        class="p-button-success mr-2"
+        pButton
+      ></a>
       <button
         class="account-btn"
         type="button"

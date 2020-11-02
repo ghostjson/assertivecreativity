@@ -18,8 +18,7 @@ export class ProductOptionsColorComponent implements OnInit {
 
   constructor(
     private _idGen: IdGeneratorService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     for (let i = 0; i < this.option.inputs.length; ++i) {
@@ -27,6 +26,10 @@ export class ProductOptionsColorComponent implements OnInit {
     }
   }
 
+  /**
+   * Emit the input given
+   * @param event event object containing the input
+   */
   emitValue(event: any): void {
     this.onChange.emit(event);
   }

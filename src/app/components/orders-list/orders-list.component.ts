@@ -9,6 +9,7 @@ import { Order } from 'src/app/models/Order';
 })
 export class OrdersListComponent implements OnInit {
   @Input() orders: Order[];
+  @Input() admin: boolean;
 
   selectedOrders: Object[];
   statuses: Object[];
@@ -35,6 +36,10 @@ export class OrdersListComponent implements OnInit {
     ];
 
     this.first = this.last = this.totalRecords = 0;
+
+    if(this.admin) {
+      console.log('admin mode detected');
+    }
   }
 
   

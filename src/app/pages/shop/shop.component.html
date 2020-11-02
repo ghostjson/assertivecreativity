@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (onSearchStringEmit)="getSearchResults($event)"></app-header>
 <div class="container">
   <!-- product slider starts -->
   <div class="row mt-5">
@@ -28,15 +28,15 @@
           <ng-container *ngIf="categories.length > 0; else noCategories">
             <div *ngFor="let category of categories" class="p-field-checkbox">
               <p-checkbox
+                [label]="category.name"
                 name="category"
                 value="category"
                 [value]="category"
                 [(ngModel)]="selectedCategories"
                 [inputId]="category.id"
                 [disabled]="category.name.toLowerCase() === 'none'"
-                (onChange)="updateProducts()"
+                (onChange)="update()"
               ></p-checkbox>
-              <label [for]="category.id">{{ category.name }}</label>
             </div>
           </ng-container>
           <ng-template #noCategories>
@@ -58,13 +58,12 @@
           <ng-template #tagsList>
             <div *ngFor="let tag of tags" class="p-field-checkbox">
               <p-checkbox
+                [label]="tag.name"
                 name="tag"
                 [value]="tag.id"
                 [(ngModel)]="selectedTags"
                 [inputId]="tag.id"
-                (onChange)="updateProducts()"
               ></p-checkbox>
-              <label [for]="tag.id">{{tag.name}}</label>
             </div>
           </ng-template>
         </p-accordionTab>

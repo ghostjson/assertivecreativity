@@ -1,18 +1,29 @@
-<p-treeTable styleClass="border rounded" [value]="orderSummary">
+<p-treeTable [value]="orderSummary" styleClass="p-datatable-gridlines">
   <ng-template pTemplate="header">
     <tr>
-        <th>Specification</th>
-        <th>Input</th>
-        <th>Price</th>
+      <th>Specification</th>
+      <th>Input</th>
+      <th>Price</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
     <tr [ttRow]="rowNode">
-        <td class="orderSummary__feature-title">
-          {{rowData.title}}
-        </td>
-        <td>{{rowData.input}}</td>
-        <td>{{rowData.price}}</td>
+      <td class="orderSummary__feature-title">
+        {{ rowData.title }}
+      </td>
+      <td>{{ rowData.input }}</td>
+      <td>{{ rowData.price }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <tr>
+      <td>
+        Total Price
+      </td>
+      <td></td>
+      <td>
+        {{totalPrice | currency: 'USD'}}
+      </td>
     </tr>
   </ng-template>
 </p-treeTable>

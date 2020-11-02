@@ -1,0 +1,17 @@
+@import '../../../assets/css/variables.scss';
+
+.customization-question__text {
+  font-weight: bold;
+}
+
+.customization-input-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.customization-input {
+  min-width: 100px;
+  display: flex;
+  margin: 1em 0.5em 0 0;
+}

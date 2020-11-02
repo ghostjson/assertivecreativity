@@ -1,3 +1,33 @@
-.message-header {
-  width: 100%;
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .message-header {
+      width: 100%;
+    }
+
+    .p-card-title {
+      font-weight: 900;
+    }
+
+    .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link {
+      background: white;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .p-scrollpanel-bar {
+      background: $secondary-color;
+    }
+
+    .compose-mail__writer {
+      height: 320px;
+    }
+
+    .p-editor-container {
+      height: 88%;
+    }
+  }
 }

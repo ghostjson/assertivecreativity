@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order } from 'src/app/models/Order';
-import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-orders',
@@ -15,24 +13,12 @@ export class OrdersComponent implements OnInit {
   productDetails: Object;
 
   constructor(
-    private _orderService: OrderService,
-    private _productService: ProductService
+    private _orderService: OrderService
   ) { }
 
-  ngOnInit(): void {
-    this.orders = [];
-
-    this._orderService.getOrders()
+  ngOnInit(): void {this._orderService.getOrders()
       .subscribe((orders: Order[]) => {
-        orders.forEach((order: Order) => {
-          order.data.product_details = null;
-
-          this._productService.getProduct(order.product_id)
-            .subscribe((product: Product) => {
-              order.data.product_details = product;
-              this.orders.push(order);
-            });
-        });
+        this.orders = orders;
         console.info('Orders: ', orders);
       });
   }

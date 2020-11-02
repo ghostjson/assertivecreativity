@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { Cart, CartItem } from '../models/Cart';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,13 @@ export class CartService {
   cart: Cart;
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _authService: AuthService
   ) {
-    // intialise the cart 
-    this.refreshCart();
+    // intialise the cart if user is logged in
+    if(_authService.isAuthenticated()) {
+      this.refreshCart();
+    }
   }
 
   /**
@@ -24,6 +28,13 @@ export class CartService {
    */
   private cartLink(): string {
     return `${environment.apiUrl}/orders/wishlist`;
+  }
+
+  /**
+   * Return cart item link
+   */
+  private cartLinkById(id: number): string {
+    return `${this.cartLink()}/${id}`;
   }
 
   /**
@@ -38,15 +49,7 @@ export class CartService {
    * Return the cart item 
    */
   getCartItem(id: number): Observable<CartItem> {
-    /**
-     * TODO: Uncomment to this after returning the object from 
-     * POST request issue is fixed
-     */
-    // return this.cart.data.find((cartItem: CartItem) => {
-    //   return cartItem.id === id;
-    // })
-
-    return this._http.get<CartItem>(`${this.cartLink()}/${id}`)
+    return this._http.get<CartItem>(this.cartLinkById(id))
       .pipe(map((item: any) => {
         return item.data;
       }));
@@ -75,9 +78,6 @@ export class CartService {
    * @param item item to add to cart
    */
   addToCart(item: any): Observable<CartItem> {
-    item.custom_forms_entry = JSON.stringify(item.custom_forms_entry);
-    console.info('cart item to add: ', item);
-
     return this._http.post<CartItem>(`${this.cartLink()}`, item)
       .pipe(take(1));
   }
@@ -87,7 +87,7 @@ export class CartService {
    * @param id id of the cart item
    */
   deleteFromCart(id: number): Observable<any> {
-    return this._http.delete(`${this.cartLink()}`)
+    return this._http.delete(`${this.cartLinkById(id)}`)
       .pipe(take(1));
   }
 }

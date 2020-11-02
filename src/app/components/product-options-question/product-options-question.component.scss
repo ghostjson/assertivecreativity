@@ -1,3 +1,31 @@
-.text-input__label, .text-input__input {
-  display: block;
+@import '../../../assets/css/variables.scss';
+
+.customization-question__text {
+  font-weight: bold;
+}
+
+.customization-input-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.customization-input-label {
+  display: flex;
+  margin-bottom: 0;
+  flex-grow: 1;
+  padding: 0.5em;
+  margin-left: 0.5em;
+}
+
+.customization-input {
+  width: 100%;
+}
+
+.customization-input__input {
+  width: 100%;
+}
+
+.customization-input-label:hover {
+  cursor: pointer;
 }

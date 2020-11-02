@@ -1,36 +1,40 @@
 <div [formGroup]="formGroup">
-  <label
-    for="text-{{id}}"
-    class="text-input__label"
-  >
-    {{option.title}}
-    <sup *ngIf="requiredInp">
+  <h5 class="customization-question">
+    <label for="text-{{ id }}" class="customization-question__text">
+      {{ option.title }}
+    </label>
+    <sup class="customization-question__req-badge" *ngIf="requiredInp">
       * required
     </sup>
-  </label>
-  <ng-container
-    *ngIf="option.meta.isChained; else withEmit"
-  >
-    <input
-      id="text-{{id}}"
-      class="text-input__input"
-      type="text"
-      formControlName="input"
-      placeholder="{{option.name}}"
-      pInputText
+  </h5>
+  <div class="customization-input-container">
+    <div 
+      *ngIf="option.meta.isChained; else withEmit"
+      class="customization-input"
     >
-  </ng-container>
-  <ng-template
-    #withEmit
-  >
-    <input
-      id="text-{{id}}"
-      class="text-input__input"
-      type="text"
-      formControlName="input"
-      placeholder="{{option.name}}"
-      pInputText
-      (input)="emitValue($event)"
-    >
-  </ng-template>
+      <textarea
+        class="customization-input__input"
+        id="text-{{ id }}"
+        formControlName="input"
+        placeholder="{{ option.label }}"
+        [autoResize]="true"
+        rows="10"
+        pInputTextarea
+      ></textarea>
+    </div>
+    <ng-template #withEmit>
+      <div class="customization-input">
+        <textarea
+          class="customization-input__input"
+          id="text-{{ id }}"
+          formControlName="input"
+          placeholder="{{ option.label }}"
+          [autoResize]="true"
+          (input)="emitValue($event)"
+          rows="10"
+          pInputTextarea
+        ></textarea>
+      </div>
+    </ng-template>
+  </div>
 </div>

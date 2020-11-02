@@ -10,6 +10,7 @@ import { Category } from 'src/app/models/Category';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: "app-admin-add-product-form",
@@ -41,7 +42,8 @@ export class AdminAddProductFormComponent implements OnInit {
     private _productService: AdminProductService,
     private _router: Router,
     private _idService: IdGeneratorService,
-    private _pcService: ProductCategorisationService
+    private _pcService: ProductCategorisationService,
+    private _common: CommonService
   ) { }
 
   ngOnInit(): void {
@@ -61,9 +63,7 @@ export class AdminAddProductFormComponent implements OnInit {
 
       // create a form group for the new product
       this.productForm = this._fb.group(new ProductForm());
-
-      // temporarily add an image as a placeholder until image upload is fixed
-      this.productForm.patchValue({image: '/assets/images/demo-product-images/1.jpg'});
+      console.log('new product form created: ', this.productForm.value);
     }
 
     // intialise categories list
@@ -103,7 +103,8 @@ export class AdminAddProductFormComponent implements OnInit {
         formTitle,
         [Validators.required]
       ],
-      parentForm: null,
+      is_formgroup: false,
+      parent_form: null,
       options: this._fb.array([])
     };
 
@@ -163,21 +164,28 @@ export class AdminAddProductFormComponent implements OnInit {
    * Submit the form
    */
   onSubmit(): void {
+    this._common.setLoader(true);
+
     if(this.newProductImage) {
       this.productForm.patchValue({
         image: this.newProductImage
       });
     }
 
+    
     // construct product from form value 
-    let submitValue = new Product(this.productForm.value);
-    console.log('Sending product object: ', submitValue);
-
+    let submitValue = new Product(this.productForm.value);   
+    
     submitValue.category_id = submitValue.category.id;
+    
+    console.info('product object: ', submitValue);
 
     if(submitValue.price_table_mode) {
       submitValue.base_price = submitValue.price_table[0].price_per_piece;
     }
+
+    
+    console.log('Sending product object: ', submitValue);
 
     if (this.isEdit) {
       this._productService.editProduct(submitValue)

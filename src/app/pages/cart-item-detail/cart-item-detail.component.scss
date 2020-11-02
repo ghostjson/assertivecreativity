@@ -1,0 +1,44 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .container {
+      margin-top: 2em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+
+    .p-card-content {
+      padding: 0;
+    }
+
+    .p-calendar {
+      border-radius: 6px;
+
+      .p-highlight {
+        color: white;
+      }
+    }
+
+    .order-summary__title {
+      text-align: left;
+      font-weight: bold;
+    }
+    
+    .pick-delivery-date__title {
+      background: white;
+      border-radius: 6px;
+      padding: 0.5em;
+      font-size: 1.7rem;
+    }
+
+  }
+}
+        .place-order-footer {
+          background: white;
+          border: 1px solid $light-grey;
+          border-radius: 6px;
+        }

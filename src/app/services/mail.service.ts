@@ -2,47 +2,66 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable } from 'rxjs';
-import { MailThread, Mail } from '../models/Mail';
-import { take } from 'rxjs/operators';
+import { Mail, MailResponse, MailThread, MailThreadResponse } from '../models/Mail';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
 })
 export class MailService {
-  host: string;
-  API_URL: string;
 
   constructor(private _http: HttpClient) {
-    this.host = environment.apiUrl;
-    // this.API_URL = 'http://localhost:3000'
-    this.API_URL = 'http://3.129.34.125/mock-api'
   }
 
-  getMailsLink(): string {
-    return `${this.API_URL}/messages`;
+  private mailLink(): string {
+    return `${environment.apiUrl}/orders/threads`;
   }
 
-  getMailsLinkById(id: number): string {
-    return `${this.getMailsLink()}/${id}/mails`;
+  private mailLinkByUserId(userId: number): string {
+    return `${this.mailLink()}/${userId}`;
   }
 
-  getMails(id: number): Observable<Mail[]> {
-    console.log('request messages from: ', this.getMailsLinkById(id));
-    return this._http
-      .get<Mail[]>(this.getMailsLinkById(id))
-      .pipe(take(1));
+  private mailLinkByOrderId(orderId: number): string {
+    return `${this.mailLink()}/order/${orderId}`;
   }
 
-  createMailThread(orderId: number): Observable<MailThread> {
-    let newThread = {
-      orderId: orderId
-    };
-
-    return this._http.post<MailThread>(this.getMailsLink(), newThread);
+  getThreadByOrderId(orderId: number): Observable<MailThread> {
+    return this._http.get<MailThreadResponse>(this.mailLinkByOrderId(orderId))
+      .pipe(
+        take(1),
+        map((res: MailThreadResponse) => {
+          return res.data;
+        })
+      );
   }
 
-  sendMail(id: number, mail: Mail): Observable<Mail> {
-    return this._http.post<Mail>(this.getMailsLinkById(id), mail)
-      .pipe(take(1));
+  getThreadByUserId(userId: number): Observable<MailThread> {
+    return this._http.get<MailThreadResponse>(this.mailLinkByUserId(userId))
+      .pipe(
+        take(1),
+        map((res: MailThreadResponse) => {
+          return res.data;
+        })
+      );
+  }
+
+  sendMail(mail: Mail): Observable<Mail> {
+    return this._http.post<MailResponse>(this.mailLink(), mail)
+      .pipe(
+        take(1),
+        map((res: MailResponse) => {
+          return res.data;
+        })
+      );
+  }
+
+  sendMailToUser(mail: Mail, userId: number): Observable<Mail> {
+    return this._http.post<MailResponse>(this.mailLinkByUserId(userId), mail)
+      .pipe(
+        take(1),
+        map((res: MailResponse) => {
+          return res.data;
+        })
+      );
   }
 }

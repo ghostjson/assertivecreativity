@@ -39,18 +39,22 @@ export class ProductCategorisationService {
 
   /**
    * Return the tags url
+   * TODO: unify both single tag and multiple tag urls
    */
   tagsUrl(): string {
-    return `${environment.apiUrl}/products/tag`;
+    return `${environment.apiUrl}/products/tags`;
   }
 
+  tagUrl(): string {
+    return `${environment.apiUrl}/products/tag`;
+  }
 
   /**
    * Return url of the tag using id
    * @param id id of the tag
    */
   tagUrlById(id: number): string {
-    return `${this.tagsUrl()}/${id}`;
+    return `${this.tagUrl()}/${id}`;
   }
 
   /**
@@ -94,7 +98,7 @@ export class ProductCategorisationService {
   }
 
   /**
-   * Get tags from  
+   * Get tags  
    */
   getTags(): Observable<Tag[]> {
     return this._http.get<Tag[]>(`${this.tagsUrl()}`)
@@ -125,7 +129,7 @@ export class ProductCategorisationService {
    * @param tag Tag object to add
    */
   addTag(tag: Tag): Observable<any> {
-    return this._http.post(`${this.tagsUrl()}`, tag)
+    return this._http.post(`${this.tagUrl()}`, tag)
       .pipe(take(1));
   }
 
@@ -143,7 +147,7 @@ export class ProductCategorisationService {
    * @param tag Tag object to delete
    */
   deleteTag(tag: Tag): Observable<any> {
-    return this._http.delete(`${this.tagUrlById(tag.id)}`)
+    return this._http.delete(`${this.tagsUrl()}/${tag.id}`)
       .pipe(take(1));
   }
 

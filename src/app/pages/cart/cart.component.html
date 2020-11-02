@@ -1,80 +1,79 @@
-<app-header></app-header>
+<div class="cart-component">
+  <app-header></app-header>
 
-<div class="mt-2">
-  <div class="pb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-          <!-- Shopping cart table -->
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="p-2 px-3 text-uppercase">Product</div>
-                  </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Price</div>
-                  </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Quantity</div>
-                  </th>
-                  <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Remove</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody *ngIf="cart.data.length > 0; else cartEmpty">
-                <tr *ngFor="let item of cart.data; index as itemIndex">
-                  <th scope="row" class="border-0">
-                    <div class="p-2">
-                      <img
-                        src="{{ item.product.image }}"
-                        alt="{{ item.product.name }}"
-                        width="70"
-                        class="img-fluid rounded shadow-sm"
-                      />
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0">
-                          <a
-                            routerLink="/cart/{{item.id}}"
-                            class="text-dark d-inline-block align-middle"
-                          >
-                            {{item.product.name}}
-                          </a>
-                        </h5>
-                        <span
-                          class="text-muted font-weight-normal font-italic d-block"
-                        >
-                          {{item.product.category}}
-                        </span>
-                      </div>
-                    </div>
-                  </th>
-                  <td class="border-0 align-middle"><strong>$79.00</strong></td>
-                  <td class="border-0 align-middle"><strong>3</strong></td>
-                  <td class="border-0 align-middle">
-                    <span 
-                      (click)="deleteItem(itemIndex)"
-                      class="text-dark delete-btn"
-                    >
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-              <ng-template #cartEmpty>
-                <p class="text-center">
-                  Add something to the cart to see it here
-                </p>
-              </ng-template>
-            </table>
+  <div class="container mt-5">
+    <h1>
+      Cart
+    </h1>
+    <p-card
+      *ngFor="let item of cart.data; index as itemIndex"
+      styleClass="mt-3"
+    >
+      <div class="cart-item-card row">
+        <div class="col-12 col-lg-3 d-flex align-items-center">
+          <div class="cart-item-card__img">
+            <img src="{{ item.product.image }}" alt="{{ item.product.name }}" />
           </div>
-          <!-- End -->
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="cart-item-card__product-details">
+            <h2 class="product-details__name">
+              <a [routerLink]="[item.id]">
+                {{ item.product.name }}
+              </a>
+            </h2>
+            <div class="product-details__quantity mt-4">
+              <span> Quantity: </span>
+              {{ item.quantity }}
+            </div>
+            <div class="product-details__price mt-2">
+              <ng-container *ngIf="item.custom_forms_entry; else basePrice">
+                {{ item.custom_forms_entry.total_price | currency: "USD" }}
+              </ng-container>
+              <ng-template #basePrice>
+                {{ item.product.base_price | currency: "USD" }}
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 d-flex align-items-end justify-content-end">
+          <div class="cart-item-card__cart-tools mt-5">
+            <p-button
+              label="Remove"
+              icon="pi pi-trash"
+              iconPos="right"
+              styleClass="p-button-danger p-button-outlined mr-2"
+              (onClick)="deleteItem(itemIndex)"
+            ></p-button>
+            <a
+              [routerLink]="[item.id]"
+              label="Buy Now"
+              icon="pi pi-check"
+              iconPos="right"
+              class="p-button-success"
+              pButton
+            ></a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </p-card>
 
-<app-footer></app-footer>
+    <p-card *ngIf="cart.data.length < 1" styleClass="shadow">
+      <div class="p-5">
+        <h2 class="cart-empty-title">Your cart is empty</h2>
+        <div class="mt-3 text-center">
+          <a
+            routerLink="/"
+            label="Go to store"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            class="p-button-primary"
+            pButton
+          ></a>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <app-footer></app-footer>
+</div>

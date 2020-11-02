@@ -3,7 +3,7 @@ import {
   Product,
   listCustomOptions,
   listAllFeatures,
-  Form
+  CustomForm
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
 import { map, take } from 'rxjs/operators';
+import { Category } from '../models/Category';
 
 @Injectable({
   providedIn: "root",
@@ -33,45 +34,71 @@ export class ProductService {
   /**
    * Return the products link
    */
-  productsLink(): string {
+  private productsLink(): string {
     return `${this.API_URL}/products`;
+  }
+
+  /**
+   * Return link for filtering product based on category
+   * @param categoryId Id of the category
+   */
+  private productsLinkByCategoryId(categoryId: number): string {
+    return `${this.productsLink()}/categories/${categoryId}`;
+  }
+
+  /**
+   * Return link for filtering product based on a list of categories
+   */
+  private productsLinkByCategoryIdList(): string {
+    return `${this.productsLink()}/categories/list`;
   }
 
   /**
    * Return link to the product details in the api
    * @param id Id of the product
    */
-  productLink(id: number): string {
+  private productLink(id: number): string {
     return `${this.productsLink()}/${id}`;
   }
 
-  getProducts(filter: any={categories: [], tags: []}): Observable<Product[]> {
-    let reqLink: string = `${this.productsLink()}`;
+  /**
+   * Return all products of a particular category
+   * @param categoryId category id of the products
+   */
+  getProductsByCategoryId(categoryId: number): Observable<Product[]> {
+    return this._http.get<Product[]>(this.productsLinkByCategoryId(categoryId))
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data as Product[];
+        })
+      );
+  }
 
-    // add the categories 
-    filter.categories.forEach((category: string) => {
-      reqLink += `category=${category}&`;
-    });
+  /**
+   * Return products belonging to a list of category ids
+   * @param categoryIds categories id list
+   */
+  getProductByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
+    return this._http.post<Product[]>(this.productsLinkByCategoryIdList(), {
+      /**
+       * TODO: fix after json_decode expects string error in the backend 
+       */
+      category_ids: JSON.stringify(categoryIds)
+    })
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data as Product[];
+        })
+      );
+  }
 
-    // add the tags 
-    filter.tags.forEach((tag: string) => {
-      reqLink += `tags=${tag}&`;
-    });
-
-    console.info('products request link: ', reqLink);
-    return this._http.get<Product[]>(reqLink)
+  getProducts(): Observable<Product[]> {
+    return this._http.get<Product[]>(this.productsLink())
       .pipe(
         take(1),
         map((products: any) => {
-          /**
-           * TODO: Remove this after lorempixel.com is fixed
-           */
-          products.data = products.data.map((product: Product) => {
-            product.image = 'https://picsum.photos/480/640';
-
-            return product;
-          });
-
           return products.data;
         })
       );
@@ -82,12 +109,25 @@ export class ProductService {
    * @param id Id of the product
    */
   getProduct(id: number): Observable<any> {
-    console.log('product link: ', this.productLink(id));
     return this._http.get(this.productLink(id))
       .pipe(
         take(1),
         map((product: any) => {
           return product.data;
+        })
+      );
+  }
+
+  /**
+   * Search products using a search string
+   * @param searchString search string
+   */
+  searchProducts(searchString: string): Observable<Product[]> {
+    return this._http.get<Product[]>(`${this.productsLink()}/search/${searchString}`)
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data;
         })
       );
   }
@@ -133,8 +173,6 @@ export class ProductService {
       optionTemplate.chained_options = this._fb.array([]);
     }
 
-    console.log("option created: ", this._fb.group(optionTemplate).value);
-
     return this._fb.group(optionTemplate);
   }
 
@@ -151,7 +189,7 @@ export class ProductService {
    * Create a formGroup for adding to custom form array
    * @param form form object to create formGroup
    */
-  newForm(form: Form): FormGroup {
+  newForm(form: CustomForm): FormGroup {
     let formTemplate = {
       id: form.id,
       title: form.title,
@@ -171,7 +209,7 @@ export class ProductService {
    * @param form form object to create formGroup
    * @param formArray formArray to insert the formGroup
    */
-  addForm(form: Form, formArray: FormArray): void {
+  addForm(form: CustomForm, formArray: FormArray): void {
     formArray.push(this.newForm(form));
   }
 

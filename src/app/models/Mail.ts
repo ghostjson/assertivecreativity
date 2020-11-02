@@ -1,19 +1,24 @@
-/**
- * Model for Message
- */
-export class Mail {
+import { User } from './User';
+
+export interface Mail {
   id?: number;
-  author: number;
-  receiver: number;
-  content: string;
-  timestamp: string;
+  order_id: number;
+  message_content: string;
+  sender_id?: number;
+  sender?: User;
+  receiver_id?: number;
+  receiver?: User;
+  updated_at?: string;
+  created_at?: string;
 }
 
-/**
- * Model for a thread of messages
- */
-export interface MailThread {
-  id?: number;
-  orderId: number;
-  mails: Mail[];
+export interface MailResponse {
+  message: string;
+  data: Mail;
+}
+
+export type MailThread = Mail[]
+
+export interface MailThreadResponse {
+  data: any[];
 }

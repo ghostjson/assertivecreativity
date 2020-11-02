@@ -9,14 +9,14 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./admin-color-option-maker.component.scss']
 })
 export class AdminColorOptionMakerComponent implements OnInit {
-  @Input() formGroup: FormGroup;
   @Input() formArray: FormArray;
+  @Input() formGroup: FormGroup;
   @Input() optionInd: number;
 
   color: string[] = ['#AC7B19'];
   chainedOptions: SelectItem[];
   selectedChainedOption: Object;
-  dialogVisible: boolean[][] = [[]];
+  dialogVisible: boolean[][] = [];
 
   constructor(
     public _productService: AdminProductService
@@ -24,6 +24,33 @@ export class AdminColorOptionMakerComponent implements OnInit {
 
   ngOnInit(): void {
     this.chainedOptions = this._productService.getCustomOptions();
+    // initialise the dialog controls if it is editing products 
+    if(this.formGroup.value.inputs.length > 0) {
+      this.initialiseDialogControls();
+
+      // fill in the colors from the product object 
+      this.color = [];
+      this.formGroup.value.inputs.forEach((input: any) => {
+        this.color.push(input.value);
+      });
+    }
+  }
+
+  /**
+   * initialise the dialogVisible array 
+   */
+  initialiseDialogControls(): void {
+    for(let i = 0; i < this.formGroup.value.inputs.length; ++i) {
+      this.dialogVisible.push([]);
+
+      if(!this.formGroup.value.meta.isChained) {
+        for(let j = 0; j < this.formGroup.value.inputs[i].chained_options.length; ++j) {
+          this.dialogVisible[i].push(false);
+        }
+      }
+    }
+
+    console.log('dialogVisible initialised', this.dialogVisible);
   }
 
   /**
@@ -42,6 +69,11 @@ export class AdminColorOptionMakerComponent implements OnInit {
     return chainedOptions;
   }
 
+  /**
+   * Add an option to options form array
+   * @param optionType type of the option
+   * @param options option form array to add the option
+   */
   addOption(optionType: string, options: FormArray): void {
     this._productService.addOption(optionType, options);
 
@@ -51,23 +83,32 @@ export class AdminColorOptionMakerComponent implements OnInit {
     }, 300);
   }
 
+  /**
+   * Add an input to an inputs form array
+   * @param inputType type of the input
+   * @param inputs inputs form array to add
+   */
   addOptionInput(inputType: string, inputs: FormArray) {
     // add the input to the option
     this._productService.addOptionInput(inputType, inputs, this.formGroup);
   }
 
+  /**
+   * Add chained option to a parent input
+   * @param optionType type of the option
+   * @param options options form array to add to
+   * @param inputInd index of the parent input
+   */
   addChainedOption(optionType: string, options: FormArray, inputInd: number): void {
     this._productService.addOption(optionType, options, true);
 
     // add to dialog controls and make it true to display it
-    if(this.dialogVisible[inputInd]) {
-      this.dialogVisible[inputInd].push(true);
-    }
-    else {
-      this.dialogVisible.push([]);
-      this.dialogVisible[inputInd].push(true);
-    }
     console.log('dialog visibility statuses: ', this.dialogVisible);
+    if(!this.dialogVisible[inputInd]) {
+      this.dialogVisible.push([]);
+    }
+    
+    this.dialogVisible[inputInd].push(true);
 
     // Clear selected option stored
     setTimeout(() => {
@@ -75,10 +116,11 @@ export class AdminColorOptionMakerComponent implements OnInit {
     }, 300);
   }
 
-  test(input: any) {
-    console.log('test function output: ', input)
-  }
-
+  /**
+   * Toggle dialog box for adding/creating the chained option
+   * @param inputInd index of the input
+   * @param chainedInd index of the chained option
+   */
   toggleDialog(inputInd: number, chainedInd: number): void {
     this.dialogVisible[inputInd][chainedInd] = !this.dialogVisible[inputInd][chainedInd];
   }

@@ -20,15 +20,22 @@ export class OrderData {
   total_price: number;
   mail_thread?: number;
   product_details: Product;
-  /**
-   * TODO: fix after api is fixed with the array to string error
-   */
-  custom_forms: CustomFormInput[];
+  custom_forms_entry?: CustomFormsEntry[];
+}
+
+export class CustomFormsEntry {
+  id: number;
+  title: string;
+  is_formgroup?: boolean;
+  parent_form?: number;
+  options?: CustomOption[];
+  subforms?: CustomFormInput[];
 }
 
 export class CustomFormInput {
-  id?: number;
+  id: number;
   title: string;
+  parent_form: number;
   options: CustomOption[]
 }
 
@@ -58,3 +65,8 @@ export class CustomOptionForm extends FormGroup {
 }
 
 export type OrderSummaryTable = TreeNode[];
+
+export interface OrderResponse {
+  data: Order[];
+  message?: string;
+}

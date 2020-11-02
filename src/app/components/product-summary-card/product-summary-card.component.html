@@ -1,5 +1,5 @@
-<div class="product-card border rounded">
-  <div class="product-card__img p-3 border-bottom">
+<div class="product-card">
+  <div class="product-card__img border-bottom">
     <img class="img-fluid object--cover" src="{{image}}" alt="Product Image">
   </div>
   <div class="product-desc mt-3 p-3">
@@ -11,7 +11,9 @@
         {{description | slice: 0:100}}...
       </p>
       <p class="product-desc__price mb-0 text-right">
-        Total Price: $ {{totalPrice}}
+        <span>
+          {{totalPrice | currency: 'USD'}}
+        </span>
       </p>
     </div>
   </div>

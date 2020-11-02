@@ -6,7 +6,7 @@
   <div *ngIf="order" class="container mt-5">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-center">Order {{order.id}}</h1>
+        <h1>Order {{order.id}}</h1>
       </div>
       <div class="col-12 col-md-4">
         <app-product-summary-card
@@ -18,27 +18,14 @@
       </div>
       <div class="col-12 col-md-8">
         <app-order-summary-table
-          [order]="order"
+          [customFormsEntry]="order.data.custom_forms_entry"
         ></app-order-summary-table>
-      </div>
-      <div 
-        *ngIf="mails; else messageBtn"
-        class="col-12 mb-5">
-        <h2 class="text-center">
-          Messages
-        </h2>
         <app-order-mail-list
           [mails]="mails"
-          [mailThread]="order.data.mail_thread"
+          [order]="order"
+          styleClass="mt-5"
         ></app-order-mail-list>
       </div>
-      <ng-template #messageBtn>
-        <div class="col-12 text-center my-5">
-          <p-button
-            label="Start Messaging"
-          ></p-button>
-        </div>
-      </ng-template>
     </div>
   </div>
   <app-footer></app-footer>

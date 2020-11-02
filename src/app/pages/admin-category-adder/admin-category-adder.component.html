@@ -1,7 +1,7 @@
 <div class="admin-category-adder">
   <app-admin-header></app-admin-header>
   
-  <div class="categories-table container p-my-5">
+  <div class="admin-data-table categories-table container p-my-5">
     <p-toast></p-toast>
     
     <div class="card">
@@ -115,14 +115,14 @@
                 pButton
                 pRipple
                 icon="pi pi-pencil"
-                class="p-button-rounded p-button-success p-mr-2"
+                class="p-button-success p-mr-2"
                 (click)="editCategory(category)"
               ></button>
               <button
                 pButton
                 pRipple
                 icon="pi pi-trash"
-                class="p-button-rounded p-button-warning"
+                class="p-button-danger"
                 (click)="deleteCategory(category)"
               ></button>
             </td>
