@@ -11,7 +11,6 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
 import { map, take } from 'rxjs/operators';
-import { Category } from '../models/Category';
 
 @Injectable({
   providedIn: "root",
