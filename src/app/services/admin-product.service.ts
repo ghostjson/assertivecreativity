@@ -36,7 +36,14 @@ export class AdminProductService {
    * Return the products API link
    */
   getProductsLink(): string {
-    return `${this.API_URL}/products`
+    return `${this.API_URL}/products`;
+  }
+
+  /**
+   * Return the products API link for vendor
+   */
+  vendorProductsLink(): string {
+    return `${this.getProductsLink()}/vendor`;
   }
 
   /**
@@ -45,6 +52,30 @@ export class AdminProductService {
    */
   getProductLinkById(id: number): string {
     return `${this.getProductsLink()}/${id}`
+  }
+
+  /**
+   * Fetch products from API
+   */
+  getProducts(userRole: string): Observable<Product[]> {
+    if(userRole === 'vendor') {
+      return this._http.get<Product[]>(`${this.vendorProductsLink()}`)
+      .pipe(
+        take(1),
+        map((products: any) => {
+          return products.data;
+        })
+      );
+    }
+    else {
+      return this._http.get<Product[]>(`${this.getProductsLink()}`)
+        .pipe(
+          take(1),
+          map((products: any) => {
+            return products.data;
+          })
+        );
+    }
   }
 
   /**
@@ -57,19 +88,6 @@ export class AdminProductService {
         take(1),
         map((product: any) => {
           return product.data;
-        })
-      );
-  }
-
-  /**
-   * Fetch products from API
-   */
-  getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(`${this.getProductsLink()}`)
-      .pipe(
-        take(1),
-        map((products: any) => {
-          return products.data;
         })
       );
   }
@@ -194,6 +212,10 @@ export class AdminProductService {
             initialValue.name,
             [Validators.required]
           ],
+          price: [
+            initialValue.price,
+            [Validators.required]
+          ],
           meta: this._fb.group({
             isChained: initialValue.meta.isChained
           }),
@@ -222,6 +244,10 @@ export class AdminProductService {
           ],
           name: [
             optionToAdd.name,
+            [Validators.required]
+          ],
+          price: [
+            0,
             [Validators.required]
           ],
           meta: this._fb.group({

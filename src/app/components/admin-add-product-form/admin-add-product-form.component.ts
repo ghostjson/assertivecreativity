@@ -11,6 +11,8 @@ import { ProductCategorisationService } from 'src/app/services/product-categoris
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: "app-admin-add-product-form",
@@ -29,6 +31,7 @@ export class AdminAddProductFormComponent implements OnInit {
   tags: Tag[];
   newProductImage: string | ArrayBuffer;
   currentProductImage: string | ArrayBuffer;
+  user: User;
 
   tagSub: Subscription;
 
@@ -43,10 +46,12 @@ export class AdminAddProductFormComponent implements OnInit {
     private _router: Router,
     private _idService: IdGeneratorService,
     private _pcService: ProductCategorisationService,
+    private _userDetailsService: UserDetailsService,
     private _common: CommonService
   ) { }
 
   ngOnInit(): void {
+    this.user = this._userDetailsService.getUserLocal();
     // list of all possible options we can add in custom forms
     this.possibleOptions = this._productService.getOptionDefinitions();
     console.log(this.possibleOptions);
@@ -190,14 +195,14 @@ export class AdminAddProductFormComponent implements OnInit {
     if (this.isEdit) {
       this._productService.editProduct(submitValue)
         .subscribe((res: Product) => {
-          this._router.navigate(['/admin/products']);
+          this._router.navigate([`/${this.user.role}/products`]);
           console.log("Product added: ", submitValue);
         });
     }
     else {
       this._productService.addProduct(submitValue)
         .subscribe((res: Product) => {
-          this._router.navigate(['/admin/products']);
+          this._router.navigate([`/${this.user.role}/products`]);
           console.log("Product added: ", submitValue);
         });
     }
@@ -207,6 +212,6 @@ export class AdminAddProductFormComponent implements OnInit {
    * Cancel creating/editing the product
    */
   cancelProduct(): void {
-    this._router.navigate(['/admin/products']);
+    this._router.navigate([`/${this.user.role}/products`]);
   }
 }

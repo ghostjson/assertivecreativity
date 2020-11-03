@@ -47,6 +47,7 @@
         <app-order-summary-table
           *ngIf="cartItem.custom_forms_entry"
           [customFormsEntry]="cartItem.custom_forms_entry.forms_input.custom_forms"
+          [totalPrice]="cartItem.custom_forms_entry.total_price"
         ></app-order-summary-table>
       </div>
       <div class="place-order-footer col-12 p-3 shadow text-right mt-4 mb-5">

@@ -38,7 +38,8 @@ export class OrderService {
    * @param id id of the order
    */
   getOrder(id: number): Observable<Order> {
-    return this._http.get<Order>(this.orderLinkById(id));
+    return this._http.get<Order>(this.orderLinkById(id))
+      .pipe(take(1));
   }
 
   /**

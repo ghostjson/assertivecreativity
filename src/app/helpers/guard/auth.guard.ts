@@ -33,17 +33,21 @@ export class AuthGuard implements CanActivate {
     let user: User = this._userService.getUserLocal();
 
     if(this._authService.isAuthenticated()) {
+      console.log('user authenticated');
       console.info('user  from auth guard', user, next);
       if(next.data.role && (next.data.role != user.role)) {
+        console.error('user not authorized');
         status = false;
-        // redirect to signin page 
+        // redirect to home 
         this._router.navigate(['/']);
       }
       else {
+        console.log('user authorized');
         status = true;
       }
     }
     else {
+      console.error('user not authenticated');
       // redirect to signin page 
       this._router.navigate(['/signin'], {
         skipLocationChange: false,

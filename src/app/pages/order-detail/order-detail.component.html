@@ -1,7 +1,7 @@
 <div>
-  <app-header *ngIf="author === 0; else adminHeader"></app-header>
-  <ng-template #adminHeader>
-    <app-admin-header></app-admin-header>
+  <app-admin-header *ngIf="adminMode; else header"></app-admin-header>
+  <ng-template #header>
+    <app-header></app-header>
   </ng-template>
   <div *ngIf="order" class="container mt-5">
     <div class="row">
@@ -19,12 +19,34 @@
       <div class="col-12 col-md-8">
         <app-order-summary-table
           [customFormsEntry]="order.data.custom_forms_entry"
+          [totalPrice]="order.data.total_price"
         ></app-order-summary-table>
+        <p-tabView 
+          *ngIf="adminMode; else notAdminMode"
+          styleClass="mt-5"
+        >
+          <p-tabPanel header="Buyer">
+            <app-order-mail-list
+              [mails]="buyerMails"
+              [receiverId]="order.buyer_id"
+              [order]="order"
+          ></app-order-mail-list>
+          </p-tabPanel>
+          <p-tabPanel header="Vendor">
+            <app-order-mail-list
+              [mails]="vendorMails"
+              [receiverId]="order.seller_id"
+              [order]="order"
+            ></app-order-mail-list>
+          </p-tabPanel>
+      </p-tabView>
+      <ng-template #notAdminMode>
         <app-order-mail-list
-          [mails]="mails"
+          [mails]="buyerMails"
           [order]="order"
           styleClass="mt-5"
         ></app-order-mail-list>
+      </ng-template>
       </div>
     </div>
   </div>

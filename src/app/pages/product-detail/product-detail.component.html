@@ -178,6 +178,9 @@
     <div class="row">
       <div class="col-lg-12 p-2">
         <p-card styleClass="forms-footer">
+          <div class="footer-price">
+            {{priceTotal | currency: 'USD'}}
+          </div>
           <p-button
             label="Add To Cart"
             icon="pi pi-shopping-cart"

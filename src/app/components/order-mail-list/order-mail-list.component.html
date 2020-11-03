@@ -6,12 +6,13 @@
         styleClass="mb-5" [multiple]="true"
       >
         <ng-container *ngFor="let mail of mails; first as isFirst">
-          <p-accordionTab [selected]="isFirst">
+          <p-accordionTab class="{{mail.sender.id == user.id ? 'user-msg' : 'reply-msg'}}" [selected]="isFirst">
             <ng-template pTemplate="header">
               <div class="message-header d-flex justify-content-between">
                 <div class="author-details">
                   <span class="author-details__name">
-                    {{ mail.sender.first_name + mail.sender.last_name }}
+                    {{mail.sender.id}} | {{user.id}}
+                    {{ mail.sender.first_name + ' ' + mail.sender.last_name }}
                   </span>
                 </div>
                 <div class="message-meta">
@@ -25,7 +26,7 @@
       </p-accordion>
       <ng-template #noMessages>
         <p class="text-center">
-          Send Message to the seller !
+          Send mail to see them here !
         </p>
       </ng-template>
     </p-scrollPanel>

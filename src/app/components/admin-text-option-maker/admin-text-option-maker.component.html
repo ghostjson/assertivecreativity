@@ -19,6 +19,16 @@
       />
     </div>
 
+    <div class="form-group">
+      <label class="form-group__label" for="color-price-{{ optionInd }}">
+        Enter extra price for the option
+      </label>
+      <p-inputNumber 
+        [inputId]="'color-price-' + optionInd" formControlName="price" 
+        mode="currency" currency="USD" locale="en-US"
+      ></p-inputNumber>
+    </div>
+
     <!-- render the inputs  -->
     <ng-container
       *ngFor="let input of getInputs().controls; let inputInd = index"

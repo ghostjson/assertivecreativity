@@ -22,3 +22,8 @@ export type MailThread = Mail[]
 export interface MailThreadResponse {
   data: any[];
 }
+
+export interface AdminMailThreadResponse {
+  vendors: MailThread;
+  users: MailThread;
+}

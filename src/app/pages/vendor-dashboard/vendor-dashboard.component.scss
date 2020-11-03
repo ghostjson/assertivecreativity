@@ -1,0 +1,25 @@
+@import 'src/assets/css/admin-common.scss';
+
+.sidebar {
+  background: red;
+}
+
+.sidebar-minimised {
+  display: none;
+  position: fixed;
+  width: 50px;
+  height: 100vh;
+  background-color: rebeccapurple;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-top-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70vh;
+  width: 100%;
+  background: linear-gradient(90deg, #05396B 0%, #4056A1 100%);
+  z-index: 0;
+}

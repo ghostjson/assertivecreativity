@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
    * Check if the logged in user is admin
    */
   isAdmin() {
-    if(this.user && this.user.role === 'admin') {
+    if(this.user && (this.user.role === 'admin' || this.user.role === 'vendor')) {
       return true;
     }
 

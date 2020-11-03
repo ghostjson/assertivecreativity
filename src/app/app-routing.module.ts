@@ -110,6 +110,54 @@ const routes: Routes = [
     component: AdminOrdersComponent,
     canActivate: [AuthGuard],
     data: { role: 'admin' }
+  },
+  { 
+    path: "vendor",
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
+  },
+  { 
+    path: "vendor/products", 
+    component: AdminProductsComponent, 
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
+  },
+  { 
+    path: "vendor/products/add", 
+    component: AdminAddProductComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' } 
+  },
+  { 
+    path: "vendor/products/:id/edit", 
+    component: AdminProductEditComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' } 
+  },
+  { 
+    path: "vendor/categories", 
+    component: AdminCategoryAdderComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
+  },
+  { 
+    path: "vendor/tags", 
+    component: AdminTagAdderComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
+  },
+  { 
+    path: "vendor/orders/:id", 
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
+  },
+  { 
+    path: "vendor/orders", 
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vendor' }
   }
 ];
 

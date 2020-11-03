@@ -3,8 +3,9 @@ import { Mail } from 'src/app/models/Mail';
 import { MailService } from 'src/app/services/mail.service';
 import { MessageService } from 'primeng/api';
 import { ScrollPanel } from 'primeng/scrollpanel';
-import { Router } from '@angular/router';
 import { Order } from 'src/app/models/Order';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-order-mail-list',
@@ -18,26 +19,22 @@ export class OrderMailListComponent implements OnInit {
   @Input() mails: Mail[];
   @Input() order: Order;
   @Input() styleClass: string;
+  @Input() receiverId: number;
 
   mailText: string;
   adminMode: boolean;
+  user: User;
 
   constructor(
     private _mailService: MailService,
     private _messageService: MessageService,
-    private _router: Router
+    private _userDetailsService: UserDetailsService
   ) { }
 
   ngOnInit(): void {
+    this.user = this._userDetailsService.getUserLocal();
+
     console.log('order received at mail list', this.order);
-    if(this._router.url.includes('admin')) {
-      console.info('author is admin');
-      this.adminMode = true;
-    }
-    else {
-      console.info('author is user');
-      this.adminMode = false;
-    }
   }
 
   /**
@@ -52,8 +49,8 @@ export class OrderMailListComponent implements OnInit {
       message_content: this.mailText
     };
 
-    if(this.adminMode) {
-      this._mailService.sendMailToUser(newMail, Number(this.order.buyer_id))
+    if(this.user.role === 'admin') {
+      this._mailService.sendMailToUser(newMail, Number(this.receiverId))
         .subscribe((res: Mail) => {
           this.mailText = null;
           this.mailContainer.scrollTop(0);

@@ -3,6 +3,8 @@ import { Product } from "../../models/Product";
 import { AdminProductService } from "../../services/admin-product.service";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
+import { User } from 'src/app/models/User';
+import { UserDetailsService } from 'src/app/store/user-details.service';
 
 @Component({
   selector: "app-admin-products-list",
@@ -18,11 +20,13 @@ export class AdminProductsListComponent implements OnInit {
     private _productService: AdminProductService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    public _idGen: IdGeneratorService
+    public _idGen: IdGeneratorService,
+    private _userDetailsService: UserDetailsService
   ) {}
 
   ngOnInit() {
-    this._productService.getProducts()
+    let user: User = this._userDetailsService.getUserLocal();
+    this._productService.getProducts(user.role)
       .subscribe((products: Product[]) => {
         this.products = products;
         console.log('products received: ', products);

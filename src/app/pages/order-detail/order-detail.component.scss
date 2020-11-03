@@ -1,0 +1,11 @@
+:host {
+  ::ng-deep {
+    .p-tabview {
+      border-radius: 6px;
+
+      .p-tabview-nav {
+        border-radius: 6px 6px 0 0;
+      }
+    }
+  }
+}

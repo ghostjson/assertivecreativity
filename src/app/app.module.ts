@@ -118,6 +118,7 @@ import { AdminOrdersComponent } from "./pages/admin-orders/admin-orders.componen
 import { OrdersListComponent } from "./components/orders-list/orders-list.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ErrorInterceptor } from "./helpers/error-interceptor/error.interceptor";
+import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +185,7 @@ import { ErrorInterceptor } from "./helpers/error-interceptor/error.interceptor"
     AdminOrdersComponent,
     OrdersListComponent,
     NavbarComponent,
+    VendorDashboardComponent,
   ],
   imports: [
     BrowserModule,

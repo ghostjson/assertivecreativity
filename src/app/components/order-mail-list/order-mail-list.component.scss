@@ -29,5 +29,12 @@
     .p-editor-container {
       height: 88%;
     }
+
+    .user-msg {
+      .p-accordion-header-link,
+      .p-accordion-content {
+        background: $secondary-color !important;
+      }
+    }
   }
 }

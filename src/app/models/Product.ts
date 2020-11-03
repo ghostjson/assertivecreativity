@@ -206,7 +206,6 @@ export class Option {
   price: number;
   inputs: any[];
   meta: OptionMeta;
-  chained_options?: Option[]
 }
 
 export class OptionMeta {

@@ -34,8 +34,37 @@ export class AdminHeaderComponent implements OnInit {
     if (token) {
       this._user.getUser().subscribe((user: User) => {
         this.user = user;
+        this.name = `${user.first_name} ${user.last_name}`;
         console.info('User details: ', this.user);
         this._common.setLoader(false);
+
+        this.sidebarItems = [
+          {
+            label: 'Home',
+            routerLink: `/${user.role}/`,
+            icon: 'pi pi-home'
+          },
+          {
+            label: 'Orders',
+            routerLink: `/${user.role}/orders`,
+            icon: 'pi pi-chart-line'
+          },
+          {
+            label: 'Products',
+            routerLink: `/${user.role}/products`,
+            icon: 'pi pi-briefcase'
+          },
+          {
+            label: 'Categories',
+            routerLink: `/${user.role}/categories`,
+            icon: 'pi pi-folder'
+          },
+          {
+            label: 'Tags',
+            routerLink: `/${user.role}/tags`,
+            icon: 'pi pi-tags'
+          }
+        ];
       })
     }
     else {
@@ -62,39 +91,6 @@ export class AdminHeaderComponent implements OnInit {
       //   routerLink: '/shop/select-type'
       // }
     ];
-
-    this.sidebarItems = [
-      {
-        label: 'Home',
-        routerLink: '/admin/',
-        icon: 'pi pi-home'
-      },
-      {
-        label: 'Orders',
-        routerLink: '/admin/orders',
-        icon: 'pi pi-chart-line'
-      },
-      {
-        label: 'Products',
-        routerLink: '/admin/products',
-        icon: 'pi pi-briefcase'
-      },
-      {
-        label: 'Categories',
-        routerLink: '/admin/categories',
-        icon: 'pi pi-folder'
-      },
-      {
-        label: 'Tags',
-        routerLink: '/admin/tags',
-        icon: 'pi pi-tags'
-      }
-    ];
-
-    this._user.getUser().subscribe((user) => {
-      this.name = `${user.first_name} ${user.last_name}`;
-    });
-
   }
   
   ngAfterViewChecked(): void {

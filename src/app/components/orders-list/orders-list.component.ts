@@ -10,6 +10,7 @@ import { Order } from 'src/app/models/Order';
 export class OrdersListComponent implements OnInit {
   @Input() orders: Order[];
   @Input() admin: boolean;
+  @Input() userRole: string;
 
   selectedOrders: Object[];
   statuses: Object[];

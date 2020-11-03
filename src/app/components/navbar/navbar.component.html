@@ -59,9 +59,9 @@
                 *ngIf="isAdmin()"
               >
                 <a
-                  [routerLink]="['/admin']"
+                  [routerLink]="['/', user.role]"
                 >
-                  Admin Dashboard
+                  {{user.role | titlecase}} Dashboard
                 </a>
               </li>
               <li class="popup-box__item">

@@ -12,6 +12,7 @@ import { IdGeneratorService } from "src/app/services/id-generator.service";
 import { CartService } from "src/app/services/cart.service";
 import { CartItem } from "src/app/models/Cart";
 import { TreeNode } from 'primeng/api';
+import { CustomOption } from 'src/app/models/Order';
 
 @Component({
   selector: "app-product-detail",
@@ -124,6 +125,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    * Initialisation steps for the order form
    */
   initialiseForms(): void {
+    this.updateTotalPrice();
     this.formSubscription = this.orderForm.valueChanges
       .pipe(debounceTime(500))
       .subscribe(() => {
@@ -205,30 +207,44 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    * update the total price of the order
    */
   updateTotalPrice(): void {
-    /**
-     * TODO: Implement updating prices
-     */
-    this.priceTotal = 0;
-  }
+    this.priceTotal = Number(this.orderForm.value.base_price);
 
-  /**
-   * Removes the empty values from the form value object
-   * @param  {any} order dirty order object containing empty values
-   * @return {any} order clean order object with no empty values
-   */
-  cleanForm(order: any): any {
-    for (let i = 0; i < order.features.length; ++i) {
-      order.features[i].chainedInputs = order.features[i].chainedInputs.filter(
-        (chainedInput: any) => {
-          if (chainedInput.input) {
-            console.log("pass");
-            return true;
+    this.orderForm.value.custom_forms.forEach((customForm: any) => {
+      if(customForm.is_formgroup) {
+        customForm.subforms.forEach((subForm: any) => {
+          subForm.options.forEach((option: CustomOption) => {
+            if(option.input) {
+              this.priceTotal += option.price;
+            }
+            
+            if(!option.meta.isChained) {
+              option.chained_options.forEach((chainedOption: CustomOption) => {
+                if(chainedOption.input) {
+                  this.priceTotal += chainedOption.price;
+                }
+              });
+            }
+          });
+        });
+      }
+      else {
+        customForm.options.forEach((option: CustomOption) => {
+          if(option.input) {
+            this.priceTotal += option.price;
           }
-        }
-      );
-    }
+          
+          if(!option.meta.isChained) {
+            option.chained_options.forEach((chainedOption: CustomOption) => {
+              if(chainedOption.input) {
+                this.priceTotal += chainedOption.price;
+              }
+            });
+          }
+        });
+      }
+    });
 
-    return order;
+    console.log('price updated: ', this.priceTotal);
   }
 
   /**
@@ -243,12 +259,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       quantity: 1,
       custom_forms_entry: {
         forms_input: this.orderForm.value,
-        total_price: 10
+        total_price: this.priceTotal
       },
     };
 
-    // order = this.cleanForm(order);
-    // cartItem.custom_forms_entry.total_price = this.priceTotal;
     console.log('add to cart: ', cartItem);
     this._cartService.addToCart(cartItem).subscribe((item: any) => {
       this._router.navigate(["/cart", item.data.id]);
