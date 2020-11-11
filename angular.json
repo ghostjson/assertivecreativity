@@ -37,13 +37,13 @@
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css",
               "src/styles.scss",
-              "src/assets/css/primeng-edited.scss",
-              "src/assets/css/admin-common.scss"
+              "src/assets/css/primeng-edited.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
               "src/assets/js/jquery.overlayScrollbars.min.js",
-              "node_modules/quill/dist/quill.js"
+              "node_modules/quill/dist/quill.js",
+              "node_modules/file-saver/dist/FileSaver.min.js"
             ]
           },
           "configurations": {

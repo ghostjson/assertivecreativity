@@ -1,0 +1,15 @@
+:host {
+  ::ng-deep {
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      input {
+        flex-grow: 1;
+      }
+    }
+    .form-group__label {
+      width: 100%;
+    }
+  }
+}

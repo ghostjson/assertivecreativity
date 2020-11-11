@@ -32,6 +32,9 @@
   </p-card>
 
   <div class="compose-mail mt-5">
+    <app-order-mail-form-maker
+      [formGroup]="orderMailForm"
+    ></app-order-mail-form-maker>
     <div class="compose-mail__writer">
       <p-editor
         [(ngModel)]="mailText"

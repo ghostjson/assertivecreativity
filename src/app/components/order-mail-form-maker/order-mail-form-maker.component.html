@@ -1,0 +1,73 @@
+<div [formGroup]="formGroup" class="order-mail-form-maker-component">
+  <p-card [header]="formGroup.value.title">
+    <ng-container>
+      <div class="form-group">
+        <label
+          class="form-group__label"
+          for="mail-form-title-{{ formGroup.value.id }}"
+        >
+          Enter title of the form
+        </label>
+        <input
+          type="text"
+          formControlName="title"
+          id="mail-form-title-{{ formGroup.value.id }}"
+          pInputText
+        />
+      </div>
+    </ng-container>
+    <ng-container formArrayName="questions">
+      <div
+        class="border-top border-bottom py-3"
+        *ngFor="let question of questions().controls; index as questionIndex"
+      >
+        <ng-container [formGroupName]="questionIndex">
+          <label class="sr-only" for="question-type-{{question.value.id}}">
+            Select Question Type
+          </label>
+          <p-dropdown
+            [options]="questionTypes"
+            formControlName="type"
+            [filter]="true"
+            filterBy="label"
+            [showClear]="true"
+            inputId="question-type-{{question.value.id}}"
+            placeholder="Select a Question Type"
+          ></p-dropdown>
+        </ng-container>
+        <app-order-mail-form-maker-dropdown
+          *ngIf="question.value.type === 'dropdown'"
+          [form]="formGroup"
+          [questionIndex]="questionIndex"
+        ></app-order-mail-form-maker-dropdown>
+        <app-order-mail-form-maker-radio
+          *ngIf="question.value.type === 'radio'"
+          [form]="formGroup"
+          [questionIndex]="questionIndex"
+        ></app-order-mail-form-maker-radio>
+        <app-order-mail-form-maker-text
+          *ngIf="question.value.type === 'text'"
+          [form]="formGroup"
+          [questionIndex]="questionIndex"
+        ></app-order-mail-form-maker-text>
+        <app-order-mail-form-maker-color
+          *ngIf="question.value.type === 'color'"
+          [form]="formGroup"
+          [pantoneColors]="pantoneColors"
+          [questionIndex]="questionIndex"
+        ></app-order-mail-form-maker-color>
+      </div>
+      <p-button
+        label="Add Question"
+        icon="pi pi-plus"
+        iconPos="right"
+        styleClass="p-button-success p-button-sm mt-5"
+        (onClick)="addQuestion()"
+      ></p-button>
+    </ng-container>
+  </p-card>
+
+  <code>
+    {{ formGroup.value | json }}
+  </code>
+</div>

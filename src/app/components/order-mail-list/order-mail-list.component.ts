@@ -6,6 +6,9 @@ import { ScrollPanel } from 'primeng/scrollpanel';
 import { Order } from 'src/app/models/Order';
 import { UserDetailsService } from 'src/app/store/user-details.service';
 import { User } from 'src/app/models/User';
+import { OrderMailForm } from 'src/app/models/OrderMailForm';
+import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-order-mail-list',
@@ -24,17 +27,21 @@ export class OrderMailListComponent implements OnInit {
   mailText: string;
   adminMode: boolean;
   user: User;
+  orderMailForm: FormGroup;
 
   constructor(
     private _mailService: MailService,
     private _messageService: MessageService,
-    private _userDetailsService: UserDetailsService
+    private _userDetailsService: UserDetailsService,
+    private _formMakerService: AdminOrdersFormMakerService
   ) { }
 
   ngOnInit(): void {
     this.user = this._userDetailsService.getUserLocal();
 
     console.log('order received at mail list', this.order);
+
+    this.orderMailForm = this._formMakerService.createOrderMailForm();
   }
 
   /**

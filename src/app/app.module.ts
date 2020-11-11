@@ -119,6 +119,11 @@ import { OrdersListComponent } from "./components/orders-list/orders-list.compon
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ErrorInterceptor } from "./helpers/error-interceptor/error.interceptor";
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
+import { OrderMailFormMakerComponent } from './components/order-mail-form-maker/order-mail-form-maker.component';
+import { OrderMailFormMakerDropdownComponent } from './components/order-mail-form-maker-dropdown/order-mail-form-maker-dropdown.component';
+import { OrderMailFormMakerRadioComponent } from './components/order-mail-form-maker-radio/order-mail-form-maker-radio.component';
+import { OrderMailFormMakerTextComponent } from './components/order-mail-form-maker-text/order-mail-form-maker-text.component';
+import { OrderMailFormMakerColorComponent } from './components/order-mail-form-maker-color/order-mail-form-maker-color.component';
 
 @NgModule({
   declarations: [
@@ -186,6 +191,11 @@ import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashbo
     OrdersListComponent,
     NavbarComponent,
     VendorDashboardComponent,
+    OrderMailFormMakerComponent,
+    OrderMailFormMakerDropdownComponent,
+    OrderMailFormMakerRadioComponent,
+    OrderMailFormMakerTextComponent,
+    OrderMailFormMakerColorComponent,
   ],
   imports: [
     BrowserModule,

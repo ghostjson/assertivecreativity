@@ -5,7 +5,15 @@
         <h1 class="toolbar__title m-md-0 mb-3">Orders</h1>
       </ng-template>
 
-      <ng-template pTemplate="right"> </ng-template>
+      <ng-template pTemplate="right">
+        <p-button
+          label="Export Excel"
+          icon="pi pi-plus"
+          iconPos="right"
+          styleClass="p-button-success"
+          (onClick)="exportOrdersExcel()"
+        ></p-button>
+      </ng-template>
     </p-toolbar>
 
     <p-table

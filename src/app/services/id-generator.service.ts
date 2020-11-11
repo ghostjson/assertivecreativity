@@ -8,7 +8,7 @@ export class IdGeneratorService {
   currentId: number;
 
   constructor() {
-    this.currentId = 0;
+    this.currentId = 1;
   }
 
   /**

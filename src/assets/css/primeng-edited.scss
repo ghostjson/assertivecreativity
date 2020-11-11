@@ -992,8 +992,8 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
   border-radius: 0;
 }
 .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
-  color: #495057;
-  background: $primary-color;
+  color: white;
+  background: $bg-primary;
 }
 .p-listbox .p-listbox-list .p-listbox-item:focus {
   outline: 0 none;
@@ -5641,5 +5641,69 @@ Product Detail component
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+}
+
+.order-mail-form-maker-color-component {
+  p-dialog {
+    p-header {
+      width: 100%;
+  
+      .mail-form-color-picker-input {
+        display: flex;
+        width: 100%;
+      }
+
+      .mail-form-color-picker-label-input {
+        text-transform: capitalize;
+        width: 100%;
+        margin-bottom: 1em;
+      }
+    
+      .mail-form-color-picker-input__input {
+        flex-grow: 1;
+      }
+    
+      .mail-form-color-picker-input__preview {
+        height: 42px;
+        width: 42px;
+        border-radius: 6px;
+        margin-left: 1em;
+      }
+    }
+  }
+
+  .color-input-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mail-form-maker-color-input-color {
+    display: flex;
+    border: 1px solid $light-grey;
+    border-radius: 6px;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    width: 100%;
+    justify-content: space-between;
+
+    .input-color-preview {
+      height: 3rem;
+      width: 3rem;
+      position: relative;
+      box-shadow: $regular-shadow;
+      margin-right: 1em;
+      border-radius: 6px;
+    }
+
+    .color-tools {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .input-color-details__name {
+    text-transform: capitalize;
   }
 }

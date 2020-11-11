@@ -1,0 +1,22 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .add-color-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 82px;
+      width: 82px;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: $regular-shadow;
+      }
+
+      &:active {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
