@@ -42,8 +42,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
               "src/assets/js/jquery.overlayScrollbars.min.js",
-              "node_modules/quill/dist/quill.js",
-              "node_modules/file-saver/dist/FileSaver.min.js"
+              "node_modules/quill/dist/quill.js"
             ]
           },
           "configurations": {

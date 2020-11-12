@@ -1,4 +1,4 @@
-@import '../../../assets/css/variables.scss';
+@import "../../../assets/css/variables.scss";
 
 :host {
   ::ng-deep {
@@ -27,7 +27,7 @@
       text-align: left;
       font-weight: bold;
     }
-    
+
     .pick-delivery-date__title {
       background: white;
       border-radius: 6px;
@@ -35,10 +35,24 @@
       font-size: 1.7rem;
     }
 
+    .pick-delivery-date {
+      p-card {
+        width: 100%;
+      }
+
+      .p-calendar {
+        width: 100%;
+      }
+
+      .date-picker {
+        margin-top: 2em;
+      }
+    }
   }
 }
-        .place-order-footer {
-          background: white;
-          border: 1px solid $light-grey;
-          border-radius: 6px;
-        }
+
+.place-order-footer {
+  background: white;
+  border: 1px solid $light-grey;
+  border-radius: 6px;
+}

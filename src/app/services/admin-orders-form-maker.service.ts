@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { IdGeneratorService } from './id-generator.service';
 import { PANTONE_COLORS } from '../../assets/js/pantone-colors';
 import { Color } from '../models/Color';
-import { FormInput } from '../models/OrderMailForm';
+import { FormInput, OrderMailFormQuestion } from '../models/OrderMailForm';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +85,28 @@ export class AdminOrdersFormMakerService {
 
     console.log('Mail form created: ', mailForm.value);
     return mailForm;
+  }
+
+  createOrderMailFormQuestionEntry(question: OrderMailFormQuestion): FormGroup {
+    let mailFormEntry: FormGroup = this._fb.group({
+      id: this._idGenService.getId(),
+      question: question.label,
+      type: question.type,
+      label: '',
+      input_value: ''
+    });
+
+    return mailFormEntry;
+  }
+
+  createOrderMailFormEntry(questions: OrderMailFormQuestion[]): FormArray {
+    let formEntry: FormArray = this._fb.array([]);
+
+    questions.forEach((question: OrderMailFormQuestion) => {
+      formEntry.push(this.createOrderMailFormQuestionEntry(question));
+    });
+
+    return formEntry;
   }
 
   getPantoneColors(): Color[] {

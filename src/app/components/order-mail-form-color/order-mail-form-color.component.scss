@@ -1,0 +1,62 @@
+@import '../../../assets/css/variables.scss';
+
+.question-input-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.question-input {
+  min-width: 100px;
+  display: flex;
+  margin: 1em 0.5em 0 0;
+  border: 1px solid $light-grey;
+  border-radius: 6px;
+  
+  &.question-input--selected {
+    position: relative;
+    box-shadow: $regular-shadow;
+    color: white;
+    background: $bg-primary;
+    border-color: $primary-color;
+  }
+
+  &.question-input--color {
+    padding-right: 0.5em;
+    align-items: center;
+  }
+}
+
+.question-input:hover {
+  position: relative;
+  box-shadow: $regular-shadow;
+  color: white;
+  background: $bg-primary;
+  border-color: $primary-color;
+}
+
+.question-input-label {
+  display: flex;
+  margin-bottom: 0;
+  flex-grow: 1;
+  padding: 0.5em;
+  margin-left: 0.5em;
+  text-transform: capitalize;
+}
+
+.question-input__input {
+  margin-left: 0.5em;
+}
+
+.question-input-label:hover,
+.question-input__input:hover {
+  cursor: pointer;
+}
+
+
+.color-preview {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 6px;
+  margin-left: 0.5em;
+}

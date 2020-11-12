@@ -1,4 +1,4 @@
-@import '../../../assets/css/variables.scss';
+@import "../../../assets/css/variables.scss";
 
 :host {
   ::ng-deep {
@@ -40,6 +40,28 @@
       .p-accordion-content {
         background: $secondary-color !important;
       }
+    }
+
+    .user-msg {
+      .order-mail-form-component {
+        .p-accordion-header-link,
+        .p-accordion-content {
+          background: white !important;
+        }
+      }
+    }
+
+    .form-list__item {
+      border: 1px solid $secondary-color;
+      border-radius: 6px;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-list__item__title {
+      font-weight: 600;
     }
   }
 }

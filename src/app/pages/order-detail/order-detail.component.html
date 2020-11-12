@@ -6,7 +6,10 @@
   <div *ngIf="order" class="container mt-5">
     <div class="row">
       <div class="col-12">
-        <h1>Order {{order.id}}</h1>
+        <div class="page-title p-3 mb-3">
+          <h1>Order {{order.id}}</h1>
+          <p-progressBar [value]="orderProgress"></p-progressBar>
+        </div>
       </div>
       <div class="col-12 col-md-4">
         <app-product-summary-card

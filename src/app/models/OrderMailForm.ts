@@ -1,7 +1,10 @@
+import { SelectItem } from 'primeng/api';
+
 export interface OrderMailForm {
   id?: number;
   title: string;
   questions: OrderMailFormQuestion[];
+  entry?: OrderMailFormQuestionEntry[];
 }
 
 export interface OrderMailFormQuestion {
@@ -17,4 +20,12 @@ export interface FormInput<ValueType = any> {
   label: string;
   placeholder?: string;
   value?: ValueType;
+}
+
+export interface OrderMailFormQuestionEntry {
+  id?: number;
+  question: string;
+  type: string;
+  label: string;
+  input_value: any;
 }

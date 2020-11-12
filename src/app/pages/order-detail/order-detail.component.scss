@@ -1,5 +1,24 @@
+@import '../../../assets/css/variables.scss';
+
 :host {
   ::ng-deep {
+    .page-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid $light-grey;
+      
+      h1 {
+        font-weight: 900;
+      }
+      p-progressBar {
+        margin-left: 2em;
+        flex-grow: 1;
+      }
+    }
+
     .p-tabview {
       border-radius: 6px;
 

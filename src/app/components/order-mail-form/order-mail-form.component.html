@@ -1,0 +1,32 @@
+<div class="order-mail-form-component">
+  <p-accordion>
+    <p-accordionTab [header]="form.title">
+      <ng-container
+        *ngFor="let formEntry of formEntries.controls; index as questionInd"
+      >
+        <app-order-mail-form-dropdown
+          *ngIf="formEntry.value.type === 'dropdown'"
+          [form]="formEntry"
+          [question]="form.questions[questionInd]"
+        ></app-order-mail-form-dropdown>
+        <app-order-mail-form-radio
+          *ngIf="formEntry.value.type === 'radio'"
+          [form]="formEntry"
+          [question]="form.questions[questionInd]"
+        ></app-order-mail-form-radio>
+        <app-order-mail-form-color
+          *ngIf="formEntry.value.type === 'color'"
+          [form]="formEntry"
+          [question]="form.questions[questionInd]"
+        ></app-order-mail-form-color>
+      </ng-container>
+      <div *ngIf="formReceiver" class="footer d-flex justify-content-end mt-2">
+        <p-button
+          label="Submit"
+          icon="pi pi-check"
+          iconPos="right"
+        ></p-button>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>

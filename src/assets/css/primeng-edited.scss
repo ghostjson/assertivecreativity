@@ -5104,10 +5104,10 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-progressbar .p-progressbar-value {
   border: 0 none;
   margin: 0;
-  background: $primary-color;
+  background: $bg-primary;
 }
 .p-progressbar .p-progressbar-label {
-  color: #495057;
+  color: white;
   line-height: 1.5rem;
 }
 
@@ -5641,6 +5641,12 @@ Product Detail component
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+}
+
+.order-mail-list-component {
+  .p-dialog {
+    max-width: 700px;
   }
 }
 

@@ -1,0 +1,12 @@
+<div class="order-mail-form-dropdown-component">
+  <div [formGroup]="form" class="form-group">
+    <label for="mail-form-dropdown-{{question.id}}">
+      {{question.label}}
+    </label>
+    <p-dropdown 
+      formControlName="input_value"
+      [options]="question.inputs" 
+      optionLabel="label"
+    ></p-dropdown>
+  </div>
+</div>

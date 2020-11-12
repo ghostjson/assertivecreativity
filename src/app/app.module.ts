@@ -124,6 +124,10 @@ import { OrderMailFormMakerDropdownComponent } from './components/order-mail-for
 import { OrderMailFormMakerRadioComponent } from './components/order-mail-form-maker-radio/order-mail-form-maker-radio.component';
 import { OrderMailFormMakerTextComponent } from './components/order-mail-form-maker-text/order-mail-form-maker-text.component';
 import { OrderMailFormMakerColorComponent } from './components/order-mail-form-maker-color/order-mail-form-maker-color.component';
+import { OrderMailFormComponent } from './components/order-mail-form/order-mail-form.component';
+import { OrderMailFormDropdownComponent } from './components/order-mail-form-dropdown/order-mail-form-dropdown.component';
+import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/order-mail-form-radio.component';
+import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
 
 @NgModule({
   declarations: [
@@ -196,6 +200,10 @@ import { OrderMailFormMakerColorComponent } from './components/order-mail-form-m
     OrderMailFormMakerRadioComponent,
     OrderMailFormMakerTextComponent,
     OrderMailFormMakerColorComponent,
+    OrderMailFormComponent,
+    OrderMailFormDropdownComponent,
+    OrderMailFormRadioComponent,
+    OrderMailFormColorComponent,
   ],
   imports: [
     BrowserModule,

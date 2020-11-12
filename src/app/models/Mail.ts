@@ -3,7 +3,10 @@ import { User } from './User';
 export interface Mail {
   id?: number;
   order_id: number;
-  message_content: string;
+  /**
+   * TODO: Implement after API is properly implemented
+   */
+  message_content: any;
   sender_id?: number;
   sender?: User;
   receiver_id?: number;
