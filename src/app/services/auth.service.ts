@@ -41,13 +41,6 @@ export class AuthService {
       .pipe(
         take(1),
         tap((token: Token) => {
-          /**
-           * TODO: Remove once role is added from server
-           */
-          if(token.user.role_id === '1') {
-            token.user.role = 'admin';
-          }
-
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
           console.log('token received: ', localStorage.getItem('Token'));
@@ -60,6 +53,9 @@ export class AuthService {
    * Logout the current user
    */
   logout(): void {
+    /**
+     * TODO: Ask akhil about logout route
+     */
     // return this._http.post(this.host('logout'), {})
     //   .pipe(
     //     tap(() => {
@@ -81,13 +77,6 @@ export class AuthService {
       .pipe(
         take(1),
         tap((token: Token) => {
-          /**
-           * TODO: Remove once role is added from server
-           */
-          if(token.user.role_id === '1') {
-            token.user.role = 'admin';
-          }
-
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
           console.log('token received: ', localStorage.getItem('Token'));

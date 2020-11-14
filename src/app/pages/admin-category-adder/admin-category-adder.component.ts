@@ -140,11 +140,8 @@ export class AdminCategoryAdderComponent implements OnInit {
       else {
         this._prodCategorisationService.addCategory(this.category)
           .pipe(take(1))
-          .subscribe((createdCategory: Category) => {
-            /**
-             * TODO: uncomment when backend fully implemented
-             */
-            // this.category = createdCategory;
+          .subscribe((createdCategory: any) => {
+            this.category = createdCategory.data;
             this.categories.unshift(this.category);
             this.categories = [...this.categories];
             this.categoryDialog = false;

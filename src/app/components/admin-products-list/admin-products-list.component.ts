@@ -116,15 +116,10 @@ export class AdminProductsListComponent implements OnInit {
    * @param product Product to duplicate
    */
   duplicateProduct(product: Product): void {
-    /**
-     * TODO: Fix duplicated product
-     * - stock is being proxied now, so fix that
-     */
     let duplicate: Product = {...product};
 
     duplicate.id = null;
     duplicate.category_id = product.category.id;
-    duplicate.stock = 30;
     duplicate.serial = product.serial + '-copy';
 
     // add the product to products 

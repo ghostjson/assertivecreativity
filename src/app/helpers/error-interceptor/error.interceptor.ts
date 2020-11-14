@@ -30,18 +30,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         if ([401, 403].indexOf(err.status) !== -1) {
           console.log("Authorization/Authentication error caught");
           // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-          /**
-           * TODO: cleanup after final implementation of logout
-           */
-          // this._authService.logout().subscribe(() => {
-          //   // then redirect to signin page 
-            // this._router.navigate(["/signin"], {
-            //   skipLocationChange: false,
-            //   queryParams: {
-            //     return: returnUrl,
-            //   },
-            // });
-          // });
           this._authService.logout();
           this._router.navigate(["/signin"], {
             skipLocationChange: false,
