@@ -1,12 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Product, listAllFeatures, listCustomOptions, PriceGroup } from "../models/Product";
+import {
+  Product,
+  listAllFeatures,
+  listCustomOptions,
+  PriceGroup,
+  newProduct,
+} from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 
-import { SelectItem } from 'primeng/api';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { SelectItem } from "primeng/api";
+import { FormGroup, FormArray, FormBuilder, Validators } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -16,14 +22,9 @@ export class AdminProductService {
   API_URL: string;
 
   possibleOptions: Object;
-  products: Product[] = [
+  products: Product[] = [];
 
-  ];
-
-  constructor(
-    private _http: HttpClient,
-    private _fb: FormBuilder
-  ) {
+  constructor(private _http: HttpClient, private _fb: FormBuilder) {
     this.host = environment.apiUrl;
 
     this.API_URL = environment.apiUrl;
@@ -51,30 +52,21 @@ export class AdminProductService {
    * @param id id of the product
    */
   getProductLinkById(id: number): string {
-    return `${this.getProductsLink()}/${id}`
+    return `${this.getProductsLink()}/${id}`;
   }
 
   /**
    * Fetch products from API
    */
-  getProducts(userRole: string): Observable<Product[]> {
-    if(userRole === 'vendor') {
-      return this._http.get<Product[]>(`${this.vendorProductsLink()}`)
-      .pipe(
-        take(1),
-        map((products: any) => {
-          return products.data;
-        })
+  getProducts(userRole: string): Observable<newProduct[]> {
+    if (userRole === "vendor") {
+      return this._http.get<newProduct[]>(`${this.vendorProductsLink()}`).pipe(
+        take(1)
       );
-    }
-    else {
-      return this._http.get<Product[]>(`${this.getProductsLink()}`)
-        .pipe(
-          take(1),
-          map((products: any) => {
-            return products.data;
-          })
-        );
+    } else {
+      return this._http.get<newProduct[]>(`${this.getProductsLink()}`).pipe(
+        take(1)
+      );
     }
   }
 
@@ -83,13 +75,12 @@ export class AdminProductService {
    * @param id id of the product
    */
   getProduct(id: number): Observable<Product> {
-    return this._http.get<Product>(`${this.getProductLinkById(id)}`)
-      .pipe(
-        take(1),
-        map((product: any) => {
-          return product.data;
-        })
-      );
+    return this._http.get<Product>(`${this.getProductLinkById(id)}`).pipe(
+      take(1),
+      map((product: any) => {
+        return product.data;
+      })
+    );
   }
 
   /**
@@ -97,7 +88,8 @@ export class AdminProductService {
    * @param product product object to add
    */
   addProduct(product: Product): Observable<Product> {
-    return this._http.post<Product>(`${this.getProductsLink()}`, product)
+    return this._http
+      .post<Product>(`${this.getProductsLink()}`, product)
       .pipe(take(1));
   }
 
@@ -106,7 +98,11 @@ export class AdminProductService {
    * @param editedProduct edited product object
    */
   editProduct(editedProduct: Product): Observable<Product> {
-    return this._http.post<Product>(`${this.getProductLinkById(editedProduct.id)}`, editedProduct)
+    return this._http
+      .post<Product>(
+        `${this.getProductLinkById(editedProduct.id)}`,
+        editedProduct
+      )
       .pipe(take(1));
   }
 
@@ -115,7 +111,8 @@ export class AdminProductService {
    * @param id id of the product
    */
   deleteProduct(id: number): Observable<Product> {
-    return this._http.delete<Product>(`${this.getProductLinkById(id)}`)
+    return this._http
+      .delete<Product>(`${this.getProductLinkById(id)}`)
       .pipe(take(1));
   }
 
@@ -132,30 +129,17 @@ export class AdminProductService {
   /**
    * Create a price group for adding to a price table
    */
-  newPriceGroup(initial: PriceGroup=null): FormGroup {
+  newPriceGroup(initial: PriceGroup = null): FormGroup {
     let priceGroup: FormGroup = null;
 
     if (initial) {
       priceGroup = this._fb.group({
-        label: [
-          initial.label,
-          [Validators.required]
-        ],
-        price_per_piece: [
-          initial.price_per_piece,
-          [Validators.required]
-        ],
-        quantity: [
-          initial.quantity,
-          [Validators.required]
-        ],
-        relation: [
-          initial.relation,
-          [Validators.required]
-        ]
-      });   
-    }
-    else {
+        label: [initial.label, [Validators.required]],
+        price_per_piece: [initial.price_per_piece, [Validators.required]],
+        quantity: [initial.quantity, [Validators.required]],
+        relation: [initial.relation, [Validators.required]],
+      });
+    } else {
       priceGroup = this._fb.group(new PriceGroup());
     }
 
@@ -191,8 +175,8 @@ export class AdminProductService {
    */
   newOption(
     optionType: string,
-    isChained: boolean=false,
-    initialValue: any=null
+    isChained: boolean = false,
+    initialValue: any = null
   ): FormGroup {
     let optionTemplate: any = {};
     let optionToAdd = this.possibleOptions[optionType];
@@ -200,26 +184,14 @@ export class AdminProductService {
     if (optionToAdd) {
       if (initialValue) {
         optionTemplate = {
-          type: [
-            optionToAdd.type,
-            [Validators.required]
-          ],
-          title: [
-            initialValue.title,
-            [Validators.required]
-          ],
-          name: [
-            initialValue.name,
-            [Validators.required]
-          ],
-          price: [
-            initialValue.price,
-            [Validators.required]
-          ],
+          type: [optionToAdd.type, [Validators.required]],
+          title: [initialValue.title, [Validators.required]],
+          name: [initialValue.name, [Validators.required]],
+          price: [initialValue.price, [Validators.required]],
           meta: this._fb.group({
-            isChained: initialValue.meta.isChained
+            isChained: initialValue.meta.isChained,
           }),
-          inputs: this._fb.array([])
+          inputs: this._fb.array([]),
         };
 
         initialValue.inputs.forEach((input) => {
@@ -231,35 +203,21 @@ export class AdminProductService {
             )
           );
         });
-      }
-      else {
+      } else {
         optionTemplate = {
-          type: [
-            optionToAdd.type,
-            [Validators.required]
-          ],
-          title: [
-            null,
-            [Validators.required]
-          ],
-          name: [
-            optionToAdd.name,
-            [Validators.required]
-          ],
-          price: [
-            0,
-            [Validators.required]
-          ],
+          type: [optionToAdd.type, [Validators.required]],
+          title: [null, [Validators.required]],
+          name: [optionToAdd.name, [Validators.required]],
+          price: [0, [Validators.required]],
           meta: this._fb.group({
-            isChained: isChained
+            isChained: isChained,
           }),
-          inputs: this._fb.array([])
+          inputs: this._fb.array([]),
         };
       }
 
       return this._fb.group(optionTemplate);
-    }
-    else {
+    } else {
       console.error("Selected feature not found!");
       return null;
     }
@@ -270,15 +228,18 @@ export class AdminProductService {
    * @param options form array to add the option
    * @param optionType type of the option to add
    */
-  addOption(optionType: string, options: FormArray, isChained: boolean=false): void {
+  addOption(
+    optionType: string,
+    options: FormArray,
+    isChained: boolean = false
+  ): void {
     let newOption: FormGroup = this.newOption(optionType, isChained);
 
     if (newOption != null) {
       // add the new option to options form array of the form
       options.push(newOption);
-    }
-    else {
-      console.error('option could not be created!!');
+    } else {
+      console.error("option could not be created!!");
     }
   }
 
@@ -294,10 +255,9 @@ export class AdminProductService {
    */
   newOptionInput(
     inputType: string,
-    isChained: boolean=false,
-    initialValue: any=null
+    isChained: boolean = false,
+    initialValue: any = null
   ): FormGroup {
-
     // create the input formgroup
     let newInput: Object = {};
 
@@ -305,8 +265,7 @@ export class AdminProductService {
       this.possibleOptions[inputType].inputs.forEach((input: any) => {
         newInput[input.name] = initialValue[input.name];
       });
-    }
-    else {
+    } else {
       this.possibleOptions[inputType].inputs.forEach((input: any) => {
         newInput[input.name] = null;
       });
@@ -315,17 +274,17 @@ export class AdminProductService {
     // add a form array for chained options if the option is not chained
     if (!isChained) {
       // add a form array for storing the chained options
-      newInput['chained_options'] = this._fb.array([]) as FormArray;
+      newInput["chained_options"] = this._fb.array([]) as FormArray;
       if (initialValue) {
         initialValue.chained_options.forEach((chainedOption: any) => {
-          newInput['chained_options'].push(
+          newInput["chained_options"].push(
             this.newOption(chainedOption.type, true, chainedOption)
-          )
+          );
         });
       }
 
       // form control for specifying the chained option to insert during runtime
-      newInput['selectedChainedOption'] = null;
+      newInput["selectedChainedOption"] = null;
     }
 
     return this._fb.group(newInput);
@@ -337,7 +296,11 @@ export class AdminProductService {
    * @param inputs form array to add the inputs
    * @param formGroup form group of the inputs form array
    */
-  addOptionInput(inputType: string, inputs: FormArray, formGroup: FormGroup): void {
+  addOptionInput(
+    inputType: string,
+    inputs: FormArray,
+    formGroup: FormGroup
+  ): void {
     inputs.push(this.newOptionInput(inputType, formGroup.value.meta.isChained));
   }
 
@@ -352,8 +315,12 @@ export class AdminProductService {
 
   uploadProductsExcel(file: File) {
     let newFormData = new FormData();
-    newFormData.append('sheet', file);
+    newFormData.append("sheet", file);
 
-    return this._http.post(`${this.getProductsLink()}/excel`, newFormData);
+    return this._http.post(`${this.getProductsLink()}/excel`, newFormData, {
+      observe: "events",
+      reportProgress: true,
+    })
+    .pipe(take(1));
   }
 }

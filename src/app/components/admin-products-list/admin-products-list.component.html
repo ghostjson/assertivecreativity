@@ -61,20 +61,20 @@
       <ng-template pTemplate="header">
         <tr>
           <th class="admin-products-table__image-header"></th>
-          <th pSortableColumn="name">
-            Name <p-sortIcon field="name"></p-sortIcon>
+          <th pSortableColumn="Name">
+            Name <p-sortIcon field="Name"></p-sortIcon>
           </th>
-          <th pSortableColumn="serial">
-            Serial <p-sortIcon field="serial"></p-sortIcon>
+          <th pSortableColumn="ProductID">
+            Product ID <p-sortIcon field="ProductID"></p-sortIcon>
           </th>
-          <th pSortableColumn="price">
-            Price <p-sortIcon field="base_price"></p-sortIcon>
+          <th pSortableColumn="Prc1">
+            Price <p-sortIcon field="Prc1"></p-sortIcon>
           </th>
-          <th pSortableColumn="category.name">
-            Category <p-sortIcon field="category.name"></p-sortIcon>
+          <th pSortableColumn="Cat1Name">
+            Category <p-sortIcon field="Cat1Name"></p-sortIcon>
           </th>
-          <th pSortableColumn="stockStatus">
-            Status <p-sortIcon field="stockStatus"></p-sortIcon>
+          <th pSortableColumn="Discontinued">
+            Status <p-sortIcon field="Discontinued"></p-sortIcon>
           </th>
           <th style="width: 170px"></th>
         </tr>
@@ -83,8 +83,8 @@
         <tr>
           <td class="admin-products-table__image">
             <img
-              [src]="product.image"
-              [alt]="product.name"
+              [src]="product.NewPictureURL"
+              [alt]="product.Name"
               width="100"
               class="shadow"
             />
@@ -93,26 +93,26 @@
             <span class="p-column-title"> Name </span>
             <span>
               <a href="/products/{{ product.id }}">
-                {{ product.name }}
+                {{ product.Name }}
               </a>
             </span>
           </td>
           <td>
             <span class="p-column-title"> Serial </span>
             <span>
-              {{ product.serial }}
+              {{ product.ProductID }}
             </span>
           </td>
           <td>
             <span class="p-column-title"> Price </span>
             <span>
-              {{ product.base_price | currency: "USD" }}
+              {{ product.Prc1 | currency: "USD" }}
             </span>
           </td>
           <td>
             <span class="p-column-title"> Category </span>
             <span>
-              {{ product.category.name }}
+              {{ product.Cat1Name }}
             </span>
           </td>
           <td>

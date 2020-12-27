@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Product } from "../../models/Product";
+import { newProduct, Product } from "../../models/Product";
 import { AdminProductService } from "../../services/admin-product.service";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class AdminProductsListComponent implements OnInit {
-  products: Product[];
-  selectedProducts: Product[];
+  products: newProduct[];
+  selectedProducts: newProduct[];
   public API_URL = environment.apiUrl;
 
   constructor(
@@ -29,7 +29,7 @@ export class AdminProductsListComponent implements OnInit {
   ngOnInit() {
     let user: User = this._userDetailsService.getUserLocal();
     this._productService.getProducts(user.role)
-      .subscribe((products: Product[]) => {
+      .subscribe((products: newProduct[]) => {
         this.products = products;
         console.log('products received: ', products);
       });
@@ -157,6 +157,10 @@ export class AdminProductsListComponent implements OnInit {
     return status;
   }
 
+  /**
+   * Upload the excel file containing product list
+   * @param event event object containing files to upload
+   */
   excelUploadHandler(event: any) {
     console.info('files to upload', event.files);
     this._productService.uploadProductsExcel(event.files[0])
