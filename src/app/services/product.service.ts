@@ -79,11 +79,9 @@ export class ProductService {
    * @param categoryIds categories id list
    */
   getProductByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
+    console.log('categories post: ', categoryIds);
     return this._http.post<Product[]>(this.productsLinkByCategoryIdList(), {
-      /**
-       * TODO: fix after json_decode expects string error in the backend 
-       */
-      category_ids: JSON.stringify(categoryIds)
+      category_ids: categoryIds
     })
       .pipe(
         take(1),

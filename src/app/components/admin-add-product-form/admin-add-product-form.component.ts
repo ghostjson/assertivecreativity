@@ -176,6 +176,10 @@ export class AdminAddProductFormComponent implements OnInit {
         image: this.newProductImage
       });
     }
+    else {
+      console.log('image field is being remove as there is no change');
+      this.productForm.removeControl('image');
+    }
 
     
     // construct product from form value 

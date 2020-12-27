@@ -5,6 +5,7 @@ import { MessageService, ConfirmationService } from "primeng/api";
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { User } from 'src/app/models/User';
 import { UserDetailsService } from 'src/app/store/user-details.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-admin-products-list",
@@ -15,6 +16,7 @@ import { UserDetailsService } from 'src/app/store/user-details.service';
 export class AdminProductsListComponent implements OnInit {
   products: Product[];
   selectedProducts: Product[];
+  public API_URL = environment.apiUrl;
 
   constructor(
     private _productService: AdminProductService,
@@ -153,5 +155,13 @@ export class AdminProductsListComponent implements OnInit {
     }
 
     return status;
+  }
+
+  excelUploadHandler(event: any) {
+    console.info('files to upload', event.files);
+    this._productService.uploadProductsExcel(event.files[0])
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 }

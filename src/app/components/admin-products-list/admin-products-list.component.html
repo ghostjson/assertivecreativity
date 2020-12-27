@@ -1,12 +1,12 @@
 <div class="p-grid admin-products-list">
   <p-toast baseZIndex="100000"></p-toast>
-  
+
   <div class="admin-data-table admin-products-table p-col card p-3">
     <p-toolbar styleClass="toolbar shadow p-mb-4">
       <ng-template pTemplate="left">
         <h1 class="toolbar__title m-md-0 mb-3">Manage Products</h1>
       </ng-template>
-  
+
       <ng-template pTemplate="right">
         <a
           [routerLink]="['add']"
@@ -16,30 +16,28 @@
           icon="pi pi-plus"
           class="p-button-success p-mr-2"
         ></a>
-        <button
-          pButton
-          pRipple
-          label="Delete"
-          icon="pi pi-trash"
-          class="p-button-danger d-none"
-          (click)="deleteSelectedProducts()"
-          [disabled]="!selectedProducts || !selectedProducts.length"
-        ></button>
+        <p-fileUpload
+          mode="basic"
+          accept=".xls"
+          [maxFileSize]="10000000"
+          customUpload="true"
+          (uploadHandler)="excelUploadHandler($event)"
+          label="Import"
+          uploadIcon="pi pi-cloud-upload"
+          chooseLabel="Import"
+          chooseIcon="pi pi-download"
+          showCancelButton="true"
+        ></p-fileUpload>
       </ng-template>
     </p-toolbar>
-  
+
     <p-table
       #dt
       [value]="products"
       [rows]="25"
-      [rowsPerPageOptions]="[25,50, 100]"
+      [rowsPerPageOptions]="[25, 50, 100]"
       [paginator]="true"
-      [globalFilterFields]="[
-        'name',
-        'serial',
-        'category.name',
-        'base_price'
-      ]"
+      [globalFilterFields]="['name', 'serial', 'category.name', 'base_price']"
       [(selection)]="selectedProducts"
       [rowHover]="true"
       dataKey="id"
@@ -78,7 +76,7 @@
           <th pSortableColumn="stockStatus">
             Status <p-sortIcon field="stockStatus"></p-sortIcon>
           </th>
-          <th style="width: 170px;"></th>
+          <th style="width: 170px"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
@@ -92,51 +90,36 @@
             />
           </td>
           <td>
-            <span class="p-column-title">
-              Name
-            </span>
+            <span class="p-column-title"> Name </span>
             <span>
-              <a href="/products/{{product.id}}">
+              <a href="/products/{{ product.id }}">
                 {{ product.name }}
               </a>
             </span>
           </td>
           <td>
-            <span class="p-column-title">
-              Serial
-            </span>
+            <span class="p-column-title"> Serial </span>
             <span>
               {{ product.serial }}
             </span>
           </td>
           <td>
-            <span class="p-column-title">
-              Price
-            </span>
+            <span class="p-column-title"> Price </span>
             <span>
               {{ product.base_price | currency: "USD" }}
             </span>
           </td>
           <td>
-            <span class="p-column-title">
-              Category
-            </span>
+            <span class="p-column-title"> Category </span>
             <span>
               {{ product.category.name }}
             </span>
           </td>
           <td>
-            <span class="p-column-title">
-              Status
+            <span class="p-column-title"> Status </span>
+            <span [class]="'product-badge status-' + availability(product)">
+              {{ availability(product) }}
             </span>
-            <span
-              [class]="
-                'product-badge status-' + availability(product)
-              "
-              >
-                {{ availability(product) }}
-              </span
-            >
           </td>
           <td class="admin-data-table__tools">
             <a

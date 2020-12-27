@@ -39,7 +39,6 @@ export class ProductCategorisationService {
 
   /**
    * Return the tags url
-   * TODO: unify both single tag and multiple tag urls
    */
   tagsUrl(): string {
     return `${environment.apiUrl}/products/tags`;
@@ -54,7 +53,7 @@ export class ProductCategorisationService {
    * @param id id of the tag
    */
   tagUrlById(id: number): string {
-    return `${this.tagUrl()}/${id}`;
+    return `${this.tagsUrl()}/${id}`;
   }
 
   /**

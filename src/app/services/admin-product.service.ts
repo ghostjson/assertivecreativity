@@ -349,4 +349,11 @@ export class AdminProductService {
   removeOptionInput(inputId: number, inputs: FormArray): void {
     inputs.removeAt(inputId);
   }
+
+  uploadProductsExcel(file: File) {
+    let newFormData = new FormData();
+    newFormData.append('sheet', file);
+
+    return this._http.post(`${this.getProductsLink()}/excel`, newFormData);
+  }
 }
