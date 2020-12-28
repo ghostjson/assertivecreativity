@@ -30,7 +30,6 @@ import { CheckoutComponent } from "./pages/checkout/checkout.component";
 import { ProductDetailComponent } from "./pages/product-detail/product-detail.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-/**Custom Pipes */
 
 /** Admin module imports */
 import { AdminDashboardComponent } from "./pages/admin-dashboard/admin-dashboard.component";
@@ -83,6 +82,7 @@ import { MenuModule } from "primeng/menu";
 import { PanelMenuModule } from "primeng/panelmenu";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { TreeModule } from "primeng/tree";
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -253,6 +253,7 @@ import { OrderMailFormColorComponent } from './components/order-mail-form-color/
     PanelMenuModule,
     ScrollPanelModule,
     TreeModule,
+    SelectButtonModule
   ],
   entryComponents: [],
   providers: [

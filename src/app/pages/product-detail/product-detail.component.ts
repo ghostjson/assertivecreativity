@@ -4,7 +4,7 @@ import { debounceTime, take } from "rxjs/operators";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormArray, FormGroup } from "@angular/forms";
-import { Product, listAllFeatures, CustomForm } from "../../models/Product";
+import { Product, listAllFeatures, CustomForm, newProduct, ProductResponse } from "../../models/Product";
 import { CommonService } from "src/app/common.service";
 import { OrderService } from "../../services/order.service";
 import { Router } from "@angular/router";
@@ -22,7 +22,7 @@ import { CustomOption } from 'src/app/models/Order';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   image_set: any[];
   responsiveOptions: any[];
-  product: Product;
+  product: ProductResponse;
   possibleFeatures: Object;
   orderForm: FormGroup;
   formSubscription: Subscription;
@@ -31,6 +31,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productId: number;
   formsOverview: TreeNode[];
   selectedNode: TreeNode;
+  productDetailsTable: {label: string, value: string}[];
+
 
   constructor(
     public _productService: ProductService,
@@ -82,40 +84,40 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  buildFormsOverview(): void {
-    this.formsOverview = [];
+  // buildFormsOverview(): void {
+  //   this.formsOverview = [];
 
-    this.product.custom_forms.forEach((form: CustomForm) => {
-      console.info('building overview: ', form)
-      if(form.is_formgroup) {
-        let node: TreeNode = {
-          key: String(form.id),
-          label: form.title,
-          data: form.title,
-          expanded: true,
-          children: []
-        };
+  //   this.product.custom_forms.forEach((form: CustomForm) => {
+  //     console.info('building overview: ', form)
+  //     if(form.is_formgroup) {
+  //       let node: TreeNode = {
+  //         key: String(form.id),
+  //         label: form.title,
+  //         data: form.title,
+  //         expanded: true,
+  //         children: []
+  //       };
 
-        this.formsOverview.push(node);
-      }
-      else {
-        let node: TreeNode = {
-          key: String(form.id),
-          label: form.title,
-          data: form.title
-        };
+  //       this.formsOverview.push(node);
+  //     }
+  //     else {
+  //       let node: TreeNode = {
+  //         key: String(form.id),
+  //         label: form.title,
+  //         data: form.title
+  //       };
 
-        if(form.parent_form != null) {
-          this.addToFormOverviewGroup(node, String(form.parent_form));
-        }
-        else {
-          this.formsOverview.push(node);
-        }
-      }
-    });
+  //       if(form.parent_form != null) {
+  //         this.addToFormOverviewGroup(node, String(form.parent_form));
+  //       }
+  //       else {
+  //         this.formsOverview.push(node);
+  //       }
+  //     }
+  //   });
 
-    console.log('form overview built: ', this.formsOverview)
-  }
+  //   console.log('form overview built: ', this.formsOverview)
+  // }
 
   toggleTreeExpand(): void {
     this.selectedNode.expanded = !this.selectedNode.expanded;
@@ -124,15 +126,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   /**
    * Initialisation steps for the order form
    */
-  initialiseForms(): void {
-    this.updateTotalPrice();
-    this.formSubscription = this.orderForm.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(() => {
-        this.updateTotalPrice();
-      });
-    console.log("form initiliased");
-  }
+  // initialiseForms(): void {
+  //   this.updateTotalPrice();
+  //   this.formSubscription = this.orderForm.valueChanges
+  //     .pipe(debounceTime(500))
+  //     .subscribe(() => {
+  //       this.updateTotalPrice();
+  //     });
+  //   console.log("form initiliased");
+  // }
 
   /**
    * Initialise all data on the page
@@ -153,11 +155,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         console.info("Product Received: ", this.product);
 
         this.image_set = [
-          {
-            src: this.product.image,
-            title: "Image 1 title",
-            alt: "Image alt for testing",
-          },
+          // {
+          //   src: this.product.product.NewPictureURL,
+          //   title: "Image 1 title",
+          //   alt: "Image alt for testing",
+          // },
           {
             src: 'https://picsum.photos/id/1/480/640',
             title: "Image 2 title",
@@ -170,11 +172,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           },
         ];
 
-        this.orderForm = this._orderService.newOrderForm(this.product);
-        console.info("Order Form: ", this.orderForm);
+        // this.orderForm = this._orderService.newOrderForm(this.product);
+        // console.info("Order Form: ", this.orderForm);
 
-        this.initialiseForms();
-        this.buildFormsOverview();
+        // this.initialiseForms();
+        // this.buildFormsOverview();
+        this.productDetailsTable = this.transformToTable(product);
         this._common.setLoader(false);
       });
   }
@@ -253,20 +256,72 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     // this.updateTotalPrice();
 
-    let cartItem: CartItem = {
-      product_id: this.productId,
-      product: this.product,
-      quantity: 1,
-      custom_forms_entry: {
-        forms_input: this.orderForm.value,
-        total_price: this.priceTotal
-      },
+    // let cartItem: CartItem = {
+    //   product_id: this.productId,
+    //   product: this.product,
+    //   quantity: 1,
+    //   custom_forms_entry: {
+    //     forms_input: this.orderForm.value,
+    //     total_price: this.priceTotal
+    //   },
+    // };
+
+    // console.log('add to cart: ', cartItem);
+    // this._cartService.addToCart(cartItem).subscribe((item: any) => {
+    //   this._router.navigate(["/cart", item.data.id]);
+    //   console.log("added to cart: ", item);
+    // });
+  }
+
+  transformToTable(product: ProductResponse): any {
+    let productProps: string[] = Object.keys(product.product);
+    let table: {label: string, value: string}[] = [];
+    let ignore: any = {
+      id: true,
+      Discontinued: true,
+      Cat1Name: true,
+      CatYear: true,
+      ExpirationDate: true,
+      Keywords: true,
+      Qty1: true,
+      Qty2: true,
+      Qty3: true,
+      Qty4: true,
+      Qty5: true,
+      Qty6: true,
+      Prc1: true,
+      Prc2: true,
+      Prc3: true,
+      Prc4: true,
+      Prc5: true,
+      Prc6: true,
+      PiecesPerUnit1: true,
+      PiecesPerUnit2: true,
+      PiecesPerUnit3: true,
+      PiecesPerUnit4: true,
+      PiecesPerUnit5: true,
+      PiecesPerUnit6: true,
+      QuoteUponRequest: true,
+      InventoryOnHand: true,
+      Owner: true,
+      created_at: true,
+      updated_at: true,
+      NewBlankPictureFile: true,
+      EraseBlankPicture: true,
+      NotPictured: true
     };
 
-    console.log('add to cart: ', cartItem);
-    this._cartService.addToCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart", item.data.id]);
-      console.log("added to cart: ", item);
+    productProps.forEach((prop: string) => {
+      if(product.product[prop] != null && !(prop in ignore)) {
+        table.push({
+          label: prop.replace(/([a-z, 0-9])([A-Z])/g, `$1 $2`)
+            .replace(/([a-z])([0-9])/g, `$1 $2`),
+          value: product.product[prop]
+        });
+      }
     });
+
+    console.info('table constructed: ', table);
+    return table;
   }
 }

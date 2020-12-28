@@ -1,6 +1,7 @@
 import { SelectItem } from 'primeng/api';
 import { FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { Category } from './Category';
+import { StringifyOptions } from 'querystring';
 
 // features avalilable for products
 const PRODUCT_FEATURES: Object = {
@@ -227,7 +228,7 @@ export class PriceGroup {
   label: string;
   price_per_piece: number;
   quantity: number;
-  relation: string;
+  relation?: string;
 
   constructor(initial: PriceGroup=null) {
     if (initial) {
@@ -284,7 +285,12 @@ export function listCustomOptions(): SelectItem[] {
   return CUSTOM_OPTIONS;
 }
 
-export class newProduct {
+export interface ProductResponse {
+  product: newProduct;
+  attributes: ProductAttributes;
+}
+
+export interface newProduct {
   id: number;
   ProductID: string;
   ItemNum: string;
@@ -412,10 +418,20 @@ export class newProduct {
   Owner?: string;
   created_at?: string;
   updated_at?: string;
-  // product attributes
-  colors: string[];
 }
 
-export class newProductAttributes {
-  Colors?: string[];
+export class ProductAttributes {
+  Colors?: any[];
+  dimensions?: number[];
+  price_table_mode?: boolean;
+  price_table?: PriceTable;
+}
+
+export class ProductAttribute {
+  id?: number;
+  label: string;
+  value: any;
+}
+
+export class ColorAttribute extends ProductAttribute{
 }
