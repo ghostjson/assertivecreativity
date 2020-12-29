@@ -83,6 +83,7 @@ import { PanelMenuModule } from "primeng/panelmenu";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { TreeModule } from "primeng/tree";
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -253,7 +254,8 @@ import { OrderMailFormColorComponent } from './components/order-mail-form-color/
     PanelMenuModule,
     ScrollPanelModule,
     TreeModule,
-    SelectButtonModule
+    SelectButtonModule,
+    ProgressSpinnerModule
   ],
   entryComponents: [],
   providers: [

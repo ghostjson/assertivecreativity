@@ -317,10 +317,7 @@ export class AdminProductService {
     let newFormData = new FormData();
     newFormData.append("sheet", file);
 
-    return this._http.post(`${this.getProductsLink()}/excel`, newFormData, {
-      observe: "events",
-      reportProgress: true,
-    })
+    return this._http.post(`${this.getProductsLink()}/excel`, newFormData)
     .pipe(take(1));
   }
 }

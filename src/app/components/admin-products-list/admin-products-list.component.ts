@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 export class AdminProductsListComponent implements OnInit {
   products: newProduct[];
   selectedProducts: newProduct[];
+  showUploadingProgess: boolean;
+  user: User;
   public API_URL = environment.apiUrl;
 
   constructor(
@@ -27,8 +29,9 @@ export class AdminProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let user: User = this._userDetailsService.getUserLocal();
-    this._productService.getProducts(user.role)
+    this.showUploadingProgess = false;
+    this.user = this._userDetailsService.getUserLocal();
+    this._productService.getProducts(this.user.role)
       .subscribe((products: newProduct[]) => {
         this.products = products;
         console.log('products received: ', products);
@@ -162,10 +165,19 @@ export class AdminProductsListComponent implements OnInit {
    * @param event event object containing files to upload
    */
   excelUploadHandler(event: any) {
+    this.showUploadingProgess = true;
     console.info('files to upload', event.files);
     this._productService.uploadProductsExcel(event.files[0])
       .subscribe((res: any) => {
+        this.showUploadingProgess = false;
+        event = null;
         console.log(res);
+
+        this._productService.getProducts(this.user.role)
+          .subscribe((products: newProduct[]) => {
+            this.products = products;
+            console.log('products received: ', products);
+          });
       });
   }
 }

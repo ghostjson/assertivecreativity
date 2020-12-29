@@ -18,6 +18,7 @@
         ></a>
         <p-fileUpload
           mode="basic"
+          [auto]="true"
           accept=".xls"
           [maxFileSize]="10000000"
           customUpload="true"
@@ -83,11 +84,15 @@
         <tr>
           <td class="admin-products-table__image">
             <img
+              *ngIf="product.NewPictureURL; else placeholderImg"
               [src]="product.NewPictureURL"
               [alt]="product.Name"
               width="100"
               class="shadow"
             />
+            <ng-template #placeholderImg>
+              <span class="pi pi-image"></span>
+            </ng-template>
           </td>
           <td>
             <span class="p-column-title"> Name </span>
@@ -153,5 +158,16 @@
       </ng-template>
     </p-table>
   </div>
+  <p-dialog 
+    header="Uploading Excel" 
+    [visible]="showUploadingProgess"
+    [draggable]="false"
+    [modal]="true"
+    [closable]="false"
+    styleClass="upload-progress-dialog"
+  >
+    <!-- <p-progressBar mode="indeterminate" [style]="{'height': '10px'}"></p-progressBar> -->
+    <p-progressSpinner></p-progressSpinner>
+  </p-dialog>
   <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
 </div>
