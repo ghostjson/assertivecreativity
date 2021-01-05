@@ -86,10 +86,6 @@ export class AdminHeaderComponent implements OnInit {
           }
         ]
       }
-      // {
-      //   label: 'Shop',
-      //   routerLink: '/shop/select-type'
-      // }
     ];
   }
   
