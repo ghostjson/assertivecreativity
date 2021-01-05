@@ -9,13 +9,17 @@
 
       <ng-template pTemplate="right">
         <a
+          *ngIf="activeProductsTabIndex === 1; else newStockProductBtn"
           [routerLink]="['add']"
           pButton
           pRipple
-          label="New"
+          label="New Custom Product"
           icon="pi pi-plus"
           class="p-button-success p-mr-2"
         ></a>
+        <ng-template #newStockProductBtn>
+
+        </ng-template>
         <p-fileUpload
           *ngIf="activeProductsTabIndex === 0"
           mode="basic"
