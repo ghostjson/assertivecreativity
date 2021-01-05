@@ -285,12 +285,12 @@ export function listCustomOptions(): SelectItem[] {
   return CUSTOM_OPTIONS;
 }
 
-export interface ProductResponse {
-  product: newProduct;
-  attributes: ProductAttributes;
+export interface StockProduct {
+  product: StockProductData;
+  attributes: StockProductAttributes;
 }
 
-export interface newProduct {
+export interface StockProductData {
   id: number;
   ProductID: string;
   ItemNum: string;
@@ -420,7 +420,7 @@ export interface newProduct {
   updated_at?: string;
 }
 
-export class ProductAttributes {
+export class StockProductAttributes {
   Colors?: any[];
   dimensions?: number[];
   price_table_mode?: boolean;

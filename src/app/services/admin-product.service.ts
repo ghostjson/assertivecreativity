@@ -4,7 +4,7 @@ import {
   listAllFeatures,
   listCustomOptions,
   PriceGroup,
-  newProduct,
+  StockProduct
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -58,13 +58,13 @@ export class AdminProductService {
   /**
    * Fetch products from API
    */
-  getProducts(userRole: string): Observable<newProduct[]> {
+  getProducts(userRole: string): Observable<StockProduct[]> {
     if (userRole === "vendor") {
-      return this._http.get<newProduct[]>(`${this.vendorProductsLink()}`).pipe(
+      return this._http.get<StockProduct[]>(`${this.vendorProductsLink()}`).pipe(
         take(1)
       );
     } else {
-      return this._http.get<newProduct[]>(`${this.getProductsLink()}`).pipe(
+      return this._http.get<StockProduct[]>(`${this.getProductsLink()}`).pipe(
         take(1)
       );
     }

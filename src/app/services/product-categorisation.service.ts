@@ -13,54 +13,61 @@ export class ProductCategorisationService {
   constructor(
     private _http: HttpClient
   ) {}
+
+  /**
+   * custom products url
+   */
+  customProductsUrl(): string {
+    return `${environment.apiUrl}/products/custom`;
+  }
   
   /**
    * Return the categories url
    */
-  categoriesUrl(): string {
-    return `${environment.apiUrl}/products/categories`;
+  customCategoriesUrl(): string {
+    return `${this.customProductsUrl()}/categories`;
   }
 
   /**
    * Return url of a category using id
    * @param id id of the tag
    */
-  categoryUrlById(id: number) {
-    return `${this.categoriesUrl()}/${id}`;
+  customCategoryUrlById(id: number) {
+    return `${this.customCategoriesUrl()}/${id}`;
   }
 
   /**
    * 
    * @param id id of the 
    */
-  tagsOfCategoryUrl(id: number): string {
-    return `${this.categoriesUrl()}/tags/${id}`
+  tagsOfCustomCategoryUrl(id: number): string {
+    return `${this.customCategoriesUrl()}/tags/${id}`
   }
 
   /**
    * Return the tags url
    */
-  tagsUrl(): string {
-    return `${environment.apiUrl}/products/tags`;
-  }
-
-  tagUrl(): string {
-    return `${environment.apiUrl}/products/tag`;
+  customTagsUrl(): string {
+    return `${this.customProductsUrl()}/tags`;
   }
 
   /**
    * Return url of the tag using id
    * @param id id of the tag
    */
-  tagUrlById(id: number): string {
-    return `${this.tagsUrl()}/${id}`;
+  customTagUrlById(id: number): string {
+    return `${this.customTagsUrl()}/${id}`;
+  }
+
+  customTagUrl(): string {
+    return `${this.customProductsUrl()}/tag`;
   }
 
   /**
    * Return all the categories as a list
    */
   getCategories(): Observable<Category[]> {
-    return this._http.get<Category[]>(`${this.categoriesUrl()}`)
+    return this._http.get<Category[]>(`${this.customCategoriesUrl()}`)
       .pipe(
         take(1),
         map((res: any) => {
@@ -74,7 +81,7 @@ export class ProductCategorisationService {
    * @param category Category Object
    */
   addCategory(category: Category): Observable<Category> {
-    return this._http.post<Category>(`${this.categoriesUrl()}`, category)
+    return this._http.post<Category>(`${this.customCategoriesUrl()}`, category)
       .pipe(take(1));
   }
 
@@ -83,7 +90,7 @@ export class ProductCategorisationService {
    * @param category Category Object
    */
   editCategory(category: Category): Observable<any> {
-    return this._http.post(`${this.categoryUrlById(category.id)}`, category)
+    return this._http.post(`${this.customCategoryUrlById(category.id)}`, category)
       .pipe(take(1));
   }
   
@@ -92,7 +99,7 @@ export class ProductCategorisationService {
    * @param category Category Object to delete
    */
   deleteCategory(category: Category): Observable<any> {
-    return this._http.delete(`${this.categoryUrlById(category.id)}`)
+    return this._http.delete(`${this.customCategoryUrlById(category.id)}`)
       .pipe(take(1));
   }
 
@@ -100,7 +107,7 @@ export class ProductCategorisationService {
    * Get tags  
    */
   getTags(): Observable<Tag[]> {
-    return this._http.get<Tag[]>(`${this.tagsUrl()}`)
+    return this._http.get<Tag[]>(`${this.customTagsUrl()}`)
       .pipe(
         take(1),
         map((tags: any) => {
@@ -114,7 +121,7 @@ export class ProductCategorisationService {
   */
   getTagsOfCategory(categoryId: number): Observable<Tag[]> {
     return this._http
-      .get<Tag[]>(this.tagsOfCategoryUrl(categoryId))
+      .get<Tag[]>(this.tagsOfCustomCategoryUrl(categoryId))
         .pipe(
           take(1),
           map((tags: any) => {
@@ -128,7 +135,7 @@ export class ProductCategorisationService {
    * @param tag Tag object to add
    */
   addTag(tag: Tag): Observable<any> {
-    return this._http.post(`${this.tagUrl()}`, tag)
+    return this._http.post(`${this.customTagsUrl()}`, tag)
       .pipe(take(1));
   }
 
@@ -137,7 +144,7 @@ export class ProductCategorisationService {
    * @param tag Tag object to edit
    */
   editTag(tag: Tag): Observable<any> {
-    return this._http.post(`${this.tagUrlById(tag.id)}`, tag)
+    return this._http.post(`${this.customTagUrlById(tag.id)}`, tag)
       .pipe(take(1));
   }
 
@@ -146,7 +153,7 @@ export class ProductCategorisationService {
    * @param tag Tag object to delete
    */
   deleteTag(tag: Tag): Observable<any> {
-    return this._http.delete(`${this.tagsUrl()}/${tag.id}`)
+    return this._http.delete(`${this.customTagUrlById(tag.id)}`)
       .pipe(take(1));
   }
 

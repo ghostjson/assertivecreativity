@@ -4,16 +4,19 @@ import {
   listCustomOptions,
   listAllFeatures,
   CustomForm,
-  ProductResponse,
   PriceTable,
-  ColorAttribute
+  ColorAttribute,
+  StockProduct,
+  StockProductAttributes,
+  ProductAttribute,
+  StockProductData,
 } from "../models/Product";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
-import { map, take } from 'rxjs/operators';
+import { map, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -23,21 +26,25 @@ export class ProductService {
   possibleOptions: Object;
   API_URL: string;
 
-  constructor(
-    private _http: HttpClient,
-    private _fb: FormBuilder
-  ) {
+  constructor(private _http: HttpClient, private _fb: FormBuilder) {
     this.API_URL = environment.apiUrl;
 
     // initialise the possible options
     this.possibleOptions = listAllFeatures();
   }
-  
+
   /**
    * Return the products link
    */
   private productsLink(): string {
     return `${this.API_URL}/products`;
+  }
+
+  /**
+   * Return the stock products link
+   */
+  private stockProductsLink(): string {
+    return `${this.productsLink()}/stock`;
   }
 
   /**
@@ -64,11 +71,20 @@ export class ProductService {
   }
 
   /**
+   * Return stock product with id
+   * @param id id of the product
+   */
+  private stockProductLink(id: number): string {
+    return `${this.stockProductsLink()}/${id}`;
+  }
+
+  /**
    * Return all products of a particular category
    * @param categoryId category id of the products
    */
   getProductsByCategoryId(categoryId: number): Observable<Product[]> {
-    return this._http.get<Product[]>(this.productsLinkByCategoryId(categoryId))
+    return this._http
+      .get<Product[]>(this.productsLinkByCategoryId(categoryId))
       .pipe(
         take(1),
         map((res: any) => {
@@ -82,10 +98,11 @@ export class ProductService {
    * @param categoryIds categories id list
    */
   getProductByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
-    console.log('categories post: ', categoryIds);
-    return this._http.post<Product[]>(this.productsLinkByCategoryIdList(), {
-      category_ids: categoryIds
-    })
+    console.log("categories post: ", categoryIds);
+    return this._http
+      .post<Product[]>(this.productsLinkByCategoryIdList(), {
+        category_ids: categoryIds,
+      })
       .pipe(
         take(1),
         map((res: any) => {
@@ -95,13 +112,20 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this.productsLink())
-      .pipe(
-        take(1),
-        map((products: any) => {
-          return products.data;
-        })
-      );
+    return this._http
+        .get<StockProduct[] | Product[]>(this.productsLink())
+        .pipe(
+          take(1),
+          map((products: any) => {
+            return products.data;
+          })
+        );
+  }
+
+  getStockProducts(): Observable<StockProductData[]> {
+    return this._http
+      .get<StockProductData[]>(this.stockProductsLink())
+      .pipe(take(1));
   }
 
   /**
@@ -109,64 +133,131 @@ export class ProductService {
    * @param id Id of the product
    */
   getProduct(id: number): Observable<any> {
-    return this._http.get(this.productLink(id))
-      .pipe(
-        take(1),
-        map((productRes: ProductResponse) => {
-          productRes.attributes.Colors = productRes.attributes.Colors.map((color: string): ColorAttribute => {
+    return this._http.get(this.productLink(id)).pipe(
+      take(1),
+      map((productRes: StockProduct) => {
+        productRes.attributes.Colors = productRes.attributes.Colors.map(
+          (color: string): ColorAttribute => {
             return {
               label: color,
-              value: color
+              value: color,
             };
-          })
+          }
+        );
 
-          productRes.attributes.price_table_mode = true;
-          productRes.attributes.price_table = new PriceTable();
-          productRes.attributes.price_table.price_groups[0] = {
-            label: 'Price 1',
-            price_per_piece: Number(productRes.product.Prc1),
-            quantity: Number(productRes.product.Qty1),
-            relation: 'lte'
-          };
+        productRes.attributes.price_table_mode = true;
+        productRes.attributes.price_table = new PriceTable();
+        productRes.attributes.price_table.price_groups[0] = {
+          label: "Price 1",
+          price_per_piece: Number(productRes.product.Prc1),
+          quantity: Number(productRes.product.Qty1),
+          relation: "lte",
+        };
 
-          productRes.attributes.price_table.price_groups.push({
-            label: 'Price 2',
-            price_per_piece: Number(productRes.product.Prc2),
-            quantity: Number(productRes.product.Qty2),
-            relation: 'lte'
-          });
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 2",
+          price_per_piece: Number(productRes.product.Prc2),
+          quantity: Number(productRes.product.Qty2),
+          relation: "lte",
+        });
 
-          productRes.attributes.price_table.price_groups.push({
-            label: 'Price 3',
-            price_per_piece: Number(productRes.product.Prc3),
-            quantity: Number(productRes.product.Qty3),
-            relation: 'lte'
-          });
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 3",
+          price_per_piece: Number(productRes.product.Prc3),
+          quantity: Number(productRes.product.Qty3),
+          relation: "lte",
+        });
 
-          productRes.attributes.price_table.price_groups.push({
-            label: 'Price 4',
-            price_per_piece: Number(productRes.product.Prc4),
-            quantity: Number(productRes.product.Qty4),
-            relation: 'lte'
-          });
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 4",
+          price_per_piece: Number(productRes.product.Prc4),
+          quantity: Number(productRes.product.Qty4),
+          relation: "lte",
+        });
 
-          productRes.attributes.price_table.price_groups.push({
-            label: 'Price 5',
-            price_per_piece: Number(productRes.product.Prc5),
-            quantity: Number(productRes.product.Qty5),
-            relation: 'lte'
-          });
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 5",
+          price_per_piece: Number(productRes.product.Prc5),
+          quantity: Number(productRes.product.Qty5),
+          relation: "lte",
+        });
 
-          productRes.attributes.price_table.price_groups.push({
-            label: 'Price 6',
-            price_per_piece: Number(productRes.product.Prc6),
-            quantity: Number(productRes.product.Qty6),
-            relation: 'lte'
-          });
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 6",
+          price_per_piece: Number(productRes.product.Prc6),
+          quantity: Number(productRes.product.Qty6),
+          relation: "lte",
+        });
 
-          return productRes;
-        })
-      );
+        return productRes;
+      })
+    );
+  }
+
+  /**
+   * get stock product
+   * @param id id of the product
+   */
+  getStockProduct(id: number): Observable<any> {
+    return this._http.get(this.stockProductLink(id)).pipe(
+      take(1),
+      map((productRes: StockProduct) => {
+        productRes.attributes.Colors = productRes.attributes.Colors.map(
+          (color: string): ColorAttribute => {
+            return {
+              label: color,
+              value: color,
+            };
+          }
+        );
+
+        productRes.attributes.price_table_mode = true;
+        productRes.attributes.price_table = new PriceTable();
+        productRes.attributes.price_table.price_groups[0] = {
+          label: "Price 1",
+          price_per_piece: Number(productRes.product.Prc1),
+          quantity: Number(productRes.product.Qty1),
+          relation: "lte",
+        };
+
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 2",
+          price_per_piece: Number(productRes.product.Prc2),
+          quantity: Number(productRes.product.Qty2),
+          relation: "lte",
+        });
+
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 3",
+          price_per_piece: Number(productRes.product.Prc3),
+          quantity: Number(productRes.product.Qty3),
+          relation: "lte",
+        });
+
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 4",
+          price_per_piece: Number(productRes.product.Prc4),
+          quantity: Number(productRes.product.Qty4),
+          relation: "lte",
+        });
+
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 5",
+          price_per_piece: Number(productRes.product.Prc5),
+          quantity: Number(productRes.product.Qty5),
+          relation: "lte",
+        });
+
+        productRes.attributes.price_table.price_groups.push({
+          label: "Price 6",
+          price_per_piece: Number(productRes.product.Prc6),
+          quantity: Number(productRes.product.Qty6),
+          relation: "lte",
+        });
+
+        return productRes;
+      })
+    );
   }
 
   /**
@@ -174,7 +265,8 @@ export class ProductService {
    * @param searchString search string
    */
   searchProducts(searchString: string): Observable<Product[]> {
-    return this._http.get<Product[]>(`${this.productsLink()}/search/${searchString}`)
+    return this._http
+      .get<Product[]>(`${this.productsLink()}/search/${searchString}`)
       .pipe(
         take(1),
         map((res: any) => {

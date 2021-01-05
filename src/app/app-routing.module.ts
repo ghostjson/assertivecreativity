@@ -1,4 +1,5 @@
 import { ProductDetailComponent } from "./pages/product-detail/product-detail.component";
+import { StockProductDetailComponent } from "./pages/stock-product-detail/stock-product-detail.component";
 import { CheckoutComponent } from "./pages/checkout/checkout.component";
 import { CartComponent } from "./pages/cart/cart.component";
 import { NgModule } from "@angular/core";
@@ -9,6 +10,7 @@ import { ContactComponent } from "./pages/contact/contact.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
 import { ShopComponent } from "./pages/shop/shop.component";
+import { ShopStockComponent } from "./pages/shop-stock/shop-stock.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { AuthGuard } from "./helpers/guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
@@ -30,7 +32,7 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
-  { path: "shop/stock", component: ShopComponent },
+  { path: "shop/stock", component: ShopStockComponent },
   {
     path: "profile",
     component: UserProfileComponent,
@@ -63,7 +65,7 @@ const routes: Routes = [
     component: CheckoutComponent,
     canActivate: [AuthGuard]
   },
-  { path: "products/:id", component: ProductDetailComponent },
+  { path: "products/stock/:id", component: StockProductDetailComponent },
   { 
     path: "admin",
     component: AdminDashboardComponent,

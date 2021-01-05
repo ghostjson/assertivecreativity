@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { newProduct, Product } from "../../models/Product";
+import { Product, StockProduct } from "../../models/Product";
 import { AdminProductService } from "../../services/admin-product.service";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class AdminProductsListComponent implements OnInit {
-  products: newProduct[];
-  selectedProducts: newProduct[];
+  products: StockProduct[];
+  selectedProducts: StockProduct[];
   showUploadingProgess: boolean;
   user: User;
   public API_URL = environment.apiUrl;
@@ -32,7 +32,7 @@ export class AdminProductsListComponent implements OnInit {
     this.showUploadingProgess = false;
     this.user = this._userDetailsService.getUserLocal();
     this._productService.getProducts(this.user.role)
-      .subscribe((products: newProduct[]) => {
+      .subscribe((products: StockProduct[]) => {
         this.products = products;
         console.log('products received: ', products);
       });
@@ -56,7 +56,7 @@ export class AdminProductsListComponent implements OnInit {
             return true;
           }
           else {
-            deleteIndices.push(val.id);
+            deleteIndices.push(val.product.id);
             return false;
           }
         });
@@ -87,7 +87,7 @@ export class AdminProductsListComponent implements OnInit {
       accept: () => {
         // find index of the product to delete
         let deleteIndex: number = this.products.findIndex((val) => {
-          return val.id === product.id;
+          return val.product.id === product.id;
         });
 
         // delete the found index
@@ -174,7 +174,7 @@ export class AdminProductsListComponent implements OnInit {
         console.log(res);
 
         this._productService.getProducts(this.user.role)
-          .subscribe((products: newProduct[]) => {
+          .subscribe((products: StockProduct[]) => {
             this.products = products;
             console.log('products received: ', products);
           });

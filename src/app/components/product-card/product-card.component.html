@@ -1,22 +1,22 @@
 <div class="product-card p-p-3 {{styleClass}}">
   <div class="product-card__img">
-    <img src="{{product.image}}" alt="{{product.name}}" srcset="">
+    <img src="{{image}}" alt="{{name}}" srcset="">
   </div>
   <div class="product-card__name mt-3">
-    {{product.name}}
+    {{name}}
   </div>
   <div class="product-card__price"
-    *ngIf="product.base_price"
+    *ngIf="price"
   >
-    {{product.base_price | currency: 'USD'}}
+    {{price | currency: 'USD'}}
   </div>
   <div class="product-card__desc">
-    {{summary(product.description)}}...
+    {{summary(description)}}...
   </div>
   <a 
     label="Know More"
     class="more-btn p-button-primary mt-2"
-    [routerLink]="['/products', product.id]"
+    [routerLink]="['/products', stock ? 'stock' : '', productId]"
     pButton
   ></a>
 </div>

@@ -4,7 +4,7 @@ import { debounceTime, take } from "rxjs/operators";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormArray, FormGroup } from "@angular/forms";
-import { Product, listAllFeatures, CustomForm, newProduct, ProductResponse } from "../../models/Product";
+import { Product, listAllFeatures, StockProduct, StockProductData} from "../../models/Product";
 import { CommonService } from "src/app/common.service";
 import { OrderService } from "../../services/order.service";
 import { Router } from "@angular/router";
@@ -22,7 +22,7 @@ import { CustomOption } from 'src/app/models/Order';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   image_set: any[];
   responsiveOptions: any[];
-  product: ProductResponse;
+  product: StockProduct;
   possibleFeatures: Object;
   orderForm: FormGroup;
   formSubscription: Subscription;
@@ -273,7 +273,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     // });
   }
 
-  transformToTable(product: ProductResponse): any {
+  transformToTable(product: StockProduct): any {
     let productProps: string[] = Object.keys(product.product);
     let table: {label: string, value: string}[] = [];
     let ignore: any = {

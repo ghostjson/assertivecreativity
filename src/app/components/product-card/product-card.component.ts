@@ -8,6 +8,12 @@ import { Product } from 'src/app/models/Product';
 })
 export class ProductCardComponent {
   @Input() product: Product;
+  @Input() productId: number;
+  @Input() name: string;
+  @Input() description: string;
+  @Input() image: string;
+  @Input() price: number;
+  @Input() stock: boolean;
   @Input() styleClass: string;
 
   /**

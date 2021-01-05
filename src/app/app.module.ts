@@ -84,6 +84,7 @@ import { ScrollPanelModule } from "primeng/scrollpanel";
 import { TreeModule } from "primeng/tree";
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BlockUIModule } from 'primeng/blockui';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -129,6 +130,8 @@ import { OrderMailFormComponent } from './components/order-mail-form/order-mail-
 import { OrderMailFormDropdownComponent } from './components/order-mail-form-dropdown/order-mail-form-dropdown.component';
 import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/order-mail-form-radio.component';
 import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
+import { ShopStockComponent } from './pages/shop-stock/shop-stock.component';
+import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
 
 @NgModule({
   declarations: [
@@ -205,6 +208,8 @@ import { OrderMailFormColorComponent } from './components/order-mail-form-color/
     OrderMailFormDropdownComponent,
     OrderMailFormRadioComponent,
     OrderMailFormColorComponent,
+    ShopStockComponent,
+    StockProductDetailComponent 
   ],
   imports: [
     BrowserModule,
@@ -255,7 +260,8 @@ import { OrderMailFormColorComponent } from './components/order-mail-form-color/
     ScrollPanelModule,
     TreeModule,
     SelectButtonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    BlockUIModule 
   ],
   entryComponents: [],
   providers: [
