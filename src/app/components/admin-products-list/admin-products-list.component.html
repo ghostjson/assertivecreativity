@@ -17,6 +17,7 @@
           class="p-button-success p-mr-2"
         ></a>
         <p-fileUpload
+          *ngIf="activeProductsTabIndex === 0"
           mode="basic"
           [auto]="true"
           accept=".xls"
@@ -32,134 +33,278 @@
       </ng-template>
     </p-toolbar>
 
-    <p-table
-      #dt
-      [value]="products"
-      [rows]="25"
-      [rowsPerPageOptions]="[25, 50, 100]"
-      [paginator]="true"
-      [globalFilterFields]="['name', 'serial', 'category.name', 'base_price']"
-      [(selection)]="selectedProducts"
-      [rowHover]="true"
-      dataKey="id"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [showCurrentPageReport]="true"
-    >
-      <ng-template pTemplate="caption">
-        <div class="p-d-flex p-ai-center p-jc-between">
-          <span class="admin-data-table-searchbar p-input-icon-right">
-            <i class="admin-data-table-searchbar__icon pi pi-search"></i>
-            <input
-              class="admin-data-table-searchbar__input"
-              type="text"
-              (input)="dt.filterGlobal($event.target.value, 'contains')"
-              placeholder="Search name, serial, category and base price"
-              pInputText
-            />
-          </span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th class="admin-products-table__image-header"></th>
-          <th pSortableColumn="Name">
-            Name <p-sortIcon field="Name"></p-sortIcon>
-          </th>
-          <th pSortableColumn="ProductID">
-            Product ID <p-sortIcon field="ProductID"></p-sortIcon>
-          </th>
-          <th pSortableColumn="Prc1">
-            Price <p-sortIcon field="Prc1"></p-sortIcon>
-          </th>
-          <th pSortableColumn="Cat1Name">
-            Category <p-sortIcon field="Cat1Name"></p-sortIcon>
-          </th>
-          <th pSortableColumn="Discontinued">
-            Status <p-sortIcon field="Discontinued"></p-sortIcon>
-          </th>
-          <th style="width: 170px"></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-product>
-        <tr>
-          <td class="admin-products-table__image">
-            <img
-              *ngIf="product.NewPictureURL; else placeholderImg"
-              [src]="product.NewPictureURL"
-              [alt]="product.Name"
-              width="100"
-              class="shadow"
-            />
-            <ng-template #placeholderImg>
-              <span class="pi pi-image"></span>
-            </ng-template>
-          </td>
-          <td>
-            <span class="p-column-title"> Name </span>
-            <span>
-              <a href="/products/{{ product.id }}">
-                {{ product.Name }}
-              </a>
-            </span>
-          </td>
-          <td>
-            <span class="p-column-title"> Serial </span>
-            <span>
-              {{ product.ProductID }}
-            </span>
-          </td>
-          <td>
-            <span class="p-column-title"> Price </span>
-            <span>
-              {{ product.Prc1 | currency: "USD" }}
-            </span>
-          </td>
-          <td>
-            <span class="p-column-title"> Category </span>
-            <span>
-              {{ product.Cat1Name }}
-            </span>
-          </td>
-          <td>
-            <span class="p-column-title"> Status </span>
-            <span [class]="'product-badge status-' + availability(product)">
-              {{ availability(product) }}
-            </span>
-          </td>
-          <td class="admin-data-table__tools">
-            <a
-              [routerLink]="[product.id, 'edit']"
-              pButton
-              pRipple
-              icon="pi pi-pencil"
-              class="p-button p-button-success p-mr-2"
-            ></a>
-            <button
-              pButton
-              pRipple
-              icon="pi pi-trash"
-              class="p-button p-button-danger p-mr-2"
-              (click)="deleteProduct(product)"
-            ></button>
-            <button
-              pButton
-              pRipple
-              icon="pi pi-copy"
-              class="p-button p-button-warning"
-              (click)="duplicateProduct(product)"
-            ></button>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
-          In total there are {{ products ? products.length : 0 }} products.
-        </div>
-      </ng-template>
-    </p-table>
+    <p-tabView [(activeIndex)]="activeProductsTabIndex">
+      <p-tabPanel header="Stock Products">
+        <p-table
+          #dt
+          [value]="stockProducts"
+          [rows]="25"
+          [rowsPerPageOptions]="[25, 50, 100]"
+          [paginator]="true"
+          [globalFilterFields]="[
+            'name',
+            'serial',
+            'category.name',
+            'base_price'
+          ]"
+          [(selection)]="selectedProducts"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+              <span class="admin-data-table-searchbar p-input-icon-right">
+                <i class="admin-data-table-searchbar__icon pi pi-search"></i>
+                <input
+                  class="admin-data-table-searchbar__input"
+                  type="text"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search name, serial, category and base price"
+                  pInputText
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="admin-products-table__image-header"></th>
+              <th pSortableColumn="Name">
+                Name <p-sortIcon field="Name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="ProductID">
+                Product ID <p-sortIcon field="ProductID"></p-sortIcon>
+              </th>
+              <th pSortableColumn="Prc1">
+                Price <p-sortIcon field="Prc1"></p-sortIcon>
+              </th>
+              <th pSortableColumn="Cat1Name">
+                Category <p-sortIcon field="Cat1Name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="Discontinued">
+                Status <p-sortIcon field="Discontinued"></p-sortIcon>
+              </th>
+              <th style="width: 170px"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td class="admin-products-table__image">
+                <img
+                  *ngIf="product.NewPictureURL; else placeholderImg"
+                  [src]="product.NewPictureURL"
+                  [alt]="product.Name"
+                  width="100"
+                  class="shadow"
+                />
+                <ng-template #placeholderImg>
+                  <span class="pi pi-image"></span>
+                </ng-template>
+              </td>
+              <td>
+                <span class="p-column-title"> Name </span>
+                <span>
+                  <a href="/products/stock/{{ product.id }}">
+                    {{ product.Name }}
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Serial </span>
+                <span>
+                  {{ product.ProductID }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Price </span>
+                <span>
+                  {{ product.Prc1 | currency: "USD" }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Category </span>
+                <span>
+                  {{ product.Cat1Name }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Status </span>
+                <span [class]="'product-badge status-' + availability(product)">
+                  {{ availability(product) }}
+                </span>
+              </td>
+              <td class="admin-data-table__tools">
+                <!-- <a
+                  [routerLink]="[product.id, 'edit']"
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button p-button-success p-mr-2"
+                ></a> -->
+                <!-- <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button p-button-danger p-mr-2"
+                  (click)="deleteProduct(product)"
+                ></button> -->
+                <!-- <button
+                  pButton
+                  pRipple
+                  icon="pi pi-copy"
+                  class="p-button p-button-warning"
+                  (click)="duplicateProduct(product)"
+                ></button> -->
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+              In total there are
+              {{ stockProducts ? stockProducts.length : 0 }} products.
+            </div>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Custom Products">
+        <p-table
+          #dt
+          [value]="customProducts"
+          [rows]="25"
+          [rowsPerPageOptions]="[25, 50, 100]"
+          [paginator]="true"
+          [globalFilterFields]="[
+            'name',
+            'serial',
+            'category.name',
+            'base_price'
+          ]"
+          [(selection)]="selectedCustomProducts"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+              <span class="admin-data-table-searchbar p-input-icon-right">
+                <i class="admin-data-table-searchbar__icon pi pi-search"></i>
+                <input
+                  class="admin-data-table-searchbar__input"
+                  type="text"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search name, serial, category and base price"
+                  pInputText
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="admin-products-table__image-header"></th>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="id">
+                Product ID <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th pSortableColumn="base_price">
+                Price <p-sortIcon field="base_price"></p-sortIcon>
+              </th>
+              <th pSortableColumn="category">
+                Category <p-sortIcon field="category"></p-sortIcon>
+              </th>
+              <th pSortableColumn="stock">
+                Status <p-sortIcon field="stock"></p-sortIcon>
+              </th>
+              <th style="width: 170px"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td class="admin-products-table__image">
+                <img
+                  *ngIf="product.image; else placeholderImg"
+                  [src]="product.image"
+                  [alt]="product.name"
+                  width="100"
+                  class="shadow"
+                />
+                <ng-template #placeholderImg>
+                  <span class="pi pi-image"></span>
+                </ng-template>
+              </td>
+              <td>
+                <span class="p-column-title"> Name </span>
+                <span>
+                  <a href="/products/custom/{{ product.id }}">
+                    {{ product.name }}
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Serial </span>
+                <span>
+                  {{ product.serial }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Price </span>
+                <span>
+                  {{ product.base_price | currency: "USD" }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Category </span>
+                <span>
+                  {{ product.category }}
+                </span>
+              </td>
+              <td>
+                <span class="p-column-title"> Status </span>
+                <span [class]="'product-badge status-' + availability(product)">
+                  {{ availability(product) }}
+                </span>
+              </td>
+              <td class="admin-data-table__tools">
+                <a
+                  [routerLink]="[product.id, 'edit']"
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button p-button-success p-mr-2"
+                ></a>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button p-button-danger p-mr-2"
+                  (click)="deleteCustomProduct(product)"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-copy"
+                  class="p-button p-button-warning"
+                  (click)="duplicateProduct(product)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+              In total there are
+              {{ customProducts ? customProducts.length : 0 }} products.
+            </div>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
   </div>
-  <p-dialog 
-    header="Uploading Excel" 
+  <p-dialog
+    header="Uploading Excel"
     [visible]="showUploadingProgess"
     [draggable]="false"
     [modal]="true"

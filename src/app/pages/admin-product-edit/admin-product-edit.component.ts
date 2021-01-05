@@ -23,7 +23,7 @@ export class AdminProductEditComponent implements OnInit {
 
   ngOnInit(): void {
     let id: number = Number(this._activatedRoute.snapshot.paramMap.get("id"));
-    this._productService.getProduct(id)
+    this._productService.getCustomProduct(id)
     .subscribe((product: Product) => {
         this.possibleOptions = this._productService.getOptionDefinitions();
         this.productObj = product;

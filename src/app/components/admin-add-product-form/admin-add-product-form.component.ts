@@ -197,14 +197,14 @@ export class AdminAddProductFormComponent implements OnInit {
     console.log('Sending product object: ', submitValue);
 
     if (this.isEdit) {
-      this._productService.editProduct(submitValue)
+      this._productService.editCustomProduct(submitValue)
         .subscribe((res: Product) => {
           this._router.navigate([`/${this.user.role}/products`]);
           console.log("Product added: ", submitValue);
         });
     }
     else {
-      this._productService.addProduct(submitValue)
+      this._productService.addCustomProduct(submitValue)
         .subscribe((res: Product) => {
           this._router.navigate([`/${this.user.role}/products`]);
           console.log("Product added: ", submitValue);

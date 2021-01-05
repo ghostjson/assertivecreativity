@@ -22,7 +22,6 @@ export class AdminProductService {
   API_URL: string;
 
   possibleOptions: Object;
-  products: Product[] = [];
 
   constructor(private _http: HttpClient, private _fb: FormBuilder) {
     this.host = environment.apiUrl;
@@ -36,35 +35,69 @@ export class AdminProductService {
   /**
    * Return the products API link
    */
-  getProductsLink(): string {
+  private productsLink(): string {
     return `${this.API_URL}/products`;
+  }
+
+  private customProductsLink(): string {
+    return `${this.productsLink()}/custom`;
+  }
+
+  private stockProductsLink(): string {
+    return `${this.productsLink()}/stock`;
   }
 
   /**
    * Return the products API link for vendor
    */
-  vendorProductsLink(): string {
-    return `${this.getProductsLink()}/vendor`;
+  private vendorCustomProductsLink(): string {
+    return `${this.customProductsLink()}/vendor`;
+  }
+
+  private vendorStockProductsLink(): string {
+    return `${this.stockProductsLink()}/vendor`;
   }
 
   /**
    * Return the product link
    * @param id id of the product
    */
-  getProductLinkById(id: number): string {
-    return `${this.getProductsLink()}/${id}`;
+  private customProductLinkById(id: number): string {
+    return `${this.customProductsLink()}/${id}`;
+  }
+
+  private stockProductLinkById(id: number): string {
+    return `${this.stockProductsLink()}/${id}`;
   }
 
   /**
    * Fetch products from API
    */
-  getProducts(userRole: string): Observable<StockProduct[]> {
+  getCustomProducts(userRole: string): Observable<Product[]> {
     if (userRole === "vendor") {
-      return this._http.get<StockProduct[]>(`${this.vendorProductsLink()}`).pipe(
+      return this._http.get<Product[]>(`${this.vendorCustomProductsLink()}`).pipe(
+        take(1),
+        map((products: any) => {
+          return products.data as Product[];
+        })
+      );
+    } else {
+      return this._http.get<Product[]>(`${this.customProductsLink()}`).pipe(
+        take(1),
+        map((products: any) => {
+          return products.data as Product[];
+        })
+      );
+    }
+  }
+
+  getStockProducts(userRole: string): Observable<StockProduct[]> {
+    if (userRole === "vendor") {
+      return this._http.get<StockProduct[]>(`${this.vendorStockProductsLink()}`).pipe(
         take(1)
       );
     } else {
-      return this._http.get<StockProduct[]>(`${this.getProductsLink()}`).pipe(
+      return this._http.get<StockProduct[]>(`${this.stockProductsLink()}`).pipe(
         take(1)
       );
     }
@@ -74,8 +107,14 @@ export class AdminProductService {
    * Fetch Product by ID from the API
    * @param id id of the product
    */
-  getProduct(id: number): Observable<Product> {
-    return this._http.get<Product>(`${this.getProductLinkById(id)}`).pipe(
+  getStockProduct(id: number): Observable<StockProduct> {
+    return this._http.get<StockProduct>(`${this.stockProductLinkById(id)}`).pipe(
+      take(1)
+    );
+  }
+
+  getCustomProduct(id: number): Observable<Product> {
+    return this._http.get<Product>(`${this.customProductLinkById(id)}`).pipe(
       take(1),
       map((product: any) => {
         return product.data;
@@ -87,9 +126,9 @@ export class AdminProductService {
    * Add product to server
    * @param product product object to add
    */
-  addProduct(product: Product): Observable<Product> {
+  addCustomProduct(product: Product): Observable<Product> {
     return this._http
-      .post<Product>(`${this.getProductsLink()}`, product)
+      .post<Product>(`${this.customProductsLink()}`, product)
       .pipe(take(1));
   }
 
@@ -97,10 +136,10 @@ export class AdminProductService {
    * Edit product
    * @param editedProduct edited product object
    */
-  editProduct(editedProduct: Product): Observable<Product> {
+  editCustomProduct(editedProduct: Product): Observable<Product> {
     return this._http
       .post<Product>(
-        `${this.getProductLinkById(editedProduct.id)}`,
+        `${this.customProductLinkById(editedProduct.id)}`,
         editedProduct
       )
       .pipe(take(1));
@@ -110,20 +149,10 @@ export class AdminProductService {
    * Delete Product
    * @param id id of the product
    */
-  deleteProduct(id: number): Observable<Product> {
+  deleteCustomProduct(id: number): Observable<Product> {
     return this._http
-      .delete<Product>(`${this.getProductLinkById(id)}`)
+      .delete<Product>(`${this.customProductLinkById(id)}`)
       .pipe(take(1));
-  }
-
-  /**
-   * Delete a list of products
-   * @param ids array of product ids to be removed
-   */
-  deleteProductsBatch(ids: number[]): void {
-    this.products = this.products.filter((product: Product) => {
-      return !ids.includes(product.id);
-    });
   }
 
   /**
@@ -317,7 +346,7 @@ export class AdminProductService {
     let newFormData = new FormData();
     newFormData.append("sheet", file);
 
-    return this._http.post(`${this.getProductsLink()}/excel`, newFormData)
+    return this._http.post(`${this.stockProductsLink()}/excel`, newFormData)
     .pipe(take(1));
   }
 }

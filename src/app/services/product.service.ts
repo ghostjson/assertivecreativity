@@ -40,6 +40,10 @@ export class ProductService {
     return `${this.API_URL}/products`;
   }
 
+  private customProductsLink(): string {
+    return `${this.productsLink()}/custom`;
+  }
+
   /**
    * Return the stock products link
    */
@@ -51,23 +55,23 @@ export class ProductService {
    * Return link for filtering product based on category
    * @param categoryId Id of the category
    */
-  private productsLinkByCategoryId(categoryId: number): string {
-    return `${this.productsLink()}/categories/${categoryId}`;
+  private customProductsLinkByCategoryId(categoryId: number): string {
+    return `${this.customProductsLink()}/categories/${categoryId}`;
   }
 
   /**
    * Return link for filtering product based on a list of categories
    */
-  private productsLinkByCategoryIdList(): string {
-    return `${this.productsLink()}/categories/list`;
+  private customProductsLinkByCategoryIdList(): string {
+    return `${this.customProductsLink()}/categories/list`;
   }
 
   /**
    * Return link to the product details in the api
    * @param id Id of the product
    */
-  private productLink(id: number): string {
-    return `${this.productsLink()}/${id}`;
+  private customProductLink(id: number): string {
+    return `${this.customProductsLink()}/${id}`;
   }
 
   /**
@@ -82,9 +86,9 @@ export class ProductService {
    * Return all products of a particular category
    * @param categoryId category id of the products
    */
-  getProductsByCategoryId(categoryId: number): Observable<Product[]> {
+  getCustomProductsByCategoryId(categoryId: number): Observable<Product[]> {
     return this._http
-      .get<Product[]>(this.productsLinkByCategoryId(categoryId))
+      .get<Product[]>(this.customProductsLinkByCategoryId(categoryId))
       .pipe(
         take(1),
         map((res: any) => {
@@ -97,10 +101,10 @@ export class ProductService {
    * Return products belonging to a list of category ids
    * @param categoryIds categories id list
    */
-  getProductByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
+  getCustomProductsByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
     console.log("categories post: ", categoryIds);
     return this._http
-      .post<Product[]>(this.productsLinkByCategoryIdList(), {
+      .post<Product[]>(this.customProductsLinkByCategoryIdList(), {
         category_ids: categoryIds,
       })
       .pipe(
@@ -111,9 +115,9 @@ export class ProductService {
       );
   }
 
-  getProducts(): Observable<Product[]> {
+  getCustomProducts(): Observable<Product[]> {
     return this._http
-        .get<StockProduct[] | Product[]>(this.productsLink())
+        .get<Product[]>(this.customProductsLink())
         .pipe(
           take(1),
           map((products: any) => {
@@ -132,64 +136,11 @@ export class ProductService {
    * Return the product from the server
    * @param id Id of the product
    */
-  getProduct(id: number): Observable<any> {
-    return this._http.get(this.productLink(id)).pipe(
+  getCustomProduct(id: number): Observable<Product> {
+    return this._http.get(this.customProductLink(id)).pipe(
       take(1),
-      map((productRes: StockProduct) => {
-        productRes.attributes.Colors = productRes.attributes.Colors.map(
-          (color: string): ColorAttribute => {
-            return {
-              label: color,
-              value: color,
-            };
-          }
-        );
-
-        productRes.attributes.price_table_mode = true;
-        productRes.attributes.price_table = new PriceTable();
-        productRes.attributes.price_table.price_groups[0] = {
-          label: "Price 1",
-          price_per_piece: Number(productRes.product.Prc1),
-          quantity: Number(productRes.product.Qty1),
-          relation: "lte",
-        };
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 2",
-          price_per_piece: Number(productRes.product.Prc2),
-          quantity: Number(productRes.product.Qty2),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 3",
-          price_per_piece: Number(productRes.product.Prc3),
-          quantity: Number(productRes.product.Qty3),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 4",
-          price_per_piece: Number(productRes.product.Prc4),
-          quantity: Number(productRes.product.Qty4),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 5",
-          price_per_piece: Number(productRes.product.Prc5),
-          quantity: Number(productRes.product.Qty5),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 6",
-          price_per_piece: Number(productRes.product.Prc6),
-          quantity: Number(productRes.product.Qty6),
-          relation: "lte",
-        });
-
-        return productRes;
+      map((product: any) => {
+        return product.data;
       })
     );
   }

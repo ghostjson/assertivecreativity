@@ -82,7 +82,7 @@ export class AdminHeaderComponent implements OnInit {
           },
           {
             label: 'Customize',
-            routerLink: ''
+            routerLink: '/shop/custom'
           }
         ]
       }

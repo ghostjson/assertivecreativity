@@ -82,7 +82,12 @@
         </div>
         <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
           <app-product-card
-            [product]="product"
+            [productId]="product.id"
+            [name]="product.name"
+            [price]="product.base_price"
+            [description]="product.description"
+            [image]="product.image"
+            [stock]="false"
             styleClass="p-mt-3"
           ></app-product-card>
         </div>

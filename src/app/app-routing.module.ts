@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
   { path: "shop/stock", component: ShopStockComponent },
+  { path: "shop/custom", component: ShopComponent },
   {
     path: "profile",
     component: UserProfileComponent,
@@ -66,6 +67,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: "products/stock/:id", component: StockProductDetailComponent },
+  { path: "products/custom/:id", component: ProductDetailComponent },
   { 
     path: "admin",
     component: AdminDashboardComponent,

@@ -56,8 +56,8 @@ export class HeaderComponent implements OnInit {
             routerLink: '/shop/stock'
           },
           {
-            label: 'Customize',
-            routerLink: ''
+            label: 'Custom Items',
+            routerLink: '/shop/custom'
           }
         ]
       },

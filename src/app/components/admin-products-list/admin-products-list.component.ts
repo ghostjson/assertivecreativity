@@ -14,10 +14,13 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class AdminProductsListComponent implements OnInit {
-  products: StockProduct[];
+  stockProducts: StockProduct[];
+  customProducts: Product[];
   selectedProducts: StockProduct[];
+  selectedCustomProducts: Product[];
   showUploadingProgess: boolean;
   user: User;
+  activeProductsTabIndex: number;
   public API_URL = environment.apiUrl;
 
   constructor(
@@ -31,71 +34,42 @@ export class AdminProductsListComponent implements OnInit {
   ngOnInit() {
     this.showUploadingProgess = false;
     this.user = this._userDetailsService.getUserLocal();
-    this._productService.getProducts(this.user.role)
-      .subscribe((products: StockProduct[]) => {
-        this.products = products;
-        console.log('products received: ', products);
+    this._productService.getStockProducts(this.user.role)
+      .subscribe((stockProducts: StockProduct[]) => {
+        this.stockProducts = stockProducts;
+        console.log('stock products received: ', stockProducts);
       });
-  }
-
-  /**
-   * Delete seletected products from the table
-   */
-  deleteSelectedProducts() {
-    this._confirmationService.confirm({
-      message: "Are you sure you want to delete the selected products?",
-      header: "Confirm",
-      icon: "pi pi-exclamation-triangle",
-      accept: () => {
-        let deleteIndices: number[] = [];
-        console.log('selected products list: ', this.selectedProducts);
-        
-        // delete from local storage
-        this.products = this.products.filter((val) => {
-          if (!this.selectedProducts.includes(val)) {
-            return true;
-          }
-          else {
-            deleteIndices.push(val.product.id);
-            return false;
-          }
-        });
-
-        // delete from server
-        // this._productService.deleteProductsBatch(deleteIndices);
-
-        this.selectedProducts = null;
-        this._messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Products Deleted",
-          life: 3000,
-        });
-      },
+    
+    this._productService.getCustomProducts(this.user.role)
+    .subscribe((customProducts: Product[]) => {
+      this.customProducts = customProducts;
+      console.log('custom products received: ', customProducts);
     });
+
+    this.activeProductsTabIndex = 0;
   }
 
   /**
    * Delete a single product
    * @param product Product to delete
    */
-  deleteProduct(product: Product) {
+  deleteCustomProduct(product: Product) {
     this._confirmationService.confirm({
       message: "Are you sure you want to delete " + product.name + "?",
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
         // find index of the product to delete
-        let deleteIndex: number = this.products.findIndex((val) => {
-          return val.product.id === product.id;
+        let deleteIndex: number = this.customProducts.findIndex((val) => {
+          return val.id === product.id;
         });
 
         // delete the found index
         if (deleteIndex > -1) {
-          this.products.splice(deleteIndex, 1);
+          this.stockProducts.splice(deleteIndex, 1);
           
           // delete from the server
-          this._productService.deleteProduct(product.id)
+          this._productService.deleteCustomProduct(product.id)
             .subscribe();
 
           this._messageService.add({
@@ -128,10 +102,10 @@ export class AdminProductsListComponent implements OnInit {
     duplicate.serial = product.serial + '-copy';
 
     // add the product to products 
-    this._productService.addProduct(duplicate)
+    this._productService.addCustomProduct(duplicate)
       .subscribe((res: any) => {
         res.data.category = duplicate.category;
-        this.products.unshift(res.data);
+        this.customProducts.unshift(res.data);
         this._messageService.add({
           severity: "success",
           summary: "Successful",
@@ -173,10 +147,10 @@ export class AdminProductsListComponent implements OnInit {
         event = null;
         console.log(res);
 
-        this._productService.getProducts(this.user.role)
-          .subscribe((products: StockProduct[]) => {
-            this.products = products;
-            console.log('products received: ', products);
+        this._productService.getStockProducts(this.user.role)
+          .subscribe((stockProducts: StockProduct[]) => {
+            this.stockProducts = stockProducts;
+            console.log('products received: ', stockProducts);
           });
       });
   }

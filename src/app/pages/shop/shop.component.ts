@@ -44,7 +44,7 @@ export class ShopComponent implements OnInit {
     // start the loader
     this._common.setLoader(true);
 
-    this._productService.getProducts().subscribe((products: Product[]) => {
+    this._productService.getCustomProducts().subscribe((products: Product[]) => {
       this.products = products;
 
       // hide the loader
@@ -66,7 +66,7 @@ export class ShopComponent implements OnInit {
     });
 
     this._productService
-      .getProductByCategoryIdList(categoryIds)
+      .getCustomProductsByCategoryIdList(categoryIds)
       .subscribe((res: Product[]) => {
         this.products = res;
         this._common.setLoader(false);
