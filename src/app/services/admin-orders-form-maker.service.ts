@@ -33,6 +33,10 @@ export class AdminOrdersFormMakerService {
       {
         label: 'Color Input',
         value: 'color'
+      },
+      {
+        label: 'Date Input',
+        value: 'date-picker'
       }
     ];
   }

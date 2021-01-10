@@ -5,11 +5,12 @@ import { TreeNode } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
-import { CustomOption } from 'src/app/models/Order';
+import { CustomOption, Order } from 'src/app/models/Order';
 import { StockProduct, listAllFeatures } from 'src/app/models/Product';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
+import { UserDetailsService } from 'src/app/store/user-details.service';
 
 @Component({
   selector: 'app-stock-product-detail',
@@ -29,6 +30,12 @@ export class StockProductDetailComponent implements OnInit {
   formsOverview: TreeNode[];
   selectedNode: TreeNode;
   productDetailsTable: {label: string, value: string}[];
+  orderDeliveryDate: Date;
+  orderMeetingDate: Date;
+  orderConfirmationDate: Date;
+  minDate: Date;
+  orderQuantity: number;
+  selectedColor: string;
 
 
   constructor(
@@ -37,13 +44,15 @@ export class StockProductDetailComponent implements OnInit {
     private _common: CommonService,
     private _orderService: OrderService,
     private _cartService: CartService,
-    private _router: Router
+    private _router: Router,
+    private _userDetailsService: UserDetailsService
   ) {
     this._common.setLoader(true);
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
   }
 
   ngOnInit(): void {
+    this.orderQuantity = 1;
     this.responsiveOptions = [
       {
         breakpoint: "1024px",
@@ -175,6 +184,9 @@ export class StockProductDetailComponent implements OnInit {
         // this.initialiseForms();
         // this.buildFormsOverview();
         this.productDetailsTable = this.transformToTable(product);
+        let tomorrow = new Date(new Date());
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        this.minDate = tomorrow;
         this._common.setLoader(false);
       });
   }
@@ -268,6 +280,43 @@ export class StockProductDetailComponent implements OnInit {
     //   this._router.navigate(["/cart", item.data.id]);
     //   console.log("added to cart: ", item);
     // });
+    let order: Order = {
+      product_id: this.product.product.id,
+      seller_id: Number(this.product.product.Owner),
+      buyer_id: this._userDetailsService.getUserLocal().id,
+      order_status: "open",
+      delivery_date: this.orderDeliveryDate.toISOString(),
+      data: {
+        is_custom_product: false,
+        product_details: this.product,
+        total_price: this.priceTotal * this.orderQuantity,
+        quantity: this.orderQuantity,
+        custom_forms_entry: [
+          {
+            id: 0,
+            title: 'Colors',
+            is_formgroup: false,
+            options: [
+              {
+                name: 'Color',
+                title: 'Colors',
+                type: 'color',
+                price: 0,
+                input: this.selectedColor,
+                meta: {
+                  isChained: false
+                }
+              }
+            ]
+          }
+        ]
+      },
+    };
+
+    this._orderService.placeOrder(order).subscribe((order: Order) => {
+      console.log("order placed: ", order);
+      this._router.navigate(["/orders/"]);
+    });
   }
 
   transformToTable(product: StockProduct): any {

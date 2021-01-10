@@ -79,7 +79,7 @@
             <span class="p-column-title"> Order </span>
             <span>
               <a href="{{admin ? '/' + userRole + '/' : ''}}orders/{{ order.id }}">
-                {{ order.data.product_details.name }}
+                {{ order.data.is_custom_product ? order.data.product_details.name : order.data.product_details.product.Name }}
               </a>
             </span>
           </td>

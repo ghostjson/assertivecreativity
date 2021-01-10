@@ -56,6 +56,11 @@
           [pantoneColors]="pantoneColors"
           [questionIndex]="questionIndex"
         ></app-order-mail-form-maker-color>
+        <app-order-mail-form-maker-date-picker
+          *ngIf="question.value.type === 'date-picker'"
+          [form]="formGroup"
+          [questionIndex]="questionIndex"
+        ></app-order-mail-form-maker-date-picker>
       </div>
       <p-button
         label="Add Question"

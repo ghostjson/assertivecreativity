@@ -19,6 +19,11 @@
           [form]="formEntry"
           [question]="form.questions[questionInd]"
         ></app-order-mail-form-color>
+        <app-order-mail-form-date-picker
+          *ngIf="formEntry.value.type === 'date-picker'"
+          [form]="formEntry"
+          [question]="form.questions[questionInd]"
+        ></app-order-mail-form-date-picker>
       </ng-container>
       <div *ngIf="formReceiver" class="footer d-flex justify-content-end mt-2">
         <p-button

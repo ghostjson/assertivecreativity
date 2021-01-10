@@ -132,6 +132,8 @@ import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/
 import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
 import { ShopStockComponent } from './pages/shop-stock/shop-stock.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
+import { OrderMailFormMakerDatePickerComponent } from './components/order-mail-form-maker-date-picker/order-mail-form-maker-date-picker.component';
+import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 
 @NgModule({
   declarations: [
@@ -209,7 +211,9 @@ import { StockProductDetailComponent } from './pages/stock-product-detail/stock-
     OrderMailFormRadioComponent,
     OrderMailFormColorComponent,
     ShopStockComponent,
-    StockProductDetailComponent 
+    StockProductDetailComponent,
+    OrderMailFormMakerDatePickerComponent,
+    OrderMailFormDatePickerComponent 
   ],
   imports: [
     BrowserModule,

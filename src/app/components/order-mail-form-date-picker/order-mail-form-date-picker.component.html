@@ -1,0 +1,32 @@
+<div class="order-mail-form-radio-component form-group" [formGroup]="form">
+  <div class="question">
+    <span class="question__text">
+      {{ question.label }}
+    </span>
+  </div>
+  <div class="question-input-container radio-list">
+    <div
+      *ngFor="let input of question.inputs; let dateInd = index"
+      [ngClass]="{
+        'question-input': true
+      }"
+      #dateInput
+    >
+      <label for="radio-input-{{ input.id }}" class="question-input-label">
+        <div class="question-input-label__text">
+          {{ input.label }}
+        </div>
+      </label>
+      <p-calendar
+        formControlName="input_value"
+        [minDate]="minDate"
+        [touchUI]="true"
+        [appendTo]="'body'"
+        [baseZIndex]="100"
+        inputId="date-range"
+        styleClass="shadow question-input__input"
+        placeholder="Confirmation Date"
+      ></p-calendar>
+    </div>
+  </div>
+</div>

@@ -85,6 +85,7 @@
               <h2 class="product-details-section__title">Colors</h2>
               <div>
                 <p-selectButton
+                  [(ngModel)]="selectedColor"
                   [options]="product.attributes.Colors"
                 ></p-selectButton>
               </div>
@@ -93,6 +94,7 @@
               <h2 class="product-details-section__title">Order Quantity</h2>
               <div>
                 <p-inputNumber
+                  [(ngModel)]="orderQuantity"
                   [showButtons]="true"
                   buttonLayout="horizontal"
                   inputId="horizontal"
@@ -107,6 +109,44 @@
                 >
                 </p-inputNumber>
               </div>
+            </div>
+
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Delivery Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderDeliveryDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Delivery Date"
+              ></p-calendar>
+            </div>
+
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Meeting Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderMeetingDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Meeting Date"
+              ></p-calendar>
+            </div>
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Confirmation Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderConfirmationDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Confirmation Date"
+              ></p-calendar>
             </div>
           </div>
           <div class="card__footer p-mt-5"></div>
@@ -126,107 +166,14 @@
       </div>
     </div>
 
-    <!-- <div 
-      *ngIf="product.custom_forms.length > 0"
-      [formGroup]="orderForm" class="container mt-5" id="forms">
-      <h2 class="form-section-title">
-        Customize The Order
-      </h2>
-      <div class="row mt-5">
-        <div class="col-lg-4">
-          <div class="form-overview mt-5">
-            <p-scrollPanel>
-              <p-tree
-                [value]="formsOverview"
-                selectionMode="single"
-                [(selection)]="selectedNode"
-                (onNodeSelect)="toggleTreeExpand()"
-              ></p-tree>
-            </p-scrollPanel>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div
-            *ngFor="
-              let customForm of customForms().controls;
-              let formInd = index
-            "
-            class="custom-form-group mb-5"
-          >
-            <h3 class="form-group__title">
-              {{ customForm.value.title }}
-            </h3>
-            <ng-container
-              *ngIf="customForm.value.is_formgroup; else independentForm"
-            >
-              <p-accordion multiple="true">
-                <p-accordionTab
-                  *ngFor="
-                    let subform of subforms(formInd).controls;
-                    let subformInd = index
-                  "
-                  [selected]="true"
-                  header="{{ subform.value.title }}"
-                >
-                  <div
-                    *ngFor="
-                      let option of subformOptions(formInd, subformInd)
-                        .controls;
-                      index as optionInd
-                    "
-                    class="card my-2"
-                  >
-                    <app-product-options
-                      [option]="
-                        product.custom_forms[subform.value.id].options[
-                          optionInd
-                        ]
-                      "
-                      [requiredInp]="true"
-                      [formGroup]="option"
-                    ></app-product-options>
-                  </div>
-                </p-accordionTab>
-              </p-accordion>
-            </ng-container>
-            <ng-template #independentForm>
-                <p-accordion class="custom-form-group">
-                  <p-accordionTab
-                    [selected]="true"
-                    header="{{ customForm.value.title }}"
-                  >
-                    <div
-                      *ngFor="
-                        let option of options(formInd).controls;
-                        index as optionInd
-                      "
-                      class="card my-2"
-                    >
-                      <app-product-options
-                        [option]="
-                          product.custom_forms[customForm.value.id].options[
-                            optionInd
-                          ]
-                        "
-                        [requiredInp]="true"
-                        [formGroup]="option"
-                      ></app-product-options>
-                    </div>
-                  </p-accordionTab>
-                </p-accordion>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <div class="row">
       <div class="col-lg-12 p-2">
         <p-card styleClass="forms-footer">
-          <div class="footer-price">
+          <!-- <div class="footer-price">
             {{ priceTotal | currency: "USD" }}
-          </div>
+          </div> -->
           <p-button
-            [disabled]="true"
+            [disabled]="false"
             label="Add To Cart"
             icon="pi pi-shopping-cart"
             iconPos="right"

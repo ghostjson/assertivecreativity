@@ -12,7 +12,8 @@ import { IdGeneratorService } from "src/app/services/id-generator.service";
 import { CartService } from "src/app/services/cart.service";
 import { CartItem } from "src/app/models/Cart";
 import { TreeNode } from 'primeng/api';
-import { CustomOption } from 'src/app/models/Order';
+import { CustomOption, Order } from 'src/app/models/Order';
+import { UserDetailsService } from "src/app/store/user-details.service";
 
 @Component({
   selector: "app-product-detail",
@@ -31,6 +32,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productId: number;
   formsOverview: TreeNode[];
   selectedNode: TreeNode;
+  orderDeliveryDate: Date;
+  orderMeetingDate: Date;
+  orderConfirmationDate: Date;
+  minDate: Date;
+  orderQuantity: number;
+  selectedColor: string;
 
   constructor(
     public _productService: ProductService,
@@ -38,13 +45,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private _common: CommonService,
     private _orderService: OrderService,
     private _cartService: CartService,
-    private _router: Router
+    private _router: Router,
+    private _userDetailsService: UserDetailsService
   ) {
     this._common.setLoader(true);
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
   }
 
   ngOnInit(): void {
+    this.orderQuantity = 1;
     this.responsiveOptions = [
       {
         breakpoint: "1024px",
@@ -177,6 +186,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.buildFormsOverview();
         this._common.setLoader(false);
       });
+
+      let tomorrow = new Date(new Date());
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.minDate = tomorrow;
   }
 
   /**
@@ -253,20 +266,40 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     // this.updateTotalPrice();
 
-    let cartItem: CartItem = {
-      product_id: this.productId,
-      product: this.product,
-      quantity: 1,
-      custom_forms_entry: {
-        forms_input: this.orderForm.value,
-        total_price: this.priceTotal
+    // let cartItem: CartItem = {
+    //   product_id: this.productId,
+    //   product: this.product,
+    //   quantity: 1,
+    //   custom_forms_entry: {
+    //     forms_input: this.orderForm.value,
+    //     total_price: this.priceTotal
+    //   },
+    // };
+
+    // console.log('add to cart: ', cartItem);
+    // this._cartService.addToCart(cartItem).subscribe((item: any) => {
+    //   this._router.navigate(["/cart", item.data.id]);
+    //   console.log("added to cart: ", item);
+    // });
+
+    let order: Order = {
+      product_id: this.product.id,
+      seller_id: this.product.seller_id,
+      buyer_id: this._userDetailsService.getUserLocal().id,
+      order_status: "open",
+      delivery_date: this.orderDeliveryDate.toISOString(),
+      data: {
+        is_custom_product: true,
+        product_details: this.product,
+        custom_forms_entry: this.orderForm.value.custom_forms,
+        total_price: this.priceTotal * this.orderQuantity,
+        quantity: this.orderQuantity,
       },
     };
 
-    console.log('add to cart: ', cartItem);
-    this._cartService.addToCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart", item.data.id]);
-      console.log("added to cart: ", item);
+    this._orderService.placeOrder(order).subscribe((order: Order) => {
+      console.log("order placed: ", order);
+      this._router.navigate(["/orders/"]);
     });
   }
 }

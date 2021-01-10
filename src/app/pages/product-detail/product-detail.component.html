@@ -76,6 +76,65 @@
                 </span>
               </ng-template>
             </div>
+
+            <div class="product-details-section product-detail__price mt-5">
+              <h2 class="product-details-section__title">Order Quantity</h2>
+              <div>
+                <p-inputNumber
+                  [showButtons]="true"
+                  buttonLayout="horizontal"
+                  inputId="horizontal"
+                  spinnerMode="horizontal"
+                  [step]="1"
+                  decrementButtonClass="p-button-danger"
+                  incrementButtonClass="p-button-success"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  mode="decimal"
+                  min="1"
+                  [(ngModel)]="orderQuantity"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+            
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Delivery Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderDeliveryDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Delivery Date"
+              ></p-calendar>
+            </div>
+
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Meeting Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderMeetingDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Meeting Date"
+              ></p-calendar>
+            </div>
+            <div class="product-details-section mt-5">
+              <h2 class="product-details-section__title">
+                Select Confirmation Date
+              </h2>
+              <p-calendar
+                [(ngModel)]="orderConfirmationDate"
+                [minDate]="minDate"
+                inputId="date-range"
+                styleClass="shadow"
+                placeholder="Confirmation Date"
+              ></p-calendar>
+            </div>
           </div>
           <div class="card__footer p-mt-5"></div>
         </div>
@@ -179,10 +238,10 @@
       <div class="col-lg-12 p-2">
         <p-card styleClass="forms-footer">
           <div class="footer-price">
-            {{priceTotal | currency: 'USD'}}
+            {{priceTotal * this.orderQuantity | currency: 'USD'}}
           </div>
           <p-button
-            [disabled]="true"
+            [disabled]="!orderForm.valid"
             label="Add To Cart"
             icon="pi pi-shopping-cart"
             iconPos="right"
