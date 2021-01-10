@@ -28,16 +28,15 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/primeflex/primeflex.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
               "src/assets/css/utility.scss",
               "src/assets/css/OverlayScrollbars.min.css",
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css",
-              "src/styles.scss",
-              "src/assets/css/primeng-edited.scss"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",

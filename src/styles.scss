@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
 @import './assets/css/variables.scss';
 
 /* You can add global styles to this file, and also import other style files */
@@ -7,10 +7,12 @@ html, body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  // font-family: 'Lato', sans-serif;
   height: 100%;
   background: $lighter-grey;
-  color: $dark-color;;
+  color: $dark-color;
+  font-family: "Roboto";
+  font-size: 14px;
 }
 
 img {
