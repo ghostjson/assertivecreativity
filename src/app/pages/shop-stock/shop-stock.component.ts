@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ShopStockComponent implements OnInit {
   featured: any;
   products: StockProductData[] = [];
-  categories: Category[] = [];
+  categories: string[] = [];
   selectedCategories: Category[] = [];
   tags: Tag[] = [];
   selectedTags: number[] = [];
@@ -30,9 +30,9 @@ export class ShopStockComponent implements OnInit {
 
     this.getProducts();
 
-    // this._pcService.getCategories().subscribe((categories: Category[]) => {
-    //   this.categories = categories;
-    // });
+    this._pcService.getStockCategories().subscribe((categories: string[]) => {
+      this.categories = categories;
+    });
   }
 
   /**

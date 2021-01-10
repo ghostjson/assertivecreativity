@@ -15,10 +15,24 @@ export class ProductCategorisationService {
   ) {}
 
   /**
+   * Return stock products url
+   */
+  stockProductsUrl(): string {
+    return `${environment.apiUrl}/products/stock`;
+  }
+
+  /**
    * custom products url
    */
   customProductsUrl(): string {
     return `${environment.apiUrl}/products/custom`;
+  }
+
+  /**
+   * Return stock categories url
+   */
+  stockCategoriesUrl(): string { 
+    return `${this.stockProductsUrl()}/categories`;
   }
   
   /**
@@ -73,6 +87,13 @@ export class ProductCategorisationService {
         map((res: any) => {
           return res.data as Category[];
         })
+      );
+  }
+
+  getStockCategories(): Observable<string[]> {
+    return this._http.get<string[]>(`${this.stockCategoriesUrl()}`)
+      .pipe(
+        take(1)
       );
   }
 

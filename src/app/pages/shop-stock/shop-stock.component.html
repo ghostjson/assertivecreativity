@@ -26,15 +26,15 @@
             </span>
           </p-header>
           <ng-container *ngIf="categories.length > 0; else noCategories">
-            <div *ngFor="let category of categories" class="p-field-checkbox">
+            <div *ngFor="let category of categories; index as catIndex" class="p-field-checkbox">
               <p-checkbox
-                [label]="category.name"
+                [label]="category"
                 name="category"
                 value="category"
                 [value]="category"
                 [(ngModel)]="selectedCategories"
-                [inputId]="category.id"
-                [disabled]="category.name.toLowerCase() === 'none'"
+                [inputId]="catIndex"
+                [disabled]="category.toLowerCase() === 'none'"
                 (onChange)="update()"
               ></p-checkbox>
             </div>
