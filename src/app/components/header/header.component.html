@@ -1,11 +1,4 @@
 <header>
-  <!-- <app-navbar
-    [navStartItems]="navStartItems"
-    [navEndItems]="navEndItems"
-    [logo]="logo"
-    [user]="user"
-    (onSearchStart)="emitSearchString($event)"
-  ></app-navbar> -->
   <nav class="navigation-bar">
     <p-menubar [model]="navStartItems">
       <ng-template pTemplate="start">
@@ -14,15 +7,20 @@
         </a>
       </ng-template>
       <ng-template pTemplate="end">
-        <span class="p-input-icon-right nav-searchbar">
-          <i class="pi pi-search"></i>
+        <span class="nav-searchbar p-input-filled">
+          <p-button 
+            label="Search"
+            icon="pi pi-search"
+            iconPos="right"
+            styleClass="search-btn p-shadow-2 p-button-sm"
+          ></p-button>
           <input
-            class="nav-searchbar__input"
+            class="nav-searchbar__input p-inputtext-sm"
             type="text"
             [(ngModel)]="searchValue"
             placeholder="Search"
             pInputText
-            (keypress)="emitValue($event)"
+            (keypress)="emitSearchString($event)"
           />
         </span>
         <a
@@ -31,63 +29,75 @@
           icon="pi pi-shopping-cart"
           iconPos="right"
           label="Cart"
-          class="p-button-success mr-2"
+          class="cart-btn p-button-success"
           pButton
+          pRipple
         ></a>
-        <button
-          class="account-btn"
-          type="button"
-          pButton
+        <p-avatar 
+          size="large"
           icon="pi pi-user"
           (click)="accountPopup.toggle($event)"
-        ></button>
+          pRipple
+        ></p-avatar>
+        <!-- <p-menu #accountPopup [popup]="true" [model]="accountItems"></p-menu> -->
         <p-overlayPanel
           styleClass="popup-box"
           class="account-popup"
           #accountPopup
         >
           <ng-template pTemplate>
-            <ul>
-              <ng-template #notLogin>
-                <li class="popup-box__item">
-                  <a
-                    [routerLink]="['/signin']"
-                    [queryParams]="{ return: currentUrl }"
-                  >
-                    Sign In
-                  </a>
-                </li>
-                <li class="popup-box__item">
-                  <a
-                    [routerLink]="['/signup']"
-                    [queryParams]="{ return: currentUrl }"
-                  >
-                    Sign Up
-                  </a>
-                </li>
-              </ng-template>
-              <ng-container *ngIf="user; else notLogin">
-                <li class="popup-box__item" *ngIf="isAdmin()">
-                  <a [routerLink]="['/', user.role]">
-                    {{ user.role | titlecase }} Dashboard
-                  </a>
-                </li>
-                <li class="popup-box__item">
-                  <a [routerLink]="['/profile']"> Profile </a>
-                </li>
-                <li class="popup-box__item">
-                  <a [routerLink]="['/orders']"> Orders </a>
-                </li>
-                <li class="popup-box__item">
-                  <a
-                    [routerLink]="['/logout']"
-                    [queryParams]="{ return: currentUrl }"
-                  >
-                    Logout
-                  </a>
-                </li>
-              </ng-container>
-            </ul>
+            <div class="p-menu p-component p-menu-overlay">
+              <ul class="p-menu-list p-reset">
+                <ng-template #notLogin>
+                  <li class="p-menuitem">
+                    <a
+                      class="p-menuitem-link"
+                      [routerLink]="['/signin']"
+                      [queryParams]="{ return: currentUrl }"
+                    >
+                      Sign In
+                    </a>
+                  </li>
+                  <li class="p-menuitem">
+                    <a
+                      class="p-menuitem-link"
+                      [routerLink]="['/signup']"
+                      [queryParams]="{ return: currentUrl }"
+                    >
+                      Sign Up
+                    </a>
+                  </li>
+                </ng-template>
+                <ng-container *ngIf="user; else notLogin">
+                  <li class="p-menuitem" *ngIf="hasDashboard()">
+                    <a 
+                      class="p-menuitem-link"
+                      [routerLink]="['/', user.role]">
+                      {{ user.role | titlecase }} Dashboard
+                    </a>
+                  </li>
+                  <li class="p-menuitem">
+                    <a 
+                      class="p-menuitem-link"
+                      [routerLink]="['/profile']"> Profile </a>
+                  </li>
+                  <li class="p-menuitem">
+                    <a 
+                      class="p-menuitem-link"
+                      [routerLink]="['/orders']"> Orders </a>
+                  </li>
+                  <li class="p-menuitem">
+                    <a
+                      class="p-menuitem-link"
+                      [routerLink]="['/logout']"
+                      [queryParams]="{ return: currentUrl }"
+                    >
+                      Logout
+                    </a>
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
           </ng-template>
         </p-overlayPanel>
       </ng-template>

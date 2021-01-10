@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserDetailsService } from './store/user-details.service';
 import { CommonService } from './common.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,22 @@ export class AppComponent {
   loader: any;
   title: string = 'acreativity';
 
-  constructor(private user: UserDetailsService, private common: CommonService) {
+  constructor(
+    private _user: UserDetailsService, 
+    private _common: CommonService,
+    private _primengConfig: PrimeNGConfig
+  ) {
 
   }
 
 
   ngOnInit() {
-    this.common.loader.subscribe(status => this.loader = status);
+    this._common.loader.subscribe(status => this.loader = status);
+    this._primengConfig.ripple = true;
   }
 
   ngAfterContentInit() {
-    this.common.setLoader(false);
+    this._common.setLoader(false);
   }
 
 

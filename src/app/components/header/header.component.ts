@@ -5,6 +5,7 @@ import { CommonService } from "src/app/common.service";
 import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/models/User';
 import { MenuItem } from 'primeng/api';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -21,15 +22,20 @@ export class HeaderComponent implements OnInit {
   navEndItems: MenuItem[];
   logo: string;
   user: User;
+  searchValue: string;
+  currentUrl: string;
+  accountItems: MenuItem[];
 
   constructor(
     private _user: UserDetailsService,
     public _auth: AuthService,
     private _common: CommonService,
-    private _cartService: CartService
+    private _cartService: CartService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.currentUrl = this._activatedRoute.snapshot.url.join('/');
     this._common.setLoader(true);
     this.logo = './../../../assets/images/logo.png';
     this.cartLength = 0;
@@ -44,6 +50,7 @@ export class HeaderComponent implements OnInit {
     }
     else {
       this.user = null;
+      console.info('User details: ', this.user);
       this._common.setLoader(false);
     }
 
@@ -70,9 +77,133 @@ export class HeaderComponent implements OnInit {
         routerLink: '/contact'
       }
     ];
+
+    this.accountItems = [
+      {
+        label: 'Sign In',
+        routerLink: '/signin',
+        queryParams: {return: this.currentUrl},
+        visible: !this.user
+      },
+      {
+        label: 'Sign Up',
+        routerLink: '/signup',
+        queryParams: {return: this.currentUrl},
+        visible: !this.user
+      },
+      {
+        label: 'Vendor Dashboard',
+        routerLink: `/vendor/`,
+        visible: Boolean(this.user && this.user.role === 'vendor')
+      },
+      {
+        label: 'Admin Dashboard',
+        routerLink: `/admin/`,
+        visible: Boolean(this.user && this.user.role === 'admin')
+      },
+      {
+        label: `Profile`,
+        routerLink: '/profile',
+        visible: this.user != null
+      },
+      {
+        label: `Orders`,
+        routerLink: '/orders',
+        visible: this.user != null
+      },
+      {
+        label: 'Log Out',
+        routerLink: '/logout',
+        queryParams: {return: this.currentUrl},
+        visible: this.user != null
+      }
+    ];
+
+    // if(this.user) {
+    //   this.accountItems.push(
+    //     {
+    //       label: `${this.user.role} Dashboard`,
+    //       routerLink: `/${this.user.role}/`,
+    //       visible: this.isAdmin()
+    //     },
+    //     {
+    //       label: `Profile`,
+    //       routerLink: '/profile',
+    //       visible: this.user != null
+    //     },
+    //     {
+    //       label: `Orders`,
+    //       routerLink: '/orders',
+    //       visible: this.user != null
+    //     },
+    //     {
+    //       label: 'Log Out',
+    //       routerLink: '/logout',
+    //       queryParams: {return: this.currentUrl}
+    //     }
+    //   );
+    // }
   }
 
+  ngOnChanges(): void {
+    this.accountItems = [
+      {
+        label: 'Sign In',
+        routerLink: '/signin',
+        queryParams: {return: this.currentUrl},
+        visible: !this.user
+      },
+      {
+        label: 'Sign Up',
+        routerLink: '/signup',
+        queryParams: {return: this.currentUrl},
+        visible: !this.user
+      },
+      {
+        label: 'Vendor Dashboard',
+        routerLink: `/vendor/`,
+        visible: this.user && this.user.role === 'vendor'
+      },
+      {
+        label: 'Admin Dashboard',
+        routerLink: `/admin/`,
+        visible: this.user && this.user.role === 'admin'
+      },
+      {
+        label: `Profile`,
+        routerLink: '/profile',
+        visible: this.user != null
+      },
+      {
+        label: `Orders`,
+        routerLink: '/orders',
+        visible: this.user != null
+      },
+      {
+        label: 'Log Out',
+        routerLink: '/logout',
+        queryParams: {return: this.currentUrl}
+      }
+    ];
+  }
+
+  /**
+   * Emit the search string typed into the search bar
+   * @param event search string typed
+   */
   emitSearchString(event: any): void {
-    this.onSearchStringEmit.emit(event);
+    console.log(this.searchValue);
+    this.onSearchStringEmit.emit(this.searchValue);
+  }
+
+  /**
+   * Check if the logged in user has a dashboard
+   */
+  hasDashboard() {
+    if(this.user && (this.user.role === 'admin' || this.user.role === 'vendor')) {
+      return true;
+    }
+
+    return false;
   }
 }

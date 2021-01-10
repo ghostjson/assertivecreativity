@@ -45,6 +45,7 @@ import { AdminAddProductFormComponent } from "./components/admin-add-product-for
 import { httpInterceptProvider } from "./helpers/http-interceptor";
 import { LoaderComponent } from "./components/loader/loader.component";
 
+import { RippleModule } from 'primeng/ripple';
 import { CardModule } from "primeng/card";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
@@ -85,6 +86,7 @@ import { TreeModule } from "primeng/tree";
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BlockUIModule } from 'primeng/blockui';
+import { AvatarModule } from 'primeng/avatar';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -118,7 +120,6 @@ import { OrderSummaryTableComponent } from "./components/order-summary-table/ord
 import { OrderMailListComponent } from "./components/order-mail-list/order-mail-list.component";
 import { AdminOrdersComponent } from "./pages/admin-orders/admin-orders.component";
 import { OrdersListComponent } from "./components/orders-list/orders-list.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ErrorInterceptor } from "./helpers/error-interceptor/error.interceptor";
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 import { OrderMailFormMakerComponent } from './components/order-mail-form-maker/order-mail-form-maker.component';
@@ -199,7 +200,6 @@ import { OrderMailFormDatePickerComponent } from './components/order-mail-form-d
     OrderMailListComponent,
     AdminOrdersComponent,
     OrdersListComponent,
-    NavbarComponent,
     VendorDashboardComponent,
     OrderMailFormMakerComponent,
     OrderMailFormMakerDropdownComponent,
@@ -265,7 +265,9 @@ import { OrderMailFormDatePickerComponent } from './components/order-mail-form-d
     TreeModule,
     SelectButtonModule,
     ProgressSpinnerModule,
-    BlockUIModule 
+    BlockUIModule,
+    AvatarModule,
+    RippleModule
   ],
   entryComponents: [],
   providers: [

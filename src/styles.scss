@@ -12,7 +12,7 @@ html, body {
   background: $lighter-grey;
   color: $dark-color;
   font-family: "Roboto";
-  font-size: 14px;
+  // font-size: 14px;
 }
 
 img {
@@ -147,3 +147,5 @@ p {
 .bg-info {
   background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
 }
+
+@import './assets/css/primeng.scss';
