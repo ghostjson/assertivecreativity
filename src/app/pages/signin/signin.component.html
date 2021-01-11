@@ -7,9 +7,7 @@
         <!-- login form starts -->
         <p-card styleClass="login-form-card">
           <p-header>
-            <h1 class="login-form-card-title">
-              Login
-            </h1>
+            <h1 class="login-form-card-title">Login</h1>
           </p-header>
           <form
             #loginForm="ngForm"
@@ -29,7 +27,7 @@
                 pInputText
               />
               <small
-                [hidden]="email.valid || email.pristine || !error"
+                [hidden]="!error && (email.valid || email.pristine)"
                 id="email-help"
                 class="form-error-message p-invalid"
               >
@@ -48,7 +46,7 @@
                 pInputText
               />
               <small
-                [hidden]="password.valid || password.pristine || !error"
+                [hidden]="!error && (password.valid || password.pristine)"
                 id="password-help"
                 class="form-error-message p-invalid"
               >
@@ -63,12 +61,12 @@
                   type="submit"
                   [disabled]="!loginForm.form.valid"
                 ></p-button>
-                <small id="login-help">
+                <div id="login-help">
                   Not signed up?
                   <a routerLink="/signup">
                     <strong> Sign Up. </strong>
                   </a>
-                </small>
+                </div>
               </div>
             </div>
           </form>
@@ -80,7 +78,15 @@
     <div class="p-col-12 p-xl-6">
       <div class="right-panel">
         <!-- <img class="right-panel-img" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="typing on computer"> -->
-        <div class="right-panel-content"></div>
+        <div class="right-panel-content">
+          <h2>Welcome Back</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+            architecto repellendus et ducimus laboriosam temporibus natus culpa.
+            Libero itaque, doloribus inventore quibusdam enim quidem. Ipsa saepe
+            mollitia consequatur eum autem?
+          </p>
+        </div>
       </div>
     </div>
   </div>

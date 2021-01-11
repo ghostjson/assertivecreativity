@@ -12,7 +12,10 @@ import { MessageService } from "primeng/api";
   providers:[MessageService]
 })
 export class SigninComponent implements OnInit {
-  user: { email: string; password: string } = {
+  user: { 
+    email: string,
+    password: string 
+  } = {
     email: "",
     password: "",
   };
@@ -54,25 +57,24 @@ export class SigninComponent implements OnInit {
       this.user.password
     )
     .subscribe(
+      // next callback
       (token: Token) => {
         console.log('Attempting to signin from signin component');
+        this._router.navigate([this.returnUrl]);
       },
+      // error callback
       (e: any) => {
         console.error('error caught from the login function: ', e);
-        this.error = e.error.status;
+        this.error = String(e.error.status);
         this._common.setLoader(false);
         this._messageService
           .add(
             {
               severity:'error',
               summary:'Login Failed',
-              detail:'Something went wrong. Kindly try again',
-              life: 30000
+              detail:'Something went wrong. Kindly try again'
             }
           );
-      },
-      () => {
-        this._router.navigate([this.returnUrl]);
       }
     )
   }

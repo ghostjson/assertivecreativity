@@ -1,3 +1,5 @@
+@import '../../../assets/css/variables.scss';
+
 :host {
   ::ng-deep {
     .login-page {
@@ -7,7 +9,24 @@
     .right-panel {
       height: 100%;
       width: 100%;
-      background: center/cover url("https://static.pexels.com/photos/33972/pexels-photo.jpg");
+      background-image: $bg-primary-transparent, 
+        url("https://static.pexels.com/photos/33972/pexels-photo.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 2em;
+
+      .right-panel-content {
+        color: white;
+
+        h2 {
+          font-size: 3rem;
+          font-weight: 900;
+          margin: 0;
+        }
+      }
 
       .right-panel-img {
         height: 100%;
