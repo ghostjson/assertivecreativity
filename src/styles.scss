@@ -1,7 +1,53 @@
 // @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
 @import './assets/css/variables.scss';
+@import './assets/css/bootstrap-container.css';
 
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #cc9933;
+  --primary-color-text:#ffffff;
+  --secondary-color: #deefb7;
+  --dark-color: #2b2b2b;
+  --surface-a:#ffffff;
+  --surface-b:#fafafa;
+  --surface-c:rgba(0,0,0,.04);
+  --surface-d:rgba(0,0,0,.12);
+  --surface-e:#ffffff;
+  --surface-f:#ffffff;
+  --text-color:#000001;
+  --text-color-secondary:textSecondaryColor;
+  --font-family:Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+}
+
+/* roboto-regular - latin-ext_latin */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), local("Roboto-Regular"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-regular.woff2") format("woff2"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-regular.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* roboto-500 - latin-ext_latin */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Roboto Medium"), local("Roboto-Medium"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-500.woff2") format("woff2"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-500.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* roboto-700 - latin-ext_latin */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Roboto Bold"), local("Roboto-Bold"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-700.woff2") format("woff2"), url("../node_modules/primeng/resources/themes/md-light-indigo/fonts/roboto-v20-latin-ext_latin-700.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+* {
+  transition-duration: 0.2s;
+}
 
 html, body {
   margin: 0px;
@@ -21,12 +67,6 @@ img {
 
 p {
   line-height: 1.8;
-}
-
-:root {
-  --primary-color: #cc9933;
-  --secondary-color: #deefb7;
-  --dark-color: #2b2b2b;
 }
 
 .card {
@@ -148,4 +188,4 @@ p {
   background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
 }
 
-@import './assets/css/primeng.scss';
+@import './assets/css/primeng-theme-edited.scss';

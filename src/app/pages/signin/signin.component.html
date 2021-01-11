@@ -1,75 +1,163 @@
-<app-header></app-header>
+<div class="login-page">
+  <app-header></app-header>
 
-<section class="login-block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 login-sec">
-        <h2 class="text-center">Login Now</h2>
-
-        <div *ngIf="error" class="alert alert-danger" role="alert">
-          {{ error }}
-        </div>
-
-        <div class="login-form">
-          <div class="form-group">
-            <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              [(ngModel)]="user.email"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1" class="text-uppercase"
-              >Password</label
-            >
-            <input
-              type="password"
-              class="form-control"
-              [(ngModel)]="user.password"
-              placeholder="Password"
-            />
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" />
-              <small>Remember Me</small>
-            </label>
-            <button
-              type="submit"
-              (click)="login()"
-              class="btn btn-login float-right"
-            >
+  <div class="p-grid p-nogutter">
+    <div class="p-col-12 p-md-7 p-xl-6">
+      <div>
+        <!-- login form starts -->
+        <p-card styleClass="login-form-card">
+          <p-header>
+            <h1 class="login-form-card-title">
               Login
-            </button>
+            </h1>
+          </p-header>
+          <form
+            #loginForm="ngForm"
+            (ngSubmit)="login()"
+            class="login-form p-fluid"
+          >
+            <div class="p-field p-input-filled">
+              <label for="email"> Email </label>
+              <input
+                #email="ngModel"
+                [(ngModel)]="user.email"
+                id="email"
+                name="email"
+                type="email"
+                [email]="true"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="email.valid || email.pristine || !error"
+                id="email-help"
+                class="form-error-message p-invalid"
+              >
+                Email is invalid
+              </small>
+            </div>
+            <div class="p-field p-input-filled">
+              <label for="password"> Password </label>
+              <input
+                #password="ngModel"
+                [(ngModel)]="user.password"
+                id="password"
+                name="password"
+                type="password"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="password.valid || password.pristine || !error"
+                id="password-help"
+                class="form-error-message p-invalid"
+              >
+                Password is invalid
+              </small>
+            </div>
+            <div class="p-fluid">
+              <div class="p-field">
+                <p-button
+                  styleClass="login-btn p-button-lg p-shadow-12"
+                  label="Sign In"
+                  type="submit"
+                  [disabled]="!loginForm.form.valid"
+                ></p-button>
+                <small id="login-help">
+                  Not signed up?
+                  <a routerLink="/signup">
+                    <strong> Sign Up. </strong>
+                  </a>
+                </small>
+              </div>
+            </div>
+          </form>
+        </p-card>
+        <!-- login form ends -->
+      </div>
+    </div>
+
+    <div class="p-col-12 p-xl-6">
+      <div class="right-panel">
+        <!-- <img class="right-panel-img" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="typing on computer"> -->
+        <div class="right-panel-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <section class="login-block">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 login-sec">
+          <h2 class="text-center">Login Now</h2>
+
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
           </div>
 
-          <div><a [routerLink]="['/signup']">Create an account</a></div>
-        </div>
-      </div>
-      <div class="col-md-8 banner-sec">
-        <div
-          id="carouselExampleIndicators"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img
-                class="d-block img-fluid"
-                src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
-                alt="First slide"
+          <div class="login-form">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="text-uppercase"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="user.email"
+                placeholder="Email"
               />
-              <div class="carousel-caption d-none d-md-block">
-                <div class="banner-text">
-                  <h2>This is Heaven</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  </p>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1" class="text-uppercase"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="user.password"
+                placeholder="Password"
+              />
+            </div>
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" />
+                <small>Remember Me</small>
+              </label>
+              <button
+                type="submit"
+                (click)="login()"
+                class="btn btn-login float-right"
+              >
+                Login
+              </button>
+            </div>
+
+            <div><a [routerLink]="['/signup']">Create an account</a></div>
+          </div>
+        </div>
+        <div class="col-md-8 banner-sec">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <img
+                  class="d-block img-fluid"
+                  src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
+                  alt="First slide"
+                />
+                <div class="carousel-caption d-none d-md-block">
+                  <div class="banner-text">
+                    <h2>This is Heaven</h2>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -77,7 +165,7 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<app-footer></app-footer>
+  </section> -->
+  <app-footer></app-footer>
+  <p-toast position="bottom-center"></p-toast>
+</div>

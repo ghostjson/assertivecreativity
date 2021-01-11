@@ -1,85 +1,56 @@
-.login-block {
-  float: left;
-  width: 100%;
-  padding: 50px 0;
-}
-.banner-sec {
-  background: url(https://static.pexels.com/photos/33972/pexels-photo.jpg) no-repeat left bottom;
-  background-size: cover;
-  min-height: 500px;
-  border-radius: 0 10px 10px 0;
-  padding: 0;
-}
-.container {
-  background: #fff;
-  border: 1px solid rgb(226, 226, 226);
-  border-radius: 10px;
-}
-.carousel-inner {
-  border-radius: 0 10px 10px 0;
-}
-.carousel-caption {
-  text-align: left;
-  left: 5%;
-}
-.login-sec {
-  padding: 50px 30px;
-  position: relative;
-}
-.login-sec .copy-text {
-  position: absolute;
-  width: 80%;
-  bottom: 20px;
-  font-size: 13px;
-  text-align: center;
-}
-.login-sec .copy-text i {
-  color: var(--primary-color);
-}
-.login-sec .copy-text a {
-  color: black;
-}
-.login-sec h2 {
-  margin-bottom: 30px;
-  font-weight: 800;
-  font-size: 30px;
-  color: var(--dark-color);
-}
-.login-sec h2:after {
-  content: " ";
-  width: 100px;
-  height: 5px;
-  background: var(--primary-color);
-  display: block;
-  margin-top: 20px;
-  border-radius: 3px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.btn-login {
-  background: var(--dark-color);
-  color: #fff;
-  font-weight: 600;
-}
-.banner-text {
-  width: 70%;
-  position: absolute;
-  bottom: 40px;
-  padding-left: 20px;
-}
-.banner-text h2 {
-  color: #fff;
-  font-weight: 600;
-}
-.banner-text h2:after {
-  content: " ";
-  width: 100px;
-  height: 5px;
-  background: var(--primary-color);
-  display: block;
-  margin-top: 20px;
-  border-radius: 3px;
-}
-.banner-text p {
-  color: #fff;
+:host {
+  ::ng-deep {
+    .login-page {
+      position: relative;
+    }
+
+    .right-panel {
+      height: 100%;
+      width: 100%;
+      background: center/cover url("https://static.pexels.com/photos/33972/pexels-photo.jpg");
+
+      .right-panel-img {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+      }
+    }
+
+
+    .login-form-card {
+      max-width: 475px;
+      min-width: 300px;
+      margin: 3em auto;
+
+      .login-form-card-title {
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 1rem;
+      }
+    }
+
+    #login-help {
+      display: block;
+      margin-top: 1em;
+    }
+
+    .p-field {
+      position: relative;
+      margin-bottom: 2.5em;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .form-error-message {
+        position: absolute;
+        top: 100%;
+        left: 0;
+      }
+    }
+
+    .login-btn {
+      margin-top: 1.5em;
+    }
+  }
 }
