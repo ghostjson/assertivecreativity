@@ -5966,4 +5966,42 @@ a {
       }
     }
   }
+  
+  .p-inputgroup {
+    .p-inputgroup-addon {
+      background-image: none;
+      border-bottom-left-radius: 4px;
+    }
+  }
+}
+
+.p-steps {
+  .p-steps-item {
+    &::before {
+      content: " ";
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      width: 100%;
+      top: 1rem;
+      left: 50%;
+      display: block;
+      position: absolute;
+    }
+
+    &:last-of-type {
+      &::before {
+        content: " ";
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        width: 100%;
+        top: 1rem;
+        left: auto;
+        right: 50%;
+        display: block;
+        position: absolute;
+      }
+    }
+
+    .p-menuitem-link {
+      flex-direction: column;
+    }
+  }
 }

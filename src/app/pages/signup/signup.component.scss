@@ -1,86 +1,73 @@
-.login-block {
-    float: left;
-    width: 100%;
-    padding: 50px 0;
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .signup-form-card {
+      max-width: 550px;
+      margin: 3em auto;
+
+      .p-field {
+        position: relative;
+        margin-bottom: 2em;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+
+        .form-error-message {
+          position: absolute;
+          top: 100%;
+          left: 0.5rem;
+        }
+
+        .phone-input {
+          border-top-left-radius: 0;
+          border-bottom-right-radius: 4px;
+          width: 100%;
+        }
+      }
+    }
+
+    .right-panel {
+      height: 100%;
+      width: 100%;
+      background-image: $bg-primary-transparent, 
+        url("https://static.pexels.com/photos/33972/pexels-photo.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 2em;
+
+      .p-steps {
+        background-color: white;
+        border-radius: 4px;
+        padding: 1em;
+
+        .p-steps-item {
+          &:first-of-type {
+            margin-right: 2em;
+          }
+        }
+      }
+
+      .right-panel-content {
+        color: white;        
+        margin-top: 5rem;
+
+        h1 {
+          font-size: 3rem;
+          font-weight: 900;
+          margin: 0;
+        }
+      }
+
+      .right-panel-img {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+      }
+    }
   }
-  .banner-sec {
-    background: url(https://static.pexels.com/photos/33972/pexels-photo.jpg) no-repeat left bottom;
-    background-size: cover;
-    min-height: 500px;
-    border-radius: 0 10px 10px 0;
-    padding: 0;
-  }
-  .container {
-    background: #fff;
-    border: 1px solid rgb(226, 226, 226);
-    border-radius: 10px;
-  }
-  .carousel-inner {
-    border-radius: 0 10px 10px 0;
-  }
-  .carousel-caption {
-    text-align: left;
-    left: 5%;
-  }
-  .login-sec {
-    padding: 50px 30px;
-    position: relative;
-  }
-  .login-sec .copy-text {
-    position: absolute;
-    width: 80%;
-    bottom: 20px;
-    font-size: 13px;
-    text-align: center;
-  }
-  .login-sec .copy-text i {
-    color: var(--primary-color);
-  }
-  .login-sec .copy-text a {
-    color: black;
-  }
-  .login-sec h2 {
-    margin-bottom: 30px;
-    font-weight: 800;
-    font-size: 30px;
-    color: var(--dark-color);
-  }
-  .login-sec h2:after {
-    content: " ";
-    width: 100px;
-    height: 5px;
-    background: var(--primary-color);
-    display: block;
-    margin-top: 20px;
-    border-radius: 3px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .btn-login {
-    background: var(--dark-color);
-    color: #fff;
-    font-weight: 600;
-  }
-  .banner-text {
-    width: 70%;
-    position: absolute;
-    bottom: 40px;
-    padding-left: 20px;
-  }
-  .banner-text h2 {
-    color: #fff;
-    font-weight: 600;
-  }
-  .banner-text h2:after {
-    content: " ";
-    width: 100px;
-    height: 5px;
-    background: var(--primary-color);
-    display: block;
-    margin-top: 20px;
-    border-radius: 3px;
-  }
-  .banner-text p {
-    color: #fff;
-  }
-  
+}

@@ -1,136 +1,427 @@
-<app-header></app-header>
+<div class="signup-page">
+  <app-header></app-header>
 
-<section class="login-block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 login-sec">
-        <h2 class="text-center">Sign Up</h2>
-
-        <form class="login-form">
-          <div class="form-group">
-            <label for="name" class="text-uppercase">First Name</label>
-            <input
-              type="text"
-              [(ngModel)]="signup_form.first_name"
-              name="first_name"
-              class="form-control"
-              placeholder="First Name"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="name" class="text-uppercase">Last Name</label>
-            <input
-              type="text"
-              [(ngModel)]="signup_form.last_name"
-              name="last_name"
-              class="form-control"
-              placeholder="Last Name"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="text-uppercase">Email</label>
-            <input
-              type="email"
-              [(ngModel)]="signup_form.email"
-              name="email"
-              class="form-control"
-              placeholder="Email"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="phone" class="text-uppercase">Phone Number</label>
-            <input
-              type="number"
-              [(ngModel)]="signup_form.phone"
-              name="phone"
-              class="form-control"
-              placeholder="Phone"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="profession" class="text-uppercase">Profession</label>
-            <input
-              id="profession"
-              type="text"
-              [(ngModel)]="signup_form.profession"
-              name="profession"
-              class="form-control"
-              placeholder="Profession"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="text-uppercase">Password</label>
-            <input
-              type="password"
-              [(ngModel)]="signup_form.password"
-              name="password"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="confirm-password" class="text-uppercase"
-              >Confirm Password</label
-            >
-            <input
-              type="password"
-              [(ngModel)]="password_confirm"
-              name="confirm-password"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-
-          <div class="danger" *ngIf="error != ''">
-            <p>{{ error }}</p>
-          </div>
-
-          <div class="form-check">
-            <button (click)="submitForm()" class="btn btn-login float-right"
-              [disabled]="!(password_confirm === signup_form.password)"
-            >
-              Signup
-            </button>
-          </div>
-
-          <div><a [routerLink]="['/signin']">Already have an account?</a></div>
-        </form>
-      </div>
-      <div class="col-md-8 banner-sec">
-        <div
-          id="carouselExampleIndicators"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img
-                class="d-block img-fluid"
-                src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
-                alt="First slide"
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <div class="banner-text">
-                  <h2>This is Heaven</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="p-grid p-nogutter p-flex-row-reverse">
+    <div class="p-col-12 p-lg-6">
+      <div class="right-panel p-d-flex p-flex-column">
+        <p-steps
+          [model]="formSteps"
+          [activeIndex]="currentFormStep"
+          styleClass="p-shadow-24"
+        ></p-steps>
+        <div class="right-panel-content">
+          <h1>
+            Sign Up
+            <br />
+            To Assertive Creativity
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+            architecto repellendus et ducimus laboriosam temporibus natus culpa.
+            Libero itaque, doloribus inventore quibusdam enim quidem. Ipsa saepe
+            mollitia consequatur eum autem?
+          </p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="p-col-12 p-lg-6">
+      <!-- personal details form starts -->
+      <p-card styleClass="signup-form-card">
+        <form
+          #personalDetailsForm="ngForm"
+          (ngSubmit)="signup()"
+          class="signup-form p-fluid"
+        >
+          <div class="personal-details-form p-fluid p-formgrid p-grid">
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="firstname">
+                Firstname
+                <sup>*</sup>
+              </label>
+              <input
+                #firstname="ngModel"
+                [(ngModel)]="newUser.first_name"
+                id="firstname"
+                name="firstname"
+                type="text"
+                placeholder="First Name"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="firstname.valid || firstname.pristine"
+                id="firstname-help"
+                class="p-invalid form-error-message"
+              >
+                First name is required
+              </small>
+            </div>
 
-<app-footer></app-footer>
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="lastname">
+                Lastname
+                <sup>*</sup>
+              </label>
+              <input
+                #lastname="ngModel"
+                [(ngModel)]="newUser.last_name"
+                id="lastname"
+                name="lastname"
+                type="text"
+                required
+                placeholder="Last Name"
+                pInputText
+              />
+              <small
+                [hidden]="lastname.valid || lastname.pristine"
+                id="lastname-help"
+                class="p-invalid form-error-message"
+              >
+                Last name is required
+              </small>
+            </div>
+
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="email">
+                Email
+                <sup>*</sup>
+              </label>
+              <input
+                #email="ngModel"
+                [(ngModel)]="newUser.email"
+                id="email"
+                name="email"
+                type="email"
+                [email]="true"
+                placeholder="Eg: person@example.com"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="email.valid || email.pristine"
+                id="email-help"
+                class="p-invalid form-error-message"
+              >
+                Email is required
+              </small>
+            </div>
+
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="phone">
+                Phone
+                <sup>*</sup>
+              </label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">+1</span>
+                <p-inputMask
+                  inputId="phone"
+                  #phone="ngModel"
+                  [(ngModel)]="newUser.phone"
+                  styleClass="phone-input p-input-filled"
+                  name="phone"
+                  type="text"
+                  mask="999-999-9999"
+                  placeholder="999-999-9999"
+                  required
+                ></p-inputMask>
+              </div>
+              <small
+                [hidden]="phone.valid || phone.pristine"
+                id="phone-help"
+                class="p-invalid form-error-message"
+              >
+                Phone number is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6 p-input-filled">
+              <label for="password">
+                Password
+                <sup>*</sup>
+              </label>
+              <input
+                #password="ngModel"
+                [(ngModel)]="newUser.password"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter Password"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="password.valid || password.pristine"
+                id="password-help"
+                class="p-invalid form-error-message"
+              >
+                Password is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6 p-input-filled">
+              <label for="confirm-password">
+                Confirm Password
+                <sup>*</sup>
+              </label>
+              <input
+                #confirmPassword="ngModel"
+                [(ngModel)]="password_confirm"
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="
+                  newUser.password === password_confirm ||
+                  confirmPassword.pristine
+                "
+                id="confirm-password-help"
+                class="p-invalid form-error-message"
+              >
+                Passwords do not match
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-input-filled">
+              <label for="profession">
+                Profession
+                <sup>*</sup>
+              </label>
+              <input
+                #profession="ngModel"
+                [(ngModel)]="newUser.profession"
+                id="profession"
+                name="profession"
+                type="password"
+                placeholder="Profession"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="profession.valid || profession.pristine"
+                id="profession-help"
+                class="p-invalid form-error-message"
+              >
+                Profession is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12">
+              <p-button
+                [disabled]="!personalDetailsForm.valid"
+                styleClass="p-button-lg p-shadow-12"
+                label="Proceed"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+      <!-- personal details form ends -->
+
+
+      <!-- company details form starts -->
+      <p-card styleClass="signup-form-card">
+        <form
+          #personalDetailsForm="ngForm"
+          (ngSubmit)="signup()"
+          class="signup-form p-fluid"
+        >
+          <div class="personal-details-form p-fluid p-formgrid p-grid">
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="firstname">
+                Firstname
+                <sup>*</sup>
+              </label>
+              <input
+                #firstname="ngModel"
+                [(ngModel)]="newUser.first_name"
+                id="firstname"
+                name="firstname"
+                type="text"
+                placeholder="First Name"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="firstname.valid || firstname.pristine"
+                id="firstname-help"
+                class="p-invalid form-error-message"
+              >
+                First name is required
+              </small>
+            </div>
+
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="lastname">
+                Lastname
+                <sup>*</sup>
+              </label>
+              <input
+                #lastname="ngModel"
+                [(ngModel)]="newUser.last_name"
+                id="lastname"
+                name="lastname"
+                type="text"
+                required
+                placeholder="Last Name"
+                pInputText
+              />
+              <small
+                [hidden]="lastname.valid || lastname.pristine"
+                id="lastname-help"
+                class="p-invalid form-error-message"
+              >
+                Last name is required
+              </small>
+            </div>
+
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="email">
+                Email
+                <sup>*</sup>
+              </label>
+              <input
+                #email="ngModel"
+                [(ngModel)]="newUser.email"
+                id="email"
+                name="email"
+                type="email"
+                [email]="true"
+                placeholder="Eg: person@example.com"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="email.valid || email.pristine"
+                id="email-help"
+                class="p-invalid form-error-message"
+              >
+                Email is required
+              </small>
+            </div>
+
+            <div class="p-field p-input-filled p-col-12 p-md-6">
+              <label for="phone">
+                Phone
+                <sup>*</sup>
+              </label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">+1</span>
+                <p-inputMask
+                  #phone="ngModel"
+                  [(ngModel)]="newUser.phone"
+                  styleClass="phone-input p-input-filled"
+                  name="phone"
+                  type="text"
+                  mask="999-999-9999"
+                  placeholder="999-999-9999"
+                  required
+                ></p-inputMask>
+              </div>
+              <small
+                [hidden]="phone.valid || phone.pristine"
+                id="phone-help"
+                class="p-invalid form-error-message"
+              >
+                Phone number is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6 p-input-filled">
+              <label for="password">
+                Password
+                <sup>*</sup>
+              </label>
+              <input
+                #password="ngModel"
+                [(ngModel)]="newUser.password"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter Password"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="password.valid || password.pristine"
+                id="password-help"
+                class="p-invalid form-error-message"
+              >
+                Password is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6 p-input-filled">
+              <label for="confirm-password">
+                Confirm Password
+                <sup>*</sup>
+              </label>
+              <input
+                #confirmPassword="ngModel"
+                [(ngModel)]="password_confirm"
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="
+                  newUser.password === password_confirm ||
+                  confirmPassword.pristine
+                "
+                id="confirm-password-help"
+                class="p-invalid form-error-message"
+              >
+                Passwords do not match
+              </small>
+            </div>
+
+            <div class="p-field p-col-12 p-input-filled">
+              <label for="profession">
+                Profession
+                <sup>*</sup>
+              </label>
+              <input
+                #profession="ngModel"
+                [(ngModel)]="newUser.profession"
+                id="profession"
+                name="profession"
+                type="password"
+                placeholder="Profession"
+                required
+                pInputText
+              />
+              <small
+                [hidden]="profession.valid || profession.pristine"
+                id="profession-help"
+                class="p-invalid form-error-message"
+              >
+                Profession is required
+              </small>
+            </div>
+
+            <div class="p-field p-col-12">
+              <p-button
+                [disabled]="!personalDetailsForm.valid"
+                styleClass="p-button-lg p-shadow-12"
+                label="Proceed"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+      <!-- company details form ends -->
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

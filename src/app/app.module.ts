@@ -87,6 +87,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BlockUIModule } from 'primeng/blockui';
 import { AvatarModule } from 'primeng/avatar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { StepsModule } from 'primeng/steps';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -267,7 +269,9 @@ import { OrderMailFormDatePickerComponent } from './components/order-mail-form-d
     ProgressSpinnerModule,
     BlockUIModule,
     AvatarModule,
-    RippleModule
+    RippleModule,
+    InputMaskModule,
+    StepsModule
   ],
   entryComponents: [],
   providers: [
