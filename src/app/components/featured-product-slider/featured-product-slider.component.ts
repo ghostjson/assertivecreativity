@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-featured-product-slider',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./featured-product-slider.component.scss']
 })
 export class FeaturedProductSliderComponent implements OnInit {
-  @Input() featured: any;
+  @Input() featured: Product[];
 
   responsiveOptions: any[];
 
