@@ -1,13 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { User } from "src/app/models/User";
-import { Form } from "@angular/forms";
-import { MenuItem } from "primeng/api";
+import { MenuItem, MessageService } from "primeng/api";
+import { CommonService } from "src/app/common.service";
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"],
+  providers: [MessageService],
 })
 export class SignupComponent implements OnInit {
   newUser: User;
@@ -17,7 +18,12 @@ export class SignupComponent implements OnInit {
   formSteps: MenuItem[];
   currentFormStep: number;
 
-  constructor(private _auth: AuthService, private _router: Router) {}
+  constructor(
+    private _auth: AuthService,
+    private _router: Router,
+    private _messageService: MessageService,
+    private _common: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.newUser = {
@@ -25,7 +31,6 @@ export class SignupComponent implements OnInit {
       last_name: null,
       email: null,
       password: null,
-      email_verified_at: null,
       image: null,
       phone: null,
       profession: null,
@@ -46,9 +51,9 @@ export class SignupComponent implements OnInit {
     this.currentFormStep = 0;
     this.formSteps = [
       { label: "Personal Details" },
-      { label: "Company Details" }
+      { label: "Company Details" },
     ];
-    
+
     console.log(
       "return url: ",
       this._router.parseUrl(this._router.url).queryParamMap.get("return")
@@ -73,17 +78,34 @@ export class SignupComponent implements OnInit {
    * Signup the user
    */
   signup(): void {
+    this._common.setLoader(true);
+
     this.error = null;
+    console.log("Account Created: ", this.newUser);
     if (this.isPasswordsMatched()) {
-      try {
-        this._auth
-          .register(this.newUser)
-          .subscribe((_) => this._router.navigate([this.returnUrl]));
-      } catch (e) {
-        this.error = "Signup failed, try again";
-      }
-    } else {
+      this._auth.register(this.newUser).subscribe(
+        () => {
+          this._router.navigate([this.returnUrl]);
+        },
+        () => {
+          this._common.setLoader(false);
+          this.error = "Signup failed, try again";
+          this._messageService.add({
+            severity: "error",
+            summary: this.error,
+            detail: "Something went wrong. Try Again",
+          });
+        }
+      );
+    } 
+    else {
       this.error = "Password does not match";
+      this._common.setLoader(false);
+      this._messageService.add({
+        severity: "error",
+        summary: this.error,
+        detail: "Kindly check the passwords and try again",
+      });
     }
   }
 }
