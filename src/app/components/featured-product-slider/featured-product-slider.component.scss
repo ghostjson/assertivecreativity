@@ -1,14 +1,65 @@
-.product-item {
-	.product-item-content {
-			border: 1px solid var(--surface-d);
-			border-radius: 3px;
-			margin: .3rem;
-			text-align: center;
-			padding: 2rem 0;
-	}
+@import '../../../assets/css/variables.scss';
 
-	.product-image {
-			width: 50%;
-			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+:host {
+	::ng-deep {
+		.p-carousel {
+			background-color: white;
+			border-bottom: 1px solid $secondary-color;
+
+			.p-carousel-indicators {
+				display: none;
+			}
+
+			.p-carousel-item {
+				height: 350px;
+				overflow: hidden;
+				padding: 1em;
+				position: relative;
+
+				.product {
+					height: 100%;
+
+					.item-num-badge {
+						padding: 0.2em;
+						background-color: $primary-color;
+						color: white;
+						font-weight: 500;
+						position: absolute;
+						right: 0;
+						width: 5rem;
+						text-align: center;
+					}
+
+					.product-image {
+						display: block;
+						width: 100%;
+						height: 60%;
+						object-fit: fill;
+					}
+					.product-content {
+						height: 40%;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-evenly;
+
+
+						.product-name {
+							font-size: 15px;
+							margin-top: 35px;
+							a {
+								color: $dark-color;
+								text-decoration: none;
+							}
+						}
+
+						.product-price {
+							font-size: 2rem;
+							font-weight: 900;
+							margin-top: 10px;
+						}
+					}
+				}
+			}
+		}
 	}
 }

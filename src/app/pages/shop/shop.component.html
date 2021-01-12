@@ -1,13 +1,10 @@
 <app-header (onSearchStringEmit)="getSearchResults($event)"></app-header>
+<!-- product slider starts -->
+<app-featured-product-slider
+  [featured]="featured"
+>
+</app-featured-product-slider>
 <div class="container">
-  <!-- product slider starts -->
-  <div class="row mt-5">
-    <div class="col-md-12">
-      <app-featured-product-slider
-        [featured]="featured"
-      ></app-featured-product-slider>
-    </div>
-  </div>
   <!-- product slider ends -->
   <div class="row justify-content-center mt-5">
     <!-- category tablist starts -->

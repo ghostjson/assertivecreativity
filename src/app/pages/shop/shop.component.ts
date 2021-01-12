@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonService } from "../../common.service";
 import { ProductService } from "../../services/product.service";
-import { Product, StockProduct, StockProductData } from "../../models/Product";
+import { Product } from "../../models/Product";
 import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
 import { Tag } from "src/app/models/Tag";
 import { Category } from "src/app/models/Category";
-import { map, tap } from "rxjs/operators";
 
 @Component({
   selector: "app-shop",

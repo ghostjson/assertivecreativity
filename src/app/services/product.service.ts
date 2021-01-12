@@ -101,7 +101,9 @@ export class ProductService {
    * Return products belonging to a list of category ids
    * @param categoryIds categories id list
    */
-  getCustomProductsByCategoryIdList(categoryIds: number[]): Observable<Product[]> {
+  getCustomProductsByCategoryIdList(
+    categoryIds: number[]
+  ): Observable<Product[]> {
     console.log("categories post: ", categoryIds);
     return this._http
       .post<Product[]>(this.customProductsLinkByCategoryIdList(), {
@@ -116,14 +118,12 @@ export class ProductService {
   }
 
   getCustomProducts(): Observable<Product[]> {
-    return this._http
-        .get<Product[]>(this.customProductsLink())
-        .pipe(
-          take(1),
-          map((products: any) => {
-            return products.data;
-          })
-        );
+    return this._http.get<Product[]>(this.customProductsLink()).pipe(
+      take(1),
+      map((products: any) => {
+        return products.data;
+      })
+    );
   }
 
   getStockProducts(): Observable<StockProductData[]> {
@@ -310,46 +310,57 @@ export class ProductService {
   /**
    * Return the feature products
    */
-  getFeaturedProducts(): any {
-    return {
-      title: "Today's Offer",
-      slides: [
-        {
-          name: "test featured product 1",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 2",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 3",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 4",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 5",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 6",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-        {
-          name: "test featured product 7",
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
-        },
-      ],
-    };
+  getFeaturedProducts(): Product[] {
+    return [
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+      {
+        id: 1,
+        name: "Men's Polyester Satin Shiny Slim Tie",
+        image: "assets/images/demo-product-images/2.jpg",
+        base_price: 4.75,
+        ItemNum: 'gh-45-xy'
+      },
+    ];
   }
 }
