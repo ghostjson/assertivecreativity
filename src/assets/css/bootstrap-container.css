@@ -23,12 +23,6 @@
   THE SOFTWARE.
 **/
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 .container,
 .container-fluid,
 .container-sm,

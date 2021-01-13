@@ -1,101 +1,65 @@
 <app-header (onSearchStringEmit)="getSearchResults($event)"></app-header>
 <!-- product slider starts -->
-<app-featured-product-slider
-  [featured]="featured"
->
+<app-featured-product-slider [featured]="featured">
 </app-featured-product-slider>
-<div class="container">
-  <!-- product slider ends -->
-  <div class="row justify-content-center mt-5">
-    <!-- category tablist starts -->
-    <div class="col-md-3 mb-5">
-      <h3>
-        Filter
-      </h3>
-      <p-accordion [multiple]="true">
-        <p-accordionTab [selected]="true">
-          <p-header>
-            Categories
-            <span class="status-badge status-badge--inactive p-ml-1"
-              *ngIf="selectedCategories.length < 1"
-            >
-              Inactive
-            </span>
-          </p-header>
-          <ng-container *ngIf="categories.length > 0; else noCategories">
-            <div *ngFor="let category of categories" class="p-field-checkbox">
-              <p-checkbox
-                [label]="category.name"
-                name="category"
-                value="category"
-                [value]="category"
-                [(ngModel)]="selectedCategories"
-                [inputId]="category.id"
-                [disabled]="category.name.toLowerCase() === 'none'"
-                (onChange)="update()"
-              ></p-checkbox>
-            </div>
-          </ng-container>
-          <ng-template #noCategories>
-            No Categories found !
-          </ng-template>
-        </p-accordionTab>
-        <p-accordionTab [selected]="true">
-          <p-header>
-            Tags
-            <span class="status-badge status-badge--inactive p-ml-1"
-              *ngIf="selectedTags.length < 1"
-            >
-              Inactive
-            </span>
-          </p-header>
-          <p *ngIf="tags.length < 1; else tagsList">
-            No Tags found !
-          </p>
-          <ng-template #tagsList>
-            <div *ngFor="let tag of tags" class="p-field-checkbox">
-              <p-checkbox
-                [label]="tag.name"
-                name="tag"
-                [value]="tag.id"
-                [(ngModel)]="selectedTags"
-                [inputId]="tag.id"
-              ></p-checkbox>
-            </div>
-          </ng-template>
-        </p-accordionTab>
-      </p-accordion>
-    </div>
-    <!-- category tablist starts -->
-    <div class="col-sm-12 col-md-9">
-      <!-- product card list starts -->
-      <div class="row row-cols-1 row-cols-lg-3 justify-content-start mb-5">
-        <div
-          *ngIf="products.length < 1" 
-          class="col-12">
-          <h3>
-            No Products Found
-          </h3>
+<!-- product slider ends -->
+
+<div class="p-grid p-nogutter">
+  <div class="filter-container p-md-3 p-lg-2">
+    <h3>Filter</h3>
+    <p-accordion [multiple]="true">
+      <p-accordionTab [selected]="true" [disabled]="!categories.length">
+        <p-header> Categories </p-header>
+        <div *ngFor="let category of categories" class="p-field-checkbox">
+          <p-checkbox
+            [label]="category.name"
+            name="category"
+            value="category"
+            [value]="category"
+            [(ngModel)]="selectedCategories"
+            [inputId]="category.id"
+            [disabled]="category.name.toLowerCase() === 'none'"
+            (onChange)="update()"
+          ></p-checkbox>
         </div>
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
-          <app-product-card
-            [productId]="product.id"
-            [name]="product.name"
-            [price]="product.base_price"
-            [description]="product.description"
-            [image]="product.image"
-            [stock]="false"
-            styleClass="p-mt-3"
-          ></app-product-card>
+      </p-accordionTab>
+      <p-accordionTab [selected]="true" [disabled]="!tags.length">
+        <p-header> Tags </p-header>
+        <div *ngFor="let tag of tags" class="p-field-checkbox">
+          <p-checkbox
+            [label]="tag.name"
+            name="tag"
+            [value]="tag.id"
+            [(ngModel)]="selectedTags"
+            [inputId]="tag.id"
+          ></p-checkbox>
         </div>
-      </div>
-      <!-- product card list ends -->
-    </div>
-    <div class="col-md-12">
-      <nav aria-label="Page navigation">
-        <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>
-      </nav>
-    </div>
+      </p-accordionTab>
+    </p-accordion>
   </div>
+  <div class="p-md-10"></div>
+
+  <!-- <div class="p-sm-12 p-md-9">
+    <div class="row row-cols-1 row-cols-lg-3 justify-content-start mb-5">
+      <div
+        *ngIf="products.length < 1" 
+        class="col-12">
+        <h3>
+          No Products Found
+        </h3>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
+        <app-product-card
+          [productId]="product.id"
+          [name]="product.name"
+          [price]="product.base_price"
+          [description]="product.description"
+          [image]="product.image"
+          [stock]="false"
+          styleClass="p-mt-3"
+        ></app-product-card>
+      </div>
+    </div>
+  </div> -->
 </div>
 <app-footer></app-footer>

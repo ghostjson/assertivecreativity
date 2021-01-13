@@ -5,6 +5,7 @@
 		.p-carousel {
 			background-color: white;
 			border-bottom: 1px solid $secondary-color;
+			padding-top: 1em;
 
 			.p-carousel-indicators {
 				display: none;
@@ -45,7 +46,6 @@
 
 						.product-name {
 							font-size: 15px;
-							margin-top: 35px;
 							a {
 								color: $dark-color;
 								text-decoration: none;
@@ -55,7 +55,6 @@
 						.product-price {
 							font-size: 2rem;
 							font-weight: 900;
-							margin-top: 10px;
 						}
 					}
 				}
