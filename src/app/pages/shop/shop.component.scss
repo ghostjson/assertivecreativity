@@ -2,6 +2,12 @@
 
 :host {
 	::ng-deep {
+		.p-grid {
+			margin-top: 0;
+			margin-right: 0;
+			margin-left: 0;
+		}
+
 		.filter-container {
 			background-color: white;
 			border-right: 1px solid $secondary-color;
@@ -32,6 +38,35 @@
 						padding-bottom: 0;
 					}
 				}
+			}
+		}
+
+		.product-list {
+			margin-top: 1em;
+			border-radius: 6px;
+
+			.p-dataview-header {
+				border-radius: 6px 6px 0 0;
+				border-bottom-color: $secondary-color;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				h3 {
+					margin: 0;
+					font-size: 1.75rem;
+				}
+			}
+
+			.p-paginator-bottom {
+				border-top: 1px solid $secondary-color;
+				border-bottom-right-radius: 6px;
+				border-bottom-left-radius: 6px;
+			}
+
+			.product-grid-item {
+				display: flex;
+				justify-content: center;
 			}
 		}
 	}

@@ -1,9 +1,15 @@
-<div class="product-card p-p-3 {{styleClass}}">
+<div class="product-card p-fluid">
+  <div
+    *ngIf="itemNum"
+    class="item-num-badge p-shadow-6"
+  >
+    {{itemNum}}
+  </div>
   <div class="product-card__img">
     <img src="{{image}}" alt="{{name}}" srcset="">
   </div>
-  <div class="product-card__name mt-3">
-    {{name}}
+  <div class="product-card__name">
+    {{summary(name)}}
   </div>
   <div class="product-card__price"
     *ngIf="price"
@@ -11,12 +17,15 @@
     {{price | currency: 'USD'}}
   </div>
   <div class="product-card__desc">
-    {{summary(description)}}...
+    {{summary(description)}}
   </div>
-  <a 
-    label="Know More"
-    class="more-btn p-button-primary mt-2"
+  <a
+    label="Shop"
+    class="show-btn p-button-lg"
+    icon="pi pi-shopping-cart"
+    iconPos="right"
     [routerLink]="['/products', stock ? 'stock' : 'custom', productId]"
+    tabindex="0"
     pButton
   ></a>
 </div>

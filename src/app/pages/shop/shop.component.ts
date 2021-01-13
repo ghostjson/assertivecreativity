@@ -18,6 +18,7 @@ export class ShopComponent implements OnInit {
   selectedCategories: Category[] = [];
   tags: Tag[] = [];
   selectedTags: number[] = [];
+  productsLoading: boolean;
 
   constructor(
     private _common: CommonService,
@@ -26,8 +27,12 @@ export class ShopComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // start the loader
+    this._common.setLoader(true);
+
     this.featured = this._productService.getFeaturedProducts();
 
+    this.productsLoading = true;
     this.getProducts();
 
     this._pcService.getCategories().subscribe((categories: Category[]) => {
@@ -40,14 +45,15 @@ export class ShopComponent implements OnInit {
    */
   getProducts(): void {
     console.log("update products");
-    // start the loader
-    this._common.setLoader(true);
 
     this._productService.getCustomProducts().subscribe((products: Product[]) => {
       this.products = products;
+      console.log('products received: ', products);
+      
 
       // hide the loader
       setTimeout(() => {
+        this.productsLoading = false;
         this._common.setLoader(false);
       }, 200);
     });

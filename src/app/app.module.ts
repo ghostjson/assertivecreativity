@@ -89,6 +89,7 @@ import { BlockUIModule } from 'primeng/blockui';
 import { AvatarModule } from 'primeng/avatar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { StepsModule } from 'primeng/steps';
+import { DataViewModule } from 'primeng/dataview';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -129,14 +130,14 @@ import { OrderMailFormMakerDropdownComponent } from './components/order-mail-for
 import { OrderMailFormMakerRadioComponent } from './components/order-mail-form-maker-radio/order-mail-form-maker-radio.component';
 import { OrderMailFormMakerTextComponent } from './components/order-mail-form-maker-text/order-mail-form-maker-text.component';
 import { OrderMailFormMakerColorComponent } from './components/order-mail-form-maker-color/order-mail-form-maker-color.component';
+import { OrderMailFormMakerDatePickerComponent } from './components/order-mail-form-maker-date-picker/order-mail-form-maker-date-picker.component';
 import { OrderMailFormComponent } from './components/order-mail-form/order-mail-form.component';
 import { OrderMailFormDropdownComponent } from './components/order-mail-form-dropdown/order-mail-form-dropdown.component';
 import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/order-mail-form-radio.component';
 import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
+import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 import { ShopStockComponent } from './pages/shop-stock/shop-stock.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
-import { OrderMailFormMakerDatePickerComponent } from './components/order-mail-form-maker-date-picker/order-mail-form-maker-date-picker.component';
-import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 
 @NgModule({
   declarations: [
@@ -271,7 +272,8 @@ import { OrderMailFormDatePickerComponent } from './components/order-mail-form-d
     AvatarModule,
     RippleModule,
     InputMaskModule,
-    StepsModule
+    StepsModule,
+    DataViewModule
   ],
   entryComponents: [],
   providers: [

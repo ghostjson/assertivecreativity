@@ -1399,7 +1399,20 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   color: #ffffff;
   border-color: transparent;
 }
+
+a.p-button:hover {
+  background: rgba(63, 81, 181, 0.92);
+  color: #ffffff;
+  border-color: transparent;
+}
+
 .p-button:enabled:active {
+  background: rgba(63, 81, 181, 0.68);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+a.p-button:active {
   background: rgba(63, 81, 181, 0.68);
   color: #ffffff;
   border-color: transparent;
