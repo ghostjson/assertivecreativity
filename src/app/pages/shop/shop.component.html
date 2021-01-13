@@ -45,13 +45,13 @@
     <div class="p-col-12 p-lg-9 p-xl-10">
       <div class="container-fluid">
         <p-dataView
-          #dv
+          #productList
           [value]="products"
           [paginator]="true"
           [rows]="12"
           [loading]="productsLoading"
           layout="grid"
-          styleClass="product-list p-shadow-8"
+          styleClass="product-list"
         >
           <ng-template pTemplate="header">
             <h3>Custom Products</h3>

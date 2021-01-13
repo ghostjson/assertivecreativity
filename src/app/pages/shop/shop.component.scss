@@ -46,8 +46,8 @@
 			border-radius: 6px;
 
 			.p-dataview-header {
-				border-radius: 6px 6px 0 0;
-				border-bottom-color: $secondary-color;
+				border-radius: 6px;
+				border: none;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -58,10 +58,19 @@
 				}
 			}
 
+			.p-dataview-content {
+				background: transparent;
+
+				.p-grid {
+					.product-grid-item {
+						padding: 0.5em;
+					}
+				}
+			}
+
 			.p-paginator-bottom {
-				border-top: 1px solid $secondary-color;
-				border-bottom-right-radius: 6px;
-				border-bottom-left-radius: 6px;
+				border-radius: 6px;
+				border: none;
 			}
 
 			.product-grid-item {
