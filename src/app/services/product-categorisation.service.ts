@@ -90,10 +90,19 @@ export class ProductCategorisationService {
       );
   }
 
-  getStockCategories(): Observable<string[]> {
+  getStockCategories(): Observable<Category[]> {
     return this._http.get<string[]>(`${this.stockCategoriesUrl()}`)
       .pipe(
-        take(1)
+        take(1),
+        map((categories: string[]) => {
+          return categories.map((category: string, index: number): Category => {
+            return {
+              id: index,
+              name: category,
+              value: category
+            };
+          });
+        })
       );
   }
 

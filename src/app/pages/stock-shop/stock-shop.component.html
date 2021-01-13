@@ -1,0 +1,78 @@
+<div class="stock-shop-page">
+  <app-header (onSearchStringEmit)="getSearchResults($event)"></app-header>
+  <!-- product slider starts -->
+  <app-featured-product-slider [featured]="featured">
+  </app-featured-product-slider>
+  <!-- product slider ends -->
+
+  <div class="p-grid">
+    <!-- filter starts -->
+    <div class="filter-container p-nogutter p-col-12 p-lg-3 p-xl-2">
+      <h3>Filter</h3>
+      <p-accordion [multiple]="true">
+        <p-accordionTab [selected]="true" [disabled]="!categories.length">
+          <p-header> Categories </p-header>
+          <div *ngFor="let category of categories" class="p-field-checkbox">
+            <p-checkbox
+              [label]="category.name"
+              name="category"
+              value="category"
+              [value]="category"
+              [(ngModel)]="selectedCategories"
+              [inputId]="category.id"
+              [disabled]="category.name.toLowerCase() === 'none'"
+              (onChange)="update()"
+            ></p-checkbox>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab [selected]="true" [disabled]="!tags.length">
+          <p-header> Tags </p-header>
+          <div *ngFor="let tag of tags" class="p-field-checkbox">
+            <p-checkbox
+              [label]="tag.name"
+              name="tag"
+              [value]="tag.id"
+              [(ngModel)]="selectedTags"
+              [inputId]="tag.id"
+            ></p-checkbox>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+    <!-- filter ends -->
+
+    <!-- products list starts  -->
+    <div class="p-col-12 p-lg-9 p-xl-10">
+      <div class="container-fluid">
+        <p-dataView
+          #productList
+          [value]="products"
+          [paginator]="true"
+          [rows]="12"
+          [loading]="productsLoading"
+          layout="grid"
+          styleClass="product-list"
+        >
+          <ng-template pTemplate="header">
+            <h3>Products</h3>
+          </ng-template>
+
+          <ng-template let-product pTemplate="gridItem">
+            <div class="product-grid-item p-col-12 p-sm-6 p-md-4 p-xl-3">
+              <app-product-card
+                [productId]="product.id"
+                [itemNum]="product.ItemNum"
+                [name]="product.Name"
+                [price]="product.Prc1"
+                [description]="product.Description"
+                [stock]="true"
+              ></app-product-card>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+    </div>
+    <!-- products list ends  -->
+  </div>
+  <app-footer></app-footer>
+</div>

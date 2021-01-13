@@ -126,9 +126,9 @@ export class ProductService {
     );
   }
 
-  getStockProducts(): Observable<StockProductData[]> {
+  getStockProducts(): Observable<Product[]> {
     return this._http
-      .get<StockProductData[]>(this.stockProductsLink())
+      .get<Product[]>(this.stockProductsLink())
       .pipe(take(1));
   }
 

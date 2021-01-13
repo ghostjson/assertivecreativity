@@ -10,7 +10,7 @@ import { ContactComponent } from "./pages/contact/contact.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SignupComponent } from "./pages/signup/signup.component";
 import { ShopComponent } from "./pages/shop/shop.component";
-import { ShopStockComponent } from "./pages/shop-stock/shop-stock.component";
+import { StockShopComponent } from "./pages/stock-shop/stock-shop.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { AuthGuard } from "./helpers/guard/auth.guard";
 import { LogoutComponent } from "./pages/logout/logout.component";
@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "signin", component: SigninComponent },
   { path: "signup", component: SignupComponent },
-  { path: "shop/stock", component: ShopStockComponent },
+  { path: "shop/stock", component: StockShopComponent },
   { path: "shop/custom", component: ShopComponent },
   {
     path: "profile",

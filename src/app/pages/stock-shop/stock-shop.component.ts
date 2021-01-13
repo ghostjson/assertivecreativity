@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/common.service';
 import { Category } from 'src/app/models/Category';
-import { StockProductData } from 'src/app/models/Product';
+import { Product, StockProductData } from 'src/app/models/Product';
 import { Tag } from 'src/app/models/Tag';
 import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-shop-stock',
-  templateUrl: './shop-stock.component.html',
-  styleUrls: ['./shop-stock.component.scss']
+  templateUrl: './stock-shop.component.html',
+  styleUrls: ['./stock-shop.component.scss']
 })
-export class ShopStockComponent implements OnInit {
-  featured: any;
-  products: StockProductData[] = [];
-  categories: string[] = [];
+export class StockShopComponent implements OnInit {
+  featured: Product[];
+  products: Product[] = [];
+  categories: Category[] = [];
   selectedCategories: Category[] = [];
   tags: Tag[] = [];
   selectedTags: number[] = [];
+  productsLoading: boolean;
 
   constructor(
     private _common: CommonService,
@@ -26,11 +27,15 @@ export class ShopStockComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // start the loader
+    this._common.setLoader(true);
+
     this.featured = this._productService.getFeaturedProducts();
 
+    this.productsLoading = true;
     this.getProducts();
 
-    this._pcService.getStockCategories().subscribe((categories: string[]) => {
+    this._pcService.getStockCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
     });
   }
@@ -40,15 +45,15 @@ export class ShopStockComponent implements OnInit {
    */
   getProducts(): void {
     console.log("update products");
-    // start the loader
-    this._common.setLoader(true);
 
-    this._productService.getStockProducts().subscribe((products: StockProductData[]) => {
+    this._productService.getStockProducts().subscribe((products: Product[]) => {
       this.products = products;
-
       console.log('products received: ', products);
+      
+
       // hide the loader
       setTimeout(() => {
+        this.productsLoading = false;
         this._common.setLoader(false);
       }, 200);
     });
@@ -57,31 +62,32 @@ export class ShopStockComponent implements OnInit {
   /**
    * update the products list
    */
-  // updateProducts(categories: Category[]): void {
-  //   this.products = [];
-  //   this._common.setLoader(true);
+  updateProducts(categories: Category[]): void {
+    // this.products = [];
+    // this._common.setLoader(true);
 
-  //   let categoryIds: number[] = categories.map((category: Category) => {
-  //     return category.id;
-  //   });
+    // let categoryIds: number[] = categories.map((category: Category) => {
+    //   return category.id;
+    // });
 
-  //   this._productService
-  //     .getProductByCategoryIdList(categoryIds)
-  //     .subscribe((res: Product[]) => {
-  //       this.products = res;
-  //       this._common.setLoader(false);
-  //     });
-  // }
+    // this._productService
+    //   .getCustomProductsByCategoryIdList(categoryIds)
+    //   .subscribe((res: Product[]) => {
+    //     this.products = res;
+    //     this._common.setLoader(false);
+    //   });
+    this.productsLoading = false;
+  }
 
   /**
    * Update tags and products
    */
   update(): void {
-    // this._common.setLoader(true);
+    this.productsLoading = true;
     // empty the current tags list
-    // this.tags = [];
+    this.tags = [];
 
-    // if (this.selectedCategories.length > 0) {
+    if (this.selectedCategories.length > 0) {
       // update products list and tag list
       /**
        * TODO: Fix after too many attempts issue is fixed for tags
@@ -124,10 +130,10 @@ export class ShopStockComponent implements OnInit {
       //     )
       //     .subscribe();
       // });
-      // this.updateProducts(this.selectedCategories);
-    // } else {
-      // this.getProducts();
-    // }
+      this.updateProducts(this.selectedCategories);
+    } else {
+      this.getProducts();
+    }
   }
 
   /**

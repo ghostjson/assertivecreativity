@@ -20,13 +20,21 @@
 .product-card__name {
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.12rem;
   margin-top: 10px;
   height: 45px;
 }
 
 .product-card__img {
   height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .img-placeholder {
+    font-size: 3rem;
+    color: $dark-grey;
+  }
 
   img {
     width: 100%;

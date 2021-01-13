@@ -12,7 +12,7 @@ import { Category } from "src/app/models/Category";
   styleUrls: ["./shop.component.scss"],
 })
 export class ShopComponent implements OnInit {
-  featured: any;
+  featured: Product[];
   products: Product[] = [];
   categories: Category[] = [];
   selectedCategories: Category[] = [];

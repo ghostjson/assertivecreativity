@@ -77,107 +77,23 @@ p {
   line-height: 1.8;
 }
 
-.card {
-  padding: 1.5em;
-  border-radius: 6px;
-}
-
-.form-group {
-  margin-bottom: 2em;
-  width: 100%;
-}
-
-.form-group__label {
-  display: block;
-}
-
-.input-group {
-  display: flex;
-}
-
-.input-group__input {
-  flex-grow: 1;
-}
-
-.chained-ribbon__text {
-  background-color: $accent-color;
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.9rem;
-  padding: 0.2em;
-  border-radius: 6px;
-}
-
 .highlight {
   color: var(--primary-color);
-}
-
-.btn {
-  background-color: white;
-  color: black;
-  font-weight: 700;
-  border-radius: 6px;
-  border: none;
-	text-transform: capitalize;
-  text-decoration: none;
-  position: relative;
-  transition: all 0.3s !important;
-}
-
-.btn:hover {
-  transform: translateY(-4px);
-  box-shadow: $regular-shadow
-}
-
-.btn-primary {
-  color: white;
-  background: $primary-color;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:not(:disabled):not(.disabled):active {
-  background: $primary-color;
-}
-
-.btn-dark {
-  background: $dark-color !important;
-}
-
-.btn-warning,
-.btn-warning:hover,
-.btn-warning:focus,
-.btn-warning:not(:disabled):not(.disabled):active {
-  background: $bg-warning;
-  color: white;
-}
-
-.btn-danger {
-  background: $bg-danger;
-  color: white;
-}
-
-.btn-success,
-.btn-success:hover,
-.btn-success:active {
-  background: $bg-success;
-  color: white;
-}
-
-.btn-light, 
-.btn-light:hover,
-.btn-light:active {
-  color: black;
-  background-color: white;
 }
 
 
 /**
  * utility classes for the project starts
  */
-.object--cover {
-  object-fit: cover;
+ .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
 }
 
 .bg-success {
@@ -195,5 +111,8 @@ p {
 .bg-info {
   background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
 }
+/**
+ * utility classes for the project ends
+ */
 
 @import './assets/css/primeng-theme-edited.scss';

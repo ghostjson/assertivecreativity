@@ -3,10 +3,20 @@
     *ngIf="itemNum"
     class="item-num-badge p-shadow-6"
   >
+    <span class="sr-only">
+      Item Number
+    </span>
     {{itemNum}}
   </div>
   <div class="product-card__img">
-    <img src="{{image}}" alt="{{name}}" srcset="">
+    <img
+      *ngIf="image; else placeholder"
+      src="{{image}}"
+      alt="{{name}}"
+    >
+    <ng-template #placeholder>
+      <span class="img-placeholder pi pi-image"></span>
+    </ng-template>
   </div>
   <div class="product-card__name">
     {{summary(name)}}
