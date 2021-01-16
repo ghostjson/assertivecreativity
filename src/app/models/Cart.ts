@@ -1,4 +1,4 @@
-import { CustomFormsEntry } from './Order';
+import { CustomFormsEntry, OrderAttribute } from './Order';
 import { Product } from './Product';
 
 export interface Cart {
@@ -12,15 +12,15 @@ export interface CartItem {
   product_id: number;
   product?: Product;
   quantity: number;
-  custom_forms_entry?: any;
+  order_data?: CartOrderData;
   total_price: number;
   created_at?: string;
   updated_at?: string;
 }
 
-export interface CartCustomFormsEntry {
-  forms_input: {
-    custom_forms: CustomFormsEntry[];
-  };
-  total_price: number;
+export interface CartOrderData {
+  is_stock: boolean;
+  forms_input?: CustomFormsEntry[];
+  stock_order_attributes?: OrderAttribute[];
+  order_price: number;
 }

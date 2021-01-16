@@ -4,33 +4,19 @@
       {{ option.title }}
     </span>
     <sup class="customization-question__req-badge" *ngIf="requiredInp">
-      * required
+      *
     </sup>
   </h5>
   <div class="customization-input-container radio-list">
     <div
       *ngFor="let input of option.inputs; let radioInd = index"
-      [ngClass]="{
-        'customization-input customization-input-color': true,
-        'customization-input--selected': formGroup.value.input === input.value ? true : false
-      }"
-    >
-      <input
-        type="radio"
-        id="radio-input-{{ inputIds[radioInd] }}"
+      class="customization-input customization-input-radio"
+    > 
+      <p-radioButton
+        [value]="input.value"
+        [label]="input.label"
         formControlName="input"
-        class="customization-input__input"
-        value="{{ input.value }}"
-        (input)="emitValue(input.value)"
-      />
-      <label 
-        for="radio-input-{{ inputIds[radioInd] }}"
-        class="customization-input-label"
-      >
-        <div class="customization-input-label__text">
-          {{ input.label }}
-        </div>
-      </label>
+      ></p-radioButton>
     </div>
   </div>
 </div>

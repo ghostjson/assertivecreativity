@@ -1,42 +1,26 @@
 <!-- add color option -->
-<div 
-  [formGroup]="formGroup"
-  class="mb-5"
->
-  <h5 class="customization-question">
+<div [formGroup]="formGroup" class="product-option">
+  <h4 class="customization-question">
     <span class="customization-question__text">
       {{ option.title }}
     </span>
     <sup class="customization-question__req-badge" *ngIf="requiredInp">
-      * required
+      *
     </sup>
-  </h5>
-  <div
-    class="
-      customization-input-container color-list
-    "
-  >
-    <div
-      *ngFor="let input of option.inputs; index as colorInd"
-      [ngClass]="{
-        'customization-input customization-input-color': true,
-        'customization-input--selected': formGroup.value.input === input.value ? true : false
-      }"
+  </h4>
+  <div class="customization-input-container color-list">
+    <p-selectButton 
+      [options]="option.inputs"
+      formControlName="input"
+      (onChange)="emitValue($event)"
     >
-      <input
-        class="customization-input__input"
-        formControlName="input"
-        type="radio"
-        id="color-{{ ids[colorInd] }}"
-        value="{{ input.value }}"
-        (input)="emitValue(input.value)"
-      />
-      <label for="color-{{ ids[colorInd] }}" class="customization-input-label">
-        <div class="customization-input-label__text">
-          {{ input.label }}
-        </div>
-        <div class="color-preview" [style.background]="input.value"></div>
-      </label>
-    </div>
+      <ng-template let-item>
+        <span>
+          {{ item.label }}
+        </span>
+        <span class="color-preview" [style.background]="item.value">
+        </span>
+      </ng-template>
+    </p-selectButton>
   </div>
 </div>

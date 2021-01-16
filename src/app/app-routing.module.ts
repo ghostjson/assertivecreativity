@@ -1,4 +1,4 @@
-import { ProductDetailComponent } from "./pages/product-detail/product-detail.component";
+import { CustomProductDetailComponent } from "./pages/custom-product-detail/custom-product-detail.component";
 import { StockProductDetailComponent } from "./pages/stock-product-detail/stock-product-detail.component";
 import { CheckoutComponent } from "./pages/checkout/checkout.component";
 import { CartComponent } from "./pages/cart/cart.component";
@@ -42,7 +42,7 @@ const routes: Routes = [
     component: ShopComponent,
     data: { is_stock: false }
   },
-  { path: "products/custom/:id", component: ProductDetailComponent },
+  { path: "products/custom/:id", component: CustomProductDetailComponent },
   {
     path: "profile",
     component: UserProfileComponent,

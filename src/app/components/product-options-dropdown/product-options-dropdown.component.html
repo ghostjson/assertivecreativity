@@ -1,15 +1,15 @@
-<div [formGroup]="formGroup">
-  <h5 class="customization-question">
+<div [formGroup]="formGroup" class="p-fluid">
+  <h4 class="customization-question">
     <span class="customization-question__text">
       {{option.title}}
     </span>
     <sup *ngIf="requiredInp"
       class="customization-question__req-badge"
     >
-      * required
+      *
     </sup>
-  </h5>
-  <div class="customization-input-container">
+  </h4>
+  <div class="customization-input-container p-field p-input-filled">
     <p-dropdown
       class="customization-input"
       [options]="dropdownList"

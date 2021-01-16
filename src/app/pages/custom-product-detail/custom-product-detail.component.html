@@ -1,0 +1,233 @@
+<div class="custom-product-detail-page">
+  <app-header></app-header>
+
+  <div *ngIf="product" class="container">
+    <div class="p-grid">
+      <!-- product image starts -->
+      <div class="p-col-12 p-lg-4">
+        <div class="product-img">
+          <p-galleria
+            [(value)]="image_set"
+            [responsiveOptions]="responsiveOptions"
+            [circular]="true"
+            [showItemNavigators]="true"
+            [numVisible]="5"
+          >
+            <ng-template pTemplate="item" let-item>
+              <img [src]="item.src" alt="{{ item.title }}" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+              <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item.src" alt="{{ item.title }}" />
+              </div>
+            </ng-template>
+          </p-galleria>
+        </div>
+      </div>
+      <!-- product image ends -->
+
+      <div class="p-col-12 p-lg-8">
+        <!-- product details start  -->
+        <p-card styleClass="product-details">
+          <p-header>
+            <h1 class="product-details__name">
+              {{ product.name }}
+            </h1>
+          </p-header>
+
+          <div class="product-details-section">
+            <h2 class="product-details-section__title">Description</h2>
+            <p class="p-mt-0">
+              {{ product.description }}
+            </p>
+          </div>
+
+          <div class="product-details-section product-detail__price">
+            <h2 class="product-details-section__title">Price</h2>
+            <p-table
+              *ngIf="product.price_table_mode; else basePrice"
+              [value]="product.price_table"
+              styleClass="p-datatable-gridlines"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Price Group</th>
+                  <th>Price Per Piece</th>
+                  <th>Quantity (Upto)</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-price>
+                <tr>
+                  <td>{{ price.label }}</td>
+                  <td>$ {{ price.price_per_piece }}</td>
+                  <td>
+                    {{ price.quantity }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <ng-template #basePrice>
+              <span class="product-details__price-value">
+                {{ product.base_price | currency: "USD" }}
+                / piece
+              </span>
+            </ng-template>
+          </div>
+
+          <p-footer>
+            <div class="p-grid p-nogutter">
+              <div class="p-col-6 p-d-flex p-jc-start p-ai-center">
+                <div class="footer-price">
+                  <span class="footer-price__label"> Total Price </span>
+                  <span class="footer-price__value">
+                    <span class="footer-price__currency"> $ </span>
+                    {{ priceTotal }}
+                  </span>
+                </div>
+              </div>
+              <div class="p-col-6 p-d-flex p-jc-end p-ai-center">
+                <p-button
+                  styleClass="p-button-success p-button-lg p-shadow-4"
+                  [disabled]="!orderForm.valid"
+                  label="Add To Cart"
+                  icon="pi pi-shopping-cart"
+                  iconPos="right"
+                  (onClick)="onSubmit()"
+                ></p-button>
+              </div>
+            </div>
+          </p-footer>
+        </p-card>
+        <!-- product details end  -->
+      </div>
+    </div>
+
+    <!-- custom forms start -->
+    <form
+      *ngIf="product.custom_forms.length > 0"
+      [formGroup]="orderForm"
+      class="p-grid custom-forms-container"
+      id="forms"
+    >
+      <!-- forms overview starts -->
+      <aside class="form-overview p-col-12 p-md-4">
+        <h2 class="sr-only">Custom forms overview</h2>
+        <p-scrollPanel>
+          <p-tree
+            [value]="formsOverview"
+            selectionMode="single"
+            [(selection)]="selectedNode"
+            (onNodeSelect)="toggleTreeExpand()"
+          >
+            <ng-template let-node pTemplate="form">
+              <a
+                pageScroll
+                [pageScrollDuration]="300"
+                href="#form-{{ node.key }}"
+              >
+                {{ node.label }}
+              </a>
+            </ng-template>
+          </p-tree>
+        </p-scrollPanel>
+      </aside>
+      <!-- forms overview ends -->
+
+      <!-- forms start -->
+      <div class="p-col-12 p-md-8">
+        <div
+          *ngFor="let customForm of customForms().controls; let formInd = index"
+          class="custom-form-group"
+        >
+          <h2 class="form-group__title">
+            {{ customForm.value.title }}
+          </h2>
+          <ng-container
+            *ngIf="customForm.value.is_formgroup; else independentForm"
+          >
+            <p-accordion multiple="true">
+              <p-accordionTab
+                *ngFor="
+                  let subform of subforms(formInd).controls;
+                  let subformInd = index
+                "
+                [(selected)]="formExpandControls[subform.value.id]"
+                id="{{ 'form-' + subform.value.id }}"
+                header="{{ subform.value.title }}"
+              >
+                <div
+                  *ngFor="
+                    let option of subformOptions(formInd, subformInd).controls;
+                    index as optionInd
+                  "
+                >
+                  <app-product-options
+                    [option]="
+                      product.custom_forms[subform.value.id].options[optionInd]
+                    "
+                    [requiredInp]="true"
+                    [formGroup]="option"
+                  ></app-product-options>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </ng-container>
+          <ng-template #independentForm>
+            <p-accordion class="custom-form-group">
+              <p-accordionTab
+                [(selected)]="formExpandControls[customForm.value.id]"
+                header="{{ customForm.value.title }}"
+                id="form-{{ customForm.value.id }}"
+              >
+                <div
+                  *ngFor="
+                    let option of options(formInd).controls;
+                    index as optionInd
+                  "
+                >
+                  <app-product-options
+                    [option]="
+                      product.custom_forms[customForm.value.id].options[
+                        optionInd
+                      ]
+                    "
+                    [requiredInp]="true"
+                    [formGroup]="option"
+                  ></app-product-options>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </ng-template>
+        </div>
+
+        <p-card>
+          <div class="p-grid p-nogutter">
+            <div class="p-col-6 p-d-flex p-jc-start p-ai-center">
+              <div class="footer-price">
+                <span class="footer-price__label"> Total Price </span>
+                <span class="footer-price__value">
+                  <span class="footer-price__currency"> $ </span>
+                  {{ priceTotal }}
+                </span>
+              </div>
+            </div>
+            <div class="p-col-6 p-d-flex p-jc-end p-ai-center">
+              <p-button
+                styleClass="p-button-success p-button-lg p-shadow-4"
+                [disabled]="!orderForm.valid"
+                label="Add To Cart"
+                icon="pi pi-shopping-cart"
+                iconPos="right"
+                (onClick)="onSubmit()"
+              ></p-button>
+            </div>
+          </div>
+        </p-card>
+      </div>
+      <!-- forms start -->
+    </form>
+    <!-- custom forms ends -->
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -12,15 +12,15 @@ import { IdGeneratorService } from "src/app/services/id-generator.service";
 import { CartService } from "src/app/services/cart.service";
 import { CartItem } from "src/app/models/Cart";
 import { TreeNode } from 'primeng/api';
-import { CustomOption, Order } from 'src/app/models/Order';
+import { CustomFormsEntry, CustomOption, Order } from 'src/app/models/Order';
 import { UserDetailsService } from "src/app/store/user-details.service";
 
 @Component({
-  selector: "app-product-detail",
-  templateUrl: "./product-detail.component.html",
-  styleUrls: ["./product-detail.component.scss"],
+  selector: "app-custom-product-detail",
+  templateUrl: "./custom-product-detail.component.html",
+  styleUrls: ["./custom-product-detail.component.scss"],
 })
-export class ProductDetailComponent implements OnInit, OnDestroy {
+export class CustomProductDetailComponent implements OnInit, OnDestroy {
   image_set: any[];
   responsiveOptions: any[];
   product: Product;
@@ -31,6 +31,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   currentUrl: string;
   productId: number;
   formsOverview: TreeNode[];
+  formExpandControls: any;
   selectedNode: TreeNode;
   orderDeliveryDate: Date;
   orderMeetingDate: Date;
@@ -72,81 +73,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     ];
     this.currentUrl = this._router.url;
 
-    // get the product from the server
-    // and do the intialise everything
-    this.initialise();
-  }
+    this.formExpandControls = {};
 
-  ngOnDestroy(): void {
-    // unsubscribe to form value changes
-    this.formSubscription.unsubscribe();
-  }
-
-  addToFormOverviewGroup(node: TreeNode, key: string): void {
-    for(let i = 0; i < this.formsOverview.length; ++i) {
-      if(this.formsOverview[i].key === key) {
-        this.formsOverview[i].children.push(node);
-        break;
-      }
-    }
-  }
-
-  buildFormsOverview(): void {
-    this.formsOverview = [];
-
-    this.product.custom_forms.forEach((form: CustomForm) => {
-      console.info('building overview: ', form)
-      if(form.is_formgroup) {
-        let node: TreeNode = {
-          key: String(form.id),
-          label: form.title,
-          data: form.title,
-          expanded: true,
-          children: []
-        };
-
-        this.formsOverview.push(node);
-      }
-      else {
-        let node: TreeNode = {
-          key: String(form.id),
-          label: form.title,
-          data: form.title
-        };
-
-        if(form.parent_form != null) {
-          this.addToFormOverviewGroup(node, String(form.parent_form));
-        }
-        else {
-          this.formsOverview.push(node);
-        }
-      }
-    });
-
-    console.log('form overview built: ', this.formsOverview)
-  }
-
-  toggleTreeExpand(): void {
-    this.selectedNode.expanded = !this.selectedNode.expanded;
-  }
-
-  /**
-   * Initialisation steps for the order form
-   */
-  initialiseForms(): void {
-    this.updateTotalPrice();
-    this.formSubscription = this.orderForm.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(() => {
-        this.updateTotalPrice();
-      });
-    console.log("form initiliased");
-  }
-
-  /**
-   * Initialise all data on the page
-   */
-  initialise(): void {
     this.orderForm = null;
     this.product = null;
 
@@ -163,20 +91,35 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
         this.image_set = [
           {
-            src: this.product.image,
-            title: "Image 1 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: 'https://picsum.photos/id/1/480/640',
+            src: "http://localhost:8000/storage/mock.jpeg",
             title: "Image 2 title",
             alt: "Image alt for testing",
           },
           {
-            src: 'https://picsum.photos/id/2/480/640',
+            src: "assets/images/demo-product-images/2.jpg",
             title: "Image 3 title",
             alt: "Image alt for testing",
           },
+          {
+            src: "http://localhost:8000/storage/mock.jpeg",
+            title: "Image 4 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "assets/images/demo-product-images/2.jpg",
+            title: "Image 5 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "http://localhost:8000/storage/mock.jpeg",
+            title: "Image 6 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "assets/images/demo-product-images/2.jpg",
+            title: "Image 7 title",
+            alt: "Image alt for testing",
+          }
         ];
 
         this.orderForm = this._orderService.newOrderForm(this.product);
@@ -190,6 +133,86 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       let tomorrow = new Date(new Date());
       tomorrow.setDate(tomorrow.getDate() + 1);
       this.minDate = tomorrow;
+  }
+
+  ngOnDestroy(): void {
+    // unsubscribe to form value changes
+    this.formSubscription.unsubscribe();
+  }
+
+  /**
+   * Add a child node to parent node in the overview
+   * @param node child node to add
+   * @param key key of the parent node
+   */
+  addToFormOverviewGroup(node: TreeNode, key: string): void {
+    for(let i = 0; i < this.formsOverview.length; ++i) {
+      if(this.formsOverview[i].key === key) {
+        this.formsOverview[i].children.push(node);
+        break;
+      }
+    }
+  }
+
+  /**
+   * Construct treenode objects required for forms overview component
+   */
+  buildFormsOverview(): void {
+    this.formsOverview = [];
+
+    this.product.custom_forms.forEach((form: CustomForm) => {
+      console.info('building overview: ', form)
+      this.formExpandControls[form.id] = true;
+      if(form.is_formgroup) {
+        let node: TreeNode = {
+          key: String(form.id),
+          label: form.title,
+          data: form.title,
+          expanded: true,
+          children: []
+        };
+
+        this.formsOverview.push(node);
+      }
+      else {
+        let node: TreeNode = {
+          key: String(form.id),
+          label: form.title,
+          data: form.title,
+          type: 'form'
+        };
+
+        if(form.parent_form != null) {
+          this.addToFormOverviewGroup(node, String(form.parent_form));
+        }
+        else {
+          this.formsOverview.push(node);
+        }
+      }
+    });
+
+    console.log('form overview built: ', this.formsOverview)
+  }
+
+  /**
+   * Expand selected treenode
+   */
+  toggleTreeExpand(): void {
+    this.formExpandControls[this.selectedNode.key] = true;
+    this.selectedNode.expanded = !this.selectedNode.expanded;
+  }
+
+  /**
+   * Initialisation steps for the order form
+   */
+  initialiseForms(): void {
+    this.updateTotalPrice();
+    this.formSubscription = this.orderForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        this.updateTotalPrice();
+      });
+    console.log("form initiliased");
   }
 
   /**
@@ -264,42 +287,23 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
    * Submit the customisation form
    */
   onSubmit(): void {
-    // this.updateTotalPrice();
+    this.updateTotalPrice();
 
-    // let cartItem: CartItem = {
-    //   product_id: this.productId,
-    //   product: this.product,
-    //   quantity: 1,
-    //   custom_forms_entry: {
-    //     forms_input: this.orderForm.value,
-    //     total_price: this.priceTotal
-    //   },
-    // };
-
-    // console.log('add to cart: ', cartItem);
-    // this._cartService.addToCart(cartItem).subscribe((item: any) => {
-    //   this._router.navigate(["/cart", item.data.id]);
-    //   console.log("added to cart: ", item);
-    // });
-
-    let order: Order = {
-      product_id: this.product.id,
-      seller_id: this.product.seller_id,
-      buyer_id: this._userDetailsService.getUserLocal().id,
-      order_status: "open",
-      delivery_date: this.orderDeliveryDate.toISOString(),
-      data: {
-        is_custom_product: true,
-        product_details: this.product,
-        custom_forms_entry: this.orderForm.value.custom_forms,
-        total_price: this.priceTotal * this.orderQuantity,
-        quantity: this.orderQuantity,
+    let cartItem: CartItem = {
+      product_id: this.productId,
+      product: this.product,
+      quantity: 1,
+      order_data: {
+        is_stock: false,
+        forms_input: this.orderForm.value.custom_forms as CustomFormsEntry[],
+        order_price: this.priceTotal
       },
+      total_price: this.priceTotal
     };
 
-    this._orderService.placeOrder(order).subscribe((order: Order) => {
-      console.log("order placed: ", order);
-      this._router.navigate(["/orders/"]);
+    this._cartService.addToCustomCart(cartItem).subscribe((item: any) => {
+      this._router.navigate(["/cart", item.data.id]);
+      console.log("added to cart: ", item);
     });
   }
 }

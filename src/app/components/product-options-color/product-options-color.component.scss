@@ -1,59 +1,47 @@
 @import '../../../assets/css/variables.scss';
 
-.customization-question__text {
-  font-weight: bold;
-}
+:host {
+  ::ng-deep {
+    .customization-question {
+      margin-top: 0;
+      font-weight: 400;
+      
+      &__text {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
 
-.customization-input-container {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
+      &__req-badge {
+        color: red;
+      }
+    }
+    
+    .customization-input-container {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
 
-.customization-input {
-  min-width: 100px;
-  display: flex;
-  margin: 1em 0.5em 0 0;
-  border: 1px solid $light-grey;
-  border-radius: 6px;
-  
-  &.customization-input--selected {
-    position: relative;
-    box-shadow: $regular-shadow;
-    color: white;
-    background: $bg-primary;
-    border-color: $primary-color;
+      .p-selectbutton {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .p-button {
+          margin-right: 1em;
+          margin-bottom: 1em;
+          border-radius: 6px;
+          border: 1px solid $light-grey;
+          text-transform: capitalize;
+        }             
+      }
+    }
+    
+    .color-preview {
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 6px;
+      margin-left: 0.5em;
+    }
   }
-}
-
-.customization-input:hover {
-  position: relative;
-  box-shadow: $regular-shadow;
-  color: white;
-  background: $bg-primary;
-  border-color: $primary-color;
-}
-
-.customization-input-label {
-  display: flex;
-  margin-bottom: 0;
-  flex-grow: 1;
-  padding: 0.5em;
-  margin-left: 0.5em;
-}
-
-.customization-input__input {
-  margin-left: 0.5em;
-}
-
-.customization-input-label:hover,
-.customization-input__input:hover {
-  cursor: pointer;
-}
-
-.color-preview {
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 6px;
-  margin-left: 0.5em;
 }

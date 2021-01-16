@@ -30,6 +30,8 @@
     "jquery": "^3.5.1",
     "ngx-color-picker": "^9.1.0",
     "ngx-colorpicker": "^4.0.1",
+    "ngx-page-scroll": "^7.0.3",
+    "ngx-page-scroll-core": "^7.0.3",
     "primeflex": "^2.0.0",
     "primeicons": "^4.0.0",
     "primeng": "^11.1.0-rc.1",

@@ -2,6 +2,7 @@ import { FormComponent } from "./library/FormComponents";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,7 +28,7 @@ import { LogoutComponent } from "./pages/logout/logout.component";
 import { FormViewComponent } from "./pages/form-view/form-view.component";
 import { CartComponent } from "./pages/cart/cart.component";
 import { CheckoutComponent } from "./pages/checkout/checkout.component";
-import { ProductDetailComponent } from "./pages/product-detail/product-detail.component";
+import { CustomProductDetailComponent } from "./pages/custom-product-detail/custom-product-detail.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
@@ -90,6 +91,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { StepsModule } from 'primeng/steps';
 import { DataViewModule } from 'primeng/dataview';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -137,6 +139,7 @@ import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/
 import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
 import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
+import { MessageService } from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -162,7 +165,7 @@ import { StockProductDetailComponent } from './pages/stock-product-detail/stock-
     FormViewComponent,
     CartComponent,
     CheckoutComponent,
-    ProductDetailComponent,
+    CustomProductDetailComponent,
     AdminDashboardComponent,
     AdminProductsComponent,
     AdminProductsListComponent,
@@ -224,6 +227,7 @@ import { StockProductDetailComponent } from './pages/stock-product-detail/stock-
     BrowserAnimationsModule,
     ChartjsModule,
     ReactiveFormsModule,
+    NgxPageScrollModule,
     // Prime Ng Modules
     ColorPickerModule,
     CardModule,
@@ -271,13 +275,15 @@ import { StockProductDetailComponent } from './pages/stock-product-detail/stock-
     RippleModule,
     InputMaskModule,
     StepsModule,
-    DataViewModule
+    DataViewModule,
+    ScrollTopModule
   ],
   entryComponents: [],
   providers: [
     FormComponent, 
     httpInterceptProvider, 
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

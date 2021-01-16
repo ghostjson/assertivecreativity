@@ -1,31 +1,36 @@
-@import '../../../assets/css/variables.scss';
+@import "../../../assets/css/variables.scss";
 
-.customization-question__text {
-  font-weight: bold;
-}
+:host {
+  ::ng-deep {
+    .product-option {
+      margin-top: 2em;
+    }
+    .customization-question {
+      margin-top: 0;
+      font-weight: 400;
 
-.customization-input-container {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
+      &__text {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
 
-.customization-input-label {
-  display: flex;
-  margin-bottom: 0;
-  flex-grow: 1;
-  padding: 0.5em;
-  margin-left: 0.5em;
-}
+      &__req-badge {
+        color: red;
+      }
+    }
+    
+    .customization-input-container {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
 
-.customization-input {
-  width: 100%;
-}
+      .customization-input {
+        width: 100%;
 
-.customization-input__input {
-  width: 100%;
-}
-
-.customization-input-label:hover {
-  cursor: pointer;
+        &__input {
+          width: 100%;
+        }
+      }  
+    }
+  }
 }

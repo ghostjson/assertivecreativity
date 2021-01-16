@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Order } from '../models/Order';
 import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Cart, CartItem } from '../models/Cart';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
+import { Order } from '../models/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -31,25 +31,64 @@ export class CartService {
   }
 
   /**
-   * Return cart item link
+   * Return custom cart link
    */
-  private cartLinkById(id: number): string {
-    return `${this.cartLink()}/${id}`;
+  private customCartLink(): string {
+    return `${this.cartLink()}/custom`;
   }
 
   /**
-   * Return all the items in the cart
+   * Return stock cart link
    */
-  getCart(): Observable<Cart> {
-    return this._http.get<Cart>(this.cartLink())
+  private stockCartLink(): string {
+    return `${this.cartLink()}/stock`;
+  }
+
+  /**
+   * Return custom cart item link
+   */
+  private customCartItemLink(id: number): string {
+    return `${this.customCartLink()}/${id}`;
+  }
+
+  /**
+   * Return stock cart item link
+   */
+  private stockCartItemLink(id: number): string {
+    return `${this.stockCartLink()}/${id}`;
+  }
+
+  /**
+   * Return all the items in the custom cart
+   */
+  getCustomCart(): Observable<Cart> {
+    return this._http.get<Cart>(this.customCartLink())
       .pipe(take(1));
   }
 
   /**
-   * Return the cart item 
+   * Return all the items in the stock cart
    */
-  getCartItem(id: number): Observable<CartItem> {
-    return this._http.get<CartItem>(this.cartLinkById(id))
+  getStockCart(): Observable<Cart> {
+    return this._http.get<Cart>(this.stockCartLink())
+      .pipe(take(1));
+  }
+
+  /**
+   * Return the custom cart item 
+   */
+  getCustomCartItem(id: number): Observable<CartItem> {
+    return this._http.get<CartItem>(this.customCartItemLink(id))
+      .pipe(map((item: any) => {
+        return item.data;
+      }));
+  }
+
+  /**
+   * Return the stock cart item 
+   */
+  getStockCartItem(id: number): Observable<CartItem> {
+    return this._http.get<CartItem>(this.stockCartItemLink(id))
       .pipe(map((item: any) => {
         return item.data;
       }));
@@ -59,11 +98,11 @@ export class CartService {
    * Refresh the cart
    */
   refreshCart(): void {
-    this.getCart()
-      .subscribe((cart: Cart) => {
-        this.cart = cart;
-        console.log('cart refreshed: ', this.cart);
-      });
+    // this.getCart()
+    //   .subscribe((cart: Cart) => {
+    //     this.cart = cart;
+    //     console.log('cart refreshed: ', this.cart);
+    //   });
   }
 
   /**
@@ -74,20 +113,38 @@ export class CartService {
   }
 
   /**
-   * Add an item to the user's cart
+   * Add a custom item to the user's cart
    * @param item item to add to cart
    */
-  addToCart(item: any): Observable<CartItem> {
-    return this._http.post<CartItem>(`${this.cartLink()}`, item)
+  addToCustomCart(item: CartItem): Observable<CartItem> {
+    return this._http.post<CartItem>(`${this.customCartLink()}`, item)
       .pipe(take(1));
   }
 
   /**
-   * Delete an item from the cart
+   * Add a custom item to the user's cart
+   * @param item item to add to cart
+   */
+  addToStockCart(item: CartItem): Observable<CartItem> {
+    return this._http.post<CartItem>(`${this.stockCartLink()}`, item)
+      .pipe(take(1));
+  }
+
+  /**
+   * Delete an item from the custom cart
    * @param id id of the cart item
    */
-  deleteFromCart(id: number): Observable<any> {
-    return this._http.delete(`${this.cartLinkById(id)}`)
+  deleteFromCustomCart(id: number): Observable<any> {
+    return this._http.delete(`${this.customCartItemLink(id)}`)
+      .pipe(take(1));
+  }
+
+  /**
+   * Delete an item from the stock cart
+   * @param id id of the cart item
+   */
+  deleteFromStockCart(id: number): Observable<any> {
+    return this._http.delete(`${this.stockCartItemLink(id)}`)
       .pipe(take(1));
   }
 }
