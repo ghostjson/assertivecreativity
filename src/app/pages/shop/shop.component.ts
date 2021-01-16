@@ -6,7 +6,7 @@ import { ProductCategorisationService } from "src/app/services/product-categoris
 import { Tag } from "src/app/models/Tag";
 import { Category } from "src/app/models/Category";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
-import { take } from "rxjs/operators";
+import { filter, take } from "rxjs/operators";
 
 @Component({
   selector: "app-shop",
@@ -37,17 +37,20 @@ export class ShopComponent implements OnInit {
     this._activatedRoute.data.pipe(take(1)).subscribe((data: any) => {
       this.is_stock = data.is_stock;
     });
-    if(this.is_stock) {
+    if (this.is_stock) {
       this.getStockProducts();
-      this._pcService.getStockCategories().subscribe((categories: Category[]) => {
-        this.categories = categories;
-      });
-    }
-    else {
+      this._pcService
+        .getStockCategories()
+        .subscribe((categories: Category[]) => {
+          this.categories = categories;
+        });
+    } else {
       this.getCustomProducts();
-      this._pcService.getCustomCategories().subscribe((categories: Category[]) => {
-        this.categories = categories;
-      });
+      this._pcService
+        .getCustomCategories()
+        .subscribe((categories: Category[]) => {
+          this.categories = categories;
+        });
     }
 
     this.featured = this._productService.getFeaturedProducts();
@@ -57,31 +60,33 @@ export class ShopComponent implements OnInit {
    * Get custom products
    */
   getCustomProducts(): void {
+    this.productsLoading = true;
     console.log("update custom products");
 
-    this._productService.getCustomProducts().subscribe((products: Product[]) => {
-      this.products = products;
-      console.log('custom products received: ', products);
-      
+    this._productService
+      .getCustomProducts()
+      .subscribe((products: Product[]) => {
+        this.products = products;
+        console.log("custom products received: ", products);
 
-      // hide the loader
-      setTimeout(() => {
-        this.productsLoading = false;
-        this._common.setLoader(false);
-      }, 200);
-    });
+        // hide the loader
+        setTimeout(() => {
+          this.productsLoading = false;
+          this._common.setLoader(false);
+        }, 200);
+      });
   }
 
   /**
    * Get stock products
    */
   getStockProducts(): void {
+    this.productsLoading = true;
     console.log("update stock products");
 
     this._productService.getStockProducts().subscribe((products: Product[]) => {
       this.products = products;
-      console.log('stock products received: ', products);
-      
+      console.log("stock products received: ", products);
 
       // hide the loader
       setTimeout(() => {
@@ -94,27 +99,27 @@ export class ShopComponent implements OnInit {
   /**
    * update the products list
    */
-  updateProducts(categories: Category[]): void {
+  updateProducts(): void {
     this.products = [];
     this.productsLoading = true;
 
-    let categoryIds: number[] = categories.map((category: Category) => {
-      return category.id;
-    });
-
-    if(this.is_stock) {
-      /**
-       * TODO: fetch stock products filtered by category
-       */
-      this.productsLoading = false;
-    }
-    else {
-      this._productService
-      .getCustomProductsByCategoryIdList(categoryIds)
-      .subscribe((res: Product[]) => {
-        this.products = res;
-        this.productsLoading = false;
+    if (this.is_stock) {
+      this._productService.getStockProductsByCategoryList(this.selectedCategories)
+        .subscribe((filteredProducts: Product[]) => {
+          this.products = [...filteredProducts];
+          this.productsLoading = false;
+        });
+    } else {
+      let categoryIds: number[] = this.selectedCategories.map((category: Category) => {
+        return category.id;
       });
+
+      this._productService
+        .getCustomProductsByCategoryIdList(categoryIds)
+        .subscribe((res: Product[]) => {
+          this.products = [...res];
+          this.productsLoading = false;
+        });
     }
   }
 
@@ -122,7 +127,6 @@ export class ShopComponent implements OnInit {
    * Update tags and products
    */
   update(): void {
-    this._common.setLoader(true);
     // empty the current tags list
     this.tags = [];
 
@@ -169,7 +173,7 @@ export class ShopComponent implements OnInit {
       //     )
       //     .subscribe();
       // });
-      this.updateProducts(this.selectedCategories);
+      this.updateProducts();
     } else {
       this.is_stock ? this.getStockProducts() : this.getCustomProducts();
     }
@@ -182,20 +186,18 @@ export class ShopComponent implements OnInit {
   getSearchResults(searchString: string): void {
     this.productsLoading = true;
 
-    if(this.is_stock) {
+    if (this.is_stock) {
       this.productsLoading = false;
-    }
-    else {
+    } else {
       if (searchString.length > 0) {
         this._productService
           .searchProducts(searchString)
           .subscribe((res: Product[]) => {
             this.products = res;
-  
+
             this.productsLoading = false;
           });
-      } 
-      else {
+      } else {
         this.getCustomProducts();
       }
     }

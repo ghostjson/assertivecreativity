@@ -17,6 +17,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Observable } from "rxjs";
 import { map, take } from "rxjs/operators";
+import { Category } from "../models/Category";
 
 @Injectable({
   providedIn: "root",
@@ -40,15 +41,114 @@ export class ProductService {
     return `${this.API_URL}/products`;
   }
 
-  private customProductsLink(): string {
-    return `${this.productsLink()}/custom`;
-  }
-
   /**
    * Return the stock products link
    */
   private stockProductsLink(): string {
     return `${this.productsLink()}/stock`;
+  }
+
+  /**
+   * Return stock product with id
+   * @param id id of the product
+   */
+  private stockProductLink(id: number): string {
+    return `${this.stockProductsLink()}/${id}`;
+  }
+
+  /**
+   * stock products categories link
+   */
+  private stockProductsByCategoriesLink(): string {
+    return `${this.stockProductsLink()}/categories`;
+  }
+
+  /**
+   * get stock products
+   */
+  getStockProducts(): Observable<Product[]> {
+    return this._http.get<Product[]>(this.stockProductsLink())
+      .pipe(
+        take(1),
+        map((products: Product[]): Product[] => {
+          return products.map((product: Product): Product => {
+            product.is_stock = true;
+            return product;
+          });
+        })
+      );
+  }
+
+  /**
+   * get stock products by category list
+   * @param categories category list to filter products
+   */
+  getStockProductsByCategoryList(categories: Category[]): Observable<Product[]> {
+    let categoryNames: string[] = categories.map((category: Category) => {
+      return category.value as string;
+    });
+
+    return this._http.post<any>(this.stockProductsByCategoriesLink(), {categories: categoryNames})
+      .pipe(
+        take(1),
+        /**
+         * TODO: fix after api bug fix
+         */
+        map((res: any[]) => {
+          let products: Product[] = [];
+          console.log('filter response: ', res)
+
+          res.forEach((list: Product[]) => {
+            products.push(...list);
+            // list.forEach((product: Product) => {
+            //   products.push(...list);
+            // })
+          })
+
+          return products;
+        })
+      );
+  }
+
+  /**
+   * get stock product
+   * @param id id of the product
+   */
+  getStockProduct(id: number): Observable<any> {
+    return this._http.get(this.stockProductLink(id)).pipe(
+      take(1),
+      map((productRes: StockProduct) => {
+        productRes.attributes.colors = productRes.attributes.colors.map(
+          (color: string): ColorAttribute => {
+            return {
+              label: color,
+              value: color,
+            };
+          }
+        );
+
+        productRes.attributes.price_table_mode = true;
+        productRes.attributes.price_table = new PriceTable();
+        productRes.product.price_list.forEach((price: number, index: number) => {
+          if(productRes.product.quantities_list[index] > 0) {
+            productRes.attributes.price_table.price_groups.push({
+              label: `Price ${index + 1}`,
+              price_per_piece: price,
+              quantity: productRes.product.quantities_list[index]
+            });
+          }
+        });
+
+        return productRes;
+      })
+    );
+  }
+
+  /**
+   * Return link for custom products
+   */
+  private customProductsLink(): string {
+    return `${this.productsLink()}/custom`;
   }
 
   /**
@@ -72,14 +172,6 @@ export class ProductService {
    */
   private customProductLink(id: number): string {
     return `${this.customProductsLink()}/${id}`;
-  }
-
-  /**
-   * Return stock product with id
-   * @param id id of the product
-   */
-  private stockProductLink(id: number): string {
-    return `${this.stockProductsLink()}/${id}`;
   }
 
   /**
@@ -117,6 +209,9 @@ export class ProductService {
       );
   }
 
+  /**
+   * get custom products
+   */
   getCustomProducts(): Observable<Product[]> {
     return this._http.get<Product[]>(this.customProductsLink()).pipe(
       take(1),
@@ -124,19 +219,6 @@ export class ProductService {
         return products.data;
       })
     );
-  }
-
-  getStockProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this.stockProductsLink())
-      .pipe(
-        take(1),
-        map((products: Product[]): Product[] => {
-          return products.map((product: Product): Product => {
-            product.is_stock = true;
-            return product;
-          });
-        })
-      );
   }
 
   /**
@@ -148,40 +230,6 @@ export class ProductService {
       take(1),
       map((product: any) => {
         return product.data;
-      })
-    );
-  }
-
-  /**
-   * get stock product
-   * @param id id of the product
-   */
-  getStockProduct(id: number): Observable<any> {
-    return this._http.get(this.stockProductLink(id)).pipe(
-      take(1),
-      map((productRes: StockProduct) => {
-        productRes.attributes.colors = productRes.attributes.colors.map(
-          (color: string): ColorAttribute => {
-            return {
-              label: color,
-              value: color,
-            };
-          }
-        );
-
-        productRes.attributes.price_table_mode = true;
-        productRes.attributes.price_table = new PriceTable();
-        productRes.product.price_list.forEach((price: number, index: number) => {
-          if(productRes.product.quantities_list[index] > 0) {
-            productRes.attributes.price_table.price_groups.push({
-              label: `Price ${index + 1}`,
-              price_per_piece: price,
-              quantity: productRes.product.quantities_list[index]
-            });
-          }
-        });
-
-        return productRes;
       })
     );
   }

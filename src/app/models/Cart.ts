@@ -12,7 +12,8 @@ export interface CartItem {
   product_id: number;
   product?: Product;
   quantity: number;
-  custom_forms_entry?: CartCustomFormsEntry;
+  custom_forms_entry?: any;
+  total_price: number;
   created_at?: string;
   updated_at?: string;
 }

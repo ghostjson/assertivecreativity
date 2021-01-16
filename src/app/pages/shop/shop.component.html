@@ -62,7 +62,7 @@
               <app-product-card
                 [productId]="product.id"
                 [name]="product.name"
-                [price]="product.base_price"
+                [price]="is_stock ? product.price_list[0] : product.base_price"
                 [description]="product.description"
                 [image]="product.image"
                 [itemNum]="product.variant_id"

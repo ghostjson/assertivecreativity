@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { CommonService } from "src/app/common.service";
+import { CartItem } from "src/app/models/Cart";
 import { Order } from "src/app/models/Order";
 import { PriceGroup, StockProduct } from "src/app/models/Product";
 import { CartService } from "src/app/services/cart.service";
@@ -71,10 +72,10 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
     // get product details from the product service
     this._productService
       .getStockProduct(this.productId)
-      .subscribe((product) => {
+      .subscribe((product: StockProduct) => {
         this.product = product;
         console.info("Product Received: ", this.product);
-        this.orderForm = this._orderService.createStockOrderForm(product);
+        this.orderForm = this._orderService.createStockOrderForm(product.product);
 
         this.image_set = [
           {
@@ -159,30 +160,28 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
    * Submit the customisation form
    */
   onSubmit(): void {
-    // this.updateTotalPrice();
+    this.updateTotalPrice();
 
-    // let cartItem: CartItem = {
-    //   product_id: this.productId,
-    //   product: this.product,
-    //   quantity: 1,
-    //   custom_forms_entry: {
-    //     forms_input: this.orderForm.value,
-    //     total_price: this.priceTotal
-    //   },
-    // };
+    let cartItem: CartItem = {
+      product_id: this.productId,
+      product: this.product.product,
+      quantity: this.orderForm.value.data.quantity,
+      custom_forms_entry: this.orderForm.value,
+      total_price: this.priceTotal
+    };
 
-    // console.log('add to cart: ', cartItem);
-    // this._cartService.addToCart(cartItem).subscribe((item: any) => {
-    //   this._router.navigate(["/cart", item.data.id]);
-    //   console.log("added to cart: ", item);
-    // });
-    console.log("order form value: ", this.orderForm.value);
-    this._orderService
-      .placeOrder(this.orderForm.value)
-      .subscribe((order: Order) => {
-        console.log("order placed: ", order);
-        this._router.navigate(["/orders/"]);
-      });
+    console.log('add to cart: ', cartItem);
+    this._cartService.addToCart(cartItem).subscribe((item: any) => {
+      this._router.navigate(["/cart", item.data.id]);
+      console.log("added to cart: ", item);
+    });
+    // console.log("order form value: ", this.orderForm.value);
+    // this._orderService
+    //   .placeOrder(this.orderForm.value)
+    //   .subscribe((order: Order) => {
+    //     console.log("order placed: ", order);
+    //     this._router.navigate(["/orders/"]);
+    //   });
   }
 
   /**

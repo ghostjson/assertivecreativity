@@ -104,11 +104,8 @@
 
                 .p-selectbutton {
                   display: flex;
-                  flex-direction: column;
                   flex-wrap: wrap;
-                  justify-content: flex-start;
-                  min-height: 700px;
-                  max-height: 1000px;
+                  justify-content: space-evenly;
                   width: 100%;
 
                   .p-button {
