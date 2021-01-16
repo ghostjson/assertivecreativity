@@ -1,185 +1,177 @@
-<div class="product-detail-component">
+<div class="stock-product-detail-component">
   <app-header></app-header>
 
-  <div *ngIf="product" class="container my-5">
-    <div class="row mb-5">
-      <div class="col-12 col-lg-4">
+  <div *ngIf="product" class="container">
+    <div class="p-grid">
+      <div class="p-col-12 p-lg-4">
         <div class="product-img">
           <p-galleria
             [(value)]="image_set"
             [responsiveOptions]="responsiveOptions"
             [circular]="true"
-            [showThumbnails]="false"
             [showItemNavigators]="true"
-            [showItemNavigatorsOnHover]="true"
-            [showThumbnailNavigators]="true ? image_set.length > 5 : false"
+            [numVisible]="5"
           >
             <ng-template pTemplate="item" let-item>
-              <img [src]="item.src" />
+              <img [src]="item.src" alt="{{ item.title }}" />
             </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
-              <div class="justify-content-center">
-                <img [src]="item.src" />
+              <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item.src" alt="{{ item.title }}" />
               </div>
             </ng-template>
           </p-galleria>
         </div>
       </div>
-      <div class="col-lg-8">
-        <div class="card product-details shadow mt-4 mt-lg-0">
-          <h1 class="product-details__name">
-            {{ product.product.Name }}
-          </h1>
-          <div class="card__content mt-3">
-            <div class="product-details-section mt-2">
-              <h2 class="product-details-section__title">Description</h2>
-              <p>
-                {{ product.product.Description }}
-              </p>
-            </div>
-            <div class="product-details-section product-detail__price mt-5">
-              <h2 class="product-details-section__title">Price</h2>
-              <p-table
-                *ngIf="product.attributes.price_table_mode; else basePrice"
-                [value]="product.attributes.price_table.price_groups"
-                styleClass="p-datatable-gridlines"
-              >
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Price Group</th>
-                    <th>Price Per Piece</th>
-                    <th>Relation</th>
-                    <th>Quantity</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-price>
-                  <tr>
-                    <td>{{ price.label }}</td>
-                    <td>{{ price.price_per_piece | currency: "USD" }}</td>
-                    <td>
-                      <span *ngIf="price.relation === 'mte'; else elseRelation">
-                        More than
-                      </span>
-                      <ng-template #elseRelation>
-                        <span> Less than </span>
-                      </ng-template>
-                    </td>
-                    <td>
-                      {{ price.quantity }}
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
-              <ng-template #basePrice>
-                <span class="product-details__price-value">
-                  {{
-                    product.attributes.price_table.price_groups[0]
-                      .price_per_piece | currency: "USD"
-                  }}
-                  / piece
-                </span>
-              </ng-template>
-            </div>
+      <div class="p-col-12 p-lg-8">
+        <p-card styleClass="product-details">
+          <p-header>
+            <h1 class="product-details__name">
+              {{ product.product.name }}
+            </h1>
+          </p-header>
 
-            <div class="product-details-section product-detail__price mt-5">
-              <h2 class="product-details-section__title">Colors</h2>
-              <div>
-                <p-selectButton
-                  [(ngModel)]="selectedColor"
-                  [options]="product.attributes.Colors"
-                ></p-selectButton>
-              </div>
-            </div>
-            <div class="product-details-section product-detail__price mt-5">
-              <h2 class="product-details-section__title">Order Quantity</h2>
-              <div>
-                <p-inputNumber
-                  [(ngModel)]="orderQuantity"
-                  [showButtons]="true"
-                  buttonLayout="horizontal"
-                  inputId="horizontal"
-                  spinnerMode="horizontal"
-                  [step]="1"
-                  decrementButtonClass="p-button-danger"
-                  incrementButtonClass="p-button-success"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  mode="decimal"
-                  min="1"
-                >
-                </p-inputNumber>
-              </div>
-            </div>
-
-            <div class="product-details-section mt-5">
-              <h2 class="product-details-section__title">
-                Select Delivery Date
-              </h2>
-              <p-calendar
-                [(ngModel)]="orderDeliveryDate"
-                [minDate]="minDate"
-                inputId="date-range"
-                styleClass="shadow"
-                placeholder="Delivery Date"
-              ></p-calendar>
-            </div>
-
-            <div class="product-details-section mt-5">
-              <h2 class="product-details-section__title">
-                Select Meeting Date
-              </h2>
-              <p-calendar
-                [(ngModel)]="orderMeetingDate"
-                [minDate]="minDate"
-                inputId="date-range"
-                styleClass="shadow"
-                placeholder="Meeting Date"
-              ></p-calendar>
-            </div>
-            <div class="product-details-section mt-5">
-              <h2 class="product-details-section__title">
-                Select Confirmation Date
-              </h2>
-              <p-calendar
-                [(ngModel)]="orderConfirmationDate"
-                [minDate]="minDate"
-                inputId="date-range"
-                styleClass="shadow"
-                placeholder="Confirmation Date"
-              ></p-calendar>
-            </div>
+          <div class="product-details-section">
+            <h2 class="product-details-section__title">Description</h2>
+            <p>
+              {{ product.product.description }}
+            </p>
           </div>
-          <div class="card__footer p-mt-5"></div>
-        </div>
-        <p-card styleClass="p-mt-5" header="Product Details">
-          <p-scrollPanel [style]="{height: '60vh', width: '100%'}" styleClass="custombar1">
-            <p-table [value]="productDetailsTable">
+
+          <div class="product-details-section product-detail__price">
+            <h2 class="product-details-section__title">Price</h2>
+            <p-table
+              *ngIf="product.attributes.price_table_mode; else basePrice"
+              [value]="product.attributes.price_table.price_groups"
+              styleClass="p-datatable-gridlines"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Price Group</th>
+                  <th>Price Per Piece</th>
+                  <th>Quantity (Upto)</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-price>
+                <tr>
+                  <td>{{ price.label }}</td>
+                  <td>
+                    $ {{ price.price_per_piece }}
+                  </td>
+                  <td>
+                    {{ price.quantity }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <ng-template #basePrice>
+              <span class="product-details__price-value">
+                {{
+                  product.attributes.price_table.price_groups[0].price_per_piece
+                    | currency: "USD"
+                }}
+                / piece
+              </span>
+            </ng-template>
+          </div>
+          
+          <form [formGroup]="orderForm">
+            <ng-container formGroupName="data">
+              <ng-container formArrayName="stock_order_attributes">
+                <!-- options for color attribute starts -->
+                <div
+                  formGroupName="0"
+                  class="product-details-section order-attribute p-grid p-nogutter"
+                >
+                  <div class="p-col-3">
+                    <label for="colors"> Colors </label>
+                  </div>
+                  <div
+                    class="order-attribute-input order-attribute-input--color p-col-9"
+                  >
+                    <p-selectButton
+                      formControlName="input"
+                      [options]="product.attributes.colors"
+                    ></p-selectButton>
+                  </div>
+                </div>
+                <!-- options for color attribute ends -->
+              </ng-container>
+    
+              <!-- option for order quantity starts -->
+              <div
+                class="product-details-section order-attribute p-grid p-nogutter"
+              >
+                <div class="p-col-3">
+                  <label for="order-quantity"> Order Quantity </label>
+                </div>
+                <div
+                  class="order-attribute-input order-attribute-input--quantity p-field p-input-filled p-col-9"
+                >
+                  <p-inputNumber
+                    formControlName="quantity"
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    inputId="order-quantity"
+                    spinnerMode="horizontal"
+                    [step]="1"
+                    decrementButtonClass="p-button-danger"
+                    incrementButtonClass="p-button-success"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    mode="decimal"
+                    min="1"
+                  >
+                  </p-inputNumber>
+                </div>
+              </div>
+              <!-- option for order quantity ends -->
+            </ng-container>
+          </form>
+
+          <p-footer>
+            <div class="p-grid p-nogutter">
+              <div class="p-col-6 p-d-flex p-jc-start p-ai-center">
+                <div class="footer-price">
+                  <span class="footer-price__currency">
+                    $
+                  </span>
+                  <span class="footer-price__value">
+                    {{ priceTotal }}
+                  </span>
+                </div>
+              </div>
+              <div class="p-col-6 p-d-flex p-jc-end">
+                <p-button
+                  styleClass="p-button-success p-button-lg p-shadow-4"
+                  [disabled]="false"
+                  label="Add To Cart"
+                  icon="pi pi-shopping-cart"
+                  iconPos="right"
+                  (onClick)="onSubmit()"
+                ></p-button>
+              </div>
+            </div>
+          </p-footer>
+        </p-card>
+
+        <!-- product specifications table starts -->
+        <p-card styleClass="product-spec-table" header="Product Specifications">
+          <p-scrollPanel
+            [style]="{ height: '60vh', width: '100%' }"
+            styleClass="custombar1"
+          >
+            <p-table [value]="productSpecsTable">
               <ng-template pTemplate="body" let-product>
                 <tr>
-                  <td>{{ product.label }}</td>
+                  <td class="spec-name">{{ product.label }}</td>
                   <td>{{ product.value }}</td>
                 </tr>
               </ng-template>
             </p-table>
           </p-scrollPanel>
         </p-card>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12 p-2">
-        <p-card styleClass="forms-footer">
-          <!-- <div class="footer-price">
-            {{ priceTotal | currency: "USD" }}
-          </div> -->
-          <p-button
-            [disabled]="false"
-            label="Add To Cart"
-            icon="pi pi-shopping-cart"
-            iconPos="right"
-            (click)="onSubmit()"
-          ></p-button>
-        </p-card>
+        <!-- product specifications table ends -->
       </div>
     </div>
   </div>

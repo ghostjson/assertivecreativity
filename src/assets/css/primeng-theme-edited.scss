@@ -1395,25 +1395,25 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   border-radius: 4px;
 }
 .p-button:enabled:hover {
-  background: rgba(63, 81, 181, 0.92);
+  background: $primary-color-hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:hover {
-  background: rgba(63, 81, 181, 0.92);
+  background: $primary-color-hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 .p-button:enabled:active {
-  background: rgba(63, 81, 181, 0.68);
+  background: $primary-color-active;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:active {
-  background: rgba(63, 81, 181, 0.68);
+  background: $primary-color-active;
   color: #ffffff;
   border-color: transparent;
 }
@@ -1424,12 +1424,12 @@ a.p-button:active {
 }
 .p-button.p-button-outlined:enabled:hover {
   background: rgba(63, 81, 181, 0.04);
-  color: $primary-color;
+  color: $primary-color-hover;
   border: 1px solid;
 }
 .p-button.p-button-outlined:enabled:active {
   background: rgba(63, 81, 181, 0.16);
-  color: $primary-color;
+  color: $primary-color-active;
   border: 1px solid;
 }
 .p-button.p-button-outlined.p-button-plain {
@@ -1456,7 +1456,7 @@ a.p-button:active {
 }
 .p-button.p-button-text:enabled:active {
   background: rgba(63, 81, 181, 0.16);
-  color: $primary-color;
+  color: $primary-color-active;
   border-color: transparent;
 }
 .p-button.p-button-text.p-button-plain {
@@ -5094,10 +5094,10 @@ a.p-button:active {
   min-width: auto;
 }
 .p-button:enabled:focus {
-  background: rgba(63, 81, 181, 0.76);
+  background: $primary-color-focus;
 }
 .p-button:enabled:active {
-  background: rgba(63, 81, 181, 0.68);
+  background: $primary-color-active;
 }
 .p-button .p-ink {
   background-color: rgba(255, 255, 255, 0.32);
@@ -5984,6 +5984,35 @@ a {
     .p-inputgroup-addon {
       background-image: none;
       border-bottom-left-radius: 4px;
+    }
+  }
+
+  .p-inputnumber {
+    position: relative;
+
+    .p-inputnumber-input {
+      border-radius: 6px;
+      padding-left: 3.5rem;
+      padding-right: 3.5rem;
+    }
+
+    .p-inputnumber-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 6px !important;
+      /* p-shadow-2 */
+      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+    }
+
+    .p-inputnumber-button-up {
+      right: 5px;
+    }
+
+    .p-inputnumber-button-down {
+      left: 5px;
     }
   }
 }

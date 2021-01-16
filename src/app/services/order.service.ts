@@ -1,21 +1,23 @@
-import { Injectable } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CustomForm, Product } from '../models/Product';
-import { ProductService } from './product.service';
-import { Order } from '../models/Order';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { map, take } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { Product } from "../models/Product";
+import { ProductService } from "./product.service";
+import { Order } from "../models/Order";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { map, take } from "rxjs/operators";
+import { IdGeneratorService } from "./id-generator.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class OrderService {
   constructor(
     private _fb: FormBuilder,
     private _productService: ProductService,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _idGenService: IdGeneratorService
   ) {}
 
   /**
@@ -38,21 +40,19 @@ export class OrderService {
    * @param id id of the order
    */
   getOrder(id: number): Observable<Order> {
-    return this._http.get<Order>(this.orderLinkById(id))
-      .pipe(take(1));
+    return this._http.get<Order>(this.orderLinkById(id)).pipe(take(1));
   }
 
   /**
    * Return all orders
    */
   getOrders(): Observable<Order[]> {
-    return this._http.get<Order[]>(this.ordersLink())
-      .pipe(
-        take(1),
-        map((res: any) => {
-          return res.data;
-        })
-      );
+    return this._http.get<Order[]>(this.ordersLink()).pipe(
+      take(1),
+      map((res: any) => {
+        return res.data;
+      })
+    );
   }
 
   /**
@@ -65,7 +65,7 @@ export class OrderService {
 
   addMailThread(threadId: number, order: Order): Observable<Order> {
     order.data.mail_thread = threadId;
-  
+
     return this._http.put<Order>(this.orderLinkById(order.id), order);
   }
 
@@ -79,28 +79,26 @@ export class OrderService {
       description: product.description,
       base_price: product.base_price,
       image: product.image,
-      custom_forms: this._fb.array([])
+      custom_forms: this._fb.array([]),
     };
 
     let custom_form_groups_dict = {};
     product.custom_forms.forEach((customForm) => {
-      if(customForm.is_formgroup) {
-        if(!custom_form_groups_dict[customForm.id]) {
+      if (customForm.is_formgroup) {
+        if (!custom_form_groups_dict[customForm.id]) {
           custom_form_groups_dict[customForm.id] = {
             has_subforms: true,
             formGroup: customForm,
-            subforms: []
+            subforms: [],
           };
         }
-      }
-      else {
-        if(customForm.parent_form == null) {
+      } else {
+        if (customForm.parent_form == null) {
           custom_form_groups_dict[customForm.id] = {
             has_subforms: false,
-            formGroup: customForm
+            formGroup: customForm,
           };
-        }
-        else {
+        } else {
           this._productService.addForm(
             customForm,
             custom_form_groups_dict[Number(customForm.parent_form)].subforms
@@ -109,28 +107,27 @@ export class OrderService {
       }
     });
 
-    console.info('forms dictionary: ', custom_form_groups_dict);
+    console.info("forms dictionary: ", custom_form_groups_dict);
 
-    let group_ids: number[] = Object.keys(custom_form_groups_dict)
-      .map((key: string) => {return Number(key)});
+    let group_ids: number[] = Object.keys(custom_form_groups_dict).map(
+      (key: string) => {
+        return Number(key);
+      }
+    );
 
-    console.info('group ids: ', group_ids);
+    console.info("group ids: ", group_ids);
 
     group_ids.forEach((id: number) => {
-      if(custom_form_groups_dict[id].has_subforms) {
+      if (custom_form_groups_dict[id].has_subforms) {
         let formGroup = {
           id: custom_form_groups_dict[id].formGroup.id,
           title: custom_form_groups_dict[id].formGroup.title,
           is_formgroup: true,
-          subforms: this._fb.array(custom_form_groups_dict[id].subforms)
-        }
+          subforms: this._fb.array(custom_form_groups_dict[id].subforms),
+        };
 
-        orderFormTemplate.custom_forms
-        .push(
-          this._fb.group(formGroup)
-        );
-      }
-      else {
+        orderFormTemplate.custom_forms.push(this._fb.group(formGroup));
+      } else {
         this._productService.addForm(
           custom_form_groups_dict[id].formGroup,
           orderFormTemplate.custom_forms
@@ -138,8 +135,37 @@ export class OrderService {
       }
     });
 
-    console.info('order form constructed: ', this._fb.group(orderFormTemplate).value);
+    console.info(
+      "order form constructed: ",
+      this._fb.group(orderFormTemplate).value
+    );
 
     return this._fb.group(orderFormTemplate);
+  }
+
+  /**
+   * Create an order FormGroup for a stock product
+   * @param product Product object
+   */
+  createStockOrderForm(product: Product): FormGroup {
+    return this._fb.group({
+      product_id: product.id,
+      delivery_date: new Date().toISOString(),
+      data: this._fb.group({
+        is_custom_product: false,
+        product_details: product,
+        total_price: 0,
+        quantity: 1,
+        stock_order_attributes: this._fb.array([
+          this._fb.group({
+            id: this._idGenService.getId(),
+            attribute_label: 'Colors',
+            attribute_type: 'color',
+            attribute_price: 0,
+            input: null,
+          }),
+        ]),
+      }),
+    });
   }
 }

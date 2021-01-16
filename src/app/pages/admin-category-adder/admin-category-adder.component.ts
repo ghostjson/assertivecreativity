@@ -25,7 +25,7 @@ export class AdminCategoryAdderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._prodCategorisationService.getCategories()
+    this._prodCategorisationService.getCustomCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
         

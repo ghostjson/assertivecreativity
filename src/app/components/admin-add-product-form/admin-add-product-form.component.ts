@@ -72,7 +72,7 @@ export class AdminAddProductFormComponent implements OnInit {
     }
 
     // intialise categories list
-    this._pcService.getCategories()
+    this._pcService.getCustomCategories()
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
         this.categories = categories;

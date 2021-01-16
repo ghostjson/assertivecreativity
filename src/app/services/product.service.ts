@@ -127,9 +127,16 @@ export class ProductService {
   }
 
   getStockProducts(): Observable<Product[]> {
-    return this._http
-      .get<Product[]>(this.stockProductsLink())
-      .pipe(take(1));
+    return this._http.get<Product[]>(this.stockProductsLink())
+      .pipe(
+        take(1),
+        map((products: Product[]): Product[] => {
+          return products.map((product: Product): Product => {
+            product.is_stock = true;
+            return product;
+          });
+        })
+      );
   }
 
   /**
@@ -153,7 +160,7 @@ export class ProductService {
     return this._http.get(this.stockProductLink(id)).pipe(
       take(1),
       map((productRes: StockProduct) => {
-        productRes.attributes.Colors = productRes.attributes.Colors.map(
+        productRes.attributes.colors = productRes.attributes.colors.map(
           (color: string): ColorAttribute => {
             return {
               label: color,
@@ -164,46 +171,14 @@ export class ProductService {
 
         productRes.attributes.price_table_mode = true;
         productRes.attributes.price_table = new PriceTable();
-        productRes.attributes.price_table.price_groups[0] = {
-          label: "Price 1",
-          price_per_piece: Number(productRes.product.Prc1),
-          quantity: Number(productRes.product.Qty1),
-          relation: "lte",
-        };
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 2",
-          price_per_piece: Number(productRes.product.Prc2),
-          quantity: Number(productRes.product.Qty2),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 3",
-          price_per_piece: Number(productRes.product.Prc3),
-          quantity: Number(productRes.product.Qty3),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 4",
-          price_per_piece: Number(productRes.product.Prc4),
-          quantity: Number(productRes.product.Qty4),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 5",
-          price_per_piece: Number(productRes.product.Prc5),
-          quantity: Number(productRes.product.Qty5),
-          relation: "lte",
-        });
-
-        productRes.attributes.price_table.price_groups.push({
-          label: "Price 6",
-          price_per_piece: Number(productRes.product.Prc6),
-          quantity: Number(productRes.product.Qty6),
-          relation: "lte",
+        productRes.product.price_list.forEach((price: number, index: number) => {
+          if(productRes.product.quantities_list[index] > 0) {
+            productRes.attributes.price_table.price_groups.push({
+              label: `Price ${index + 1}`,
+              price_per_piece: price,
+              quantity: productRes.product.quantities_list[index]
+            });
+          }
         });
 
         return productRes;
@@ -317,50 +292,50 @@ export class ProductService {
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
+        is_stock: false
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
         image: "assets/images/demo-product-images/2.jpg",
         base_price: 4.75,
-        ItemNum: 'gh-45-xy'
-      },
+        is_stock: false
+      }
     ];
   }
 }

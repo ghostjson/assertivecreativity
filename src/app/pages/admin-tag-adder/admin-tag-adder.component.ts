@@ -31,7 +31,7 @@ export class AdminTagAdderComponent implements OnInit {
   ngOnInit(): void {
     this.tags = [];
 
-    this._prodCategorisationService.getCategories()
+    this._prodCategorisationService.getCustomCategories()
       .pipe(take(1))
       .subscribe((categories: Category[]) => {
         let fetchedTags: Tag[] = [];

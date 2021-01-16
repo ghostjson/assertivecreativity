@@ -7,7 +7,7 @@
 
   <div class="p-grid">
     <!-- filter starts -->
-    <div class="filter-container p-nogutter p-col-12 p-lg-3 p-xl-2">
+    <div class="filter-container p-col-12 p-lg-3 p-xl-2">
       <h3>Filter</h3>
       <p-accordion [multiple]="true">
         <p-accordionTab [selected]="true" [disabled]="!categories.length">
@@ -54,19 +54,19 @@
           styleClass="product-list"
         >
           <ng-template pTemplate="header">
-            <h3>Custom Products</h3>
+            <h3>{{is_stock ? '' : 'Custom '}}Products</h3>
           </ng-template>
 
           <ng-template let-product pTemplate="gridItem">
             <div class="product-grid-item p-col-12 p-sm-6 p-md-4 p-xl-3">
               <app-product-card
                 [productId]="product.id"
-                [itemNum]="'FF-RR-TT'"
                 [name]="product.name"
                 [price]="product.base_price"
                 [description]="product.description"
                 [image]="product.image"
-                [stock]="false"
+                [itemNum]="product.variant_id"
+                [stock]="is_stock"
               ></app-product-card>
             </div>
           </ng-template>

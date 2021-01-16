@@ -78,9 +78,9 @@ export class ProductCategorisationService {
   }
 
   /**
-   * Return all the categories as a list
+   * Return all custom categories
    */
-  getCategories(): Observable<Category[]> {
+  getCustomCategories(): Observable<Category[]> {
     return this._http.get<Category[]>(`${this.customCategoriesUrl()}`)
       .pipe(
         take(1),
@@ -90,6 +90,9 @@ export class ProductCategorisationService {
       );
   }
 
+  /**
+   * Return all stock categories
+   */
   getStockCategories(): Observable<Category[]> {
     return this._http.get<string[]>(`${this.stockCategoriesUrl()}`)
       .pipe(

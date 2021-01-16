@@ -1,42 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TreeNode } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { CommonService } from 'src/app/common.service';
-import { CustomOption, Order } from 'src/app/models/Order';
-import { StockProduct, listAllFeatures } from 'src/app/models/Product';
-import { CartService } from 'src/app/services/cart.service';
-import { OrderService } from 'src/app/services/order.service';
-import { ProductService } from 'src/app/services/product.service';
-import { UserDetailsService } from 'src/app/store/user-details.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { CommonService } from "src/app/common.service";
+import { Order } from "src/app/models/Order";
+import { PriceGroup, StockProduct } from "src/app/models/Product";
+import { CartService } from "src/app/services/cart.service";
+import { IdGeneratorService } from "src/app/services/id-generator.service";
+import { OrderService } from "src/app/services/order.service";
+import { ProductService } from "src/app/services/product.service";
+import { UserDetailsService } from "src/app/store/user-details.service";
 
 @Component({
-  selector: 'app-stock-product-detail',
-  templateUrl: './stock-product-detail.component.html',
-  styleUrls: ['./stock-product-detail.component.scss']
+  selector: "app-stock-product-detail",
+  templateUrl: "./stock-product-detail.component.html",
+  styleUrls: ["./stock-product-detail.component.scss"],
 })
-export class StockProductDetailComponent implements OnInit {
+export class StockProductDetailComponent implements OnInit, OnDestroy {
   image_set: any[];
   responsiveOptions: any[];
   product: StockProduct;
-  possibleFeatures: Object;
-  orderForm: FormGroup;
-  formSubscription: Subscription;
   priceTotal: number;
   currentUrl: string;
   productId: number;
-  formsOverview: TreeNode[];
-  selectedNode: TreeNode;
-  productDetailsTable: {label: string, value: string}[];
+  productSpecsTable: { label: string; value: string }[];
   orderDeliveryDate: Date;
   orderMeetingDate: Date;
   orderConfirmationDate: Date;
   minDate: Date;
-  orderQuantity: number;
-  selectedColor: string;
-
+  orderForm: FormGroup;
+  formSub: Subscription;
 
   constructor(
     public _productService: ProductService,
@@ -45,14 +38,15 @@ export class StockProductDetailComponent implements OnInit {
     private _orderService: OrderService,
     private _cartService: CartService,
     private _router: Router,
-    private _userDetailsService: UserDetailsService
+    private _userDetailsService: UserDetailsService,
+    private _idGenService: IdGeneratorService
   ) {
     this._common.setLoader(true);
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
   }
 
   ngOnInit(): void {
-    this.orderQuantity = 1;
+    this.orderDeliveryDate = new Date();
     this.responsiveOptions = [
       {
         breakpoint: "1024px",
@@ -61,202 +55,104 @@ export class StockProductDetailComponent implements OnInit {
       {
         breakpoint: "768px",
         numVisible: 3,
-        showItemNavigatorsOnHover: true
+        showItemNavigatorsOnHover: true,
       },
       {
         breakpoint: "560px",
         numVisible: 3,
-        showItemNavigatorsOnHover: true
+        showItemNavigatorsOnHover: true,
       },
     ];
     this.currentUrl = this._router.url;
 
-    // get the product from the server
-    // and do the intialise everything
-    this.initialise();
-  }
-
-  ngOnDestroy(): void {
-    // unsubscribe to form value changes
-    // this.formSubscription.unsubscribe();
-  }
-
-  addToFormOverviewGroup(node: TreeNode, key: string): void {
-    for(let i = 0; i < this.formsOverview.length; ++i) {
-      if(this.formsOverview[i].key === key) {
-        this.formsOverview[i].children.push(node);
-        break;
-      }
-    }
-  }
-
-  // buildFormsOverview(): void {
-  //   this.formsOverview = [];
-
-  //   this.product.custom_forms.forEach((form: CustomForm) => {
-  //     console.info('building overview: ', form)
-  //     if(form.is_formgroup) {
-  //       let node: TreeNode = {
-  //         key: String(form.id),
-  //         label: form.title,
-  //         data: form.title,
-  //         expanded: true,
-  //         children: []
-  //       };
-
-  //       this.formsOverview.push(node);
-  //     }
-  //     else {
-  //       let node: TreeNode = {
-  //         key: String(form.id),
-  //         label: form.title,
-  //         data: form.title
-  //       };
-
-  //       if(form.parent_form != null) {
-  //         this.addToFormOverviewGroup(node, String(form.parent_form));
-  //       }
-  //       else {
-  //         this.formsOverview.push(node);
-  //       }
-  //     }
-  //   });
-
-  //   console.log('form overview built: ', this.formsOverview)
-  // }
-
-  toggleTreeExpand(): void {
-    this.selectedNode.expanded = !this.selectedNode.expanded;
-  }
-
-  /**
-   * Initialisation steps for the order form
-   */
-  // initialiseForms(): void {
-  //   this.updateTotalPrice();
-  //   this.formSubscription = this.orderForm.valueChanges
-  //     .pipe(debounceTime(500))
-  //     .subscribe(() => {
-  //       this.updateTotalPrice();
-  //     });
-  //   console.log("form initiliased");
-  // }
-
-  /**
-   * Initialise all data on the page
-   */
-  initialise(): void {
-    this.orderForm = null;
+    // get the product from the server and do the intialise everything
     this.product = null;
-
-    // list of all possible feature
-    this.possibleFeatures = listAllFeatures();
 
     // get product details from the product service
     this._productService
       .getStockProduct(this.productId)
-      .pipe(take(1))
       .subscribe((product) => {
         this.product = product;
         console.info("Product Received: ", this.product);
+        this.orderForm = this._orderService.createStockOrderForm(product);
 
         this.image_set = [
-          // {
-          //   src: this.product.product.NewPictureURL,
-          //   title: "Image 1 title",
-          //   alt: "Image alt for testing",
-          // },
           {
-            src: 'https://picsum.photos/id/1/480/640',
+            src: "http://localhost:8000/storage/mock.jpeg",
             title: "Image 2 title",
             alt: "Image alt for testing",
           },
           {
-            src: 'https://picsum.photos/id/2/480/640',
+            src: "assets/images/demo-product-images/2.jpg",
             title: "Image 3 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "http://localhost:8000/storage/mock.jpeg",
+            title: "Image 4 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "assets/images/demo-product-images/2.jpg",
+            title: "Image 5 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "http://localhost:8000/storage/mock.jpeg",
+            title: "Image 6 title",
+            alt: "Image alt for testing",
+          },
+          {
+            src: "assets/images/demo-product-images/2.jpg",
+            title: "Image 7 title",
             alt: "Image alt for testing",
           },
         ];
 
-        // this.orderForm = this._orderService.newOrderForm(this.product);
-        // console.info("Order Form: ", this.orderForm);
+        this.productSpecsTable = this.transformToTable(product);
 
-        // this.initialiseForms();
-        // this.buildFormsOverview();
-        this.productDetailsTable = this.transformToTable(product);
         let tomorrow = new Date(new Date());
         tomorrow.setDate(tomorrow.getDate() + 1);
         this.minDate = tomorrow;
-        this._common.setLoader(false);
+
+        this.updateTotalPrice();
+        // update price on future value changes of the order form
+        this.formSub = this.orderForm.valueChanges.subscribe(() => {
+          this.updateTotalPrice()
+        })
       });
   }
 
-  /**
-   * Return custom_forms form array
-   */
-  customForms(): FormArray {
-    return this.orderForm.get('custom_forms') as FormArray;
-  }
-
-  subforms(customFormIndex: number): FormArray {
-    return this.customForms().at(customFormIndex).get('subforms') as FormArray;
-  }
-
-  /**
-   * Return options of a sub form under a parent form
-   * @param formInd Index of the parent form
-   * @param subformInd Index of the sub form
-   */
-  subformOptions(formInd: number, subformInd: number): FormArray {
-    return this.subforms(formInd).at(subformInd).get('options') as FormArray;
-  }
-
-  options(formInd: number): FormArray {
-    return this.customForms().at(formInd).get('options') as FormArray;
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe();
   }
 
   /**
    * update the total price of the order
    */
   updateTotalPrice(): void {
-    this.priceTotal = Number(this.orderForm.value.base_price);
+    let pricePerPiece: number = this.getPricePerPiece();
+    this.priceTotal = Number((this.orderForm.value.data.quantity * pricePerPiece).toFixed(2));
+    
+    console.log("price updated: ", pricePerPiece, ' | ', this.orderForm.value.data.quantity * pricePerPiece);
+  }
 
-    this.orderForm.value.custom_forms.forEach((customForm: any) => {
-      if(customForm.is_formgroup) {
-        customForm.subforms.forEach((subForm: any) => {
-          subForm.options.forEach((option: CustomOption) => {
-            if(option.input) {
-              this.priceTotal += option.price;
-            }
-            
-            if(!option.meta.isChained) {
-              option.chained_options.forEach((chainedOption: CustomOption) => {
-                if(chainedOption.input) {
-                  this.priceTotal += chainedOption.price;
-                }
-              });
-            }
-          });
-        });
+  /**
+   * return the price per piece for a particular quantity
+   * @param quantity quantity of the order
+   */
+  getPricePerPiece(): number {
+    let priceGroups: PriceGroup[] = this.product.attributes.price_table.price_groups,
+      pricePerPiece = null;
+    
+    for(const priceGroup of priceGroups) {
+      if(this.orderForm.value.data.quantity <= priceGroup.quantity) {
+        pricePerPiece = priceGroup.price_per_piece;
+        return pricePerPiece;
       }
-      else {
-        customForm.options.forEach((option: CustomOption) => {
-          if(option.input) {
-            this.priceTotal += option.price;
-          }
-          
-          if(!option.meta.isChained) {
-            option.chained_options.forEach((chainedOption: CustomOption) => {
-              if(chainedOption.input) {
-                this.priceTotal += chainedOption.price;
-              }
-            });
-          }
-        });
-      }
-    });
+    }
 
-    console.log('price updated: ', this.priceTotal);
+    return priceGroups[priceGroups.length - 1].price_per_piece;
   }
 
   /**
@@ -280,94 +176,107 @@ export class StockProductDetailComponent implements OnInit {
     //   this._router.navigate(["/cart", item.data.id]);
     //   console.log("added to cart: ", item);
     // });
-    let order: Order = {
-      product_id: this.product.product.id,
-      seller_id: Number(this.product.product.Owner),
-      buyer_id: this._userDetailsService.getUserLocal().id,
-      order_status: "open",
-      delivery_date: this.orderDeliveryDate.toISOString(),
-      data: {
-        is_custom_product: false,
-        product_details: this.product,
-        total_price: this.priceTotal * this.orderQuantity,
-        quantity: this.orderQuantity,
-        custom_forms_entry: [
-          {
-            id: 0,
-            title: 'Colors',
-            is_formgroup: false,
-            options: [
-              {
-                name: 'Color',
-                title: 'Colors',
-                type: 'color',
-                price: 0,
-                input: this.selectedColor,
-                meta: {
-                  isChained: false
-                }
-              }
-            ]
-          }
-        ]
-      },
-    };
-
-    this._orderService.placeOrder(order).subscribe((order: Order) => {
-      console.log("order placed: ", order);
-      this._router.navigate(["/orders/"]);
-    });
+    console.log("order form value: ", this.orderForm.value);
+    this._orderService
+      .placeOrder(this.orderForm.value)
+      .subscribe((order: Order) => {
+        console.log("order placed: ", order);
+        this._router.navigate(["/orders/"]);
+      });
   }
 
+  /**
+   * Transform the product specification into a table object
+   * @param product product object
+   */
   transformToTable(product: StockProduct): any {
     let productProps: string[] = Object.keys(product.product);
-    let table: {label: string, value: string}[] = [];
+    let table: { label: string; value: string }[] = [];
     let ignore: any = {
-      id: true,
-      Discontinued: true,
-      Cat1Name: true,
-      CatYear: true,
-      ExpirationDate: true,
-      Keywords: true,
-      Qty1: true,
-      Qty2: true,
-      Qty3: true,
-      Qty4: true,
-      Qty5: true,
-      Qty6: true,
-      Prc1: true,
-      Prc2: true,
-      Prc3: true,
-      Prc4: true,
-      Prc5: true,
-      Prc6: true,
-      PiecesPerUnit1: true,
-      PiecesPerUnit2: true,
-      PiecesPerUnit3: true,
-      PiecesPerUnit4: true,
-      PiecesPerUnit5: true,
-      PiecesPerUnit6: true,
-      QuoteUponRequest: true,
-      InventoryOnHand: true,
-      Owner: true,
+      cat_year: true,
+      image_url_list: true,
+      dimension_list: true,
+      dimension_unit_list: true,
+      dimension_type_list: true,
+      quantities_list: true,
+      price_list: true,
+      pr_code: true,
+      pieces_per_unit_list: true,
+      quote_upon_request: true,
+      price_include_clr: true,
+      price_include_side: true,
+      price_include_loc: true,
+      setup_chg: true,
+      setup_chg_code: true,
+      screen_chg: true,
+      screen_chg_code: true,
+      plate_chg: true,
+      plate_chg_code: true,
+      die_chg: true,
+      die_chg_code: true,
+      tooling_chg: true,
+      tooling_chg_code: true,
+      repeat_chg: true,
+      repeat_chg_code: true,
+      add_clr_chg: true,
+      add_clr_chg_code: true,
+      add_clr_run_chg_list: true,
+      add_clr_run_chg_code: true,
+      is_new_product: true,
+      not_suitable: true,
+      exclusive: true,
+      officially_licensed: true,
+      is_food: true,
+      is_clothing: true,
+      imprint_size_list: true,
+      imprint_size_units_list: true,
+      imprint_size_type_list: true,
+      imprint_loc: true,
+      second_imprint_size_list: true,
+      second_imprint_units_list: true,
+      second_imprint_type_list: true,
+      second_imprint_loc: true,
+      decoration_method: true,
+      no_decoration: true,
+      made_in_country: true,
+      assembled_in_country: true,
+      decorated_in_country: true,
+      compliance_list: true,
+      warning_lbl: true,
+      compliance_memo: true,
+      prod_time_lo: true,
+      prod_time_hi: true,
+      rush_prod_time_lo: true,
+      rush_prod_time_hi: true,
+      packing: true,
+      carton_l: true,
+      carton_w: true,
+      carton_h: true,
+      weight_per_carton: true,
+      units_per_carton: true,
+      ship_point_country: true,
+      ship_point_zip: true,
+      comment: true,
+      verified: true,
+      update_inventory: true,
+      inventory_on_hand: true,
+      inventory_on_hand_added: true,
+      inventory_memo: true,
+      owner: true,
       created_at: true,
       updated_at: true,
-      NewBlankPictureFile: true,
-      EraseBlankPicture: true,
-      NotPictured: true
     };
 
     productProps.forEach((prop: string) => {
-      if(product.product[prop] != null && !(prop in ignore)) {
+      if (product.product[prop] != null && !(prop in ignore)) {
         table.push({
-          label: prop.replace(/([a-z, 0-9])([A-Z])/g, `$1 $2`)
-            .replace(/([a-z])([0-9])/g, `$1 $2`),
-          value: product.product[prop]
+          label: prop.replace(/[_]/g, ` `),
+          value: product.product[prop],
         });
       }
     });
 
-    console.info('table constructed: ', table);
+    console.info("table constructed: ", table);
     return table;
   }
 }
