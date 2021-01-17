@@ -27,7 +27,6 @@ export class AdminHeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._common.setLoader(true);
     this.currentUrl = this._activatedRoute.snapshot.url.join('/');
 
     let token = localStorage.getItem('Token');
@@ -36,7 +35,6 @@ export class AdminHeaderComponent implements OnInit {
         this.user = user;
         this.name = `${user.first_name} ${user.last_name}`;
         console.info('User details: ', this.user);
-        this._common.setLoader(false);
 
         this.sidebarItems = [
           {
@@ -69,7 +67,6 @@ export class AdminHeaderComponent implements OnInit {
     }
     else {
       this.user = null;
-      this._common.setLoader(false);
     }
 
     this.navItems = [

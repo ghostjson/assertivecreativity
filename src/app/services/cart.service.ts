@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { concatMap, map, take } from 'rxjs/operators';
 import { Cart, CartItem } from '../models/Cart';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -75,6 +75,25 @@ export class CartService {
   }
 
   /**
+   * return both the carts combined
+   */
+  getCart(): Observable<Cart> {
+    return this.getCustomCart().pipe(
+      concatMap((customCart: Cart) => {
+        return this.getStockCart().pipe(
+          map((stockCart: Cart): Cart => {
+            console.log('stock cart price: ', stockCart.total_price, ' custom cart: ', customCart.total_price);
+            return {
+              data: [...stockCart.data, ...customCart.data],
+              total_price: stockCart.total_price + customCart.total_price
+            };
+          })
+        );
+      })
+    );
+  }
+
+  /**
    * Return the custom cart item 
    */
   getCustomCartItem(id: number): Observable<CartItem> {
@@ -92,6 +111,10 @@ export class CartService {
       .pipe(map((item: any) => {
         return item.data;
       }));
+  }
+
+  getCartItem(id: number, is_stock: boolean) {
+    return is_stock ? this.getStockCartItem(id) : this.getCustomCartItem(id);
   }
 
   /**
@@ -131,10 +154,18 @@ export class CartService {
   }
 
   /**
+   * Add to custom cart or stock cart
+   * @param item cart item
+   */
+  addToCart(item: CartItem): Observable<CartItem> {
+    return item.order_data.is_stock ? this.addToStockCart(item) : this.addToCustomCart(item);
+  }
+
+  /**
    * Delete an item from the custom cart
    * @param id id of the cart item
    */
-  deleteFromCustomCart(id: number): Observable<any> {
+  deleteCustomCartItem(id: number): Observable<any> {
     return this._http.delete(`${this.customCartItemLink(id)}`)
       .pipe(take(1));
   }
@@ -143,8 +174,45 @@ export class CartService {
    * Delete an item from the stock cart
    * @param id id of the cart item
    */
-  deleteFromStockCart(id: number): Observable<any> {
+  deleteStockCartItem(id: number): Observable<any> {
     return this._http.delete(`${this.stockCartItemLink(id)}`)
       .pipe(take(1));
+  }
+
+  /**
+   * delete cart item
+   * @param id id of the cart item
+   * @param is_stock is stock item
+   */
+  deleteCartItem(id: number, is_stock: boolean): Observable<any> {
+    return is_stock ? this.deleteStockCartItem(id) : this.deleteCustomCartItem(id);
+  }
+
+  /**
+   * clear custom cart
+   */
+  clearCustomCart(): Observable<any> {
+    return this._http.delete<any>(this.customCartLink())
+      .pipe(take(1));
+  }
+
+  /**
+   * clear stock product
+   */
+  clearStockCart(): Observable<any> {
+    return this._http.delete<any>(this.stockCartLink())
+      .pipe(take(1));
+  }
+
+  /**
+   * clear the cart 
+   * @param is_stock stock cart check
+   */
+  clearCart(): Observable<any> {
+    return this.clearCustomCart().pipe(
+      concatMap(() => {
+        return this.clearStockCart();
+      })
+    );
   }
 }

@@ -15,7 +15,6 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private _userService: UserDetailsService, private common: CommonService) {
     this.viewMode = true;
-    this.common.setLoader(true);
     _userService.getUser().subscribe((user: User) => {
       this.user = user;
       this.common.setLoader(false);

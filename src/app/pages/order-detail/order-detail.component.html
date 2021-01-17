@@ -13,8 +13,8 @@
       </div>
       <div class="col-12 col-md-4">
         <app-product-summary-card
-          [name]="order.data.is_custom_product ? order.data.product_details.name : order.data.product_details.product.Name"
-          [description]="order.data.is_custom_product ? order.data.product_details.description : order.data.product_details.product.Description"
+          [name]="order.data.is_custom_product ? order.data.product_details.name : order.data.product_details.product.name"
+          [description]="order.data.is_custom_product ? order.data.product_details.description : order.data.product_details.product.description"
           [totalPrice]="order.data.total_price"
           [image]="order.data.product_details.image"
         ></app-product-summary-card>

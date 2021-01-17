@@ -92,6 +92,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { StepsModule } from 'primeng/steps';
 import { DataViewModule } from 'primeng/dataview';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { InputSwitchModule } from "primeng/inputswitch";
+import { SplitButtonModule } from "primeng/splitbutton";
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -108,8 +110,6 @@ import { AdminTagSelectorComponent } from "./components/admin-tag-selector/admin
 import { AdminTextOptionMakerComponent } from "./components/admin-text-option-maker/admin-text-option-maker.component";
 import { AdminProductEditComponent } from "./pages/admin-product-edit/admin-product-edit.component";
 import { AdminPriceTableInputComponent } from "./components/admin-price-table-input/admin-price-table-input.component";
-import { InputSwitchModule } from "primeng/inputswitch";
-import { SplitButtonModule } from "primeng/splitbutton";
 import { AdminHeaderComponent } from "./components/admin-header/admin-header.component";
 import { AdminSidebarComponent } from "./components/admin-sidebar/admin-sidebar.component";
 import { AdminNavbarComponent } from "./components/admin-navbar/admin-navbar.component";

@@ -24,7 +24,6 @@ export class ShopComponent implements OnInit {
   is_stock: boolean = false;
 
   constructor(
-    private _common: CommonService,
     private _productService: ProductService,
     private _pcService: ProductCategorisationService,
     private _activatedRoute: ActivatedRoute
@@ -32,7 +31,6 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     // start the loader
-    this._common.setLoader(true);
     this.productsLoading = true;
     this._activatedRoute.data.pipe(take(1)).subscribe((data: any) => {
       this.is_stock = data.is_stock;
@@ -72,7 +70,6 @@ export class ShopComponent implements OnInit {
         // hide the loader
         setTimeout(() => {
           this.productsLoading = false;
-          this._common.setLoader(false);
         }, 200);
       });
   }
@@ -91,7 +88,6 @@ export class ShopComponent implements OnInit {
       // hide the loader
       setTimeout(() => {
         this.productsLoading = false;
-        this._common.setLoader(false);
       }, 200);
     });
   }

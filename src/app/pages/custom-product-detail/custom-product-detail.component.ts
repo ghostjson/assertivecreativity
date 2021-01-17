@@ -49,7 +49,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _userDetailsService: UserDetailsService
   ) {
-    this._common.setLoader(true);
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
   }
 
@@ -302,7 +301,7 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     };
 
     this._cartService.addToCustomCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart", item.data.id]);
+      this._router.navigate(["/cart/custom", item.data.id]);
       console.log("added to cart: ", item);
     });
   }

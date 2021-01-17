@@ -20,7 +20,7 @@ export class OrderData {
   quantity: number;
   total_price: number;
   mail_thread?: number;
-  product_details: any;
+  product_details: Product;
   dates?: OrderAttribute[];
   stock_order_attributes?: OrderAttribute[];
   custom_forms_entry?: CustomFormsEntry[];

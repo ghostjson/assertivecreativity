@@ -55,9 +55,7 @@
               <ng-template pTemplate="body" let-price>
                 <tr>
                   <td>{{ price.label }}</td>
-                  <td>
-                    $ {{ price.price_per_piece }}
-                  </td>
+                  <td>$ {{ price.price_per_piece }}</td>
                   <td>
                     {{ price.quantity }}
                   </td>
@@ -74,70 +72,66 @@
               </span>
             </ng-template>
           </div>
-          
+
           <form [formGroup]="orderForm">
-            <ng-container formGroupName="data">
-              <ng-container formArrayName="stock_order_attributes">
-                <!-- options for color attribute starts -->
-                <div
-                  formGroupName="0"
-                  class="product-details-section order-attribute p-grid p-nogutter"
-                >
-                  <div class="p-col-3">
-                    <label for="colors"> Colors </label>
-                  </div>
-                  <div
-                    class="order-attribute-input order-attribute-input--color p-col-9"
-                  >
-                    <p-selectButton
-                      formControlName="input"
-                      [options]="product.attributes.colors"
-                    ></p-selectButton>
-                  </div>
-                </div>
-                <!-- options for color attribute ends -->
-              </ng-container>
-    
-              <!-- option for order quantity starts -->
+            <ng-container formArrayName="stock_order_attributes">
+              <!-- options for color attribute starts -->
               <div
+                formGroupName="0"
                 class="product-details-section order-attribute p-grid p-nogutter"
               >
                 <div class="p-col-3">
-                  <label for="order-quantity"> Order Quantity </label>
+                  <label for="colors"> Colors </label>
                 </div>
                 <div
-                  class="order-attribute-input order-attribute-input--quantity p-field p-input-filled p-col-9"
+                  class="order-attribute-input order-attribute-input--color p-col-9"
                 >
-                  <p-inputNumber
-                    formControlName="quantity"
-                    [showButtons]="true"
-                    buttonLayout="horizontal"
-                    inputId="order-quantity"
-                    spinnerMode="horizontal"
-                    [step]="1"
-                    decrementButtonClass="p-button-danger"
-                    incrementButtonClass="p-button-success"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    mode="decimal"
-                    min="1"
-                  >
-                  </p-inputNumber>
+                  <p-selectButton
+                    formControlName="input"
+                    [options]="product.attributes.colors"
+                  ></p-selectButton>
                 </div>
               </div>
-              <!-- option for order quantity ends -->
+              <!-- options for color attribute ends -->
             </ng-container>
           </form>
+          <!-- option for order quantity starts -->
+          <div
+            class="product-details-section order-attribute p-grid p-nogutter"
+          >
+            <div class="p-col-3">
+              <label for="order-quantity"> Order Quantity </label>
+            </div>
+            <div
+              class="order-attribute-input order-attribute-input--quantity p-field p-input-filled p-col-9"
+            >
+              <p-inputNumber
+                [(ngModel)]="orderQuantity"
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                inputId="order-quantity"
+                spinnerMode="horizontal"
+                [step]="1"
+                decrementButtonClass="p-button-danger"
+                incrementButtonClass="p-button-success"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                mode="decimal"
+                min="1"
+                (onInput)="this.updateTotalPrice()"
+              >
+              </p-inputNumber>
+            </div>
+          </div>
+          <!-- option for order quantity ends -->
 
           <p-footer>
             <div class="p-grid p-nogutter">
               <div class="p-col-6 p-d-flex p-jc-start p-ai-center">
                 <div class="footer-price">
-                  <span class="footer-price__currency">
-                    $
-                  </span>
+                  <span class="footer-price__currency"> $ </span>
                   <span class="footer-price__value">
-                    {{ priceTotal }}
+                    {{ totalPrice }}
                   </span>
                 </div>
               </div>

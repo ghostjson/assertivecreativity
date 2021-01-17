@@ -147,25 +147,17 @@ export class OrderService {
    * Create an order FormGroup for a stock product
    * @param product Product object
    */
-  createStockOrderForm(product: Product): FormGroup {
+  createStockOrderForm(): FormGroup {
     return this._fb.group({
-      product_id: product.id,
-      delivery_date: new Date().toISOString(),
-      data: this._fb.group({
-        is_custom_product: false,
-        product_details: product,
-        total_price: 0,
-        quantity: 1,
-        stock_order_attributes: this._fb.array([
-          this._fb.group({
-            id: this._idGenService.getId(),
-            attribute_label: 'Colors',
-            attribute_type: 'color',
-            attribute_price: 0,
-            input: null,
-          }),
-        ]),
-      }),
+      stock_order_attributes: this._fb.array([
+        this._fb.group({
+          id: this._idGenService.getId(),
+          attribute_label: "Colors",
+          attribute_type: "color",
+          attribute_price: 0,
+          input: null,
+        }),
+      ]),
     });
   }
 }

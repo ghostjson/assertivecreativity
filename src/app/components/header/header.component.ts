@@ -36,7 +36,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUrl = this._activatedRoute.snapshot.url.join('/');
-    this._common.setLoader(true);
     this.logo = './../../../assets/images/logo.png';
     this.cartLength = 0;
 

@@ -10,7 +10,7 @@ export interface CartItem {
   id?: number;
   user_id?: number;
   product_id: number;
-  product?: Product;
+  product: Product;
   quantity: number;
   order_data?: CartOrderData;
   total_price: number;

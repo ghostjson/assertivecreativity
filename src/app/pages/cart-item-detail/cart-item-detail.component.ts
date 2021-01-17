@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  Order
-} from "src/app/models/Order";
+import { Order } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { CartService } from "src/app/services/cart.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -18,6 +16,7 @@ export class CartItemDetailComponent implements OnInit {
   cartItemId: number;
   cartItem: any;
   order: Order;
+  is_stock: boolean;
 
   minDate: Date;
   orderDeliveryDate: Date;
@@ -33,9 +32,11 @@ export class CartItemDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    this.is_stock = this._router.url.includes("stock");
+    console.log("is stock: ", this.is_stock);
 
     this._cartService
-      .getCartItem(this.cartItemId)
+      .getCartItem(this.cartItemId, this.is_stock)
       .subscribe((cartItem: CartItem) => {
         this.cartItem = cartItem;
         console.info("cart item received: ", cartItem);
@@ -61,18 +62,21 @@ export class CartItemDetailComponent implements OnInit {
       delivery_date: this.orderDeliveryDate.toISOString(),
       data: {
         product_details: this.cartItem.product,
-        custom_forms_entry: this.cartItem.custom_forms_entry.forms_input.custom_forms,
+        custom_forms_entry: this.cartItem.custom_forms_entry.forms_input
+          .custom_forms,
         total_price: this.cartItem.custom_forms_entry.total_price,
         quantity: 1,
       },
     };
 
     // remove order from cart and add it to orders
-    this._cartService.deleteFromCart(this.cartItemId).subscribe((res: any) => {
-      this._orderService.placeOrder(this.order).subscribe((order: Order) => {
-        console.log("order placed: ", order);
-        this._router.navigate(["/orders/"]);
+    this._cartService
+      .deleteCartItem(this.cartItemId, this.order.data.product_details.is_stock)
+      .subscribe((res: any) => {
+        this._orderService.placeOrder(this.order).subscribe((order: Order) => {
+          console.log("order placed: ", order);
+          this._router.navigate(["/orders/"]);
+        });
       });
-    });
   }
 }

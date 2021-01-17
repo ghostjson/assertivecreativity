@@ -41,8 +41,6 @@ export class SigninComponent implements OnInit {
     if (this._auth.isAuthenticated()) {
       this._router.navigate([this.returnUrl]);
     }
-
-    this._common.setLoader(false);
   }
 
   /**

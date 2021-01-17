@@ -107,6 +107,7 @@ export class Product {
 
   // stock product
   is_stock: boolean;
+  product?: Product;
   product_id?: string;
   variant_id?: string;
   cat_year?: string;

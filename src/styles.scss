@@ -15,7 +15,7 @@
   --surface-d:rgba(0,0,0,.12);
   --surface-e:#ffffff;
   --surface-f:#ffffff;
-  --text-color:#000001;
+  --text-color:#2b2b2b;
   --text-color-secondary:textSecondaryColor;
   --font-family:Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
 }
@@ -61,12 +61,12 @@ html, body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  // font-family: 'Lato', sans-serif;
   height: 100%;
   background: $lighter-grey;
   color: $dark-color;
   font-family: "Roboto";
   font-size: 14px;
+  min-height: 600px;
 }
 
 img {

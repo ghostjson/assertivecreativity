@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { CartCustomFormsEntry } from 'src/app/models/Cart';
 import { OrderSummaryTable, CustomOption, CustomFormsEntry, CustomFormInput } from '../../models/Order';
 
 @Component({

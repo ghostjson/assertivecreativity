@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { CommonService } from "src/app/common.service";
-import { CartItem } from "src/app/models/Cart";
+import { CartItem, CartOrderData } from "src/app/models/Cart";
 import { Order } from "src/app/models/Order";
 import { PriceGroup, StockProduct } from "src/app/models/Product";
 import { CartService } from "src/app/services/cart.service";
@@ -17,20 +17,17 @@ import { UserDetailsService } from "src/app/store/user-details.service";
   templateUrl: "./stock-product-detail.component.html",
   styleUrls: ["./stock-product-detail.component.scss"],
 })
-export class StockProductDetailComponent implements OnInit, OnDestroy {
+export class StockProductDetailComponent implements OnInit {
   image_set: any[];
   responsiveOptions: any[];
   product: StockProduct;
-  priceTotal: number;
   currentUrl: string;
   productId: number;
   productSpecsTable: { label: string; value: string }[];
-  orderDeliveryDate: Date;
-  orderMeetingDate: Date;
-  orderConfirmationDate: Date;
   minDate: Date;
   orderForm: FormGroup;
-  formSub: Subscription;
+  orderQuantity: number;
+  totalPrice: number;
 
   constructor(
     public _productService: ProductService,
@@ -38,16 +35,13 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
     private _common: CommonService,
     private _orderService: OrderService,
     private _cartService: CartService,
-    private _router: Router,
-    private _userDetailsService: UserDetailsService,
-    private _idGenService: IdGeneratorService
+    private _router: Router
   ) {
-    this._common.setLoader(true);
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
   }
 
   ngOnInit(): void {
-    this.orderDeliveryDate = new Date();
+    this.orderQuantity = 1;
     this.responsiveOptions = [
       {
         breakpoint: "1024px",
@@ -75,7 +69,7 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
       .subscribe((product: StockProduct) => {
         this.product = product;
         console.info("Product Received: ", this.product);
-        this.orderForm = this._orderService.createStockOrderForm(product.product);
+        this.orderForm = this._orderService.createStockOrderForm();
 
         this.image_set = [
           {
@@ -117,15 +111,7 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
         this.minDate = tomorrow;
 
         this.updateTotalPrice();
-        // update price on future value changes of the order form
-        this.formSub = this.orderForm.valueChanges.subscribe(() => {
-          this.updateTotalPrice()
-        })
       });
-  }
-
-  ngOnDestroy(): void {
-    this.formSub.unsubscribe();
   }
 
   /**
@@ -133,9 +119,9 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
    */
   updateTotalPrice(): void {
     let pricePerPiece: number = this.getPricePerPiece();
-    this.priceTotal = Number((this.orderForm.value.data.quantity * pricePerPiece).toFixed(2));
+    this.totalPrice = Number((this.orderQuantity * pricePerPiece).toFixed(2));
     
-    console.log("price updated: ", pricePerPiece, ' | ', this.orderForm.value.data.quantity * pricePerPiece);
+    console.log("price updated: ", pricePerPiece, ' | ', this.orderQuantity * pricePerPiece);
   }
 
   /**
@@ -147,7 +133,7 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
       pricePerPiece = null;
     
     for(const priceGroup of priceGroups) {
-      if(this.orderForm.value.data.quantity <= priceGroup.quantity) {
+      if(this.orderQuantity <= priceGroup.quantity) {
         pricePerPiece = priceGroup.price_per_piece;
         return pricePerPiece;
       }
@@ -165,23 +151,20 @@ export class StockProductDetailComponent implements OnInit, OnDestroy {
     let cartItem: CartItem = {
       product_id: this.productId,
       product: this.product.product,
-      quantity: this.orderForm.value.data.quantity,
-      custom_forms_entry: this.orderForm.value,
-      total_price: this.priceTotal
+      quantity: this.orderQuantity,
+      order_data: {
+        is_stock: true,
+        order_price: this.totalPrice,
+        stock_order_attributes: this.orderForm.value.stock_order_attributes
+      },
+      total_price: this.totalPrice
     };
 
     console.log('add to cart: ', cartItem);
     this._cartService.addToCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart", item.data.id]);
+      this._router.navigate(["/cart/stock", item.data.id]);
       console.log("added to cart: ", item);
     });
-    // console.log("order form value: ", this.orderForm.value);
-    // this._orderService
-    //   .placeOrder(this.orderForm.value)
-    //   .subscribe((order: Order) => {
-    //     console.log("order placed: ", order);
-    //     this._router.navigate(["/orders/"]);
-    //   });
   }
 
   /**
