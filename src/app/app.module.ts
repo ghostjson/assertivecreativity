@@ -53,13 +53,11 @@ import { DropdownModule } from "primeng/dropdown";
 import { RadioButtonModule } from "primeng/radiobutton";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
-import { TreeTableModule } from "primeng/treetable";
 import { CalendarModule } from "primeng/calendar";
 import { TableModule } from "primeng/table";
 import { SliderModule } from "primeng/slider";
 import { DialogModule } from "primeng/dialog";
 import { MultiSelectModule } from "primeng/multiselect";
-import { ContextMenuModule } from "primeng/contextmenu";
 import { ToastModule } from "primeng/toast";
 import { ProgressBarModule } from "primeng/progressbar";
 import { FileUploadModule } from "primeng/fileupload";
@@ -94,6 +92,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { InputSwitchModule } from "primeng/inputswitch";
 import { SplitButtonModule } from "primeng/splitbutton";
+import { MessageService } from "primeng/api";
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -139,7 +138,8 @@ import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/
 import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
 import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
-import { MessageService } from "primeng/api";
+import { LimitLengthPipe } from './pipes/limit-length/limit-length.pipe';
+import { AdminFormsMakerComponent } from './pages/admin-forms-maker/admin-forms-maker.component';
 
 @NgModule({
   declarations: [
@@ -217,7 +217,9 @@ import { MessageService } from "primeng/api";
     OrderMailFormColorComponent,
     StockProductDetailComponent,
     OrderMailFormMakerDatePickerComponent,
-    OrderMailFormDatePickerComponent 
+    OrderMailFormDatePickerComponent,
+    LimitLengthPipe,
+    AdminFormsMakerComponent
   ],
   imports: [
     BrowserModule,
@@ -236,13 +238,11 @@ import { MessageService } from "primeng/api";
     RadioButtonModule,
     InputTextModule,
     InputTextareaModule,
-    TreeTableModule,
     CalendarModule,
     TableModule,
     SliderModule,
     DialogModule,
     MultiSelectModule,
-    ContextMenuModule,
     ToastModule,
     ProgressBarModule,
     FileUploadModule,

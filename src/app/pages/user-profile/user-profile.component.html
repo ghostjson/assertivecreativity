@@ -2,9 +2,9 @@
   <app-header></app-header>
   <div 
     *ngIf="user"
-    class="container my-5">
-    <div class="row">
-      <div class="col-12 col-lg-4">
+    class="container p-my-5">
+    <div class="p-grid">
+      <div class="p-col-12 p-lg-4">
         <p-card
           header="{{user.first_name + ' ' + user.last_name}}"
           subheader="{{user.role_id}}"
@@ -27,11 +27,11 @@
           </ng-template>
         </p-card>
       </div>
-      <div class="col-12 col-lg-8">
-        <p-card header="User Details" styleClass="user-details shadow mt-3 mt-lg-0">
+      <div class="p-col-12 p-lg-8">
+        <p-card header="User Details" styleClass="user-details p-mt-3 p-mt-lg-0">
           <p-tabView *ngIf="user">
             <p-tabPanel header="Personal Details">
-              <form class="user-details-form row">
+              <form class="user-details-form p-grid">
                 <div class="form-group col-12 col-lg-6">
                   <label class="form-group__label" for="first-name">
                     First Name
@@ -46,7 +46,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="last-name">
                     Last Name
                   </label>
@@ -60,7 +60,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group p-col-12">
                   <label class="form-group__label" for="profession">
                     Profession
                   </label>
@@ -74,7 +74,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group p-col-12">
                   <label class="form-group__label" for="email">
                     Email
                   </label>
@@ -88,7 +88,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group p-col-12">
                   <label class="form-group__label" for="phone">
                     Phone
                   </label>
@@ -107,7 +107,7 @@
             <p-tabPanel header="Company Details">
               <form
                 *ngIf="user.company_details"
-                class="company-details-form row">
+                class="company-details-form p-grid">
                 <div class="form-group col-12">
                   <label class="form-group__label" for="company-name">
                     Company Name
@@ -122,7 +122,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-2">
+                <div class="form-group p-col-12 p-md-2">
                   <label class="form-group__label" for="building-number">
                     Building Number
                   </label>
@@ -136,7 +136,7 @@
                     [disabled]="viewMode"
                   ></p-inputNumber>
                 </div>
-                <div class="form-group col-12 col-md-10">
+                <div class="form-group p-col-12 p-md-10">
                   <label class="form-group__label" for="street-name">
                     Street Name
                   </label
@@ -151,7 +151,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group p-col-12">
                   <label class="form-group__label" for="builing-name">
                     Building
                   </label
@@ -166,7 +166,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="locality">
                     Locality
                   </label>
@@ -180,7 +180,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="province-abbr">
                     Province Abbreviation
                   </label>
@@ -194,7 +194,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="zip">
                     Zip/Postal Code
                   </label>
@@ -208,7 +208,7 @@
                     [disabled]="viewMode"
                   ></p-inputNumber>
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="country">
                     Country
                   </label>
@@ -222,7 +222,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="email">
                     Email
                   </label>
@@ -236,7 +236,7 @@
                     [disabled]="viewMode"
                   />
                 </div>
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group p-col-12 p-md-6">
                   <label class="form-group__label" for="company-phone">
                     Phone
                   </label>
@@ -260,7 +260,7 @@
                 label="Cancel"
                 iconPos="right"
                 icon="pi pi-times"
-                styleClass="p-button-danger mr-2"
+                styleClass="p-button-danger p-mr-2"
                 (click)="viewMode = true"
               ></p-button>
               <p-button

@@ -1,11 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { Order } from "src/app/models/Order";
+import {
+  CustomFormInput,
+  CustomFormsEntry,
+  CustomOption,
+  Order,
+  OrderAttribute,
+} from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { CartService } from "src/app/services/cart.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { CommonService } from "src/app/common.service";
 import { CartItem } from "src/app/models/Cart";
 import { UserDetailsService } from "src/app/store/user-details.service";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-cart-item-detail",
@@ -14,12 +21,13 @@ import { UserDetailsService } from "src/app/store/user-details.service";
 })
 export class CartItemDetailComponent implements OnInit {
   cartItemId: number;
-  cartItem: any;
+  cartItem: CartItem;
   order: Order;
   is_stock: boolean;
+  orderSummary: OrderAttribute[];
 
   minDate: Date;
-  orderDeliveryDate: Date;
+  deliveryDates: FormGroup;
 
   constructor(
     private _orderService: OrderService,
@@ -47,6 +55,8 @@ export class CartItemDetailComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     this.minDate = tomorrow;
+
+    this.deliveryDates = this._orderService.createOrderDateForm();
   }
 
   /**
@@ -56,23 +66,43 @@ export class CartItemDetailComponent implements OnInit {
     this._commonService.setLoader(true);
     this.order = {
       product_id: this.cartItem.product.id,
-      seller_id: this.cartItem.product.seller_id,
-      buyer_id: this._userDetailsService.getUserLocal().id,
-      order_status: "open",
-      delivery_date: this.orderDeliveryDate.toISOString(),
-      data: {
-        product_details: this.cartItem.product,
-        custom_forms_entry: this.cartItem.custom_forms_entry.forms_input
-          .custom_forms,
-        total_price: this.cartItem.custom_forms_entry.total_price,
-        quantity: 1,
+      delivery_date: {
+        delivery_dates: this.deliveryDates.value.delivery_dates.map(
+          (date: Date) => {
+            return date ? date.toISOString() : '';
+          }
+        ),
+        meeting_dates: this.deliveryDates.value.meeting_dates.map(
+          (date: Date) => {
+            return date ? date.toISOString() : '';
+          }
+        ),
+        confirmation_dates: this.deliveryDates.value.confirmation_dates.map(
+          (date: Date) => {
+            return date ? date.toISOString() : '';
+          }
+        ),
       },
+      data: {
+        is_stock: this.cartItem.order_data.is_stock,
+        product_details: this.cartItem.product,
+        custom_forms_entry: this.cartItem.order_data.is_stock
+          ? null
+          : this.cartItem.order_data.forms_input,
+        stock_order_attributes: this.cartItem.order_data.is_stock
+          ? this.cartItem.order_data.stock_order_attributes
+          : null,
+        total_price: this.cartItem.order_data.order_price,
+        quantity: this.cartItem.quantity,
+      }
     };
 
     // remove order from cart and add it to orders
     this._cartService
-      .deleteCartItem(this.cartItemId, this.order.data.product_details.is_stock)
-      .subscribe((res: any) => {
+      .deleteCartItem(this.cartItemId, this.cartItem.order_data.is_stock)
+      .subscribe(() => {
+        console.log('item deleted from cart');
+        console.log('placing order: ', this.order);
         this._orderService.placeOrder(this.order).subscribe((order: Order) => {
           console.log("order placed: ", order);
           this._router.navigate(["/orders/"]);

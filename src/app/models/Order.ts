@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
-import { Product, StockProduct, StockProductAttributes } from './Product';
+import { Product } from './Product';
 
 export class Order {
   id?: number;
@@ -9,14 +9,20 @@ export class Order {
   seller_id?: number;
   created_at?: string;
   updated_at?: string;
-  delivery_date: string;
+  delivery_date: OrderDeliveryDates;
   order_status?: string;
   payment_id?: number;
   data: OrderData;
 }
 
+export class OrderDeliveryDates {
+  delivery_dates: string[];
+  meeting_dates: string[];
+  confirmation_dates: string[];
+}
+
 export class OrderData {
-  is_custom_product?: boolean;
+  is_stock: boolean;
   quantity: number;
   total_price: number;
   mail_thread?: number;
@@ -29,7 +35,7 @@ export class OrderData {
 export interface OrderAttribute {
   id?: number;
   attribute_label: string;
-  attribute_type: string;
+  attribute_type?: string;
   attribute_price: number;
   input: any;
 }

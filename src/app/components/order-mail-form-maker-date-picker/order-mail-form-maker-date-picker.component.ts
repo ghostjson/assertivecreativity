@@ -10,10 +10,15 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 export class OrderMailFormMakerDatePickerComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() questionIndex: number;
+  minDate: Date;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
   ngOnInit(): void {
+    let today = new Date();
+    let tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.minDate = tomorrow;
   }
 
   questions(): FormArray {

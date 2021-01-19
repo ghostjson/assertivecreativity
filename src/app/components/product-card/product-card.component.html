@@ -19,7 +19,7 @@
     </ng-template>
   </div>
   <div class="product-card__name">
-    {{summary(name)}}
+    {{ name | limitLength: 50 }}
   </div>
   <div class="product-card__price"
     *ngIf="price"
@@ -27,7 +27,7 @@
     {{price | currency: 'USD'}}
   </div>
   <div class="product-card__desc">
-    {{summary(description)}}
+    {{ description | limitLength: 50}}
   </div>
   <a
     label="Shop"

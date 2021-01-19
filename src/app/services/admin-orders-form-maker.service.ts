@@ -4,7 +4,12 @@ import { SelectItem } from 'primeng/api';
 import { IdGeneratorService } from './id-generator.service';
 import { PANTONE_COLORS } from '../../assets/js/pantone-colors';
 import { Color } from '../models/Color';
-import { FormInput, OrderMailFormQuestion } from '../models/OrderMailForm';
+import { FormInput, OrderMailForm, OrderMailFormQuestion, OrderMailFormResponse } from '../models/OrderMailForm';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, take } from 'rxjs/operators';
+import { Order } from '../models/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +18,8 @@ export class AdminOrdersFormMakerService {
 
   constructor(
     private _fb: FormBuilder,
-    private _idGenService: IdGeneratorService
+    private _idGenService: IdGeneratorService,
+    private _http: HttpClient
   ) { }
 
   getQuestionTypes(): SelectItem<string>[] {
@@ -39,6 +45,80 @@ export class AdminOrdersFormMakerService {
         value: 'date-picker'
       }
     ];
+  }
+
+  /**
+   * Return forms link
+   */
+  formsLink(): string {
+    return `${environment.apiUrl}/orders/forms`;
+  }
+
+  /**
+   * Return link for a form
+   * @param id id of the form
+   */
+  formLink(id: number): string {
+    return `${this.formsLink()}/${id}`;
+  }
+
+  /**
+   * List all the forms created
+   */
+  getAllForms(): Observable<OrderMailFormResponse[]> {
+    return this._http.get<any>(this.formsLink())
+      .pipe(
+        take(1),
+        map((res: any): OrderMailFormResponse[] => {
+          /**
+           * TODO: report bug
+           */
+          return res.data.map((formResponse: any): OrderMailFormResponse => {
+            formResponse.data = JSON.parse(formResponse.data);
+
+            return formResponse;
+          });
+        })
+      );
+  }
+
+  getForm(id: number): Observable<OrderMailFormResponse> {
+    return this._http.get<any>(this.formLink(id))
+      .pipe(
+        take(1),
+        map((res: any): OrderMailFormResponse => {
+          /**
+           * TODO: report bug
+           */
+          res.data = JSON.parse(res.data);
+          return res.data;
+        })
+      );
+  }
+
+  addForm(form: OrderMailForm): Observable<any> {
+    let req: any = {
+      name: form.title,
+      data: JSON.stringify(form)
+    };
+
+    return this._http.post<any>(this.formsLink(), req)
+      .pipe(take(1));
+  }
+
+  editForm(id:number, form: OrderMailForm): Observable<any> {
+    let req: any = {
+      id: id,
+      name: form.title,
+      data: JSON.stringify(form)
+    };
+
+    return this._http.post<any>(this.formLink(id), req)
+      .pipe(take(1));
+  }
+
+  deleteForm(id: number): Observable<any> {
+    return this._http.delete<any>(this.formLink(id)).pipe(take(1));
   }
 
   createQuestionInput(initial: FormInput = null): FormGroup {

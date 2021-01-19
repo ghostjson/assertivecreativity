@@ -3,17 +3,17 @@
   <app-admin-header></app-admin-header>
   <div class="dashboard">
     <div class="sidebar-minimised"></div>
-    <div class="container my-5">
-      <div class="row">
-        <div *ngFor="let card of cards" class="col-12 col-lg-4">
+    <div class="container p-my-5">
+      <div class="p-grid">
+        <div *ngFor="let card of cards" class="p-col-12 p-lg-4">
           <app-admin-status-card [card]="card"></app-admin-status-card>
         </div>
         <div *ngFor="let chart of charts" 
-          class="col-12 col-lg-6 mt-5"
+          class="p-col-12 p-lg-6 p-mt-5"
         >
           <app-admin-chart-card 
             chartIcon="pi pi-chart-line"
-            styleClass="shadow-lg"
+            styleClass="p-shadow-6"
             [chart]="chart"
           ></app-admin-chart-card>
         </div>

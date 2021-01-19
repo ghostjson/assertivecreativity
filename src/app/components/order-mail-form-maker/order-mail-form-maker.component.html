@@ -1,74 +1,94 @@
 <div [formGroup]="formGroup" class="order-mail-form-maker-component">
-  <p-card [header]="formGroup.value.title">
-    <ng-container>
-      <div class="form-group">
-        <label
-          class="form-group__label"
-          for="mail-form-title-{{ formGroup.value.id }}"
+  <h3>
+    {{ formGroup.value.title }}
+  </h3>
+
+  <div class="p-fluid">
+    <div class="p-field p-input-filled">
+      <label for="mail-form-title-{{ formGroup.value.id }}">
+        Enter title of the form
+      </label>
+      <input
+        type="text"
+        formControlName="title"
+        id="mail-form-title-{{ formGroup.value.id }}"
+        placeholder="Eg: Pick a color for the product ?"
+        pInputText
+      />
+    </div>
+  </div>
+
+  <ng-container formArrayName="questions">
+    <p-card
+      class="question-container"
+      *ngFor="let question of questions().controls; index as questionIndex"
+    >
+      <p-header>
+        <div
+          class="question-type p-input-filled"
+          [formGroupName]="questionIndex"
         >
-          Enter title of the form
-        </label>
-        <input
-          type="text"
-          formControlName="title"
-          id="mail-form-title-{{ formGroup.value.id }}"
-          pInputText
-        />
-      </div>
-    </ng-container>
-    <ng-container formArrayName="questions">
-      <div
-        class="border-top border-bottom py-3"
-        *ngFor="let question of questions().controls; index as questionIndex"
-      >
-        <ng-container [formGroupName]="questionIndex">
-          <label class="sr-only" for="question-type-{{question.value.id}}">
+          <span class="question-type__number">
+            {{ questionIndex + 1 }}
+          </span>
+          <label class="sr-only" for="question-type-{{ questionIndex }}">
             Select Question Type
           </label>
           <p-dropdown
+            class="question-type__input"
             [options]="questionTypes"
             formControlName="type"
             [filter]="true"
             filterBy="label"
             [showClear]="true"
-            inputId="question-type-{{question.value.id}}"
+            inputId="question-type-{{ questionIndex }}"
             placeholder="Select a Question Type"
           ></p-dropdown>
-        </ng-container>
-        <app-order-mail-form-maker-dropdown
-          *ngIf="question.value.type === 'dropdown'"
-          [form]="formGroup"
-          [questionIndex]="questionIndex"
-        ></app-order-mail-form-maker-dropdown>
-        <app-order-mail-form-maker-radio
-          *ngIf="question.value.type === 'radio'"
-          [form]="formGroup"
-          [questionIndex]="questionIndex"
-        ></app-order-mail-form-maker-radio>
-        <app-order-mail-form-maker-text
-          *ngIf="question.value.type === 'text'"
-          [form]="formGroup"
-          [questionIndex]="questionIndex"
-        ></app-order-mail-form-maker-text>
-        <app-order-mail-form-maker-color
-          *ngIf="question.value.type === 'color'"
-          [form]="formGroup"
-          [pantoneColors]="pantoneColors"
-          [questionIndex]="questionIndex"
-        ></app-order-mail-form-maker-color>
-        <app-order-mail-form-maker-date-picker
-          *ngIf="question.value.type === 'date-picker'"
-          [form]="formGroup"
-          [questionIndex]="questionIndex"
-        ></app-order-mail-form-maker-date-picker>
-      </div>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="question-type__delete-btn p-button-danger p-button-lg"
+            (onClick)="removeQuestion(questionIndex)"
+          ></p-button>
+        </div>
+      </p-header>
+
+      <app-order-mail-form-maker-dropdown
+        *ngIf="question.value.type === 'dropdown'"
+        [form]="formGroup"
+        [questionIndex]="questionIndex"
+      ></app-order-mail-form-maker-dropdown>
+      <app-order-mail-form-maker-radio
+        *ngIf="question.value.type === 'radio'"
+        [form]="formGroup"
+        [questionIndex]="questionIndex"
+      ></app-order-mail-form-maker-radio>
+      <app-order-mail-form-maker-text
+        *ngIf="question.value.type === 'text'"
+        [form]="formGroup"
+        [questionIndex]="questionIndex"
+      ></app-order-mail-form-maker-text>
+      <app-order-mail-form-maker-color
+        *ngIf="question.value.type === 'color'"
+        [form]="formGroup"
+        [pantoneColors]="pantoneColors"
+        [questionIndex]="questionIndex"
+      ></app-order-mail-form-maker-color>
+      <app-order-mail-form-maker-date-picker
+        *ngIf="question.value.type === 'date-picker'"
+        [form]="formGroup"
+        [questionIndex]="questionIndex"
+      ></app-order-mail-form-maker-date-picker>
+    </p-card>
+
+    <div class="p-fluid p-mt-6">
       <p-button
-        label="Add Question"
+        type="button"
+        label="Add New Question"
         icon="pi pi-plus"
         iconPos="right"
-        styleClass="p-button-success p-button-sm mt-5"
+        styleClass="p-button-success p-button-lg p-button-raised p-mb-5"
         (onClick)="addQuestion()"
       ></p-button>
-    </ng-container>
-  </p-card>
+    </div>
+  </ng-container>
 </div>

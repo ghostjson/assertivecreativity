@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CartService } from "src/app/services/cart.service";
 import { Cart, CartItem } from "src/app/models/Cart";
-import { ProductService } from "src/app/services/product.service";
-import { Product } from "src/app/models/Product";
-import { CustomFormInput } from "src/app/models/Order";
 import { CommonService } from "src/app/common.service";
 import { MessageService } from "primeng/api";
 
@@ -24,7 +21,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cart = null;
-    
+
     this._cartService.getCart().subscribe((cart: Cart) => {
       this.cart = cart;
       console.info("Cart received: ", this.cart);

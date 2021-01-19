@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngOnChanges(): void {
-    this._common.setLoader(true);
+    // this._common.setLoader(true);
   }
 
   ngAfterContentInit() {

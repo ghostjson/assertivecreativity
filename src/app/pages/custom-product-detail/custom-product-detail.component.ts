@@ -8,7 +8,6 @@ import { Product, listAllFeatures, CustomForm } from "../../models/Product";
 import { CommonService } from "src/app/common.service";
 import { OrderService } from "../../services/order.service";
 import { Router } from "@angular/router";
-import { IdGeneratorService } from "src/app/services/id-generator.service";
 import { CartService } from "src/app/services/cart.service";
 import { CartItem } from "src/app/models/Cart";
 import { TreeNode } from 'primeng/api';

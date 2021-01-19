@@ -7,14 +7,11 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   templateUrl: './order-mail-form-maker-radio.component.html',
   styleUrls: ['./order-mail-form-maker-radio.component.scss']
 })
-export class OrderMailFormMakerRadioComponent implements OnInit {
+export class OrderMailFormMakerRadioComponent {
   @Input() form: FormGroup;
   @Input() questionIndex: number;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
-
-  ngOnInit(): void {
-  }
 
   questions(): FormArray {
     return this.form.get('questions') as FormArray;
@@ -22,10 +19,6 @@ export class OrderMailFormMakerRadioComponent implements OnInit {
 
   inputs(questionIndex: number): FormArray {
     return this.questions().at(questionIndex).get('inputs') as FormArray;
-  }
-
-  removeQuestion(): void {
-    this.questions().removeAt(this.questionIndex);
   }
 
   addQuestionInput(): void {

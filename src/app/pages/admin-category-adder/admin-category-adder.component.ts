@@ -165,12 +165,4 @@ export class AdminCategoryAdderComponent implements OnInit {
 
     return index;
   }
-
-  /**
-   * Return a short part from the beginning of the string
-   * @param str string to make summary from
-   */
-  summary(str: string=''): string {
-    return str.slice(0, 50);
-  }
 }

@@ -1,0 +1,42 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .p-dataview {
+      &-content {
+        padding: 1.5em;
+      }
+    }
+    
+    h1 {
+      margin: 0;
+    }
+
+    .form-grid-item {
+      // padding: 0 1em;
+
+      .p-card {
+        box-shadow: none;
+        border: 1px solid $light-grey;
+
+        &-title {
+          font-size: 1.2rem;
+        }
+      }
+
+      &__content {
+        .content-row {
+          span {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .form-maker-dialog {
+      .p-dialog {
+        width: 80vw;
+      }
+    }
+  }
+}

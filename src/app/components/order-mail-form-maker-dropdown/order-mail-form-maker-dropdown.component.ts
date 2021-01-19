@@ -24,10 +24,6 @@ export class OrderMailFormMakerDropdownComponent implements OnInit {
     return this.questions().at(questionIndex).get('inputs') as FormArray;
   }
 
-  removeQuestion(): void {
-    this.questions().removeAt(this.questionIndex);
-  }
-
   addQuestionInput(): void {
     this.inputs(this.questionIndex).push(this._formMakerService.createQuestionInput());
   }

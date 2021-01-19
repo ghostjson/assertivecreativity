@@ -7,6 +7,8 @@ import { MailThread, Mail, AdminMailThreadResponse } from "src/app/models/Mail";
 import { AdminOrdersService } from "src/app/services/admin-orders.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { User } from "src/app/models/User";
+import { MenuItem } from "primeng/api";
+import { CommonService } from "src/app/common.service";
 
 @Component({
   selector: "app-order-detail",
@@ -22,6 +24,7 @@ export class OrderDetailComponent implements OnInit {
   adminMode: boolean;
   vendorMode: boolean;
   orderProgress: number;
+  orderSteps: MenuItem[];
 
   constructor(
     private _activatedRouteService: ActivatedRoute,
@@ -29,12 +32,28 @@ export class OrderDetailComponent implements OnInit {
     private _adminOrderService: AdminOrdersService,
     private _mailService: MailService,
     private _router: Router,
-    private _userDetailsService: UserDetailsService
+    private _userDetailsService: UserDetailsService,
+    private _commonService: CommonService
   ) {
     this.orderProgress = 0;
   }
 
   ngOnInit(): void {
+    this.orderSteps = [
+      {
+        label: "Order Placed"
+      },
+      {
+        label: "Discussion"
+      },
+      {
+        label: "Payment"
+      },
+      {
+        label: "Confirmation"
+      },
+    ];
+    
     this.adminMode = this._router.url.includes("admin");
     this.vendorMode = this._router.url.includes("vendor");
     let user: User = this._userDetailsService.getUserLocal();
@@ -108,6 +127,8 @@ export class OrderDetailComponent implements OnInit {
           });
       });
     }
+
+    this._commonService.setLoader(false);
   }
 
   /**
@@ -128,13 +149,11 @@ export class OrderDetailComponent implements OnInit {
   }
 
   setOrderProgress(): void {
-    if(this.order.order_status === "pending") {
+    if (this.order.order_status === "pending") {
       this.orderProgress = 50;
-    } 
-    else if(this.order.order_status === "complete") {
+    } else if (this.order.order_status === "complete") {
       this.orderProgress = 100;
-    } 
-    else {
+    } else {
       this.orderProgress = 0;
     }
   }

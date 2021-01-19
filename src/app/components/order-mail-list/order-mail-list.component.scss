@@ -6,48 +6,88 @@
       width: 100%;
     }
 
-    .p-card-title {
-      font-weight: 900;
-    }
-
-    .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link {
-      background: white;
-
-      &:hover {
-        text-decoration: none;
+    .mail-thread {
+      .p-card {
+        &-body {
+          padding: 0;
+        }
+  
+        &-title {
+          padding: 1rem;
+          font-weight: 900;
+        }
+  
+        .mail-item {
+          .p-accordion-tab {
+            box-shadow: none;
+            border: 1px solid $light-grey;
+            border-width: 1px 0 1px 0;
+            border-radius: 0;
+  
+            &.p-accordion-tab-active {
+              margin-bottom: 0;
+            }
+  
+            &:first-child {
+              .p-accordion-header {
+                .p-accordion-header-link {
+                  border-top-right-radius: 0;
+                  border-top-left-radius: 0;
+                }
+              }
+            }
+  
+            .author-details {
+              &__name {
+                font-weight: 500;
+              }
+            }
+          }
+  
+          &.user-msg {
+            .p-accordion-header-link,
+            .p-accordion-content {
+              // background: $lighter-grey !important;
+              background: rgba(222, 239, 183, 0.3) !important;
+            }
+  
+            .order-mail-form-component {
+              .p-accordion-header-link,
+              .p-accordion-content {
+                background: white !important;
+              }
+            }
+          }
+        }
       }
     }
 
     .p-scrollpanel-bar {
-      background: $secondary-color;
+      background: $primary-color;
+      opacity: 1;
     }
 
-    .compose-mail__writer {
-      height: 320px;
-    }
+    .compose-mail {
+      .p-card {
+        margin-top: 3em;
 
-    .p-editor-container {
-      height: 88%;
-    }
+        &-footer {
+          text-align: right;
+        }
+      }
 
-    .message-header,
-    .p-accordion-content {
-      color: black;
-    }
-
-    .user-msg {
-      .p-accordion-header-link,
-      .p-accordion-content {
-        background: $secondary-color !important;
+      &__writer {
+        height: 320px;
+      }
+  
+      .p-editor-container {
+        height: 88%;
       }
     }
 
-    .user-msg {
-      .order-mail-form-component {
-        .p-accordion-header-link,
-        .p-accordion-content {
-          background: white !important;
-        }
+    .order-mail-form-maker {
+      .p-dialog {
+        width: 70vw;
       }
     }
 

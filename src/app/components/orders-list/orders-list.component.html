@@ -1,8 +1,8 @@
 <div class="p-grid admin-products-list">
-  <div class="admin-data-table admin-products-table p-col card p-3">
-    <p-toolbar styleClass="toolbar shadow p-mb-4">
+  <div class="admin-data-table admin-products-table p-col p-3">
+    <p-toolbar styleClass="toolbar p-shadow-6 p-mb-3">
       <ng-template pTemplate="left">
-        <h1 class="toolbar__title m-md-0 mb-3">Orders</h1>
+        <h1 class="toolbar__title">Orders</h1>
       </ng-template>
 
       <ng-template pTemplate="right">
@@ -35,7 +35,7 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <span class="admin-data-table-searchbar p-input-icon-right">
+          <span class="admin-data-table-searchbar p-input-icon-right p-input-filled">
             <i class="admin-data-table-searchbar__icon pi pi-search"></i>
             <input
               class="admin-data-table-searchbar__input"
@@ -78,8 +78,8 @@
           <td>
             <span class="p-column-title"> Order </span>
             <span>
-              <a href="{{admin ? '/' + userRole + '/' : ''}}orders/{{ order.id }}">
-                {{ order.data.is_custom_product ? order.data.product_details.name : order.data.product_details.product.Name }}
+              <a [routerLink]="[admin ? '/' + userRole : '', 'orders', order.id]" >
+                {{ order.data.product_details.name }}
               </a>
             </span>
           </td>
@@ -92,7 +92,7 @@
           <td>
             <span class="p-column-title"> Delivery Date </span>
             <span>
-              {{ order.delivery_date | date: "mediumDate" }}
+              {{ order.delivery_date.delivery_dates[0] | date: "mediumDate" }}
             </span>
           </td>
           <td>

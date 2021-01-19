@@ -102,7 +102,7 @@
               <span class="p-column-title">
                 DESCRIPTION
               </span>
-              {{ summary(category.description) }}...
+              {{ category.description | limitLength: 50 }}...
             </td>
             <!-- <td>
               <span class="p-column-title">

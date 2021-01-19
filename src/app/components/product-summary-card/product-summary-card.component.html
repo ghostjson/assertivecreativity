@@ -1,20 +1,26 @@
-<div class="product-card">
-  <div class="product-card__img border-bottom">
-    <img class="img-fluid object--cover" src="{{image}}" alt="Product Image">
-  </div>
-  <div class="product-desc mt-3 p-3">
-    <div>
+<p-card>
+  <div class="product-card">
+    <div class="product-card__img">
+      <img *ngIf="image; else imgPlaceholder" src="{{image}}" alt="Product Image">
+      <ng-template #imgPlaceholder>
+        <span class="img-placeholder pi pi-image"></span>
+      </ng-template>
+    </div>
+    <div class="product-desc">
       <h2 class="product-desc__name">
-        {{name}}...
+        {{name | limitLength: 50}}
       </h2>
       <p class="product-desc__content">
-        {{description | slice: 0:100}}...
+        {{description | limitLength: 120}}
       </p>
-      <p class="product-desc__price mb-0 text-right">
-        <span>
+      <p class="product-desc__price">
+        <span class="product-desc__price__label">
+          Total Price:
+        </span>
+        <span class="product-desc__price__value">
           {{totalPrice | currency: 'USD'}}
         </span>
       </p>
     </div>
   </div>
-</div>
+</p-card>

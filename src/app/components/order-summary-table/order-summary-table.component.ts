@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TreeNode } from 'primeng/api';
-import { OrderSummaryTable, CustomOption, CustomFormsEntry, CustomFormInput } from '../../models/Order';
+import { Component, Input, OnInit } from '@angular/core';
+import { CustomFormInput, CustomFormsEntry, CustomOption, OrderAttribute } from '../../models/Order';
 
 @Component({
   selector: 'app-order-summary-table',
@@ -8,16 +7,20 @@ import { OrderSummaryTable, CustomOption, CustomFormsEntry, CustomFormInput } fr
   styleUrls: ['./order-summary-table.component.scss']
 })
 export class OrderSummaryTableComponent implements OnInit {
-  @Input() customFormsEntry: CustomFormsEntry[];
   @Input() totalPrice: number;
+  @Input() quantity: number;
+  @Input() is_stock: boolean;
+  @Input() data: any;
 
-  orderSummary: TreeNode[];
-  formSummary: OrderSummaryTable[];
+  orderSummary: OrderAttribute[];
 
   ngOnInit(): void {
-    console.info('cart item object in summary table: ', this.customFormsEntry);
-    // add data needed for table component from the order details
-    this.populateOrderTable();
+    if(this.is_stock) {
+      this.orderSummary = this.data;
+    }
+    else {
+      this.convertFormsToTable(this.data);
+    }
   }
 
   /**
@@ -25,51 +28,48 @@ export class OrderSummaryTableComponent implements OnInit {
    * custom form in the product page
    * @param option option object of the custom form
    */
-  populateOption(option: CustomOption): TreeNode {
-    let tableRow: TreeNode = {
-      data: {
-        title: option.title,
-        input: option.input,
-        price: option.price,
-      },
+  createRow(option: CustomOption): OrderAttribute {
+    let row: OrderAttribute = {
+      attribute_label: option.title,
+      attribute_price: option.price,
+      input: option.input,
     };
 
-    return tableRow;
+    return row;
   }
 
   /**
-   * Populate order table
+   * Convert custom forms to table
    */
-  populateOrderTable(): void {
+  convertFormsToTable(customFormsEntries: CustomFormsEntry[]): void {
     this.orderSummary = [];
 
-    this.customFormsEntry.forEach((customFormsEntry: CustomFormsEntry) => {
-      if(customFormsEntry.is_formgroup) {
+    customFormsEntries.forEach((customFormsEntry: CustomFormsEntry) => {
+      if (customFormsEntry.is_formgroup) {
         customFormsEntry.subforms.forEach((subform: CustomFormInput) => {
           subform.options.forEach((option: CustomOption) => {
-            if(option.input) {
-              this.orderSummary.push(this.populateOption(option));
+            if (option.input) {
+              this.orderSummary.push(this.createRow(option));
             }
 
             // populate chained options
             option.chained_options.forEach((chainedOption: CustomOption) => {
-              if(chainedOption.input) {
-                this.orderSummary.push(this.populateOption(chainedOption));
+              if (chainedOption.input) {
+                this.orderSummary.push(this.createRow(chainedOption));
               }
             });
           });
         });
-      }
-      else {
+      } else {
         customFormsEntry.options.forEach((option) => {
-          if(option.input) {
-            this.orderSummary.push(this.populateOption(option));
+          if (option.input) {
+            this.orderSummary.push(this.createRow(option));
           }
 
           // populate chained options
           option.chained_options.forEach((chainedOption) => {
-            if(chainedOption.input) {
-              this.orderSummary.push(this.populateOption(chainedOption));
+            if (chainedOption.input) {
+              this.orderSummary.push(this.createRow(chainedOption));
             }
           });
         });

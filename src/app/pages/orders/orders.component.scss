@@ -1,0 +1,10 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .container {
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+  }
+}

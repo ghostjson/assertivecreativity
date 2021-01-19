@@ -102,7 +102,8 @@ export class OrderMailListComponent implements OnInit {
             life: 3000,
           });
         });
-    } else {
+    } 
+    else {
       this._mailService.sendMail(newMail).subscribe((res: Mail) => {
         this.mailText = null;
         this.mailContainer.scrollTop(0);

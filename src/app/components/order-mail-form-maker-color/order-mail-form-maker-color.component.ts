@@ -24,8 +24,8 @@ export class OrderMailFormMakerColorComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentColorInput = {
-      label: '',
-      value: ''
+      label: 'Assertive',
+      value: '#cc9933'
     };
     this.colorSelector = false;
     this.colorEditMode = false;

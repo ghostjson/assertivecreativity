@@ -2,57 +2,50 @@
 
 :host {
   ::ng-deep {
-    .container {
+    .order-dates-picker {
       margin-top: 2em;
-    }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0;
-    }
+      .p-card {
+        &-title {
+          padding: 1rem 1rem 0 1rem;
+        }
 
-    .p-card-content {
-      padding: 0;
-    }
+        &-body {
+          padding: 0;
+        }
 
-    .p-calendar {
-      border-radius: 6px;
+        &-content {
+          padding: 1em 1em 0 1em;
+        }
 
-      .p-highlight {
-        color: white;
-      }
-    }
-
-    .order-summary__title {
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .pick-delivery-date__title {
-      background: white;
-      border-radius: 6px;
-      padding: 0.5em;
-      font-size: 1.7rem;
-    }
-
-    .pick-delivery-date {
-      p-card {
-        width: 100%;
-      }
-
-      .p-calendar {
-        width: 100%;
+        &-footer {
+          padding: 1em;
+        }
       }
 
       .date-picker {
-        margin-top: 2em;
+        border: 1px solid $light-grey;
+        border-radius: 6px;
+        padding: 1em;
+
+        .p-datepicker-inline {
+          flex-direction: column;
+        }
+
+        label {
+          display: block;
+          font-size: 1.2rem;
+          margin-bottom: 0.5em;
+        }
+
+        .date-picker-content__input-value {
+          margin-top: 1em;
+
+          .label {
+            font-weight: 500;
+          }
+        }
       }
     }
   }
-}
-
-.place-order-footer {
-  background: white;
-  border: 1px solid $light-grey;
-  border-radius: 6px;
 }

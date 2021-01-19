@@ -32,4 +32,8 @@ export class OrderMailFormMakerComponent implements OnInit {
   addQuestion(): void {
     this.questions().push(this._formMakerService.createFormQuestion());
   }
+
+  removeQuestion(index: number): void {
+    this.questions().removeAt(index);
+  }
 }

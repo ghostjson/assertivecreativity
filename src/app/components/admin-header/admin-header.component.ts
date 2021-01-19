@@ -61,7 +61,12 @@ export class AdminHeaderComponent implements OnInit {
             label: 'Tags',
             routerLink: `/${user.role}/tags`,
             icon: 'pi pi-tags'
-          }
+          },
+          {
+            label: 'Forms',
+            routerLink: `/${user.role}/forms`,
+            icon: 'pi pi-book'
+          },
         ];
       })
     }

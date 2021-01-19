@@ -2,6 +2,10 @@
 
 :host {
   ::ng-deep {
+    .p-card {
+      box-shadow: none;
+    }
+
     .p-treetable .p-treetable-thead > tr > th {
       background: white;
       color: $dark-color;

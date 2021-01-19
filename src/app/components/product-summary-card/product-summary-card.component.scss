@@ -1,26 +1,59 @@
 @import '../../../assets/css/variables.scss';
 
-.product-card {
-  background: white;
-  border: 1px solid $light-grey;
-  border-radius: 6px;
-  overflow: hidden;
-}
+:host {
+  ::ng-deep {
+    .p-card {
+      box-shadow: none;
 
-.product-desc__name {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
+      .p-card-content {
+        .product-card {
+          &__img {
+            height: 350px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-.product-card__img {
-  text-align: center;
-  overflow: hidden;
-}
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
 
-.product-desc__price {
-  font-size: 1.5rem;
+            .img-placeholder {
+              font-size: 2rem;
+            }
+          }
 
-  &>span:nth-of-type(1) {
-    font-weight: 800;
+          .product-desc {
+            p {
+              margin-bottom: 0;
+            }
+
+            &__name {
+              font-weight: 500;
+              margin-bottom: 0;
+            }
+
+            &__content {
+              margin-bottom: 0;
+            }
+
+            &__price {
+              &__label {
+                display: block;
+                font-size: 0.9rem;
+              }
+
+              &__value {
+                font-weight: 700;
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

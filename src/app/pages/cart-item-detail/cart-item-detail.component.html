@@ -1,103 +1,193 @@
-<div class="cart-item-detail-component">
+<div class="cart-item-detail-page">
   <app-header></app-header>
-  <div class="container">
-    <div *ngIf="cartItem" class="row justify-content-center">
-      <div class="col-12">
-        <p-card>
-          <p-header>
-            <h1 class="order-summary__title">Order Summary</h1>
-          </p-header>
-          <div class="d-flex justify-content-center">
-            <div
-              class="row justify-content-between align-items-stretch mt-5 mb-5"
-            >
-              <div
-                class="col-12 col-md-6 d-flex flex-column justify-content-start"
-              >
-                <app-product-summary-card
-                  [name]="cartItem.product.name"
-                  [image]="cartItem.product.image"
-                  [description]="cartItem.product.description"
-                  [totalPrice]="
-                    cartItem.custom_forms_entry
-                      ? cartItem.custom_forms_entry.total_price
-                      : cartItem.product.base_price
-                  "
-                ></app-product-summary-card>
+
+  <div *ngIf="cartItem" class="container">
+    <h1 class="order-summary__title">Order Summary</h1>
+    <div class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <app-product-summary-card
+          [name]="cartItem.product.name"
+          [image]="cartItem.product.image"
+          [description]="cartItem.product.description"
+          [totalPrice]="cartItem.order_data.order_price"
+        ></app-product-summary-card>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-8">
+        <app-order-summary-table
+          [data]="
+            cartItem.order_data.is_stock
+              ? cartItem.order_data.stock_order_attributes
+              : cartItem.order_data.forms_input
+          "
+          [is_stock]="cartItem.order_data.is_stock"
+          [totalPrice]="cartItem.order_data.order_price"
+          [quantity]="cartItem.quantity"
+        ></app-order-summary-table>
+
+        <form [formGroup]="deliveryDates" class="order-dates-picker">
+          <p-card header="Choose Order Related Dates">
+            <div class="p-grid">
+              <div class="p-fluid p-col-6">
+                <div class="date-picker p-field p-input-filled">
+                  <label for="delivery-date-picker">
+                    Select a delivery date range
+                    <sup>*</sup>
+                  </label>
+                  <p-calendar
+                    formControlName="delivery_dates"
+                    selectionMode="range"
+                    [minDate]="minDate"
+                    inputId="delivery-date-picker"
+                    styleClass="shadow"
+                    showTime="true"
+                    hourFormat="12"
+                    placeholder="Delivery Date"
+                    name="delivery-date"
+                  ></p-calendar>
+                  <div class="date-picker-content">
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> From: </span>
+                      {{
+                        deliveryDates.value.delivery_dates
+                          ? (deliveryDates.value.delivery_dates[0]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> To: </span>
+                      {{
+                        deliveryDates.value.delivery_dates
+                          ? (deliveryDates.value.delivery_dates[1]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> Time: </span>
+                      {{
+                        deliveryDates.value.delivery_dates
+                          ? (deliveryDates.value.delivery_dates[0]
+                            | date: "shortTime")
+                          : "Not Selected"
+                      }}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div
-                class="pick-delivery-date col-12 col-md-5 d-flex justify-content-center mt-5 mt-md-0"
-              >
-                <p-card header="Choose Delivery Date">
-                  <div class="date-picker">
-                    <label for="delivery-date-picker">
-                      Select delivery date
-                      <sup>*</sup>
-                    </label>
-                    <p-calendar
-                      [(ngModel)]="orderDeliveryDate"
-                      [minDate]="minDate"
-                      inputId="date-range"
-                      styleClass="shadow"
-                      showTime="true" 
-                      hourFormat="12"
-                      placeholder="Delivery Date"
-                    ></p-calendar>
+              <div class="p-fluid p-col-6">
+                <div class="date-picker p-field p-input-filled">
+                  <label for="meeting-date-picker">
+                    Select a meeting date range
+                    <sup>*</sup>
+                  </label>
+                  <p-calendar
+                    formControlName="meeting_dates"
+                    selectionMode="range"
+                    [minDate]="minDate"
+                    inputId="meeting-date-picker"
+                    showTime="true"
+                    hourFormat="12"
+                    placeholder="Meeting Date"
+                    name="meeting-date"
+                  ></p-calendar>
+                  <div class="date-picker-content">
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> From: </span>
+                      {{
+                        deliveryDates.value.meeting_dates
+                          ? (deliveryDates.value.meeting_dates[0]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> To: </span>
+                      {{
+                        deliveryDates.value.meeting_dates
+                          ? (deliveryDates.value.meeting_dates[1]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> Time: </span>
+                      {{
+                        deliveryDates.value.meeting_dates
+                          ? (deliveryDates.value.meeting_dates[0]
+                            | date: "shortTime")
+                          : "Not Selected"
+                      }}
+                    </div>
                   </div>
-                  <div class="date-picker">
-                    <label for="delivery-date-picker">
-                      Select meeting date
-                      <sup>*</sup>
-                    </label>
-                    <p-calendar
-                      [minDate]="minDate"
-                      inputId="date-range"
-                      styleClass="shadow"
-                      showTime="true" 
-                      hourFormat="12"
-                      placeholder="Meeting Date"
-                    ></p-calendar>
+                </div>
+              </div>
+              <div class="p-fluid p-col-6">
+                <div class="date-picker p-field p-input-filled">
+                  <label for="confirmation-date-picker">
+                    Select a confirmation date range
+                    <sup>*</sup>
+                  </label>
+                  <p-calendar
+                    formControlName="confirmation_dates"
+                    selectionMode="range"
+                    [minDate]="minDate"
+                    inputId="confirmation-date-picker"
+                    showTime="true"
+                    hourFormat="12"
+                    placeholder="Confirmation Date"
+                    name="confirmation-date"
+                  ></p-calendar>
+                  <div class="date-picker-content">
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> From: </span>
+                      {{
+                        deliveryDates.value.confirmation_dates
+                          ? (deliveryDates.value.confirmation_dates[0]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> To: </span>
+                      {{
+                        deliveryDates.value.confirmation_dates
+                          ? (deliveryDates.value.confirmation_dates[1]
+                            | date: "longDate")
+                          : "Not Selected"
+                      }}
+                    </div>
+                    <div class="date-picker-content__input-value">
+                      <span class="label"> Time: </span>
+                      {{
+                        deliveryDates.value.confirmation_dates
+                          ? (deliveryDates.value.confirmation_dates[0]
+                            | date: "shortTime")
+                          : "Not Selected"
+                      }}
+                    </div>
                   </div>
-                  <div class="date-picker">
-                    <label for="delivery-date-picker">
-                      Select confirmation date
-                      <sup>*</sup>
-                    </label>
-                    <p-calendar
-                      [minDate]="minDate"
-                      inputId="date-range"
-                      styleClass="shadow"
-                      showTime="true" 
-                      hourFormat="12"
-                      placeholder="Confirmation Date"
-                    ></p-calendar>
-                  </div>
-                </p-card>
+                </div>
               </div>
             </div>
-          </div>
-        </p-card>
-      </div>
-      <div class="mt-5">
-        <app-order-summary-table
-          *ngIf="cartItem.custom_forms_entry"
-          [customFormsEntry]="
-            cartItem.custom_forms_entry.forms_input.custom_forms
-          "
-          [totalPrice]="cartItem.custom_forms_entry.total_price"
-        ></app-order-summary-table>
-      </div>
-      <div class="place-order-footer col-12 p-3 shadow text-right mt-4 mb-5">
-        <button
-          label="Place Order"
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          type="submit"
-          class="p-button-primary p-button-lg"
-          [disabled]="!orderDeliveryDate"
-          (click)="confirmOrder()"
-          pButton
-        ></button>
+
+            <p-footer>
+              <div class="p-d-flex p-jc-end">
+                <button
+                  label="Place Order"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                  type="submit"
+                  class="p-button-primary p-button-lg"
+                  [disabled]="!deliveryDates.valid"
+                  (click)="confirmOrder()"
+                  pButton
+                ></button>
+              </div>
+            </p-footer>
+          </p-card>
+        </form>
       </div>
     </div>
   </div>

@@ -1,3 +1,5 @@
+@import '../../../assets/css/variables.scss';
+
 :host {
   ::ng-deep {
     .order-badge {
@@ -7,35 +9,152 @@
       font-weight: 700;
       font-size: 12px;
       letter-spacing: 0.3px;
-  
+
       &.status-closed {
         background-color: #c8e6c9;
         color: #256029;
       }
-  
+
       &.status-cancelled {
         background-color: #ffcdd2;
         color: #c63737;
       }
-  
+
       &.status-pending {
         background-color: #feedaf;
         color: #8a5340;
       }
-  
+
       &.status-completed {
         background-color: #b3e5fc;
         color: #23547b;
       }
-  
+
       &.status-renewal {
         background-color: #eccfff;
         color: #694382;
       }
-  
+
       &.status-proposal {
         background-color: #ffd8b2;
         color: #805b36;
+      }
+    }
+    .toolbar__title {
+      margin: 0;
+    }
+    
+    .admin-products-table {
+      .admin-products-table__image-header {
+        width: 4rem;
+        height: auto;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .p-datatable-tbody {
+        .admin-products-table__image {
+          img {
+            border-radius: 6px;
+          }
+
+          padding-right: 0;
+        }
+      }
+    }
+
+    .admin-data-table__image-header {
+      width: 4rem;
+      height: auto;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .p-datatable-tbody {
+      .admin-data-table__image {
+        img {
+          border-radius: 6px;
+        }
+
+        padding-right: 0;
+      }
+    }
+
+    .admin-data-table__tools {
+      .p-button {
+        height: 2.357rem;
+      }
+    }
+
+    .admin-data-table-searchbar {
+      width: 100%;
+    }
+
+    .admin-data-table-searchbar__input {
+      width: 100%;
+    }
+
+    .toolbar__title {
+      font-weight: 900;
+      font-size: 2rem;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td.admin-data-table__tools {
+      text-align: center;
+    }
+
+    /* Responsive */
+    .p-datatable-tbody > tr > td .p-column-title {
+      display: none;
+    }
+
+    @media screen and (max-width: 960px) {
+      .p-datatable {
+        .p-datatable-thead > tr > th,
+        .p-datatable-tfoot > tr > td {
+          display: none !important;
+        }
+
+        .p-datatable-tbody > tr {
+          border-bottom: 1px solid $secondary-color;
+
+          > td {
+            text-align: left;
+            display: flex;
+            border: 0 none !important;
+            width: 100% !important;
+            float: left;
+            clear: left;
+            border: 0 none;
+            word-break: break-all;
+
+            .p-column-title {
+              padding: 0.4rem;
+              min-width: 30%;
+              display: inline-block;
+              margin: -0.4rem 1rem -0.4rem -0.4rem;
+              font-weight: bold;
+            }
+
+            .p-progressbar {
+              margin-top: 0.5rem;
+            }
+          }
+        }
+
+        .admin-products-table__tools {
+          display: flex;
+          justify-content: center;
+        }
+
+        .p-paginator-current {
+          width: 100%;
+        }
       }
     }
   }

@@ -2,28 +2,49 @@
 
 :host {
   ::ng-deep {
+    .container {
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
     .page-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       background: white;
       border-radius: 6px;
       border: 1px solid $light-grey;
+      padding: 1em;
       
       h1 {
-        font-weight: 900;
-      }
-      p-progressBar {
-        margin-left: 2em;
-        flex-grow: 1;
+        font-weight: 500;
+        margin: 0;
+        margin-bottom: 0.5em;
       }
     }
 
-    .p-tabview {
-      border-radius: 6px;
+    .admin-mail-tabview {
+      .p-tabview {
+        border-radius: 6px;
 
-      .p-tabview-nav {
-        border-radius: 6px 6px 0 0;
+        &-panels {
+          padding: 0;
+          background-color: transparent;
+
+          .p-card {
+            box-shadow: none;
+          }
+        }
+  
+        &-nav {
+          border-radius: 6px 6px 0 0;
+          overflow: hidden;
+          justify-content: space-around;
+
+          li {
+            flex-grow: 1;
+            
+            .p-tabview-nav-link {
+              justify-content: center;
+            }
+          }
+        }
       }
     }
   }

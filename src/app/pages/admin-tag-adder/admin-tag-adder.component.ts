@@ -183,19 +183,4 @@ export class AdminTagAdderComponent implements OnInit {
 
     return index;
   }
-
-  /**
-   * Convert tag label into a slug
-   */
-  // generateSlug(): void {
-  //   this.tag.value = this.tag.label.trim().toLowerCase().replace(/\s+/g, '-');
-  // }
-
-  /**
-   * Return a short first part of a string 
-   * @param str string to generate the summary of
-   */
-  summary(str: string): string {
-    return str.slice(0, 50);
-  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { Product } from "../models/Product";
 import { ProductService } from "./product.service";
 import { Order } from "../models/Order";
@@ -158,6 +158,26 @@ export class OrderService {
           input: null,
         }),
       ]),
+    });
+  }
+
+  /**
+   * Create form for getting order related dates
+   */
+  createOrderDateForm(): FormGroup {
+    return this._fb.group({
+      delivery_dates: [
+        null,
+        [Validators.required]
+      ],
+      meeting_dates: [
+        null,
+        [Validators.required]
+      ],
+      confirmation_dates: [
+        null,
+        [Validators.required]
+      ]
     });
   }
 }

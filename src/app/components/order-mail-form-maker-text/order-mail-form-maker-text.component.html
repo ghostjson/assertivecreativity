@@ -1,4 +1,4 @@
-<ng-container [formGroup]="form">
+<!-- <ng-container [formGroup]="form">
   <div
     formArrayName="questions"
     class="order-mail-form-maker-dropdown-component mt-3"
@@ -64,5 +64,39 @@
         (onClick)="removeQuestion()"
       ></p-button>
     </div>
+  </div>
+</ng-container> -->
+
+<ng-container [formGroup]="form">
+  <div
+    formArrayName="questions"
+    class="order-mail-form-maker-text-component"
+  >
+    <ng-container [formGroupName]="questionIndex">
+      <div class="p-fluid p-field p-input-filled">
+        <label for="form-question-{{ form.value.questions[questionIndex].id }}">
+          Enter the question
+        </label>
+        <input
+          type="text"
+          formControlName="label"
+          id="form-question-{{ form.value.questions[questionIndex].id }}"
+          placeholder="Enter the question"
+          pInputText
+        />
+      </div>
+      <div class="p-fluid p-field p-input-filled">
+        <label for="form-question-{{ form.value.questions[questionIndex].id }}-placeholder">
+          Enter placeholder for text input
+        </label>
+        <input
+          type="text"
+          formControlName="placeholder"
+          id="form-question-{{ form.value.questions[questionIndex].id }}-placeholder"
+          placeholder="Enter the question"
+          pInputText
+        />
+      </div>
+    </ng-container>
   </div>
 </ng-container>

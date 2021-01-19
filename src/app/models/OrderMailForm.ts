@@ -29,3 +29,11 @@ export interface OrderMailFormQuestionEntry {
   label: string;
   input_value: any;
 }
+
+export interface OrderMailFormResponse {
+  id?: number;
+  name?: string;
+  data: OrderMailForm;
+  created_at?: string;
+  updated_at?: string;
+}

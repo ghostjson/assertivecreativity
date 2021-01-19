@@ -25,7 +25,10 @@ export class ExcelService {
       let orderDate: Date = new Date(order.created_at);
       excelRow.push(orderDate.toLocaleDateString("en-US"));
 
-      let deliveryDate: Date = new Date(order.delivery_date);
+      /**
+       * TODO: Fix delivery dates incorectly exported
+       */
+      let deliveryDate: Date = null;
       excelRow.push(deliveryDate.toLocaleDateString("en-US"));
 
       excelRow.push(order.data.total_price);
