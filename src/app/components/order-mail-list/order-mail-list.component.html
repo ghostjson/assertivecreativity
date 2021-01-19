@@ -55,7 +55,7 @@
   </p-card>
 
   <p-card class="compose-mail">
-    <div *ngIf="orderMailForm.touched" class="form-list">
+    <div  *ngIf="user.role === 'admin' && orderMailForm.touched" class="form-list">
       <div class="form-list__item">
         <div class="form-list__item__title">
           {{ orderMailForm.value.title }}
@@ -108,6 +108,7 @@
       class="saved-forms-dialog"
       header="Saved Forms"
       [(visible)]="savedFormsDialog"
+      *ngIf="user.role === 'admin'"
     >
       <p-listbox
         [options]="savedForms"
@@ -159,6 +160,7 @@
     </p-dialog> -->
 
     <p-dialog
+      *ngIf="user.role === 'admin'"
       class="order-mail-form-maker"
       header="Create New Form"
       [(visible)]="showFormMakerDialog"

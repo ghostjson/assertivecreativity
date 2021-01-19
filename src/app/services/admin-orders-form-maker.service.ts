@@ -143,8 +143,8 @@ export class AdminOrdersFormMakerService {
     return questionInput;
   }
 
-  createFormQuestion(): FormGroup {
-    let formQuestion: FormGroup = this._fb.group({
+  createFormQuestion(initial: OrderMailFormQuestion = null): FormGroup {
+    let formTemplate: any = {
       id: this._idGenService.getId(),
       label: '',
       placeholder: '',
@@ -152,20 +152,50 @@ export class AdminOrdersFormMakerService {
       inputs: this._fb.array([
         this.createQuestionInput()
       ])
-    });
+    };
 
+    if(initial) {
+      formTemplate.label = initial.label;
+      formTemplate.placeholder = initial.placeholder;
+      formTemplate.type = initial.type;
+
+      formTemplate.inputs = this._fb.array([]);
+      initial.inputs.forEach((input: any) => {
+        formTemplate.inputs.push(this.createQuestionInput(input))
+      });
+    }
+
+    let formQuestion: FormGroup = this._fb.group(formTemplate);
     console.log('form question created: ', formQuestion.value);
     return formQuestion;
   }
 
-  createOrderMailForm(): FormGroup {
-    let mailForm: FormGroup = this._fb.group({
-      id: this._idGenService.getId(),
-      title: 'Form Title',
-      questions: this._fb.array([
-        this.createFormQuestion()
-      ])
-    });
+  createOrderMailForm(initial: OrderMailForm = null): FormGroup {
+    let mailForm: FormGroup = null;
+
+    if(initial) {
+      let mailFormTemp = {
+        id: this._idGenService.getId(),
+        title: initial.title,
+        questions: this._fb.array([])
+      };
+      
+
+      initial.questions.forEach(question => {
+        mailFormTemp.questions.push(this.createFormQuestion(question))
+      });
+
+      mailForm = this._fb.group(mailFormTemp);
+    }
+    else {
+      mailForm = this._fb.group({
+        id: this._idGenService.getId(),
+        title: 'Form Title',
+        questions: this._fb.array([
+          this.createFormQuestion()
+        ])
+      });
+    }
 
     console.log('Mail form created: ', mailForm.value);
     return mailForm;

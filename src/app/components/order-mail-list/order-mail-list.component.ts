@@ -52,10 +52,12 @@ export class OrderMailListComponent implements OnInit {
     // if(this.user.role === 'admin') {
     this.orderMailForm = this._formMakerService.createOrderMailForm();
     // }
-    this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
-      this.savedForms = res;
-      console.log('forms received: ', this.savedForms);
-    });
+    if(this.user.role === 'admin') {
+      this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
+        this.savedForms = res;
+        console.log('forms received: ', this.savedForms);
+      });
+    }
 
 
     this.showFormMakerDialog = false;
@@ -153,7 +155,7 @@ export class OrderMailListComponent implements OnInit {
 
   setMailForm(): void {
     console.log('setting form ', this.selectedSavedForm);
-    this.orderMailForm.setValue(this.selectedSavedForm.data);
+    this.orderMailForm = this._formMakerService.createOrderMailForm(this.selectedSavedForm.data);
     this.toggleSavedFormsDialog();
     console.log(this.orderMailForm.value);
     this.orderMailForm.markAllAsTouched();
