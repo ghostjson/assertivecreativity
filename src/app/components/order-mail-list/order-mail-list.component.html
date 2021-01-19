@@ -1,20 +1,22 @@
 <div class="order-mail-list-component">
   <p-card class="mail-thread" header="Mail Thread">
     <p-scrollPanel #mailContainer [style]="{ width: '100%', height: '80vh' }">
-      <p-accordion
-        *ngIf="mails.length; else noMessages"
-        [multiple]="true"
-      >
+      <p-accordion *ngIf="mails.length; else noMessages" [multiple]="true">
         <ng-container *ngFor="let mail of mails; first as isFirst">
           <p-accordionTab
-            class="mail-item {{ mail.sender.id == user.id ? 'user-msg' : 'reply-msg' }}"
+            class="mail-item {{
+              mail.sender.id == user.id ? 'user-msg' : 'reply-msg'
+            }}"
             [selected]="isFirst"
           >
             <ng-template pTemplate="header">
               <div class="message-header d-flex justify-content-between">
                 <div class="author-details">
                   <span class="author-details__name">
-                    {{ mail.sender.first_name + " " + mail.sender.last_name | titlecase}}
+                    {{
+                      mail.sender.first_name + " " + mail.sender.last_name
+                        | titlecase
+                    }}
                   </span>
                 </div>
                 <div class="message-meta">
@@ -27,6 +29,10 @@
             <div class="message">
               <div class="forms-list">
                 <div
+                  class="message"
+                  [innerHtml]="mail.message_content.message"
+                ></div>
+                <div
                   *ngFor="
                     let form of mail.message_content.forms;
                     index as formIndex
@@ -38,42 +44,123 @@
                   ></app-order-mail-form>
                 </div>
               </div>
-              <div
-                class="message"
-                [innerHtml]="mail.message_content.message"
-              ></div>
             </div>
           </p-accordionTab>
         </ng-container>
       </p-accordion>
       <ng-template #noMessages>
-        <p class="p-text-center">
-          You don't have any mail now.
-        </p>
+        <p class="p-text-center">You don't have any mail now.</p>
       </ng-template>
     </p-scrollPanel>
   </p-card>
 
   <p-card class="compose-mail">
+    <div *ngIf="orderMailForm.touched" class="form-list">
+      <div class="form-list__item">
+        <div class="form-list__item__title">
+          {{ orderMailForm.value.title }}
+        </div>
+        <div class="form-list__item__tools">
+          <p-button
+            label="Delete"
+            icon="pi pi-trash"
+            iconPos="right"
+            styleClass="p-button-sm p-button-danger p-mr-2"
+            (onClick)="orderMailForm.reset()"
+          ></p-button>
+          <p-button
+            label="Open"
+            icon="pi pi-external-link"
+            iconPos="right"
+            styleClass="p-button-sm p-button-primary"
+            (onClick)="toggleFormMakerDialog()"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+
     <p-toolbar *ngIf="user.role === 'admin'">
       <div class="p-toolbar-group-left"></div>
 
       <div class="p-toolbar-group-right">
         <div>
           <p-button
+            label="Select Form"
+            icon="pi pi-download"
+            iconPos="right"
+            styleClass="p-mr-2"
+            [disabled]="orderMailForm.touched"
+            (onClick)="toggleSavedFormsDialog()"
+          ></p-button>
+          <p-button
             label="Create Form"
             icon="pi pi-plus"
             iconPos="right"
-            styleClass="p-button-sm"
+            styleClass=""
             (onClick)="toggleFormMakerDialog()"
             [disabled]="orderMailForm.touched"
           ></p-button>
         </div>
       </div>
     </p-toolbar>
+
+    <p-dialog
+      class="saved-forms-dialog"
+      header="Saved Forms"
+      [(visible)]="savedFormsDialog"
+    >
+      <p-listbox
+        [options]="savedForms"
+        [(ngModel)]="selectedSavedForm"
+        [metaKeySelection]="false"
+        [filter]="true"
+        optionLabel="name"
+        [style]="{ width: '80vw', height: '80vh' }"
+        (onChange)="setMailForm()"
+      >
+        <ng-template let-form pTemplate="item">
+          <div class="saved-forms-list-item p-d-flex p-jc-between p-ai-center">
+            <div class="saved-forms-list-item__name">
+              {{ form.name }}
+            </div>
+            <!-- <div class="saved-forms-list-item__tools">
+              <button
+                label="Preview"
+                icon="pi pi-eye"
+                iconPos="right"
+                class="p-button-info p-mr-2"
+                [disabled]="!selectedSavedForm || (selectedSavedForm.id !== form.id)"
+                pButton
+              ></button>
+              <button
+                label="Add"
+                icon="pi pi-plus"
+                iconPos="right"
+                class="p-button-success"
+                [disabled]="!selectedSavedForm || (selectedSavedForm.id !== form.id)"
+                pButton
+              ></button>
+            </div> -->
+          </div>
+        </ng-template>
+      </p-listbox>
+    </p-dialog>
+
+    <!-- <p-dialog
+      [(visible)]="savedFormPreview"
+      header="Form Proview"
+      [style]="{'width': '100vw', 'height:': '100vh'}"
+    >
+      <app-order-mail-form
+        *ngIf="selectedSavedForm"
+        [formReceiver]="false"
+        [form]="selectedSavedForm.data"
+      ></app-order-mail-form>
+    </p-dialog> -->
+
     <p-dialog
       class="order-mail-form-maker"
-      header="Create New Form" 
+      header="Create New Form"
       [(visible)]="showFormMakerDialog"
       [draggable]="false"
       [resizable]="false"
@@ -107,28 +194,5 @@
       ></p-button>
     </p-footer>
   </p-card>
-  <div *ngIf="orderMailForm.touched" class="form-list">
-    <div class="form-list__item">
-      <div class="form-list__item__title">
-        {{orderMailForm.value.title}}
-      </div>
-      <div class="form-list__item__tools">
-        <p-button
-          label="Delete"
-          icon="pi pi-trash"
-          iconPos="right"
-          styleClass="p-button-sm p-button-danger"
-          (onClick)="orderMailForm.reset()"
-        ></p-button>
-        <p-button
-          label="Open"
-          icon="pi pi-external-link"
-          iconPos="right"
-          styleClass="p-button-sm p-button-primary"
-          (onClick)="toggleFormMakerDialog()"
-        ></p-button>
-      </div>
-    </div>
-  </div>
   <p-toast></p-toast>
 </div>

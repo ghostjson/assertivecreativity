@@ -6,7 +6,7 @@ import { ScrollPanel } from "primeng/scrollpanel";
 import { Order } from "src/app/models/Order";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { User } from "src/app/models/User";
-import { OrderMailForm } from "src/app/models/OrderMailForm";
+import { OrderMailForm, OrderMailFormResponse } from "src/app/models/OrderMailForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 import { FormGroup } from "@angular/forms";
 
@@ -29,6 +29,10 @@ export class OrderMailListComponent implements OnInit {
   user: User;
   orderMailForm: FormGroup;
   showFormMakerDialog: boolean;
+  savedForms: OrderMailFormResponse[];
+  savedFormsDialog: boolean;
+  selectedSavedForm: OrderMailFormResponse;
+  savedFormPreview: boolean;
 
   constructor(
     private _mailService: MailService,
@@ -48,6 +52,11 @@ export class OrderMailListComponent implements OnInit {
     // if(this.user.role === 'admin') {
     this.orderMailForm = this._formMakerService.createOrderMailForm();
     // }
+    this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
+      this.savedForms = res;
+      console.log('forms received: ', this.savedForms);
+    });
+
 
     this.showFormMakerDialog = false;
   }
@@ -126,5 +135,28 @@ export class OrderMailListComponent implements OnInit {
 
   toggleFormMakerDialog(): void {
     this.showFormMakerDialog = !this.showFormMakerDialog;
+  }
+
+  toggleSavedFormsDialog(): void {
+    this.savedFormsDialog = !this.savedFormsDialog;
+  }
+
+  toggleSavedFormPreview(): void {
+    this.savedFormPreview = !this.savedFormPreview;
+  }
+
+  previewForm(): void {
+    console.log('preview form');
+    this.toggleSavedFormsDialog();
+    this.toggleSavedFormPreview();
+  }
+
+  setMailForm(): void {
+    console.log('setting form ', this.selectedSavedForm);
+    this.orderMailForm.setValue(this.selectedSavedForm.data);
+    this.toggleSavedFormsDialog();
+    console.log(this.orderMailForm.value);
+    this.orderMailForm.markAllAsTouched();
+    this.selectedSavedForm = null;
   }
 }

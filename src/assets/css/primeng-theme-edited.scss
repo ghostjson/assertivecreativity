@@ -6970,93 +6970,118 @@ a {
   }
 }
 
-/**
-Admin Header
-**/
-.admin-header {
-  .p-sidebar-left {
-    padding: 0;
 
-    .p-sidebar-close {
-      visibility: hidden;
-      left: 50%;
-      transform: translateX(-50%);
-      background: $bg-primary;
-      color: white;
-      height: 3rem;
-      width: 3rem;
-      z-index: 10002;
-      box-shadow: $large-shadow;
-      transition: all 0.3s;
-    }
+/**Legacu syles**/
+body {
+  .ui-card {
+    box-shadow: none;
+    border-radius: 6px;
+    color: $dark-color;
+  }
 
-    .p-sidebar-close:hover {
-      transform: translate(-50%, -4px);
-      background: $bg-primary;
-      color: white;
-    }
+  .ui-button {
+    cursor: pointer;
+  }
 
-    &.p-sidebar-active {
-      .p-sidebar-close {
-        visibility: visible;
+  .p-dropdown {
+    width: 100%;
+  }
+
+  .p-toast {
+    z-index: 100000;
+  }
+
+  .p-sidebar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .p-overlaypanel::before,
+  .p-overlaypanel::after {
+    display: none;
+  }
+
+  .p-menubar {
+    .p-submenu-list {
+      border-radius: 6px;
+
+      .p-menuitem-link {
+        padding-top: 1em;
+        padding-bottom: 1em;
       }
     }
   }
-
-  .p-menubar-button {
-    display: none;
-  }
 }
 
 /**
-Admin Custom Form component
+  Navigation Bar
 **/
-.admin-custom-form-component {
-  .option-input {
-    border: 1px solid $light-grey;
-    border-radius: 6px; 
+.navigation-bar {
+  .p-menubar {
+    background: white;
+    border: none;
     position: relative;
     box-shadow: $regular-shadow;
+    padding: 1em;
   }
-  
-  .chained-options {
-    width: 100%;
-  
-    .form-group__label {
+
+  .p-menubar-end {
+    display: flex;
+    flex-grow: 1;
+
+    .nav-searchbar {
+      flex-grow: 1;
+      margin: 0 1em;
+    }
+
+    .nav-searchbar__input {
       width: 100%;
     }
   }
-  
-  .card-footer {
-    border: 1px solid $light-grey;
+
+  .account-btn {
+    background: $primary-color;
+    border: none;
     position: relative;
-    box-shadow: $regular-shadow;
-    background: white;
-    border-radius: 6px;
   }
 
-  .add-form-options-overlay {
-    .p-overlaypanel-content {
-      padding: 0;
-    }
+  .account-btn:enabled:hover,
+  .account-btn:enabled:focus {
+    background-color: $primary-color;
+    box-shadow: $regular-shadow;
+    border: none;
   }
 }
 
 /**
-  Admin add product form component
+  Popup box styles
 **/
-.admin-product-form {
-  .form-card__header {
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.popup-box {
+  border-radius: 6px;
 
-  .chained-option-controls {
-    width: 100%;
+  .p-overlaypanel-content {
+    padding: 0.2em 0;
+
+    .popup-box__item {
+      min-width: 200px;
+    }
+
+    .popup-box__item a {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      padding: 1em;
+      color: $dark-color;
+    }
+
+    .popup-box__item a:hover {
+      color: white;
+      background-color: $primary-color;
+      text-decoration: none;
+    }
   }
 }
+
 
 /**
   Admin Products list page
@@ -7180,71 +7205,97 @@ Admin Custom Form component
   }
 }
 
+
 /**
-  Popup box styles
+  Admin add product form component
 **/
-.popup-box {
-  border-radius: 6px;
+.admin-product-form {
+  .form-card__header {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-  .p-overlaypanel-content {
-    padding: 0.2em 0;
+  .chained-option-controls {
+    width: 100%;
+  }
+}
 
-    .popup-box__item {
-      min-width: 200px;
-    }
-
-    .popup-box__item a {
-      display: inline-block;
-      height: 100%;
+/**
+Admin Custom Form component
+**/
+.admin-custom-form-component {
+  .option-input {
+    border: 1px solid $light-grey;
+    border-radius: 6px; 
+    position: relative;
+    box-shadow: $regular-shadow;
+  }
+  
+  .chained-options {
+    width: 100%;
+  
+    .form-group__label {
       width: 100%;
-      padding: 1em;
-      color: $dark-color;
     }
+  }
+  
+  .card-footer {
+    border: 1px solid $light-grey;
+    position: relative;
+    box-shadow: $regular-shadow;
+    background: white;
+    border-radius: 6px;
+  }
 
-    .popup-box__item a:hover {
-      color: white;
-      background-color: $primary-color;
-      text-decoration: none;
+  .add-form-options-overlay {
+    .p-overlaypanel-content {
+      padding: 0;
     }
   }
 }
 
 /**
-  Navigation Bar
+Admin Header
 **/
-.navigation-bar {
-  .p-menubar {
-    background: white;
-    border: none;
-    position: relative;
-    box-shadow: $regular-shadow;
-    padding: 1em;
+.admin-header {
+  position: relative;
+  z-index: 100;
+  background: white;
+  a {
+    text-decoration: none !important;
   }
+  .p-sidebar-left {
+    padding: 0;
 
-  .p-menubar-end {
-    display: flex;
-    flex-grow: 1;
-
-    .nav-searchbar {
-      flex-grow: 1;
-      margin: 0 1em;
+    .p-sidebar-close {
+      visibility: hidden;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $bg-primary;
+      color: white;
+      height: 3rem;
+      width: 3rem;
+      z-index: 10002;
+      box-shadow: $large-shadow;
+      transition: all 0.3s;
     }
 
-    .nav-searchbar__input {
-      width: 100%;
+    .p-sidebar-close:hover {
+      transform: translate(-50%, -4px);
+      background: $bg-primary;
+      color: white;
+    }
+
+    &.p-sidebar-active {
+      .p-sidebar-close {
+        visibility: visible;
+      }
     }
   }
 
-  .account-btn {
-    background: $primary-color;
-    border: none;
-    position: relative;
-  }
-
-  .account-btn:enabled:hover,
-  .account-btn:enabled:focus {
-    background-color: $primary-color;
-    box-shadow: $regular-shadow;
-    border: none;
+  .p-menubar-button {
+    display: none;
   }
 }

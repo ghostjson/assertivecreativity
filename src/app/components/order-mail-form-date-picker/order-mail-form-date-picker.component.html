@@ -1,4 +1,4 @@
-<div class="order-mail-form-radio-component form-group" [formGroup]="form">
+<div class="order-mail-form-date-picker-component p-p-5 form-group" [formGroup]="form">
   <div class="question">
     <span class="question__text">
       {{ question.label }}
@@ -19,6 +19,7 @@
       </label>
       <p-calendar
         formControlName="input_value"
+        selectionMode="range"
         [minDate]="minDate"
         [touchUI]="true"
         [appendTo]="'body'"

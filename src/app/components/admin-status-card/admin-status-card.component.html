@@ -1,4 +1,4 @@
-<div class="status-card {{styleClass}} p-2 mt-4 mt-xl-0">
+<div class="status-card {{styleClass}} p-p-2 p-mt-4 p-mt-xl-0">
   <div class="status-card__section status-card-title">
     <div class="status-card-title__icon">
       <i class="{{iconClass}}"></i>
@@ -7,14 +7,18 @@
       {{card.title}}
     </h3>
   </div>
-  <div class="status-card__section status-card-content mt-2">
+  <div class="status-card__section status-card-content p-mt-2">
     <div class="status-card-content__value">
       {{ card.value }}
     </div>
   </div>
-  <div class="status-card__section status-card-footer justify-content-end mt-2">
-    <a [routerLink]="" class="status-card-footer__more-btn btn px-2 py-1">
-      More info
+  <div class="status-card__section status-card-footer p-jc-end p-mt-2">
+    <a 
+      [routerLink]=""
+      class="status-card-footer__more-btn p-px-2 p-py-1"
+      label="More info"
+      pButton
+    >
     </a>
   </div>
 </div>

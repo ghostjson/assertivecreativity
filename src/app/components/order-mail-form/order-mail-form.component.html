@@ -1,6 +1,6 @@
 <div class="order-mail-form-component">
   <p-accordion>
-    <p-accordionTab [header]="form.title">
+    <p-accordionTab [header]="form.title" [selected]="true">
       <ng-container
         *ngFor="let formEntry of formEntries.controls; index as questionInd"
       >

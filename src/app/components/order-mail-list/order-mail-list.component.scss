@@ -64,7 +64,7 @@
 
     .p-scrollpanel-bar {
       background: $primary-color;
-      opacity: 1;
+      // opacity: 1;
     }
 
     .compose-mail {
@@ -102,6 +102,16 @@
 
     .form-list__item__title {
       font-weight: 600;
+    }
+
+    .saved-forms-dialog {
+      .saved-forms-list-item {
+        width: 100%;
+
+        &__name {
+          font-weight: 500;
+        }
+      }
     }
   }
 }

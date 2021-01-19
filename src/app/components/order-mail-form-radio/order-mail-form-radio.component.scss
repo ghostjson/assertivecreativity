@@ -1,5 +1,9 @@
 @import '../../../assets/css/variables.scss';
 
+.order-mail-form-radio-component {
+  border-bottom: 1px solid $light-grey;
+}
+
 .question-input-container {
   display: flex;
   justify-content: flex-start;

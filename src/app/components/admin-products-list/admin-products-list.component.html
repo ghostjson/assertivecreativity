@@ -74,17 +74,17 @@
           <ng-template pTemplate="header">
             <tr>
               <th class="admin-products-table__image-header"></th>
-              <th pSortableColumn="Name">
-                Name <p-sortIcon field="Name"></p-sortIcon>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
               </th>
-              <th pSortableColumn="ProductID">
-                Product ID <p-sortIcon field="ProductID"></p-sortIcon>
+              <th pSortableColumn="id">
+                Product ID <p-sortIcon field="id"></p-sortIcon>
               </th>
-              <th pSortableColumn="Prc1">
-                Price <p-sortIcon field="Prc1"></p-sortIcon>
+              <th pSortableColumn="price_list[0]">
+                Price <p-sortIcon field="price_list[0]"></p-sortIcon>
               </th>
-              <th pSortableColumn="Cat1Name">
-                Category <p-sortIcon field="Cat1Name"></p-sortIcon>
+              <th pSortableColumn="category">
+                Category <p-sortIcon field="category"></p-sortIcon>
               </th>
               <th pSortableColumn="Discontinued">
                 Status <p-sortIcon field="Discontinued"></p-sortIcon>
@@ -96,9 +96,9 @@
             <tr>
               <td class="admin-products-table__image">
                 <img
-                  *ngIf="product.NewPictureURL; else placeholderImg"
-                  [src]="product.NewPictureURL"
-                  [alt]="product.Name"
+                  *ngIf="product.image; else placeholderImg"
+                  [src]="product.image"
+                  [alt]="product.name"
                   width="100"
                   class="shadow"
                 />
@@ -110,26 +110,26 @@
                 <span class="p-column-title"> Name </span>
                 <span>
                   <a href="/products/stock/{{ product.id }}">
-                    {{ product.Name }}
+                    {{ product.name }}
                   </a>
                 </span>
               </td>
               <td>
                 <span class="p-column-title"> Serial </span>
                 <span>
-                  {{ product.ProductID }}
+                  {{ product.id }}
                 </span>
               </td>
               <td>
                 <span class="p-column-title"> Price </span>
                 <span>
-                  {{ product.Prc1 | currency: "USD" }}
+                  {{ product.price_list[0] | currency: "USD" }}
                 </span>
               </td>
               <td>
                 <span class="p-column-title"> Category </span>
                 <span>
-                  {{ product.Cat1Name }}
+                  {{ product.category }}
                 </span>
               </td>
               <td>
