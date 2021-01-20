@@ -41,7 +41,6 @@ export class StockProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._common.setLoader(true);
     this.orderQuantity = 1;
     this.responsiveOptions = [
       {
@@ -65,54 +64,59 @@ export class StockProductDetailComponent implements OnInit {
     this.product = null;
 
     // get product details from the product service
-    this._productService
-      .getStockProduct(this.productId)
-      .subscribe((product: StockProduct) => {
-        this.product = product;
-        console.info("Product Received: ", this.product);
-        this.orderForm = this._orderService.createStockOrderForm();
+    this._common.setLoaderFor(
+      this._productService
+        .getStockProduct(this.productId)
+        .subscribe((product: StockProduct) => {
+          this.product = product;
+          console.info("Product Received: ", this.product);
+          this.orderForm = this._orderService.createStockOrderForm();
 
-        this.image_set = [
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 2 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 3 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 4 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 5 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 6 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 7 title",
-            alt: "Image alt for testing",
-          },
-        ];
+          this.productSpecsTable = this.transformToTable(product);
 
-        this.productSpecsTable = this.transformToTable(product);
+          let tomorrow = new Date(new Date());
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          this.minDate = tomorrow;
 
-        let tomorrow = new Date(new Date());
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        this.minDate = tomorrow;
+          this.updateTotalPrice();
+        })
+    );
 
-        this.updateTotalPrice();
-      });
+    /**
+     * TODO: Remove once the api is fixed with images
+     */
+    this.image_set = [
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 2 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 3 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 4 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 5 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 6 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 7 title",
+        alt: "Image alt for testing",
+      },
+    ];
   }
 
   /**
@@ -121,8 +125,13 @@ export class StockProductDetailComponent implements OnInit {
   updateTotalPrice(): void {
     let pricePerPiece: number = this.getPricePerPiece();
     this.totalPrice = Number((this.orderQuantity * pricePerPiece).toFixed(2));
-    
-    console.log("price updated: ", pricePerPiece, ' | ', this.orderQuantity * pricePerPiece);
+
+    console.log(
+      "price updated: ",
+      pricePerPiece,
+      " | ",
+      this.orderQuantity * pricePerPiece
+    );
   }
 
   /**
@@ -130,11 +139,12 @@ export class StockProductDetailComponent implements OnInit {
    * @param quantity quantity of the order
    */
   getPricePerPiece(): number {
-    let priceGroups: PriceGroup[] = this.product.attributes.price_table.price_groups,
+    let priceGroups: PriceGroup[] = this.product.attributes.price_table
+        .price_groups,
       pricePerPiece = null;
-    
-    for(const priceGroup of priceGroups) {
-      if(this.orderQuantity <= priceGroup.quantity) {
+
+    for (const priceGroup of priceGroups) {
+      if (this.orderQuantity <= priceGroup.quantity) {
         pricePerPiece = priceGroup.price_per_piece;
         return pricePerPiece;
       }
@@ -147,7 +157,6 @@ export class StockProductDetailComponent implements OnInit {
    * Submit the customisation form
    */
   onSubmit(): void {
-    this._common.setLoader(true);
     this.updateTotalPrice();
 
     let cartItem: CartItem = {
@@ -157,16 +166,18 @@ export class StockProductDetailComponent implements OnInit {
       order_data: {
         is_stock: true,
         order_price: this.totalPrice,
-        stock_order_attributes: this.orderForm.value.stock_order_attributes
+        stock_order_attributes: this.orderForm.value.stock_order_attributes,
       },
-      total_price: this.totalPrice
+      total_price: this.totalPrice,
     };
 
-    console.log('add to cart: ', cartItem);
-    this._cartService.addToCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart/stock", item.data.id]);
-      console.log("added to cart: ", item);
-    });
+    console.log("add to cart: ", cartItem);
+    this._common.setLoaderFor(
+      this._cartService.addToCart(cartItem).subscribe((item: any) => {
+        this._router.navigate(["/cart/stock", item.data.id]);
+        console.log("added to cart: ", item);
+      })
+    );
   }
 
   /**

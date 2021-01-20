@@ -78,29 +78,27 @@ export class SignupComponent implements OnInit {
    * Signup the user
    */
   signup(): void {
-    this._common.setLoader(true);
-
     this.error = null;
     console.log("Account Created: ", this.newUser);
     if (this.isPasswordsMatched()) {
-      this._auth.register(this.newUser).subscribe(
-        () => {
-          this._router.navigate([this.returnUrl]);
-        },
-        () => {
-          this._common.setLoader(false);
-          this.error = "Signup failed, try again";
-          this._messageService.add({
-            severity: "error",
-            summary: this.error,
-            detail: "Something went wrong. Try Again",
-          });
-        }
+      this._common.setLoaderFor(
+        this._auth.register(this.newUser).subscribe(
+          () => {
+            this._router.navigate([this.returnUrl]);
+          },
+          () => {
+            this.error = "Signup failed, try again";
+            this._messageService.add({
+              severity: "error",
+              summary: this.error,
+              detail: "Something went wrong. Try Again",
+            });
+          }
+        )
       );
     } 
     else {
       this.error = "Password does not match";
-      this._common.setLoader(false);
       this._messageService.add({
         severity: "error",
         summary: this.error,

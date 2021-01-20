@@ -53,7 +53,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._common.setLoader(true);
     /**
      * TODO: Remove once images is finalized
      */
@@ -118,7 +117,8 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     this.possibleFeatures = listAllFeatures();
 
     // get product details from the product service
-    this._productService
+    this._common.setLoaderFor(
+      this._productService
       .getCustomProduct(this.productId)
       .pipe(take(1))
       .subscribe((product) => {
@@ -129,8 +129,8 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
         console.info("Order Form: ", this.orderForm);
 
         this.initialiseForms();
-        this._common.setLoader(false);
-      });
+      })
+    );
 
       let tomorrow = new Date(new Date());
       tomorrow.setDate(tomorrow.getDate() + 1);
@@ -294,7 +294,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
    * Submit the customisation form
    */
   onSubmit(): void {
-    this._common.setLoader(true);
     this.updateTotalPrice();
 
     let cartItem: CartItem = {
@@ -309,9 +308,11 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       total_price: this.priceTotal
     };
 
-    this._cartService.addToCustomCart(cartItem).subscribe((item: any) => {
-      this._router.navigate(["/cart/custom", item.data.id]);
-      console.log("added to cart: ", item);
-    });
+    this._common.setLoaderFor(
+      this._cartService.addToCustomCart(cartItem).subscribe((item: any) => {
+        this._router.navigate(["/cart/custom", item.data.id]);
+        console.log("added to cart: ", item);
+      })
+    );
   }
 }

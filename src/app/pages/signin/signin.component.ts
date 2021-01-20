@@ -47,33 +47,33 @@ export class SigninComponent implements OnInit {
    * Sign in the user
    */
   login() {
-    this._common.setLoader(true);
     this.error = null;
 
-    this._auth.authenticate(
-      this.user.email,
-      this.user.password
-    )
-    .subscribe(
-      // next callback
-      (token: Token) => {
-        console.log('Attempting to signin from signin component');
-        this._router.navigate([this.returnUrl]);
-      },
-      // error callback
-      (e: any) => {
-        console.error('error caught from the login function: ', e);
-        this.error = String(e.error.status);
-        this._common.setLoader(false);
-        this._messageService
-          .add(
-            {
-              severity:'error',
-              summary:'Login Failed',
-              detail:'Something went wrong. Kindly try again'
-            }
-          );
-      }
-    )
+    this._common.setLoaderFor(
+      this._auth.authenticate(
+        this.user.email,
+        this.user.password
+      )
+      .subscribe(
+        // next callback
+        (token: Token) => {
+          console.log('Attempting to signin from signin component');
+          this._router.navigate([this.returnUrl]);
+        },
+        // error callback
+        (e: any) => {
+          console.error('error caught from the login function: ', e);
+          this.error = String(e.error.status);
+          this._messageService
+            .add(
+              {
+                severity:'error',
+                summary:'Login Failed',
+                detail:'Something went wrong. Kindly try again'
+              }
+            );
+        }
+      )
+    );
   }
 }

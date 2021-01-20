@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             console.log('navigation end loader');
             this._common.setLoader(false);
-          }, 300);
+          }, 500);
         }
       });
   }
