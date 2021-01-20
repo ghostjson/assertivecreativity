@@ -54,7 +54,7 @@ export class CommonService {
    * Show or hide page loading animation
    * @param status loader status
    */
-  setLoader(status: boolean, observable?: Observable<any>, observableCallback?: any) {
+  setLoader(status: boolean) {
     if(status) {
       this.loaderCount += 1;
       this.loaderSource.next(true);
@@ -79,6 +79,7 @@ export class CommonService {
    * @param sub subscription to the observable that triggered the loader
    */
   setLoaderFor(sub: Subscription) {
+    console.log('set loader from wrapper');
     this.setLoader(true);
     sub.add(() => {
       this.setLoader(false);
