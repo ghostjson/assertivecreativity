@@ -59,7 +59,7 @@ export class OrderService {
    * Places the order on the server
    * @param order order object to place
    */
-  placeOrder(order: Order): Observable<Order> {
+  placeOrder(order: Order): Observable<any> {
     return this._http.post<Order>(this.ordersLink(), order);
   }
 

@@ -1,12 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { Table } from "primeng/table";
-import {
-  CustomFormInput,
-  CustomFormsEntry,
-  CustomOption,
-  Order,
-} from "src/app/models/Order";
-import { ExcelService } from "src/app/services/excel.service";
+import { Order } from "src/app/models/Order";
 
 @Component({
   selector: "app-orders-list",
@@ -27,7 +21,7 @@ export class OrdersListComponent implements OnInit {
 
   @ViewChild("dt") table: Table;
 
-  constructor(private _excelService: ExcelService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.loading = false;
@@ -81,20 +75,5 @@ export class OrdersListComponent implements OnInit {
 
   onRepresentativeChange(event: any) {
     this.table.filter(event.value, "representative", "in");
-  }
-
-
-  exportOrdersExcel(): void {
-    let excelSheetData: any[][] = this._excelService.constructOrdersExcelData(this.orders);
-
-    excelSheetData.unshift([
-      "ID",
-      "PRODUCT NAME",
-      "ORDER DATE",
-      "DELIVERY DATE",
-      "TOTAL PRICE",
-    ]);
-
-    this._excelService.exportExcel(excelSheetData);
   }
 }

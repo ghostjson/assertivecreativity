@@ -5,8 +5,8 @@ import { Product } from "../../models/Product";
 import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
 import { Tag } from "src/app/models/Tag";
 import { Category } from "src/app/models/Category";
-import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
-import { filter, take } from "rxjs/operators";
+import { ActivatedRoute } from "@angular/router";
+import { take } from "rxjs/operators";
 
 @Component({
   selector: "app-shop",
@@ -128,47 +128,6 @@ export class ShopComponent implements OnInit {
 
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
-      /**
-       * TODO: Fix after too many attempts issue is fixed for tags
-       */
-      // this.selectedCategories.forEach((category: Category) => {
-      //   this._pcService
-      //     .getTagsOfCategory(category.id)
-      //     .pipe(
-      //       // get the tags of the selected categories and populate tags list
-      //       tap((tags: Tag[]) => {
-      //         this.tags.concat(tags);
-
-      //         // filter selected tags
-      //         let newSelectedTags: number[] = [];
-      //         this.tags.forEach((tag: Tag) => {
-      //           let tagIsSelected: number = this.selectedTags.find(
-      //             (selectedTagId: number) => {
-      //               return selectedTagId === tag.id;
-      //             }
-      //           );
-
-      //           if (tagIsSelected) {
-      //             newSelectedTags.push(tag.id);
-      //           }
-      //         });
-      //         this.selectedTags = newSelectedTags;
-
-      //         console.log(
-      //           "updated=>  ",
-      //           "tags: ",
-      //           this.tags,
-      //           "selected tags: ",
-      //           this.selectedTags,
-      //           "categs: ",
-      //           this.categories,
-      //           "selected categs: ",
-      //           this.selectedCategories
-      //         );
-      //       })
-      //     )
-      //     .subscribe();
-      // });
       this.updateProducts();
     } else {
       this.is_stock ? this.getStockProducts() : this.getCustomProducts();

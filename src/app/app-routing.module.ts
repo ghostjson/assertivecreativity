@@ -181,6 +181,10 @@ const routes: Routes = [
     component: AdminOrdersComponent,
     canActivate: [AuthGuard],
     data: { role: 'vendor' }
+  },
+  { 
+    path: "**", 
+    component: HomeComponent
   }
 ];
 

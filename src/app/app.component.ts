@@ -1,47 +1,70 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { UserDetailsService } from './store/user-details.service';
-import { CommonService } from './common.service';
-import { PrimeNGConfig } from 'primeng/api';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
+import { UserDetailsService } from "./store/user-details.service";
+import { CommonService } from "./common.service";
+import { PrimeNGConfig } from "primeng/api";
+import { Subject } from "rxjs";
+import { filter, takeUntil } from "rxjs/operators";
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
-export class AppComponent implements OnInit, OnDestroy, AfterContentInit {
-  loader: any;
-  title: string = 'acreativity';
+export class AppComponent implements OnInit, OnDestroy {
+  loader: boolean;
+  title: string = "acreativity";
   destroy: Subject<void>;
 
   constructor(
-    private _user: UserDetailsService, 
+    private _user: UserDetailsService,
     private _common: CommonService,
-    private _primengConfig: PrimeNGConfig
+    private _primengConfig: PrimeNGConfig,
+    private _router: Router
   ) {
     this.destroy = new Subject<void>();
   }
 
-
   ngOnInit() {
     this._common.loader
       .pipe(takeUntil(this.destroy))
-      .subscribe(status => this.loader = status);
+      .subscribe((status) => (this.loader = status));
+
     this._primengConfig.ripple = true;
-  }
 
-  ngOnChanges(): void {
-    // this._common.setLoader(true);
-  }
-
-  ngAfterContentInit() {
-    setTimeout(() => {
-      this._common.setLoader(false);
-    }, 500);
+    // trigger loader on route changes
+    this._router.events
+      .pipe(
+        filter(
+          (event) =>
+            event instanceof NavigationStart ||
+            event instanceof NavigationEnd ||
+            event instanceof NavigationCancel ||
+            event instanceof NavigationError
+        ),
+        takeUntil(this.destroy)
+      )
+      .subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          this._common.setLoader(true);
+          console.log('navigation start loader');
+        } else {
+          setTimeout(() => {
+            console.log('navigation end loader');
+            this._common.setLoader(false);
+          }, 300);
+        }
+      });
   }
 
   ngOnDestroy(): void {
+    this.destroy.next();
     this.destroy.complete();
   }
 }

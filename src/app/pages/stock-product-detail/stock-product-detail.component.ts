@@ -41,6 +41,7 @@ export class StockProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._common.setLoader(true);
     this.orderQuantity = 1;
     this.responsiveOptions = [
       {
@@ -146,6 +147,7 @@ export class StockProductDetailComponent implements OnInit {
    * Submit the customisation form
    */
   onSubmit(): void {
+    this._common.setLoader(true);
     this.updateTotalPrice();
 
     let cartItem: CartItem = {

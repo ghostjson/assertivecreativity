@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
-import { debounceTime, take } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { debounceTime, take, takeUntil } from "rxjs/operators";
 import { ProductService } from "../../services/product.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormArray, FormGroup } from "@angular/forms";
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cart.service";
 import { CartItem } from "src/app/models/Cart";
 import { TreeNode } from 'primeng/api';
-import { CustomFormsEntry, CustomOption, Order } from 'src/app/models/Order';
+import { CustomFormsEntry, CustomOption } from 'src/app/models/Order';
 import { UserDetailsService } from "src/app/store/user-details.service";
 
 @Component({
@@ -25,7 +25,7 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
   product: Product;
   possibleFeatures: Object;
   orderForm: FormGroup;
-  formSubscription: Subscription;
+  componentDestroy: Subject<void>;
   priceTotal: number;
   currentUrl: string;
   productId: number;
@@ -40,7 +40,7 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
   selectedColor: string;
 
   constructor(
-    public _productService: ProductService,
+    private _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
     private _common: CommonService,
     private _orderService: OrderService,
@@ -49,9 +49,47 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     private _userDetailsService: UserDetailsService
   ) {
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    this.componentDestroy = new Subject<void>();
   }
 
   ngOnInit(): void {
+    this._common.setLoader(true);
+    /**
+     * TODO: Remove once images is finalized
+     */
+    this.image_set = [
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 2 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 3 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 4 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 5 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "http://localhost:8000/storage/mock.jpeg",
+        title: "Image 6 title",
+        alt: "Image alt for testing",
+      },
+      {
+        src: "assets/images/demo-product-images/2.jpg",
+        title: "Image 7 title",
+        alt: "Image alt for testing",
+      }
+    ];
+
     this.orderQuantity = 1;
     this.responsiveOptions = [
       {
@@ -87,44 +125,10 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
         this.product = product;
         console.info("Product Received: ", this.product);
 
-        this.image_set = [
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 2 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 3 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 4 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 5 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "http://localhost:8000/storage/mock.jpeg",
-            title: "Image 6 title",
-            alt: "Image alt for testing",
-          },
-          {
-            src: "assets/images/demo-product-images/2.jpg",
-            title: "Image 7 title",
-            alt: "Image alt for testing",
-          }
-        ];
-
         this.orderForm = this._orderService.newOrderForm(this.product);
         console.info("Order Form: ", this.orderForm);
 
         this.initialiseForms();
-        this.buildFormsOverview();
         this._common.setLoader(false);
       });
 
@@ -135,7 +139,8 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // unsubscribe to form value changes
-    this.formSubscription.unsubscribe();
+    this.componentDestroy.next();
+    this.componentDestroy.complete()
   }
 
   /**
@@ -204,9 +209,13 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
    * Initialisation steps for the order form
    */
   initialiseForms(): void {
+    this.buildFormsOverview();
     this.updateTotalPrice();
-    this.formSubscription = this.orderForm.valueChanges
-      .pipe(debounceTime(500))
+    this.orderForm.valueChanges
+      .pipe(
+        debounceTime(500),
+        takeUntil(this.componentDestroy)
+      )
       .subscribe(() => {
         this.updateTotalPrice();
       });
@@ -285,6 +294,7 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
    * Submit the customisation form
    */
   onSubmit(): void {
+    this._common.setLoader(true);
     this.updateTotalPrice();
 
     let cartItem: CartItem = {

@@ -1,4 +1,4 @@
-ng build --prod
+ng build --prod --outputHashing=all
 
 aws s3 sync dist/acreativity/ s3://assertivecreativity/
 

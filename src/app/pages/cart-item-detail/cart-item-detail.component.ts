@@ -103,9 +103,9 @@ export class CartItemDetailComponent implements OnInit {
       .subscribe(() => {
         console.log('item deleted from cart');
         console.log('placing order: ', this.order);
-        this._orderService.placeOrder(this.order).subscribe((order: Order) => {
-          console.log("order placed: ", order);
-          this._router.navigate(["/orders/"]);
+        this._orderService.placeOrder(this.order).subscribe((res: any) => {
+          console.log("order placed: ", res);
+          this._router.navigate(["/orders/", res.data.id]);
         });
       });
   }

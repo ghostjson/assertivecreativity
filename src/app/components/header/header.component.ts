@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
 
     let token = localStorage.getItem('Token');
     if (token) {
+      this._common.setLoader(true);
       this._user.getUser().subscribe((user: User) => {
         this.user = user;
         console.info('User details: ', this.user);
@@ -50,7 +51,6 @@ export class HeaderComponent implements OnInit {
     else {
       this.user = null;
       console.info('User details: ', this.user);
-      this._common.setLoader(false);
     }
 
     this.navStartItems = [
