@@ -238,15 +238,27 @@ export class ProductService {
    * Search products using a search string
    * @param searchString search string
    */
-  searchProducts(searchString: string): Observable<Product[]> {
-    return this._http
-      .get<Product[]>(`${this.productsLink()}/search/${searchString}`)
+  searchProducts(searchString: string, is_stock: boolean): Observable<Product[]> {
+    if(is_stock) {
+      return this._http
+      .get<Product[]>(`${this.stockProductsLink()}/search/${searchString}`)
       .pipe(
         take(1),
         map((res: any) => {
           return res.data;
         })
       );
+    }
+    else {
+      return this._http
+      .get<Product[]>(`${this.customProductsLink()}/search/${searchString}`)
+      .pipe(
+        take(1),
+        map((res: any) => {
+          return res.data;
+        })
+      );
+    }
   }
 
   /**

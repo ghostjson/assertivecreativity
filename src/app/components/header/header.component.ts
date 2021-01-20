@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
@@ -14,7 +14,8 @@ import { ActivatedRoute } from "@angular/router";
 })
 
 export class HeaderComponent implements OnInit {
-  @Output() onSearchStringEmit: EventEmitter<string> = new EventEmitter<string>();
+  @Input() searchString: string = '';
+  @Output() searchBtnClick: EventEmitter<string> = new EventEmitter<string>();
 
   user_role: any;
   cartLength: number;
@@ -22,7 +23,6 @@ export class HeaderComponent implements OnInit {
   navEndItems: MenuItem[];
   logo: string;
   user: User;
-  searchValue: string;
   currentUrl: string;
   accountItems: MenuItem[];
 
@@ -117,31 +117,6 @@ export class HeaderComponent implements OnInit {
         visible: this.user != null
       }
     ];
-
-    // if(this.user) {
-    //   this.accountItems.push(
-    //     {
-    //       label: `${this.user.role} Dashboard`,
-    //       routerLink: `/${this.user.role}/`,
-    //       visible: this.isAdmin()
-    //     },
-    //     {
-    //       label: `Profile`,
-    //       routerLink: '/profile',
-    //       visible: this.user != null
-    //     },
-    //     {
-    //       label: `Orders`,
-    //       routerLink: '/orders',
-    //       visible: this.user != null
-    //     },
-    //     {
-    //       label: 'Log Out',
-    //       routerLink: '/logout',
-    //       queryParams: {return: this.currentUrl}
-    //     }
-    //   );
-    // }
   }
 
   ngOnChanges(): void {
@@ -190,9 +165,9 @@ export class HeaderComponent implements OnInit {
    * Emit the search string typed into the search bar
    * @param event search string typed
    */
-  emitSearchString(event: any): void {
-    console.log(this.searchValue);
-    this.onSearchStringEmit.emit(this.searchValue);
+  emitSearchString(): void {
+    console.log(this.searchString);
+    this.searchBtnClick.emit(this.searchString);
   }
 
   /**

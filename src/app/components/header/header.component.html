@@ -8,19 +8,18 @@
       </ng-template>
       <ng-template pTemplate="end">
         <span class="nav-searchbar p-input-filled">
-          <p-button 
+          <p-button
             label="Search"
-            icon="pi pi-search"
-            iconPos="right"
             styleClass="search-btn p-shadow-2 p-button-sm"
+            (onClick)="emitSearchString()"
           ></p-button>
           <input
             class="nav-searchbar__input p-inputtext-sm"
             type="text"
-            [(ngModel)]="searchValue"
+            [(ngModel)]="searchString"
             placeholder="Search"
+            (keyup.enter)="emitSearchString()"
             pInputText
-            (keypress)="emitSearchString($event)"
           />
         </span>
         <a

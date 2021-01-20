@@ -182,20 +182,16 @@ export class ShopComponent implements OnInit {
   getSearchResults(searchString: string): void {
     this.productsLoading = true;
 
-    if (this.is_stock) {
-      this.productsLoading = false;
-    } else {
-      if (searchString.length > 0) {
-        this._productService
-          .searchProducts(searchString)
-          .subscribe((res: Product[]) => {
-            this.products = res;
+    if (searchString.length > 0) {
+      this._productService
+        .searchProducts(searchString, this.is_stock)
+        .subscribe((res: Product[]) => {
+          this.products = res;
 
-            this.productsLoading = false;
-          });
-      } else {
-        this.getCustomProducts();
-      }
+          this.productsLoading = false;
+        });
+    } else {
+      this.getCustomProducts();
     }
   }
 }

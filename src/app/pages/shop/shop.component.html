@@ -1,5 +1,5 @@
 <div class="shop-page">
-  <app-header (onSearchStringEmit)="getSearchResults($event)"></app-header>
+  <app-header (searchBtnClick)="getSearchResults($event)"></app-header>
   <!-- product slider starts -->
   <app-featured-product-slider [featured]="featured">
   </app-featured-product-slider>
