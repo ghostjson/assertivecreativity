@@ -24,7 +24,8 @@ import { AdminProductEditComponent } from './pages/admin-product-edit/admin-prod
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
-import { AdminFormsMakerComponent } from './pages/admin-forms-maker/admin-forms-maker.component';
+import { AdminFormsMakerComponent } from './components/admin-forms-maker/admin-forms-maker.component';
+import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -130,7 +131,7 @@ const routes: Routes = [
   },
   { 
     path: "admin/forms", 
-    component: AdminFormsMakerComponent,
+    component: AdminFormsComponent,
     canActivate: [AuthGuard],
     data: { role: 'admin' }
   },

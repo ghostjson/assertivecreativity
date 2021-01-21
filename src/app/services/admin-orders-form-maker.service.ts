@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { IdGeneratorService } from './id-generator.service';
 import { PANTONE_COLORS } from '../../assets/js/pantone-colors';
@@ -70,12 +70,7 @@ export class AdminOrdersFormMakerService {
       .pipe(
         take(1),
         map((res: any): OrderMailFormResponse[] => {
-          /**
-           * TODO: report bug
-           */
           return res.data.map((formResponse: any): OrderMailFormResponse => {
-            formResponse.data = JSON.parse(formResponse.data);
-
             return formResponse;
           });
         })
@@ -87,10 +82,6 @@ export class AdminOrdersFormMakerService {
       .pipe(
         take(1),
         map((res: any): OrderMailFormResponse => {
-          /**
-           * TODO: report bug
-           */
-          res.data = JSON.parse(res.data);
           return res.data;
         })
       );
@@ -125,10 +116,14 @@ export class AdminOrdersFormMakerService {
     let questionInput: FormGroup;
 
     if(initial) {
-      questionInput = this._fb.group({
+      let questionInputTemplate: FormInput = {
         id: this._idGenService.getId(),
-        ...initial
-      });
+        label: initial.label,
+        placeholder: initial.placeholder,
+        value: initial.value
+      };
+
+      questionInput = this._fb.group(questionInputTemplate);
     }
     else {
       questionInput = this._fb.group({
@@ -144,28 +139,33 @@ export class AdminOrdersFormMakerService {
   }
 
   createFormQuestion(initial: OrderMailFormQuestion = null): FormGroup {
-    let formTemplate: any = {
-      id: this._idGenService.getId(),
-      label: '',
-      placeholder: '',
-      type: 'dropdown',
-      inputs: this._fb.array([
-        this.createQuestionInput()
-      ])
-    };
+    let formQuestion: FormGroup = null;
 
     if(initial) {
-      formTemplate.label = initial.label;
-      formTemplate.placeholder = initial.placeholder;
-      formTemplate.type = initial.type;
+      let formTemplate: any = {
+        id: this._idGenService.getId(),
+        label: initial.label,
+        placeholder: initial.label,
+        type: initial.type,
+        inputs: this._fb.array([])
+      };
 
-      formTemplate.inputs = this._fb.array([]);
-      initial.inputs.forEach((input: any) => {
+      initial.inputs.forEach((input: FormInput) => {
         formTemplate.inputs.push(this.createQuestionInput(input))
+      });
+
+      formQuestion = this._fb.group(formTemplate);
+    }
+    else {
+      formQuestion = this._fb.group({
+        id: this._idGenService.getId(),
+        label: '',
+        placeholder: '',
+        type: '',
+        inputs: this._fb.array([])
       });
     }
 
-    let formQuestion: FormGroup = this._fb.group(formTemplate);
     console.log('form question created: ', formQuestion.value);
     return formQuestion;
   }
@@ -180,7 +180,6 @@ export class AdminOrdersFormMakerService {
         questions: this._fb.array([])
       };
       
-
       initial.questions.forEach(question => {
         mailFormTemp.questions.push(this.createFormQuestion(question))
       });
@@ -190,7 +189,10 @@ export class AdminOrdersFormMakerService {
     else {
       mailForm = this._fb.group({
         id: this._idGenService.getId(),
-        title: 'Form Title',
+        title: [
+          'Form Title',
+          [Validators.required]
+        ],
         questions: this._fb.array([
           this.createFormQuestion()
         ])

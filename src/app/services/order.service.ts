@@ -28,6 +28,20 @@ export class OrderService {
   }
 
   /**
+   * Stock orders link
+   */
+  private stockOrdersLink(): string {
+    return `${this.ordersLink()}/stock`;
+  }
+
+  /**
+   * Custom orders link
+   */
+  private customOrdersLink(): string {
+    return `${this.ordersLink()}/custom`;
+  }
+
+  /**
    * Return order API link
    * @param id id of the order
    */
@@ -60,7 +74,12 @@ export class OrderService {
    * @param order order object to place
    */
   placeOrder(order: Order): Observable<any> {
-    return this._http.post<Order>(this.ordersLink(), order);
+    if(order.data.is_stock) {
+      return this._http.post<Order>(this.stockOrdersLink(), order);
+    }
+    else {
+      return this._http.post<Order>(this.customOrdersLink(), order);
+    }
   }
 
   addMailThread(threadId: number, order: Order): Observable<Order> {

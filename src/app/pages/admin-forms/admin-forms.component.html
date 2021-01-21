@@ -1,0 +1,114 @@
+<div class="admin-forms-page">
+  <app-admin-header></app-admin-header>
+  <div class="container p-mb-5">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <h1>Forms</h1>
+          </div>
+
+          <div class="p-toolbar-group-right">
+            <button
+              class="p-button-success"
+              type="button"
+              label="Create Form"
+              icon="pi pi-plus"
+              iconPos="right"
+              (click)="createNewFormDialog()"
+              pButton
+            ></button>
+          </div>
+        </p-toolbar>
+      </div>
+
+      <div
+        *ngFor="let form of forms; index as formIndex; trackBy: trackById"
+        class="p-col-12 p-sm-6 p-lg-3"
+      >
+        <p-card
+          class="form-grid-item"
+          header="{{ form.data.title | limitLength: 25 }}"
+        >
+          <div class="form-grid-item__content">
+            <div class="content-row p-mt-2">
+              <span> Updated On: </span>
+              {{ form.updated_at | date: "mediumDate" }}
+            </div>
+            <div class="content-row p-mt-2">
+              <span> Created On: </span>
+              {{ form.created_at | date: "mediumDate" }}
+            </div>
+          </div>
+          <p-footer>
+            <div class="p-d-flex">
+              <button
+                class="p-button-text p-button-danger p-mr-2"
+                type="button"
+                icon="pi pi-trash"
+                (click)="deleteForm(formIndex)"
+                pButton
+              ></button>
+              <button
+                class="edit-btn p-shadow-6"
+                type="button"
+                label="Edit"
+                icon="pi pi-pencil"
+                iconPos="right"
+                pButton
+                (click)="openEditDialog(form, formIndex)"
+              ></button>
+            </div>
+          </p-footer>
+        </p-card>
+      </div>
+
+      <div *ngIf="!forms || !forms.length" class="p-col-12">
+        <p-card>
+          <div
+            class="p-d-flex p-ai-center p-jc-center p-text-center"
+            style="height: 400px"
+          >
+            <div>
+              <strong> Add forms to see them here </strong>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog
+    class="form-maker-dialog"
+    header="Create New Form"
+    [(visible)]="showFormMakerDialog"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+    position="bottom"
+    [blockScroll]="true"
+  >
+    <app-admin-forms-maker
+      [formGroup]="newForm"
+    ></app-admin-forms-maker>
+    <p-footer>
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        iconPos="right"
+        styleClass="p-button-danger"
+        (onClick)="toggleFormMakerDialog()"
+      ></p-button>
+      <p-button
+        [label]="editMode ? 'Save Form' : 'Add Form'"
+        [icon]="editMode ? 'pi pi-pencil' : 'pi pi-check'"
+        iconPos="right"
+        styleClass="p-button-success"
+        (onClick)="addForm()"
+      ></p-button>
+    </p-footer>
+  </p-dialog>
+
+  <app-footer></app-footer>
+  <p-toast position="bottom-center"></p-toast>
+</div>

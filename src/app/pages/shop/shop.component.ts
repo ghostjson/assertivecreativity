@@ -105,7 +105,8 @@ export class ShopComponent implements OnInit {
           this.products = [...filteredProducts];
           this.productsLoading = false;
         });
-    } else {
+    } 
+    else {
       let categoryIds: number[] = this.selectedCategories.map((category: Category) => {
         return category.id;
       });
@@ -129,7 +130,8 @@ export class ShopComponent implements OnInit {
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
       this.updateProducts();
-    } else {
+    } 
+    else {
       this.is_stock ? this.getStockProducts() : this.getCustomProducts();
     }
   }
@@ -149,8 +151,9 @@ export class ShopComponent implements OnInit {
 
           this.productsLoading = false;
         });
-    } else {
-      this.getCustomProducts();
+    } 
+    else {
+      this.is_stock ? this.getStockProducts() : this.getCustomProducts();
     }
   }
 }

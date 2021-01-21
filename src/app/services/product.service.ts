@@ -239,14 +239,12 @@ export class ProductService {
    * @param searchString search string
    */
   searchProducts(searchString: string, is_stock: boolean): Observable<Product[]> {
+    searchString = searchString ? searchString : '';
     if(is_stock) {
       return this._http
-      .get<Product[]>(`${this.stockProductsLink()}/search/${searchString}`)
+      .post<Product[]>(`${this.stockProductsLink()}/search`, { query: searchString })
       .pipe(
-        take(1),
-        map((res: any) => {
-          return res.data;
-        })
+        take(1)
       );
     }
     else {

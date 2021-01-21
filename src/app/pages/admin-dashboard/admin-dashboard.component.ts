@@ -14,16 +14,13 @@ export class AdminDashboardComponent implements OnInit {
   cards: StatusCard[];
 
   constructor(
-    private _dashboardService: AdminDashboardService,
-    private _commonService: CommonService
+    private _dashboardService: AdminDashboardService
   ) { }
 
   ngOnInit(): void {
     this.charts = this._dashboardService.getCharts();
 
     this.cards = this._dashboardService.getStatusCards();
-    this._commonService.setLoader(false);
-
   }
 
 }

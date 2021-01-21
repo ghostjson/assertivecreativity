@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loader: boolean;
   title: string = "acreativity";
   destroy: Subject<void>;
+  adminPage: boolean;
 
   constructor(
     private _user: UserDetailsService,
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.adminPage = this._router.url.includes('admin') || this._router.url.includes('vendor');
     this._common.loader
       .pipe(takeUntil(this.destroy))
       .subscribe((status) => (this.loader = status));

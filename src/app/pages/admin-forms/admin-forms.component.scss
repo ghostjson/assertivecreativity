@@ -1,26 +1,24 @@
 @import '../../../assets/css/variables.scss';
 
 :host {
-  ::ng-deep {
-    .p-dataview {
-      &-content {
-        padding: 1.5em;
-      }
-    }
-    
-    h1 {
+  ::ng-deep {    
+    h1, h2, h3 {
       margin: 0;
     }
 
     .form-grid-item {
-      // padding: 0 1em;
-
       .p-card {
         box-shadow: none;
         border: 1px solid $light-grey;
 
         &-title {
           font-size: 1.2rem;
+        }
+
+        &-footer {
+          .edit-btn {
+            flex-grow: 1;
+          }
         }
       }
 
@@ -35,7 +33,15 @@
 
     .form-maker-dialog {
       .p-dialog {
-        width: 80vw;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        margin: 0;
+
+        &-content {
+          position: relative;
+          flex-grow: 1;
+        }
       }
     }
   }

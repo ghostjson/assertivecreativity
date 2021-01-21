@@ -9,6 +9,7 @@ import { User } from "src/app/models/User";
 import { OrderMailForm, OrderMailFormResponse } from "src/app/models/OrderMailForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 import { FormGroup } from "@angular/forms";
+import { CommonService } from "src/app/common.service";
 
 @Component({
   selector: "app-order-mail-list",
@@ -21,7 +22,6 @@ export class OrderMailListComponent implements OnInit {
 
   @Input() mails: Mail[];
   @Input() order: Order;
-  @Input() styleClass: string;
   @Input() receiverId: number;
 
   mailText: string;
@@ -38,7 +38,8 @@ export class OrderMailListComponent implements OnInit {
     private _mailService: MailService,
     private _messageService: MessageService,
     private _userDetailsService: UserDetailsService,
-    private _formMakerService: AdminOrdersFormMakerService
+    private _formMakerService: AdminOrdersFormMakerService,
+    private _commonService: CommonService
   ) {}
 
   ngOnInit(): void {
@@ -53,12 +54,13 @@ export class OrderMailListComponent implements OnInit {
     this.orderMailForm = this._formMakerService.createOrderMailForm();
     // }
     if(this.user.role === 'admin') {
-      this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
-        this.savedForms = res;
-        console.log('forms received: ', this.savedForms);
-      });
+      this._commonService.setLoaderFor(
+        this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
+          this.savedForms = res;
+          console.log('forms received: ', this.savedForms);
+        })
+      );
     }
-
 
     this.showFormMakerDialog = false;
   }
@@ -103,7 +105,7 @@ export class OrderMailListComponent implements OnInit {
           /**
            * TODO: Cleanup after the api is finalised
            */
-          this.orderMailForm.reset();
+          this.orderMailForm = this._formMakerService.createOrderMailForm();
           res.message_content = JSON.parse(res.message_content);
           this.mails.unshift(res);
           this._messageService.add({
@@ -122,7 +124,7 @@ export class OrderMailListComponent implements OnInit {
         /**
          * TODO: Cleanup after the api is finalised
          */
-        this.orderMailForm.reset();
+        this.orderMailForm = this._formMakerService.createOrderMailForm();
         res.message_content = JSON.parse(res.message_content);
         this.mails.unshift(res);
         this._messageService.add({

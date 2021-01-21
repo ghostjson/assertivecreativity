@@ -63,7 +63,6 @@ export class CartItemDetailComponent implements OnInit {
    * Confirm the order by pushing to the API
    */
   confirmOrder(): void {
-    this._commonService.setLoader(true);
     this.order = {
       product_id: this.cartItem.product.id,
       delivery_date: {
@@ -98,15 +97,19 @@ export class CartItemDetailComponent implements OnInit {
     };
 
     // remove order from cart and add it to orders
-    this._cartService
+    this._commonService.setLoaderFor(
+      this._cartService
       .deleteCartItem(this.cartItemId, this.cartItem.order_data.is_stock)
       .subscribe(() => {
         console.log('item deleted from cart');
         console.log('placing order: ', this.order);
-        this._orderService.placeOrder(this.order).subscribe((res: any) => {
-          console.log("order placed: ", res);
-          this._router.navigate(["/orders/", res.data.id]);
-        });
-      });
+        this._commonService.setLoaderFor(
+          this._orderService.placeOrder(this.order).subscribe((res: any) => {
+            console.log("order placed: ", res);
+            this._router.navigate(["/orders/", res.data.id]);
+          })
+        );
+      })
+    );
   }
 }

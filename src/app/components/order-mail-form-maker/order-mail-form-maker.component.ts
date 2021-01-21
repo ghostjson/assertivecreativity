@@ -10,30 +10,6 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   templateUrl: './order-mail-form-maker.component.html',
   styleUrls: ['./order-mail-form-maker.component.scss']
 })
-export class OrderMailFormMakerComponent implements OnInit {
-  @Input() formGroup: FormGroup;
-
-  formGroupValue: OrderMailForm;
-  questionTypes: SelectItem<string>[];
-  pantoneColors: Color[];
-
-  constructor(private _formMakerService: AdminOrdersFormMakerService) { }
-
-  ngOnInit(): void {
-    console.log('formgroup received: ', this.formGroup.value);
-    this.questionTypes = this._formMakerService.getQuestionTypes();
-    this.pantoneColors = this._formMakerService.getPantoneColors();
-  }
-
-  questions(): FormArray {
-    return this.formGroup.get('questions') as FormArray;
-  }
-
-  addQuestion(): void {
-    this.questions().push(this._formMakerService.createFormQuestion());
-  }
-
-  removeQuestion(index: number): void {
-    this.questions().removeAt(index);
-  }
+export class OrderMailFormMakerComponent {
+  
 }

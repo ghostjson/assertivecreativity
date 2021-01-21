@@ -15,7 +15,7 @@ export class IdGeneratorService {
    * Return a unique id
    */
   public getId(): number {
-    ++this.currentId;
+    this.currentId += 1;
 
     return  this.currentId;
   }

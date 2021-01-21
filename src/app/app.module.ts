@@ -93,6 +93,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { InputSwitchModule } from "primeng/inputswitch";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { MessageService } from "primeng/api";
+import { DragDropModule } from 'primeng/dragdrop';
 
 import { ProductOptionsColorComponent } from "./components/product-options-color/product-options-color.component";
 import { ProductOptionsRadioBtnComponent } from "./components/product-options-radio-btn/product-options-radio-btn.component";
@@ -139,7 +140,8 @@ import { OrderMailFormColorComponent } from './components/order-mail-form-color/
 import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
 import { LimitLengthPipe } from './pipes/limit-length/limit-length.pipe';
-import { AdminFormsMakerComponent } from './pages/admin-forms-maker/admin-forms-maker.component';
+import { AdminFormsMakerComponent } from './components/admin-forms-maker/admin-forms-maker.component';
+import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
 
 @NgModule({
   declarations: [
@@ -219,7 +221,8 @@ import { AdminFormsMakerComponent } from './pages/admin-forms-maker/admin-forms-
     OrderMailFormMakerDatePickerComponent,
     OrderMailFormDatePickerComponent,
     LimitLengthPipe,
-    AdminFormsMakerComponent
+    AdminFormsMakerComponent,
+    AdminFormsComponent
   ],
   imports: [
     BrowserModule,
@@ -276,7 +279,8 @@ import { AdminFormsMakerComponent } from './pages/admin-forms-maker/admin-forms-
     InputMaskModule,
     StepsModule,
     DataViewModule,
-    ScrollTopModule
+    ScrollTopModule,
+    DragDropModule
   ],
   entryComponents: [],
   providers: [
