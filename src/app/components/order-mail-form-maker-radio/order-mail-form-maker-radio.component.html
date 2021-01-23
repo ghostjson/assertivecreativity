@@ -1,63 +1,49 @@
-<ng-container [formGroup]="form">
-  <div
-    formArrayName="questions"
-    class="order-mail-form-maker-radio-component"
-  >
-    <ng-container [formGroupName]="questionIndex">
-      <div class="p-fluid p-field p-input-filled">
-        <label for="form-question-{{ form.value.questions[questionIndex].id }}">
-          Enter the question
-        </label>
+<div [formGroup]="form" class="order-mail-form-maker-radio-component">
+  <div class="p-fluid p-field p-input-filled">
+    <label for="form-question-{{ form.value.id }}">
+      Enter the question
+    </label>
+    <input
+      type="text"
+      formControlName="label"
+      id="form-question-{{ form.value.id }}"
+      placeholder="Enter the question"
+      pInputText
+    />
+  </div>
+  <div class="radio-buttons p-mt-5" formArrayName="inputs">
+    <label class="p-mb-2"> Enter radio button options </label>
+    <div
+      class="p-field p-inputgroup p-input-filled p-mt-2"
+      *ngFor="let input of inputs.controls; index as inputIndex"
+    >
+      <ng-container [formGroupName]="inputIndex">
         <input
-          type="text"
           formControlName="label"
-          id="form-question-{{ form.value.questions[questionIndex].id }}"
-          placeholder="Enter the question"
+          id="mail-form-question-input-{{ form.value.inputs[inputIndex] }}"
+          type="text"
           pInputText
+          placeholder="Label for radio button"
         />
-      </div>
-      <div class="radio-buttons p-mt-5" formArrayName="inputs">
-        <label class="p-mb-2">
-          Enter radio button options
-        </label>
-        <div
-          class="p-field p-inputgroup p-input-filled p-mt-2"
-          *ngFor="
-            let input of inputs(questionIndex).controls;
-            index as inputIndex
-          "
-        >
-          <ng-container [formGroupName]="inputIndex">
-            <input
-              formControlName="label"
-              id="mail-form-question-input-{{
-                form.value.questions[questionIndex].inputs[inputIndex]
-              }}"
-              type="text"
-              pInputText
-              placeholder="Label for radio button"
-            />
-            <button
-              class="p-button-danger"
-              type="button"
-              icon="pi pi-times"
-              pButton
-              pRipple
-              (click)="removeQuestionInput(inputIndex)"
-            ></button>
-          </ng-container>
-        </div>
-      </div>
-    </ng-container>
-
-    <div class="p-text-right p-fluid">
-      <p-button
-        label="Add Radio Button"
-        icon="pi pi-plus"
-        iconPos="right"
-        styleClass="p-button-success"
-        (onClick)="addQuestionInput()"
-      ></p-button>
+        <button
+          class="p-button-danger"
+          type="button"
+          icon="pi pi-times"
+          pButton
+          pRipple
+          (click)="removeQuestionInput(inputIndex)"
+        ></button>
+      </ng-container>
     </div>
   </div>
-</ng-container>
+
+  <div class="p-text-right p-fluid">
+    <p-button
+      label="Add Radio Button"
+      icon="pi pi-plus"
+      iconPos="right"
+      styleClass="p-button-success"
+      (onClick)="addQuestionInput()"
+    ></p-button>
+  </div>
+</div>

@@ -116,12 +116,18 @@ export class AdminOrdersFormMakerService {
     let questionInput: FormGroup;
 
     if(initial) {
-      let questionInputTemplate: FormInput = {
+      let questionInputTemplate: any = {
         id: this._idGenService.getId(),
         label: initial.label,
         placeholder: initial.placeholder,
         value: initial.value
       };
+
+      for(const childQuestion of initial.children_form_questions) {
+        questionInputTemplate.children_form_questions.push(
+          this.createFormQuestion(childQuestion)
+        );
+      }
 
       questionInput = this._fb.group(questionInputTemplate);
     }
@@ -130,7 +136,8 @@ export class AdminOrdersFormMakerService {
         id: this._idGenService.getId(),
         label: '',
         placeholder: '',
-        value: ''
+        value: '',
+        children_form_questions: this._fb.array([])
       });
     }
 

@@ -94,9 +94,7 @@
     <p-footer>
       <p-button
         label="Cancel"
-        icon="pi pi-times"
-        iconPos="right"
-        styleClass="p-button-danger"
+        styleClass="p-button-danger p-button-text"
         (onClick)="toggleFormMakerDialog()"
       ></p-button>
       <p-button
@@ -104,6 +102,7 @@
         [icon]="editMode ? 'pi pi-pencil' : 'pi pi-check'"
         iconPos="right"
         styleClass="p-button-success"
+        [disabled]="!newForm.valid"
         (onClick)="addForm()"
       ></p-button>
     </p-footer>

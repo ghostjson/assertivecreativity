@@ -1,54 +1,48 @@
-<ng-container [formGroup]="form">
-  <div formArrayName="questions" class="order-mail-form-maker-date-component">
-    <ng-container [formGroupName]="questionIndex">
-      <div class="p-fluid p-field p-input-filled">
-        <label for="form-question-{{ form.value.questions[questionIndex].id }}">
-          Enter the question
-        </label>
-        <input
-          type="text"
-          formControlName="label"
-          id="form-question-{{ form.value.questions[questionIndex].id }}"
-          placeholder="Enter the question"
-          pInputText
-        />
-      </div>
-
-      <div class="p-fluid p-field p-input-filled">
-        <label
-          for="form-question-{{
-            form.value.questions[questionIndex].id
-          }}-placeholder"
-        >
-          Enter placeholder for date input
-        </label>
-        <input
-          type="text"
-          formControlName="placeholder"
-          id="form-question-{{
-            form.value.questions[questionIndex].id
-          }}-placeholder"
-          placeholder="Enter the question"
-          pInputText
-        />
-      </div>
-
-      <div class="p-grid">
-        <div class="p-col-6">
-          <div class="p-fluid p-field p-input-filled">
-            <label for="min-date"> Minimum Date For Input </label>
-            <p-calendar
-              [minDate]="minDate"
-              [touchUI]="true"
-              [appendTo]="'body'"
-              [baseZIndex]="100"
-              inputId="date-range"
-              styleClass="shadow question-input__input"
-              placeholder="Confirmation Date"
-            ></p-calendar>
-          </div>
-        </div>
-      </div>
-    </ng-container>
+<div [formGroup]="form" class="order-mail-form-maker-date-component">
+  <div class="p-fluid p-field p-input-filled">
+    <label for="form-question-{{ form.value.id }}">
+      Enter the question
+    </label>
+    <input
+      type="text"
+      formControlName="label"
+      id="form-question-{{ form.value.id }}"
+      placeholder="Enter the question"
+      pInputText
+    />
   </div>
-</ng-container>
+
+  <div class="p-grid">
+    <div class="p-col-6">
+      <div class="p-fluid p-field p-input-filled">
+        <label for="min-date">
+          Select a minimum date (today by default)
+        </label>
+        <p-calendar
+          [minDate]="minDate"
+          [touchUI]="true"
+          [appendTo]="'body'"
+          [baseZIndex]="100"
+          inputId="min-date"
+          styleClass="question-input__input"
+          placeholder="Minimum Date"
+        ></p-calendar>
+      </div>
+
+      <div class="p-fluid p-field p-input-filled">
+        <label for="max-date">
+          Select a maximum date
+        </label>
+        <p-calendar
+          [minDate]="maxDate"
+          [touchUI]="true"
+          [appendTo]="'body'"
+          [baseZIndex]="100"
+          inputId="max-date"
+          styleClass="question-input__input"
+          placeholder="Maximum Date"
+        ></p-calendar>
+      </div>
+    </div>
+  </div>
+</div>

@@ -142,6 +142,7 @@ import { StockProductDetailComponent } from './pages/stock-product-detail/stock-
 import { LimitLengthPipe } from './pipes/limit-length/limit-length.pipe';
 import { AdminFormsMakerComponent } from './components/admin-forms-maker/admin-forms-maker.component';
 import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
+import { AdminFormsQuestionMakerComponent } from './components/admin-forms-question-maker/admin-forms-question-maker.component';
 
 @NgModule({
   declarations: [
@@ -222,7 +223,8 @@ import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
     OrderMailFormDatePickerComponent,
     LimitLengthPipe,
     AdminFormsMakerComponent,
-    AdminFormsComponent
+    AdminFormsComponent,
+    AdminFormsQuestionMakerComponent
   ],
   imports: [
     BrowserModule,

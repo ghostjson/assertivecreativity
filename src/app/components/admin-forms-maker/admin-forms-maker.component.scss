@@ -1,7 +1,11 @@
 @import '../../../assets/css/variables.scss';
 
 :host {
-  ::ng-deep {    
+  ::ng-deep {
+    .admin-forms-maker-component {
+      position: relative;
+    }
+
     .questions-list {
       .p-card {
         width: 100%;
@@ -21,18 +25,22 @@
         transition: all 0.2s;
 
         &:hover {
-          cursor: pointer;
+          cursor: grab;
           background-color: $bg-primary-hover;
         }
       }
     }
 
-    .form-maker-card {
-      .p-card {
-        padding-top: 0;
+    .form-maker {
+      position: relative;
 
-        &-content {
+      &-card {
+        .p-card {
           padding-top: 0;
+  
+          &-content {
+            padding-top: 0;
+          }
         }
       }
     }
@@ -125,6 +133,16 @@
         .droppable-text {
           display: block;
         }
+      }
+    }
+
+    .child-question-dialog {
+      .p-dialog {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 95%;
+        border-radius: 4px 0 0 0;
       }
     }
   }

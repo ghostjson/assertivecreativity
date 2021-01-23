@@ -1,73 +1,60 @@
 <div class="order-mail-form-maker-color-component">
   <ng-container [formGroup]="form">
-    <div
-      formArrayName="questions"
-    >
-      <div [formGroupName]="questionIndex">
-        <div class="p-field p-fluid p-input-filled">
-          <label
-            class="p-mb-2"
-            for="form-question-{{ form.value.questions[questionIndex].id }}"
-          >
-            Enter the question
-          </label>
-          <input
-            type="text"
-            formControlName="label"
-            id="form-question-{{ form.value.questions[questionIndex].id }}"
-            placeholder="Enter the question"
-            pInputText
-          />
-        </div>
+    <div class="p-field p-fluid p-input-filled">
+      <label class="p-mb-2" for="form-question-{{ form.value.id }}">
+        Enter the question
+      </label>
+      <input
+        type="text"
+        formControlName="label"
+        id="form-question-{{ form.value.id }}"
+        placeholder="Enter the question"
+        pInputText
+      />
+    </div>
 
-        <div class="color-input-list" formArrayName="inputs">
-          <label class="p-mb-3">
-            Add color choices
-          </label>
-          
-          <div
-            class="mail-form-maker-color-input-color"
-            *ngFor="let input of inputs().controls; index as inputIndex"
-          >
-            <div
-              class="input-color-preview"
-              [ngStyle]="{ background: input.value.value }"
-            ></div>
-            <div class="input-color-details">
-              <div class="input-color-details__name">
-                <strong>
-                  {{ input.value.label }}
-                </strong>
-              </div>
-              <div class="input-color-details__value">
-                {{ input.value.value }}
-              </div>
-            </div>
-            <div class="color-tools">
-              <p-button
-                type="button"
-                icon="pi pi-pencil"
-                styleClass="p-button-primary p-mr-2"
-                (onClick)="editQuestionInput(inputIndex, input.value)"
-              ></p-button>
-              <p-button
-                type="button"
-                icon="pi pi-times"
-                styleClass="p-button-danger"
-                (onClick)="removeQuestionInput(inputIndex)"
-              ></p-button>
-            </div>
+    <div class="color-input-list" formArrayName="inputs">
+      <label class="p-mb-3"> Add color choices </label>
+
+      <div
+        class="mail-form-maker-color-input-color"
+        *ngFor="let input of inputs.controls; index as inputIndex"
+      >
+        <div
+          class="input-color-preview"
+          [ngStyle]="{ background: input.value.value }"
+        ></div>
+        <div class="input-color-details">
+          <div class="input-color-details__name">
+            <strong>
+              {{ input.value.label }}
+            </strong>
           </div>
-          <div
-            class="add-color-btn"
-            (click)="toggleColorSelector()"
-          >
-            <i class="pi pi-plus"></i>
+          <div class="input-color-details__value">
+            {{ input.value.value }}
           </div>
         </div>
+        <div class="color-tools">
+          <p-button
+            type="button"
+            icon="pi pi-pencil"
+            styleClass="p-button-primary p-mr-2"
+            (onClick)="editQuestionInput(inputIndex, input.value)"
+          ></p-button>
+          <p-button
+            type="button"
+            icon="pi pi-times"
+            styleClass="p-button-danger"
+            (onClick)="removeQuestionInput(inputIndex)"
+          ></p-button>
+        </div>
+      </div>
+      <div class="add-color-btn" (click)="toggleColorSelector()">
+        <i class="pi pi-plus"></i>
       </div>
     </div>
   </ng-container>
+
   <div class="select-color-dialog">
     <p-dialog
       header="Select From Pantone Colors"
@@ -107,7 +94,7 @@
             <div
               class="mail-form-color-picker-input__preview"
               [ngStyle]="{
-                'background': currentColorInput.value
+                background: currentColorInput.value
               }"
             ></div>
           </div>
@@ -133,5 +120,5 @@
         ></p-button>
       </ng-template>
     </p-dialog>
-  </div>  
+  </div>
 </div>

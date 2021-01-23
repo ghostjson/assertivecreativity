@@ -9,35 +9,34 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 })
 export class OrderMailFormMakerDatePickerComponent implements OnInit {
   @Input() form: FormGroup;
-  @Input() questionIndex: number;
   minDate: Date;
+  maxDate: Date;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
   ngOnInit(): void {
-    let today = new Date();
-    let tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.minDate = tomorrow;
+    this.minDate = new Date();
   }
 
-  questions(): FormArray {
-    return this.form.get('questions') as FormArray;
+  /**
+   * get inputs formarray
+   */
+  public get inputs(): FormArray {
+    return this.form.get('inputs') as FormArray;
   }
 
-  inputs(questionIndex: number): FormArray {
-    return this.questions().at(questionIndex).get('inputs') as FormArray;
-  }
-
-  removeQuestion(): void {
-    this.questions().removeAt(this.questionIndex);
-  }
-
+  /**
+   * Add input to the question
+   */
   addQuestionInput(): void {
-    this.inputs(this.questionIndex).push(this._formMakerService.createQuestionInput());
+    this.inputs.push(this._formMakerService.createQuestionInput());
   }
 
+  /**
+   * remove the input at index
+   * @param inputIndex index of the input to remove
+   */
   removeQuestionInput(inputIndex: number): void {
-    this.inputs(this.questionIndex).removeAt(inputIndex);
+    this.inputs.removeAt(inputIndex);
   }
 }

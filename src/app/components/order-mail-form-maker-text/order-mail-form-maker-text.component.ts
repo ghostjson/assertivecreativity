@@ -7,28 +7,13 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   templateUrl: './order-mail-form-maker-text.component.html',
   styleUrls: ['./order-mail-form-maker-text.component.scss']
 })
-export class OrderMailFormMakerTextComponent implements OnInit {
+export class OrderMailFormMakerTextComponent {
   @Input() form: FormGroup;
-  @Input() questionIndex: number;
 
-  constructor(private _formMakerService: AdminOrdersFormMakerService) { }
-
-  ngOnInit(): void {
-  }
-
-  questions(): FormArray {
-    return this.form.get('questions') as FormArray;
-  }
-
-  inputs(questionIndex: number): FormArray {
-    return this.questions().at(questionIndex).get('inputs') as FormArray;
-  }
-
-  removeQuestion(): void {
-    this.questions().removeAt(this.questionIndex);
-  }
-
-  removeQuestionInput(inputIndex: number): void {
-    this.inputs(this.questionIndex).removeAt(inputIndex);
+  /**
+   * Get inputs of the question
+   */
+  public get inputs(): FormArray {
+    return this.form.get('inputs') as FormArray;
   }
 }

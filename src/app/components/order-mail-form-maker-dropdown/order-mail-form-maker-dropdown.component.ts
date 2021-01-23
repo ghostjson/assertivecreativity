@@ -9,26 +9,31 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 })
 export class OrderMailFormMakerDropdownComponent implements OnInit {
   @Input() form: FormGroup;
-  @Input() questionIndex: number;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
   ngOnInit(): void {
   }
 
-  questions(): FormArray {
-    return this.form.get('questions') as FormArray;
+  /**
+   * Get the inputs formarray
+   */
+  public get inputs(): FormArray {
+    return this.form.get('inputs') as FormArray;
   }
 
-  inputs(questionIndex: number): FormArray {
-    return this.questions().at(questionIndex).get('inputs') as FormArray;
-  }
-
+  /**
+   * Add an input to the formgroup
+   */
   addQuestionInput(): void {
-    this.inputs(this.questionIndex).push(this._formMakerService.createQuestionInput());
+    this.inputs.push(this._formMakerService.createQuestionInput());
   }
 
+  /**
+   * Remove input at index from the question
+   * @param inputIndex index of the input to remove
+   */
   removeQuestionInput(inputIndex: number): void {
-    this.inputs(this.questionIndex).removeAt(inputIndex);
+    this.inputs.removeAt(inputIndex);
   }
 }

@@ -9,23 +9,28 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 })
 export class OrderMailFormMakerRadioComponent {
   @Input() form: FormGroup;
-  @Input() questionIndex: number;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
-  questions(): FormArray {
-    return this.form.get('questions') as FormArray;
+  /**
+   * Get inputs of the question
+   */
+  public get inputs(): FormArray {
+    return this.form.get('inputs') as FormArray;
   }
 
-  inputs(questionIndex: number): FormArray {
-    return this.questions().at(questionIndex).get('inputs') as FormArray;
-  }
-
+  /**
+   * Add input to the question
+   */
   addQuestionInput(): void {
-    this.inputs(this.questionIndex).push(this._formMakerService.createQuestionInput());
+    this.inputs.push(this._formMakerService.createQuestionInput());
   }
 
+  /**
+   * Remove the input at inputIndex
+   * @param inputIndex index of the input to remove
+   */
   removeQuestionInput(inputIndex: number): void {
-    this.inputs(this.questionIndex).removeAt(inputIndex);
+    this.inputs.removeAt(inputIndex);
   }
 }

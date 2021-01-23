@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { Color } from "src/app/models/Color";
-import { OrderMailFormQuestion, OrderMailFormResponse} from "src/app/models/OrderMailForm";
+import { OrderMailFormQuestion } from "src/app/models/OrderMailForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 
 @Component({
@@ -13,31 +13,24 @@ import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-
 export class AdminFormsMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
-  draggedQuestion: OrderMailFormQuestion;
-  questionTypes: SelectItem<string>[];
-  pantoneColors: Color[];
+  @ViewChild("formsPartContainer") formsPartContainer: ElementRef<HTMLElement>;
 
-  constructor(
-    private _formMakerService: AdminOrdersFormMakerService
-  ) {}
+  draggedQuestion: OrderMailFormQuestion;
+  pantoneColors: Color[];
+  dialogs: {
+    childQuestion: boolean;
+  };
+  formsPartWidth: string;
+  currentChildQuestion: FormGroup;
+
+  constructor() {}
 
   ngOnInit(): void {
-    console.log('formgroup received: ', this.formGroup.value);
-    this.questionTypes = this._formMakerService.getQuestionTypes();
-    this.pantoneColors = this._formMakerService.getPantoneColors();
-  }
+    this.dialogs = {
+      childQuestion: false,
+    };
 
-  handleDragStart(question: OrderMailFormQuestion) {
-    this.draggedQuestion = question;
-  }
-
-  handleDragEnd(): void {
-    this.draggedQuestion = null;
-  }
-
-  addDroppedForm(): void {
-    console.log('drop successfully catched: ', this.draggedQuestion);
-    this.addQuestion(this.draggedQuestion);
+    console.log("formgroup received: ", this.formGroup.value);
   }
 
   /**
@@ -49,20 +42,38 @@ export class AdminFormsMakerComponent implements OnInit {
     return obj.id;
   }
 
-  questions(): FormArray {
-    return this.formGroup.get('questions') as FormArray;
+  /**
+   * Handle drag event start
+   * @param question question object that is being dragged
+   */
+  handleDragStart(question: OrderMailFormQuestion) {
+    this.draggedQuestion = question;
   }
 
-  addQuestion(question: OrderMailFormQuestion = null): void {
-    if(question) {
-      this.questions().push(this._formMakerService.createFormQuestion(question));
-    }
-    else {
-      this.questions().push(this._formMakerService.createFormQuestion());
-    }
+  /**
+   * Handle drag event end
+   */
+  handleDragEnd(): void {
+    this.draggedQuestion = null;
   }
 
-  removeQuestion(index: number): void {
-    this.questions().removeAt(index);
+  /**
+   * Get window height
+   */
+  public get windowHeight(): string {
+    return `${window.innerHeight}px`;
+  }
+
+  /**
+   * Toggle the child question dialog
+   */
+  toggleChildQuestionDialog(): void {
+    // calculate the width of the overlay window
+    this.formsPartWidth = `${
+      window.innerWidth -
+      this.formsPartContainer.nativeElement.getBoundingClientRect().left
+    }px`;
+
+    this.dialogs.childQuestion = !this.dialogs.childQuestion;
   }
 }

@@ -3,7 +3,15 @@
     <aside class="questions-list">
       <p-card>
         <p-header>
-          <h3>Questions</h3>
+          <h3>
+            Questions
+            <button
+              type="button"
+              label="openDialog"
+              (click)="toggleChildQuestionDialog()"
+              pButton
+            ></button>
+          </h3>
         </p-header>
         <ng-container
           *ngFor="
@@ -28,14 +36,14 @@
     </aside>
   </div>
 
-  <div class="p-col-12 p-md-8 p-lg-9">
+  <div #formsPartContainer class="form-maker p-col-12 p-md-8 p-lg-9">
     <p-card class="form-maker-card">
       <form [formGroup]="formGroup" class="order-form-maker">
         <h3>
           {{ formGroup.value.title }}
         </h3>
 
-        <div class="p-fluid">
+        <div class="p-fluid p-mt-3">
           <div class="p-field p-input-filled">
             <label for="mail-form-title-{{ formGroup.value.id }}">
               Enter title of the form
@@ -50,97 +58,34 @@
           </div>
         </div>
 
-        <ng-container formArrayName="questions">
-          <p-card
-            class="question-container"
-            *ngFor="
-              let question of questions().controls;
-              index as questionIndex
-            "
-          >
-            <p-header>
-              <div
-                class="question-type p-input-filled"
-                [formGroupName]="questionIndex"
-              >
-                <span class="question-type__number">
-                  {{ questionIndex + 1 }}
-                </span>
-                <label class="sr-only" for="question-type-{{ questionIndex }}">
-                  Select Question Type
-                </label>
-                <p-dropdown
-                  class="question-type__input"
-                  [options]="questionTypes"
-                  formControlName="type"
-                  [filter]="true"
-                  filterBy="label"
-                  [showClear]="true"
-                  inputId="question-type-{{ questionIndex }}"
-                  placeholder="Select a Question Type"
-                ></p-dropdown>
-                <p-button
-                  icon="pi pi-trash"
-                  styleClass="question-type__delete-btn p-button-text p-button-danger p-button-lg"
-                  (onClick)="removeQuestion(questionIndex)"
-                ></p-button>
-              </div>
-            </p-header>
+        <app-admin-forms-question-maker
+          [formGroup]="formGroup"
+          [draggedQuestion]="draggedQuestion"
+        ></app-admin-forms-question-maker>
 
-            <app-order-mail-form-maker-dropdown
-              *ngIf="question.value.type === 'dropdown'"
-              [form]="formGroup"
-              [questionIndex]="questionIndex"
-            ></app-order-mail-form-maker-dropdown>
-            <app-order-mail-form-maker-radio
-              *ngIf="question.value.type === 'radio'"
-              [form]="formGroup"
-              [questionIndex]="questionIndex"
-            ></app-order-mail-form-maker-radio>
-            <app-order-mail-form-maker-text
-              *ngIf="question.value.type === 'text'"
-              [form]="formGroup"
-              [questionIndex]="questionIndex"
-            ></app-order-mail-form-maker-text>
-            <app-order-mail-form-maker-color
-              *ngIf="question.value.type === 'color'"
-              [form]="formGroup"
-              [pantoneColors]="pantoneColors"
-              [questionIndex]="questionIndex"
-            ></app-order-mail-form-maker-color>
-            <app-order-mail-form-maker-date-picker
-              *ngIf="question.value.type === 'date-picker'"
-              [form]="formGroup"
-              [questionIndex]="questionIndex"
-            ></app-order-mail-form-maker-date-picker>
-          </p-card>
-
-          <div class="p-fluid p-mt-6">
-            <div
-              pDroppable="formGroup.value.questions"
-              (onDrop)="addDroppedForm()"
-              class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
-            >
-              <i class="add-icon pi pi-plus"></i>
-              <i class="droppable-icon pi pi-check"></i>
-              <div class="placeholder-text">
-                Drop Question Here
-              </div>
-              <div class="droppable-text">
-                Drop To Add
-              </div>
-            </div>
-            <p-button
-              type="button"
-              label="Add New Question"
-              icon="pi pi-plus"
-              iconPos="right"
-              styleClass="p-button-success p-button-lg p-button-raised p-mb-5"
-              (onClick)="addQuestion()"
-            ></p-button>
-          </div>
-        </ng-container>
       </form>
     </p-card>
+    <p-dialog
+      header="Add Child Questions"
+      class="child-question-dialog"
+      position="right"
+      [(visible)]="dialogs.childQuestion"
+      [resizable]="false"
+      [draggable]="false"
+      [closable]="false"
+      [style]="{
+        width: formsPartWidth
+      }"
+    >
+      Content
+      <p-footer>
+        <p-button
+          type="button"
+          label="Cancel"
+          styleClass="p-button-danger p-button-text"
+          (onClick)="toggleChildQuestionDialog()"
+        ></p-button>
+      </p-footer>
+    </p-dialog>
   </div>
 </div>
