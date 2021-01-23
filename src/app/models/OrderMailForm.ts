@@ -1,3 +1,5 @@
+import { FormArray, FormGroup } from "@angular/forms";
+
 export interface OrderMailForm {
   id: number;
   title: string;
@@ -10,6 +12,7 @@ export interface OrderMailFormQuestion {
   label: string;
   placeholder?: string;
   type: string;
+  is_child: boolean;
   inputs: FormInput[];
 }
 
@@ -35,4 +38,10 @@ export interface OrderMailFormResponse {
   data: OrderMailForm;
   created_at?: string;
   updated_at?: string;
+}
+
+export interface formQuestionEvent {
+  question: FormGroup;
+  parent: FormArray | FormGroup;
+  questionIndex: number;
 }

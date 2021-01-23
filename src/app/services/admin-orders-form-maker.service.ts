@@ -120,12 +120,13 @@ export class AdminOrdersFormMakerService {
         id: this._idGenService.getId(),
         label: initial.label,
         placeholder: initial.placeholder,
-        value: initial.value
+        value: initial.value,
+        children_form_questions: this._fb.array([])
       };
-
+      
       for(const childQuestion of initial.children_form_questions) {
         questionInputTemplate.children_form_questions.push(
-          this.createFormQuestion(childQuestion)
+          this.createFormQuestion(true, childQuestion)
         );
       }
 
@@ -145,7 +146,7 @@ export class AdminOrdersFormMakerService {
     return questionInput;
   }
 
-  createFormQuestion(initial: OrderMailFormQuestion = null): FormGroup {
+  createFormQuestion(isChild: boolean, initial: OrderMailFormQuestion = null): FormGroup {
     let formQuestion: FormGroup = null;
 
     if(initial) {
@@ -154,6 +155,7 @@ export class AdminOrdersFormMakerService {
         label: initial.label,
         placeholder: initial.label,
         type: initial.type,
+        is_child: isChild,
         inputs: this._fb.array([])
       };
 
@@ -166,9 +168,10 @@ export class AdminOrdersFormMakerService {
     else {
       formQuestion = this._fb.group({
         id: this._idGenService.getId(),
-        label: '',
+        label: 'Question label',
         placeholder: '',
-        type: '',
+        type: 'dropdown',
+        is_child: isChild,
         inputs: this._fb.array([])
       });
     }
@@ -188,7 +191,7 @@ export class AdminOrdersFormMakerService {
       };
       
       initial.questions.forEach(question => {
-        mailFormTemp.questions.push(this.createFormQuestion(question))
+        mailFormTemp.questions.push(this.createFormQuestion(false, question))
       });
 
       mailForm = this._fb.group(mailFormTemp);
@@ -201,7 +204,7 @@ export class AdminOrdersFormMakerService {
           [Validators.required]
         ],
         questions: this._fb.array([
-          this.createFormQuestion()
+          this.createFormQuestion(false)
         ])
       });
     }

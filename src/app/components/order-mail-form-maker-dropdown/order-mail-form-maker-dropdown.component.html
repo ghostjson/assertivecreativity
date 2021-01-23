@@ -1,8 +1,6 @@
 <div [formGroup]="form" class="order-mail-form-maker-dropdown-component">
   <div class="p-fluid p-field p-input-filled">
-    <label for="form-question-{{ form.value.id }}">
-      Enter the question
-    </label>
+    <label for="form-question-{{ form.value.id }}"> Enter the question </label>
     <input
       type="text"
       formControlName="label"
@@ -11,13 +9,22 @@
       pInputText
     />
   </div>
-  <div class="dropdown-options p-mt-5" formArrayName="inputs">
-    <label class="p-mb-2"> Enter dropdown options </label>
-    <div
-      class="p-field p-inputgroup p-input-filled p-mt-2"
-      *ngFor="let input of inputs.controls; index as inputIndex"
-    >
-      <ng-container [formGroupName]="inputIndex">
+  <div *ngIf="inputs.length" class="dropdown-options p-input-filled p-mt-5" formArrayName="inputs">
+    <label class="p-mb-3"> Enter dropdown options </label>
+    <ng-container *ngFor="let input of inputs.controls; index as inputIndex">
+      <div
+        [formGroupName]="inputIndex"
+        class="form-maker-inputgroup p-field p-inputgroup p-mt-2"
+      >
+        <button
+          class="p-button-danger p-button-text"
+          type="button"
+          aria-label="remove question input"
+          icon="pi pi-times"
+          (click)="removeQuestionInput(inputIndex)"
+          pButton
+          pRipple
+        ></button>
         <input
           formControlName="label"
           id="mail-form-question-input-{{ form.value.inputs[inputIndex] }}"
@@ -26,15 +33,47 @@
           placeholder="Label for dropdown option"
         />
         <button
-          class="p-button-danger"
+          *ngIf="!form.value.is_child"
+          class="p-button-success"
+          label="Add Child Input"
           type="button"
-          icon="pi pi-times"
+          (click)="addChildrenQuestion(inputIndex)"
           pButton
           pRipple
-          (click)="removeQuestionInput(inputIndex)"
         ></button>
-      </ng-container>
-    </div>
+      </div>
+
+      <div class="children-questions">
+        <div
+          *ngFor="let childQuestion of childrenQuestions(inputIndex).controls; index as childIndex"
+          class="children-questions-item"
+        >
+          <div class="children-questions-item__label">
+            {{ childQuestion.value.label | limitLength: 100 }}
+          </div>
+          <div>
+            <button
+              aria-label="Edit Child question"
+              class="children-questions-item__edit-btn"
+              type="button"
+              label="Edit"
+              icon="pi pi-pencil"
+              iconPos="right"
+              (click)="emitChildQuestion(childQuestion, childrenQuestions(inputIndex), childIndex)"
+              pButton
+            ></button>
+            <button
+              aria-label="Delete child question"
+              class="children-questions-item__delete-btn p-button-text p-button-danger"
+              type="button"
+              icon="pi pi-trash"
+              (click)="removeChildrenQuestion(inputIndex, childIndex)"
+              pButton
+            ></button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 
   <div class="p-text-right p-fluid">

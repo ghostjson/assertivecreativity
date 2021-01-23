@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Color } from 'src/app/models/Color';
-import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
+import { formQuestionEvent, OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class AdminFormsQuestionMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() draggedQuestion: OrderMailFormQuestion;
   @Input() data: any;
+  @Output() childQuestionActive = new EventEmitter<formQuestionEvent>();
 
   questionTypes: SelectItem<string>[];
   pantoneColors: Color[];
@@ -48,17 +49,13 @@ export class AdminFormsQuestionMakerComponent implements OnInit {
   addQuestion(question: OrderMailFormQuestion = null): void {
     if (question) {
       this.questions().push(
-        this._formMakerService.createFormQuestion(question)
+        this._formMakerService.createFormQuestion(false, question)
       );
     } else {
-      this.questions().push(this._formMakerService.createFormQuestion());
+      this.questions().push(this._formMakerService.createFormQuestion(false));
     }
   }
 
-  /**
-   * Remove question at index
-   * @param index index of the question 
-   */
   removeQuestion(index: number): void {
     this.questions().removeAt(index);
   }
@@ -71,5 +68,14 @@ export class AdminFormsQuestionMakerComponent implements OnInit {
     if (this.draggedQuestion) {
       this.addQuestion(this.draggedQuestion);
     }
+  }
+
+  /**
+   * Emit the child question formgroup recevied
+   * @param value active child question formgroup
+   */
+  emitActiveChildQuestion(value: formQuestionEvent): void {
+    console.log('emit from question maker: ', value);
+    this.childQuestionActive.emit(value);
   }
 }

@@ -1,9 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
-import { SelectItem } from "primeng/api";
 import { Color } from "src/app/models/Color";
-import { OrderMailFormQuestion } from "src/app/models/OrderMailForm";
-import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
+import { formQuestionEvent, OrderMailFormQuestion } from "src/app/models/OrderMailForm";
 
 @Component({
   selector: "app-admin-forms-maker",
@@ -14,6 +12,8 @@ export class AdminFormsMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
   @ViewChild("formsPartContainer") formsPartContainer: ElementRef<HTMLElement>;
+  
+  activeChildQuestion: formQuestionEvent;
 
   draggedQuestion: OrderMailFormQuestion;
   pantoneColors: Color[];
@@ -21,7 +21,7 @@ export class AdminFormsMakerComponent implements OnInit {
     childQuestion: boolean;
   };
   formsPartWidth: string;
-  currentChildQuestion: FormGroup;
+  _currentChildQuestion: FormGroup;
 
   constructor() {}
 
@@ -75,5 +75,27 @@ export class AdminFormsMakerComponent implements OnInit {
     }px`;
 
     this.dialogs.childQuestion = !this.dialogs.childQuestion;
+  }
+
+  /**
+   * Catch the value of the child question emitted from the child component
+   * @param value value of the child question
+   */
+  catchActiveChildQuestion(value: formQuestionEvent): void {
+    console.log('catch in forms maker: ', value.question.value);
+    this.activeChildQuestion = value;
+
+    this.toggleChildQuestionDialog();
+  }
+
+  /**
+   * Remove the child question from its parent form array
+   * @param index index of the child question
+   */
+  removeActiveChildQuestion(index: number): void {
+    let parentArray = this.activeChildQuestion.parent as FormArray;
+    parentArray.removeAt(index);
+    this.toggleChildQuestionDialog()
+    this.activeChildQuestion = null;
   }
 }

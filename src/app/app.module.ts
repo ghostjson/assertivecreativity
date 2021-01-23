@@ -143,6 +143,7 @@ import { LimitLengthPipe } from './pipes/limit-length/limit-length.pipe';
 import { AdminFormsMakerComponent } from './components/admin-forms-maker/admin-forms-maker.component';
 import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
 import { AdminFormsQuestionMakerComponent } from './components/admin-forms-question-maker/admin-forms-question-maker.component';
+import { AdminFormsQuestionMakerQuestionComponent } from './components/admin-forms-question-maker-question/admin-forms-question-maker-question.component';
 
 @NgModule({
   declarations: [
@@ -224,7 +225,8 @@ import { AdminFormsQuestionMakerComponent } from './components/admin-forms-quest
     LimitLengthPipe,
     AdminFormsMakerComponent,
     AdminFormsComponent,
-    AdminFormsQuestionMakerComponent
+    AdminFormsQuestionMakerComponent,
+    AdminFormsQuestionMakerQuestionComponent
   ],
   imports: [
     BrowserModule,

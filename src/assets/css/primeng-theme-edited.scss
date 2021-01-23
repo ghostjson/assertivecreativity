@@ -1832,7 +1832,7 @@ a.p-button.p-button-success,
 .p-buttonset.p-button-success > .p-button,
 .p-splitbutton.p-button-success > .p-button {
   color: #ffffff;
-  background: #689f38;
+  background: $success-color;
   border: 0 none;
 }
 .p-button.p-button-success:enabled:hover,
@@ -1862,28 +1862,28 @@ a.p-button.p-button-success.p-button-outlined,
 .p-buttonset.p-button-success > .p-button.p-button-outlined,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #689f38;
+  color: $success-color;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
   background: rgba(104, 159, 56, 0.04);
-  color: #689f38;
+  color: $success-color;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
   background: rgba(104, 159, 56, 0.16);
-  color: #689f38;
+  color: $success-color;
   border: 1px solid;
 }
 .p-button.p-button-success.p-button-text,
 .p-buttonset.p-button-success > .p-button.p-button-text,
 .p-splitbutton.p-button-success > .p-button.p-button-text {
   background-color: transparent;
-  color: #689f38;
+  color: $success-color;
   border-color: transparent;
 }
 .p-button.p-button-success.p-button-text:enabled:hover,
@@ -1891,14 +1891,14 @@ a.p-button.p-button-success.p-button-outlined,
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:hover {
   background: rgba(104, 159, 56, 0.04);
   border-color: transparent;
-  color: #689f38;
+  color: $success-color;
 }
 .p-button.p-button-success.p-button-text:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active {
   background: rgba(104, 159, 56, 0.16);
   border-color: transparent;
-  color: #689f38;
+  color: $success-color;
 }
 
 .p-button.p-button-warning,
@@ -5449,7 +5449,7 @@ a.p-button.p-button-success.p-button-outlined,
   color: #ffffff;
 }
 .p-badge.p-badge-success {
-  background-color: #689f38;
+  background-color: $success-color;
   color: #ffffff;
 }
 .p-badge.p-badge-info {
@@ -5587,7 +5587,7 @@ a.p-button.p-button-success.p-button-outlined,
   border-radius: 4px;
 }
 .p-tag.p-tag-success {
-  background-color: #689f38;
+  background-color: $success-color;
   color: #ffffff;
 }
 .p-tag.p-tag-info {
@@ -6914,6 +6914,29 @@ a {
         border-radius: 0;
         border-bottom-left-radius: 4px;
         border-top-left-radius: 4px;
+      }
+    }
+
+    &.form-maker-inputgroup {
+      button {
+        &:first-child,
+        &:last-child {
+          border-radius: 4px;
+        }
+
+        &:first-child {
+          margin-left: 0;
+          margin-right: 1em;
+        }
+
+        &:last-child {
+          margin-right: 0;
+          margin-left: 1em;
+        }
+      }
+
+      input {
+        border-radius: 4px;
       }
     }
   }

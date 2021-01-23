@@ -45,47 +45,6 @@
       }
     }
 
-    .question-container {
-      .p-card {
-        margin-top: 3em;
-        border: 1px solid $light-grey;
-        box-shadow: none;
-
-        &-header {
-          .question-type {
-            display: flex;
-            width: 100%;
-            padding: 1rem;
-            border-bottom: 1px solid $light-grey;
-
-            &__number {
-              width: 48px;
-              margin-right: 1em;
-              border-radius: 6px;
-              font-size: 1.2rem;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-weight: 500;
-              background: rgba(204, 153, 51, 0.3);
-            }
-
-            &__input {
-              flex-grow: 1;
-
-              .p-dropdown {
-                width: 100%;
-              }
-            }
-
-            &__delete-btn {
-              margin-left: 1em;
-            }
-          }
-        }
-      }
-    }
-
     .drop-region {
       height: 150px;
       width: 100%;
