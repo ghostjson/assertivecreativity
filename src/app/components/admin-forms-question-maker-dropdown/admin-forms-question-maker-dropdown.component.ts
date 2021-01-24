@@ -2,12 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { formQuestionEvent } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
+
 @Component({
-  selector: 'app-order-mail-form-maker-dropdown',
-  templateUrl: './order-mail-form-maker-dropdown.component.html',
-  styleUrls: ['./order-mail-form-maker-dropdown.component.scss']
+  selector: 'app-admin-forms-question-maker-dropdown',
+  templateUrl: './admin-forms-question-maker-dropdown.html',
+  styleUrls: ['./admin-forms-question-maker-dropdown.component.scss']
 })
-export class OrderMailFormMakerDropdownComponent implements OnInit {
+
+export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
   @Input() form: FormGroup;
   @Output() childQuestionActive = new EventEmitter<formQuestionEvent>()
   

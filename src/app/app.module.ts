@@ -128,11 +128,11 @@ import { OrdersListComponent } from "./components/orders-list/orders-list.compon
 import { ErrorInterceptor } from "./helpers/error-interceptor/error.interceptor";
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 import { OrderMailFormMakerComponent } from './components/order-mail-form-maker/order-mail-form-maker.component';
-import { OrderMailFormMakerDropdownComponent } from './components/order-mail-form-maker-dropdown/order-mail-form-maker-dropdown.component';
-import { OrderMailFormMakerRadioComponent } from './components/order-mail-form-maker-radio/order-mail-form-maker-radio.component';
-import { OrderMailFormMakerTextComponent } from './components/order-mail-form-maker-text/order-mail-form-maker-text.component';
-import { OrderMailFormMakerColorComponent } from './components/order-mail-form-maker-color/order-mail-form-maker-color.component';
-import { OrderMailFormMakerDatePickerComponent } from './components/order-mail-form-maker-date-picker/order-mail-form-maker-date-picker.component';
+import { AdminFormsQuestionMakerDropdownComponent } from './components/admin-forms-question-maker-dropdown/admin-forms-question-maker-dropdown.component';
+import { AdminFormsQuestionMakerRadioComponent } from './components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component';
+import { AdminFormsQuestionMakerParagraphComponent } from './components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component';
+import { AdminFormsQuestionMakerColorComponent } from './components/admin-forms-question-maker-color/admin-forms-question-maker-color.component';
+import { AdminFormsQuestionMakerDatePickerComponent } from './components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component';
 import { OrderMailFormComponent } from './components/order-mail-form/order-mail-form.component';
 import { OrderMailFormDropdownComponent } from './components/order-mail-form-dropdown/order-mail-form-dropdown.component';
 import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/order-mail-form-radio.component';
@@ -211,21 +211,21 @@ import { AdminFormsQuestionMakerQuestionComponent } from './components/admin-for
     OrdersListComponent,
     VendorDashboardComponent,
     OrderMailFormMakerComponent,
-    OrderMailFormMakerDropdownComponent,
-    OrderMailFormMakerRadioComponent,
-    OrderMailFormMakerTextComponent,
-    OrderMailFormMakerColorComponent,
     OrderMailFormComponent,
     OrderMailFormDropdownComponent,
     OrderMailFormRadioComponent,
     OrderMailFormColorComponent,
     StockProductDetailComponent,
-    OrderMailFormMakerDatePickerComponent,
     OrderMailFormDatePickerComponent,
     LimitLengthPipe,
-    AdminFormsMakerComponent,
     AdminFormsComponent,
+    AdminFormsMakerComponent,
     AdminFormsQuestionMakerComponent,
+    AdminFormsQuestionMakerDropdownComponent,
+    AdminFormsQuestionMakerRadioComponent,
+    AdminFormsQuestionMakerParagraphComponent,
+    AdminFormsQuestionMakerColorComponent,
+    AdminFormsQuestionMakerDatePickerComponent,
     AdminFormsQuestionMakerQuestionComponent
   ],
   imports: [

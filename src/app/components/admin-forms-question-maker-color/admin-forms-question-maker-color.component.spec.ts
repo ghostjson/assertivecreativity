@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderMailFormMakerColorComponent } from './order-mail-form-maker-color.component';
+import { AdminFormsQuestionMakerColorComponent } from './admin-forms-question-maker-color.component';
 
 describe('OrderMailFormMakerColorComponent', () => {
-  let component: OrderMailFormMakerColorComponent;
-  let fixture: ComponentFixture<OrderMailFormMakerColorComponent>;
+  let component: AdminFormsQuestionMakerColorComponent;
+  let fixture: ComponentFixture<AdminFormsQuestionMakerColorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderMailFormMakerColorComponent ]
+      declarations: [ AdminFormsQuestionMakerColorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderMailFormMakerColorComponent);
+    fixture = TestBed.createComponent(AdminFormsQuestionMakerColorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

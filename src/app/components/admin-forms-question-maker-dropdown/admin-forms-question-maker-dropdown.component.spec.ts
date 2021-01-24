@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderMailFormMakerDropdownComponent } from './order-mail-form-maker-dropdown.component';
+import { AdminFormsQuestionMakerDropdownComponent } from './admin-forms-question-maker-dropdown.component';
 
 describe('OrderMailFormMakerDropdownComponent', () => {
-  let component: OrderMailFormMakerDropdownComponent;
-  let fixture: ComponentFixture<OrderMailFormMakerDropdownComponent>;
+  let component: AdminFormsQuestionMakerDropdownComponent;
+  let fixture: ComponentFixture<AdminFormsQuestionMakerDropdownComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderMailFormMakerDropdownComponent ]
+      declarations: [ AdminFormsQuestionMakerDropdownComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderMailFormMakerDropdownComponent);
+    fixture = TestBed.createComponent(AdminFormsQuestionMakerDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

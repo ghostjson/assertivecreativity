@@ -1,25 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
-  selector: 'app-order-mail-form-maker-date-picker',
-  templateUrl: './order-mail-form-maker-date-picker.component.html',
-  styleUrls: ['./order-mail-form-maker-date-picker.component.scss']
+  selector: 'app-admin-forms-question-maker-radio',
+  templateUrl: './admin-forms-question-maker-radio.component.html',
+  styleUrls: ['./admin-forms-question-maker-radio.component.scss']
 })
-export class OrderMailFormMakerDatePickerComponent implements OnInit {
+export class AdminFormsQuestionMakerRadioComponent {
   @Input() form: FormGroup;
-  minDate: Date;
-  maxDate: Date;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
-  ngOnInit(): void {
-    this.minDate = new Date();
-  }
-
   /**
-   * get inputs formarray
+   * Get inputs of the question
    */
   public get inputs(): FormArray {
     return this.form.get('inputs') as FormArray;
@@ -33,7 +27,7 @@ export class OrderMailFormMakerDatePickerComponent implements OnInit {
   }
 
   /**
-   * remove the input at index
+   * Remove the input at inputIndex
    * @param inputIndex index of the input to remove
    */
   removeQuestionInput(inputIndex: number): void {

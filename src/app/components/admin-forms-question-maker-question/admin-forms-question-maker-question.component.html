@@ -25,26 +25,26 @@
     </div>
   </p-header>
 
-  <app-order-mail-form-maker-dropdown
+  <app-admin-forms-question-maker-dropdown
     *ngIf="question.value.type === 'dropdown'"
     [form]="question"
     (childQuestionActive)="emitActiveChildQuestion($event)"
-  ></app-order-mail-form-maker-dropdown>
-  <app-order-mail-form-maker-radio
+  ></app-admin-forms-question-maker-dropdown>
+  <app-admin-forms-question-maker-radio
     *ngIf="question.value.type === 'radio'"
     [form]="question"
-  ></app-order-mail-form-maker-radio>
-  <app-order-mail-form-maker-text
+  ></app-admin-forms-question-maker-radio>
+  <app-admin-forms-question-maker-paragraph
     *ngIf="question.value.type === 'text'"
     [form]="question"
-  ></app-order-mail-form-maker-text>
-  <app-order-mail-form-maker-color
+  ></app-admin-forms-question-maker-paragraph>
+  <app-admin-forms-question-maker-color
     *ngIf="question.value.type === 'color'"
     [form]="question"
     [pantoneColors]="data"
-  ></app-order-mail-form-maker-color>
-  <app-order-mail-form-maker-date-picker
+  ></app-admin-forms-question-maker-color>
+  <app-admin-forms-question-maker-date-picker
     *ngIf="question.value.type === 'date-picker'"
     [form]="question"
-  ></app-order-mail-form-maker-date-picker>
+  ></app-admin-forms-question-maker-date-picker>
 </p-card>

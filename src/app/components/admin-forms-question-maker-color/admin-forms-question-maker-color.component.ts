@@ -6,11 +6,11 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
-  selector: 'app-order-mail-form-maker-color',
-  templateUrl: './order-mail-form-maker-color.component.html',
-  styleUrls: ['./order-mail-form-maker-color.component.scss']
+  selector: 'app-admin-forms-question-maker-color',
+  templateUrl: './admin-forms-question-maker-color.component.html',
+  styleUrls: ['./admin-forms-question-maker-color.component.scss']
 })
-export class OrderMailFormMakerColorComponent implements OnInit {
+export class AdminFormsQuestionMakerColorComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() pantoneColors: Color[];
 
