@@ -8,7 +8,7 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   styleUrls: ['./admin-forms-question-maker-date-picker.component.scss']
 })
 export class AdminFormsQuestionMakerDatePickerComponent implements OnInit {
-  @Input() form: FormGroup;
+  @Input() question: FormGroup;
   minDate: Date;
   maxDate: Date;
 
@@ -22,7 +22,7 @@ export class AdminFormsQuestionMakerDatePickerComponent implements OnInit {
    * get inputs formarray
    */
   public get inputs(): FormArray {
-    return this.form.get('inputs') as FormArray;
+    return this.question.get('inputs') as FormArray;
   }
 
   /**

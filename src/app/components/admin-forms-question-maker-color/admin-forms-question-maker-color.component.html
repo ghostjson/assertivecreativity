@@ -1,13 +1,13 @@
 <div class="order-mail-form-maker-color-component">
-  <ng-container [formGroup]="form">
+  <ng-container [formGroup]="question">
     <div class="p-field p-fluid p-input-filled">
-      <label class="p-mb-2" for="form-question-{{ form.value.id }}">
+      <label class="p-mb-2" for="form-question-{{ question.value.id }}">
         Enter the question
       </label>
       <input
         type="text"
         formControlName="label"
-        id="form-question-{{ form.value.id }}"
+        id="form-question-{{ question.value.id }}"
         placeholder="Enter the question"
         pInputText
       />

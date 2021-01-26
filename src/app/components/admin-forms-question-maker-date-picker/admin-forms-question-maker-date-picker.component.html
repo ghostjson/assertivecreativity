@@ -1,12 +1,12 @@
-<div [formGroup]="form" class="order-mail-form-maker-date-component">
+<div [formGroup]="question" class="order-mail-form-maker-date-component">
   <div class="p-fluid p-field p-input-filled">
-    <label for="form-question-{{ form.value.id }}">
+    <label for="form-question-{{ question.value.id }}">
       Enter the question
     </label>
     <input
       type="text"
       formControlName="label"
-      id="form-question-{{ form.value.id }}"
+      id="form-question-{{ question.value.id }}"
       placeholder="Enter the question"
       pInputText
     />

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
+import { OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
 
 @Component({
   selector: 'app-order-mail-form-color',
@@ -8,7 +8,7 @@ import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
   styleUrls: ['./order-mail-form-color.component.scss']
 })
 export class OrderMailFormColorComponent implements OnInit {
-  @Input() question: OrderMailFormQuestion;
+  @Input() question: OrderFormQuestionConfig;
   @Input() form: FormGroup;
 
   constructor() { }

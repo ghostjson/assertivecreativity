@@ -6,7 +6,7 @@ import { ScrollPanel } from "primeng/scrollpanel";
 import { Order } from "src/app/models/Order";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { User } from "src/app/models/User";
-import { OrderMailForm, OrderMailFormResponse } from "src/app/models/OrderMailForm";
+import { OrderFormResponse } from "src/app/models/OrderMailForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 import { FormGroup } from "@angular/forms";
 import { CommonService } from "src/app/common.service";
@@ -29,9 +29,9 @@ export class OrderMailListComponent implements OnInit {
   user: User;
   orderMailForm: FormGroup;
   showFormMakerDialog: boolean;
-  savedForms: OrderMailFormResponse[];
+  savedForms: OrderFormResponse[];
   savedFormsDialog: boolean;
-  selectedSavedForm: OrderMailFormResponse;
+  selectedSavedForm: OrderFormResponse;
   savedFormPreview: boolean;
 
   constructor(
@@ -51,11 +51,11 @@ export class OrderMailListComponent implements OnInit {
      * TODO: Fix after api is finailzed for mail forms
      */
     // if(this.user.role === 'admin') {
-    this.orderMailForm = this._formMakerService.createOrderMailForm();
+    this.orderMailForm = this._formMakerService.createOrderForm();
     // }
     if(this.user.role === 'admin') {
       this._commonService.setLoaderFor(
-        this._formMakerService.getAllForms().subscribe((res: OrderMailFormResponse[]) => {
+        this._formMakerService.getAllForms().subscribe((res: OrderFormResponse[]) => {
           this.savedForms = res;
           console.log('forms received: ', this.savedForms);
         })
@@ -105,7 +105,7 @@ export class OrderMailListComponent implements OnInit {
           /**
            * TODO: Cleanup after the api is finalised
            */
-          this.orderMailForm = this._formMakerService.createOrderMailForm();
+          this.orderMailForm = this._formMakerService.createOrderForm();
           res.message_content = JSON.parse(res.message_content);
           this.mails.unshift(res);
           this._messageService.add({
@@ -124,7 +124,7 @@ export class OrderMailListComponent implements OnInit {
         /**
          * TODO: Cleanup after the api is finalised
          */
-        this.orderMailForm = this._formMakerService.createOrderMailForm();
+        this.orderMailForm = this._formMakerService.createOrderForm();
         res.message_content = JSON.parse(res.message_content);
         this.mails.unshift(res);
         this._messageService.add({
@@ -157,7 +157,7 @@ export class OrderMailListComponent implements OnInit {
 
   setMailForm(): void {
     console.log('setting form ', this.selectedSavedForm);
-    this.orderMailForm = this._formMakerService.createOrderMailForm(this.selectedSavedForm.data);
+    this.orderMailForm = this._formMakerService.createOrderForm(this.selectedSavedForm.data);
     this.toggleSavedFormsDialog();
     console.log(this.orderMailForm.value);
     this.orderMailForm.markAllAsTouched();

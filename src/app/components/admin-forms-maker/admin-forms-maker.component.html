@@ -3,9 +3,7 @@
     <aside class="questions-list">
       <p-card>
         <p-header>
-          <h3>
-            Questions
-          </h3>
+          <h3>Questions</h3>
         </p-header>
         <ng-container
           *ngFor="
@@ -14,7 +12,7 @@
             trackBy: trackById
           "
         >
-          <div *ngIf="question.label" class="questions-list-item p-p-3 p-mt-2">
+          <div class="questions-list-item p-p-3 p-mt-2">
             <div
               class="questions-list-item__label"
               pDraggable="formGroup.value.questions"
@@ -51,12 +49,43 @@
             />
           </div>
         </div>
-        
-        <app-admin-forms-question-maker
-          [formGroup]="formGroup"
-          [draggedQuestion]="draggedQuestion"
-          (childQuestionActive)="catchActiveChildQuestion($event)"
-        ></app-admin-forms-question-maker>
+
+        <ng-container formArrayName="questions">
+          <div class="p-mt-5">
+            <app-admin-forms-question-maker
+              *ngFor="
+                let question of questions().controls;
+                index as questionIndex
+              "
+              [questionIndex]="questionIndex"
+              [question]="question"
+              (childQuestionActive)="catchActiveChildQuestion($event)"
+              (removeQuestion)="removeQuestion(questionIndex)"
+            ></app-admin-forms-question-maker>
+          </div>
+
+          <div class="p-fluid p-mt-6">
+            <div
+              pDroppable="formGroup.value.questions"
+              (onDrop)="addDroppedForm()"
+              class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
+            >
+              <i class="add-icon pi pi-plus"></i>
+              <i class="droppable-icon pi pi-check"></i>
+              <div class="placeholder-text">Drop Question Here</div>
+              <div class="droppable-text">Drop To Add</div>
+            </div>
+            <button
+              type="button"
+              label="Add New Question"
+              icon="pi pi-plus"
+              iconPos="right"
+              class="p-button-success p-button-lg p-shadow-2"
+              (click)="addQuestion()"
+              pButton
+            ></button>
+          </div>
+        </ng-container>
       </form>
     </p-card>
     <p-dialog
@@ -73,12 +102,15 @@
         width: formsPartWidth
       }"
     >
-      <app-admin-forms-question-maker-question
-        *ngIf="activeChildQuestion"
-        [question]="activeChildQuestion.question"
-        [questionIndex]="activeChildQuestion.questionIndex"
-        (removeQuestion)="removeActiveChildQuestion($event)"
-      ></app-admin-forms-question-maker-question>
+      <div class="p-mt-5">
+        <app-admin-forms-question-maker
+          *ngIf="activeChildQuestion"
+          [questionIndex]="activeChildQuestion.questionIndex"
+          [question]="activeChildQuestion.question"
+          (childQuestionActive)="catchActiveChildQuestion($event)"
+          (removeQuestion)="removeActiveChildQuestion($event)"
+        ></app-admin-forms-question-maker>
+      </div>
       <p-footer>
         <button
           type="button"

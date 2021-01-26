@@ -8,7 +8,7 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   styleUrls: ['./admin-forms-question-maker-radio.component.scss']
 })
 export class AdminFormsQuestionMakerRadioComponent {
-  @Input() form: FormGroup;
+  @Input() question: FormGroup;
 
   constructor(private _formMakerService: AdminOrdersFormMakerService) { }
 
@@ -16,7 +16,7 @@ export class AdminFormsQuestionMakerRadioComponent {
    * Get inputs of the question
    */
   public get inputs(): FormArray {
-    return this.form.get('inputs') as FormArray;
+    return this.question.get('inputs') as FormArray;
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
+import { OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
 
 @Component({
   selector: 'app-order-mail-form-radio',
@@ -8,7 +8,7 @@ import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
   styleUrls: ['./order-mail-form-radio.component.scss']
 })
 export class OrderMailFormRadioComponent implements OnInit {
-  @Input() question: OrderMailFormQuestion;
+  @Input() question: OrderFormQuestionConfig;
   @Input() form: FormGroup;
 
   constructor() { }

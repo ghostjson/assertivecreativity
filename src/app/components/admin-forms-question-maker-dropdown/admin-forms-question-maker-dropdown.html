@@ -1,10 +1,10 @@
-<div [formGroup]="form">
+<div [formGroup]="question">
   <div class="p-fluid p-field p-input-filled">
-    <label for="form-question-{{ form.value.id }}"> Enter the question </label>
+    <label for="form-question-{{question.value.id }}"> Enter the question </label>
     <input
       type="text"
       formControlName="label"
-      id="form-question-{{ form.value.id }}"
+      id="form-question-{{question.value.id }}"
       placeholder="Enter the question"
       pInputText
     />
@@ -27,13 +27,13 @@
         ></button>
         <input
           formControlName="label"
-          id="mail-form-question-input-{{ form.value.inputs[inputIndex] }}"
+          id="mail-form-question-input-{{ question.value.inputs[inputIndex] }}"
           type="text"
           pInputText
           placeholder="Label for dropdown option"
         />
         <button
-          *ngIf="!form.value.is_child"
+          *ngIf="!question.value.is_child"
           class="p-button-success"
           label="Add Child Input"
           type="button"

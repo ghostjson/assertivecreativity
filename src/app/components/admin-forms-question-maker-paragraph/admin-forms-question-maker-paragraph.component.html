@@ -1,12 +1,12 @@
-<div [formGroup]="form" class="order-mail-form-maker-text-component">
+<div [formGroup]="question" class="order-mail-form-maker-text-component">
   <div class="p-fluid p-field p-input-filled">
-    <label for="form-question-{{ form.value.id }}">
+    <label for="form-question-{{ question.value.id }}">
       Enter the question
     </label>
     <input
       type="text"
       formControlName="label"
-      id="form-question-{{ form.value.id }}"
+      id="form-question-{{ question.value.id }}"
       placeholder="Enter the question"
       pInputText
     />
@@ -14,7 +14,7 @@
   <div class="p-fluid p-field p-input-filled">
     <label
       for="form-question-{{
-        form.value.id
+        question.value.id
       }}-placeholder"
     >
       Enter placeholder for text input
@@ -23,7 +23,7 @@
       type="text"
       formControlName="placeholder"
       id="form-question-{{
-        form.value.id
+        question.value.id
       }}-placeholder"
       placeholder="Enter the question"
       pInputText

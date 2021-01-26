@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { Color } from 'src/app/models/Color';
-import { FormInput } from 'src/app/models/OrderMailForm';
+import { OrderFormInputConfig } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
@@ -11,12 +11,12 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
   styleUrls: ['./admin-forms-question-maker-color.component.scss']
 })
 export class AdminFormsQuestionMakerColorComponent implements OnInit {
-  @Input() form: FormGroup;
+  @Input() question: FormGroup;
   @Input() pantoneColors: Color[];
 
   colorSelector: boolean;
   selectedColor: string;
-  currentColorInput: FormInput;
+  currentColorInput: OrderFormInputConfig;
   currentInputIndex: number;
   colorEditMode: boolean;
 
@@ -40,7 +40,7 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
    * Get inputs formarray of the question
    */
   public get inputs(): FormArray {
-    return this.form.get('inputs') as FormArray;
+    return this.question.get('inputs') as FormArray;
   }
 
   /**
@@ -65,7 +65,7 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
    * @param inputIndex index of the input
    * @param currentValue currentValue of the input
    */
-  editQuestionInput(inputIndex: number, currentValue: FormInput) {
+  editQuestionInput(inputIndex: number, currentValue: OrderFormInputConfig) {
     this.colorEditMode = true;
     this.currentColorInput = currentValue;
     this.currentInputIndex = inputIndex;

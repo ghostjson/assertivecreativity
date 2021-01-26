@@ -80,7 +80,6 @@
 
   <p-dialog
     class="form-maker-dialog"
-    header="Create New Form"
     [(visible)]="showFormMakerDialog"
     [draggable]="false"
     [resizable]="false"
@@ -88,13 +87,14 @@
     position="bottom"
     [blockScroll]="true"
   >
-    <app-admin-forms-maker
-      [formGroup]="newForm"
-    ></app-admin-forms-maker>
-    <p-footer>
-      <p-button
+    <ng-template pTemplate="header">
+      <div class="form-maker-dialog__header">
+        Create New Form
+      </div>
+      <div>
+        <p-button
         label="Cancel"
-        styleClass="p-button-danger p-button-text"
+        styleClass="p-button-danger p-button-text p-mr-2"
         (onClick)="toggleFormMakerDialog()"
       ></p-button>
       <p-button
@@ -105,7 +105,9 @@
         [disabled]="!newForm.valid"
         (onClick)="addForm()"
       ></p-button>
-    </p-footer>
+      </div>
+    </ng-template>
+    <app-admin-forms-maker [formGroup]="newForm"></app-admin-forms-maker>
   </p-dialog>
 
   <app-footer></app-footer>

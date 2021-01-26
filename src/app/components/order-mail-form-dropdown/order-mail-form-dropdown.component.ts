@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
+import { OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
   styleUrls: ['./order-mail-form-dropdown.component.scss']
 })
 export class OrderMailFormDropdownComponent implements OnInit {
-  @Input() question: OrderMailFormQuestion;
+  @Input() question: OrderFormQuestionConfig;
   @Input() form: FormGroup;
 
   constructor(private _idGenService: IdGeneratorService) { }

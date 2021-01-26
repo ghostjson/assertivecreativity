@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
-import { OrderMailFormResponse, OrderMailFormQuestion } from 'src/app/models/OrderMailForm';
+import { OrderFormResponse, OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
@@ -13,13 +13,13 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 export class AdminFormsComponent implements OnInit {
   @ViewChild('questionsList') questionsList: ElementRef<HTMLElement>;
 
-  forms: OrderMailFormResponse[] = null;
+  forms: OrderFormResponse[] = null;
   showFormMakerDialog: boolean = false;
   newForm: FormGroup;
   editMode: boolean = false;
   editIndex: number;
-  prevForm: OrderMailFormResponse;
-  draggedQuestion: OrderMailFormQuestion;
+  prevForm: OrderFormResponse;
+  draggedQuestion: OrderFormQuestionConfig;
 
   constructor(
     private _adminFormsService: AdminOrdersFormMakerService,
@@ -31,13 +31,13 @@ export class AdminFormsComponent implements OnInit {
   ngOnInit(): void {
     this._adminFormsService
       .getAllForms()
-      .subscribe((res: OrderMailFormResponse[]) => {
+      .subscribe((res: OrderFormResponse[]) => {
         this.forms = res;
         this._commonService.setLoader(false);
         console.log("forms received: ", this.forms);
       });
 
-    this.newForm = this._formMakerService.createOrderMailForm();
+    this.newForm = this._formMakerService.createOrderForm();
   }
 
   toggleFormMakerDialog(): void {
@@ -88,7 +88,7 @@ export class AdminFormsComponent implements OnInit {
         this._formMakerService.addForm(this.newForm.value).subscribe(
           (res: any) => {
             console.log('created form: ', res);
-            let resForm: OrderMailFormResponse = {
+            let resForm: OrderFormResponse = {
               id: res.data.id,
               name: res.data.name,
               data: this.newForm.value,
@@ -119,17 +119,17 @@ export class AdminFormsComponent implements OnInit {
 
   createNewFormDialog(): void {
     this.editMode = false;
-    this.newForm = this._formMakerService.createOrderMailForm();
+    this.newForm = this._formMakerService.createOrderForm();
     this.toggleFormMakerDialog();
   }
 
-  openEditDialog(form: OrderMailFormResponse, index: number) {
+  openEditDialog(form: OrderFormResponse, index: number) {
     this.toggleFormMakerDialog();
     this.editMode = true;
     this.editIndex = index;
     this.prevForm = form;
     console.log(form, index);
-    this.newForm = this._formMakerService.createOrderMailForm(form.data);
+    this.newForm = this._formMakerService.createOrderForm(form.data);
   }
 
   deleteForm(index: number): void {

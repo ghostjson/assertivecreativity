@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { formQuestionEvent } from 'src/app/models/OrderMailForm';
+import { FormQuestionEvent } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 })
 
 export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
-  @Input() form: FormGroup;
-  @Output() childQuestionActive = new EventEmitter<formQuestionEvent>()
+  @Input() question: FormGroup;
+  @Output() childQuestionActive = new EventEmitter<FormQuestionEvent>()
   
   currentChildQuestion: FormGroup;
 
@@ -24,7 +24,7 @@ export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
    * Get the inputs formarray
    */
   public get inputs(): FormArray {
-    return this.form.get('inputs') as FormArray;
+    return this.question.get('inputs') as FormArray;
   }
 
   /**
