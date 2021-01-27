@@ -194,7 +194,9 @@ export class AdminOrdersFormMakerService {
         placeholder: '',
         type: 'dropdown',
         is_child: isChild,
-        inputs: this._fb.array([]),
+        inputs: this._fb.array([
+          this.createQuestionInput()
+        ]),
       });
     }
 
