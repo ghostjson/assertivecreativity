@@ -1,4 +1,4 @@
-<div [formGroup]="question" class="order-mail-form-maker-radio-component">
+<div [formGroup]="question" class="order-form-maker-radio-component">
   <div class="p-fluid p-field p-input-filled">
     <label for="form-question-{{ question.value.id }}">
       Enter the question
@@ -11,30 +11,44 @@
       pInputText
     />
   </div>
-  <div class="radio-buttons p-mt-5" formArrayName="inputs">
-    <label class="p-mb-2"> Enter radio button options </label>
-    <div
-      class="p-field p-inputgroup p-input-filled p-mt-2"
-      *ngFor="let input of inputs.controls; index as inputIndex"
-    >
-      <ng-container [formGroupName]="inputIndex">
-        <input
-          formControlName="label"
-          id="mail-form-question-input-{{ question.value.inputs[inputIndex] }}"
-          type="text"
-          pInputText
-          placeholder="Label for radio button"
-        />
+  <div class="radio-buttons p-input-filled p-mt-5" formArrayName="inputs">
+    <label class="p-mb-3"> Enter radio button options </label>
+    <ng-container *ngFor="let input of inputs.controls; index as inputIndex">
+      <div
+        [formGroupName]="inputIndex"
+        class="form-maker-inputgroup p-inputgroup p-field p-mt-2"
+      >
         <button
-          class="p-button-danger"
+          class="p-button-text p-button-danger p-mr-2"
           type="button"
           icon="pi pi-times"
           pButton
           pRipple
           (click)="removeQuestionInput(inputIndex)"
         ></button>
-      </ng-container>
-    </div>
+        <input
+          class="p-mr-2"
+          formControlName="label"
+          id="order-form-question-input-{{ question.value.inputs[inputIndex] }}"
+          type="text"
+          pInputText
+          placeholder="Label for radio button"
+        />
+        <button
+          *ngIf="!question.value.is_child"
+          class="p-button-success"
+          label="Add Child Input"
+          type="button"
+          (click)="addChildrenQuestion(inputIndex)"
+          pButton
+          pRipple
+        ></button>
+      </div>
+      <app-admin-forms-question-maker-child-questions-list
+        [childrenQuestions]="childrenQuestions(inputIndex)"
+        (childQuestionActive)="emitUp($event)"
+      ></app-admin-forms-question-maker-child-questions-list>
+    </ng-container>
   </div>
 
   <div class="p-text-right p-fluid">
