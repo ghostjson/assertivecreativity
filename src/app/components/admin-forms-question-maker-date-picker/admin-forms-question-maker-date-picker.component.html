@@ -3,21 +3,30 @@
     <label for="form-question-{{ question.value.id }}">
       Enter the question
     </label>
-    <input
-      type="text"
-      formControlName="label"
-      id="form-question-{{ question.value.id }}"
-      placeholder="Enter the question"
-      pInputText
-    />
+    <div class="form-maker-inputgroup p-inputgroup">
+      <input
+        type="text"
+        formControlName="label"
+        id="form-question-{{ question.value.id }}"
+        placeholder="Enter the question"
+        pInputText
+      />
+      <button
+        *ngIf="!question.value.is_child"
+        class="p-button-success p-ml-2"
+        label="Add Child Input"
+        type="button"
+        (click)="addChildrenQuestion(0)"
+        pButton
+        pRipple
+      ></button>
+    </div>
   </div>
 
   <div class="p-grid">
     <div class="p-col-6">
       <div class="p-fluid p-field p-input-filled">
-        <label for="min-date">
-          Select a minimum date (today by default)
-        </label>
+        <label for="min-date"> Select a minimum date (today by default) </label>
         <p-calendar
           [minDate]="minDate"
           [touchUI]="true"
@@ -28,11 +37,10 @@
           placeholder="Minimum Date"
         ></p-calendar>
       </div>
-
+    </div>
+    <div class="p-col-6">
       <div class="p-fluid p-field p-input-filled">
-        <label for="max-date">
-          Select a maximum date
-        </label>
+        <label for="max-date"> Select a maximum date </label>
         <p-calendar
           [minDate]="maxDate"
           [touchUI]="true"
@@ -43,6 +51,12 @@
           placeholder="Maximum Date"
         ></p-calendar>
       </div>
+    </div>
+    <div *ngFor="let input of inputs.controls; index as inputIndex" class="p-col-12">
+      <app-admin-forms-question-maker-child-questions-list
+        [childrenQuestions]="childrenQuestions(inputIndex)"
+        (childQuestionActive)="emitUp($event)"
+      ></app-admin-forms-question-maker-child-questions-list>
     </div>
   </div>
 </div>

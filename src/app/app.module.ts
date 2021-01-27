@@ -64,6 +64,7 @@ import { ScrollTopModule } from "primeng/scrolltop";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { MessageService } from "primeng/api";
+import { TooltipModule } from 'primeng/tooltip';
 
 /** Common Imports */
 import { LoaderComponent } from "./components/loader/loader.component";
@@ -149,10 +150,10 @@ import { AdminOrdersComponent } from "./pages/admin-orders/admin-orders.componen
 import { AdminFormsMakerComponent } from "./components/admin-forms-maker/admin-forms-maker.component";
 import { AdminFormsComponent } from "./pages/admin-forms/admin-forms.component";
 import { AdminFormsQuestionMakerComponent } from "./components/admin-forms-question-maker/admin-forms-question-maker.component";
+import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components/admin-forms-question-maker-child-questions-list/admin-forms-question-maker-child-questions-list.component';
 
 /** Vendor imports */
 import { VendorDashboardComponent } from "./pages/vendor-dashboard/vendor-dashboard.component";
-import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components/admin-forms-question-maker-child-questions-list/admin-forms-question-maker-child-questions-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -299,7 +300,7 @@ import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components
     StepsModule,
     DataViewModule,
     ScrollTopModule,
-    // DragDropModule
+    TooltipModule
   ],
   providers: [
     FormComponent,

@@ -16,6 +16,11 @@
       .p-card {
         width: 100%;
 
+        &-content,
+        &-body {
+          padding-top: 0;
+        }
+
         &-header {
           padding: 1em;
 
