@@ -1,10 +1,8 @@
-import { Component, ComponentFactory, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
-import { Subject } from "rxjs";
-import { take } from "rxjs/operators";
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Color } from "src/app/models/Color";
 import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderMailForm";
-import { AdminFormsComponentResolverService } from "src/app/services/admin-forms-component-resolver/admin-forms-component-resolver.service";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 
 @Component({
