@@ -1,7 +1,7 @@
 import { ComponentFactoryResolver } from "@angular/core";
 import { ComponentFactory } from "@angular/core";
 import { Injectable } from "@angular/core";
-import { PANTONE_COLORS } from "dist/acreativity/assets/js/pantone-colors";
+import { PANTONE_COLORS } from "src/assets/js/pantone-colors";
 import { AdminFormsQuestionMakerColorComponent } from "src/app/components/admin-forms-question-maker-color/admin-forms-question-maker-color.component";
 import { AdminFormsQuestionMakerDatePickerComponent } from "src/app/components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component";
 import { AdminFormsQuestionMakerDropdownComponent } from "src/app/components/admin-forms-question-maker-dropdown/admin-forms-question-maker-dropdown.component";
