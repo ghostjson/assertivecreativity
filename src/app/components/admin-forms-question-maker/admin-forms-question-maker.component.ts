@@ -58,15 +58,13 @@ export class AdminFormsQuestionMakerComponent
       .subscribe((newType: string) => {
         console.log('type sub started');
         this.renderQuestion(newType, this.question, this.questionContainer);
-      })
-      .add(() => {
-        console.log('type sub closed');
       });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.unsub.next();
     if (changes.question) {
+      this.unsub.next();
+      console.log(changes.question);
       // render the new form
       this.renderQuestion(changes.question.currentValue.value.type, this.question, this.questionContainer);
       // listen for changes to the question type and render
@@ -76,9 +74,6 @@ export class AdminFormsQuestionMakerComponent
         .subscribe((newType: string) => {
           console.log('type sub started');
           this.renderQuestion(newType, this.question, this.questionContainer);
-        })
-        .add(() => {
-          console.log('type sub closed');
         });
     }
   }
@@ -113,9 +108,6 @@ export class AdminFormsQuestionMakerComponent
       .subscribe((e: FormQuestionEvent) => {
         console.log('child sub started');
         this.emitActiveChildQuestion(e);
-      })
-      .add(() => {
-        console.log('child sub closed');
       });
   }
 
