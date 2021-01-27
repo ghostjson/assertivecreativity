@@ -1,4 +1,10 @@
-@import '../../../assets/css/variables.scss';
+@import "../../../assets/css/variables.scss";
+
+:host-context(body) {
+  .cdk-drag-preview {
+    box-shadow: $shadow-6;
+  }
+}
 
 :host {
   ::ng-deep {
@@ -6,7 +12,7 @@
       position: relative;
     }
 
-    .questions-list {
+    .questions-overview-list-wrapper {
       .p-card {
         width: 100%;
 
@@ -19,14 +25,32 @@
         }
       }
 
-      &-item {
-        border: 1px solid $light-grey;
-        border-radius: 4px;
-        transition: all 0.2s;
+      .questions-overview-list {
+        &-item {
+          border: 1px solid $light-grey;
+          border-radius: 4px;
+          height: 4rem;
+          padding: 0.75em;
+          display: flex;
+          align-items: center;
 
-        &:hover {
-          cursor: grab;
-          background-color: $bg-primary-hover;
+          &:hover {
+            cursor: grab;
+          }
+        }
+
+        &.cdk-drop-list-dragging {
+          .questions-overview-list-item:not(.cdk-drag-placeholder) {
+            transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+          }
+        }
+
+        .custom-placeholder {
+          background: $light-grey;
+          border: dashed 3px $primary-color;
+          border-radius: 4px;
+          height: 4rem;
+          transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
         }
       }
     }
@@ -37,9 +61,15 @@
       &-card {
         .p-card {
           padding-top: 0;
-  
+
           &-content {
             padding-top: 0;
+
+            .question-maker-list {
+              &__item {
+                margin-top: 2.5em;
+              }
+            }
           }
         }
       }

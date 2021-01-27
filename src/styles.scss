@@ -1,23 +1,24 @@
 // @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
-@import './assets/css/variables.scss';
-@import './assets/css/bootstrap-container.css';
+@import "./assets/css/variables.scss";
+@import "./assets/css/bootstrap-container.css";
 
 /* You can add global styles to this file, and also import other style files */
 
 :root {
   --primary-color: #cc9933;
-  --primary-color-text:#ffffff;
+  --primary-color-text: #ffffff;
   --secondary-color: #deefb7;
   --dark-color: #2b2b2b;
-  --surface-a:#ffffff;
-  --surface-b:#fafafa;
-  --surface-c:rgba(0,0,0,.04);
-  --surface-d:rgba(0,0,0,.12);
-  --surface-e:#ffffff;
-  --surface-f:#ffffff;
-  --text-color:#2b2b2b;
-  --text-color-secondary:textSecondaryColor;
-  --font-family:Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  --surface-a: #ffffff;
+  --surface-b: #fafafa;
+  --surface-c: rgba(0, 0, 0, 0.04);
+  --surface-d: rgba(0, 0, 0, 0.12);
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --text-color: #2b2b2b;
+  --text-color-secondary: textSecondaryColor;
+  --font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
+    Lucida Grande, sans-serif;
 }
 
 /* roboto-regular - latin-ext_latin */
@@ -25,7 +26,10 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  src: local("Roboto"), local("Roboto-Regular"), url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff2") format("woff2"), url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff") format("woff");
+  src: local("Roboto"), local("Roboto-Regular"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff2")
+      format("woff2"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff") format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-500 - latin-ext_latin */
@@ -33,7 +37,9 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  src: local("Roboto Medium"), local("Roboto-Medium"), url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff2") format("woff2"), url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff") format("woff");
+  src: local("Roboto Medium"), local("Roboto-Medium"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff2") format("woff2"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff") format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-700 - latin-ext_latin */
@@ -41,7 +47,9 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: local("Roboto Bold"), local("Roboto-Bold"), url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff2") format("woff2"), url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff") format("woff");
+  src: local("Roboto Bold"), local("Roboto-Bold"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff2") format("woff2"),
+    url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff") format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
@@ -50,10 +58,12 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 900;
-  src: local("Roboto Black"), url("./assets/fonts/Roboto-Black.ttf") format("truetype");
+  src: local("Roboto Black"),
+    url("./assets/fonts/Roboto-Black.ttf") format("truetype");
 }
 
-html, body {
+html,
+body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -77,38 +87,56 @@ p {
   color: var(--primary-color);
 }
 
+.questions-overview-list-item {
+  &.cdk-drag-preview {
+    background-color: white;
+    color: $dark-color;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    height: 4rem;
+    padding: 0.75em;
+    display: flex;
+    align-items: center;
+    box-shadow: $shadow-6;
+    cursor: grab;
+  }
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
 
 /**
  * utility classes for the project starts
  */
- .sr-only {
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
 
 .bg-success {
-  background: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+  background: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
 }
 
 .bg-danger {
-  background: linear-gradient(90deg, #FF414D 0%, #FF4B5C 96.87%);
+  background: linear-gradient(90deg, #ff414d 0%, #ff4b5c 96.87%);
 }
 
 .bg-warning {
-  background: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
+  background: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
 }
 
 .bg-info {
-  background: linear-gradient(90deg, #00A8CC 0%, #00BCD4 100%);
+  background: linear-gradient(90deg, #00a8cc 0%, #00bcd4 100%);
 }
 /**
  * utility classes for the project ends
  */
 
-@import './assets/css/primeng-theme-edited.scss';
+@import "./assets/css/primeng-theme-edited.scss";

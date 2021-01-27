@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Color } from "src/app/models/Color";
 import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderMailForm";
@@ -57,8 +57,11 @@ export class AdminFormsMakerComponent implements OnInit {
     }
   }
 
+  /**
+   * remove formgroup from the formarray
+   * @param index index of the formgroup to remove
+   */
   removeQuestion(index: number): void {
-    // remove from the formgroup
     this.questions().removeAt(index);
   }
 
@@ -85,18 +88,35 @@ export class AdminFormsMakerComponent implements OnInit {
   }
 
   /**
-   * Handle drag event start
-   * @param question question object that is being dragged
+   * Track the formgroup by id
+   * @param index index of the form
+   * @param formGroup parent formgroup
    */
-  handleDragStart(question: OrderFormQuestionConfig) {
-    this.draggedQuestion = question;
+  trackFormGroupById(index: number, formGroup: FormGroup): number {
+    return formGroup.value.id;
   }
 
   /**
-   * Handle drag event end
+   * Move formgroup in a formarray
+   * @param formArray formarray to sort
+   * @param prevIndex previous index of the item
+   * @param currentIndex current index of the item
    */
-  handleDragEnd(): void {
-    this.draggedQuestion = null;
+  moveItemInFormArray(formArray: FormArray, prevIndex: number, currentIndex: number): void {
+    let item: AbstractControl = formArray.at(prevIndex);
+    let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
+    formArray.insert(insertIndex, item);
+    
+    let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
+    formArray.removeAt(removeIndex);
+  }
+
+  /**
+   * handle sorting when dragging ends
+   * @param e event
+   */
+  handleDragSort(e: CdkDragDrop<OrderFormQuestionConfig[]>): void {
+    this.moveItemInFormArray(this.questions(), e.previousIndex, e.currentIndex);
   }
 
   /**

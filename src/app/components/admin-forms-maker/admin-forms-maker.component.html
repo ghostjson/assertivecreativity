@@ -1,37 +1,41 @@
 <div class="p-grid admin-forms-maker-component">
   <div class="p-col-12 p-md-4 p-lg-3">
-    <aside class="questions-list">
+    <aside class="questions-overview-list-wrapper">
       <p-card>
         <p-header>
           <h3>Questions</h3>
         </p-header>
-        <ng-container
-          *ngFor="
-            let question of formGroup.value.questions;
-            index as questionInd;
-            trackBy: trackById
-          "
+        <div
+          class="questions-overview-list"
+          cdkDropList
+          (cdkDropListDropped)="handleDragSort($event)"
         >
-          <!-- <div class="questions-list-item p-p-3 p-mt-2">
-            <div
-              class="questions-list-item__label"
-              pDraggable="formGroup.value.questions"
-              (onDragStart)="handleDragStart(question)"
-              (onDragEnd)="handleDragEnd()"
-            >
+          <div
+            *ngFor="
+              let question of formGroup.value.questions;
+              index as questionInd;
+              trackBy: trackById
+            "
+            class="questions-overview-list-item p-d-flex p-jc-between p-mt-2"
+            cdkDrag
+          >
+            <div class="questions-overview-list-item__label">
               <span class="p-text-bold"> {{ questionInd + 1 }}. </span>
               {{ question.label }}
+              <div class="custom-placeholder" *cdkDragPlaceholder></div>
             </div>
-          </div> -->
-          <div class="questions-list-item p-p-3 p-mt-2">
-            <div
-              class="questions-list-item__label"
-            >
-              <span class="p-text-bold"> {{ questionInd + 1 }}. </span>
-              {{ question.label }}
+            <div class="questions-overview-list-item__tools">
+              <button
+                aria-label="delete question"
+                role="button"
+                class="p-button-text p-button-danger"
+                icon="pi pi-times"
+                (click)="removeQuestion(questionInd)"
+                pButton
+              ></button>
             </div>
           </div>
-        </ng-container>
+        </div>
       </p-card>
     </aside>
   </div>
@@ -59,30 +63,25 @@
         </div>
 
         <ng-container formArrayName="questions">
-          <div class="p-mt-5">
-            <app-admin-forms-question-maker
+          <div class="question-maker-list p-mt-5">
+            <div
               *ngFor="
                 let question of questions().controls;
-                index as questionIndex
+                index as questionIndex;
+                trackBy: trackFormGroupById
               "
-              [questionIndex]="questionIndex"
-              [question]="question"
-              (childQuestionActive)="catchActiveChildQuestion($event)"
-              (removeQuestion)="removeQuestion(questionIndex)"
-            ></app-admin-forms-question-maker>
+              class="question-maker-list__item"
+            >
+              <app-admin-forms-question-maker
+                [questionIndex]="questionIndex"
+                [question]="question"
+                (childQuestionActive)="catchActiveChildQuestion($event)"
+                (removeQuestion)="removeQuestion(questionIndex)"
+              ></app-admin-forms-question-maker>
+            </div>
           </div>
 
           <div class="p-fluid p-mt-6">
-            <!-- <div
-              pDroppable="formGroup.value.questions"
-              (onDrop)="addDroppedForm()"
-              class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
-            >
-              <i class="add-icon pi pi-plus"></i>
-              <i class="droppable-icon pi pi-check"></i>
-              <div class="placeholder-text">Drop Question Here</div>
-              <div class="droppable-text">Drop To Add</div>
-            </div> -->
             <div
               class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
             >
