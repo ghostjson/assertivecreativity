@@ -57,8 +57,6 @@ export class AdminProductEditComponent implements OnInit {
     let optionsArray: FormArray = this._fb.array([]);
 
     options.forEach((option) => {
-      console.log(option.type);
-
       optionsArray.push(
         this._productService.newOption(
           option.type,

@@ -46,7 +46,6 @@ export class UserDetailsService {
     this._auth.getUser()
       .pipe(take(1))
       .subscribe((user: User) => {
-        console.log('User role rceived: ', user.role_id);
         return user.role_id;
       });
   }

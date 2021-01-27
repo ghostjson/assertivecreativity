@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.info('return url from error inter: ', this._router.url)
 
         if ([401, 403].indexOf(err.status) !== -1) {
-          console.log("Authorization/Authentication error caught");
+          console.error("Authorization/Authentication error caught");
           // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
           this._authService.logout();
           this._router.navigate(["/signin"], {

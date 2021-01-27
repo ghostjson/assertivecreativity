@@ -1,4 +1,5 @@
 import { FormArray, FormGroup } from "@angular/forms";
+import { PANTONE_COLORS } from "dist/acreativity/assets/js/pantone-colors";
 import { SelectItem } from "primeng/api";
 export class OrderFormConfig {
   id: number;
@@ -47,29 +48,36 @@ export interface FormQuestionEvent {
 }
 
 export interface QuestionType extends SelectItem<string> {
-  component: any,
+  component?: any,
   data?: any;
 }
 
-export const QUESTION_TYPES: SelectItem<string>[]  = [
+export const QUESTION_TYPES: QuestionType[]  = [
   {
     label: 'Dropdown',
-    value: 'dropdown'
+    value: 'dropdown',
+    data: {}
   },
   {
     label: 'Radio Button',
-    value: 'radio'
+    value: 'radio',
+    data: {}
   },
   {
     label: 'Paragraph Input',
-    value: 'paragraph'
+    value: 'paragraph',
+    data: {}
   },
   {
     label: 'Color Input',
-    value: 'color'
+    value: 'color',
+    data: {
+      pantoneColors: PANTONE_COLORS
+    }
   },
   {
     label: 'Date Input',
-    value: 'datePicker'
+    value: 'datePicker',
+    data: {}
   }
 ];

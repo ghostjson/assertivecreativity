@@ -42,8 +42,6 @@ export class AuthService {
         tap((token: Token) => {
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
-          console.log('token received: ', localStorage.getItem('Token'));
-          console.info('User Data: ', localStorage.getItem('user'));
         })
       );
   }
@@ -78,7 +76,6 @@ export class AuthService {
         tap((token: Token) => {
           localStorage.setItem('Token', token.access_token);
           localStorage.setItem('user', JSON.stringify(token.user));
-          console.log('token received: ', localStorage.getItem('Token'));
         })
       );
   }

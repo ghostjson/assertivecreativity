@@ -1,4 +1,4 @@
-<div class="order-mail-form-maker-color-component">
+<div class="admin-forms-question-maker-color-component">
   <ng-container [formGroup]="question">
     <div class="p-field p-fluid p-input-filled">
       <label class="p-mb-2" for="form-question-{{ question.value.id }}">
@@ -15,40 +15,55 @@
 
     <div class="color-input-list" formArrayName="inputs">
       <label class="p-mb-3"> Add color choices </label>
+      <ng-container *ngFor="let input of inputs.controls; index as inputIndex">
+        <div class="form-maker-color-input-color">
+          <div
+            class="input-color-preview"
+            [ngStyle]="{ background: input.value.value }"
+          ></div>
 
-      <div
-        class="mail-form-maker-color-input-color"
-        *ngFor="let input of inputs.controls; index as inputIndex"
-      >
-        <div
-          class="input-color-preview"
-          [ngStyle]="{ background: input.value.value }"
-        ></div>
-        <div class="input-color-details">
-          <div class="input-color-details__name">
-            <strong>
-              {{ input.value.label }}
-            </strong>
+          <div class="input-color-details">
+            <div class="input-color-details__name">
+              <strong>
+                {{ input.value.label }}
+              </strong>
+            </div>
+            <div class="input-color-details__value">
+              {{ input.value.value }}
+            </div>
           </div>
-          <div class="input-color-details__value">
-            {{ input.value.value }}
+
+          <div class="color-tools">
+            <button
+              *ngIf="!question.value.is_child"
+              class="p-button-success p-mr-2"
+              label="Add Child Input"
+              type="button"
+              (click)="addChildrenQuestion(inputIndex)"
+              pButton
+              pRipple
+            ></button>
+            <p-button
+              type="button"
+              icon="pi pi-pencil"
+              styleClass="p-button-text p-button-primary p-mr-2"
+              (onClick)="editQuestionInput(inputIndex, input.value)"
+            ></p-button>
+            <p-button
+              type="button"
+              icon="pi pi-times"
+              styleClass="p-button-text p-button-danger"
+              (onClick)="removeQuestionInput(inputIndex)"
+            ></p-button>
           </div>
         </div>
-        <div class="color-tools">
-          <p-button
-            type="button"
-            icon="pi pi-pencil"
-            styleClass="p-button-primary p-mr-2"
-            (onClick)="editQuestionInput(inputIndex, input.value)"
-          ></p-button>
-          <p-button
-            type="button"
-            icon="pi pi-times"
-            styleClass="p-button-danger"
-            (onClick)="removeQuestionInput(inputIndex)"
-          ></p-button>
+        <div class="children-questions-list p-mt-3">
+          <app-admin-forms-question-maker-child-questions-list
+            [childrenQuestions]="childrenQuestions(inputIndex)"
+            (childQuestionActive)="emitUp($event)"
+          ></app-admin-forms-question-maker-child-questions-list>
         </div>
-      </div>
+      </ng-container>
       <div class="add-color-btn" (click)="toggleColorSelector()">
         <i class="pi pi-plus"></i>
       </div>
@@ -59,64 +74,71 @@
     <p-dialog
       header="Select From Pantone Colors"
       [(visible)]="colorSelector"
-      [style]="{ width: '50vw' }"
+      [style]="{ width: '50vw', 'max-height': '60vh' }"
       [modal]="true"
       [dismissableMask]="true"
       [baseZIndex]="10000"
     >
-      <p-listbox
-        [options]="pantoneColors"
-        [(ngModel)]="currentColorInput"
-        [metaKeySelection]="false"
-        [checkbox]="true"
-        [filter]="true"
-        [listStyle]="{ 'max-height': '250px' }"
-        optionLabel="label"
-        [style]="{ width: '100%' }"
-      >
-        <p-header>
-          <div class="p-field p-fluid p-input-filled">
-            <input
-              class="mail-form-color-picker-label-input"
-              id="mail-form-question-input"
-              type="text"
-              [(ngModel)]="currentColorInput.label"
-              pInputText
-            />
-          </div>
-          <div class="mail-form-color-picker-input p-input-filled">
-            <input
-              class="mail-form-color-picker-input__input"
-              type="text"
-              [(ngModel)]="currentColorInput.value"
-              pInputText
-            />
-            <div
-              class="mail-form-color-picker-input__preview"
-              [ngStyle]="{
-                background: currentColorInput.value
-              }"
-            ></div>
-          </div>
-        </p-header>
-        <ng-template let-color pTemplate="item">
-          <div class="p-d-flex p-jc-center p-ai-center">
-            <i
-              class="pi pi-circle-on"
-              [style]="'color:' + color.value + '; font-size: 1.5rem'"
-            ></i>
-            <div class="p-ml-2" style="text-transform: capitalize">
-              {{ color.label }}
+      <div class="color-option-editor">
+        <div class="p-field p-fluid p-input-filled">
+          <label for="color-option-label"> Color Name To Display </label>
+          <input
+            class="color-option-editor__name-input"
+            id="color-option-label"
+            [(ngModel)]="currentColorInput.label"
+            type="text"
+            placeholder="Enter a name for the color"
+            pInputText
+          />
+        </div>
+      </div>
+      <div class="p-fluid p-input-filled">
+        <p-dropdown
+          [options]="data.pantoneColors"
+          [(ngModel)]="currentColorInput"
+          [filter]="true"
+          optionLabel="label"
+          filterBy="label"
+          [showClear]="true"
+          placeholder="Select a Color"
+          [virtualScroll]="true"
+          [itemSize]="30"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div *ngIf="currentColorInput" class="form-color-picker-input">
+              <div
+                class="form-color-picker-input__preview"
+                [ngStyle]="{
+                  background: currentColorInput.value
+                }"
+              ></div>
+              <div class="form-color-picker-input__preview-label">
+                {{ currentColorInput.label }}
+              </div>
             </div>
-          </div>
-        </ng-template>
-      </p-listbox>
+          </ng-template>
+          <ng-template let-color pTemplate="item">
+            <div class="form-color-picker-input p-d-flex p-ai-center">
+              <div
+                class="form-color-picker-input__preview p-mr-2"
+                [ngStyle]="{
+                  background: color.value
+                }"
+              ></div>
+              <div class="form-color-picker-input__preview-label">
+                {{ color.label }}
+              </div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
       <ng-template pTemplate="footer">
         <p-button
           icon="pi pi-check"
           (click)="saveQuestionInput()"
-          label="Add Color"
-          styleClass="p-button-success p-button-sm"
+          [label]="colorEditMode ? 'Save Color' : 'Add Color'"
+          styleClass="p-button-success"
         ></p-button>
       </ng-template>
     </p-dialog>

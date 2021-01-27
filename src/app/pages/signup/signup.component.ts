@@ -54,10 +54,6 @@ export class SignupComponent implements OnInit {
       { label: "Company Details" },
     ];
 
-    console.log(
-      "return url: ",
-      this._router.parseUrl(this._router.url).queryParamMap.get("return")
-    );
     this.returnUrl = this._router
       .parseUrl(this._router.url)
       .queryParamMap.get("return");
@@ -79,7 +75,6 @@ export class SignupComponent implements OnInit {
    */
   signup(): void {
     this.error = null;
-    console.log("Account Created: ", this.newUser);
     if (this.isPasswordsMatched()) {
       this._common.setLoaderFor(
         this._auth.register(this.newUser).subscribe(

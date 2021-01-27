@@ -82,7 +82,6 @@ export class CartService {
       concatMap((customCart: Cart) => {
         return this.getStockCart().pipe(
           map((stockCart: Cart): Cart => {
-            console.log('stock cart price: ', stockCart.total_price, ' custom cart: ', customCart.total_price);
             return {
               data: [...stockCart.data, ...customCart.data],
               total_price: stockCart.total_price + customCart.total_price
@@ -124,7 +123,6 @@ export class CartService {
     // this.getCart()
     //   .subscribe((cart: Cart) => {
     //     this.cart = cart;
-    //     console.log('cart refreshed: ', this.cart);
     //   });
   }
 

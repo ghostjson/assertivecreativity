@@ -66,7 +66,6 @@ export class OrderDetailComponent implements OnInit {
         .getOrder(this.id, user.role)
         .subscribe((order: Order) => {
           this.order = order;
-          console.log("order fetched: ", this.order);
           // set the progress bar according to order status
           this.setOrderProgress();
           console.info("order progress: ", this.orderProgress);
@@ -74,7 +73,6 @@ export class OrderDetailComponent implements OnInit {
           this._mailService
             .adminGetThreadByOrderId(this.id)
             .subscribe((mailThread: AdminMailThreadResponse) => {
-              console.log("mail for admin fetched: ", mailThread);
               this.buyerMails = mailThread.users;
               this.vendorMails = mailThread.vendors;
 
@@ -100,7 +98,6 @@ export class OrderDetailComponent implements OnInit {
     } else {
       this._orderService.getOrder(this.id).subscribe((order: Order) => {
         this.order = order;
-        console.log("order fetched: ", this.order);
 
         // set the progress bar according to order status
         this.setOrderProgress();
@@ -111,7 +108,6 @@ export class OrderDetailComponent implements OnInit {
         this._mailService
           .getThreadByOrderId(this.id)
           .subscribe((mails: MailThread) => {
-            console.log("mail thread received", mails);
             this.buyerMails = mails;
 
             mails.sort((mail1: Mail, mail2: Mail) => {
@@ -142,8 +138,6 @@ export class OrderDetailComponent implements OnInit {
 
       return mail;
     });
-
-    console.log("Mail processed: ", mails);
 
     return mails;
   }

@@ -35,7 +35,6 @@ export class AdminCategoryAdderComponent implements OnInit {
             value: category.id
           }
         });
-        console.log('categories received: ', categories);
       });
   }
 

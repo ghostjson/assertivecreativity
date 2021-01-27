@@ -15,6 +15,7 @@ import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map, take } from "rxjs/operators";
+
 @Injectable({
   providedIn: "root",
 })
@@ -27,8 +28,18 @@ export class AdminOrdersFormMakerService {
     private _http: HttpClient
   ) {}
 
+  /**
+   * return question types list
+   */
   getQuestionTypes(): SelectItem<string>[] {
     return QUESTION_TYPES;
+  }
+
+  /**
+   * return pantone colors
+   */
+  getPantoneColors(): Color[] {
+    return PANTONE_COLORS;
   }
 
   /**
@@ -62,6 +73,10 @@ export class AdminOrdersFormMakerService {
     );
   }
 
+  /**
+   * get a form
+   * @param id id of the form
+   */
   getForm(id: number): Observable<OrderFormResponse> {
     return this._http.get<any>(this.formLink(id)).pipe(
       take(1),
@@ -73,6 +88,10 @@ export class AdminOrdersFormMakerService {
     );
   }
 
+  /**
+   * Add form
+   * @param form form object to add
+   */
   addForm(form: OrderFormConfig): Observable<any> {
     let req: any = {
       name: form.title,
@@ -82,6 +101,11 @@ export class AdminOrdersFormMakerService {
     return this._http.post<any>(this.formsLink(), req).pipe(take(1));
   }
 
+  /**
+   * Edit form
+   * @param id id of the form to edit
+   * @param form form object to edit
+   */
   editForm(id: number, form: OrderFormConfig): Observable<any> {
     let req: any = {
       id: id,
@@ -92,10 +116,18 @@ export class AdminOrdersFormMakerService {
     return this._http.post<any>(this.formLink(id), req).pipe(take(1));
   }
 
+  /**
+   * delete the form
+   * @param id id of the form
+   */
   deleteForm(id: number): Observable<any> {
     return this._http.delete<any>(this.formLink(id)).pipe(take(1));
   }
 
+  /**
+   * create formgroup for question input
+   * @param initial initial value of the form
+   */
   createQuestionInput(initial: OrderFormInputConfig = null): FormGroup {
     let questionInput: FormGroup;
 
@@ -128,6 +160,11 @@ export class AdminOrdersFormMakerService {
     return questionInput;
   }
 
+  /**
+   * create the formgroup for form question
+   * @param isChild flag for setting question as child question
+   * @param initial initial value of the question
+   */
   createFormQuestion(
     isChild: boolean,
     initial: OrderFormQuestionConfig = null
@@ -164,6 +201,10 @@ export class AdminOrdersFormMakerService {
     return formQuestion;
   }
 
+  /**
+   * create order form formgroup
+   * @param initial initial value of the order form
+   */
   createOrderForm(initial: OrderFormConfig = null): FormGroup {
     let mailForm: FormGroup = null;
 
@@ -190,6 +231,10 @@ export class AdminOrdersFormMakerService {
     return mailForm;
   }
 
+  /**
+   * Create order form question user entry formgroup
+   * @param question question form config object
+   */
   createOrderFormQuestionEntry(question: OrderFormQuestionConfig): FormGroup {
     let mailFormEntry: FormGroup = this._fb.group({
       id: this._idGenService.getId(),
@@ -202,6 +247,10 @@ export class AdminOrdersFormMakerService {
     return mailFormEntry;
   }
 
+  /**
+   * Create order form user entry formgroup
+   * @param questions question form config object array
+   */
   createOrderMailFormEntry(questions: OrderFormQuestionConfig[]): FormArray {
     let formEntry: FormArray = this._fb.array([]);
 
@@ -210,9 +259,5 @@ export class AdminOrdersFormMakerService {
     });
 
     return formEntry;
-  }
-
-  getPantoneColors(): Color[] {
-    return PANTONE_COLORS;
   }
 }

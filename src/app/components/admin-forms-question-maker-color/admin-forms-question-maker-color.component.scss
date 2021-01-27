@@ -8,14 +8,13 @@
       align-items: center;
       height: 82px;
       width: 82px;
-      border: 1px solid $light-grey;
       border-radius: 6px;
-      background: #21BF73;
+      background: $success-color;
       color: white;
 
       &:hover {
         cursor: pointer;
-        box-shadow: $regular-shadow;
+        box-shadow: $shadow-1;
       }
 
       &:active {
@@ -23,35 +22,41 @@
       }
     }
 
-    .p-dialog-header {
-      padding: 1rem;
-    }
+    .select-color-dialog {
+      .p-dialog {
+        &-header {
+          padding: 1rem;
+        }
 
-    p-header {
-      width: 100%;
+        &-content {
+          overflow: visible;
+        }
+      }
     }
     
-    .mail-form-color-picker-label-input {
+    .form-color-picker-label-input {
       text-transform: capitalize;
       margin-bottom: 1em;
     }
 
-    .mail-form-color-picker-input {
+    .form-color-picker-input {
       display: flex;
       width: 100%;
-      
-      &__input {
-        flex-grow: 1;
-      }
+      align-items: center;
   
       &__preview {
-        height: 48px;
-        width: 48px;
+        height: 2rem;
+        width: 2rem;
         border-radius: 6px;
+      }
+
+      &__preview-label {
+        text-transform: capitalize;
+        font-size: 1.2rem;
+        font-weight: 500;
         margin-left: 1em;
       }
     }
-
 
     .color-input-list {
       display: flex;
@@ -63,18 +68,20 @@
       }
     }
 
-    .mail-form-maker-color-input-color {
+    .form-maker-color-input-color {
       display: flex;
+      flex-wrap: wrap;
       border: 1px solid $light-grey;
       border-radius: 6px;
       padding: 1em;
-      margin-bottom: 1.5em;
+      margin-top: 1em;
       width: 100%;
       justify-content: space-between;
+      align-items: center;
 
       .input-color-preview {
-        height: 3rem;
-        width: 3rem;
+        height: 2.5rem;
+        width: 2.5rem;
         position: relative;
         box-shadow: $regular-shadow;
         margin-right: 1em;
@@ -87,8 +94,18 @@
       }
     }
 
+    .color-option-editor {
+      &__name-input {
+        text-transform: capitalize;
+      }
+    }
+
     .input-color-details__name {
       text-transform: capitalize;
+    }
+
+    .children-questions-list {
+      width: 100%;
     }
   }
 }

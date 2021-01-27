@@ -64,7 +64,6 @@ import { ScrollTopModule } from "primeng/scrolltop";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { MessageService } from "primeng/api";
-// import { DragDropModule } from 'primeng/dragdrop';
 
 /** Common Imports */
 import { LoaderComponent } from "./components/loader/loader.component";
@@ -153,6 +152,7 @@ import { AdminFormsQuestionMakerComponent } from "./components/admin-forms-quest
 
 /** Vendor imports */
 import { VendorDashboardComponent } from "./pages/vendor-dashboard/vendor-dashboard.component";
+import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components/admin-forms-question-maker-child-questions-list/admin-forms-question-maker-child-questions-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -234,6 +234,7 @@ import { VendorDashboardComponent } from "./pages/vendor-dashboard/vendor-dashbo
     AdminFormsQuestionMakerParagraphComponent,
     AdminFormsQuestionMakerColorComponent,
     AdminFormsQuestionMakerDatePickerComponent,
+    AdminFormsQuestionMakerChildQuestionsListComponent,
   ],
   imports: [
     /** Angular modules */

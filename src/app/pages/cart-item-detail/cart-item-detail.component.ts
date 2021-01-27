@@ -41,7 +41,6 @@ export class CartItemDetailComponent implements OnInit {
   ngOnInit(): void {
     this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
     this.is_stock = this._router.url.includes("stock");
-    console.log("is stock: ", this.is_stock);
 
     this._cartService
       .getCartItem(this.cartItemId, this.is_stock)
@@ -101,11 +100,8 @@ export class CartItemDetailComponent implements OnInit {
       this._cartService
       .deleteCartItem(this.cartItemId, this.cartItem.order_data.is_stock)
       .subscribe(() => {
-        console.log('item deleted from cart');
-        console.log('placing order: ', this.order);
         this._commonService.setLoaderFor(
           this._orderService.placeOrder(this.order).subscribe((res: any) => {
-            console.log("order placed: ", res);
             this._router.navigate(["/orders/", res.data.id]);
           })
         );

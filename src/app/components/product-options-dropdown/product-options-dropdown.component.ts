@@ -33,7 +33,6 @@ export class ProductOptionsDropdownComponent implements OnInit {
         value: input.value
       });
     });
-    console.log(this.dropdownList);
   }
 
   /**

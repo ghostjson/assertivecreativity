@@ -194,7 +194,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log('form overview built: ', this.formsOverview)
   }
 
   /**
@@ -219,7 +218,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.updateTotalPrice();
       });
-    console.log("form initiliased");
   }
 
   /**
@@ -287,7 +285,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log('price updated: ', this.priceTotal);
   }
 
   /**
@@ -311,7 +308,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     this._common.setLoaderFor(
       this._cartService.addToCustomCart(cartItem).subscribe((item: any) => {
         this._router.navigate(["/cart/custom", item.data.id]);
-        console.log("added to cart: ", item);
       })
     );
   }

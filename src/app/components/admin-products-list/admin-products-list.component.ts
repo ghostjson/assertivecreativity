@@ -37,13 +37,11 @@ export class AdminProductsListComponent implements OnInit {
     this._productService.getStockProducts(this.user.role)
       .subscribe((stockProducts: StockProduct[]) => {
         this.stockProducts = stockProducts;
-        console.log('stock products received: ', stockProducts);
       });
     
     this._productService.getCustomProducts(this.user.role)
     .subscribe((customProducts: Product[]) => {
       this.customProducts = customProducts;
-      console.log('custom products received: ', customProducts);
     });
 
     this.activeProductsTabIndex = 0;
@@ -112,7 +110,6 @@ export class AdminProductsListComponent implements OnInit {
           detail: "Product Duplicated",
           life: 2000,
         });
-        console.log('Product duplicated: ', res);
       });
   }
 
@@ -145,12 +142,10 @@ export class AdminProductsListComponent implements OnInit {
       .subscribe((res: any) => {
         this.showUploadingProgess = false;
         event = null;
-        console.log(res);
 
         this._productService.getStockProducts(this.user.role)
           .subscribe((stockProducts: StockProduct[]) => {
             this.stockProducts = stockProducts;
-            console.log('products received: ', stockProducts);
           });
       });
   }

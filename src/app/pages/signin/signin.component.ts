@@ -57,7 +57,6 @@ export class SigninComponent implements OnInit {
       .subscribe(
         // next callback
         (token: Token) => {
-          console.log('Attempting to signin from signin component');
           this._router.navigate([this.returnUrl]);
         },
         // error callback

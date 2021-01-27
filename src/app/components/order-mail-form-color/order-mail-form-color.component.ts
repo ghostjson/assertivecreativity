@@ -15,8 +15,4 @@ export class OrderMailFormColorComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  log(value: any) {
-    console.log('logging: ', value);
-  }
 }

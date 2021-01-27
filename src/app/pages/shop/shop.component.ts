@@ -59,13 +59,11 @@ export class ShopComponent implements OnInit {
    */
   getCustomProducts(): void {
     this.productsLoading = true;
-    console.log("update custom products");
 
     this._productService
       .getCustomProducts()
       .subscribe((products: Product[]) => {
         this.products = products;
-        console.log("custom products received: ", products);
 
         // hide the loader
         setTimeout(() => {
@@ -79,11 +77,9 @@ export class ShopComponent implements OnInit {
    */
   getStockProducts(): void {
     this.productsLoading = true;
-    console.log("update stock products");
 
     this._productService.getStockProducts().subscribe((products: Product[]) => {
       this.products = products;
-      console.log("stock products received: ", products);
 
       // hide the loader
       setTimeout(() => {

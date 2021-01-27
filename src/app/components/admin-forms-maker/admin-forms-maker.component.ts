@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Color } from "src/app/models/Color";
 import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderMailForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 
@@ -17,7 +16,6 @@ export class AdminFormsMakerComponent implements OnInit {
   
   activeChildQuestion: FormQuestionEvent;
   draggedQuestion: OrderFormQuestionConfig;
-  pantoneColors: Color[];
   dialogs: {
     childQuestion: boolean;
   };
@@ -69,7 +67,6 @@ export class AdminFormsMakerComponent implements OnInit {
    * Add the dropped question to the form
    */
   addDroppedForm(): void {
-    console.log("drop successfully catched: ", this.draggedQuestion);
     if (this.draggedQuestion instanceof OrderFormQuestionConfig) {
       this.addQuestion(this.draggedQuestion);
     }
@@ -144,7 +141,6 @@ export class AdminFormsMakerComponent implements OnInit {
    * @param value value of the child question
    */
   catchActiveChildQuestion(value: FormQuestionEvent): void {
-    console.log('catch in forms maker: ', value.question.value);
     this.activeChildQuestion = value;
 
     this.toggleChildQuestionDialog();

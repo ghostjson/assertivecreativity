@@ -1,0 +1,30 @@
+<div class="children-questions">
+  <div
+    *ngFor="let childQuestion of childrenQuestions.controls; index as childIndex"
+    class="children-questions-item"
+  >
+    <div class="children-questions-item__label">
+      {{ childQuestion.value.label | limitLength: 100 }}
+    </div>
+    <div>
+      <button
+        aria-label="Edit Child question"
+        class="children-questions-item__edit-btn"
+        type="button"
+        label="Edit"
+        icon="pi pi-pencil"
+        iconPos="right"
+        (click)="emitChildQuestion(childQuestion, childrenQuestions, childIndex)"
+        pButton
+      ></button>
+      <button
+        aria-label="Delete child question"
+        class="children-questions-item__delete-btn p-button-text p-button-danger"
+        type="button"
+        icon="pi pi-trash"
+        (click)="removeChildrenQuestion(childIndex)"
+        pButton
+      ></button>
+    </div>
+  </div>
+</div>

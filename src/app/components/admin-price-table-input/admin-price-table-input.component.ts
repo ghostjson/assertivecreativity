@@ -55,6 +55,5 @@ export class AdminPriceTableInputComponent implements OnInit {
   addPriceGroup(): void {
     console.info('price table: ', this.formGroup.value);
     this._productService.addPriceGroup(this.priceTable());
-    console.log('new price group added');
   }
 }

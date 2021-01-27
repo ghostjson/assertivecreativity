@@ -125,13 +125,6 @@ export class StockProductDetailComponent implements OnInit {
   updateTotalPrice(): void {
     let pricePerPiece: number = this.getPricePerPiece();
     this.totalPrice = Number((this.orderQuantity * pricePerPiece).toFixed(2));
-
-    console.log(
-      "price updated: ",
-      pricePerPiece,
-      " | ",
-      this.orderQuantity * pricePerPiece
-    );
   }
 
   /**
@@ -171,11 +164,9 @@ export class StockProductDetailComponent implements OnInit {
       total_price: this.totalPrice,
     };
 
-    console.log("add to cart: ", cartItem);
     this._common.setLoaderFor(
       this._cartService.addToCart(cartItem).subscribe((item: any) => {
         this._router.navigate(["/cart/stock", item.data.id]);
-        console.log("added to cart: ", item);
       })
     );
   }

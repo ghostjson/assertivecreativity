@@ -41,7 +41,6 @@ export class CartComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.cart.data.splice(index, 1);
-          console.log("item deleted: ", res);
 
           this._messageService.add({
             severity: "success",
@@ -64,8 +63,6 @@ export class CartComponent implements OnInit {
   clearCart(): void {
     this._cartService.clearCart().subscribe(
       (res: any) => {
-        console.log(res);
-
         this._messageService.add({
           severity: "success",
           summary: "Cart Cleared",

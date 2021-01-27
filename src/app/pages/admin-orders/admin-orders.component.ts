@@ -23,7 +23,6 @@ export class AdminOrdersComponent implements OnInit {
 
     this._orderService.getAllOrders(this.user.role)
       .subscribe((orders: Order[]) => {
-        console.log('orders received: ', orders);
         this.orders = orders;
       });
   }

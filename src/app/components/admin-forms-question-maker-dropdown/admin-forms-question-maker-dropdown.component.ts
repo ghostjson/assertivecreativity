@@ -11,7 +11,8 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 
 export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
   @Input() question: FormGroup;
-  @Output() childQuestionActive = new EventEmitter<FormQuestionEvent>()
+  @Input() data: any;
+  @Output() childQuestionActive = new EventEmitter<FormQuestionEvent>();
   
   currentChildQuestion: FormGroup;
 
@@ -62,18 +63,8 @@ export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
     this.emitChildQuestion(
       this.currentChildQuestion,
       this.childrenQuestions(inputIndex),
-      this.childrenQuestions(inputIndex).length - 1
+      this.childrenQuestions.length - 1
     );
-    console.log('emit from dropdown: ', this.currentChildQuestion.value);
-  }
-
-  /**
-   * remove the child question from the parent input
-   * @param inputIndex index of the parent input
-   * @param childIndex index of the child question
-   */
-  removeChildrenQuestion(inputIndex: number, childIndex: number): void {
-    this.childrenQuestions(inputIndex).removeAt(childIndex);
   }
 
   /**
@@ -88,6 +79,20 @@ export class AdminFormsQuestionMakerDropdownComponent implements OnInit {
       question: question,
       parent: parentArray,
       questionIndex: questionIndex
+    });
+    console.log('emit from dropdown: ', this.currentChildQuestion);
+  }
+
+  /**
+   * Emit the child question active event to the parent component
+   * @param e event
+   */
+  emitUp(e: any): void {
+    console.log('emit from dropdown: ', e);
+    this.childQuestionActive.emit({
+      question: e.question,
+      parent: e.parent,
+      questionIndex: e.questionIndex
     });
   }
 }

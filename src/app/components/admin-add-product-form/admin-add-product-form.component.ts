@@ -55,7 +55,6 @@ export class AdminAddProductFormComponent implements OnInit {
     this.user = this._userDetailsService.getUserLocal();
     // list of all possible options we can add in custom forms
     this.possibleOptions = this._productService.getOptionDefinitions();
-    console.log(this.possibleOptions);
 
     // intialise the product form to avoid errors in the template
     this.productForm = null;
@@ -64,11 +63,8 @@ export class AdminAddProductFormComponent implements OnInit {
     if (this.product) {
       this.productForm = this.product;
     } else {
-      console.log("product form not found");
-
       // create a form group for the new product
       this.productForm = this._fb.group(new ProductForm());
-      console.log("new product form created: ", this.productForm.value);
     }
 
     // intialise categories list
@@ -118,10 +114,6 @@ export class AdminAddProductFormComponent implements OnInit {
    * Add custom form to the form object
    */
   addCustomForm(): void {
-    console.log(
-      "add new custom form with title",
-      this.newCustomFormTitle.nativeElement.value
-    );
 
     // add the custom form to the form array
     this.customForms().push(

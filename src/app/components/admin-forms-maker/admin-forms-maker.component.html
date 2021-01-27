@@ -122,7 +122,6 @@
           *ngIf="activeChildQuestion"
           [questionIndex]="activeChildQuestion.questionIndex"
           [question]="activeChildQuestion.question"
-          (childQuestionActive)="catchActiveChildQuestion($event)"
           (removeQuestion)="removeActiveChildQuestion($event)"
         ></app-admin-forms-question-maker>
       </div>

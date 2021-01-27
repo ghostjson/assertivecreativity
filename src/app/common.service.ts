@@ -58,7 +58,6 @@ export class CommonService {
     if(status) {
       this.loaderCount += 1;
       this.loaderSource.next(true);
-      console.log('setting loader to ', status);
     }
     else {
       // reduce loaderCount only if loader was set to true before 
@@ -68,10 +67,8 @@ export class CommonService {
 
       if(this.loaderCount === 0) {
         this.loaderSource.next(status);
-        console.log('setting loader to ', status);
       }
     }
-    console.log(this.loaderCount);
   }
 
   /**
@@ -79,7 +76,6 @@ export class CommonService {
    * @param sub subscription to the observable that triggered the loader
    */
   setLoaderFor(sub: Subscription) {
-    console.log('set loader from wrapper');
     this.setLoader(true);
     sub.add(() => {
       this.setLoader(false);

@@ -18,7 +18,6 @@ export class UserProfileComponent implements OnInit {
     _userService.getUser().subscribe((user: User) => {
       this.user = user;
       this.common.setLoader(false);
-      console.log(this.user)
     });
   }
 
@@ -30,7 +29,6 @@ export class UserProfileComponent implements OnInit {
     if(this.viewMode) {
       this._userService.editUser(this.user)
         .subscribe(() => {
-          console.log('User updated: ', this.user);
         });
     }
   }

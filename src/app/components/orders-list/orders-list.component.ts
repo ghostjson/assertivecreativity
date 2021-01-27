@@ -37,10 +37,6 @@ export class OrdersListComponent implements OnInit {
     ];
 
     this.first = this.last = this.totalRecords = 0;
-
-    if (this.admin) {
-      console.log("admin mode detected");
-    }
   }
 
   onActivityChange(event: any) {

@@ -55,10 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((event) => {
         if (event instanceof NavigationStart) {
           this._common.setLoader(true);
-          console.log('navigation start loader');
         } else {
           setTimeout(() => {
-            console.log('navigation end loader');
             this._common.setLoader(false);
           }, 500);
         }

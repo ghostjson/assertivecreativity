@@ -1,10 +1,10 @@
 <div [formGroup]="question">
   <div class="p-fluid p-field p-input-filled">
-    <label for="form-question-{{question.value.id }}"> Enter the question </label>
+    <label for="form-question-{{ question.value.id }}"> Enter the question </label>
     <input
       type="text"
       formControlName="label"
-      id="form-question-{{question.value.id }}"
+      id="form-question-{{ question.value.id }}"
       placeholder="Enter the question"
       pInputText
     />
@@ -43,36 +43,11 @@
         ></button>
       </div>
 
-      <div class="children-questions">
-        <div
-          *ngFor="let childQuestion of childrenQuestions(inputIndex).controls; index as childIndex"
-          class="children-questions-item"
-        >
-          <div class="children-questions-item__label">
-            {{ childQuestion.value.label | limitLength: 100 }}
-          </div>
-          <div>
-            <button
-              aria-label="Edit Child question"
-              class="children-questions-item__edit-btn"
-              type="button"
-              label="Edit"
-              icon="pi pi-pencil"
-              iconPos="right"
-              (click)="emitChildQuestion(childQuestion, childrenQuestions(inputIndex), childIndex)"
-              pButton
-            ></button>
-            <button
-              aria-label="Delete child question"
-              class="children-questions-item__delete-btn p-button-text p-button-danger"
-              type="button"
-              icon="pi pi-trash"
-              (click)="removeChildrenQuestion(inputIndex, childIndex)"
-              pButton
-            ></button>
-          </div>
-        </div>
-      </div>
+      <app-admin-forms-question-maker-child-questions-list
+        [childrenQuestions]="childrenQuestions(inputIndex)"
+        (childQuestionActive)="emitUp($event)"
+      ></app-admin-forms-question-maker-child-questions-list>
+
     </ng-container>
   </div>
 

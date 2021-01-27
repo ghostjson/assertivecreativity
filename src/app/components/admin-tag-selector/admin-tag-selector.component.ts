@@ -14,8 +14,4 @@ export class AdminTagSelectorComponent {
   selectedTags: Tag[];
 
   constructor() { }
-
-  logTags() {
-    console.log('tags selected: ', this.selectedTags);
-  }
 }

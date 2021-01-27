@@ -46,7 +46,6 @@ export class AdminTagAdderComponent implements OnInit {
             }))
             .subscribe(() => {
               this.tags = fetchedTags;
-              console.log('tags received: ', this.tags);
             });
         });
       });

@@ -43,8 +43,6 @@ export class AdminTextOptionMakerComponent implements OnInit {
         }
       }
     }
-
-    console.log('dialogVisible initialised', this.dialogVisible);
   }
 
   /**
@@ -97,7 +95,6 @@ export class AdminTextOptionMakerComponent implements OnInit {
     this._productService.addOption(optionType, options, true);
 
     // add to dialog controls and make it true to display it
-    console.log('dialog visibility statuses: ', this.dialogVisible);
     if(!this.dialogVisible[inputInd]) {
       this.dialogVisible.push([]);
     }

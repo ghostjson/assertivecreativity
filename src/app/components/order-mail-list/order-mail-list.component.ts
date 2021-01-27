@@ -45,8 +45,6 @@ export class OrderMailListComponent implements OnInit {
   ngOnInit(): void {
     this.user = this._userDetailsService.getUserLocal();
 
-    console.log("order received at mail list", this.order);
-
     /**
      * TODO: Fix after api is finailzed for mail forms
      */
@@ -57,7 +55,6 @@ export class OrderMailListComponent implements OnInit {
       this._commonService.setLoaderFor(
         this._formMakerService.getAllForms().subscribe((res: OrderFormResponse[]) => {
           this.savedForms = res;
-          console.log('forms received: ', this.savedForms);
         })
       );
     }
@@ -80,7 +77,6 @@ export class OrderMailListComponent implements OnInit {
     //   order_id: Number(this.order.id),
     //   message_content: this.mailText
     // };
-    console.log("order mail form: ", this.orderMailForm.value);
     let messageContent = {
       message: this.mailText,
       forms: []
@@ -101,7 +97,6 @@ export class OrderMailListComponent implements OnInit {
         .subscribe((res: Mail) => {
           this.mailText = null;
           this.mailContainer.scrollTop(0);
-          console.log("mail sent: ", res);
           /**
            * TODO: Cleanup after the api is finalised
            */
@@ -120,7 +115,6 @@ export class OrderMailListComponent implements OnInit {
       this._mailService.sendMail(newMail).subscribe((res: Mail) => {
         this.mailText = null;
         this.mailContainer.scrollTop(0);
-        console.log("mail sent: ", res);
         /**
          * TODO: Cleanup after the api is finalised
          */
@@ -150,16 +144,13 @@ export class OrderMailListComponent implements OnInit {
   }
 
   previewForm(): void {
-    console.log('preview form');
     this.toggleSavedFormsDialog();
     this.toggleSavedFormPreview();
   }
 
   setMailForm(): void {
-    console.log('setting form ', this.selectedSavedForm);
     this.orderMailForm = this._formMakerService.createOrderForm(this.selectedSavedForm.data);
     this.toggleSavedFormsDialog();
-    console.log(this.orderMailForm.value);
     this.orderMailForm.markAllAsTouched();
     this.selectedSavedForm = null;
   }

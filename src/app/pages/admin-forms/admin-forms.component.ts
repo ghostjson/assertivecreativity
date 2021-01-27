@@ -34,7 +34,6 @@ export class AdminFormsComponent implements OnInit {
       .subscribe((res: OrderFormResponse[]) => {
         this.forms = res;
         this._commonService.setLoader(false);
-        console.log("forms received: ", this.forms);
       });
 
     this.newForm = this._formMakerService.createOrderForm();
@@ -45,10 +44,6 @@ export class AdminFormsComponent implements OnInit {
   }
 
   addForm(): void {
-    console.log('add form called');
-    console.log(this.editMode);
-    console.log(this.prevForm);
-    
     this.toggleFormMakerDialog();
 
     if(this.editMode) {
@@ -56,7 +51,6 @@ export class AdminFormsComponent implements OnInit {
         this._formMakerService.editForm(this.prevForm.id, this.newForm.value)
         .subscribe(
           ((res: any) => {
-            console.log('form edited', res);
             this.forms.splice(this.editIndex, 1, {
               id: res.data.id,
               name: String(this.newForm.value.title),
@@ -87,7 +81,6 @@ export class AdminFormsComponent implements OnInit {
       this._commonService.setLoaderFor(
         this._formMakerService.addForm(this.newForm.value).subscribe(
           (res: any) => {
-            console.log('created form: ', res);
             let resForm: OrderFormResponse = {
               id: res.data.id,
               name: res.data.name,
@@ -97,7 +90,6 @@ export class AdminFormsComponent implements OnInit {
             };
   
             this.forms.push(resForm);
-            console.log('adding: ', resForm);
     
             this._messageService.add({
               severity: "success",
@@ -128,12 +120,10 @@ export class AdminFormsComponent implements OnInit {
     this.editMode = true;
     this.editIndex = index;
     this.prevForm = form;
-    console.log(form, index);
     this.newForm = this._formMakerService.createOrderForm(form.data);
   }
 
   deleteForm(index: number): void {
-    console.log('deleteing; ', this.forms[index]);
     this._commonService.setLoaderFor(
       this._formMakerService.deleteForm(this.forms[index].id).subscribe(
         () => {

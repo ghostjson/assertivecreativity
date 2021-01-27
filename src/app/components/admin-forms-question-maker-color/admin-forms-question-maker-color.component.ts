@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { Color } from 'src/app/models/Color';
-import { OrderFormInputConfig } from 'src/app/models/OrderMailForm';
+import { FormQuestionEvent, OrderFormInputConfig } from 'src/app/models/OrderMailForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
@@ -12,13 +12,16 @@ import { IdGeneratorService } from 'src/app/services/id-generator.service';
 })
 export class AdminFormsQuestionMakerColorComponent implements OnInit {
   @Input() question: FormGroup;
-  @Input() pantoneColors: Color[];
+  @Input() data: {
+    pantoneColors: Color[]
+  };
+  @Output() childQuestionActive = new EventEmitter<FormQuestionEvent>()
 
   colorSelector: boolean;
-  selectedColor: string;
   currentColorInput: OrderFormInputConfig;
   currentInputIndex: number;
   colorEditMode: boolean;
+  currentChildQuestion: FormGroup;
 
   constructor(
     private _formMakerService: AdminOrdersFormMakerService,
@@ -47,14 +50,15 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
    * Save the question input, add if does not exist
    */
   saveQuestionInput(): void {
-    console.log('addning ', this.currentColorInput);
     if(this.colorEditMode) {
       this.currentColorInput.id = this.currentInputIndex;
       this.inputs.at(this.currentInputIndex).patchValue(this.currentColorInput);
       this.colorEditMode = false;
     }
     else {
-      this.inputs.push(this._formMakerService.createQuestionInput(this.currentColorInput));
+      let newColorInput = this._formMakerService.createQuestionInput();
+      newColorInput.patchValue(this.currentColorInput);
+      this.inputs.push(newColorInput);
     }
 
     this.toggleColorSelector()
@@ -84,7 +88,66 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
    * toggle color selector dialog
    */
   toggleColorSelector(): void {
-    console.info('current color: ', this.currentColorInput);
     this.colorSelector = !this.colorSelector;
+  }
+
+  /**
+   * get all the children inputs of an input
+   * @param inputIndex index of the parent input of the child question
+   */
+  childrenQuestions(inputIndex: number): FormArray {
+    return this.inputs.at(inputIndex).get('children_form_questions') as FormArray;
+  }
+
+  /**
+   * Add child question to the input
+   * @param inputIndex index of the input to which child question should be added
+   */
+  addChildrenQuestion(inputIndex: number): void {
+    this.currentChildQuestion = this._formMakerService.createFormQuestion(true);
+    this.childrenQuestions(inputIndex).push(this.currentChildQuestion);
+
+    // emit that child question is active
+    this.emitChildQuestion(
+      this.currentChildQuestion,
+      this.childrenQuestions(inputIndex),
+      this.childrenQuestions(inputIndex).length - 1
+    );
+  }
+
+  /**
+   * remove the child question from the parent input
+   * @param inputIndex index of the parent input
+   * @param childIndex index of the child question
+   */
+  removeChildrenQuestion(inputIndex: number, childIndex: number): void {
+    this.childrenQuestions(inputIndex).removeAt(childIndex);
+  }
+
+  /**
+   * emit the currently active child question to parent component
+   * @param question child question currently active
+   * @param parentArray parent form array of the question
+   * @param questionIndex index of the child question in the form array
+   */
+  emitChildQuestion(question: FormGroup, parentArray: FormArray, questionIndex: number): void {
+    this.currentChildQuestion = question;
+    this.childQuestionActive.emit({
+      question: question,
+      parent: parentArray,
+      questionIndex: questionIndex
+    });
+  }
+
+  /**
+   * Emit the child question active event to the parent component
+   * @param e event
+   */
+  emitUp(e: any): void {
+    this.childQuestionActive.emit({
+      question: e.question,
+      parent: e.parent,
+      questionIndex: e.questionIndex
+    });
   }
 }

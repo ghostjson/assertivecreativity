@@ -42,8 +42,6 @@ export class AdminRadiobtnOptionMakerComponent implements OnInit {
         }
       }
     }
-
-    console.log('dialogVisible initialised', this.dialogVisible);
   }
 
   /**

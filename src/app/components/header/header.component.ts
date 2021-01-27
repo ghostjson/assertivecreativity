@@ -166,7 +166,6 @@ export class HeaderComponent implements OnInit {
    * @param event search string typed
    */
   emitSearchString(): void {
-    console.log(this.searchString);
     this.searchBtnClick.emit(this.searchString);
   }
 
