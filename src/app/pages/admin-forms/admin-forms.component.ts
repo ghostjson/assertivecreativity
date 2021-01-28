@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
-import { OrderFormResponse, OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
+import { OrderFormResponse, OrderFormQuestionConfig } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({

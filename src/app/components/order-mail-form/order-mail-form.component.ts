@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { OrderFormConfig } from 'src/app/models/OrderMailForm';
+import { OrderFormConfig } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { FormQuestionEvent } from 'src/app/models/OrderMailForm';
+import { FormQuestionEvent } from 'src/app/models/OrderForm';
 
 @Component({
   selector: 'app-admin-forms-question-maker-child-questions-list',

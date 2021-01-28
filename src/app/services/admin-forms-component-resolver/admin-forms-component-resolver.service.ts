@@ -7,7 +7,7 @@ import { AdminFormsQuestionMakerDatePickerComponent } from "src/app/components/a
 import { AdminFormsQuestionMakerDropdownComponent } from "src/app/components/admin-forms-question-maker-dropdown/admin-forms-question-maker-dropdown.component";
 import { AdminFormsQuestionMakerParagraphComponent } from "src/app/components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component";
 import { AdminFormsQuestionMakerRadioComponent } from "src/app/components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component";
-import { QuestionType } from "src/app/models/OrderMailForm";
+import { QuestionType } from "src/app/models/OrderForm";
 
 @Injectable({
   providedIn: "root",

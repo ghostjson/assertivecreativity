@@ -14,7 +14,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { FormQuestionEvent, QuestionType } from "src/app/models/OrderMailForm";
+import { FormQuestionEvent, QuestionType } from "src/app/models/OrderForm";
 import { AdminFormsComponentResolverService } from "src/app/services/admin-forms-component-resolver/admin-forms-component-resolver.service";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 

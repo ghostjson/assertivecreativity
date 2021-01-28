@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { Color } from 'src/app/models/Color';
-import { FormQuestionEvent, OrderFormInputConfig } from 'src/app/models/OrderMailForm';
+import { FormQuestionEvent, OrderFormInputConfig } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 

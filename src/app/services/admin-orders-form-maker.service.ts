@@ -10,7 +10,7 @@ import {
   OrderFormQuestionConfig,
   OrderFormResponse,
   QUESTION_TYPES,
-} from "../models/OrderMailForm";
+} from "../models/OrderForm";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";

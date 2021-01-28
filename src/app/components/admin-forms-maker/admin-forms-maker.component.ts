@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderMailForm";
+import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 
 @Component({

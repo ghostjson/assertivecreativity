@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { OrderFormQuestionConfig } from 'src/app/models/OrderMailForm';
+import { OrderFormQuestionConfig } from 'src/app/models/OrderForm';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({

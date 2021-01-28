@@ -6,7 +6,7 @@ import { ScrollPanel } from "primeng/scrollpanel";
 import { Order } from "src/app/models/Order";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { User } from "src/app/models/User";
-import { OrderFormResponse } from "src/app/models/OrderMailForm";
+import { OrderFormResponse } from "src/app/models/OrderForm";
 import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 import { FormGroup } from "@angular/forms";
 import { CommonService } from "src/app/common.service";

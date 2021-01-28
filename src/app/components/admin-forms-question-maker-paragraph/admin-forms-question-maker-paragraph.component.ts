@@ -1,7 +1,7 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
-import { FormQuestionEvent } from 'src/app/models/OrderMailForm';
+import { FormQuestionEvent } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({

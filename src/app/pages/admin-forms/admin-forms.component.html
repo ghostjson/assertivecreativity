@@ -23,7 +23,7 @@
         </p-toolbar>
       </div>
 
-      <ng-container *ngIf="forms; else noForms">
+      <ng-container *ngIf="forms && forms.length; else noForms">
         <div
         *ngFor="let form of forms; index as formIndex; trackBy: trackById"
         class="p-col-12 p-sm-6 p-lg-3"
