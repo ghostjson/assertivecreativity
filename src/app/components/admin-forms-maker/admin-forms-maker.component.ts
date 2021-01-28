@@ -1,19 +1,19 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { FormQuestionEvent, OrderFormQuestionConfig } from "src/app/models/OrderForm";
-import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
+import { FormQuestionEvent, OrderFormQuestionConfig } from 'src/app/models/OrderForm';
+import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
-  selector: "app-admin-forms-maker",
-  templateUrl: "./admin-forms-maker.component.html",
-  styleUrls: ["./admin-forms-maker.component.scss"]
+  selector: 'app-admin-forms-maker',
+  templateUrl: './admin-forms-maker.component.html',
+  styleUrls: ['./admin-forms-maker.component.scss']
 })
 export class AdminFormsMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
-  @ViewChild("formsPartContainer") formsPartContainer: ElementRef<HTMLElement>;
-  
+  @ViewChild('formsPartContainer') formsPartContainer: ElementRef<HTMLElement>;
+
   activeChildQuestion: FormQuestionEvent;
   draggedQuestion: OrderFormQuestionConfig;
   dialogs: {
@@ -35,7 +35,7 @@ export class AdminFormsMakerComponent implements OnInit {
    * get questions formarray
    */
   questions(): FormArray {
-    return this.formGroup.get("questions") as FormArray;
+    return this.formGroup.get('questions') as FormArray;
   }
 
   /**
@@ -103,7 +103,7 @@ export class AdminFormsMakerComponent implements OnInit {
     let item: AbstractControl = formArray.at(prevIndex);
     let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
     formArray.insert(insertIndex, item);
-    
+
     let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
     formArray.removeAt(removeIndex);
   }

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminTextOptionMakerComponent } from './admin-text-option-maker.component';
 
@@ -6,7 +6,7 @@ describe('AdminTextOptionMakerComponent', () => {
   let component: AdminTextOptionMakerComponent;
   let fixture: ComponentFixture<AdminTextOptionMakerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminTextOptionMakerComponent ]
     })

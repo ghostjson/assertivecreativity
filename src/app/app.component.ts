@@ -1,25 +1,25 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
-import { UserDetailsService } from "./store/user-details.service";
-import { CommonService } from "./common.service";
-import { PrimeNGConfig } from "primeng/api";
-import { Subject } from "rxjs";
-import { filter, takeUntil } from "rxjs/operators";
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { UserDetailsService } from './store/user-details.service';
+import { CommonService } from './common.service';
+import { PrimeNGConfig } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import {
   NavigationCancel,
   NavigationEnd,
   NavigationError,
   NavigationStart,
   Router,
-} from "@angular/router";
+} from '@angular/router';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
   loader: boolean;
-  title: string = "acreativity";
+  title: string = 'acreativity';
   destroy: Subject<void>;
   adminPage: boolean;
 

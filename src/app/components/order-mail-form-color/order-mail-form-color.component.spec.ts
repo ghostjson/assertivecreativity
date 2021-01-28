@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OrderMailFormColorComponent } from './order-mail-form-color.component';
 
@@ -6,7 +6,7 @@ describe('OrderMailFormColorComponent', () => {
   let component: OrderMailFormColorComponent;
   let fixture: ComponentFixture<OrderMailFormColorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OrderMailFormColorComponent ]
     })

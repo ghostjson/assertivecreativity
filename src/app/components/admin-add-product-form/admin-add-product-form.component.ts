@@ -1,33 +1,33 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
-import { FormBuilder, FormArray, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { AdminProductService } from "../../services/admin-product.service";
-import { Product, ProductForm } from "src/app/models/Product";
-import { IdGeneratorService } from "src/app/services/id-generator.service";
-import { Tag } from "src/app/models/Tag";
-import { Category } from "src/app/models/Category";
-import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
-import { Subscription } from "rxjs";
-import { take } from "rxjs/operators";
-import { CommonService } from "src/app/common.service";
-import { UserDetailsService } from "src/app/store/user-details.service";
-import { User } from "src/app/models/User";
+import { AdminProductService } from '../../services/admin-product.service';
+import { Product, ProductForm } from 'src/app/models/Product';
+import { IdGeneratorService } from 'src/app/services/id-generator.service';
+import { Tag } from 'src/app/models/Tag';
+import { Category } from 'src/app/models/Category';
+import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { CommonService } from 'src/app/common.service';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { User } from 'src/app/models/User';
 
 @Component({
-  selector: "app-admin-add-product-form",
-  templateUrl: "./admin-add-product-form.component.html",
-  styleUrls: ["./admin-add-product-form.component.scss"],
+  selector: 'app-admin-add-product-form',
+  templateUrl: './admin-add-product-form.component.html',
+  styleUrls: ['./admin-add-product-form.component.scss'],
 })
 export class AdminAddProductFormComponent implements OnInit {
   @Input() product: FormGroup;
   @Input() isEdit: boolean;
 
-  @ViewChild("newCustomFormTitle", { static: true })
+  @ViewChild('newCustomFormTitle', { static: true })
   newCustomFormTitle: ElementRef;
 
   productForm: FormGroup;
-  possibleOptions: Object;
+  possibleOptions: object;
   categories: Category[];
   tags: Tag[];
   newProductImage: string | ArrayBuffer;
@@ -37,8 +37,8 @@ export class AdminAddProductFormComponent implements OnInit {
   tagSub: Subscription;
 
   colorPicker = {
-    cpOutputFormat: "hex",
-    cpAlphaChannel: "disabled",
+    cpOutputFormat: 'hex',
+    cpAlphaChannel: 'disabled',
   };
 
   constructor(
@@ -74,7 +74,7 @@ export class AdminAddProductFormComponent implements OnInit {
       .subscribe((categories: Category[]) => {
         this.categories = categories;
         this.categories.unshift({
-          name: "Select a category",
+          name: 'Select a category',
           id: null,
         });
       });
@@ -84,14 +84,14 @@ export class AdminAddProductFormComponent implements OnInit {
    * Helper function to return price table form array
    */
   priceTable(): FormArray {
-    return this.productForm.get("price_table") as FormArray;
+    return this.productForm.get('price_table') as FormArray;
   }
 
   /**
    * Helper function to get custom forms of a product
    */
   customForms(): FormArray {
-    return this.productForm.get("custom_forms") as FormArray;
+    return this.productForm.get('custom_forms') as FormArray;
   }
 
   /**
@@ -99,7 +99,7 @@ export class AdminAddProductFormComponent implements OnInit {
    * @param formTitle title of the form
    */
   newCustomForm(formTitle: string = null): FormGroup {
-    let newFormTemplate: Object = {
+    const newFormTemplate: object = {
       id: [this.customForms().length],
       title: [formTitle, [Validators.required]],
       is_formgroup: false,
@@ -131,7 +131,7 @@ export class AdminAddProductFormComponent implements OnInit {
    * Return keys of an object
    * @param obj object to get the keys of
    */
-  getKeys(obj: Object): Array<string> {
+  getKeys(obj: object): Array<string> {
     return Object.keys(obj);
   }
 
@@ -155,7 +155,7 @@ export class AdminAddProductFormComponent implements OnInit {
     console.log(`event caught: ${categoryId}`);
     this._pcService.getTagsOfCategory(categoryId).subscribe((tags) => {
       this.tags = tags;
-      console.log("tags found in admin form: ", this.tags);
+      console.log('tags found in admin form: ', this.tags);
     });
   }
 
@@ -168,8 +168,8 @@ export class AdminAddProductFormComponent implements OnInit {
         image: this.newProductImage,
       });
     } else {
-      console.log("image field is being remove as there is no change");
-      this.productForm.removeControl("image");
+      console.log('image field is being remove as there is no change');
+      this.productForm.removeControl('image');
     }
 
     // construct product from form value
@@ -177,13 +177,13 @@ export class AdminAddProductFormComponent implements OnInit {
 
     submitValue.category_id = submitValue.category.id;
 
-    console.info("product object: ", submitValue);
+    console.info('product object: ', submitValue);
 
     if (submitValue.price_table_mode) {
       submitValue.base_price = submitValue.price_table[0].price_per_piece;
     }
 
-    console.log("Sending product object: ", submitValue);
+    console.log('Sending product object: ', submitValue);
 
     if (this.isEdit) {
       this._common.setLoaderFor(
@@ -191,17 +191,17 @@ export class AdminAddProductFormComponent implements OnInit {
           .editCustomProduct(submitValue)
           .subscribe((res: Product) => {
             this._router.navigate([`/${this.user.role}/products`]);
-            console.log("Product added: ", submitValue);
+            console.log('Product added: ', submitValue);
           })
       );
-    } 
+    }
     else {
       this._common.setLoaderFor(
         this._productService
           .addCustomProduct(submitValue)
           .subscribe((res: Product) => {
             this._router.navigate([`/${this.user.role}/products`]);
-            console.log("Product added: ", submitValue);
+            console.log('Product added: ', submitValue);
           })
       );
     }

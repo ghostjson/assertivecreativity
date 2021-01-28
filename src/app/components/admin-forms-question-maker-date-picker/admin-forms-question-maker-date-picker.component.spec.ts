@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminFormsQuestionMakerDatePickerComponent } from './admin-forms-question-maker-date-picker.component';
 
@@ -6,7 +6,7 @@ describe('AdminFormsQuestionMakerDatePickerComponent', () => {
   let component: AdminFormsQuestionMakerDatePickerComponent;
   let fixture: ComponentFixture<AdminFormsQuestionMakerDatePickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminFormsQuestionMakerDatePickerComponent ]
     })

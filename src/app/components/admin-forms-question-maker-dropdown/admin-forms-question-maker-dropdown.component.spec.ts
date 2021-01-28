@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminFormsQuestionMakerDropdownComponent } from './admin-forms-question-maker-dropdown.component';
 
@@ -6,7 +6,7 @@ describe('OrderMailFormMakerDropdownComponent', () => {
   let component: AdminFormsQuestionMakerDropdownComponent;
   let fixture: ComponentFixture<AdminFormsQuestionMakerDropdownComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminFormsQuestionMakerDropdownComponent ]
     })

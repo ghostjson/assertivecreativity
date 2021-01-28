@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminFormsMakerComponent } from './admin-forms-maker.component';
 
@@ -6,7 +6,7 @@ describe('AdminFormsMakerComponent', () => {
   let component: AdminFormsMakerComponent;
   let fixture: ComponentFixture<AdminFormsMakerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminFormsMakerComponent ]
     })

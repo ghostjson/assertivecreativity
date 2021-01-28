@@ -3,7 +3,7 @@ import { rejects } from 'assert';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CommonService {
   isloading: boolean = true;
@@ -16,35 +16,35 @@ export class CommonService {
 
   featuredProduct(): any {
     return {
-      title: "Today's Offer",
+      title: 'Today\'s Offer',
       slides: [
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
         {
-          image: "https://via.placeholder.com/200x200.png",
-          url: "",
+          image: 'https://via.placeholder.com/200x200.png',
+          url: '',
         },
       ],
     };
@@ -60,7 +60,7 @@ export class CommonService {
       this.loaderSource.next(true);
     }
     else {
-      // reduce loaderCount only if loader was set to true before 
+      // reduce loaderCount only if loader was set to true before
       if(this.loaderCount > 0) {
         this.loaderCount -= 1;
       }

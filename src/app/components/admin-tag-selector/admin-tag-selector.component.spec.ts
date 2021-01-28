@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminTagSelectorComponent } from './admin-tag-selector.component';
 
@@ -6,7 +6,7 @@ describe('AdminTagSelectorComponent', () => {
   let component: AdminTagSelectorComponent;
   let fixture: ComponentFixture<AdminTagSelectorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminTagSelectorComponent ]
     })

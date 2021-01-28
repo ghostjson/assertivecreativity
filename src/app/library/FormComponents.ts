@@ -1,3 +1,4 @@
+import { Injectable } from "@angular/core";
 export interface FormInputInterface {
   type?: string;
   required?: string;
@@ -17,6 +18,7 @@ export interface FormInputInterface {
   rows?: string;
 }
 
+@Injectable()
 export class FormComponent {
   // input resolver core
   public getComponents(form: FormInputInterface): string {

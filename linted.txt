@@ -1,0 +1,1197 @@
+Linting "acreativity"...
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/app.component.ts:22:10
+ERROR: 22:10   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/common.service.ts:9:14
+ERROR: 9:14    no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 10:16   no-inferrable-types           Type number trivially inferred from a number literal, remove type annotation
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-add-product-form/admin-add-product-form.component.ts:143:9
+ERROR: 143:9   prefer-const                  Identifier 'reader' is never reassigned; use 'const' instead of 'let'.
+ERROR: 176:9   prefer-const                  Identifier 'submitValue' is never reassigned; use 'const' instead of 'let'.
+ERROR: 180:5   no-console                    Calls to 'console.info' are not allowed.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-category-selector/admin-category-selector.component.ts:14:3
+ERROR: 14:3    no-output-on-prefix           In the class "AdminCategorySelectorComponent", the output property "onSelect" should not be prefixed with on
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-color-option-maker/admin-color-option-maker.component.ts:18:26
+ERROR: 18:26   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 27:64   no-trailing-whitespace        trailing whitespace
+ERROR: 31:52   no-trailing-whitespace        trailing whitespace
+ERROR: 40:40   no-trailing-whitespace        trailing whitespace
+ERROR: 47:9    prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+ERROR: 68:9    prefer-const                  Identifier 'chainedOptions' is never reassigned; use 'const' instead of 'let'.
+ERROR: 110:1   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-custom-form/admin-custom-form.component.ts:22:20
+ERROR: 22:20   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 37:5    no-console                    Calls to 'console.info' are not allowed.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-dropdown-option-maker/admin-dropdown-option-maker.component.ts:17:26
+ERROR: 17:26   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 26:64   no-trailing-whitespace        trailing whitespace
+ERROR: 33:40   no-trailing-whitespace        trailing whitespace
+ERROR: 36:5    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 41:9    prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+ERROR: 62:9    prefer-const                  Identifier 'chainedOptions' is never reassigned; use 'const' instead of 'let'.
+ERROR: 104:1   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-maker/admin-forms-maker.component.ts:103:9
+ERROR: 103:9   prefer-const                  Identifier 'item' is never reassigned; use 'const' instead of 'let'.
+ERROR: 104:9   prefer-const                  Identifier 'insertIndex' is never reassigned; use 'const' instead of 'let'.
+ERROR: 107:9   prefer-const                  Identifier 'removeIndex' is never reassigned; use 'const' instead of 'let'.
+ERROR: 154:9   prefer-const                  Identifier 'parentArray' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-child-questions-list/admin-forms-question-maker-child-questions-list.component.ts:36:7
+ERROR: 36:7    object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 38:7    object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-color/admin-forms-question-maker-color.component.ts:59:11
+ERROR: 59:11   prefer-const                  Identifier 'newColorInput' is never reassigned; use 'const' instead of 'let'.
+ERROR: 136:7   object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 138:7   object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component.ts:80:7
+ERROR: 80:7    object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 82:7    object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-dropdown/admin-forms-question-maker-dropdown.component.ts:16:1
+ERROR: 16:1    no-trailing-whitespace        trailing whitespace
+ERROR: 79:7    object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 81:7    object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component.ts:60:7
+ERROR: 60:7    object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 62:7    object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component.ts:41:1
+ERROR: 41:1    jsdoc-format                  asterisks in jsdoc must be aligned
+ERROR: 42:1    jsdoc-format                  asterisks in jsdoc must be aligned
+ERROR: 43:1    jsdoc-format                  asterisks in jsdoc must be aligned
+ERROR: 73:7    object-literal-shorthand      Expected property shorthand in object literal ('{question}').
+ERROR: 75:7    object-literal-shorthand      Expected property shorthand in object literal ('{questionIndex}').
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-forms-question-maker/admin-forms-question-maker.component.ts:13:8
+ERROR: 13:8    quotemark                     " should be '
+ERROR: 14:27   quotemark                     " should be '
+ERROR: 15:25   quotemark                     " should be '
+ERROR: 16:27   quotemark                     " should be '
+ERROR: 17:49   quotemark                     " should be '
+ERROR: 18:52   quotemark                     " should be '
+ERROR: 19:45   quotemark                     " should be '
+ERROR: 22:13   quotemark                     " should be '
+ERROR: 23:16   quotemark                     " should be '
+ERROR: 24:15   quotemark                     " should be '
+ERROR: 34:14   quotemark                     " should be '
+ERROR: 58:14   quotemark                     " should be '
+ERROR: 85:9    prefer-const                  Identifier 'componentFactory' is never reassigned; use 'const' instead of 'let'.
+ERROR: 122:9   prefer-const                  Identifier 'questionType' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-header/admin-header.component.ts:15:12
+ERROR: 15:12   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 32:9    prefer-const                  Identifier 'token' is never reassigned; use 'const' instead of 'let'.
+ERROR: 37:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 93:1    no-trailing-whitespace        trailing whitespace
+ERROR: 94:3    use-lifecycle-interface       Lifecycle interface AfterViewChecked should be implemented for method ngAfterViewChecked. (https://angular.io/styleguide#style-09-01)
+ERROR: 97:1    no-trailing-whitespace        trailing whitespace
+ERROR: 102:9   prefer-const                  Identifier 'sideBarEl' is never reassigned; use 'const' instead of 'let'.
+ERROR: 103:9   prefer-const                  Identifier 'sideBarDetailsEl' is never reassigned; use 'const' instead of 'let'.
+ERROR: 104:9   prefer-const                  Identifier 'sideBarItemsEl' is never reassigned; use 'const' instead of 'let'.
+ERROR: 105:9   prefer-const                  Identifier 'sideBarCloseBtn' is never reassigned; use 'const' instead of 'let'.
+ERROR: 107:9   prefer-const                  Identifier 'sideBarDetailsElHeight' is never reassigned; use 'const' instead of 'let'.
+ERROR: 108:9   prefer-const                  Identifier 'sideBarElHeight' is never reassigned; use 'const' instead of 'let'.
+ERROR: 110:9   prefer-const                  Identifier 'sideBarItemsElHeight' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-navbar/admin-navbar.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:26    quotemark                     " should be '
+ERROR: 5:13    quotemark                     " should be '
+ERROR: 6:16    quotemark                     " should be '
+ERROR: 7:15    quotemark                     " should be '
+ERROR: 15:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-price-table-input/admin-price-table-input.component.ts:1:42
+ERROR: 1:42    quotemark                     " should be '
+ERROR: 2:28    quotemark                     " should be '
+ERROR: 8:13    quotemark                     " should be '
+ERROR: 9:16    quotemark                     " should be '
+ERROR: 10:15   quotemark                     " should be '
+ERROR: 14:1    no-trailing-whitespace        trailing whitespace
+ERROR: 31:7    object-literal-key-quotes     Unnecessarily quoted property 'lte' found.
+ERROR: 32:7    object-literal-key-quotes     Unnecessarily quoted property 'mte' found.
+ERROR: 56:5    no-console                    Calls to 'console.info' are not allowed.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-products-list/admin-products-list.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:39    quotemark                     " should be '
+ERROR: 3:37    quotemark                     " should be '
+ERROR: 4:53    quotemark                     " should be '
+ERROR: 11:13   quotemark                     " should be '
+ERROR: 12:16   quotemark                     " should be '
+ERROR: 13:15   quotemark                     " should be '
+ERROR: 41:1    no-trailing-whitespace        trailing whitespace
+ERROR: 56:16   quotemark                     " should be '
+ERROR: 56:68   quotemark                     " should be '
+ERROR: 57:15   quotemark                     " should be '
+ERROR: 58:13   quotemark                     " should be '
+ERROR: 61:13   prefer-const                  Identifier 'deleteIndex' is never reassigned; use 'const' instead of 'let'.
+ERROR: 68:1    no-trailing-whitespace        trailing whitespace
+ERROR: 74:23   quotemark                     " should be '
+ERROR: 75:22   quotemark                     " should be '
+ERROR: 76:21   quotemark                     " should be '
+ERROR: 81:23   quotemark                     " should be '
+ERROR: 82:22   quotemark                     " should be '
+ERROR: 83:21   quotemark                     " should be '
+ERROR: 96:9    prefer-const                  Identifier 'duplicate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 102:35  no-trailing-whitespace        trailing whitespace
+ERROR: 108:21  quotemark                     " should be '
+ERROR: 109:20  quotemark                     " should be '
+ERROR: 110:19  quotemark                     " should be '
+ERROR: 121:17  no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 140:5   no-console                    Calls to 'console.info' are not allowed.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component.ts:17:26
+ERROR: 17:26   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 26:64   no-trailing-whitespace        trailing whitespace
+ERROR: 33:40   no-trailing-whitespace        trailing whitespace
+ERROR: 40:9    prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+ERROR: 59:9    prefer-const                  Identifier 'chainedOptions' is never reassigned; use 'const' instead of 'let'.
+ERROR: 101:1   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-sidebar/admin-sidebar.component.ts:9:1
+ERROR: 9:1     no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/admin-text-option-maker/admin-text-option-maker.component.ts:17:26
+ERROR: 17:26   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 27:64   no-trailing-whitespace        trailing whitespace
+ERROR: 34:40   no-trailing-whitespace        trailing whitespace
+ERROR: 41:9    prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+ERROR: 60:9    prefer-const                  Identifier 'chainedOptions' is never reassigned; use 'const' instead of 'let'.
+ERROR: 101:1   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/contact-form/contact-form.component.ts:10:3
+ERROR: 10:3    no-input-rename               
+In the class "ContactFormComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/contact-section/contact-section.component.ts:10:3
+ERROR: 10:3    no-input-rename               
+In the class "ContactSectionComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/featured-product-slider/featured-product-slider.component.ts:19:21
+ERROR: 19:21   quotemark                     " should be '
+ERROR: 24:21   quotemark                     " should be '
+ERROR: 29:21   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/featured-product/featured-product.component.ts:12:3
+ERROR: 12:3    no-input-rename               
+In the class "FeaturedProductComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/graphic-content/graphic-content.component.ts:11:3
+ERROR: 11:3    no-input-rename               
+In the class "GraphicContentComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/header/header.component.ts:1:64
+ERROR: 1:64    quotemark                     " should be '
+ERROR: 2:29    quotemark                     " should be '
+ERROR: 3:36    quotemark                     " should be '
+ERROR: 4:31    quotemark                     " should be '
+ERROR: 8:32    quotemark                     " should be '
+ERROR: 11:13   quotemark                     " should be '
+ERROR: 12:16   quotemark                     " should be '
+ERROR: 13:15   quotemark                     " should be '
+ERROR: 17:26   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 20:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 42:9    prefer-const                  Identifier 'token' is never reassigned; use 'const' instead of 'let'.
+ERROR: 47:11   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 53:7    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 122:3   use-lifecycle-interface       Lifecycle interface OnChanges should be implemented for method ngOnChanges. (https://angular.io/styleguide#style-09-01)
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/heading/heading.component.ts:12:3
+ERROR: 12:3    no-input-rename               
+In the class "HeadingComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/main-banner/main-banner.component.ts:13:3
+ERROR: 13:3    no-input-rename               
+In the class "MainBannerComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+ERROR: 15:12   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 16:13   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 17:10   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 18:11   no-inferrable-types           Type number trivially inferred from a number literal, remove type annotation
+ERROR: 19:10   no-inferrable-types           Type number trivially inferred from a number literal, remove type annotation
+ERROR: 41:3    use-lifecycle-interface       Lifecycle interface AfterContentInit should be implemented for method ngAfterContentInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 52:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 64:30   quotemark                     " should be '
+ERROR: 65:28   quotemark                     " should be '
+ERROR: 75:30   quotemark                     " should be '
+ERROR: 76:32   quotemark                     " should be '
+ERROR: 83:30   quotemark                     " should be '
+ERROR: 85:28   quotemark                     " should be '
+ERROR: 96:30   quotemark                     " should be '
+ERROR: 97:32   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/order-mail-form-date-picker/order-mail-form-date-picker.component.ts:19:9
+ERROR: 19:9    prefer-const                  Identifier 'tomorrow' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/order-mail-form-dropdown/order-mail-form-dropdown.component.ts:18:25
+ERROR: 18:25   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/order-mail-form/order-mail-form.component.ts:14:1
+ERROR: 14:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/order-mail-list/order-mail-list.component.ts:1:53
+ERROR: 1:53    quotemark                     " should be '
+ERROR: 2:22    quotemark                     " should be '
+ERROR: 3:29    quotemark                     " should be '
+ERROR: 4:32    quotemark                     " should be '
+ERROR: 5:29    quotemark                     " should be '
+ERROR: 6:23    quotemark                     " should be '
+ERROR: 7:36    quotemark                     " should be '
+ERROR: 8:22    quotemark                     " should be '
+ERROR: 9:35    quotemark                     " should be '
+ERROR: 10:45   quotemark                     " should be '
+ERROR: 11:27   quotemark                     " should be '
+ERROR: 12:31   quotemark                     " should be '
+ERROR: 15:13   quotemark                     " should be '
+ERROR: 16:16   quotemark                     " should be '
+ERROR: 17:15   quotemark                     " should be '
+ERROR: 21:14   quotemark                     " should be '
+ERROR: 80:9    prefer-const                  Identifier 'messageContent' is never reassigned; use 'const' instead of 'let'.
+ERROR: 89:9    prefer-const                  Identifier 'newMail' is never reassigned; use 'const' instead of 'let'.
+ERROR: 94:28   quotemark                     " should be '
+ERROR: 107:23  quotemark                     " should be '
+ERROR: 108:22  quotemark                     " should be '
+ERROR: 109:21  quotemark                     " should be '
+ERROR: 113:6   no-trailing-whitespace        trailing whitespace
+ERROR: 125:21  quotemark                     " should be '
+ERROR: 126:20  quotemark                     " should be '
+ERROR: 127:19  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/order-summary-table/order-summary-table.component.ts:12:12
+ERROR: 12:12   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 32:9    prefer-const                  Identifier 'row' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/orders-list/orders-list.component.ts:1:53
+ERROR: 1:53    quotemark                     " should be '
+ERROR: 2:23    quotemark                     " should be '
+ERROR: 3:23    quotemark                     " should be '
+ERROR: 6:13    quotemark                     " should be '
+ERROR: 7:16    quotemark                     " should be '
+ERROR: 8:15    quotemark                     " should be '
+ERROR: 15:19   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 16:13   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 20:12   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 22:14   quotemark                     " should be '
+ERROR: 31:16   quotemark                     " should be '
+ERROR: 31:35   quotemark                     " should be '
+ERROR: 32:16   quotemark                     " should be '
+ERROR: 32:35   quotemark                     " should be '
+ERROR: 33:16   quotemark                     " should be '
+ERROR: 33:30   quotemark                     " should be '
+ERROR: 34:16   quotemark                     " should be '
+ERROR: 34:34   quotemark                     " should be '
+ERROR: 35:16   quotemark                     " should be '
+ERROR: 35:34   quotemark                     " should be '
+ERROR: 36:16   quotemark                     " should be '
+ERROR: 36:35   quotemark                     " should be '
+ERROR: 45:24   radix                         Missing radix parameter
+ERROR: 48:37   quotemark                     " should be '
+ERROR: 48:49   quotemark                     " should be '
+ERROR: 54:57   quotemark                     " should be '
+ERROR: 62:15   quotemark                     " should be '
+ERROR: 66:13   quotemark                     " should be '
+ERROR: 69:33   quotemark                     " should be '
+ERROR: 69:47   quotemark                     " should be '
+ERROR: 73:36   quotemark                     " should be '
+ERROR: 73:54   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-options-color/product-options-color.component.ts:14:1
+ERROR: 14:1    no-trailing-whitespace        trailing whitespace
+ERROR: 15:3    no-output-on-prefix           In the class "ProductOptionsColorComponent", the output property "onChange" should not be prefixed with on
+ERROR: 15:3    no-output-rename              @Outputs should not be renamed
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-options-dropdown/product-options-dropdown.component.ts:15:3
+ERROR: 15:3    no-output-on-prefix           In the class "ProductOptionsDropdownComponent", the output property "onChange" should not be prefixed with on
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-options-question/product-options-question.component.ts:16:3
+ERROR: 16:3    no-output-on-prefix           In the class "ProductOptionsQuestionComponent", the output property "onChange" should not be prefixed with on
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-options-radio-btn/product-options-radio-btn.component.ts:16:3
+ERROR: 16:3    no-output-on-prefix           In the class "ProductOptionsRadioBtnComponent", the output property "onChange" should not be prefixed with on
+ERROR: 21:34   no-trailing-whitespace        trailing whitespace
+ERROR: 29:44   no-trailing-whitespace        trailing whitespace
+ERROR: 31:5    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 33:49   no-trailing-whitespace        trailing whitespace
+ERROR: 34:5    prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-options/product-options.component.ts:54:5
+ERROR: 54:5    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 65:5    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 69:5    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 70:5    no-console                    Calls to 'console.info' are not allowed.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/product-slider/product-slider.component.ts:15:3
+ERROR: 15:3    no-input-rename               
+In the class "ProductSliderComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+ERROR: 20:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/components/spacer/spacer.component.ts:11:3
+ERROR: 11:3    no-input-rename               
+In the class "SpacerComponent", the directive input property "data" should not be renamed.
+However, you should use an alias when the directive name is also an input property, and the directive name
+doesn't describe the property. In this last case, you can disable this rule with `tslint:disable-next-line:no-input-rename`.
+  
+ERROR: 17:1    no-trailing-whitespace        trailing whitespace
+ERROR: 21:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/helpers/error-interceptor/error.interceptor.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 7:8     quotemark                     " should be '
+ERROR: 8:40    quotemark                     " should be '
+ERROR: 9:29    quotemark                     " should be '
+ERROR: 10:28   quotemark                     " should be '
+ERROR: 11:40   quotemark                     " should be '
+ERROR: 16:39   no-trailing-whitespace        trailing whitespace
+ERROR: 27:13   prefer-const                  Identifier 'returnUrl' is never reassigned; use 'const' instead of 'let'.
+ERROR: 28:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 31:25   quotemark                     " should be '
+ERROR: 34:34   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/helpers/guard/auth.guard.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 8:8     quotemark                     " should be '
+ERROR: 9:28    quotemark                     " should be '
+ERROR: 12:29   quotemark                     " should be '
+ERROR: 15:15   quotemark                     " should be '
+ERROR: 32:17   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 33:9    prefer-const                  Identifier 'user' is never reassigned; use 'const' instead of 'let'.
+ERROR: 36:7    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 37:44   triple-equals                 != should be !==
+ERROR: 40:28   no-trailing-whitespace        trailing whitespace
+ERROR: 49:33   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/helpers/http-interceptor/token.interceptor.ts:5:8
+ERROR: 5:8     quotemark                     " should be '
+ERROR: 6:28    quotemark                     " should be '
+ERROR: 12:40   quotemark                     " should be '
+ERROR: 14:11   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 17:17   quotemark                     " should be '
+ERROR: 18:9    quotemark                     " should be '
+ERROR: 18:40   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/library/FormComponents.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 26:12   quotemark                     " should be '
+ERROR: 43:12   quotemark                     " should be '
+ERROR: 57:12   quotemark                     " should be '
+ERROR: 68:12   quotemark                     " should be '
+ERROR: 72:12   quotemark                     " should be '
+ERROR: 73:17   no-trailing-whitespace        trailing whitespace
+ERROR: 89:12   quotemark                     " should be '
+ERROR: 94:12   quotemark                     " should be '
+ERROR: 104:12  quotemark                     " should be '
+ERROR: 112:12  quotemark                     " should be '
+ERROR: 113:17  no-trailing-whitespace        trailing whitespace
+ERROR: 131:12  quotemark                     " should be '
+ERROR: 132:17  no-trailing-whitespace        trailing whitespace
+ERROR: 148:12  quotemark                     " should be '
+ERROR: 160:17  quotemark                     " should be '
+ERROR: 160:30  quotemark                     " should be '
+ERROR: 164:19  quotemark                     " should be '
+ERROR: 172:9   prefer-const                  Identifier 'values' is never reassigned; use 'const' instead of 'let'.
+ERROR: 173:19  quotemark                     " should be '
+ERROR: 185:15  triple-equals                 == should be ===
+ERROR: 186:14  quotemark                     " should be '
+ERROR: 193:9   prefer-const                  Identifier 'values' is never reassigned; use 'const' instead of 'let'.
+ERROR: 194:19  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/Category.ts:5:3
+ERROR: 5:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 6:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/Order.ts:7:3
+ERROR: 7:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 8:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 9:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 10:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 11:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 12:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 13:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 14:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 19:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 20:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 21:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 25:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 27:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 28:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 29:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 31:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 32:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 45:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 46:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 54:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 65:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 80:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/OrderForm.ts:1:38
+ERROR: 1:38    quotemark                     " should be '
+ERROR: 2:32    quotemark                     " should be '
+ERROR: 3:28    quotemark                     " should be '
+ERROR: 17:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 26:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 34:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 41:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 42:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/Product.ts:7:25
+ERROR: 7:25    ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 87:5    prefer-const                  Identifier '_fb' is never reassigned; use 'const' instead of 'let'.
+ERROR: 92:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 97:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 99:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 100:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 104:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 105:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 106:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 109:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 111:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 112:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 113:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 114:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 116:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 121:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 122:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 123:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 124:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 125:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 126:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 127:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 128:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 129:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 130:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 131:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 132:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 133:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 134:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 135:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 136:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 137:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 138:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 139:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 140:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 141:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 142:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 143:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 144:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 145:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 146:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 147:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 148:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 149:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 150:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 151:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 154:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 155:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 156:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 157:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 158:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 159:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 160:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 161:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 162:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 163:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 164:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 165:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 166:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 167:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 168:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 169:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 170:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 171:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 172:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 173:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 174:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 175:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 176:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 178:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 179:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 180:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 181:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 182:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 183:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 184:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 187:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 188:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 189:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 190:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 192:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 193:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 241:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 243:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 246:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 247:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 249:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 301:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 308:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 309:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 311:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 316:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 337:10  variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 359:36  ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 466:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 467:3   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/Tag.ts:5:3
+ERROR: 5:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/models/User.ts:6:3
+ERROR: 6:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 7:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 10:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 11:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 16:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 17:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 18:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 26:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 27:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 28:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 30:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/about/about.component.ts:24:3
+ERROR: 24:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 26:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/admin-category-adder/admin-category-adder.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:37    quotemark                     " should be '
+ERROR: 3:32    quotemark                     " should be '
+ERROR: 4:46    quotemark                     " should be '
+ERROR: 5:26    quotemark                     " should be '
+ERROR: 9:13    quotemark                     " should be '
+ERROR: 10:16   quotemark                     " should be '
+ERROR: 11:15   quotemark                     " should be '
+ERROR: 31:1    no-trailing-whitespace        trailing whitespace
+ERROR: 55:16   quotemark                     " should be '
+ERROR: 56:15   quotemark                     " should be '
+ERROR: 57:13   quotemark                     " should be '
+ERROR: 64:21   quotemark                     " should be '
+ERROR: 65:20   quotemark                     " should be '
+ERROR: 66:19   quotemark                     " should be '
+ERROR: 88:16   quotemark                     " should be '
+ERROR: 88:69   quotemark                     " should be '
+ERROR: 89:15   quotemark                     " should be '
+ERROR: 90:13   quotemark                     " should be '
+ERROR: 100:21  quotemark                     " should be '
+ERROR: 101:20  quotemark                     " should be '
+ERROR: 102:19  quotemark                     " should be '
+ERROR: 133:21  quotemark                     " should be '
+ERROR: 134:20  quotemark                     " should be '
+ERROR: 135:19  quotemark                     " should be '
+ERROR: 138:8   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/admin-forms/admin-forms.component.ts:15:24
+ERROR: 15:24   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 17:13   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 63:25   quotemark                     " should be '
+ERROR: 64:24   quotemark                     " should be '
+ERROR: 72:25   quotemark                     " should be '
+ERROR: 73:24   quotemark                     " should be '
+ERROR: 74:23   quotemark                     " should be '
+ERROR: 84:17   prefer-const                  Identifier 'resForm' is never reassigned; use 'const' instead of 'let'.
+ERROR: 91:1    no-trailing-whitespace        trailing whitespace
+ERROR: 93:1    no-trailing-whitespace        trailing whitespace
+ERROR: 95:25   quotemark                     " should be '
+ERROR: 96:24   quotemark                     " should be '
+ERROR: 97:23   quotemark                     " should be '
+ERROR: 102:25  quotemark                     " should be '
+ERROR: 103:24  quotemark                     " should be '
+ERROR: 104:23  quotemark                     " should be '
+ERROR: 133:25  quotemark                     " should be '
+ERROR: 134:24  quotemark                     " should be '
+ERROR: 135:23  quotemark                     " should be '
+ERROR: 140:1   no-trailing-whitespace        trailing whitespace
+ERROR: 142:23  quotemark                     " should be '
+ERROR: 143:22  quotemark                     " should be '
+ERROR: 144:21  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/admin-product-edit/admin-product-edit.component.ts:2:32
+ERROR: 2:32    quotemark                     " should be '
+ERROR: 5:37    quotemark                     " should be '
+ERROR: 16:20   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 25:9    prefer-const                  Identifier 'id' is never reassigned; use 'const' instead of 'let'.
+ERROR: 25:72   quotemark                     " should be '
+ERROR: 30:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 32:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 40:9    prefer-const                  Identifier 'priceTable' is never reassigned; use 'const' instead of 'let'.
+ERROR: 41:9    prefer-const                  Identifier 'parsedPriceTable' is never reassigned; use 'const' instead of 'let'.
+ERROR: 52:60   no-trailing-whitespace        trailing whitespace
+ERROR: 53:56   no-trailing-whitespace        trailing whitespace
+ERROR: 57:9    prefer-const                  Identifier 'optionsArray' is never reassigned; use 'const' instead of 'let'.
+ERROR: 77:9    prefer-const                  Identifier 'customFormsArray' is never reassigned; use 'const' instead of 'let'.
+ERROR: 99:9    prefer-const                  Identifier 'form' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/admin-tag-adder/admin-tag-adder.component.ts:40:9
+ERROR: 40:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 68:16   quotemark                     " should be '
+ERROR: 69:15   quotemark                     " should be '
+ERROR: 70:13   quotemark                     " should be '
+ERROR: 77:21   quotemark                     " should be '
+ERROR: 78:20   quotemark                     " should be '
+ERROR: 79:19   quotemark                     " should be '
+ERROR: 101:16  quotemark                     " should be '
+ERROR: 101:64  quotemark                     " should be '
+ERROR: 102:15  quotemark                     " should be '
+ERROR: 103:13  quotemark                     " should be '
+ERROR: 114:21  quotemark                     " should be '
+ERROR: 115:20  quotemark                     " should be '
+ERROR: 116:19  quotemark                     " should be '
+ERROR: 137:5   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 146:21  quotemark                     " should be '
+ERROR: 147:20  quotemark                     " should be '
+ERROR: 148:19  quotemark                     " should be '
+ERROR: 151:8   no-trailing-whitespace        trailing whitespace
+ERROR: 158:21  quotemark                     " should be '
+ERROR: 159:20  quotemark                     " should be '
+ERROR: 160:19  quotemark                     " should be '
+ERROR: 164:1   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/cart-item-detail/cart-item-detail.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 8:8     quotemark                     " should be '
+ERROR: 9:30    quotemark                     " should be '
+ERROR: 10:29   quotemark                     " should be '
+ERROR: 11:40   quotemark                     " should be '
+ERROR: 12:31   quotemark                     " should be '
+ERROR: 13:26   quotemark                     " should be '
+ERROR: 14:36   quotemark                     " should be '
+ERROR: 15:27   quotemark                     " should be '
+ERROR: 18:13   quotemark                     " should be '
+ERROR: 19:16   quotemark                     " should be '
+ERROR: 20:15   quotemark                     " should be '
+ERROR: 26:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 42:73   quotemark                     " should be '
+ERROR: 43:47   quotemark                     " should be '
+ERROR: 49:9    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 49:22   quotemark                     " should be '
+ERROR: 52:9    prefer-const                  Identifier 'today' is never reassigned; use 'const' instead of 'let'.
+ERROR: 53:9    prefer-const                  Identifier 'tomorrow' is never reassigned; use 'const' instead of 'let'.
+ERROR: 105:36  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/cart/cart.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:29    quotemark                     " should be '
+ERROR: 3:32    quotemark                     " should be '
+ERROR: 4:31    quotemark                     " should be '
+ERROR: 5:32    quotemark                     " should be '
+ERROR: 8:13    quotemark                     " should be '
+ERROR: 9:16    quotemark                     " should be '
+ERROR: 10:15   quotemark                     " should be '
+ERROR: 27:7    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 27:20   quotemark                     " should be '
+ERROR: 37:9    prefer-const                  Identifier 'cartItem' is never reassigned; use 'const' instead of 'let'.
+ERROR: 46:23   quotemark                     " should be '
+ERROR: 55:23   quotemark                     " should be '
+ERROR: 56:22   quotemark                     " should be '
+ERROR: 67:21   quotemark                     " should be '
+ERROR: 68:20   quotemark                     " should be '
+ERROR: 69:19   quotemark                     " should be '
+ERROR: 76:21   quotemark                     " should be '
+ERROR: 77:20   quotemark                     " should be '
+ERROR: 78:19   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/contact/contact.component.ts:21:3
+ERROR: 21:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 23:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/custom-product-detail/custom-product-detail.component.ts:1:46
+ERROR: 1:46    quotemark                     " should be '
+ERROR: 2:25    quotemark                     " should be '
+ERROR: 3:47    quotemark                     " should be '
+ERROR: 4:32    quotemark                     " should be '
+ERROR: 5:32    quotemark                     " should be '
+ERROR: 6:38    quotemark                     " should be '
+ERROR: 7:54    quotemark                     " should be '
+ERROR: 8:31    quotemark                     " should be '
+ERROR: 9:30    quotemark                     " should be '
+ERROR: 10:24   quotemark                     " should be '
+ERROR: 11:29   quotemark                     " should be '
+ERROR: 12:26   quotemark                     " should be '
+ERROR: 15:36   quotemark                     " should be '
+ERROR: 18:13   quotemark                     " should be '
+ERROR: 19:16   quotemark                     " should be '
+ERROR: 20:15   quotemark                     " should be '
+ERROR: 23:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 26:21   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 51:72   quotemark                     " should be '
+ERROR: 61:14   quotemark                     " should be '
+ERROR: 62:16   quotemark                     " should be '
+ERROR: 63:14   quotemark                     " should be '
+ERROR: 66:14   quotemark                     " should be '
+ERROR: 67:16   quotemark                     " should be '
+ERROR: 68:14   quotemark                     " should be '
+ERROR: 71:14   quotemark                     " should be '
+ERROR: 72:16   quotemark                     " should be '
+ERROR: 73:14   quotemark                     " should be '
+ERROR: 76:14   quotemark                     " should be '
+ERROR: 77:16   quotemark                     " should be '
+ERROR: 78:14   quotemark                     " should be '
+ERROR: 81:14   quotemark                     " should be '
+ERROR: 82:16   quotemark                     " should be '
+ERROR: 83:14   quotemark                     " should be '
+ERROR: 86:14   quotemark                     " should be '
+ERROR: 87:16   quotemark                     " should be '
+ERROR: 88:14   quotemark                     " should be '
+ERROR: 95:21   quotemark                     " should be '
+ERROR: 99:21   quotemark                     " should be '
+ERROR: 104:21  quotemark                     " should be '
+ERROR: 126:9   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 126:22  quotemark                     " should be '
+ERROR: 129:9   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 129:22  quotemark                     " should be '
+ERROR: 135:11  prefer-const                  Identifier 'tomorrow' is never reassigned; use 'const' instead of 'let'.
+ERROR: 152:5   prefer-for-of                 Expected a 'for-of' loop instead of a 'for' loop with this simple iteration
+ERROR: 167:7   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 170:13  prefer-const                  Identifier 'node' is never reassigned; use 'const' instead of 'let'.
+ERROR: 181:13  prefer-const                  Identifier 'node' is never reassigned; use 'const' instead of 'let'.
+ERROR: 260:1   no-trailing-whitespace        trailing whitespace
+ERROR: 276:1   no-trailing-whitespace        trailing whitespace
+ERROR: 296:9   prefer-const                  Identifier 'cartItem' is never reassigned; use 'const' instead of 'let'.
+ERROR: 310:32  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/form-view/form-view.component.ts:1:37
+ERROR: 1:37    quotemark                     " should be '
+ERROR: 2:58    quotemark                     " should be '
+ERROR: 3:32    quotemark                     " should be '
+ERROR: 6:13    quotemark                     " should be '
+ERROR: 7:16    quotemark                     " should be '
+ERROR: 8:15    quotemark                     " should be '
+ERROR: 11:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 23:53   quotemark                     " should be '
+ERROR: 26:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 27:60   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/home/home.component.ts:21:3
+ERROR: 21:3    use-lifecycle-interface       Lifecycle interface AfterViewInit should be implemented for method ngAfterViewInit. (https://angular.io/styleguide#style-09-01)
+ERROR: 23:1    no-trailing-whitespace        trailing whitespace
+ERROR: 26:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/logout/logout.component.ts:23:1
+ERROR: 23:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/order-detail/order-detail.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:40    quotemark                     " should be '
+ERROR: 3:30    quotemark                     " should be '
+ERROR: 4:23    quotemark                     " should be '
+ERROR: 5:29    quotemark                     " should be '
+ERROR: 6:59    quotemark                     " should be '
+ERROR: 7:36    quotemark                     " should be '
+ERROR: 8:36    quotemark                     " should be '
+ERROR: 9:22    quotemark                     " should be '
+ERROR: 10:26   quotemark                     " should be '
+ERROR: 11:31   quotemark                     " should be '
+ERROR: 14:13   quotemark                     " should be '
+ERROR: 15:16   quotemark                     " should be '
+ERROR: 16:15   quotemark                     " should be '
+ERROR: 44:16   quotemark                     " should be '
+ERROR: 47:16   quotemark                     " should be '
+ERROR: 50:16   quotemark                     " should be '
+ERROR: 53:16   quotemark                     " should be '
+ERROR: 56:1    no-trailing-whitespace        trailing whitespace
+ERROR: 57:48   quotemark                     " should be '
+ERROR: 58:49   quotemark                     " should be '
+ERROR: 59:9    prefer-const                  Identifier 'user' is never reassigned; use 'const' instead of 'let'.
+ERROR: 63:72   quotemark                     " should be '
+ERROR: 71:11   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 71:24   quotemark                     " should be '
+ERROR: 105:9   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 105:22  quotemark                     " should be '
+ERROR: 135:11  prefer-const                  Identifier 'processedMailContent' is never reassigned; use 'const' instead of 'let'.
+ERROR: 146:37  quotemark                     " should be '
+ERROR: 148:44  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/orders/orders.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:30    quotemark                     " should be '
+ERROR: 3:23    quotemark                     " should be '
+ERROR: 6:13    quotemark                     " should be '
+ERROR: 7:16    quotemark                     " should be '
+ERROR: 8:15    quotemark                     " should be '
+ERROR: 12:19   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 19:7    no-console                    Calls to 'console.info' are not allowed.
+ERROR: 19:20   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/shop/shop.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:31    quotemark                     " should be '
+ERROR: 3:32    quotemark                     " should be '
+ERROR: 4:25    quotemark                     " should be '
+ERROR: 5:46    quotemark                     " should be '
+ERROR: 6:21    quotemark                     " should be '
+ERROR: 7:26    quotemark                     " should be '
+ERROR: 8:32    quotemark                     " should be '
+ERROR: 9:22    quotemark                     " should be '
+ERROR: 12:13   quotemark                     " should be '
+ERROR: 13:16   quotemark                     " should be '
+ERROR: 14:15   quotemark                     " should be '
+ERROR: 24:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 24:13   no-inferrable-types           Type boolean trivially inferred from a boolean literal, remove type annotation
+ERROR: 104:6   no-trailing-whitespace        trailing whitespace
+ERROR: 106:11  prefer-const                  Identifier 'categoryIds' is never reassigned; use 'const' instead of 'let'.
+ERROR: 129:6   no-trailing-whitespace        trailing whitespace
+ERROR: 150:6   no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/signin/signin.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:29    quotemark                     " should be '
+ERROR: 3:24    quotemark                     " should be '
+ERROR: 4:31    quotemark                     " should be '
+ERROR: 6:32    quotemark                     " should be '
+ERROR: 9:13    quotemark                     " should be '
+ERROR: 10:16   quotemark                     " should be '
+ERROR: 11:15   quotemark                     " should be '
+ERROR: 15:10   no-trailing-whitespace        trailing whitespace
+ERROR: 17:21   no-trailing-whitespace        trailing whitespace
+ERROR: 19:12   quotemark                     " should be '
+ERROR: 20:15   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/signup/signup.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:29    quotemark                     " should be '
+ERROR: 3:24    quotemark                     " should be '
+ERROR: 4:22    quotemark                     " should be '
+ERROR: 5:42    quotemark                     " should be '
+ERROR: 6:31    quotemark                     " should be '
+ERROR: 8:13    quotemark                     " should be '
+ERROR: 9:16    quotemark                     " should be '
+ERROR: 10:15   quotemark                     " should be '
+ERROR: 15:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 16:10   no-inferrable-types           Type string trivially inferred from a string literal, remove type annotation
+ERROR: 16:19   quotemark                     " should be '
+ERROR: 53:16   quotemark                     " should be '
+ERROR: 54:16   quotemark                     " should be '
+ERROR: 59:26   quotemark                     " should be '
+ERROR: 62:24   quotemark                     " should be '
+ERROR: 85:26   quotemark                     " should be '
+ERROR: 87:25   quotemark                     " should be '
+ERROR: 89:23   quotemark                     " should be '
+ERROR: 94:6    no-trailing-whitespace        trailing whitespace
+ERROR: 96:20   quotemark                     " should be '
+ERROR: 98:19   quotemark                     " should be '
+ERROR: 100:17  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/stock-product-detail/stock-product-detail.component.ts:1:46
+ERROR: 1:46    quotemark                     " should be '
+ERROR: 2:27    quotemark                     " should be '
+ERROR: 3:40    quotemark                     " should be '
+ERROR: 4:30    quotemark                     " should be '
+ERROR: 5:31    quotemark                     " should be '
+ERROR: 6:41    quotemark                     " should be '
+ERROR: 7:23    quotemark                     " should be '
+ERROR: 8:42    quotemark                     " should be '
+ERROR: 9:29    quotemark                     " should be '
+ERROR: 10:36   quotemark                     " should be '
+ERROR: 11:30   quotemark                     " should be '
+ERROR: 12:32   quotemark                     " should be '
+ERROR: 13:36   quotemark                     " should be '
+ERROR: 16:13   quotemark                     " should be '
+ERROR: 17:16   quotemark                     " should be '
+ERROR: 18:15   quotemark                     " should be '
+ERROR: 21:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 40:72   quotemark                     " should be '
+ERROR: 47:21   quotemark                     " should be '
+ERROR: 51:21   quotemark                     " should be '
+ERROR: 56:21   quotemark                     " should be '
+ERROR: 72:11   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 72:24   quotemark                     " should be '
+ERROR: 77:15   prefer-const                  Identifier 'tomorrow' is never reassigned; use 'const' instead of 'let'.
+ERROR: 90:14   quotemark                     " should be '
+ERROR: 91:16   quotemark                     " should be '
+ERROR: 92:14   quotemark                     " should be '
+ERROR: 95:14   quotemark                     " should be '
+ERROR: 96:16   quotemark                     " should be '
+ERROR: 97:14   quotemark                     " should be '
+ERROR: 100:14  quotemark                     " should be '
+ERROR: 101:16  quotemark                     " should be '
+ERROR: 102:14  quotemark                     " should be '
+ERROR: 105:14  quotemark                     " should be '
+ERROR: 106:16  quotemark                     " should be '
+ERROR: 107:14  quotemark                     " should be '
+ERROR: 110:14  quotemark                     " should be '
+ERROR: 111:16  quotemark                     " should be '
+ERROR: 112:14  quotemark                     " should be '
+ERROR: 115:14  quotemark                     " should be '
+ERROR: 116:16  quotemark                     " should be '
+ERROR: 117:14  quotemark                     " should be '
+ERROR: 126:9   prefer-const                  Identifier 'pricePerPiece' is never reassigned; use 'const' instead of 'let'.
+ERROR: 135:5   one-variable-per-declaration  Multiple variable declarations in the same statement are forbidden
+ERROR: 135:9   prefer-const                  Identifier 'priceGroups' is never reassigned; use 'const' instead of 'let'.
+ERROR: 155:9   prefer-const                  Identifier 'cartItem' is never reassigned; use 'const' instead of 'let'.
+ERROR: 169:32  quotemark                     " should be '
+ERROR: 179:9   prefer-const                  Identifier 'productProps' is never reassigned; use 'const' instead of 'let'.
+ERROR: 180:9   prefer-const                  Identifier 'table' is never reassigned; use 'const' instead of 'let'.
+ERROR: 181:9   prefer-const                  Identifier 'ignore' is never reassigned; use 'const' instead of 'let'.
+ERROR: 265:5   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 265:18  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/pages/user-profile/user-profile.component.ts:1:35
+ERROR: 1:35    quotemark                     " should be '
+ERROR: 2:29    quotemark                     " should be '
+ERROR: 3:31    quotemark                     " should be '
+ERROR: 8:13    quotemark                     " should be '
+ERROR: 9:16    quotemark                     " should be '
+ERROR: 10:15   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/admin-dashboard.service.ts:94:11
+ERROR: 94:11   object-literal-key-quotes     Unnecessarily quoted property 'null' found.
+ERROR: 102:11  object-literal-key-quotes     Unnecessarily quoted property 'null' found.
+ERROR: 110:11  object-literal-key-quotes     Unnecessarily quoted property 'null' found.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/admin-forms-component-resolver/admin-forms-component-resolver.service.ts:1:42
+ERROR: 1:42    quotemark                     " should be '
+ERROR: 2:34    quotemark                     " should be '
+ERROR: 3:28    quotemark                     " should be '
+ERROR: 4:32    quotemark                     " should be '
+ERROR: 5:55    quotemark                     " should be '
+ERROR: 6:60    quotemark                     " should be '
+ERROR: 7:58    quotemark                     " should be '
+ERROR: 8:59    quotemark                     " should be '
+ERROR: 9:55    quotemark                     " should be '
+ERROR: 10:30   quotemark                     " should be '
+ERROR: 13:15   quotemark                     " should be '
+ERROR: 18:14   quotemark                     " should be '
+ERROR: 19:14   quotemark                     " should be '
+ERROR: 23:14   quotemark                     " should be '
+ERROR: 24:14   quotemark                     " should be '
+ERROR: 28:14   quotemark                     " should be '
+ERROR: 29:14   quotemark                     " should be '
+ERROR: 33:14   quotemark                     " should be '
+ERROR: 34:14   quotemark                     " should be '
+ERROR: 41:14   quotemark                     " should be '
+ERROR: 42:14   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/admin-orders-form-maker.service.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 2:63    quotemark                     " should be '
+ERROR: 3:28    quotemark                     " should be '
+ERROR: 4:36    quotemark                     " should be '
+ERROR: 5:32    quotemark                     " should be '
+ERROR: 6:23    quotemark                     " should be '
+ERROR: 13:8    quotemark                     " should be '
+ERROR: 14:29   quotemark                     " should be '
+ERROR: 15:28   quotemark                     " should be '
+ERROR: 16:28   quotemark                     " should be '
+ERROR: 17:27   quotemark                     " should be '
+ERROR: 20:15   quotemark                     " should be '
+ERROR: 23:18   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 92:9    prefer-const                  Identifier 'req' is never reassigned; use 'const' instead of 'let'.
+ERROR: 106:9   prefer-const                  Identifier 'req' is never reassigned; use 'const' instead of 'let'.
+ERROR: 107:7   object-literal-shorthand      Expected property shorthand in object literal ('{id}').
+ERROR: 131:11  prefer-const                  Identifier 'questionInputTemplate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 171:11  prefer-const                  Identifier 'formTemplate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 210:11  prefer-const                  Identifier 'mailFormTemp' is never reassigned; use 'const' instead of 'let'.
+ERROR: 237:9   prefer-const                  Identifier 'mailFormEntry' is never reassigned; use 'const' instead of 'let'.
+ERROR: 253:9   prefer-const                  Identifier 'formEntry' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/admin-orders.service.ts:16:1
+ERROR: 16:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/admin-product.service.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 8:8     quotemark                     " should be '
+ERROR: 9:28    quotemark                     " should be '
+ERROR: 10:29   quotemark                     " should be '
+ERROR: 12:28   quotemark                     " should be '
+ERROR: 13:63   quotemark                     " should be '
+ERROR: 14:28   quotemark                     " should be '
+ERROR: 15:27   quotemark                     " should be '
+ERROR: 18:15   quotemark                     " should be '
+ERROR: 24:20   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 77:22   quotemark                     " should be '
+ERROR: 95:22   quotemark                     " should be '
+ERROR: 196:27  ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 211:9   prefer-const                  Identifier 'optionToAdd' is never reassigned; use 'const' instead of 'let'.
+ERROR: 242:13  object-literal-shorthand      Expected property shorthand in object literal ('{isChained}').
+ERROR: 250:21  quotemark                     " should be '
+ERROR: 265:9   prefer-const                  Identifier 'newOption' is never reassigned; use 'const' instead of 'let'.
+ERROR: 271:21  quotemark                     " should be '
+ERROR: 291:9   prefer-const                  Identifier 'newInput' is never reassigned; use 'const' instead of 'let'.
+ERROR: 291:19  ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 306:16  no-string-literal             object access via string literals is disallowed
+ERROR: 306:16  quotemark                     " should be '
+ERROR: 309:20  no-string-literal             object access via string literals is disallowed
+ERROR: 309:20  quotemark                     " should be '
+ERROR: 316:16  quotemark                     " should be '
+ERROR: 316:16  no-string-literal             object access via string literals is disallowed
+ERROR: 346:9   prefer-const                  Identifier 'newFormData' is never reassigned; use 'const' instead of 'let'.
+ERROR: 347:24  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/auth.service.ts:13:3
+ERROR: 13:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 34:9    prefer-const                  Identifier 'credentials' is never reassigned; use 'const' instead of 'let'.
+ERROR: 35:7    object-literal-shorthand      Expected property shorthand in object literal ('{email}').
+ERROR: 36:7    object-literal-shorthand      Expected property shorthand in object literal ('{password}').
+ERROR: 38:1    no-trailing-whitespace        trailing whitespace
+ERROR: 70:27   no-trailing-whitespace        trailing whitespace
+ERROR: 84:49   no-trailing-whitespace        trailing whitespace
+ERROR: 87:9    no-shadowed-variable          Shadowed name: 'Token'
+ERROR: 87:9    prefer-const                  Identifier 'Token' is never reassigned; use 'const' instead of 'let'.
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/cart.service.ts:96:33
+ERROR: 96:33   no-trailing-whitespace        trailing whitespace
+ERROR: 106:32  no-trailing-whitespace        trailing whitespace
+ERROR: 115:27  variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 185:30  variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 206:20  no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/contact.service.ts:19:22
+ERROR: 19:22   quotemark                     " should be '
+ERROR: 21:26   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/form-resolver.service.ts:1:46
+ERROR: 1:46    quotemark                     " should be '
+ERROR: 2:28    quotemark                     " should be '
+ERROR: 3:31    quotemark                     " should be '
+ERROR: 6:15    quotemark                     " should be '
+ERROR: 9:3     variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 10:3    variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 26:11   prefer-const                  Identifier 'form_data' is never reassigned; use 'const' instead of 'let'.
+ERROR: 26:11   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 28:34   quotemark                     " should be '
+ERROR: 33:11   quotemark                     " should be '
+ERROR: 39:9    quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/home.service.ts:20:29
+ERROR: 20:29   quotemark                     " should be '
+ERROR: 21:30   quotemark                     " should be '
+ERROR: 22:28   quotemark                     " should be '
+ERROR: 25:29   quotemark                     " should be '
+ERROR: 26:30   quotemark                     " should be '
+ERROR: 27:28   quotemark                     " should be '
+ERROR: 30:29   quotemark                     " should be '
+ERROR: 31:30   quotemark                     " should be '
+ERROR: 32:28   quotemark                     " should be '
+ERROR: 51:21   quotemark                     " should be '
+ERROR: 52:22   quotemark                     " should be '
+ERROR: 53:20   quotemark                     " should be '
+ERROR: 61:21   quotemark                     " should be '
+ERROR: 62:22   quotemark                     " should be '
+ERROR: 63:20   quotemark                     " should be '
+ERROR: 71:21   quotemark                     " should be '
+ERROR: 72:22   quotemark                     " should be '
+ERROR: 73:20   quotemark                     " should be '
+ERROR: 80:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/mail.service.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 2:28    quotemark                     " should be '
+ERROR: 3:29    quotemark                     " should be '
+ERROR: 4:28    quotemark                     " should be '
+ERROR: 11:8    quotemark                     " should be '
+ERROR: 12:27   quotemark                     " should be '
+ERROR: 15:15   quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/order.service.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 2:63    quotemark                     " should be '
+ERROR: 3:25    quotemark                     " should be '
+ERROR: 4:32    quotemark                     " should be '
+ERROR: 5:23    quotemark                     " should be '
+ERROR: 6:28    quotemark                     " should be '
+ERROR: 7:28    quotemark                     " should be '
+ERROR: 8:29    quotemark                     " should be '
+ERROR: 9:27    quotemark                     " should be '
+ERROR: 10:36   quotemark                     " should be '
+ERROR: 13:15   quotemark                     " should be '
+ERROR: 96:9    prefer-const                  Identifier 'orderFormTemplate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 104:9   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 104:9   prefer-const                  Identifier 'custom_form_groups_dict' is never reassigned; use 'const' instead of 'let'.
+ERROR: 129:5   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 129:18  quotemark                     " should be '
+ERROR: 131:9   variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 131:9   prefer-const                  Identifier 'group_ids' is never reassigned; use 'const' instead of 'let'.
+ERROR: 137:5   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 137:18  quotemark                     " should be '
+ERROR: 141:13  prefer-const                  Identifier 'formGroup' is never reassigned; use 'const' instead of 'let'.
+ERROR: 157:5   no-console                    Calls to 'console.info' are not allowed.
+ERROR: 158:7   quotemark                     " should be '
+ERROR: 174:28  quotemark                     " should be '
+ERROR: 175:27  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/product-categorisation.service.ts:34:33
+ERROR: 34:33   no-trailing-whitespace        trailing whitespace
+ERROR: 37:1    no-trailing-whitespace        trailing whitespace
+ERROR: 54:5    no-trailing-whitespace        trailing whitespace
+ERROR: 55:25   no-trailing-whitespace        trailing whitespace
+ERROR: 129:1   no-trailing-whitespace        trailing whitespace
+ERROR: 140:14  no-trailing-whitespace        trailing whitespace
+ERROR: 152:6   no-trailing-whitespace        trailing whitespace
+ERROR: 153:28  no-trailing-whitespace        trailing whitespace
+ERROR: 154:1   jsdoc-format                  asterisks in jsdoc must be aligned
+ERROR: 167:13  no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/product.service.ts:1:28
+ERROR: 1:28    quotemark                     " should be '
+ERROR: 13:8    quotemark                     " should be '
+ERROR: 14:28   quotemark                     " should be '
+ERROR: 15:29   quotemark                     " should be '
+ERROR: 16:63   quotemark                     " should be '
+ERROR: 17:28   quotemark                     " should be '
+ERROR: 18:28   quotemark                     " should be '
+ERROR: 19:27   quotemark                     " should be '
+ERROR: 20:26   quotemark                     " should be '
+ERROR: 23:15   quotemark                     " should be '
+ERROR: 27:20   ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 87:9    prefer-const                  Identifier 'categoryNames' is never reassigned; use 'const' instead of 'let'.
+ERROR: 98:15   prefer-const                  Identifier 'products' is never reassigned; use 'const' instead of 'let'.
+ERROR: 199:17  quotemark                     " should be '
+ERROR: 241:40  variable-name                 variable name must be in lowerCamelCase, PascalCase or UPPER_CASE
+ERROR: 272:27  ban-types                     Don't use 'Object' as a type. Avoid using the `Object` type. Did you mean `object`?
+ERROR: 281:9   prefer-const                  Identifier 'validators' is never reassigned; use 'const' instead of 'let'.
+ERROR: 283:9   prefer-const                  Identifier 'optionTemplate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 320:9   prefer-const                  Identifier 'formTemplate' is never reassigned; use 'const' instead of 'let'.
+ERROR: 350:15  quotemark                     " should be '
+ERROR: 351:16  quotemark                     " should be '
+ERROR: 357:15  quotemark                     " should be '
+ERROR: 358:16  quotemark                     " should be '
+ERROR: 364:15  quotemark                     " should be '
+ERROR: 365:16  quotemark                     " should be '
+ERROR: 371:15  quotemark                     " should be '
+ERROR: 372:16  quotemark                     " should be '
+ERROR: 378:15  quotemark                     " should be '
+ERROR: 379:16  quotemark                     " should be '
+ERROR: 385:15  quotemark                     " should be '
+ERROR: 386:16  quotemark                     " should be '
+ERROR: 392:15  quotemark                     " should be '
+ERROR: 393:16  quotemark                     " should be '
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/services/widget-manager.service.ts:60:23
+ERROR: 60:23   triple-equals                 == should be ===
+ERROR: 68:1    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/app/store/user-details.service.ts:43:4
+ERROR: 43:4    no-trailing-whitespace        trailing whitespace
+
+/mnt/sda10/projekts/FREELANCE WORK/update-version/src/environments/environment.ts:7:11
+ERROR: 7:11    quotemark                     " should be '
+

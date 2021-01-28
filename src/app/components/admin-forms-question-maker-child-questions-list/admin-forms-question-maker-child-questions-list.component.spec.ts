@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminFormsQuestionMakerChildQuestionsListComponent } from './admin-forms-question-maker-child-questions-list.component';
 
@@ -6,7 +6,7 @@ describe('AdminFormsQuestionMakerChildQuestionsListComponent', () => {
   let component: AdminFormsQuestionMakerChildQuestionsListComponent;
   let fixture: ComponentFixture<AdminFormsQuestionMakerChildQuestionsListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminFormsQuestionMakerChildQuestionsListComponent ]
     })

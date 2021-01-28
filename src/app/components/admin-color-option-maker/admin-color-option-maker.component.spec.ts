@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminColorOptionMakerComponent } from './admin-color-option-maker.component';
 
@@ -6,7 +6,7 @@ describe('AdminColorOptionMakerComponent', () => {
   let component: AdminColorOptionMakerComponent;
   let fixture: ComponentFixture<AdminColorOptionMakerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminColorOptionMakerComponent ]
     })

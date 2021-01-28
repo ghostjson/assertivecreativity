@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OrderMailFormDatePickerComponent } from './order-mail-form-date-picker.component';
 
@@ -6,7 +6,7 @@ describe('OrderMailFormDatePickerComponent', () => {
   let component: OrderMailFormDatePickerComponent;
   let fixture: ComponentFixture<OrderMailFormDatePickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OrderMailFormDatePickerComponent ]
     })
