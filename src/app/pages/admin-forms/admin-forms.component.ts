@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
@@ -11,8 +11,6 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
   styleUrls: ['./admin-forms.component.scss']
 })
 export class AdminFormsComponent implements OnInit {
-  @ViewChild('questionsList') questionsList: ElementRef<HTMLElement>;
-
   forms: OrderFormResponse[] = null;
   showFormMakerDialog: boolean = false;
   newForm: FormGroup;
@@ -29,12 +27,14 @@ export class AdminFormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._adminFormsService
+    this._commonService.setLoaderFor(
+      this._adminFormsService
       .getAllForms()
       .subscribe((res: OrderFormResponse[]) => {
         this.forms = res;
-        this._commonService.setLoader(false);
-      });
+        console.log('forms received: ', this.forms);
+      })
+    );
 
     this.newForm = this._formMakerService.createOrderForm();
   }

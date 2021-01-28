@@ -64,11 +64,7 @@ export class AdminOrdersFormMakerService {
     return this._http.get<any>(this.formsLink()).pipe(
       take(1),
       map((res: any): OrderFormResponse[] => {
-        return res.data.map(
-          (formResponse: any): OrderFormResponse => {
-            return formResponse;
-          }
-        );
+        return res.data;
       })
     );
   }

@@ -46,25 +46,11 @@ export class AdminFormsQuestionMakerComponent
   }
 
   ngOnInit(): void {
-    this.renderQuestion(
-      this.question.value.type,
-      this.question,
-      this.questionContainer
-    );
-    // listen for changes to the question type and render
-    this.question
-      .get("type")
-      .valueChanges.pipe(takeUntil(this.unsub))
-      .subscribe((newType: string) => {
-        console.log('type sub started');
-        this.renderQuestion(newType, this.question, this.questionContainer);
-      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.question) {
       this.unsub.next();
-      console.log(changes.question);
       // render the new form
       this.renderQuestion(changes.question.currentValue.value.type, this.question, this.questionContainer);
       // listen for changes to the question type and render

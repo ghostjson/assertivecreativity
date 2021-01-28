@@ -23,13 +23,14 @@
         </p-toolbar>
       </div>
 
-      <div
+      <ng-container *ngIf="forms; else noForms">
+        <div
         *ngFor="let form of forms; index as formIndex; trackBy: trackById"
         class="p-col-12 p-sm-6 p-lg-3"
       >
         <p-card
           class="form-grid-item"
-          header="{{ form.data.title | limitLength: 25 }}"
+          header="{{ form.name | limitLength: 25 }}"
         >
           <div class="form-grid-item__content">
             <div class="content-row p-mt-2">
@@ -63,19 +64,22 @@
           </p-footer>
         </p-card>
       </div>
+      </ng-container>
 
-      <div *ngIf="!forms || !forms.length" class="p-col-12">
-        <p-card>
-          <div
-            class="p-d-flex p-ai-center p-jc-center p-text-center"
-            style="height: 400px"
-          >
-            <div>
-              <strong> Add forms to see them here </strong>
+      <ng-template #noForms>
+        <div class="p-col-12">
+          <p-card>
+            <div
+              class="p-d-flex p-ai-center p-jc-center p-text-center"
+              style="height: 400px"
+            >
+              <div>
+                <strong> Add forms to see them here </strong>
+              </div>
             </div>
-          </div>
-        </p-card>
-      </div>
+          </p-card>
+        </div>
+      </ng-template>
     </div>
   </div>
 
