@@ -98,6 +98,18 @@ export class AdminFormsQuestionMakerComponent
   }
 
   /**
+   * set the required state of the question
+   * @param state required state
+   */
+  setRequired(state: boolean): void {
+    this.question.get('validators').patchValue({
+      required: state
+    });
+
+    console.log(this.question.get('validators').value);
+  }
+
+  /**
    * Emit the child question formgroup recevied
    * @param value active child question formgroup
    */

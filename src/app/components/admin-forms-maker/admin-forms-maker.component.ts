@@ -15,7 +15,6 @@ export class AdminFormsMakerComponent implements OnInit {
   @ViewChild('formsPartContainer') formsPartContainer: ElementRef<HTMLElement>;
 
   activeChildQuestion: FormQuestionEvent;
-  draggedQuestion: OrderFormQuestionConfig;
   dialogs: {
     childQuestion: boolean;
   };
@@ -66,11 +65,14 @@ export class AdminFormsMakerComponent implements OnInit {
   /**
    * Add the dropped question to the form
    */
-  addDroppedForm(): void {
-    if (this.draggedQuestion instanceof OrderFormQuestionConfig) {
-      this.addQuestion(this.draggedQuestion);
+  addDroppedForm(droppedQuestion: CdkDragDrop<OrderFormQuestionConfig>): void {
+    let question: OrderFormQuestionConfig = droppedQuestion.previousContainer.data[0];
+    if (question) {
+      console.log('drop detectected: ', );
+      this.addQuestion(question);
     }
     else {
+      console.log(question);
       console.error('dropping not possible');
     }
   }

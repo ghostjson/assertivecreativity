@@ -8,6 +8,8 @@
         <div
           class="questions-overview-list"
           cdkDropList
+          [cdkDropListData]="formGroup.value.questions"
+          [cdkDropListConnectedTo]="dropNewQuestion"
           (cdkDropListDropped)="handleDragSort($event)"
         >
           <div
@@ -84,6 +86,9 @@
 
           <div class="p-fluid p-mt-6">
             <div
+              #dropNewQuestion="cdkDropList"
+              cdkDropList
+              (cdkDropListDropped)="addDroppedForm($event)"
               class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
             >
               <i class="add-icon pi pi-plus"></i>

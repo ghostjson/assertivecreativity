@@ -20,6 +20,12 @@
         inputId="question-type-{{ questionIndex }}"
         placeholder="Select a Question Type"
       ></p-dropdown>
+      <div class="p-mx-3 p-my-auto">
+        <label for="required-btn">
+          Required
+        </label>
+        <p-inputSwitch (onChange)="setRequired($event.checked)"></p-inputSwitch>
+      </div>
       <p-button
         type="button"
         icon="pi pi-trash"

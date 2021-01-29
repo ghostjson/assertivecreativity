@@ -1,5 +1,11 @@
 import { Injectable } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from "@angular/forms";
 import { SelectItem } from "primeng/api";
 import { IdGeneratorService } from "./id-generator.service";
 import { PANTONE_COLORS } from "../../assets/js/pantone-colors";
@@ -146,9 +152,9 @@ export class AdminOrdersFormMakerService {
     } else {
       questionInput = this._fb.group({
         id: this._idGenService.getId(),
-        label: '',
-        placeholder: '',
-        value: '',
+        label: "",
+        placeholder: "",
+        value: "",
         children_form_questions: this._fb.array([]),
       });
     }
@@ -174,25 +180,37 @@ export class AdminOrdersFormMakerService {
         placeholder: initial.label,
         type: initial.type,
         is_child: isChild,
+        validators: initial.validators,
         inputs: this._fb.array([]),
       };
 
+      // add the inputs
       initial.inputs.forEach((input: OrderFormInputConfig) => {
         formTemplate.inputs.push(this.createQuestionInput(input));
       });
 
-      formQuestion = this._fb.group(formTemplate);
-    }
-    else {
+      formQuestion = this._fb.group(formTemplate, {
+        validators: initial.validators
+          ? Object.keys(initial.validators).map(
+              (validatorType: string): ValidatorFn => {
+                return Validators[validatorType];
+              }
+            )
+          : {},
+      });
+
+      console.log("form question made: ", formQuestion.value);
+    } else {
       formQuestion = this._fb.group({
         id: this._idGenService.getId(),
-        label: 'Question label ' + this._idGenService.getId(),
-        placeholder: '',
-        type: 'dropdown',
+        label: "Question label " + this._idGenService.getId(),
+        placeholder: "",
+        type: "dropdown",
         is_child: isChild,
-        inputs: this._fb.array([
-          this.createQuestionInput()
-        ]),
+        validators: {
+          required: true
+        },
+        inputs: this._fb.array([this.createQuestionInput()]),
       });
     }
 
@@ -221,7 +239,10 @@ export class AdminOrdersFormMakerService {
     } else {
       mailForm = this._fb.group({
         id: this._idGenService.getId(),
-        title: ['Form Title ' + this._idGenService.getId(), [Validators.required]],
+        title: [
+          "Form Title " + this._idGenService.getId(),
+          [Validators.required],
+        ],
         questions: this._fb.array([this.createFormQuestion(false)]),
       });
     }
@@ -238,8 +259,8 @@ export class AdminOrdersFormMakerService {
       id: this._idGenService.getId(),
       question: question.label,
       type: question.type,
-      label: '',
-      input_value: '',
+      label: "",
+      input_value: "",
     });
 
     return mailFormEntry;

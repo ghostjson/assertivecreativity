@@ -1,4 +1,4 @@
-import { FormArray, FormGroup } from "@angular/forms";
+import { FormArray, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { PANTONE_COLORS } from "src/assets/js/pantone-colors";
 import { SelectItem } from "primeng/api";
 
@@ -9,12 +9,25 @@ export class OrderFormConfig {
   entry?: OrderFormQuestionEntry[];
 }
 
+export interface ValidationDict {
+  min?: boolean;
+  max?: boolean;
+  required?: boolean;
+  requiredTrue?: boolean;
+  email?: boolean;
+  minLength?: boolean;
+  maxLength?: boolean;
+  pattern?: boolean;
+  nullValidator?: boolean;
+}
+
 export class OrderFormQuestionConfig {
   id: number;
   label: string;
   placeholder?: string;
   type: string;
   is_child: boolean;
+  validators: ValidationDict;
   inputs: OrderFormInputConfig[];
 }
 

@@ -108,7 +108,7 @@
         display: none;
       }
 
-      &.p-draggable-enter {
+      &.cdk-drop-list-dragging {
         color: $success-color;
         border-color: $success-color;
 
