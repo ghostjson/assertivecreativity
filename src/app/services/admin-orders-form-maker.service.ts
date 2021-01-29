@@ -180,7 +180,7 @@ export class AdminOrdersFormMakerService {
         placeholder: initial.label,
         type: initial.type,
         is_child: isChild,
-        validators: initial.validators,
+        validators: this._fb.group(initial.validators),
         inputs: this._fb.array([]),
       };
 
@@ -189,17 +189,7 @@ export class AdminOrdersFormMakerService {
         formTemplate.inputs.push(this.createQuestionInput(input));
       });
 
-      formQuestion = this._fb.group(formTemplate, {
-        validators: initial.validators
-          ? Object.keys(initial.validators).map(
-              (validatorType: string): ValidatorFn => {
-                return Validators[validatorType];
-              }
-            )
-          : {},
-      });
-
-      console.log("form question made: ", formQuestion.value);
+      formQuestion = this._fb.group(formTemplate);
     } else {
       formQuestion = this._fb.group({
         id: this._idGenService.getId(),
@@ -207,13 +197,14 @@ export class AdminOrdersFormMakerService {
         placeholder: "",
         type: "dropdown",
         is_child: isChild,
-        validators: {
-          required: true
-        },
+        validators: this._fb.group({
+          required: false
+        }),
         inputs: this._fb.array([this.createQuestionInput()]),
       });
     }
 
+    console.log("form question made: ", formQuestion.value);
     return formQuestion;
   }
 

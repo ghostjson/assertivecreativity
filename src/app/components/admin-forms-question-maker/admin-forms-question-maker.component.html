@@ -21,10 +21,16 @@
         placeholder="Select a Question Type"
       ></p-dropdown>
       <div class="p-mx-3 p-my-auto">
-        <label for="required-btn">
+        <label class="p-mr-2" for="required-btn-{{ questionIndex }}">
           Required
         </label>
-        <p-inputSwitch (onChange)="setRequired($event.checked)"></p-inputSwitch>
+        <ng-container formGroupName="validators">
+          <p-inputSwitch
+            formControlName="required"
+            inputId="required-btn-{{ questionIndex }}"
+          >
+          </p-inputSwitch>
+        </ng-container>
       </div>
       <p-button
         type="button"
