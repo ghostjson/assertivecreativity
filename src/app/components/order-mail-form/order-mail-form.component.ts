@@ -11,7 +11,7 @@ import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-
 export class OrderMailFormComponent implements OnInit {
   @Input() form: OrderFormConfig;
   @Input() formReceiver: boolean;
-  
+
   formEntries: FormArray;
 
   constructor(
@@ -20,6 +20,6 @@ export class OrderMailFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.formEntries = this._orderFormService.createOrderMailFormEntry(this.form.questions);
+    // this.formEntries = this._orderFormService.createOrderMailFormEntry(this.form.questions);
   }
 }

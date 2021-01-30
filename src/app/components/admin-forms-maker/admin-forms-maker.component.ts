@@ -1,28 +1,41 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { FormQuestionEvent, OrderFormQuestionConfig } from 'src/app/models/OrderForm';
-import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
+import {
+  FormQuestionEvent,
+  OrderFormQuestionConfig,
+  OrderFormSectionConfig,
+} from "src/app/models/OrderForm";
+import { AdminOrdersFormMakerService } from "src/app/services/admin-orders-form-maker.service";
 
 @Component({
-  selector: 'app-admin-forms-maker',
-  templateUrl: './admin-forms-maker.component.html',
-  styleUrls: ['./admin-forms-maker.component.scss']
+  selector: "app-admin-forms-maker",
+  templateUrl: "./admin-forms-maker.component.html",
+  styleUrls: ["./admin-forms-maker.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminFormsMakerComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
-  @ViewChild('formsPartContainer') formsPartContainer: ElementRef<HTMLElement>;
+  @ViewChild("formsPartContainer") formsPartContainer: ElementRef<HTMLElement>;
 
   activeChildQuestion: FormQuestionEvent;
   dialogs: {
     childQuestion: boolean;
   };
   formsPartWidth: string;
+  newSectionTitle: string;
 
-  constructor(
-    private _formMakerService: AdminOrdersFormMakerService
-  ) {}
+  constructor(private _formMakerService: AdminOrdersFormMakerService) {}
 
   ngOnInit(): void {
     this.dialogs = {
@@ -31,51 +44,91 @@ export class AdminFormsMakerComponent implements OnInit {
   }
 
   /**
+   * return sections formarray
+   */
+  sections(): FormArray {
+    return this.formGroup.get("sections") as FormArray;
+  }
+
+  /**
    * get questions formarray
    */
-  questions(): FormArray {
-    return this.formGroup.get('questions') as FormArray;
+  questions(sectionIndex: number): FormArray {
+    return this.sections().at(sectionIndex).get("questions") as FormArray;
+  }
+
+  /**
+   * Add a new section to form
+   * @param section form section config
+   */
+  addSection(section: OrderFormSectionConfig = null): void {
+    let sectionForm: FormGroup = null;
+
+    // if initial config is present initialise the formgroup with that
+    if (section) {
+      sectionForm = this._formMakerService.createOrderFormSection(section);
+    } else {
+      sectionForm = this._formMakerService.createOrderFormSection();
+      sectionForm.patchValue({ title: this.newSectionTitle });
+    }
+
+    // add section formgroup to the controller
+    this.sections().push(sectionForm);
+
+    this.newSectionTitle = "";
+  }
+
+  removeSection(sectionIndex: number): void {
+    this.sections().removeAt(sectionIndex);
   }
 
   /**
    * Add a question
    * @param question question object to add to the formarray
    */
-  addQuestion(question: OrderFormQuestionConfig = null): void {
+  addQuestion(
+    sectionIndex: number,
+    question: OrderFormQuestionConfig = null
+  ): void {
     let questionForm: FormGroup = null;
 
-    // add to form controller
+    // if initial config is present initialise the formgroup with that
     if (question) {
       questionForm = this._formMakerService.createFormQuestion(false, question);
-      this.questions().push(questionForm);
     } else {
       questionForm = this._formMakerService.createFormQuestion(false);
-      this.questions().push(questionForm);
     }
+
+    // add question formgroup to the controller
+    this.questions(sectionIndex).push(questionForm);
   }
 
   /**
    * remove formgroup from the formarray
    * @param index index of the formgroup to remove
    */
-  removeQuestion(index: number): void {
-    this.questions().removeAt(index);
+  removeQuestion(sectionIndex: number, questionIndex: number): void {
+    this.questions(sectionIndex).removeAt(questionIndex);
   }
 
   /**
    * Add the dropped question to the form
    */
-  addDroppedForm(droppedQuestion: CdkDragDrop<OrderFormQuestionConfig>): void {
-    let question: OrderFormQuestionConfig = droppedQuestion.previousContainer.data[0];
-    if (question) {
-      console.log('drop detectected: ', );
-      this.addQuestion(question);
-    }
-    else {
-      console.log(question);
-      console.error('dropping not possible');
-    }
-  }
+  // addDroppedForm(
+  //   droppedQuestion: CdkDragDrop<OrderFormQuestionConfig>,
+  //   sectionIndex: number
+  // ): void {
+  //   let question: OrderFormQuestionConfig =
+  //     droppedQuestion.previousContainer.data[0];
+
+  //   if (question) {
+  //     console.log("drop detectected: ");
+  //     this.addQuestion(sectionIndex, question);
+  //   } else {
+  //     console.log(question);
+  //     console.error("dropping not possible");
+  //   }
+  // }
 
   /**
    * trackby function for ngfor
@@ -96,26 +149,26 @@ export class AdminFormsMakerComponent implements OnInit {
   }
 
   /**
-   * Move formgroup in a formarray
-   * @param formArray formarray to sort
-   * @param prevIndex previous index of the item
-   * @param currentIndex current index of the item
-   */
-  moveItemInFormArray(formArray: FormArray, prevIndex: number, currentIndex: number): void {
-    let item: AbstractControl = formArray.at(prevIndex);
-    let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
-    formArray.insert(insertIndex, item);
-
-    let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
-    formArray.removeAt(removeIndex);
-  }
-
-  /**
    * handle sorting when dragging ends
    * @param e event
    */
-  handleDragSort(e: CdkDragDrop<OrderFormQuestionConfig[]>): void {
-    this.moveItemInFormArray(this.questions(), e.previousIndex, e.currentIndex);
+  handleQuestionsDragSort(
+    e: CdkDragDrop<OrderFormQuestionConfig[]>,
+    sectionIndex: number
+  ): void {
+    this._formMakerService.moveItemInFormArray(
+      this.questions(sectionIndex),
+      e.previousIndex,
+      e.currentIndex
+    );
+  }
+
+  handleSectionsDragSort(e: CdkDragDrop<OrderFormQuestionConfig[]>): void {
+    this._formMakerService.moveItemInFormArray(
+      this.sections(),
+      e.previousIndex,
+      e.currentIndex
+    );
   }
 
   /**
@@ -155,7 +208,7 @@ export class AdminFormsMakerComponent implements OnInit {
   removeActiveChildQuestion(index: number): void {
     let parentArray = this.activeChildQuestion.parent as FormArray;
     parentArray.removeAt(index);
-    this.toggleChildQuestionDialog()
+    this.toggleChildQuestionDialog();
     this.activeChildQuestion = null;
   }
 }

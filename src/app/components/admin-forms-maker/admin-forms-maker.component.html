@@ -1,45 +1,76 @@
-<div class="p-grid admin-forms-maker-component">
+<div cdkDropListGroup class="p-grid admin-forms-maker-component">
   <div class="p-col-12 p-md-4 p-lg-3">
-    <aside class="questions-overview-list-wrapper">
-      <p-card>
-        <p-header>
-          <h3>Form Overview</h3>
-        </p-header>
+    <aside class="questions-overview-list-wrapper position-sticky">
+      <h3>Form Overview</h3>
+      <div
+        class="questions-overview-list"
+        cdkDropList
+        [cdkDropListData]="formGroup.value.sections"
+        (cdkDropListDropped)="handleSectionsDragSort($event)"
+        [cdkDropListAutoScrollDisabled]="false"
+      >
         <div
-          class="questions-overview-list"
-          cdkDropList
-          [cdkDropListData]="formGroup.value.questions"
-          [cdkDropListConnectedTo]="dropNewQuestion"
-          (cdkDropListDropped)="handleDragSort($event)"
+          class="questions-overview-list-item questions-overview-list-item--section p-mt-3"
+          *ngFor="
+            let section of formGroup.value.sections;
+            index as sectionIndex;
+            trackBy: trackById
+          "
+          cdkDrag
+          cdkDragLockAxis="y"
+          cdkDragBoundary=".questions-overview-list"
         >
-          <div
-            *ngFor="
-              let question of formGroup.value.questions;
-              index as questionInd;
-              trackBy: trackById
-            "
-            class="questions-overview-list-item p-d-flex p-jc-between p-mt-2"
-            pTooltip="Drag to reorder"
-            cdkDrag
-          >
-            <div class="questions-overview-list-item__label">
-              <span class="p-text-bold"> {{ questionInd + 1 }}. </span>
-              {{ question.label }}
-              <div class="custom-placeholder" *cdkDragPlaceholder></div>
+          <p-card>
+            <ng-template pTemplate="header">
+              <div class="p-d-flex p-jc-between">
+                <h4 class="p-m-0">
+                  {{ sectionIndex + 1 }}. {{ section.title }}
+                </h4>
+                <span class="drag-section-area pi pi-sort" cdkDragHandle></span>
+              </div>
+            </ng-template>
+            <div
+              class="questions-overview-list__questions"
+              cdkDropList
+              [cdkDropListData]="section.questions"
+              [cdkDropListAutoScrollDisabled]="false"
+              (cdkDropListDropped)="
+                handleQuestionsDragSort($event, sectionIndex)
+              "
+            >
+              <div
+                *ngFor="
+                  let question of section.questions;
+                  index as questionIndex;
+                  trackBy: trackById
+                "
+                class="questions-overview-list-item questions-overview-list-item--question p-d-flex p-jc-between p-mt-2 p-ml-3"
+                pTooltip="Drag to reorder"
+                cdkDrag
+                cdkDragLockAxis="y"
+                cdkDragBoundary=".questions-overview-list__questions"
+              >
+                <div class="questions-overview-list-item__label">
+                  <span class="p-text-bold">
+                    {{ sectionIndex + 1 }}.{{ questionIndex + 1 }}
+                  </span>
+                  {{ question.label }}
+                </div>
+                <div class="questions-overview-list-item__tools">
+                  <button
+                    aria-label="delete question"
+                    role="button"
+                    class="p-button-text p-button-danger"
+                    icon="pi pi-times"
+                    (click)="removeQuestion(sectionIndex, questionIndex)"
+                    pButton
+                  ></button>
+                </div>
+              </div>
             </div>
-            <div class="questions-overview-list-item__tools">
-              <button
-                aria-label="delete question"
-                role="button"
-                class="p-button-text p-button-danger"
-                icon="pi pi-times"
-                (click)="removeQuestion(questionInd)"
-                pButton
-              ></button>
-            </div>
-          </div>
+          </p-card>
         </div>
-      </p-card>
+      </div>
     </aside>
   </div>
 
@@ -64,51 +95,108 @@
             />
           </div>
         </div>
+      </form>
+    </p-card>
 
-        <ng-container formArrayName="questions">
-          <div class="question-maker-list p-mt-5">
-            <div
-              *ngFor="
-                let question of questions().controls;
-                index as questionIndex;
-                trackBy: trackFormGroupById
-              "
-              class="question-maker-list__item"
-            >
-              <app-admin-forms-question-maker
-                [questionIndex]="questionIndex"
-                [question]="question"
-                (childQuestionActive)="catchActiveChildQuestion($event)"
-                (removeQuestion)="removeQuestion(questionIndex)"
-              ></app-admin-forms-question-maker>
+    <p-toolbar styleClass="form-toolbar p-shadow-6 p-mt-5 position-sticky">
+      <form class="p-toolbar-group-left p-flex-grow-1">
+        <div class="p-fluid p-input-filled p-flex-grow-1">
+          <input
+            name="new-section-title"
+            type="text"
+            [(ngModel)]="newSectionTitle"
+            placeholder="Enter title for the new section"
+            pInputText
+          />
+        </div>
+        <button
+          type="submit"
+          class="p-button-lg p-button-success p-ml-2"
+          label="Add Section"
+          icon="pi pi-plus"
+          iconPos="right"
+          (click)="addSection()"
+          [disabled]="!newSectionTitle"
+          pButton
+        ></button>
+      </form>
+    </p-toolbar>
+
+    <ng-container
+      *ngFor="
+        let section of sections().controls;
+        index as sectionIndex;
+        trackBy: trackFormGroupById
+      "
+    >
+      <p-card styleClass="form-section p-mt-5">
+        <ng-template pTemplate="header">
+          <div class="form-section-header p-d-flex p-p-3 p-pb-0">
+            <div class="p-fluid p-input-filled p-flex-grow-1">
+              <input
+                class="form-section-header__title"
+                type="text"
+                [formControl]="section.get('title')"
+                placeholder="Enter section title"
+                pInputText
+              />
             </div>
+            <button
+              aria-label="delete form section"
+              type="button"
+              class="p-button-lg p-button-text p-button-danger p-ml-2"
+              icon="pi pi-trash"
+              (click)="removeSection(sectionIndex)"
+              pButton
+            ></button>
           </div>
-
-          <div class="p-fluid p-mt-6">
-            <div
-              #dropNewQuestion="cdkDropList"
-              cdkDropList
-              (cdkDropListDropped)="addDroppedForm($event)"
-              class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
-            >
-              <i class="add-icon pi pi-plus"></i>
-              <i class="droppable-icon pi pi-check"></i>
-              <div class="placeholder-text">Drop Question Here</div>
-              <div class="droppable-text">Drop To Add</div>
+        </ng-template>
+        <form [formGroup]="section">
+          <ng-container formArrayName="questions">
+            <div class="question-maker-list">
+              <div
+                *ngFor="
+                  let question of questions(sectionIndex).controls;
+                  index as questionIndex;
+                  trackBy: trackFormGroupById
+                "
+                class="question-maker-list__item p-mb-5"
+              >
+                <app-admin-forms-question-maker
+                  [questionIndex]="questionIndex"
+                  [question]="question"
+                  (childQuestionActive)="catchActiveChildQuestion($event)"
+                  (removeQuestion)="removeQuestion(sectionIndex, questionIndex)"
+                ></app-admin-forms-question-maker>
+              </div>
             </div>
+
+            <!-- drag and drop feature, uncomment if needed -->
+            <!-- <div class="p-fluid p-mt-6">
+              <div
+                cdkDropList
+                (cdkDropListDropped)="addDroppedForm($event, sectionIndex)"
+                class="drop-region p-d-flex p-flex-column p-ai-center p-jc-center"
+              >
+                <i class="add-icon pi pi-plus"></i>
+                <i class="droppable-icon pi pi-check"></i>
+                <div class="placeholder-text">Drop Question Here</div>
+                <div class="droppable-text">Drop To Add</div>
+              </div>
+            </div> -->
             <button
               type="button"
               label="Add New Question"
               icon="pi pi-plus"
               iconPos="right"
-              class="p-button-success p-button-lg p-shadow-2"
-              (click)="addQuestion()"
+              class="p-button-success p-button-lg p-shadow-2 p-d-block p-ml-auto"
+              (click)="addQuestion(sectionIndex)"
               pButton
             ></button>
-          </div>
-        </ng-container>
-      </form>
-    </p-card>
+          </ng-container>
+        </form>
+      </p-card>
+    </ng-container>
     <p-dialog
       header="Add Child Questions"
       class="child-question-dialog"

@@ -20,7 +20,13 @@
         inputId="question-type-{{ questionIndex }}"
         placeholder="Select a Question Type"
       ></p-dropdown>
-      <div class="p-mx-3 p-my-auto">
+      <p-button
+        type="button"
+        icon="pi pi-trash"
+        styleClass="question-type__delete-btn p-mx-3 p-button-text p-button-danger p-button-lg"
+        (onClick)="emitRemove(questionIndex)"
+      ></p-button>
+      <div class="p-my-auto">
         <label class="p-mr-2" for="required-btn-{{ questionIndex }}">
           Required
         </label>
@@ -32,12 +38,6 @@
           </p-inputSwitch>
         </ng-container>
       </div>
-      <p-button
-        type="button"
-        icon="pi pi-trash"
-        styleClass="question-type__delete-btn p-button-text p-button-danger p-button-lg"
-        (onClick)="emitRemove(questionIndex)"
-      ></p-button>
     </div>
   </p-header>
 

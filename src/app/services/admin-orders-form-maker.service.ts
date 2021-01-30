@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -16,6 +17,7 @@ import {
   OrderFormQuestionConfig,
   OrderFormResponse,
   QUESTION_TYPES,
+  OrderFormSectionConfig,
 } from "../models/OrderForm";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
@@ -209,6 +211,42 @@ export class AdminOrdersFormMakerService {
   }
 
   /**
+   * create a form section formgroup
+   * @param initial initial config of the section
+   */
+  createOrderFormSection(initial: OrderFormSectionConfig = null): FormGroup {
+    let formSection: FormGroup = null;
+
+    if(initial) {
+      const sectionTemplate = {
+        id: this._idGenService.getId(),
+        title: initial.title,
+        questions: this._fb.array([])
+      };
+
+      // add questions to the section
+      initial.questions.forEach(question => {
+        sectionTemplate.questions.push(
+          this.createFormQuestion(false, question)
+        );
+      });
+
+      formSection = this._fb.group(sectionTemplate);
+    }
+    else {
+      const sectionTemplate = {
+        id: this._idGenService.getId(),
+        title: 'Section Title ' + this._idGenService.getId(),
+        questions: this._fb.array([this.createFormQuestion(false)])
+      };
+
+      formSection = this._fb.group(sectionTemplate);
+    }
+
+    return formSection;
+  }
+
+  /**
    * create order form formgroup
    * @param initial initial value of the order form
    */
@@ -216,25 +254,29 @@ export class AdminOrdersFormMakerService {
     let mailForm: FormGroup = null;
 
     if (initial) {
-      let mailFormTemp = {
+      const mailFormTemp = {
         id: this._idGenService.getId(),
-        title: initial.title,
-        questions: this._fb.array([]),
+        title: [
+          initial.title,
+          [Validators.required]
+        ],
+        sections: this._fb.array([]),
       };
 
-      initial.questions.forEach((question) => {
-        mailFormTemp.questions.push(this.createFormQuestion(false, question));
+      initial.sections.forEach(section => {
+        mailFormTemp.sections.push(this.createOrderFormSection(section));
       });
 
       mailForm = this._fb.group(mailFormTemp);
-    } else {
+    }
+    else {
       mailForm = this._fb.group({
         id: this._idGenService.getId(),
         title: [
           "Form Title " + this._idGenService.getId(),
           [Validators.required],
         ],
-        questions: this._fb.array([this.createFormQuestion(false)]),
+        sections: this._fb.array([this.createOrderFormSection()]),
       });
     }
 
@@ -246,7 +288,7 @@ export class AdminOrdersFormMakerService {
    * @param question question form config object
    */
   createOrderFormQuestionEntry(question: OrderFormQuestionConfig): FormGroup {
-    let mailFormEntry: FormGroup = this._fb.group({
+    const mailFormEntry: FormGroup = this._fb.group({
       id: this._idGenService.getId(),
       question: question.label,
       type: question.type,
@@ -269,5 +311,20 @@ export class AdminOrdersFormMakerService {
     });
 
     return formEntry;
+  }
+
+  /**
+   * Move formgroup in a formarray
+   * @param formArray formarray to sort
+   * @param prevIndex previous index of the item
+   * @param currentIndex current index of the item
+   */
+  moveItemInFormArray(formArray: FormArray, prevIndex: number, currentIndex: number): void {
+    let item: AbstractControl = formArray.at(prevIndex);
+    let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
+    formArray.insert(insertIndex, item);
+
+    let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
+    formArray.removeAt(removeIndex);
   }
 }

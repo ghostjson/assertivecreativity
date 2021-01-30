@@ -2,25 +2,25 @@ import { FormArray, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { PANTONE_COLORS } from "src/assets/js/pantone-colors";
 import { SelectItem } from "primeng/api";
 
+/**
+ * Model for Order Form Configuration
+ */
 export class OrderFormConfig {
   id: number;
   title: string;
-  questions: OrderFormQuestionConfig[];
+  sections: OrderFormSectionConfig[];
   entry?: OrderFormQuestionEntry[];
 }
 
-export interface ValidationDict {
-  min?: boolean;
-  max?: boolean;
-  required?: boolean;
-  requiredTrue?: boolean;
-  email?: boolean;
-  minLength?: boolean;
-  maxLength?: boolean;
-  pattern?: boolean;
-  nullValidator?: boolean;
+export class OrderFormSectionConfig {
+  id: number;
+  title: string;
+  questions?: OrderFormQuestionConfig[];
 }
 
+/**
+ * Model for Question configuration in the order form
+ */
 export class OrderFormQuestionConfig {
   id: number;
   label: string;
@@ -31,6 +31,9 @@ export class OrderFormQuestionConfig {
   inputs: OrderFormInputConfig[];
 }
 
+/**
+ * Model for Order form Input configuration
+ */
 export class OrderFormInputConfig<ValueType = any> {
   id: number;
   label: string;
@@ -39,6 +42,9 @@ export class OrderFormInputConfig<ValueType = any> {
   children_form_questions?: OrderFormQuestionConfig[];
 }
 
+/**
+ * Model for user entry of order form
+ */
 export class OrderFormQuestionEntry {
   id: number;
   question: string;
@@ -64,6 +70,21 @@ export interface FormQuestionEvent {
 export interface QuestionType extends SelectItem<string> {
   component?: any,
   data?: any;
+}
+
+/**
+ * Model for Validation dictionary
+ */
+export interface ValidationDict {
+  min?: boolean;
+  max?: boolean;
+  required?: boolean;
+  requiredTrue?: boolean;
+  email?: boolean;
+  minLength?: boolean;
+  maxLength?: boolean;
+  pattern?: boolean;
+  nullValidator?: boolean;
 }
 
 export const QUESTION_TYPES: QuestionType[]  = [

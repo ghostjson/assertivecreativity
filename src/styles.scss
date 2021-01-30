@@ -87,17 +87,10 @@ p {
   color: var(--primary-color);
 }
 
-.questions-overview-list-item {
-  &.cdk-drag-preview {
-    background-color: white;
-    color: $dark-color;
-    border: 1px solid $light-grey;
-    border-radius: 4px;
-    height: 4rem;
-    padding: 0.75em;
-    display: flex;
-    align-items: center;
-    box-shadow: $shadow-6;
+.cdk-drag-preview {
+  box-shadow: $shadow-6;
+
+  &:active {
     cursor: grab;
   }
 }
@@ -135,8 +128,59 @@ p {
 .bg-info {
   background: linear-gradient(90deg, #00a8cc 0%, #00bcd4 100%);
 }
+
+.p-flex-grow-1 {
+  flex-grow: 1;
+}
+
+.position-sticky {
+  position: sticky;
+  top: 10px;
+  z-index: 100000;
+}
 /**
  * utility classes for the project ends
  */
 
 @import "./assets/css/primeng-theme-edited.scss";
+
+/**
+  For angular cdk drag preview
+**/
+.questions-overview-list {
+  &-item {
+    background-color: white;
+
+    &--section {
+      border-radius: 4px;
+
+      .p-card-header {
+        padding: 0.75em;
+
+        .drag-section-area {
+          &:hover {
+            cursor: grab;
+          }
+        }
+      }
+
+      .p-card-content,
+      .p-card-body {
+        padding-top: 0;
+      }
+    }
+
+    &--question {
+      border: 1px solid $light-grey;
+      border-radius: 4px;
+      height: 4rem;
+      padding: 0.75em;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        cursor: grab;
+      }
+    }
+  }
+}

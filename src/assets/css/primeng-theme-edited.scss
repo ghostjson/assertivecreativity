@@ -1540,6 +1540,7 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
+  cursor: pointer;
 }
 .p-button:enabled:hover {
   background: $primary-color-hover;
@@ -7120,13 +7121,13 @@ body {
       padding-left: 0;
       padding-right: 0;
     }
-  
+
     .p-datatable-tbody {
       .admin-products-table__image {
         img {
           border-radius: 6px;
         }
-  
+
         padding-right: 0;
       }
     }
@@ -7251,19 +7252,19 @@ Admin Custom Form component
 .admin-custom-form-component {
   .option-input {
     border: 1px solid $light-grey;
-    border-radius: 6px; 
+    border-radius: 6px;
     position: relative;
     box-shadow: $regular-shadow;
   }
-  
+
   .chained-options {
     width: 100%;
-  
+
     .form-group__label {
       width: 100%;
     }
   }
-  
+
   .card-footer {
     border: 1px solid $light-grey;
     position: relative;
