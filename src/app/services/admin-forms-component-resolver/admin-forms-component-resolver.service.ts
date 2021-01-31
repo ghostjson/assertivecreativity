@@ -8,6 +8,7 @@ import { AdminFormsQuestionMakerDropdownComponent } from "src/app/components/adm
 import { AdminFormsQuestionMakerParagraphComponent } from "src/app/components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component";
 import { AdminFormsQuestionMakerRadioComponent } from "src/app/components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component";
 import { QuestionType } from "src/app/models/OrderForm";
+import { AdminFormsQuestionMakerCheckboxComponent } from "src/app/components/admin-forms-question-maker-checkbox/admin-forms-question-maker-checkbox.component";
 
 @Injectable({
   providedIn: "root",
@@ -41,6 +42,11 @@ export class AdminFormsComponentResolverService {
       label: "Date Input",
       value: "datePicker",
       component: AdminFormsQuestionMakerDatePickerComponent,
+    },
+    checkbox: {
+      label: "Checkboxes",
+      value: "checkbox",
+      component: AdminFormsQuestionMakerCheckboxComponent,
     }
   };
 

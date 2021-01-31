@@ -87,10 +87,12 @@
       margin: 0 auto;
     }
 
-    .form-section {
+    .form-section-maker {
       border-color: $dark-grey;
 
       &-header {
+        border-bottom: 1px solid $dark-grey;
+
         &__title {
           font-weight: 500;
         }

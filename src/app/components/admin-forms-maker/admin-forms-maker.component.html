@@ -24,7 +24,7 @@
             <ng-template pTemplate="header">
               <div class="p-d-flex p-jc-between">
                 <h4 class="p-m-0">
-                  {{ sectionIndex + 1 }}. {{ section.title }}
+                  {{ sectionIndex + 1 }}. {{ section.title | limitLength: 25 }}
                 </h4>
                 <span class="drag-section-area pi pi-sort" cdkDragHandle></span>
               </div>
@@ -54,7 +54,7 @@
                   <span class="p-text-bold">
                     {{ sectionIndex + 1 }}.{{ questionIndex + 1 }}
                   </span>
-                  {{ question.label }}
+                  {{ question.label | limitLength: 25 }}
                 </div>
                 <div class="questions-overview-list-item__tools">
                   <button
@@ -131,9 +131,9 @@
         trackBy: trackFormGroupById
       "
     >
-      <p-card styleClass="form-section p-mt-5">
+      <p-card styleClass="form-section-maker p-mt-5">
         <ng-template pTemplate="header">
-          <div class="form-section-header p-d-flex p-p-3 p-pb-0">
+          <div class="form-section-maker-header p-d-flex p-p-3 p-pb-0">
             <app-overlay-menu
               #menu
               [menuItems]="sectionMenuItems"
@@ -149,7 +149,7 @@
             ></button>
             <div class="p-fluid p-input-filled p-flex-grow-1">
               <input
-                class="form-section-header__title"
+                class="form-section-maker-header__title"
                 type="text"
                 [formControl]="section.get('title')"
                 placeholder="Enter section title"
@@ -164,6 +164,19 @@
               (click)="removeSection(sectionIndex)"
               pButton
             ></button>
+            <div class="p-my-auto">
+              <label
+                class="p-mr-2"
+                for="section-required-switch-{{ sectionIndex }}"
+              >
+                Required
+              </label>
+              <p-inputSwitch
+                [formControl]="section.get('required')"
+                inputId="section-required-switch-{{ sectionIndex }}"
+              >
+              </p-inputSwitch>
+            </div>
           </div>
         </ng-template>
         <form [formGroup]="section">
@@ -182,7 +195,9 @@
                   [question]="question"
                   (childQuestionActive)="catchActiveChildQuestion($event)"
                   (removeQuestion)="removeQuestion(sectionIndex, questionIndex)"
-                  (questionOperation)="doQuestionOperation($event, sectionIndex)"
+                  (questionOperation)="
+                    doQuestionOperation($event, sectionIndex)
+                  "
                 ></app-admin-forms-question-maker>
               </div>
             </div>

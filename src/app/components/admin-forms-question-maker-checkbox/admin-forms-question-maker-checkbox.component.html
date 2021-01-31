@@ -1,0 +1,63 @@
+<div [formGroup]="question">
+  <div class="p-fluid p-field p-input-filled">
+    <label for="form-question-{{ question.value.id }}"> Enter the question </label>
+    <input
+      type="text"
+      formControlName="label"
+      id="form-question-{{ question.value.id }}"
+      placeholder="Enter the question"
+      pInputText
+    />
+  </div>
+  <div *ngIf="inputs.length" class="checkbox-options p-input-filled p-mt-5" formArrayName="inputs">
+    <label class="p-mb-3"> Enter checkbox options </label>
+    <ng-container *ngFor="let input of inputs.controls; index as inputIndex">
+      <div
+        [formGroupName]="inputIndex"
+        class="form-maker-inputgroup p-field p-inputgroup p-mt-2"
+      >
+        <button
+          class="p-button-danger p-button-text"
+          type="button"
+          aria-label="remove question input"
+          icon="pi pi-times"
+          (click)="removeQuestionInput(inputIndex)"
+          pButton
+          pRipple
+        ></button>
+        <input
+          formControlName="label"
+          id="order-form-question-input-{{ question.value.inputs[inputIndex] }}"
+          type="text"
+          pInputText
+          placeholder="Label for checkbox option"
+        />
+        <button
+          *ngIf="!question.value.is_child"
+          class="p-button-success"
+          label="Add Child Input"
+          type="button"
+          (click)="addChildrenQuestion(inputIndex)"
+          pButton
+          pRipple
+        ></button>
+      </div>
+
+      <app-admin-forms-question-maker-child-questions-list
+        [childrenQuestions]="childrenQuestions(inputIndex)"
+        (childQuestionActive)="emitUp($event)"
+      ></app-admin-forms-question-maker-child-questions-list>
+
+    </ng-container>
+  </div>
+
+  <div class="p-text-right p-fluid">
+    <p-button
+      label="Add checkbox Option"
+      icon="pi pi-plus"
+      iconPos="right"
+      styleClass="p-button-success"
+      (onClick)="addQuestionInput()"
+    ></p-button>
+  </div>
+</div>

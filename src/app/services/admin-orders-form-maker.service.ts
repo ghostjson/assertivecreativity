@@ -221,6 +221,7 @@ export class AdminOrdersFormMakerService {
       const sectionTemplate = {
         id: initial.id ? initial.id : this._idGenService.getId(),
         title: initial.title,
+        required: initial.required,
         questions: this._fb.array([])
       };
 
@@ -236,6 +237,7 @@ export class AdminOrdersFormMakerService {
     else {
       const sectionTemplate = {
         id: this._idGenService.getId(),
+        required: false,
         title: 'Section Title ' + this._idGenService.getId(),
         questions: this._fb.array([this.createFormQuestion(false)])
       };

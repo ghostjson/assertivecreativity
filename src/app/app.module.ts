@@ -153,6 +153,7 @@ import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components
 /** Vendor imports */
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 import { OverlayMenuComponent } from './components/overlay-menu/overlay-menu.component';
+import { AdminFormsQuestionMakerCheckboxComponent } from './components/admin-forms-question-maker-checkbox/admin-forms-question-maker-checkbox.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -236,6 +237,7 @@ import { OverlayMenuComponent } from './components/overlay-menu/overlay-menu.com
     AdminFormsQuestionMakerDatePickerComponent,
     AdminFormsQuestionMakerChildQuestionsListComponent,
     OverlayMenuComponent,
+    AdminFormsQuestionMakerCheckboxComponent,
   ],
   imports: [
     /** Angular modules */

@@ -15,6 +15,7 @@ export class OrderFormConfig {
 export class OrderFormSectionConfig {
   id: number;
   title: string;
+  required: boolean;
   questions?: OrderFormQuestionConfig[];
 }
 
@@ -94,7 +95,7 @@ export const QUESTION_TYPES: QuestionType[]  = [
     data: {}
   },
   {
-    label: 'Radio Button',
+    label: 'Radio Buttons',
     value: 'radio',
     data: {}
   },
@@ -113,6 +114,11 @@ export const QUESTION_TYPES: QuestionType[]  = [
   {
     label: 'Date Input',
     value: 'datePicker',
+    data: {}
+  },
+  {
+    label: 'Checkboxes',
+    value: 'checkbox',
     data: {}
   }
 ];
