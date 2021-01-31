@@ -8,7 +8,9 @@ export class IdGeneratorService {
   currentId: number;
 
   constructor() {
-    this.currentId = 1;
+    this.currentId = Math.floor(
+      Math.random() * 10000
+    );
   }
 
   /**

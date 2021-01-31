@@ -4,7 +4,22 @@
 >
   <p-header>
     <div class="question-type p-input-filled">
-      <span *ngIf="questionIndex >= 0" class="question-type__number">
+      <ng-container *ngIf="!question.value.is_child">
+        <app-overlay-menu
+          #menu
+          [menuItems]="questionMenuItems"
+          (onSelect)="emitQuestionOperation($event, question, questionIndex)"
+        ></app-overlay-menu>
+        <button
+          class="p-button-text p-button-plain p-mr-2"
+          type="button"
+          icon="pi pi-ellipsis-v"
+          aria-label="Show menu"
+          (click)="menu.toggle($event)"
+          pButton
+        ></button>
+      </ng-container>
+      <span class="question-type__number">
         {{ questionIndex + 1 }}
       </span>
       <label class="sr-only" for="question-type-{{ questionIndex }}">

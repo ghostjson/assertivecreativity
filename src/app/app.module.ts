@@ -152,6 +152,7 @@ import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components
 
 /** Vendor imports */
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
+import { OverlayMenuComponent } from './components/overlay-menu/overlay-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -234,6 +235,7 @@ import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashbo
     AdminFormsQuestionMakerColorComponent,
     AdminFormsQuestionMakerDatePickerComponent,
     AdminFormsQuestionMakerChildQuestionsListComponent,
+    OverlayMenuComponent,
   ],
   imports: [
     /** Angular modules */

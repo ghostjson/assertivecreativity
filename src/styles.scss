@@ -184,3 +184,20 @@ p {
     }
   }
 }
+
+// .p-overlaypanel {
+//   &-content {
+
+//   }
+// }
+
+// .overlay-menu {
+//   &
+// }
+
+
+.overlay-menu.p-overlaypanel {
+  .p-overlaypanel-content {
+    padding: 0.75em;
+  }
+}

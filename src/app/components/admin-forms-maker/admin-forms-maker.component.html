@@ -98,6 +98,7 @@
       </form>
     </p-card>
 
+    <!-- add section toolbar starts -->
     <p-toolbar styleClass="form-toolbar p-shadow-6 p-mt-5 position-sticky">
       <form class="p-toolbar-group-left p-flex-grow-1">
         <div class="p-fluid p-input-filled p-flex-grow-1">
@@ -121,6 +122,7 @@
         ></button>
       </form>
     </p-toolbar>
+    <!-- add section toolbar ends -->
 
     <ng-container
       *ngFor="
@@ -132,6 +134,19 @@
       <p-card styleClass="form-section p-mt-5">
         <ng-template pTemplate="header">
           <div class="form-section-header p-d-flex p-p-3 p-pb-0">
+            <app-overlay-menu
+              #menu
+              [menuItems]="sectionMenuItems"
+              (onSelect)="doSectionOperation($event, section, sectionIndex)"
+            ></app-overlay-menu>
+            <button
+              class="p-button-text p-button-plain p-mr-2"
+              type="button"
+              icon="pi pi-ellipsis-v"
+              aria-label="Show menu"
+              (click)="menu.toggle($event)"
+              pButton
+            ></button>
             <div class="p-fluid p-input-filled p-flex-grow-1">
               <input
                 class="form-section-header__title"
@@ -167,6 +182,7 @@
                   [question]="question"
                   (childQuestionActive)="catchActiveChildQuestion($event)"
                   (removeQuestion)="removeQuestion(sectionIndex, questionIndex)"
+                  (questionOperation)="doQuestionOperation($event, sectionIndex)"
                 ></app-admin-forms-question-maker>
               </div>
             </div>
@@ -201,7 +217,7 @@
       header="Add Child Questions"
       class="child-question-dialog"
       position="right"
-      [(visible)]="dialogs.childQuestion"
+      [(visible)]="overlays.childQuestion"
       [resizable]="false"
       [draggable]="false"
       [closable]="false"
@@ -210,6 +226,7 @@
       [style]="{
         width: formsPartWidth
       }"
+      [baseZIndex]="200000"
     >
       <div class="p-mt-5">
         <app-admin-forms-question-maker

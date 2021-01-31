@@ -137,7 +137,7 @@ export class AdminOrdersFormMakerService {
 
     if (initial) {
       let questionInputTemplate: any = {
-        id: this._idGenService.getId(),
+        id: initial.id ? initial.id : this._idGenService.getId(),
         label: initial.label,
         placeholder: initial.placeholder,
         value: initial.value,
@@ -177,7 +177,7 @@ export class AdminOrdersFormMakerService {
 
     if (initial) {
       let formTemplate: any = {
-        id: this._idGenService.getId(),
+        id: initial.id ? initial.id : this._idGenService.getId(),
         label: initial.label,
         placeholder: initial.label,
         type: initial.type,
@@ -219,7 +219,7 @@ export class AdminOrdersFormMakerService {
 
     if(initial) {
       const sectionTemplate = {
-        id: this._idGenService.getId(),
+        id: initial.id ? initial.id : this._idGenService.getId(),
         title: initial.title,
         questions: this._fb.array([])
       };
@@ -255,7 +255,7 @@ export class AdminOrdersFormMakerService {
 
     if (initial) {
       const mailFormTemp = {
-        id: this._idGenService.getId(),
+        id: initial.id ? initial.id : this._idGenService.getId(),
         title: [
           initial.title,
           [Validators.required]

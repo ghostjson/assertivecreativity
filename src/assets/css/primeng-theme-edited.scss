@@ -1608,7 +1608,7 @@ a.p-button:active {
   border-color: transparent;
 }
 .p-button.p-button-text.p-button-plain {
-  color: rgba(0, 0, 0, 0.6);
+  color: $dark-color;
 }
 .p-button.p-button-text.p-button-plain:enabled:hover {
   background: rgba(0, 0, 0, 0.04);

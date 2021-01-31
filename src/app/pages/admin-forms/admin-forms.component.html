@@ -25,45 +25,62 @@
 
       <ng-container *ngIf="forms && forms.length; else noForms">
         <div
-        *ngFor="let form of forms; index as formIndex; trackBy: trackById"
-        class="p-col-12 p-sm-6 p-lg-3"
-      >
-        <p-card
-          class="form-grid-item"
-          header="{{ form.name | limitLength: 25 }}"
+          *ngFor="let form of forms; index as formIndex; trackBy: trackById"
+          class="p-col-12 p-sm-6 p-lg-3"
         >
-          <div class="form-grid-item__content">
-            <div class="content-row p-mt-2">
-              <span> Updated On: </span>
-              {{ form.updated_at | date: "mediumDate" }}
+          <p-card class="form-grid-item">
+            <ng-template pTemplate="header">
+              <div class="form-grid-item__header p-d-flex p-p-2 p-ai-center p-text-bold">
+                <app-overlay-menu
+                  #menu
+                  [menuItems]="formItemMenuItems"
+                  (onSelect)="doFormOperation($event, form, formIndex)"
+                ></app-overlay-menu>
+                <button
+                  class="p-button-text p-button-plain p-mr-2"
+                  type="button"
+                  icon="pi pi-ellipsis-v"
+                  aria-label="Show menu"
+                  (click)="menu.toggle($event)"
+                  pButton
+                ></button>
+                <div>
+                  {{ form.name | limitLength: 25 }}
+                </div>
+              </div>
+            </ng-template>
+            <div class="form-grid-item__content">
+              <div class="content-row p-mt-2">
+                <span> Updated On: </span>
+                {{ form.updated_at | date: "mediumDate" }}
+              </div>
+              <div class="content-row p-mt-2">
+                <span> Created On: </span>
+                {{ form.created_at | date: "mediumDate" }}
+              </div>
             </div>
-            <div class="content-row p-mt-2">
-              <span> Created On: </span>
-              {{ form.created_at | date: "mediumDate" }}
-            </div>
-          </div>
-          <p-footer>
-            <div class="p-d-flex">
-              <button
-                class="p-button-text p-button-danger p-mr-2"
-                type="button"
-                icon="pi pi-trash"
-                (click)="deleteForm(formIndex)"
-                pButton
-              ></button>
-              <button
-                class="edit-btn p-shadow-6"
-                type="button"
-                label="Edit"
-                icon="pi pi-pencil"
-                iconPos="right"
-                pButton
-                (click)="openEditDialog(form, formIndex)"
-              ></button>
-            </div>
-          </p-footer>
-        </p-card>
-      </div>
+            <p-footer>
+              <div class="p-d-flex">
+                <button
+                  class="p-button-text p-button-danger p-mr-2"
+                  type="button"
+                  icon="pi pi-trash"
+                  (click)="deleteForm(formIndex)"
+                  pButton
+                ></button>
+                <button
+                  class="edit-btn p-shadow-6"
+                  type="button"
+                  label="Edit"
+                  icon="pi pi-pencil"
+                  iconPos="right"
+                  pButton
+                  (click)="openEditDialog(form, formIndex)"
+                ></button>
+              </div>
+            </p-footer>
+          </p-card>
+        </div>
       </ng-container>
 
       <ng-template #noForms>
@@ -95,23 +112,21 @@
     [baseZIndex]="100"
   >
     <ng-template pTemplate="header">
-      <div class="form-maker-dialog__header">
-        Create New Form
-      </div>
+      <div class="form-maker-dialog__header">Create New Form</div>
       <div>
         <p-button
-        label="Cancel"
-        styleClass="p-button-danger p-button-text p-mr-2"
-        (onClick)="toggleFormMakerDialog()"
-      ></p-button>
-      <p-button
-        [label]="editMode ? 'Save Form' : 'Add Form'"
-        [icon]="editMode ? 'pi pi-pencil' : 'pi pi-check'"
-        iconPos="right"
-        styleClass="p-button-success"
-        [disabled]="!newForm.valid"
-        (onClick)="addForm()"
-      ></p-button>
+          label="Cancel"
+          styleClass="p-button-danger p-button-text p-mr-2"
+          (onClick)="toggleFormMakerDialog()"
+        ></p-button>
+        <p-button
+          [label]="editMode ? 'Save Form' : 'Add Form'"
+          [icon]="editMode ? 'pi pi-pencil' : 'pi pi-check'"
+          iconPos="right"
+          styleClass="p-button-success"
+          [disabled]="!newForm.valid"
+          (onClick)="addForm()"
+        ></p-button>
       </div>
     </ng-template>
     <app-admin-forms-maker [formGroup]="newForm"></app-admin-forms-maker>

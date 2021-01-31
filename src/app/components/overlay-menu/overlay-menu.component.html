@@ -1,0 +1,18 @@
+<p-overlayPanel
+  #menu appendTo="body"
+  [dismissable]="true"
+  styleClass="overlay-menu"
+>
+  <ng-template pTemplate>
+    <button
+      *ngFor="let item of menuItems; index as itemIndex"
+      class="p-button-text p-button-plain"
+      type="button"
+      [icon]="item.icon"
+      iconPos="left"
+      [label]="item.label"
+      (click)="itemClick($event, item)"
+      pButton
+    ></button>
+  </ng-template>
+</p-overlayPanel>

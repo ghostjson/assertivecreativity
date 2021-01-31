@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { CommonService } from 'src/app/common.service';
-import { OrderFormResponse, OrderFormQuestionConfig } from 'src/app/models/OrderForm';
+import { OrderFormResponse, OrderFormQuestionConfig, OrderFormConfig } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class AdminFormsComponent implements OnInit {
   editIndex: number;
   prevForm: OrderFormResponse;
   draggedQuestion: OrderFormQuestionConfig;
+  formItemMenuItems: MenuItem[];
 
   constructor(
     private _adminFormsService: AdminOrdersFormMakerService,
@@ -37,14 +38,26 @@ export class AdminFormsComponent implements OnInit {
     );
 
     this.newForm = this._formMakerService.createOrderForm();
+
+    this.formItemMenuItems = [
+      {
+        label: 'Duplicate Form',
+        title: 'Duplicate this form',
+        icon: 'pi pi-clone'
+      }
+    ];
   }
 
   toggleFormMakerDialog(): void {
     this.showFormMakerDialog = !this.showFormMakerDialog;
   }
 
+  hideFormMakerDialog(): void {
+    this.showFormMakerDialog = false;
+  }
+
   addForm(): void {
-    this.toggleFormMakerDialog();
+    this.hideFormMakerDialog();
 
     if(this.editMode) {
       this._commonService.setLoaderFor(
@@ -60,8 +73,8 @@ export class AdminFormsComponent implements OnInit {
             });
 
             this._messageService.add({
-              severity: "success",
-              summary: "Form updated",
+              severity: 'success',
+              summary: 'Form updated',
               detail: `${this.newForm.value.title.slice(0, 50)} updated`,
             });
           }),
@@ -69,9 +82,9 @@ export class AdminFormsComponent implements OnInit {
             console.error(e);
 
             this._messageService.add({
-              severity: "error",
-              summary: "Form not updated",
-              detail: "Something went wrong. Kindly try again",
+              severity: 'error',
+              summary: 'Form not updated',
+              detail: 'Something went wrong. Kindly try again',
             });
           })
         )
@@ -88,20 +101,20 @@ export class AdminFormsComponent implements OnInit {
               created_at: res.data.created_at,
               updated_at: res.data.updated_at
             };
-  
+
             this.forms.push(resForm);
-    
+
             this._messageService.add({
-              severity: "success",
-              summary: "Form Added",
-              detail: "Form was added successfully",
+              severity: 'success',
+              summary: 'Form Added',
+              detail: 'Form was added successfully',
             });
           },
           () => {
             this._messageService.add({
-              severity: "error",
-              summary: "Form not created",
-              detail: "Something went wrong. Kindly try again",
+              severity: 'error',
+              summary: 'Form not created',
+              detail: 'Something went wrong. Kindly try again',
             });
           }
         )
@@ -130,22 +143,41 @@ export class AdminFormsComponent implements OnInit {
             this.forms.splice(index, 1);
 
             this._messageService.add({
-              severity: "success",
-              summary: "Form Deleted",
-              detail: "Form was deleted successfully",
+              severity: 'success',
+              summary: 'Form Deleted',
+              detail: 'Form was deleted successfully',
             });
         },
         (e: any) => {
           console.error(e);
-  
+
           this._messageService.add({
-            severity: "error",
-            summary: "Form Deletion Failed",
-            detail: "Something went wrong. Kindly try again",
+            severity: 'error',
+            summary: 'Form Deletion Failed',
+            detail: 'Something went wrong. Kindly try again',
           });
         }
       )
     );
+  }
+
+  /**
+   * do an operation on form
+   * @param event event object
+   * @param form form config to do operation on
+   * @param formIndex index of the form config
+   */
+  doFormOperation(event: any, form: OrderFormResponse, formIndex: number): void {
+    switch(event.item.label) {
+      case 'Duplicate Form':
+        this.editMode = false;
+        let duplicate = form;
+        duplicate.data.id = null;
+
+        this.newForm = this._formMakerService.createOrderForm(duplicate.data);
+        this.addForm();
+        break;
+    }
   }
 
   /**
