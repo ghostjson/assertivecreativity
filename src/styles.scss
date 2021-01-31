@@ -88,6 +88,7 @@ p {
 }
 
 .cdk-drag-preview {
+  transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: $shadow-6;
 
   &:active {
@@ -95,8 +96,16 @@ p {
   }
 }
 
+.cdk-drop-list-dragging {
+  transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 /**
@@ -148,7 +157,16 @@ p {
   For angular cdk drag preview
 **/
 .questions-overview-list {
+  transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+
+  &.cdk-drop-list-dragging {
+    .questions-overview-list-item:not(.cdk-drag-placeholder) {
+      transition: all 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
   &-item {
+    box-shadow: none;
     background-color: white;
 
     &--section {
@@ -184,17 +202,6 @@ p {
     }
   }
 }
-
-// .p-overlaypanel {
-//   &-content {
-
-//   }
-// }
-
-// .overlay-menu {
-//   &
-// }
-
 
 .overlay-menu.p-overlaypanel {
   .p-overlaypanel-content {

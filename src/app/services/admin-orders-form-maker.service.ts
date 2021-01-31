@@ -322,11 +322,16 @@ export class AdminOrdersFormMakerService {
    * @param currentIndex current index of the item
    */
   moveItemInFormArray(formArray: FormArray, prevIndex: number, currentIndex: number): void {
-    let item: AbstractControl = formArray.at(prevIndex);
-    let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
-    formArray.insert(insertIndex, item);
+    // let item: AbstractControl = formArray.at(prevIndex);
+    // let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
+    // formArray.insert(insertIndex, item);
 
-    let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
-    formArray.removeAt(removeIndex);
+    // let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
+    // formArray.removeAt(removeIndex);
+
+    let itemPrev: AbstractControl = formArray.at(prevIndex);
+    let itemCurr: AbstractControl = formArray.at(currentIndex);
+    formArray.setControl(prevIndex, itemCurr);
+    formArray.setControl(currentIndex, itemPrev);
   }
 }
