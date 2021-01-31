@@ -10,7 +10,7 @@
         [cdkDropListAutoScrollDisabled]="false"
       >
         <div
-          class="questions-overview-list-item questions-overview-list-item--section p-mt-3"
+          class="questions-overview-list-item questions-overview-list-item--section"
           *ngFor="
             let section of formGroup.value.sections;
             index as sectionIndex;
@@ -43,7 +43,7 @@
                   index as questionIndex;
                   trackBy: trackById
                 "
-                class="questions-overview-list-item questions-overview-list-item--question p-d-flex p-jc-between p-mt-2 p-ml-3"
+                class="questions-overview-list-item questions-overview-list-item--question p-d-flex p-jc-between"
                 pTooltip="Drag to reorder"
                 cdkDrag
                 cdkDragLockAxis="y"
