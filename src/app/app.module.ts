@@ -154,6 +154,13 @@ import { AdminFormsQuestionMakerChildQuestionsListComponent } from './components
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 import { OverlayMenuComponent } from './components/overlay-menu/overlay-menu.component';
 import { AdminFormsQuestionMakerCheckboxComponent } from './components/admin-forms-question-maker-checkbox/admin-forms-question-maker-checkbox.component';
+import { CustomFormQuestionRadioComponent } from './components/custom-form-question-radio/custom-form-question-radio.component';
+import { CustomFormComponent } from './components/custom-form/custom-form.component';
+import { CustomFormQuestionDropdownComponent } from './components/custom-form-question-dropdown/custom-form-question-dropdown.component';
+import { CustomFormQuestionColorComponent } from './components/custom-form-question-color/custom-form-question-color.component';
+import { CustomFormQuestionCheckboxComponent } from './components/custom-form-question-checkbox/custom-form-question-checkbox.component';
+import { CustomFormQuestionParagraphComponent } from './components/custom-form-question-paragraph/custom-form-question-paragraph.component';
+import { CustomFormQuestionDatePickerComponent } from './components/custom-form-question-date-picker/custom-form-question-date-picker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -238,6 +245,13 @@ import { AdminFormsQuestionMakerCheckboxComponent } from './components/admin-for
     AdminFormsQuestionMakerChildQuestionsListComponent,
     OverlayMenuComponent,
     AdminFormsQuestionMakerCheckboxComponent,
+    CustomFormQuestionRadioComponent,
+    CustomFormComponent,
+    CustomFormQuestionDropdownComponent,
+    CustomFormQuestionColorComponent,
+    CustomFormQuestionCheckboxComponent,
+    CustomFormQuestionParagraphComponent,
+    CustomFormQuestionDatePickerComponent
   ],
   imports: [
     /** Angular modules */

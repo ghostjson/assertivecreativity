@@ -1,0 +1,20 @@
+<p-card class="question-wrapper" [formGroup]="questionFormGroup">
+  <fieldset class="p-fluid p-field p-input-filled">
+    <legend>
+      {{ questionConfig.label }}
+      <sup class="required-text" *ngIf="questionConfig.validators.required">
+        * required
+      </sup>
+    </legend>
+    <div *ngFor="let input of questionConfig.inputs" class="p-mt-3">
+      <p-checkbox
+        [label]="input.label"
+        [value]="{
+          label: input.label,
+          value: input.value
+        }"
+        formControlName="input"
+      ></p-checkbox>
+    </div>
+  </fieldset>
+</p-card>

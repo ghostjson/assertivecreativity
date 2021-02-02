@@ -1,0 +1,17 @@
+<p-card [formGroup]="questionFormGroup">
+  <div class="p-field">
+    <label for="date-picker-{{ questionFormGroup.value.id }}">
+      {{ questionConfig.label }}
+      <sup *ngIf="questionConfig.validators.required" class="required-text">
+        * required
+      </sup>
+    </label>
+    <div class="p-mt-3">
+      <p-calendar
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        formControlName="input" [inline]="true"
+      ></p-calendar>
+    </div>
+  </div>
+</p-card>

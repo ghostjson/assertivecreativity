@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { FormQuestionEvent } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 
@@ -20,6 +20,9 @@ export class AdminFormsQuestionMakerDatePickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.minDate = new Date();
+    let properties = this.question.get('properties') as FormGroup;
+    properties.addControl('minDate', new FormControl(this.minDate))
+    properties.addControl('maxDate', new FormControl(''));
   }
 
   /**
@@ -57,7 +60,7 @@ export class AdminFormsQuestionMakerDatePickerComponent implements OnInit {
    * @param inputIndex index of the input to which child question should be added
    */
   addChildrenQuestion(inputIndex: number): void {
-    this.currentChildQuestion = this._formMakerService.createFormQuestion(true);
+    this.currentChildQuestion = this._formMakerService.createFormQuestion(true, {});
     this.childrenQuestions(inputIndex).push(this.currentChildQuestion);
 
     // emit that child question is active

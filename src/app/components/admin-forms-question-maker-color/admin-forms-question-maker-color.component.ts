@@ -104,7 +104,7 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
    * @param inputIndex index of the input to which child question should be added
    */
   addChildrenQuestion(inputIndex: number): void {
-    this.currentChildQuestion = this._formMakerService.createFormQuestion(true);
+    this.currentChildQuestion = this._formMakerService.createFormQuestion(true, {});
     this.childrenQuestions(inputIndex).push(this.currentChildQuestion);
 
     // emit that child question is active

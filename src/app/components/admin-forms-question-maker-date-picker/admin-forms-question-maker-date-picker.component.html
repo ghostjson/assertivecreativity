@@ -23,11 +23,12 @@
     </div>
   </div>
 
-  <div class="p-grid">
+  <div class="p-grid" formGroupName="properties">
     <div class="p-col-6">
       <div class="p-fluid p-field p-input-filled">
         <label for="min-date"> Select a minimum date (today by default) </label>
         <p-calendar
+          formControlName="minDate"
           [minDate]="minDate"
           [touchUI]="true"
           [appendTo]="'body'"
@@ -42,6 +43,7 @@
       <div class="p-fluid p-field p-input-filled">
         <label for="max-date"> Select a maximum date </label>
         <p-calendar
+          formControlName="maxDate"
           [minDate]="maxDate"
           [touchUI]="true"
           [appendTo]="'body'"

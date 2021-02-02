@@ -21,7 +21,11 @@
         >
           <p-card>
             <ng-template pTemplate="header">
-              <div class="p-d-flex p-jc-between">
+              <div
+                class="p-d-flex p-jc-between"
+                pTooltip="Drag to reorder"
+                showDelay="500"
+              >
                 <h4 class="p-m-0">
                   {{ sectionIndex + 1 }}. {{ section.title | limitLength: 25 }}
                 </h4>
@@ -45,6 +49,7 @@
                 "
                 class="questions-overview-list-item questions-overview-list-item--question p-d-flex p-jc-between"
                 pTooltip="Drag to reorder"
+                showDelay="500"
                 cdkDrag
                 cdkDragLockAxis="y"
               >

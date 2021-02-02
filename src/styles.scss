@@ -88,7 +88,7 @@ p {
 }
 
 .cdk-drag-preview {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  // transition: transform 25000ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: $shadow-6;
 
   &:active {
@@ -156,8 +156,11 @@ p {
   height: 80vh;
   overflow-y: auto;
 
-  &.cdk-drop-list-dragging &-item:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  &.cdk-drop-list-dragging,
+  &__questions.cdk-drop-list-dragging {
+    .questions-overview-list-item {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
   }
 
   &-item {

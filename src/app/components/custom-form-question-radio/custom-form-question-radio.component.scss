@@ -1,0 +1,19 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    fieldset {
+      border: none;
+      margin-bottom: 0;
+
+      legend {
+        padding-left: 0;
+        font-size: 1.1rem;
+
+        .required-text {
+          color: $danger-color;
+        }
+      }
+    }
+  }
+}

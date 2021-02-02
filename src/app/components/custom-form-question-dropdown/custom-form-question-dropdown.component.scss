@@ -1,0 +1,13 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    label {
+      font-size: 1.1rem;
+    }
+
+    .required-text {
+      color: $danger-color;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<p-card [formGroup]="questionFormGroup">
+  <div class="p-field p-fluid p-input-filled">
+    <label for="paragraph-question-{{ questionFormGroup.value.id }}">
+      {{ questionConfig.label }}
+    </label>
+    <textarea
+      class="p-mt-3"
+      id="paragraph-question-{{ questionFormGroup.value.id }}"
+      formControlName="input"
+      placeholder="{{ questionConfig.placeholder }}"
+      [autoResize]="true"
+      rows="10"
+      pInputTextarea
+    ></textarea>
+  </div>
+</p-card>

@@ -53,6 +53,10 @@ export class AdminFormsComponentResolverService {
   constructor(private _cfresolver: ComponentFactoryResolver) {
   }
 
+  /**
+   * return the component for questionType
+   * @param questionType type of the question
+   */
   getComponent(questionType: string): ComponentFactory<any> {
     return this._cfresolver.resolveComponentFactory(
       this.componentDict[questionType].component

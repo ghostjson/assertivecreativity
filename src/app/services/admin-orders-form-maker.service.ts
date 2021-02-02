@@ -146,7 +146,7 @@ export class AdminOrdersFormMakerService {
 
       for (const childQuestion of initial.children_form_questions) {
         questionInputTemplate.children_form_questions.push(
-          this.createFormQuestion(true, childQuestion)
+          this.createFormQuestion(true, {}, childQuestion)
         );
       }
 
@@ -171,6 +171,7 @@ export class AdminOrdersFormMakerService {
    */
   createFormQuestion(
     isChild: boolean,
+    properties: {[key: string]: any},
     initial: OrderFormQuestionConfig = null
   ): FormGroup {
     let formQuestion: FormGroup = null;
@@ -179,9 +180,10 @@ export class AdminOrdersFormMakerService {
       let formTemplate: any = {
         id: initial.id ? initial.id : this._idGenService.getId(),
         label: initial.label,
-        placeholder: initial.label,
+        placeholder: initial.placeholder,
         type: initial.type,
         is_child: isChild,
+        properties: this._fb.group(initial.properties),
         validators: this._fb.group(initial.validators),
         inputs: this._fb.array([]),
       };
@@ -199,6 +201,7 @@ export class AdminOrdersFormMakerService {
         placeholder: "",
         type: "dropdown",
         is_child: isChild,
+        properties: this._fb.group(properties),
         validators: this._fb.group({
           required: false
         }),
@@ -228,7 +231,7 @@ export class AdminOrdersFormMakerService {
       // add questions to the section
       initial.questions.forEach(question => {
         sectionTemplate.questions.push(
-          this.createFormQuestion(false, question)
+          this.createFormQuestion(false, question.properties, question)
         );
       });
 
@@ -239,7 +242,7 @@ export class AdminOrdersFormMakerService {
         id: this._idGenService.getId(),
         required: false,
         title: 'Section Title ' + this._idGenService.getId(),
-        questions: this._fb.array([this.createFormQuestion(false)])
+        questions: this._fb.array([this.createFormQuestion(false, {})])
       };
 
       formSection = this._fb.group(sectionTemplate);

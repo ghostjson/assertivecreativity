@@ -1,0 +1,17 @@
+<p-card [formGroup]="questionFormGroup">
+  <div class="p-field p-fluid p-input-filled">
+    <label for="dropdown-{{ questionFormGroup.value.id }}">
+      {{ questionConfig.label }}
+      <sup *ngIf="questionConfig.validators.required" class="required-text">
+        * required
+      </sup>
+    </label>
+    <p-dropdown
+      styleClass="p-mt-3"
+      inputId="dropdown-{{ questionFormGroup.value.id }}"
+      [options]="questionConfig.inputs"
+      optionValue="optionLabel"
+      formControlName="input"
+    ></p-dropdown>
+  </div>
+</p-card>

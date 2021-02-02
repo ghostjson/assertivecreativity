@@ -1,5 +1,5 @@
 <div class="order-mail-list-component">
-  <p-card class="mail-thread" header="Mail Thread">
+  <p-card styleClass="mail-thread" header="Mail Thread">
     <p-scrollPanel #mailContainer [style]="{ width: '100%', height: '80vh' }">
       <p-accordion *ngIf="mails.length; else noMessages" [multiple]="true">
         <ng-container *ngFor="let mail of mails; first as isFirst">
@@ -32,7 +32,7 @@
                   class="message"
                   [innerHtml]="mail.message_content.message"
                 ></div>
-                <div
+                <!-- <div
                   *ngFor="
                     let form of mail.message_content.forms;
                     index as formIndex
@@ -42,7 +42,11 @@
                     [formReceiver]="mail.sender.id != user.id"
                     [form]="form"
                   ></app-order-mail-form>
-                </div>
+                </div> -->
+                <app-custom-form
+                  [formReceiver]="mail.sender.id != user.id"
+                  [formConfig]="mail.message_content.forms[0]"
+                ></app-custom-form>
               </div>
             </div>
           </p-accordionTab>
@@ -55,7 +59,10 @@
   </p-card>
 
   <p-card class="compose-mail">
-    <div  *ngIf="user.role === 'admin' && orderMailForm.touched" class="form-list">
+    <div
+      *ngIf="user.role === 'admin' && orderMailForm.touched"
+      class="form-list"
+    >
       <div class="form-list__item">
         <div class="form-list__item__title">
           {{ orderMailForm.value.title }}

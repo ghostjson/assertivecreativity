@@ -1,4 +1,4 @@
-import { FormArray, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { FormArray, FormGroup } from "@angular/forms";
 import { PANTONE_COLORS } from "src/assets/js/pantone-colors";
 import { SelectItem } from "primeng/api";
 
@@ -9,7 +9,6 @@ export class OrderFormConfig {
   id: number;
   title: string;
   sections: OrderFormSectionConfig[];
-  entry?: OrderFormQuestionEntry[];
 }
 
 export class OrderFormSectionConfig {
@@ -28,6 +27,7 @@ export class OrderFormQuestionConfig {
   placeholder?: string;
   type: string;
   is_child: boolean;
+  properties: any;
   validators: ValidationDict;
   inputs: OrderFormInputConfig[];
 }
@@ -41,6 +41,27 @@ export class OrderFormInputConfig<ValueType = any> {
   value?: ValueType;
   placeholder?: string;
   children_form_questions?: OrderFormQuestionConfig[];
+}
+
+export interface CustomFormEntry {
+  id: number;
+  sectionEntries: CustomFormSectionEntry[];
+}
+
+export interface CustomFormSectionEntry {
+  id: number;
+  required: boolean;
+  questionEntries: CustomFormQuestionEntry[];
+}
+
+export interface CustomFormQuestionEntry {
+  id: number;
+  input: CustomFormInputEntry;
+}
+
+export interface CustomFormInputEntry {
+  label: string;
+  value: string;
 }
 
 /**
@@ -95,7 +116,7 @@ export const QUESTION_TYPES: QuestionType[]  = [
     data: {}
   },
   {
-    label: 'Radio Buttons',
+    label: 'Multiple Choice',
     value: 'radio',
     data: {}
   },

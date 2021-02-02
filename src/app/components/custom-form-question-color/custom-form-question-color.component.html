@@ -1,0 +1,24 @@
+<p-card [formGroup]="questionFormGroup">
+  <fieldset>
+    <legend>
+      {{ questionConfig.label }}
+      <sup *ngIf="questionConfig.validators.required" class="required-text">
+        * required
+      </sup>
+    </legend>
+    <div class="color-list p-mt-3">
+      <p-selectButton
+        [options]="questionConfig.inputs"
+        formControlName="input"
+      >
+        <ng-template let-item>
+          <span>
+            {{ item.label }}
+          </span>
+          <span class="color-preview" [style.background]="item.value">
+          </span>
+        </ng-template>
+      </p-selectButton>
+    </div>
+  </fieldset>
+</p-card>

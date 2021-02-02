@@ -105,9 +105,9 @@ export class AdminFormsMakerComponent implements OnInit {
 
     // if initial config is present initialise the formgroup with that
     if (question) {
-      questionForm = this._formMakerService.createFormQuestion(false, question);
+      questionForm = this._formMakerService.createFormQuestion(false, {}, question);
     } else {
-      questionForm = this._formMakerService.createFormQuestion(false);
+      questionForm = this._formMakerService.createFormQuestion(false, {});
     }
 
     // add question formgroup to the controller
