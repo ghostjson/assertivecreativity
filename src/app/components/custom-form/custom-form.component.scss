@@ -5,12 +5,18 @@
     .form-card {
       &.p-card {
         .p-card-header {
+          padding: 1em;
+          border-bottom: 1px solid $light-grey;
+
           h3 {
             margin: 0;
           }
 
-          padding: 1em;
-          border-bottom: 1px solid $light-grey;
+          .p-progressbar {
+            &-label {
+              opacity: 0;
+            }
+          }
         }
 
         .p-card-footer {

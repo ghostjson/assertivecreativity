@@ -3,7 +3,12 @@
     <h3 class="form-card__title">
       {{ formConfig.title }}
     </h3>
-    <p-progressBar styleClass="p-mt-3" [value]="40"></p-progressBar>
+    <div *ngIf="formConfig.sections.length > 1" class="form-progress p-d-flex p-ai-center p-mt-3">
+      <span class="p-mr-3">
+        Section {{ activeSection.index + 1 }} of {{ formConfig.sections.length }}
+      </span>
+      <p-progressBar class="p-flex-grow-1" [value]="formProgress"></p-progressBar>
+    </div>
   </ng-template>
 
   <app-custom-form-section
