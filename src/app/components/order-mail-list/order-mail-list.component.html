@@ -14,13 +14,13 @@
                 <div class="author-details">
                   <span class="author-details__name">
                     {{
-                      mail.sender.first_name + " " + mail.sender.last_name
+                      mail.sender.first_name + ' ' + mail.sender.last_name
                         | titlecase
                     }}
                   </span>
                 </div>
                 <div class="message-meta">
-                  {{ mail.created_at | date: "medium" }}
+                  {{ mail.created_at | date: 'medium' }}
                 </div>
               </div>
             </ng-template>
@@ -32,26 +32,33 @@
                   class="message"
                   [innerHtml]="mail.message_content.message"
                 ></div>
-                <!-- <div
-                  *ngFor="
-                    let form of mail.message_content.forms;
-                    index as formIndex
-                  "
-                >
-                  <app-order-mail-form
-                    [formReceiver]="mail.sender.id != user.id"
-                    [form]="form"
-                  ></app-order-mail-form>
-                </div> -->
-                <app-custom-form
-                  [formReceiver]="mail.sender.id != user.id"
-                  [formConfig]="mail.message_content.forms[0]"
-                ></app-custom-form>
+                <div class="message-form-list">
+                  <div
+                    *ngFor="let form of mail.message_content.forms"
+                    class="message-form-list-item p-mt-3"
+                  >
+                    <div class="message-form-list-item__title">
+                      {{ form.title | limitLength: 30 }}
+                    </div>
+                    <div class="message-form-list-item__tools">
+                      <button
+                        type="button"
+                        [label]="
+                          mail.sender.id != user.id ? 'Answer' : 'Preview'
+                        "
+                        class="p-shadow-2"
+                        (click)="previewForm(form, mail.sender.id != user.id)"
+                        pButton
+                      ></button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </p-accordionTab>
         </ng-container>
       </p-accordion>
+
       <ng-template #noMessages>
         <p class="p-text-center">You don't have any mail now.</p>
       </ng-template>
@@ -60,8 +67,8 @@
 
   <p-card class="compose-mail">
     <div
-      *ngIf="user.role === 'admin' && orderMailForm.touched"
-      class="form-list"
+      *ngIf="user.role === 'admin' && orderMailForm"
+      class="form-list p-mb-3"
     >
       <div class="form-list__item">
         <div class="form-list__item__title">
@@ -71,7 +78,7 @@
           <p-button
             label="Delete"
             styleClass="p-button-text p-button-sm p-button-danger p-mr-2"
-            (onClick)="orderMailForm.reset()"
+            (onClick)="deleteOrderMailForm()"
           ></p-button>
           <p-button
             label="Open"
@@ -82,7 +89,7 @@
       </div>
     </div>
 
-    <p-toolbar *ngIf="user.role === 'admin'">
+    <p-toolbar styleClass="p-mb-2" *ngIf="user.role === 'admin'">
       <div class="p-toolbar-group-left"></div>
 
       <div class="p-toolbar-group-right">
@@ -92,7 +99,7 @@
             icon="pi pi-download"
             iconPos="right"
             styleClass="p-mr-2"
-            [disabled]="orderMailForm.touched"
+            [disabled]="orderMailForm"
             (onClick)="toggleSavedFormsDialog()"
           ></p-button>
           <p-button
@@ -101,90 +108,12 @@
             iconPos="right"
             styleClass=""
             (onClick)="toggleFormMakerDialog()"
-            [disabled]="orderMailForm.touched"
+            [disabled]="orderMailForm"
           ></p-button>
         </div>
       </div>
     </p-toolbar>
 
-    <p-dialog
-      class="saved-forms-dialog"
-      header="Saved Forms"
-      [(visible)]="savedFormsDialog"
-      *ngIf="user.role === 'admin'"
-    >
-      <p-listbox
-        [options]="savedForms"
-        [(ngModel)]="selectedSavedForm"
-        [metaKeySelection]="false"
-        [filter]="true"
-        optionLabel="name"
-        [style]="{ width: '80vw', height: '80vh' }"
-        (onChange)="setMailForm()"
-      >
-        <ng-template let-form pTemplate="item">
-          <div class="saved-forms-list-item p-d-flex p-jc-between p-ai-center">
-            <div class="saved-forms-list-item__name">
-              {{ form.name }}
-            </div>
-            <!-- <div class="saved-forms-list-item__tools">
-              <button
-                label="Preview"
-                icon="pi pi-eye"
-                iconPos="right"
-                class="p-button-info p-mr-2"
-                [disabled]="!selectedSavedForm || (selectedSavedForm.id !== form.id)"
-                pButton
-              ></button>
-              <button
-                label="Add"
-                icon="pi pi-plus"
-                iconPos="right"
-                class="p-button-success"
-                [disabled]="!selectedSavedForm || (selectedSavedForm.id !== form.id)"
-                pButton
-              ></button>
-            </div> -->
-          </div>
-        </ng-template>
-      </p-listbox>
-    </p-dialog>
-
-    <!-- <p-dialog
-      [(visible)]="savedFormPreview"
-      header="Form Proview"
-      [style]="{'width': '100vw', 'height:': '100vh'}"
-    >
-      <app-order-mail-form
-        *ngIf="selectedSavedForm"
-        [formReceiver]="false"
-        [form]="selectedSavedForm.data"
-      ></app-order-mail-form>
-    </p-dialog> -->
-
-    <p-dialog
-      *ngIf="user.role === 'admin'"
-      class="order-mail-form-maker"
-      header="Create New Form"
-      [(visible)]="showFormMakerDialog"
-      [draggable]="false"
-      [resizable]="false"
-      [modal]="true"
-    >
-      <app-order-mail-form-maker
-        *ngIf="user.role === 'admin'"
-        [formGroup]="orderMailForm"
-      ></app-order-mail-form-maker>
-      <p-footer>
-        <p-button
-          label="Done"
-          icon="pi pi-check"
-          iconPos="right"
-          styleClass="p-button-success"
-          (onClick)="toggleFormMakerDialog()"
-        ></p-button>
-      </p-footer>
-    </p-dialog>
     <div class="compose-mail__writer">
       <p-editor [(ngModel)]="mailText"></p-editor>
     </div>
@@ -199,5 +128,94 @@
       ></p-button>
     </p-footer>
   </p-card>
+
+  <p-dialog
+    *ngIf="user.role === 'admin'"
+    class="form-maker-dialog"
+    [(visible)]="showFormMakerDialog"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+    position="bottom"
+    [blockScroll]="true"
+    [autoZIndex]="false"
+  >
+    <ng-template pTemplate="header">
+      <div class="form-maker-dialog__header">Create New Form</div>
+      <div>
+        <p-button
+          label="Cancel"
+          styleClass="p-button-danger p-button-text p-mr-2"
+          (onClick)="toggleFormMakerDialog()"
+        ></p-button>
+        <p-button
+          label="Save Form"
+          icon="pi pi-check"
+          iconPos="right"
+          styleClass="p-button-success"
+          [disabled]="!orderMailForm.valid"
+          (onClick)="toggleFormMakerDialog()"
+        ></p-button>
+      </div>
+    </ng-template>
+    <app-admin-forms-maker
+      *ngIf="orderMailForm"
+      [formGroup]="orderMailForm"
+    ></app-admin-forms-maker>
+  </p-dialog>
+
+  <p-dialog
+    class="saved-forms-dialog"
+    header="Saved Forms"
+    [(visible)]="savedFormsDialog"
+    [draggable]="false"
+    [resizable]="false"
+    [modal]="true"
+    [dismissableMask]="true"
+    *ngIf="user.role === 'admin'"
+  >
+    <p-listbox
+      [options]="savedForms"
+      [(ngModel)]="selectedSavedForm"
+      [metaKeySelection]="false"
+      [filter]="true"
+      optionLabel="name"
+      [style]="{ width: '500px', height: '80vh' }"
+      (onChange)="setMailForm()"
+    >
+      <ng-template let-form pTemplate="item">
+        <div class="saved-forms-list-item p-d-flex p-jc-between p-ai-center">
+          <div class="saved-forms-list-item__name">
+            {{ form.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="activeForm && activeForm.config"
+    styleClass="message-form-dialog"
+    [(visible)]="activeForm.visible"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+    [modal]="true"
+  >
+    <ng-template pTemplate="header">
+      <button
+        type="button"
+        label="Close"
+        class="p-button-text p-button-danger"
+        (click)="toggleMessageForm()"
+        pButton
+      ></button>
+    </ng-template>
+    <app-custom-form
+      [formReceiver]="activeForm.isReceiver"
+      [formConfig]="activeForm.config"
+    ></app-custom-form>
+  </p-dialog>
+
   <p-toast></p-toast>
 </div>

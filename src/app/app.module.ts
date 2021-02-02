@@ -106,12 +106,6 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
 import { ProductSummaryCardComponent } from './components/product-summary-card/product-summary-card.component';
 import { OrderSummaryTableComponent } from './components/order-summary-table/order-summary-table.component';
 import { OrderMailListComponent } from './components/order-mail-list/order-mail-list.component';
-import { OrderMailFormMakerComponent } from './components/order-mail-form-maker/order-mail-form-maker.component';
-import { OrderMailFormComponent } from './components/order-mail-form/order-mail-form.component';
-import { OrderMailFormDropdownComponent } from './components/order-mail-form-dropdown/order-mail-form-dropdown.component';
-import { OrderMailFormRadioComponent } from './components/order-mail-form-radio/order-mail-form-radio.component';
-import { OrderMailFormColorComponent } from './components/order-mail-form-color/order-mail-form-color.component';
-import { OrderMailFormDatePickerComponent } from './components/order-mail-form-date-picker/order-mail-form-date-picker.component';
 import { StockProductDetailComponent } from './pages/stock-product-detail/stock-product-detail.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 
@@ -161,6 +155,7 @@ import { CustomFormQuestionColorComponent } from './components/custom-form-quest
 import { CustomFormQuestionCheckboxComponent } from './components/custom-form-question-checkbox/custom-form-question-checkbox.component';
 import { CustomFormQuestionParagraphComponent } from './components/custom-form-question-paragraph/custom-form-question-paragraph.component';
 import { CustomFormQuestionDatePickerComponent } from './components/custom-form-question-date-picker/custom-form-question-date-picker.component';
+import { CustomFormSectionComponent } from './components/custom-form-section/custom-form-section.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -226,13 +221,7 @@ import { CustomFormQuestionDatePickerComponent } from './components/custom-form-
     AdminOrdersComponent,
     OrdersListComponent,
     VendorDashboardComponent,
-    OrderMailFormMakerComponent,
-    OrderMailFormComponent,
-    OrderMailFormDropdownComponent,
-    OrderMailFormRadioComponent,
-    OrderMailFormColorComponent,
     StockProductDetailComponent,
-    OrderMailFormDatePickerComponent,
     LimitLengthPipe,
     AdminFormsComponent,
     AdminFormsMakerComponent,
@@ -251,7 +240,8 @@ import { CustomFormQuestionDatePickerComponent } from './components/custom-form-
     CustomFormQuestionColorComponent,
     CustomFormQuestionCheckboxComponent,
     CustomFormQuestionParagraphComponent,
-    CustomFormQuestionDatePickerComponent
+    CustomFormQuestionDatePickerComponent,
+    CustomFormSectionComponent
   ],
   imports: [
     /** Angular modules */

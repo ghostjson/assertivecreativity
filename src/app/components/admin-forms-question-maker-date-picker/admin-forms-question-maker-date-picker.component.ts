@@ -21,8 +21,19 @@ export class AdminFormsQuestionMakerDatePickerComponent implements OnInit {
   ngOnInit(): void {
     this.minDate = new Date();
     let properties = this.question.get('properties') as FormGroup;
-    properties.addControl('minDate', new FormControl(this.minDate))
-    properties.addControl('maxDate', new FormControl(''));
+
+    // this is needed because data is stored as iso strings
+    // but the calendar component needs the date to be javascript
+    // date objects
+    if(Object.keys(properties.value).length) {
+      properties.setValue({
+        minDate: new Date(properties.get('minDate').value),
+        maxDate: new Date(properties.get('maxDate').value)
+      })
+    } else {
+      properties.addControl('minDate', new FormControl(this.minDate))
+      properties.addControl('maxDate', new FormControl(''));
+    }
   }
 
   /**

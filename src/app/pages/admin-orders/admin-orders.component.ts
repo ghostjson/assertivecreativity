@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/common.service';
 import { Order } from 'src/app/models/Order';
 import { User } from 'src/app/models/User';
 import { AdminOrdersService } from 'src/app/services/admin-orders.service';
@@ -15,16 +16,19 @@ export class AdminOrdersComponent implements OnInit {
 
   constructor(
     private _orderService: AdminOrdersService,
-    private _userDetailsService: UserDetailsService
+    private _userDetailsService: UserDetailsService,
+    private _commonService: CommonService
   ) { }
 
   ngOnInit(): void {
     this.user = this._userDetailsService.getUserLocal();
 
-    this._orderService.getAllOrders(this.user.role)
+    this._commonService.setLoaderFor(
+      this._orderService.getAllOrders(this.user.role)
       .subscribe((orders: Order[]) => {
         this.orders = orders;
-      });
+      })
+    );
   }
 
 }

@@ -30,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
     this.destroy = new Subject<void>();
+    this.loader = true;
   }
 
   ngOnInit() {

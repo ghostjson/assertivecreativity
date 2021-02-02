@@ -1,15 +1,11 @@
 import {
   Component,
-  ComponentFactoryResolver,
   Input,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
+  OnInit
 } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { CustomFormEntry, OrderFormConfig } from 'src/app/models/OrderForm';
 import { CustomFormService } from 'src/app/services/custom-form/custom-form.service';
-import { FormComponentResolverService } from 'src/app/services/form-component-resolver/form-component-resolver.service';
 
 @Component({
   selector: 'app-custom-form',
@@ -21,16 +17,14 @@ export class CustomFormComponent implements OnInit {
   @Input() formReceiver: boolean;
   @Input() initialEntry: CustomFormEntry;
 
-  @ViewChild('questionsList', { static: true, read: ViewContainerRef })
-  questionsList: ViewContainerRef;
-
   formGroup: FormGroup;
+  activeSection: {
+    index: number,
+    formGroup: FormGroup
+  };
+  formProgress: number;
 
-  constructor(
-    private _formCompResolver: FormComponentResolverService,
-    private _compFactResolver: ComponentFactoryResolver,
-    private _formService: CustomFormService
-  ) {}
+  constructor(private _formService: CustomFormService) {}
 
   ngOnInit(): void {
     this.formGroup = this._formService.createForm(
@@ -38,25 +32,13 @@ export class CustomFormComponent implements OnInit {
       this.initialEntry
     );
 
+    this.activeSection = {
+      index: 0,
+      formGroup: <FormGroup>this.sectionEntries().at(0)
+    };
+
     console.log('form config: ', this.formConfig);
     console.log('formgroup created: ', this.formGroup.value);
-
-    this.questionsList.clear();
-    this.formConfig.sections.forEach((section, sectionIndex) => {
-      section.questions.forEach((question, questionIndex) => {
-        console.log(question.type);
-        const component = this.questionsList.createComponent<any>(
-          this._compFactResolver.resolveComponentFactory(
-            this._formCompResolver.getComponent(question.type)
-          )
-        );
-
-        component.instance.questionConfig = question;
-        component.instance.questionFormGroup = this.questionEntries(
-          sectionIndex
-        ).at(questionIndex);
-      });
-    });
   }
 
   sectionEntries(): FormArray {
@@ -67,5 +49,25 @@ export class CustomFormComponent implements OnInit {
     return this.sectionEntries()
       .at(sectionIndex)
       .get('questionEntries') as FormArray;
+  }
+
+  nextSection(): void {
+    if (this.activeSection.index < (this.formConfig.sections.length - 1)) {
+      this.activeSection.index += 1;
+      this.activeSection.formGroup = <FormGroup>this.sectionEntries().at(this.activeSection.index);
+    } else {
+      this.submitForm();
+    }
+  }
+
+  prevSection(): void {
+    if (this.activeSection.index > 0) {
+      this.activeSection.index -= 1;
+      this.activeSection.formGroup = <FormGroup>this.sectionEntries().at(this.activeSection.index);
+    }
+  }
+
+  submitForm(): void {
+    console.log('form submitted');
   }
 }

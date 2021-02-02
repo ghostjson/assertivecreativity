@@ -5533,7 +5533,7 @@ a.p-button.p-button-success.p-button-outlined,
 
 .p-progressbar {
   border: 0 none;
-  height: 4px;
+  height: 16px;
   background: rgba(63, 81, 181, 0.32);
   border-radius: 4px;
 }
@@ -5544,7 +5544,6 @@ a.p-button.p-button-success.p-button-outlined,
 }
 .p-progressbar .p-progressbar-label {
   color: $dark-color;
-  line-height: 4px;
 }
 
 .p-scrolltop {
@@ -6621,9 +6620,6 @@ a.p-button.p-button-success.p-button-outlined,
   background: #f6f6f6;
 }
 
-.p-progressbar {
-  border-radius: 0;
-}
 .p-progressbar .p-progressbar-label {
   display: none;
 }

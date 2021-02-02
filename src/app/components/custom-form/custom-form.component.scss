@@ -1,0 +1,23 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .form-card {
+      &.p-card {
+        .p-card-header {
+          h3 {
+            margin: 0;
+          }
+
+          padding: 1em;
+          border-bottom: 1px solid $light-grey;
+        }
+
+        .p-card-footer {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}

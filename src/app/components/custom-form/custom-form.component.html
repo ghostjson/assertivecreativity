@@ -1,4 +1,44 @@
-<p-card [formGroup]="formGroup">
-  <div #questionsList class="questions-list">
-  </div>
+<p-card styleClass="form-card" [formGroup]="formGroup">
+  <ng-template pTemplate="header">
+    <h3 class="form-card__title">
+      {{ formConfig.title }}
+    </h3>
+    <p-progressBar styleClass="p-mt-3" [value]="40"></p-progressBar>
+  </ng-template>
+
+  <app-custom-form-section
+    *ngFor="let section of sectionEntries().controls; index as sectionIndex"
+    [hidden]="activeSection.index !== sectionIndex"
+    [sectionConfig]="formConfig.sections[sectionIndex]"
+    [sectionFormGroup]="section"
+  ></app-custom-form-section>
+
+  <ng-template pTemplate="footer">
+    <ng-container *ngIf="formConfig.sections.length > 1">
+      <button
+        type="button"
+        label="Previous"
+        class="p-button-text"
+        (click)="prevSection()"
+        [disabled]="activeSection.index <= 0"
+        pButton
+      ></button>
+      <button
+        type="button"
+        [label]="
+          activeSection.index === formConfig.sections.length - 1
+            ? 'Submit'
+            : 'Next'
+        "
+        class="p-shadow-2"
+        [disabled]="
+          (activeSection.formGroup.value.required &&
+            !activeSection.formGroup.valid) ||
+          !activeSection.formGroup.valid
+        "
+        (click)="nextSection()"
+        pButton
+      ></button>
+    </ng-container>
+  </ng-template>
 </p-card>

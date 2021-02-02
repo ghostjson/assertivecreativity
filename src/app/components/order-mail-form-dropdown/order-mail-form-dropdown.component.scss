@@ -1,9 +1,0 @@
-@import '../../../assets/css/variables.scss';
-
-:host {
-  ::ng-deep {
-    .order-mail-form-dropdown-component {
-      border-bottom: 1px solid $light-grey;
-    }
-  }
-}
