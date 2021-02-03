@@ -136,6 +136,11 @@ export class OrderMailListComponent implements OnInit {
     this.showFormMakerDialog = !this.showFormMakerDialog;
   }
 
+  createForm(): void {
+    this.orderMailForm = this._formMakerService.createOrderForm();
+    this.toggleFormMakerDialog();
+  }
+
   toggleSavedFormsDialog(): void {
     this.savedFormsDialog = !this.savedFormsDialog;
   }
