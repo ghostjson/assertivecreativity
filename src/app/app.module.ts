@@ -63,6 +63,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
+import { ChartModule } from 'primeng/chart';
 
 /** Common Imports */
 import { LoaderComponent } from './components/loader/loader.component';
@@ -310,7 +311,8 @@ import { CustomFormQuestionFileComponent } from './components/custom-form-questi
     StepsModule,
     DataViewModule,
     ScrollTopModule,
-    TooltipModule
+    TooltipModule,
+    ChartModule
   ],
   providers: [
     FormComponent,
