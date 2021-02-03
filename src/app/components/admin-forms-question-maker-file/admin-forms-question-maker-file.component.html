@@ -1,0 +1,33 @@
+<div [formGroup]="question">
+  <div class="p-fluid p-field p-input-filled">
+    <label for="form-question-{{ question.value.id }}">
+      Enter the question
+    </label>
+    <div class="form-maker-inputgroup p-inputgroup">
+      <input
+        type="text"
+        formControlName="label"
+        id="form-question-{{ question.value.id }}"
+        placeholder="Enter the question"
+        pInputText
+      />
+
+      <button
+        *ngIf="!question.value.is_child"
+        class="p-button-success"
+        label="Add Child Input"
+        type="button"
+        (click)="addChildrenQuestion(0)"
+        pButton
+        pRipple
+      ></button>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let input of inputs.controls; index as inputIndex">
+    <app-admin-forms-question-maker-child-questions-list
+      [childrenQuestions]="childrenQuestions(inputIndex)"
+      (childQuestionActive)="emitChildQuestion($event.question, $event.parent, $event.questionIndex)"
+    ></app-admin-forms-question-maker-child-questions-list>
+  </ng-container>
+</div>

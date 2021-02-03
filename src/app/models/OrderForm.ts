@@ -153,5 +153,10 @@ export const QUESTION_TYPES: QuestionType[]  = [
     label: 'Checkboxes',
     value: 'checkbox',
     data: {}
+  },
+  {
+    label: 'File Input',
+    value: 'file',
+    data: {}
   }
 ];

@@ -1,0 +1,24 @@
+<p-card [formGroup]="questionFormGroup">
+  <div class="p-field p-fluid p-input-filled">
+    <label for="paragraph-question-{{ questionFormGroup.value.id }}">
+      {{ questionConfig.label }}
+    </label>
+    <p-fileUpload
+      [customUpload]="true"
+      (uploadHandler)="uploadFile($event)"
+      (onSelect)="onSelect($event)"
+      [auto]="true"
+      multiple="false"
+      accept="image/*"
+      maxFileSize="1000000"
+    >
+      <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+          <li *ngFor="let file of uploadedFiles">
+            {{ file.name }} - {{ file.size }} bytes
+          </li>
+        </ul>
+      </ng-template>
+    </p-fileUpload>
+  </div>
+</p-card>

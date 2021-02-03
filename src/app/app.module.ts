@@ -157,6 +157,8 @@ import { CustomFormQuestionParagraphComponent } from './components/custom-form-q
 import { CustomFormQuestionDatePickerComponent } from './components/custom-form-question-date-picker/custom-form-question-date-picker.component';
 import { CustomFormSectionComponent } from './components/custom-form-section/custom-form-section.component';
 import { CustomFormQuestionComponent } from './components/custom-form-question/custom-form-question.component';
+import { AdminFormsQuestionMakerFileComponent } from './components/admin-forms-question-maker-file/admin-forms-question-maker-file.component';
+import { CustomFormQuestionFileComponent } from './components/custom-form-question-file/custom-form-question-file.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -243,7 +245,9 @@ import { CustomFormQuestionComponent } from './components/custom-form-question/c
     CustomFormQuestionParagraphComponent,
     CustomFormQuestionDatePickerComponent,
     CustomFormSectionComponent,
-    CustomFormQuestionComponent
+    CustomFormQuestionComponent,
+    AdminFormsQuestionMakerFileComponent,
+    CustomFormQuestionFileComponent
   ],
   imports: [
     /** Angular modules */

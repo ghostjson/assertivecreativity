@@ -3,6 +3,7 @@ import { CustomFormQuestionCheckboxComponent } from 'src/app/components/custom-f
 import { CustomFormQuestionColorComponent } from 'src/app/components/custom-form-question-color/custom-form-question-color.component';
 import { CustomFormQuestionDatePickerComponent } from 'src/app/components/custom-form-question-date-picker/custom-form-question-date-picker.component';
 import { CustomFormQuestionDropdownComponent } from 'src/app/components/custom-form-question-dropdown/custom-form-question-dropdown.component';
+import { CustomFormQuestionFileComponent } from 'src/app/components/custom-form-question-file/custom-form-question-file.component';
 import { CustomFormQuestionParagraphComponent } from 'src/app/components/custom-form-question-paragraph/custom-form-question-paragraph.component';
 import { CustomFormQuestionRadioComponent } from 'src/app/components/custom-form-question-radio/custom-form-question-radio.component';
 import { QuestionType } from 'src/app/models/OrderForm';
@@ -41,6 +42,11 @@ export class FormComponentResolverService {
       label: 'Checkboxes',
       value: 'checkbox',
       component: CustomFormQuestionCheckboxComponent
+    },
+    file: {
+      label: 'File Input',
+      value: 'file',
+      component: CustomFormQuestionFileComponent
     }
   };
 

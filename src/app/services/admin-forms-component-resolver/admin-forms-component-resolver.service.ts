@@ -9,6 +9,7 @@ import { AdminFormsQuestionMakerParagraphComponent } from "src/app/components/ad
 import { AdminFormsQuestionMakerRadioComponent } from "src/app/components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component";
 import { QuestionType } from "src/app/models/OrderForm";
 import { AdminFormsQuestionMakerCheckboxComponent } from "src/app/components/admin-forms-question-maker-checkbox/admin-forms-question-maker-checkbox.component";
+import { AdminFormsQuestionMakerFileComponent } from 'src/app/components/admin-forms-question-maker-file/admin-forms-question-maker-file.component';
 
 @Injectable({
   providedIn: "root",
@@ -47,6 +48,11 @@ export class AdminFormsComponentResolverService {
       label: "Checkboxes",
       value: "checkbox",
       component: AdminFormsQuestionMakerCheckboxComponent,
+    },
+    file: {
+      label: "File Input",
+      value: "file",
+      component: AdminFormsQuestionMakerFileComponent,
     }
   };
 

@@ -4,7 +4,6 @@ import {
   FormArray,
   FormBuilder,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from "@angular/forms";
 import { SelectItem } from "primeng/api";
