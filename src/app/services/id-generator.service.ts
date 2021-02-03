@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IdGeneratorService {
-
   currentId: number;
 
   constructor() {
-    this.currentId = Math.floor(
-      Math.random() * 10000
-    );
+    let random: string = '';
+
+    for(let i = 0; i < 10; i += 1) {
+      random += String(Math.floor(Math.random() * 10));
+    }
+    this.currentId = Number(random);
   }
 
   /**
@@ -19,6 +21,6 @@ export class IdGeneratorService {
   public getId(): number {
     this.currentId += 1;
 
-    return  this.currentId;
+    return this.currentId;
   }
 }

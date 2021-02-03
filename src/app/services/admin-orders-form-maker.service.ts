@@ -209,7 +209,6 @@ export class AdminOrdersFormMakerService {
       });
     }
 
-    console.log("form question made: ", formQuestion.value);
     return formQuestion;
   }
 

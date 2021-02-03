@@ -10,8 +10,9 @@
       styleClass="p-mt-3"
       inputId="dropdown-{{ questionFormGroup.value.id }}"
       [options]="questionConfig.inputs"
-      optionValue="optionLabel"
+      optionValue="label"
       formControlName="input"
+      (onChange)="emitChildren($event)"
     ></p-dropdown>
   </div>
 </p-card>

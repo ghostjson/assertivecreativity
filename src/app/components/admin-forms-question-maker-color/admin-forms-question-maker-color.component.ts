@@ -36,7 +36,12 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
     };
     this.colorSelector = false;
     this.colorEditMode = false;
-    this.inputs.removeAt(0);
+
+    // removing the first input as the service puts in a null input
+    // and this breaks the component
+    if(!this.inputs.at(0).value.value) {
+      this.inputs.removeAt(0);
+    }
   }
 
   /**
@@ -60,6 +65,8 @@ export class AdminFormsQuestionMakerColorComponent implements OnInit {
       newColorInput.patchValue(this.currentColorInput);
       this.inputs.push(newColorInput);
     }
+
+    console.log('inputs: ', this.question.value);
 
     this.toggleColorSelector()
   }

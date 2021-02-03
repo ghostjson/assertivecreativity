@@ -4,5 +4,11 @@
       {{ sectionConfig.title }}
     </h4>
   </p-card>
-  <ng-template #questionsList></ng-template>
+
+  <app-custom-form-question
+    *ngFor="let question of sectionConfig.questions; index as questionIndex"
+    [questionIndex]="questionIndex"
+    [questionConfig]="question"
+    [questionFormGroup]="questionEntries().at(questionIndex)"
+  ></app-custom-form-question>
 </div>

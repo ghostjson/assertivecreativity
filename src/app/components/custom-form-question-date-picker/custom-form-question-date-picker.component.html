@@ -11,6 +11,7 @@
         [minDate]="minDate"
         [maxDate]="maxDate"
         formControlName="input" [inline]="true"
+        (onSelect)="emitChildren($event)"
       ></p-calendar>
     </div>
   </div>

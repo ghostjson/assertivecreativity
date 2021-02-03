@@ -10,6 +10,7 @@
       placeholder="{{ questionConfig.placeholder }}"
       [autoResize]="true"
       rows="10"
+      (blur)="emitChildren($event)"
       pInputTextarea
     ></textarea>
   </div>

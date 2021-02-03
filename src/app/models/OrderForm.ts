@@ -57,6 +57,7 @@ export interface CustomFormSectionEntry {
 export interface CustomFormQuestionEntry {
   id: number;
   input: CustomFormInputEntry;
+  children_questions_entries?: CustomFormQuestionEntry[];
 }
 
 export interface CustomFormInputEntry {
@@ -85,8 +86,19 @@ export class OrderFormResponse {
 
 export interface FormQuestionEvent {
   question: FormGroup;
-  parent: FormArray | FormGroup;
+  parent?: FormArray | FormGroup;
   questionIndex: number;
+  config?: OrderFormQuestionConfig;
+}
+
+export interface FormInputEvent {
+  value: any;
+  inputIndex?: any;
+  questionIndex: number;
+  questionId: number;
+  questionConfig: OrderFormQuestionConfig;
+  questionFormGroup: FormGroup;
+  childrenQuestionsConfig: OrderFormQuestionConfig[];
 }
 
 export interface QuestionType extends SelectItem<string> {

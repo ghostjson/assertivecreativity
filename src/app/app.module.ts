@@ -156,6 +156,7 @@ import { CustomFormQuestionCheckboxComponent } from './components/custom-form-qu
 import { CustomFormQuestionParagraphComponent } from './components/custom-form-question-paragraph/custom-form-question-paragraph.component';
 import { CustomFormQuestionDatePickerComponent } from './components/custom-form-question-date-picker/custom-form-question-date-picker.component';
 import { CustomFormSectionComponent } from './components/custom-form-section/custom-form-section.component';
+import { CustomFormQuestionComponent } from './components/custom-form-question/custom-form-question.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -241,7 +242,8 @@ import { CustomFormSectionComponent } from './components/custom-form-section/cus
     CustomFormQuestionCheckboxComponent,
     CustomFormQuestionParagraphComponent,
     CustomFormQuestionDatePickerComponent,
-    CustomFormSectionComponent
+    CustomFormSectionComponent,
+    CustomFormQuestionComponent
   ],
   imports: [
     /** Angular modules */

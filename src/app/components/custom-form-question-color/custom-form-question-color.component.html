@@ -10,6 +10,7 @@
       <p-selectButton
         [options]="questionConfig.inputs"
         formControlName="input"
+        (onChange)="emitChildren($event)"
       >
         <ng-template let-item>
           <span>
