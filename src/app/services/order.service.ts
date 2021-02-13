@@ -171,11 +171,18 @@ export class OrderService {
       stock_order_attributes: this._fb.array([
         this._fb.group({
           id: this._idGenService.getId(),
-          attribute_label: "Colors",
+          attribute_label: "colors",
           attribute_type: "color",
           attribute_price: 0,
           input: null,
         }),
+        this._fb.group({
+          id: this._idGenService.getId(),
+          attribute_label: "variant_id",
+          attribute_type: "string",
+          attribute_price: 0,
+          input: null,
+        })
       ]),
     });
   }

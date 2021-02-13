@@ -118,37 +118,80 @@ export class StockProductDetailComponent implements OnInit {
     return priceGroups[priceGroups.length - 1].price_per_piece;
   }
 
+  updateProductVariant(): void {
+    this._common.setLoaderFor(
+      this._productService
+        .getUpdatedStockProduct(this.product.product, {
+          variant_id: (<FormArray>(
+            this.orderForm.get('stock_order_attributes')
+          )).at(1).value.input,
+        })
+        .subscribe((updatedProducts) => {
+          this.product.product = updatedProducts[0];
+          /**
+           * TODO: Fix this once the primeng galleria component is fixed
+           * so that the current image updates when the images list updates
+           */
+          this.updateCarouselImage();
+
+          // set the color selected as the color of the variant
+          (<FormArray>this.orderForm.get('stock_order_attributes'))
+            .at(0)
+            .patchValue({
+              input: this.product.product.colors,
+            });
+
+          // set other options as disabled
+          this.attributes.colors = this.attributes.colors.map(color => {
+            if(color.label !== this.product.product.colors) {
+              color.inactive = true;
+            }
+            else {
+              color.inactive = false;
+            }
+
+            return color;
+          });
+          console.log(updatedProducts);
+        })
+    );
+  }
+
   updateProductAttributes(): void {
     this._common.setLoaderFor(
-      this._productService.getUpdatedStockProduct(
-        this.product.product,
-        {
+      this._productService
+        .getUpdatedStockProduct(this.product.product, {
           color: (<FormArray>this.orderForm.get('stock_order_attributes')).at(0)
-            .value.input
-        }
-      )
-      .subscribe(updatedProducts => {
-        this.product.product = updatedProducts[0];
-        /**
-         * TODO: Fix this once the primeng galleria component is fixed
-         * so that the current image updates when the images list updates
-         */
-        this.activeImageIndex = 1;
-        setTimeout(() => {
-          this.activeImageIndex = 0;
-        }, 100);
+            .value.input,
+        })
+        .subscribe((updatedProducts) => {
+          this.product.product = updatedProducts[0];
+          /**
+           * TODO: Fix this once the primeng galleria component is fixed
+           * so that the current image updates when the images list updates
+           */
+          this.updateCarouselImage();
 
-        // update variant ids available for new attribute
-        this.attributes.variant_ids = updatedProducts.map(updatedProduct => {
-          return {
-            label: updatedProduct.variant_id,
-            value: updatedProduct.variant_id
-          };
-        });
+          // update variant ids available for new attribute
+          this.attributes.variant_ids = updatedProducts.map(
+            (updatedProduct) => {
+              return {
+                label: updatedProduct.variant_id,
+                value: updatedProduct.variant_id,
+              };
+            }
+          );
 
-        console.log(updatedProducts);
-      })
+          console.log(updatedProducts);
+        })
     );
+  }
+
+  updateCarouselImage(): void {
+    this.activeImageIndex = 1;
+    setTimeout(() => {
+      this.activeImageIndex = 0;
+    }, 100);
   }
 
   /**

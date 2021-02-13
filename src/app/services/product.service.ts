@@ -126,6 +126,7 @@ export class ProductService {
             return {
               label: color,
               value: color,
+              inactive: false
             };
           }
         );
@@ -171,10 +172,12 @@ export class ProductService {
     product: Product,
     attributes: {
       color?: string;
+      variant_id?: string
     }
   ): Observable<Product[]> {
     let attributeReq = {
       colors: attributes.color,
+      variant_id: attributes.variant_id
     };
 
     return this._http

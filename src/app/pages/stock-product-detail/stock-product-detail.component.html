@@ -39,14 +39,21 @@
             </p>
           </div>
           <form [formGroup]="orderForm">
-            <div class="product-details-section">
-              <h2 class="product-details-section__title">Variant Id</h2>
-              <div class="p-field p-input-filled">
-                <p-dropdown
-                  [options]="attributes.variant_ids"
-                ></p-dropdown>
-              </div>
-            </div>
+            <ng-container formArrayName="stock_order_attributes">
+              <ng-container formGroupName="1">
+                <div class="product-details-section">
+                  <label for="variant_id" class="product-details-section__title">Variant Id</label>
+                  <div class="p-field p-input-filled">
+                    <p-dropdown
+                      inputId="variant_id"
+                      [options]="attributes.variant_ids"
+                      formControlName="input"
+                      (onChange)="updateProductVariant()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
 
             <div class="product-details-section product-detail__price">
               <h2 class="product-details-section__title">Price</h2>
@@ -98,6 +105,7 @@
                   <p-selectButton
                     formControlName="input"
                     [options]="attributes.colors"
+                    optionDisabled="inactive"
                     (onChange)="updateProductAttributes()"
                   ></p-selectButton>
                 </div>

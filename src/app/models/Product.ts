@@ -378,6 +378,7 @@ export class ProductAttribute {
   id?: number;
   label: string;
   value: any;
+  inactive?: boolean;
 }
 
 export class ColorAttribute extends ProductAttribute {}
