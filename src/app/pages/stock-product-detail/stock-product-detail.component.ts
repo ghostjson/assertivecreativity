@@ -1,21 +1,23 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { CommonService } from "src/app/common.service";
-import { CartItem, CartOrderData } from "src/app/models/Cart";
-import { Order } from "src/app/models/Order";
-import { PriceGroup, StockProduct } from "src/app/models/Product";
-import { CartService } from "src/app/services/cart.service";
-import { IdGeneratorService } from "src/app/services/id-generator.service";
-import { OrderService } from "src/app/services/order.service";
-import { ProductService } from "src/app/services/product.service";
-import { UserDetailsService } from "src/app/store/user-details.service";
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
+import { CartItem } from 'src/app/models/Cart';
+import {
+  PriceGroup,
+  ProductAttribute,
+  StockProduct,
+  StockProductAttributes,
+} from 'src/app/models/Product';
+import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
+import { ProductService } from 'src/app/services/product.service';
+import { UserDetailsService } from 'src/app/store/user-details.service';
 
 @Component({
-  selector: "app-stock-product-detail",
-  templateUrl: "./stock-product-detail.component.html",
-  styleUrls: ["./stock-product-detail.component.scss"],
+  selector: 'app-stock-product-detail',
+  templateUrl: './stock-product-detail.component.html',
+  styleUrls: ['./stock-product-detail.component.scss'],
 })
 export class StockProductDetailComponent implements OnInit {
   image_set: any[];
@@ -28,6 +30,8 @@ export class StockProductDetailComponent implements OnInit {
   orderForm: FormGroup;
   orderQuantity: number;
   totalPrice: number;
+  attributes: StockProductAttributes;
+  activeImageIndex: number;
 
   constructor(
     public _productService: ProductService,
@@ -37,23 +41,24 @@ export class StockProductDetailComponent implements OnInit {
     private _cartService: CartService,
     private _router: Router
   ) {
-    this.productId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
+    this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
+    this.activeImageIndex = 0;
     this.orderQuantity = 1;
     this.responsiveOptions = [
       {
-        breakpoint: "1024px",
+        breakpoint: '1024px',
         numVisible: 5,
       },
       {
-        breakpoint: "768px",
+        breakpoint: '768px',
         numVisible: 3,
         showItemNavigatorsOnHover: true,
       },
       {
-        breakpoint: "560px",
+        breakpoint: '560px',
         numVisible: 3,
         showItemNavigatorsOnHover: true,
       },
@@ -69,7 +74,7 @@ export class StockProductDetailComponent implements OnInit {
         .getStockProduct(this.productId)
         .subscribe((product: StockProduct) => {
           this.product = product;
-          console.info("Product Received: ", this.product);
+          console.info('Product Received: ', this.product);
           this.orderForm = this._orderService.createStockOrderForm();
 
           this.productSpecsTable = this.transformToTable(product);
@@ -79,44 +84,11 @@ export class StockProductDetailComponent implements OnInit {
           this.minDate = tomorrow;
 
           this.updateTotalPrice();
+
+          this.attributes = product.attributes;
+          this.image_set = product.product.images;
         })
     );
-
-    /**
-     * TODO: Remove once the api is fixed with images
-     */
-    this.image_set = [
-      {
-        src: "http://localhost:8000/storage/mock.jpeg",
-        title: "Image 2 title",
-        alt: "Image alt for testing",
-      },
-      {
-        src: "assets/images/demo-product-images/2.jpg",
-        title: "Image 3 title",
-        alt: "Image alt for testing",
-      },
-      {
-        src: "http://localhost:8000/storage/mock.jpeg",
-        title: "Image 4 title",
-        alt: "Image alt for testing",
-      },
-      {
-        src: "assets/images/demo-product-images/2.jpg",
-        title: "Image 5 title",
-        alt: "Image alt for testing",
-      },
-      {
-        src: "http://localhost:8000/storage/mock.jpeg",
-        title: "Image 6 title",
-        alt: "Image alt for testing",
-      },
-      {
-        src: "assets/images/demo-product-images/2.jpg",
-        title: "Image 7 title",
-        alt: "Image alt for testing",
-      },
-    ];
   }
 
   /**
@@ -146,6 +118,39 @@ export class StockProductDetailComponent implements OnInit {
     return priceGroups[priceGroups.length - 1].price_per_piece;
   }
 
+  updateProductAttributes(): void {
+    this._common.setLoaderFor(
+      this._productService.getUpdatedStockProduct(
+        this.product.product,
+        {
+          color: (<FormArray>this.orderForm.get('stock_order_attributes')).at(0)
+            .value.input
+        }
+      )
+      .subscribe(updatedProducts => {
+        this.product.product = updatedProducts[0];
+        /**
+         * TODO: Fix this once the primeng galleria component is fixed
+         * so that the current image updates when the images list updates
+         */
+        this.activeImageIndex = 1;
+        setTimeout(() => {
+          this.activeImageIndex = 0;
+        }, 100);
+
+        // update variant ids available for new attribute
+        this.attributes.variant_ids = updatedProducts.map(updatedProduct => {
+          return {
+            label: updatedProduct.variant_id,
+            value: updatedProduct.variant_id
+          };
+        });
+
+        console.log(updatedProducts);
+      })
+    );
+  }
+
   /**
    * Submit the customisation form
    */
@@ -166,7 +171,7 @@ export class StockProductDetailComponent implements OnInit {
 
     this._common.setLoaderFor(
       this._cartService.addToCart(cartItem).subscribe((item: any) => {
-        this._router.navigate(["/cart/stock", item.data.id]);
+        this._router.navigate(['/cart/stock', item.data.id]);
       })
     );
   }
@@ -262,7 +267,7 @@ export class StockProductDetailComponent implements OnInit {
       }
     });
 
-    console.info("table constructed: ", table);
+    console.info('table constructed: ', table);
     return table;
   }
 }

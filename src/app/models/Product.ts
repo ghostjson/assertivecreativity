@@ -12,13 +12,13 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'label'
+        name: 'label',
       },
       {
         type: 'text',
-        name: 'value'
-      }
-    ]
+        name: 'value',
+      },
+    ],
   },
   radioBtn: {
     type: 'radioBtn',
@@ -27,13 +27,13 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'label'
+        name: 'label',
       },
       {
         type: 'text',
-        name: 'value'
-      }
-    ]
+        name: 'value',
+      },
+    ],
   },
   dropdown: {
     type: 'dropdown',
@@ -42,13 +42,13 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'label'
+        name: 'label',
       },
       {
         type: 'text',
-        name: 'value'
-      }
-    ]
+        name: 'value',
+      },
+    ],
   },
   text: {
     type: 'text',
@@ -57,32 +57,31 @@ const PRODUCT_FEATURES: Object = {
     inputs: [
       {
         type: 'text',
-        name: 'label'
-      }
-    ]
-  }
+        name: 'label',
+      },
+    ],
+  },
 };
 
 // custom options list for custom form
 const CUSTOM_OPTIONS: SelectItem[] = [
   {
     label: 'Colors',
-    value: 'color'
+    value: 'color',
   },
   {
     label: 'Radio Buttons',
-    value: 'radioBtn'
+    value: 'radioBtn',
   },
   {
     label: 'Dropdown Selection',
-    value: 'dropdown'
+    value: 'dropdown',
   },
   {
     label: 'Text input',
     value: 'text',
-  }
+  },
 ];
-
 
 let _fb: FormBuilder = new FormBuilder();
 
@@ -113,12 +112,17 @@ export class Product {
   cat_year?: string;
   expiration_date?: string;
   discontinued?: string;
+  images?: Array<{
+    src: string;
+    title: string;
+    alt: string;
+  }>;
   image_url_list?: string[];
   tag?: string;
   keywords?: string;
   colors?: string;
   themes?: string;
-  dimension_list?: string
+  dimension_list?: string;
   dimension_unit_list?: number[];
   dimension_type_list?: number[];
   quantities_list?: number[];
@@ -192,7 +196,7 @@ export class Product {
   created_at?: string;
   updated_at?: string;
 
-  constructor(initial: Product=null) {
+  constructor(initial: Product = null) {
     if (initial) {
       this.id = initial.id;
       this.name = initial.name;
@@ -209,8 +213,7 @@ export class Product {
       this.price_table_mode = initial.price_table_mode;
       this.price_table = initial.price_table;
       this.custom_forms = initial.custom_forms;
-    }
-    else {
+    } else {
       this.name = '';
       this.serial = '';
       this.description = '';
@@ -248,7 +251,7 @@ export class ProductForm {
   features?: FormArray;
   custom_forms?: FormArray;
 
-  constructor(initial: ProductForm=null) {
+  constructor(initial: ProductForm = null) {
     if (initial) {
       this.id = initial.id;
       this.name = initial.name;
@@ -264,8 +267,7 @@ export class ProductForm {
       this.price_table_mode = initial.price_table_mode;
       this.price_table = initial.price_table;
       this.custom_forms = initial.custom_forms;
-    }
-    else {
+    } else {
       this.name = _fb.control(null);
       this.serial = _fb.control(null);
       this.description = _fb.control(null);
@@ -277,11 +279,7 @@ export class ProductForm {
       this.sales = _fb.control(0);
       this.image = _fb.control(null);
       this.price_table_mode = _fb.control(false);
-      this.price_table = _fb.array([
-        _fb.group(
-          new PriceGroup()
-        )
-      ]);
+      this.price_table = _fb.array([_fb.group(new PriceGroup())]);
       this.custom_forms = _fb.array([]);
     }
   }
@@ -317,14 +315,13 @@ export class PriceGroup {
   quantity: number;
   relation?: string;
 
-  constructor(initial: PriceGroup=null) {
+  constructor(initial: PriceGroup = null) {
     if (initial) {
       this.label = initial.label;
       this.price_per_piece = initial.price_per_piece;
       this.quantity = initial.quantity;
       this.relation = initial.relation;
-    }
-    else {
+    } else {
       this.label = null;
       this.price_per_piece = null;
       this.quantity = null;
@@ -340,16 +337,15 @@ export class PriceTable {
     this.price_groups = [];
   }
 
-  add(initial: PriceGroup=null): void {
+  add(initial: PriceGroup = null): void {
     if (initial) {
       this.price_groups.push(initial);
-    }
-    else {
+    } else {
       this.price_groups.push({
         label: null,
         price_per_piece: null,
         quantity: null,
-        relation: null
+        relation: null,
       });
     }
   }
@@ -370,98 +366,9 @@ export interface StockProduct {
   attributes: StockProductAttributes;
 }
 
-export interface StockProductData {
-    id: number;
-    product_id: string;
-    variant_id: string;
-    name: string;
-    cat_year: string;
-    expiration_date: string;
-    discontinued: string;
-    category: string;
-    image_url_list: string[];
-    tag: string;
-    description: string;
-    keywords: string;
-    colors: string;
-    themes: string;
-    dimension_list: string
-    dimension_unit_list: number[];
-    dimension_type_list: number[];
-    quantities_list: number[];
-    price_list: number[];
-    pr_code: string;
-    pieces_per_unit_list: number[];
-    quote_upon_request: string;
-    price_include_clr: string;
-    price_include_side: string;
-    price_include_loc: string;
-    setup_chg: string;
-    setup_chg_code: string;
-    screen_chg: string;
-    screen_chg_code: string;
-    plate_chg: string;
-    plate_chg_code: string;
-    die_chg: string;
-    die_chg_code: string;
-    tooling_chg: string;
-    tooling_chg_code: string;
-    repeat_chg: string;
-    repeat_chg_code: string;
-    add_clr_chg: string;
-    add_clr_chg_code: string;
-    add_clr_run_chg_list: number[];
-    add_clr_run_chg_code: string;
-    is_recyclable: string;
-    is_environmentally_friendly: string;
-    is_new_product: string;
-    not_suitable: string;
-    exclusive: string;
-    hazardous: string;
-    officially_licensed: string;
-    is_food: string;
-    is_clothing: string;
-    imprint_size_list: number[];
-    imprint_size_units_list: number[];
-    imprint_size_type_list: number[];
-    imprint_loc: string;
-    second_imprint_size_list: number[];
-    second_imprint_units_list: number[];
-    second_imprint_type_list: number[];
-    second_imprint_loc: string;
-    decoration_method: string;
-    no_decoration: string;
-    made_in_country: string;
-    assembled_in_country: string;
-    decorated_in_country: string;
-    compliance_list: string;
-    warning_lbl: string;
-    compliance_memo: string;
-    prod_time_lo: string;
-    prod_time_hi: string;
-    rush_prod_time_lo: string;
-    rush_prod_time_hi: string;
-    packing: string;
-    carton_l: string;
-    carton_w: string;
-    carton_h: string;
-    weight_per_carton: string;
-    units_per_carton: string;
-    ship_point_country: string;
-    ship_point_zip: string;
-    comment: string;
-    verified: string;
-    update_inventory: string;
-    inventory_on_hand: string;
-    inventory_on_hand_added: string;
-    inventory_memo: string;
-    owner: string;
-    created_at: string;
-    updated_at: string;
-}
-
 export class StockProductAttributes {
-  colors?: any;
+  colors?: any[];
+  variant_ids?: any[];
   dimensions?: number[];
   price_table_mode?: boolean;
   price_table?: PriceTable;
@@ -473,5 +380,4 @@ export class ProductAttribute {
   value: any;
 }
 
-export class ColorAttribute extends ProductAttribute{
-}
+export class ColorAttribute extends ProductAttribute {}

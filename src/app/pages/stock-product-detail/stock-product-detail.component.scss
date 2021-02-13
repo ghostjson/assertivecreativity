@@ -68,21 +68,26 @@
         .p-card-content {
           padding: 1.5em;
           padding-top: 0;
-  
+
           .product-details-section {
-            margin-top: 3em;
-  
+            margin-top: 2em;
+
+            p {
+              margin: 0;
+            }
+
             &__title {
               color: $dark-grey;
               font-size: 1.35rem;
               font-weight: 500;
               margin-top: 0;
+              margin-bottom: 0.5em;
             }
-  
+
             &.order-attribute {
               display: flex;
               justify-content: left;
-  
+
               label {
                 font-size: 1.2em;
                 font-weight: 500;
@@ -94,7 +99,7 @@
                 display: flex;
                 align-items: center;
               }
-  
+
               .order-attribute-input--color {
                 flex-grow: 1;
 
@@ -114,7 +119,7 @@
                     border-radius: 6px;
                     border: 1px solid $light-grey;
                     text-transform: capitalize;
-                  }             
+                  }
                 }
               }
             }

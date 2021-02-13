@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   Product,
   listCustomOptions,
@@ -7,20 +7,17 @@ import {
   PriceTable,
   ColorAttribute,
   StockProduct,
-  StockProductAttributes,
-  ProductAttribute,
-  StockProductData,
-} from "../models/Product";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
-import { SelectItem } from "primeng/api";
-import { Observable } from "rxjs";
-import { map, take } from "rxjs/operators";
-import { Category } from "../models/Category";
+} from '../models/Product';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { SelectItem } from 'primeng/api';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { Category } from '../models/Category';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ProductService {
   products: Product[];
@@ -67,28 +64,34 @@ export class ProductService {
    * get stock products
    */
   getStockProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this.stockProductsLink())
-      .pipe(
-        take(1),
-        map((products: Product[]): Product[] => {
-          return products.map((product: Product): Product => {
+    return this._http.get<Product[]>(this.stockProductsLink()).pipe(
+      take(1),
+      map((products: Product[]): Product[] => {
+        return products.map(
+          (product: Product): Product => {
             product.is_stock = true;
             return product;
-          });
-        })
-      );
+          }
+        );
+      })
+    );
   }
 
   /**
    * get stock products by category list
    * @param categories category list to filter products
    */
-  getStockProductsByCategoryList(categories: Category[]): Observable<Product[]> {
+  getStockProductsByCategoryList(
+    categories: Category[]
+  ): Observable<Product[]> {
     let categoryNames: string[] = categories.map((category: Category) => {
       return category.value as string;
     });
 
-    return this._http.post<any>(this.stockProductsByCategoriesLink(), {categories: categoryNames})
+    return this._http
+      .post<any>(this.stockProductsByCategoriesLink(), {
+        categories: categoryNames,
+      })
       .pipe(
         take(1),
         /**
@@ -96,14 +99,14 @@ export class ProductService {
          */
         map((res: any[]) => {
           let products: Product[] = [];
-          console.log('filter response: ', res)
+          console.log('filter response: ', res);
 
           res.forEach((list: Product[]) => {
             products.push(...list);
             // list.forEach((product: Product) => {
             //   products.push(...list);
             // })
-          })
+          });
 
           return products;
         })
@@ -127,21 +130,75 @@ export class ProductService {
           }
         );
 
+        // map product image url list to the object list
+        productRes.product.images = productRes.product.image_url_list.map(
+          (url, index) => {
+            return {
+              src: url,
+              title: 'Product Image ' + index,
+              alt: 'Product Image',
+            };
+          }
+        );
+
+        productRes.attributes.variant_ids = productRes.attributes.variant_ids.map((id: string) => {
+          return {
+            label: id,
+            value: id
+          };
+        });
+
         productRes.attributes.price_table_mode = true;
         productRes.attributes.price_table = new PriceTable();
-        productRes.product.price_list.forEach((price: number, index: number) => {
-          if(productRes.product.quantities_list[index] > 0) {
-            productRes.attributes.price_table.price_groups.push({
-              label: `Price ${index + 1}`,
-              price_per_piece: price,
-              quantity: productRes.product.quantities_list[index]
-            });
+        productRes.product.price_list.forEach(
+          (price: number, index: number) => {
+            if (productRes.product.quantities_list[index] > 0) {
+              productRes.attributes.price_table.price_groups.push({
+                label: `Price ${index + 1}`,
+                price_per_piece: price,
+                quantity: productRes.product.quantities_list[index],
+              });
+            }
           }
-        });
+        );
 
         return productRes;
       })
     );
+  }
+
+  getUpdatedStockProduct(
+    product: Product,
+    attributes: {
+      color?: string;
+    }
+  ): Observable<Product[]> {
+    let attributeReq = {
+      colors: attributes.color,
+    };
+
+    return this._http
+      .post<Product[]>(
+        `${this.stockProductsLink()}/${product.id}/updated`,
+        attributeReq
+      )
+      .pipe(
+        take(1),
+        map((products) => {
+          return products.map((product) => {
+            // map product image url list to the object list
+            product.images = product.image_url_list.map((url, index) => {
+              return {
+                src: url,
+                title: 'Product Image ' + index,
+                alt: 'Product Image',
+              };
+            });
+
+            return product;
+          });
+        })
+      );
   }
 
   /**
@@ -196,7 +253,7 @@ export class ProductService {
   getCustomProductsByCategoryIdList(
     categoryIds: number[]
   ): Observable<Product[]> {
-    console.log("categories post: ", categoryIds);
+    console.log('categories post: ', categoryIds);
     return this._http
       .post<Product[]>(this.customProductsLinkByCategoryIdList(), {
         category_ids: categoryIds,
@@ -238,24 +295,26 @@ export class ProductService {
    * Search products using a search string
    * @param searchString search string
    */
-  searchProducts(searchString: string, is_stock: boolean): Observable<Product[]> {
+  searchProducts(
+    searchString: string,
+    is_stock: boolean
+  ): Observable<Product[]> {
     searchString = searchString ? searchString : '';
-    if(is_stock) {
+    if (is_stock) {
       return this._http
-      .post<Product[]>(`${this.stockProductsLink()}/search`, { query: searchString })
-      .pipe(
-        take(1)
-      );
-    }
-    else {
-      return this._http
-      .get<Product[]>(`${this.customProductsLink()}/search/${searchString}`)
-      .pipe(
-        take(1),
-        map((res: any) => {
-          return res.data;
+        .post<Product[]>(`${this.stockProductsLink()}/search`, {
+          query: searchString,
         })
-      );
+        .pipe(take(1));
+    } else {
+      return this._http
+        .get<Product[]>(`${this.customProductsLink()}/search/${searchString}`)
+        .pipe(
+          take(1),
+          map((res: any) => {
+            return res.data;
+          })
+        );
     }
   }
 
@@ -348,52 +407,52 @@ export class ProductService {
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
+        is_stock: false,
       },
       {
         id: 1,
         name: "Men's Polyester Satin Shiny Slim Tie",
-        image: "assets/images/demo-product-images/2.jpg",
+        image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
-        is_stock: false
-      }
+        is_stock: false,
+      },
     ];
   }
 }

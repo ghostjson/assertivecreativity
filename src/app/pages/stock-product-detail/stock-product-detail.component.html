@@ -6,7 +6,8 @@
       <div class="p-col-12 p-lg-4">
         <div class="product-img">
           <p-galleria
-            [(value)]="image_set"
+            [(value)]="product.product.images"
+            [(activeIndex)]="activeImageIndex"
             [responsiveOptions]="responsiveOptions"
             [circular]="true"
             [showItemNavigators]="true"
@@ -37,43 +38,51 @@
               {{ product.product.description }}
             </p>
           </div>
-
-          <div class="product-details-section product-detail__price">
-            <h2 class="product-details-section__title">Price</h2>
-            <p-table
-              *ngIf="product.attributes.price_table_mode; else basePrice"
-              [value]="product.attributes.price_table.price_groups"
-              styleClass="p-datatable-gridlines"
-            >
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Price Group</th>
-                  <th>Price Per Piece</th>
-                  <th>Quantity (Upto)</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-price>
-                <tr>
-                  <td>{{ price.label }}</td>
-                  <td>$ {{ price.price_per_piece }}</td>
-                  <td>
-                    {{ price.quantity }}
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-            <ng-template #basePrice>
-              <span class="product-details__price-value">
-                {{
-                  product.attributes.price_table.price_groups[0].price_per_piece
-                    | currency: "USD"
-                }}
-                / piece
-              </span>
-            </ng-template>
-          </div>
-
           <form [formGroup]="orderForm">
+            <div class="product-details-section">
+              <h2 class="product-details-section__title">Variant Id</h2>
+              <div class="p-field p-input-filled">
+                <p-dropdown
+                  [options]="attributes.variant_ids"
+                ></p-dropdown>
+              </div>
+            </div>
+
+            <div class="product-details-section product-detail__price">
+              <h2 class="product-details-section__title">Price</h2>
+              <p-table
+                *ngIf="product.attributes.price_table_mode; else basePrice"
+                [value]="product.attributes.price_table.price_groups"
+                styleClass="p-datatable-gridlines"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Price Group</th>
+                    <th>Price Per Piece</th>
+                    <th>Quantity (Upto)</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-price>
+                  <tr>
+                    <td>{{ price.label }}</td>
+                    <td>$ {{ price.price_per_piece }}</td>
+                    <td>
+                      {{ price.quantity }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <ng-template #basePrice>
+                <span class="product-details__price-value">
+                  {{
+                    product.attributes.price_table.price_groups[0]
+                      .price_per_piece | currency: 'USD'
+                  }}
+                  / piece
+                </span>
+              </ng-template>
+            </div>
+
             <ng-container formArrayName="stock_order_attributes">
               <!-- options for color attribute starts -->
               <div
@@ -88,13 +97,15 @@
                 >
                   <p-selectButton
                     formControlName="input"
-                    [options]="product.attributes.colors"
+                    [options]="attributes.colors"
+                    (onChange)="updateProductAttributes()"
                   ></p-selectButton>
                 </div>
               </div>
               <!-- options for color attribute ends -->
             </ng-container>
           </form>
+
           <!-- option for order quantity starts -->
           <div
             class="product-details-section order-attribute p-grid p-nogutter"
