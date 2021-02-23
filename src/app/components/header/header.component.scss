@@ -56,6 +56,17 @@
           padding-bottom: 0;
         }
       }
+
+      .category-dropdown {
+        &.p-overlaypanel {
+          width: 60vw;
+          height: 80vh;
+
+          .p-overlaypanel-content {
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }

@@ -5,6 +5,19 @@
         <a class="navigation-bar__brand" routerLink="/">
           <img src="{{ logo }}" class="p-mr-2" />
         </a>
+        <p-overlayPanel styleClass="category-dropdown" #categoryDropdown>
+          <ng-template pTemplate>
+            <app-category-dropdown></app-category-dropdown>
+          </ng-template>
+        </p-overlayPanel>
+
+        <button
+          class="p-button p-button-text p-button-lg"
+          type="text"
+          label="Shop"
+          (click)="toggleCategoryDropdown($event)"
+          pButton
+        ></button>
       </ng-template>
       <ng-template pTemplate="end">
         <span class="nav-searchbar p-input-filled">
@@ -32,7 +45,7 @@
           pButton
           pRipple
         ></a>
-        <p-avatar 
+        <p-avatar
           size="large"
           icon="pi pi-user"
           (click)="accountPopup.toggle($event)"
@@ -69,21 +82,19 @@
                 </ng-template>
                 <ng-container *ngIf="user; else notLogin">
                   <li class="p-menuitem" *ngIf="hasDashboard()">
-                    <a 
-                      class="p-menuitem-link"
-                      [routerLink]="['/', user.role]">
+                    <a class="p-menuitem-link" [routerLink]="['/', user.role]">
                       {{ user.role | titlecase }} Dashboard
                     </a>
                   </li>
                   <li class="p-menuitem">
-                    <a 
-                      class="p-menuitem-link"
-                      [routerLink]="['/profile']"> Profile </a>
+                    <a class="p-menuitem-link" [routerLink]="['/profile']">
+                      Profile
+                    </a>
                   </li>
                   <li class="p-menuitem">
-                    <a 
-                      class="p-menuitem-link"
-                      [routerLink]="['/orders']"> Orders </a>
+                    <a class="p-menuitem-link" [routerLink]="['/orders']">
+                      Orders
+                    </a>
                   </li>
                   <li class="p-menuitem">
                     <a

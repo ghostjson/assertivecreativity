@@ -64,6 +64,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
+import { SlideMenuModule } from 'primeng/slidemenu';
 
 /** Common Imports */
 import { LoaderComponent } from './components/loader/loader.component';
@@ -160,6 +161,7 @@ import { CustomFormSectionComponent } from './components/custom-form-section/cus
 import { CustomFormQuestionComponent } from './components/custom-form-question/custom-form-question.component';
 import { AdminFormsQuestionMakerFileComponent } from './components/admin-forms-question-maker-file/admin-forms-question-maker-file.component';
 import { CustomFormQuestionFileComponent } from './components/custom-form-question-file/custom-form-question-file.component';
+import { CategoryDropdownComponent } from './components/category-dropdown/category-dropdown.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -248,7 +250,8 @@ import { CustomFormQuestionFileComponent } from './components/custom-form-questi
     CustomFormSectionComponent,
     CustomFormQuestionComponent,
     AdminFormsQuestionMakerFileComponent,
-    CustomFormQuestionFileComponent
+    CustomFormQuestionFileComponent,
+    CategoryDropdownComponent,
   ],
   imports: [
     /** Angular modules */
@@ -312,7 +315,8 @@ import { CustomFormQuestionFileComponent } from './components/custom-form-questi
     DataViewModule,
     ScrollTopModule,
     TooltipModule,
-    ChartModule
+    ChartModule,
+    SlideMenuModule
   ],
   providers: [
     FormComponent,
@@ -320,7 +324,7 @@ import { CustomFormQuestionFileComponent } from './components/custom-form-questi
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
+      multi: true,
     },
     MessageService,
   ],

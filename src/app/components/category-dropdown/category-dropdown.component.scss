@@ -1,0 +1,46 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .dropdown {
+      height: 100%;
+
+      .p-slidemenu {
+        border: none;
+
+        .p-submenu-list {
+          box-shadow: none;
+        }
+      }
+    }
+
+    .dropdown-section {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1em;
+        text-decoration: none;
+        padding: 0 1em;
+        padding: 0.714rem 1rem;
+
+        .p-button-label {
+          flex-grow: 0;
+        }
+      }
+
+      .dropdown-list {
+        width: 100%;
+        flex-grow: 1;
+
+        .p-slidemenu {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

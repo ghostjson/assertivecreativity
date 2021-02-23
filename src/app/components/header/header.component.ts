@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { UserDetailsService } from "src/app/store/user-details.service";
 import { CommonService } from "src/app/common.service";
@@ -16,6 +16,8 @@ import { ActivatedRoute } from "@angular/router";
 export class HeaderComponent implements OnInit {
   @Input() searchString: string = '';
   @Output() searchBtnClick: EventEmitter<string> = new EventEmitter<string>();
+
+  @ViewChild('categoryDropdown') categoryDropdown: any;
 
   user_role: any;
   cartLength: number;
@@ -54,19 +56,19 @@ export class HeaderComponent implements OnInit {
     }
 
     this.navStartItems = [
-      {
-        label: 'Shop',
-        items: [
-          {
-            label: 'Stock Items',
-            routerLink: '/shop/stock'
-          },
-          {
-            label: 'Custom Items',
-            routerLink: '/shop/custom'
-          }
-        ]
-      },
+      // {
+      //   label: 'Shop',
+      //   items: [
+      //     {
+      //       label: 'Stock Items',
+      //       routerLink: '/shop/stock'
+      //     },
+      //     {
+      //       label: 'Custom Items',
+      //       routerLink: '/shop/custom'
+      //     }
+      //   ]
+      // },
       {
         label: 'About Us',
         routerLink: '/about'
@@ -178,5 +180,9 @@ export class HeaderComponent implements OnInit {
     }
 
     return false;
+  }
+
+  toggleCategoryDropdown(event): void {
+    this.categoryDropdown.show(event)
   }
 }

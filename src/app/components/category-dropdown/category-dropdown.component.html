@@ -1,0 +1,39 @@
+<div class="dropdown p-grid">
+  <div class="dropdown-section p-col-12 p-md-6">
+    <a
+      #dropdownHeader
+      class="dropdown-section__header p-button-text p-button-plain p-button-lg"
+      [routerLink]="['shop/stock']"
+      label="Stock Products"
+      iconPos="right"
+      icon="pi pi-arrow-right"
+      pButton
+    >
+    </a>
+    <div #dropdownSlideMenu class="dropdown-list">
+      <p-slideMenu
+        [menuWidth]="dropdownMenuWidth"
+        [viewportHeight]="dropdownMenuHeight"
+        [model]="dropdownList"
+      ></p-slideMenu>
+    </div>
+  </div>
+  <div class="dropdown-section p-col-12 p-md-6">
+    <a
+      class="dropdown-section__header p-button-text p-button-plain p-button-lg"
+      [routerLink]="['shop/custom']"
+      label="Custom Products"
+      iconPos="right"
+      icon="pi pi-arrow-right"
+      pButton
+    >
+    </a>
+    <div class="dropdown-list">
+      <p-slideMenu
+        [menuWidth]="dropdownMenuWidth"
+        [viewportHeight]="dropdownMenuHeight"
+        [model]="dropdownList"
+      ></p-slideMenu>
+    </div>
+  </div>
+</div>
