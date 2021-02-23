@@ -6,6 +6,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/models/User';
 import { MenuItem } from 'primeng/api';
 import { ActivatedRoute } from "@angular/router";
+import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
+import { Category } from 'src/app/models/Category';
 
 @Component({
   selector: "app-header",
@@ -27,13 +29,16 @@ export class HeaderComponent implements OnInit {
   user: User;
   currentUrl: string;
   accountItems: MenuItem[];
+  customCategoriesDropdownList: MenuItem[];
+  stockCategoriesDropdownList: MenuItem[];
 
   constructor(
     private _user: UserDetailsService,
     public _auth: AuthService,
     private _common: CommonService,
     private _cartService: CartService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _prodCategorisationService: ProductCategorisationService
   ) {}
 
   ngOnInit() {
@@ -56,19 +61,6 @@ export class HeaderComponent implements OnInit {
     }
 
     this.navStartItems = [
-      // {
-      //   label: 'Shop',
-      //   items: [
-      //     {
-      //       label: 'Stock Items',
-      //       routerLink: '/shop/stock'
-      //     },
-      //     {
-      //       label: 'Custom Items',
-      //       routerLink: '/shop/custom'
-      //     }
-      //   ]
-      // },
       {
         label: 'About Us',
         routerLink: '/about'
@@ -119,6 +111,34 @@ export class HeaderComponent implements OnInit {
         visible: this.user != null
       }
     ];
+
+    this._prodCategorisationService.getCustomCategories()
+      .subscribe(categories => {
+        this.customCategoriesDropdownList = categories.map(category => {
+          return {
+            label: category.name,
+            routerLink: '/shop/custom',
+            queryParams: {
+              category: category.id
+            }
+          }
+        });
+        console.log(categories);
+      });
+
+    this._prodCategorisationService.getStockCategories()
+      .subscribe(categories => {
+        this.stockCategoriesDropdownList = categories.map(category => {
+          return {
+            label: category.name,
+            routerLink: '/shop/stock',
+            queryParams: {
+              category: category.id
+            }
+          }
+        });
+        console.log(categories);
+      });
   }
 
   ngOnChanges(): void {

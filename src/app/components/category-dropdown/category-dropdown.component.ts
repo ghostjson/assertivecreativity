@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Category } from 'src/app/models/Category';
+import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
 
 @Component({
   selector: 'app-category-dropdown',
@@ -7,6 +9,9 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./category-dropdown.component.scss'],
 })
 export class CategoryDropdownComponent implements OnInit {
+  @Input() customCategories: MenuItem[];
+  @Input() stockCategories: MenuItem[];
+
   dropdownList: MenuItem[];
   dropdownMenuWidth: number;
   dropdownMenuHeight: number;
@@ -22,6 +27,10 @@ export class CategoryDropdownComponent implements OnInit {
     this.dropdownList = [
       {
         label: 'Ties',
+        routerLink: '/shop/custom',
+        queryParams: {
+          category: 'corporis'
+        },
         items: [
           {
             label: 'Bow Tie',

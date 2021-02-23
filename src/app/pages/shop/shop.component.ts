@@ -1,19 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { CommonService } from "../../common.service";
-import { ProductService } from "../../services/product.service";
-import { Product } from "../../models/Product";
-import { ProductCategorisationService } from "src/app/services/product-categorisation.service";
-import { Tag } from "src/app/models/Tag";
-import { Category } from "src/app/models/Category";
-import { ActivatedRoute } from "@angular/router";
-import { take } from "rxjs/operators";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonService } from '../../common.service';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/Product';
+import { ProductCategorisationService } from 'src/app/services/product-categorisation.service';
+import { Tag } from 'src/app/models/Tag';
+import { Category } from 'src/app/models/Category';
+import { ActivatedRoute } from '@angular/router';
+import { take, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-shop",
-  templateUrl: "./shop.component.html",
-  styleUrls: ["./shop.component.scss"],
+  selector: 'app-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss'],
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
   featured: Product[];
   products: Product[] = [];
   categories: Category[] = [];
@@ -22,12 +23,15 @@ export class ShopComponent implements OnInit {
   selectedTags: number[] = [];
   productsLoading: boolean;
   is_stock: boolean = false;
+  componentDestroy: Subject<void>;
 
   constructor(
     private _productService: ProductService,
     private _pcService: ProductCategorisationService,
     private _activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.componentDestroy = new Subject();
+  }
 
   ngOnInit() {
     // start the loader
@@ -35,12 +39,18 @@ export class ShopComponent implements OnInit {
     this._activatedRoute.data.pipe(take(1)).subscribe((data: any) => {
       this.is_stock = data.is_stock;
     });
+
     if (this.is_stock) {
       this.getStockProducts();
       this._pcService
         .getStockCategories()
         .subscribe((categories: Category[]) => {
           this.categories = categories;
+          this.getCategoryFromUrl().add(() => {
+            if(this.selectedCategories.length) {
+              this.updateProducts();
+            }
+          });
         });
     } else {
       this.getCustomProducts();
@@ -48,10 +58,32 @@ export class ShopComponent implements OnInit {
         .getCustomCategories()
         .subscribe((categories: Category[]) => {
           this.categories = categories;
+          this.getCategoryFromUrl().add(() => {
+            if(this.selectedCategories.length) {
+              this.updateProducts();
+            }
+          });
         });
     }
 
+    // subscribe to url changes so that selected categories
+    // get updated
+    this._activatedRoute.queryParamMap
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe(() => {
+        this.getCategoryFromUrl().add(() => {
+          if(this.selectedCategories.length) {
+            this.updateProducts();
+          }
+        });
+      });
+
     this.featured = this._productService.getFeaturedProducts();
+  }
+
+  ngOnDestroy(): void {
+    this.componentDestroy.next();
+    this.componentDestroy.complete();
   }
 
   /**
@@ -96,16 +128,18 @@ export class ShopComponent implements OnInit {
     this.productsLoading = true;
 
     if (this.is_stock) {
-      this._productService.getStockProductsByCategoryList(this.selectedCategories)
+      this._productService
+        .getStockProductsByCategoryList(this.selectedCategories)
         .subscribe((filteredProducts: Product[]) => {
           this.products = [...filteredProducts];
           this.productsLoading = false;
         });
-    } 
-    else {
-      let categoryIds: number[] = this.selectedCategories.map((category: Category) => {
-        return category.id;
-      });
+    } else {
+      let categoryIds: number[] = this.selectedCategories.map(
+        (category: Category) => {
+          return category.id;
+        }
+      );
 
       this._productService
         .getCustomProductsByCategoryIdList(categoryIds)
@@ -126,8 +160,7 @@ export class ShopComponent implements OnInit {
     if (this.selectedCategories.length > 0) {
       // update products list and tag list
       this.updateProducts();
-    } 
-    else {
+    } else {
       this.is_stock ? this.getStockProducts() : this.getCustomProducts();
     }
   }
@@ -147,9 +180,27 @@ export class ShopComponent implements OnInit {
 
           this.productsLoading = false;
         });
-    } 
-    else {
+    } else {
       this.is_stock ? this.getStockProducts() : this.getCustomProducts();
     }
+  }
+
+  /**
+   * get the category specified in the url
+   */
+  getCategoryFromUrl(): Subscription {
+    return this._activatedRoute.queryParamMap
+      .pipe(take(1))
+      .subscribe((paramMap) => {
+        let categoryId = Number(paramMap.get('category'));
+
+        if (categoryId !== null) {
+          this.selectedCategories = this.categories.filter((category) => {
+            return category.id === categoryId;
+          });
+
+          console.log('category from url: ', this.selectedCategories);
+        }
+      });
   }
 }

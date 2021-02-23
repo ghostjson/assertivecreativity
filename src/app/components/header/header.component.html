@@ -7,7 +7,10 @@
         </a>
         <p-overlayPanel styleClass="category-dropdown" #categoryDropdown>
           <ng-template pTemplate>
-            <app-category-dropdown></app-category-dropdown>
+            <app-category-dropdown
+              [customCategories]="customCategoriesDropdownList"
+              [stockCategories]="stockCategoriesDropdownList"
+            ></app-category-dropdown>
           </ng-template>
         </p-overlayPanel>
 
