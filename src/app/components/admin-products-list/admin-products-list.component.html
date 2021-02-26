@@ -17,9 +17,7 @@
           icon="pi pi-plus"
           class="p-button-success p-mr-2"
         ></a>
-        <ng-template #newStockProductBtn>
-
-        </ng-template>
+        <ng-template #newStockProductBtn> </ng-template>
         <p-fileUpload
           *ngIf="activeProductsTabIndex === 0"
           mode="basic"
@@ -51,7 +49,6 @@
             'category.name',
             'base_price'
           ]"
-          [(selection)]="selectedProducts"
           [rowHover]="true"
           dataKey="id"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -77,8 +74,8 @@
               <th pSortableColumn="name">
                 Name <p-sortIcon field="name"></p-sortIcon>
               </th>
-              <th pSortableColumn="id">
-                Product ID <p-sortIcon field="id"></p-sortIcon>
+              <th pSortableColumn="product_key">
+                Product Key <p-sortIcon field="product_key"></p-sortIcon>
               </th>
               <th pSortableColumn="price_list[0]">
                 Price <p-sortIcon field="price_list[0]"></p-sortIcon>
@@ -109,21 +106,21 @@
               <td>
                 <span class="p-column-title"> Name </span>
                 <span>
-                  <a href="/products/stock/{{ product.id }}">
+                  <a href="/products/stock/{{ product.product_key }}">
                     {{ product.name }}
                   </a>
                 </span>
               </td>
               <td>
-                <span class="p-column-title"> Serial </span>
+                <span class="p-column-title"> Product Key </span>
                 <span>
-                  {{ product.id }}
+                  {{ product.product_key }}
                 </span>
               </td>
               <td>
                 <span class="p-column-title"> Price </span>
                 <span>
-                  {{ product.price_list[0] | currency: "USD" }}
+                  {{ product.price_list[0] | currency: 'USD' }}
                 </span>
               </td>
               <td>
@@ -146,13 +143,13 @@
                   icon="pi pi-pencil"
                   class="p-button p-button-success p-mr-2"
                 ></a> -->
-                <!-- <button
+                <button
+                  icon="pi pi-trash"
+                  class="p-button p-button-danger p-button-text"
+                  (click)="deleteProduct(product, true)"
                   pButton
                   pRipple
-                  icon="pi pi-trash"
-                  class="p-button p-button-danger p-mr-2"
-                  (click)="deleteProduct(product)"
-                ></button> -->
+                ></button>
                 <!-- <button
                   pButton
                   pRipple
@@ -185,7 +182,6 @@
             'category.name',
             'base_price'
           ]"
-          [(selection)]="selectedCustomProducts"
           [rowHover]="true"
           dataKey="id"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -257,7 +253,7 @@
               <td>
                 <span class="p-column-title"> Price </span>
                 <span>
-                  {{ product.base_price | currency: "USD" }}
+                  {{ product.base_price | currency: 'USD' }}
                 </span>
               </td>
               <td>
@@ -285,7 +281,7 @@
                   pRipple
                   icon="pi pi-trash"
                   class="p-button p-button-danger p-mr-2"
-                  (click)="deleteCustomProduct(product)"
+                  (click)="deleteProduct(product, false)"
                 ></button>
                 <button
                   pButton

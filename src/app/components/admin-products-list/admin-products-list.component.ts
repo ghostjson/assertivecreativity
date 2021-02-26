@@ -1,48 +1,49 @@
-import { Component, OnInit } from "@angular/core";
-import { Product, StockProduct } from "../../models/Product";
-import { AdminProductService } from "../../services/admin-product.service";
-import { MessageService, ConfirmationService } from "primeng/api";
+import { Component, OnInit } from '@angular/core';
+import { Product, StockProduct } from '../../models/Product';
+import { AdminProductService } from '../../services/admin-product.service';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { IdGeneratorService } from 'src/app/services/id-generator.service';
 import { User } from 'src/app/models/User';
 import { UserDetailsService } from 'src/app/store/user-details.service';
 import { environment } from 'src/environments/environment';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
-  selector: "app-admin-products-list",
-  templateUrl: "./admin-products-list.component.html",
-  styleUrls: ["./admin-products-list.component.scss"],
+  selector: 'app-admin-products-list',
+  templateUrl: './admin-products-list.component.html',
+  styleUrls: ['./admin-products-list.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
 export class AdminProductsListComponent implements OnInit {
-  stockProducts: StockProduct[];
+  stockProducts: Product[];
   customProducts: Product[];
-  selectedProducts: StockProduct[];
-  selectedCustomProducts: Product[];
   showUploadingProgess: boolean;
   user: User;
   activeProductsTabIndex: number;
-  public API_URL = environment.apiUrl;
 
   constructor(
     private _productService: AdminProductService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     public _idGen: IdGeneratorService,
-    private _userDetailsService: UserDetailsService
+    private _userDetailsService: UserDetailsService,
+    private _commonService: CommonService
   ) {}
 
   ngOnInit() {
     this.showUploadingProgess = false;
     this.user = this._userDetailsService.getUserLocal();
-    this._productService.getStockProducts(this.user.role)
-      .subscribe((stockProducts: StockProduct[]) => {
+    this._productService
+      .getStockProducts(this.user.role)
+      .subscribe(stockProducts => {
         this.stockProducts = stockProducts;
       });
-    
-    this._productService.getCustomProducts(this.user.role)
-    .subscribe((customProducts: Product[]) => {
-      this.customProducts = customProducts;
-    });
+
+    this._productService
+      .getCustomProducts(this.user.role)
+      .subscribe(customProducts => {
+        this.customProducts = customProducts;
+      });
 
     this.activeProductsTabIndex = 0;
   }
@@ -51,37 +52,65 @@ export class AdminProductsListComponent implements OnInit {
    * Delete a single product
    * @param product Product to delete
    */
-  deleteCustomProduct(product: Product) {
+  deleteProduct(product: Product, isStock: boolean) {
     this._confirmationService.confirm({
-      message: "Are you sure you want to delete " + product.name + "?",
-      header: "Confirm",
-      icon: "pi pi-exclamation-triangle",
+      message: 'Are you sure you want to delete ' + product.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        // find index of the product to delete
-        let deleteIndex: number = this.customProducts.findIndex((val) => {
-          return val.id === product.id;
-        });
-
-        // delete the found index
-        if (deleteIndex > -1) {
-          this.stockProducts.splice(deleteIndex, 1);
-          
+        if (isStock) {
+          console.log('product to delete: ', product);
+          console.log('stock products: ', this.stockProducts);
           // delete from the server
-          this._productService.deleteCustomProduct(product.id)
-            .subscribe();
+          this._commonService.setLoaderFor(
+            this._productService
+              .deleteStockProduct(product.product_key)
+              .subscribe({
+                complete: () => {
+                  // delete from local
+                  this.stockProducts = this.stockProducts.filter(value => {
+                    return value.product_key !== product.product_key;
+                  });
 
-          this._messageService.add({
-            severity: "success",
-            summary: "Successful",
-            detail: "Product Deleted",
-            life: 3000,
-          });
+                  this._messageService.add({
+                    severity: 'success',
+                    summary: 'Successful',
+                    detail: 'Product Deleted',
+                    life: 3000,
+                  });
+                },
+                error: () => {
+                  this._messageService.add({
+                    severity: 'error',
+                    summary: 'Deleting product failed',
+                    detail: 'Something went wrong',
+                    life: 3000,
+                  });
+                },
+              })
+          );
         } else {
-          this._messageService.add({
-            severity: "error",
-            summary: "Unsuccessful",
-            detail: "Product Not Found",
-            life: 3000,
+          // delete from the server
+          this._productService.deleteCustomProduct(product.id).subscribe({
+            complete: () => {
+              this.customProducts = this.customProducts.filter(value => {
+                return value.id !== product.id;
+              });
+              this._messageService.add({
+                severity: 'success',
+                summary: 'Successful',
+                detail: 'Product Deleted',
+                life: 3000,
+              });
+            },
+            error: () => {
+              this._messageService.add({
+                severity: 'error',
+                summary: 'Unsuccessful',
+                detail: 'Something went wrong',
+                life: 3000,
+              });
+            },
           });
         }
       },
@@ -93,24 +122,23 @@ export class AdminProductsListComponent implements OnInit {
    * @param product Product to duplicate
    */
   duplicateProduct(product: Product): void {
-    let duplicate: Product = {...product};
+    let duplicate: Product = { ...product };
 
     duplicate.id = null;
     duplicate.category_id = product.category.id;
     duplicate.serial = product.serial + '-copy';
 
-    // add the product to products 
-    this._productService.addCustomProduct(duplicate)
-      .subscribe((res: any) => {
-        res.data.category = duplicate.category;
-        this.customProducts.unshift(res.data);
-        this._messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Product Duplicated",
-          life: 2000,
-        });
+    // add the product to products
+    this._productService.addCustomProduct(duplicate).subscribe((res: any) => {
+      res.data.category = duplicate.category;
+      this.customProducts.unshift(res.data);
+      this._messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Product Duplicated',
+        life: 2000,
       });
+    });
   }
 
   /**
@@ -138,13 +166,15 @@ export class AdminProductsListComponent implements OnInit {
   excelUploadHandler(event: any) {
     this.showUploadingProgess = true;
     console.info('files to upload', event.files);
-    this._productService.uploadProductsExcel(event.files[0])
+    this._productService
+      .uploadProductsExcel(event.files[0])
       .subscribe((res: any) => {
         this.showUploadingProgess = false;
         event = null;
 
-        this._productService.getStockProducts(this.user.role)
-          .subscribe((stockProducts: StockProduct[]) => {
+        this._productService
+          .getStockProducts(this.user.role)
+          .subscribe(stockProducts => {
             this.stockProducts = stockProducts;
           });
       });

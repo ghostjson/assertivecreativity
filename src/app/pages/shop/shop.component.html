@@ -60,11 +60,11 @@
           <ng-template let-product pTemplate="gridItem">
             <div class="product-grid-item p-col-12 p-sm-6 p-md-4 p-xl-3">
               <app-product-card
-                [productId]="product.id"
+                [productId]="is_stock ? product.product_key : product.id"
                 [name]="product.name"
                 [price]="is_stock ? product.price_list[0] : product.base_price"
                 [description]="product.description"
-                [image]="is_stock ? product.image_url_list[0] : product.image"
+                [image]="is_stock ? product.images[0] : product.image"
                 [itemNum]="product.variant_id"
                 [stock]="is_stock"
               ></app-product-card>

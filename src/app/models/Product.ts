@@ -107,16 +107,13 @@ export class Product {
   is_stock: boolean;
   product?: Product;
   product_id?: string;
+  product_key: string;
   variant_id?: string;
   cat_year?: string;
   expiration_date?: string;
   discontinued?: string;
-  images?: Array<{
-    src: string;
-    title: string;
-    alt: string;
-  }>;
-  image_url_list?: string[];
+  images?: Image[];
+  // image_url_list?: string[];
   tag?: string;
   keywords?: string;
   colors?: string;
@@ -340,4 +337,5 @@ export interface ProductImage {
 export interface Image {
   src: string;
   alt_text?: string;
+  title?: string;
 }

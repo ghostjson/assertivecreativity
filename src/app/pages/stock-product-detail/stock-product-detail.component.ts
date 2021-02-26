@@ -227,7 +227,7 @@ export class StockProductDetailComponent implements OnInit {
     let table: { label: string; value: string }[] = [];
     let ignore: any = {
       cat_year: true,
-      image_url_list: true,
+      images: true,
       dimension_list: true,
       dimension_unit_list: true,
       dimension_type_list: true,

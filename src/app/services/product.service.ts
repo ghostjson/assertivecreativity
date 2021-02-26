@@ -134,12 +134,12 @@ export class ProductService {
         );
 
         // map product image url list to the object list
-        productRes.product.images = productRes.product.image_url_list.map(
+        productRes.product.images = <any>productRes.product.images.map(
           (url, index) => {
             return {
               src: url,
               title: 'Product Image ' + index,
-              alt: 'Product Image',
+              alt_text: 'Product Image',
             };
           }
         );
@@ -192,11 +192,11 @@ export class ProductService {
         map((products) => {
           return products.map((product) => {
             // map product image url list to the object list
-            product.images = product.image_url_list.map((url, index) => {
+            product.images = <any>product.images.map((url, index) => {
               return {
                 src: url,
                 title: 'Product Image ' + index,
-                alt: 'Product Image',
+                alt_text: 'Product Image',
               };
             });
 
@@ -415,6 +415,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -422,6 +423,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -429,6 +431,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -436,6 +439,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -443,6 +447,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -450,6 +455,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
       {
         id: 1,
@@ -457,6 +463,7 @@ export class ProductService {
         image: 'assets/images/demo-product-images/2.jpg',
         base_price: 4.75,
         is_stock: false,
+        product_key: '1234124'
       },
     ];
   }

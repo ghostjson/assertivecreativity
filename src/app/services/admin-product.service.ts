@@ -1,21 +1,21 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   Product,
   listAllFeatures,
   listCustomOptions,
   PriceGroup,
-  StockProduct
-} from "../models/Product";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+  StockProduct,
+} from '../models/Product';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-import { SelectItem } from "primeng/api";
-import { FormGroup, FormArray, FormBuilder, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
-import { map, take } from "rxjs/operators";
+import { SelectItem } from 'primeng/api';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AdminProductService {
   host: string;
@@ -70,17 +70,23 @@ export class AdminProductService {
     return `${this.stockProductsLink()}/${id}`;
   }
 
+  private stockProductLinkByProductKey(productKey: string): string {
+    return `${this.stockProductsLink()}/${productKey}`;
+  }
+
   /**
    * Fetch products from API
    */
   getCustomProducts(userRole: string): Observable<Product[]> {
-    if (userRole === "vendor") {
-      return this._http.get<Product[]>(`${this.vendorCustomProductsLink()}`).pipe(
-        take(1),
-        map((products: any) => {
-          return products.data as Product[];
-        })
-      );
+    if (userRole === 'vendor') {
+      return this._http
+        .get<Product[]>(`${this.vendorCustomProductsLink()}`)
+        .pipe(
+          take(1),
+          map((products: any) => {
+            return products.data as Product[];
+          })
+        );
     } else {
       return this._http.get<Product[]>(`${this.customProductsLink()}`).pipe(
         take(1),
@@ -95,15 +101,15 @@ export class AdminProductService {
    * Fetch the stock products
    * @param userRole role of the user
    */
-  getStockProducts(userRole: string): Observable<StockProduct[]> {
-    if (userRole === "vendor") {
-      return this._http.get<StockProduct[]>(`${this.vendorStockProductsLink()}`).pipe(
-        take(1)
-      );
+  getStockProducts(userRole: string): Observable<Product[]> {
+    if (userRole === 'vendor') {
+      return this._http
+        .get<Product[]>(`${this.vendorStockProductsLink()}`)
+        .pipe(take(1));
     } else {
-      return this._http.get<StockProduct[]>(`${this.stockProductsLink()}`).pipe(
-        take(1)
-      );
+      return this._http
+        .get<Product[]>(`${this.stockProductsLink()}`)
+        .pipe(take(1));
     }
   }
 
@@ -112,9 +118,19 @@ export class AdminProductService {
    * @param id id of the product
    */
   getStockProduct(id: number): Observable<StockProduct> {
-    return this._http.get<StockProduct>(`${this.stockProductLinkById(id)}`).pipe(
-      take(1)
-    );
+    return this._http
+      .get<StockProduct>(`${this.stockProductLinkById(id)}`)
+      .pipe(take(1));
+  }
+
+  /**
+   * Delete stock product by product key
+   * @param productKey product key of the stock product
+   */
+  deleteStockProduct(productKey: string): Observable<any> {
+    return this._http
+      .delete(`${this.stockProductLinkByProductKey(productKey)}`)
+      .pipe(take(1));
   }
 
   /**
@@ -205,11 +221,16 @@ export class AdminProductService {
     return this.possibleOptions;
   }
 
+  /**
+   * Upload products from excel file
+   * @param file excel file with product list
+   */
   uploadProductsExcel(file: File) {
     let newFormData = new FormData();
-    newFormData.append("sheet", file);
+    newFormData.append('sheet', file);
 
-    return this._http.post(`${this.stockProductsLink()}/excel`, newFormData)
-    .pipe(take(1));
+    return this._http
+      .post(`${this.stockProductsLink()}/excel`, newFormData)
+      .pipe(take(1));
   }
 }

@@ -154,6 +154,7 @@ import { AdminFormsQuestionMakerFileComponent } from './components/admin-forms-q
 import { CustomFormQuestionFileComponent } from './components/custom-form-question-file/custom-form-question-file.component';
 import { CategoryDropdownComponent } from './components/category-dropdown/category-dropdown.component';
 import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
+import { CustomProductImagePreviewComponent } from './components/custom-product-image-preview/custom-product-image-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -236,6 +237,7 @@ import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-cr
     CustomFormQuestionFileComponent,
     CategoryDropdownComponent,
     AdminCustomProductCrudComponent,
+    CustomProductImagePreviewComponent,
   ],
   imports: [
     /** Angular modules */
