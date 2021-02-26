@@ -118,22 +118,13 @@ import { AdminProductsListComponent } from './components/admin-products-list/adm
 import { AdminStatusCardComponent } from './components/admin-status-card/admin-status-card.component';
 import { AdminFooterComponent } from './components/admin-footer/admin-footer.component';
 import { AdminChartCardComponent } from './components/admin-chart-card/admin-chart-card.component';
-import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
-import { AdminAddProductFormComponent } from './components/admin-add-product-form/admin-add-product-form.component';
 import { AdminFormsQuestionMakerDropdownComponent } from './components/admin-forms-question-maker-dropdown/admin-forms-question-maker-dropdown.component';
 import { AdminFormsQuestionMakerRadioComponent } from './components/admin-forms-question-maker-radio/admin-forms-question-maker-radio.component';
 import { AdminFormsQuestionMakerParagraphComponent } from './components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component';
 import { AdminFormsQuestionMakerColorComponent } from './components/admin-forms-question-maker-color/admin-forms-question-maker-color.component';
 import { AdminFormsQuestionMakerDatePickerComponent } from './components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component';
-import { AdminCustomFormComponent } from './components/admin-custom-form/admin-custom-form.component';
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
-import { AdminColorOptionMakerComponent } from './components/admin-color-option-maker/admin-color-option-maker.component';
-import { AdminDropdownOptionMakerComponent } from './components/admin-dropdown-option-maker/admin-dropdown-option-maker.component';
-import { AdminRadiobtnOptionMakerComponent } from './components/admin-radiobtn-option-maker/admin-radiobtn-option-maker.component';
-import { AdminFormOptionsComponent } from './components/admin-form-options/admin-form-options.component';
 import { AdminTagSelectorComponent } from './components/admin-tag-selector/admin-tag-selector.component';
-import { AdminTextOptionMakerComponent } from './components/admin-text-option-maker/admin-text-option-maker.component';
-import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 import { AdminPriceTableInputComponent } from './components/admin-price-table-input/admin-price-table-input.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
@@ -162,6 +153,7 @@ import { CustomFormQuestionComponent } from './components/custom-form-question/c
 import { AdminFormsQuestionMakerFileComponent } from './components/admin-forms-question-maker-file/admin-forms-question-maker-file.component';
 import { CustomFormQuestionFileComponent } from './components/custom-form-question-file/custom-form-question-file.component';
 import { CategoryDropdownComponent } from './components/category-dropdown/category-dropdown.component';
+import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -193,23 +185,14 @@ import { CategoryDropdownComponent } from './components/category-dropdown/catego
     AdminStatusCardComponent,
     AdminFooterComponent,
     AdminChartCardComponent,
-    AdminAddProductComponent,
-    AdminAddProductFormComponent,
     LoaderComponent,
     ProductOptionsColorComponent,
     ProductOptionsRadioBtnComponent,
     ProductOptionsDropdownComponent,
     ProductOptionsQuestionComponent,
     OrdersComponent,
-    AdminCustomFormComponent,
     AdminCategorySelectorComponent,
-    AdminColorOptionMakerComponent,
-    AdminDropdownOptionMakerComponent,
-    AdminRadiobtnOptionMakerComponent,
-    AdminFormOptionsComponent,
     AdminTagSelectorComponent,
-    AdminTextOptionMakerComponent,
-    AdminProductEditComponent,
     AdminPriceTableInputComponent,
     AdminHeaderComponent,
     AdminSidebarComponent,
@@ -252,6 +235,7 @@ import { CategoryDropdownComponent } from './components/category-dropdown/catego
     AdminFormsQuestionMakerFileComponent,
     CustomFormQuestionFileComponent,
     CategoryDropdownComponent,
+    AdminCustomProductCrudComponent,
   ],
   imports: [
     /** Angular modules */

@@ -16,16 +16,14 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { FormViewComponent } from './pages/form-view/form-view.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
-import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
-import { AdminProductEditComponent } from './pages/admin-product-edit/admin-product-edit.component';
 import { AdminCategoryAdderComponent } from './pages/admin-category-adder/admin-category-adder.component';
 import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.component';
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
-import { AdminFormsMakerComponent } from './components/admin-forms-maker/admin-forms-maker.component';
 import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
+import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -96,16 +94,16 @@ const routes: Routes = [
   },
   {
     path: 'admin/products/add',
-    component: AdminAddProductComponent,
+    component: AdminCustomProductCrudComponent,
     canActivate: [AuthGuard],
     data: { role: 'admin' }
   },
-  {
-    path: 'admin/products/:id/edit',
-    component: AdminProductEditComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'admin' }
-  },
+  // {
+  //   path: 'admin/products/:id/edit',
+  //   component: AdminProductEditComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { role: 'admin' }
+  // },
   {
     path: 'admin/categories',
     component: AdminCategoryAdderComponent,
@@ -147,18 +145,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { role: 'vendor' }
   },
-  {
-    path: 'vendor/products/add',
-    component: AdminAddProductComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'vendor' }
-  },
-  {
-    path: 'vendor/products/:id/edit',
-    component: AdminProductEditComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'vendor' }
-  },
+  // {
+  //   path: 'vendor/products/add',
+  //   component: AdminAddProductComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { role: 'vendor' }
+  // },
+  // {
+  //   path: 'vendor/products/:id/edit',
+  //   component: AdminProductEditComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { role: 'vendor' }
+  // },
   {
     path: 'vendor/categories',
     component: AdminCategoryAdderComponent,

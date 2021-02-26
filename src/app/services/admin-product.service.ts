@@ -91,6 +91,10 @@ export class AdminProductService {
     }
   }
 
+  /**
+   * Fetch the stock products
+   * @param userRole role of the user
+   */
   getStockProducts(userRole: string): Observable<StockProduct[]> {
     if (userRole === "vendor") {
       return this._http.get<StockProduct[]>(`${this.vendorStockProductsLink()}`).pipe(
@@ -113,6 +117,10 @@ export class AdminProductService {
     );
   }
 
+  /**
+   * get custom product
+   * @param id id of the product
+   */
   getCustomProduct(id: number): Observable<Product> {
     return this._http.get<Product>(`${this.customProductLinkById(id)}`).pipe(
       take(1),
@@ -195,151 +203,6 @@ export class AdminProductService {
    */
   getOptionDefinitions(): Object {
     return this.possibleOptions;
-  }
-
-  /**
-   * Create an option to insert to the custom form
-   * @param optionType specify the option to insert
-   * @param isChained specify the if the option is chained
-   */
-  newOption(
-    optionType: string,
-    isChained: boolean = false,
-    initialValue: any = null
-  ): FormGroup {
-    let optionTemplate: any = {};
-    let optionToAdd = this.possibleOptions[optionType];
-
-    if (optionToAdd) {
-      if (initialValue) {
-        optionTemplate = {
-          type: [optionToAdd.type, [Validators.required]],
-          title: [initialValue.title, [Validators.required]],
-          name: [initialValue.name, [Validators.required]],
-          price: [initialValue.price, [Validators.required]],
-          meta: this._fb.group({
-            isChained: initialValue.meta.isChained,
-          }),
-          inputs: this._fb.array([]),
-        };
-
-        initialValue.inputs.forEach((input) => {
-          optionTemplate.inputs.push(
-            this.newOptionInput(
-              initialValue.type,
-              initialValue.meta.isChained,
-              input
-            )
-          );
-        });
-      } else {
-        optionTemplate = {
-          type: [optionToAdd.type, [Validators.required]],
-          title: [null, [Validators.required]],
-          name: [optionToAdd.name, [Validators.required]],
-          price: [0, [Validators.required]],
-          meta: this._fb.group({
-            isChained: isChained,
-          }),
-          inputs: this._fb.array([]),
-        };
-      }
-
-      return this._fb.group(optionTemplate);
-    } else {
-      console.error("Selected feature not found!");
-      return null;
-    }
-  }
-
-  /**
-   * add option to an options form array
-   * @param options form array to add the option
-   * @param optionType type of the option to add
-   */
-  addOption(
-    optionType: string,
-    options: FormArray,
-    isChained: boolean = false
-  ): void {
-    let newOption: FormGroup = this.newOption(optionType, isChained);
-
-    if (newOption != null) {
-      // add the new option to options form array of the form
-      options.push(newOption);
-    } else {
-      console.error("option could not be created!!");
-    }
-  }
-
-  // remove option from the custom form
-  removeOption(optionId: number, options: FormArray): void {
-    options.removeAt(optionId);
-  }
-
-  /**
-   * construct a form group for taking new option's input
-   * @param inputType type of the option
-   * @param isChained true if the input is chained
-   */
-  newOptionInput(
-    inputType: string,
-    isChained: boolean = false,
-    initialValue: any = null
-  ): FormGroup {
-    // create the input formgroup
-    let newInput: Object = {};
-
-    if (initialValue) {
-      this.possibleOptions[inputType].inputs.forEach((input: any) => {
-        newInput[input.name] = initialValue[input.name];
-      });
-    } else {
-      this.possibleOptions[inputType].inputs.forEach((input: any) => {
-        newInput[input.name] = null;
-      });
-    }
-
-    // add a form array for chained options if the option is not chained
-    if (!isChained) {
-      // add a form array for storing the chained options
-      newInput["chained_options"] = this._fb.array([]) as FormArray;
-      if (initialValue) {
-        initialValue.chained_options.forEach((chainedOption: any) => {
-          newInput["chained_options"].push(
-            this.newOption(chainedOption.type, true, chainedOption)
-          );
-        });
-      }
-
-      // form control for specifying the chained option to insert during runtime
-      newInput["selectedChainedOption"] = null;
-    }
-
-    return this._fb.group(newInput);
-  }
-
-  /**
-   * add input to the corresponding option
-   * @param inputType type of option to insert
-   * @param inputs form array to add the inputs
-   * @param formGroup form group of the inputs form array
-   */
-  addOptionInput(
-    inputType: string,
-    inputs: FormArray,
-    formGroup: FormGroup
-  ): void {
-    inputs.push(this.newOptionInput(inputType, formGroup.value.meta.isChained));
-  }
-
-  /**
-   * remove the input from an option
-   * @param inputs Formarray of inputs
-   * @param inputId input index/id in the inputs form array
-   */
-  removeOptionInput(inputId: number, inputs: FormArray): void {
-    inputs.removeAt(inputId);
   }
 
   uploadProductsExcel(file: File) {

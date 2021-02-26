@@ -1,7 +1,6 @@
 import { SelectItem } from 'primeng/api';
 import { FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { Category } from './Category';
-import { StringifyOptions } from 'querystring';
 
 // features avalilable for products
 const PRODUCT_FEATURES: Object = {
@@ -231,60 +230,6 @@ export class Product {
   }
 }
 
-/**
- * Model for product forms
- */
-export class ProductForm {
-  id?: FormControl;
-  name: FormControl;
-  serial: FormControl;
-  description: FormControl;
-  category: FormControl;
-  tags: FormControl;
-  base_price: FormControl;
-  stock: FormControl;
-  stock_status: FormControl;
-  sales: FormControl;
-  image: FormControl;
-  price_table_mode: FormControl;
-  price_table: FormArray;
-  features?: FormArray;
-  custom_forms?: FormArray;
-
-  constructor(initial: ProductForm = null) {
-    if (initial) {
-      this.id = initial.id;
-      this.name = initial.name;
-      this.serial = initial.serial;
-      this.description = initial.description;
-      this.category = initial.category;
-      this.tags = initial.tags;
-      this.base_price = initial.base_price;
-      this.stock = initial.stock;
-      this.stock_status = initial.stock_status;
-      this.sales = initial.sales;
-      this.image = initial.image;
-      this.price_table_mode = initial.price_table_mode;
-      this.price_table = initial.price_table;
-      this.custom_forms = initial.custom_forms;
-    } else {
-      this.name = _fb.control(null);
-      this.serial = _fb.control(null);
-      this.description = _fb.control(null);
-      this.category = _fb.control('none');
-      this.tags = _fb.control([]);
-      this.base_price = _fb.control(0);
-      this.stock = _fb.control(0);
-      this.stock_status = _fb.control('outofstock');
-      this.sales = _fb.control(0);
-      this.image = _fb.control(null);
-      this.price_table_mode = _fb.control(false);
-      this.price_table = _fb.array([_fb.group(new PriceGroup())]);
-      this.custom_forms = _fb.array([]);
-    }
-  }
-}
-
 export class Option {
   name: string;
   title: string;
@@ -374,11 +319,25 @@ export class StockProductAttributes {
   price_table?: PriceTable;
 }
 
-export class ProductAttribute {
+export interface ProductAttribute {
   id?: number;
+  type: string;
   label: string;
   value: any;
-  inactive?: boolean;
+  image?: ProductImage;
+  cost?: number;
+  price: number;
+  show: boolean;
 }
 
-export class ColorAttribute extends ProductAttribute {}
+export interface ProductImage {
+  front_view?: Image;
+  back_view?: Image;
+  left_view?: Image;
+  right_view?: Image;
+}
+
+export interface Image {
+  src: string;
+  alt_text?: string;
+}

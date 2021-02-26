@@ -5,7 +5,6 @@ import { CommonService } from 'src/app/common.service';
 import { CartItem } from 'src/app/models/Cart';
 import {
   PriceGroup,
-  ProductAttribute,
   StockProduct,
   StockProductAttributes,
 } from 'src/app/models/Product';

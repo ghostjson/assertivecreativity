@@ -5,8 +5,8 @@ import {
   listAllFeatures,
   CustomForm,
   PriceTable,
-  ColorAttribute,
   StockProduct,
+  ProductAttribute,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -122,11 +122,13 @@ export class ProductService {
       take(1),
       map((productRes: StockProduct) => {
         productRes.attributes.colors = productRes.attributes.colors.map(
-          (color: string): ColorAttribute => {
+          (color: string): ProductAttribute => {
             return {
               label: color,
               value: color,
-              inactive: false
+              show: true,
+              price: 0,
+              type: 'color'
             };
           }
         );

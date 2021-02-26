@@ -1,4 +1,7 @@
-$accent-color: #4056A1;
+/**
+  Color Palette
+**/
+$accent-color: #4056a1;
 $dark-grey: #828282;
 $light-grey: #f1f1f1;
 $lighter-grey: #f9f9f9;
@@ -13,43 +16,108 @@ $dark-color-focus: rgba(43, 43, 43, 0.76);
 $dark-color-active: rgba(43, 43, 43, 0.68);
 $bg-primary: linear-gradient(90deg, #cc9933 0%, #e1b458 100%);
 $bg-primary-hover: rgba(204, 153, 51, 0.4);
-$bg-primary-transparent: linear-gradient(90deg, rgba(204, 153, 51, 0.9) 0%, rgba(225, 180, 88, 0.9) 100%);
-$bg-danger: linear-gradient(90deg, #FF414D 0%, #f85161 100%);
-$bg-warning: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
-$bg-success: linear-gradient(90deg, #21BF73 0%, #28DF99 100%);
+$bg-primary-transparent: linear-gradient(
+  90deg,
+  rgba(204, 153, 51, 0.9) 0%,
+  rgba(225, 180, 88, 0.9) 100%
+);
+$bg-danger: linear-gradient(90deg, #ff414d 0%, #f85161 100%);
+$bg-warning: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
+$bg-success: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
 $danger-color: #f85161;
-$danger-color-grad: linear-gradient(90deg, #FF414D 0%, #f85161 100%);
-$warning-color-grad: linear-gradient(90deg, #F6D743 0%, #F6F578 100%);
-$success-color: #28DF99;
+$danger-color-grad: linear-gradient(90deg, #ff414d 0%, #f85161 100%);
+$warning-color-grad: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
+$success-color: #28df99;
+
+/**
+  Font Styles
+**/
+$font-headline1: (
+  font-size: 96,
+);
+$font-headline2: (
+  font-size: 60,
+);
+$font-headline3: (
+  font-size: 48,
+);
+$font-headline4: (
+  font-size: 34,
+);
+$font-headline5: (
+  font-size: 24,
+);
+$font-headline6: (
+  font-size: 20,
+);
+$font-body: (
+  font-size: 14,
+);
+$font-subtitle: (
+  font-size: 14,
+);
+$font-button: (
+  font-size: 14,
+);
+$font-overline: (
+  font-size: 10,
+);
+$font-caption: (
+  font-size: 12,
+);
 
 /**
   Shadows
 **/
-$small-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
-$regular-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-$large-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+$small-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+$regular-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+$large-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 
-$shadow-1: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-$shadow-2: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-$shadow-3: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
-$shadow-4: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
-$shadow-5: 0 3px 5px -1px rgba(0,0,0,.2), 0 5px 8px 0 rgba(0,0,0,.14), 0 1px 14px 0 rgba(0,0,0,.12);
-$shadow-6: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
-$shadow-7: 0 4px 5px -2px rgba(0,0,0,.2), 0 7px 10px 1px rgba(0,0,0,.14), 0 2px 16px 1px rgba(0,0,0,.12);
-$shadow-8: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
-$shadow-9: 0 5px 6px -3px rgba(0,0,0,.2), 0 9px 12px 1px rgba(0,0,0,.14), 0 3px 16px 2px rgba(0,0,0,.12);
-$shadow-10: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
-$shadow-11: 0 6px 7px -4px rgba(0,0,0,.2), 0 11px 15px 1px rgba(0,0,0,.14), 0 4px 20px 3px rgba(0,0,0,.12);
-$shadow-12: 0 7px 8px -4px rgba(0,0,0,.2), 0 12px 17px 2px rgba(0,0,0,.14), 0 5px 22px 4px rgba(0,0,0,.12);
-$shadow-13: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
-$shadow-14: 0 7px 9px -4px rgba(0,0,0,.2), 0 14px 21px 2px rgba(0,0,0,.14), 0 5px 26px 4px rgba(0,0,0,.12);
-$shadow-15: 0 8px 9px -5px rgba(0,0,0,.2), 0 15px 22px 2px rgba(0,0,0,.14), 0 6px 28px 5px rgba(0,0,0,.12);
-$shadow-16: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
-$shadow-17: 0 8px 11px -5px rgba(0,0,0,.2), 0 17px 26px 2px rgba(0,0,0,.14), 0 6px 32px 5px rgba(0,0,0,.12);
-$shadow-18: 0 9px 11px -5px rgba(0,0,0,.2), 0 18px 28px 2px rgba(0,0,0,.14), 0 7px 34px 6px rgba(0,0,0,.12);
-$shadow-19: 0 9px 12px -6px rgba(0,0,0,.2), 0 19px 29px 2px rgba(0,0,0,.14), 0 7px 36px 6px rgba(0,0,0,.12);
-$shadow-20: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
-$shadow-21: 0 10px 13px -6px rgba(0,0,0,.2), 0 21px 33px 3px rgba(0,0,0,.14), 0 8px 40px 7px rgba(0,0,0,.12);
-$shadow-22: 0 10px 14px -6px rgba(0,0,0,.2), 0 22px 35px 3px rgba(0,0,0,.14), 0 8px 42px 7px rgba(0,0,0,.12);
-$shadow-23: 0 11px 14px -7px rgba(0,0,0,.2), 0 23px 36px 3px rgba(0,0,0,.14), 0 9px 44px 8px rgba(0,0,0,.12);
-$shadow-24: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12)
+$shadow-1: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  0 1px 3px 0 rgba(0, 0, 0, 0.12);
+$shadow-2: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+  0 1px 5px 0 rgba(0, 0, 0, 0.12);
+$shadow-3: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+  0 1px 8px 0 rgba(0, 0, 0, 0.12);
+$shadow-4: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+  0 1px 10px 0 rgba(0, 0, 0, 0.12);
+$shadow-5: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14),
+  0 1px 14px 0 rgba(0, 0, 0, 0.12);
+$shadow-6: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+  0 1px 18px 0 rgba(0, 0, 0, 0.12);
+$shadow-7: 0 4px 5px -2px rgba(0, 0, 0, 0.2), 0 7px 10px 1px rgba(0, 0, 0, 0.14),
+  0 2px 16px 1px rgba(0, 0, 0, 0.12);
+$shadow-8: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+$shadow-9: 0 5px 6px -3px rgba(0, 0, 0, 0.2), 0 9px 12px 1px rgba(0, 0, 0, 0.14),
+  0 3px 16px 2px rgba(0, 0, 0, 0.12);
+$shadow-10: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
+  0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
+$shadow-11: 0 6px 7px -4px rgba(0, 0, 0, 0.2),
+  0 11px 15px 1px rgba(0, 0, 0, 0.14), 0 4px 20px 3px rgba(0, 0, 0, 0.12);
+$shadow-12: 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+  0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12);
+$shadow-13: 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+  0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+$shadow-14: 0 7px 9px -4px rgba(0, 0, 0, 0.2),
+  0 14px 21px 2px rgba(0, 0, 0, 0.14), 0 5px 26px 4px rgba(0, 0, 0, 0.12);
+$shadow-15: 0 8px 9px -5px rgba(0, 0, 0, 0.2),
+  0 15px 22px 2px rgba(0, 0, 0, 0.14), 0 6px 28px 5px rgba(0, 0, 0, 0.12);
+$shadow-16: 0 8px 10px -5px rgba(0, 0, 0, 0.2),
+  0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+$shadow-17: 0 8px 11px -5px rgba(0, 0, 0, 0.2),
+  0 17px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 32px 5px rgba(0, 0, 0, 0.12);
+$shadow-18: 0 9px 11px -5px rgba(0, 0, 0, 0.2),
+  0 18px 28px 2px rgba(0, 0, 0, 0.14), 0 7px 34px 6px rgba(0, 0, 0, 0.12);
+$shadow-19: 0 9px 12px -6px rgba(0, 0, 0, 0.2),
+  0 19px 29px 2px rgba(0, 0, 0, 0.14), 0 7px 36px 6px rgba(0, 0, 0, 0.12);
+$shadow-20: 0 10px 13px -6px rgba(0, 0, 0, 0.2),
+  0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
+$shadow-21: 0 10px 13px -6px rgba(0, 0, 0, 0.2),
+  0 21px 33px 3px rgba(0, 0, 0, 0.14), 0 8px 40px 7px rgba(0, 0, 0, 0.12);
+$shadow-22: 0 10px 14px -6px rgba(0, 0, 0, 0.2),
+  0 22px 35px 3px rgba(0, 0, 0, 0.14), 0 8px 42px 7px rgba(0, 0, 0, 0.12);
+$shadow-23: 0 11px 14px -7px rgba(0, 0, 0, 0.2),
+  0 23px 36px 3px rgba(0, 0, 0, 0.14), 0 9px 44px 8px rgba(0, 0, 0, 0.12);
+$shadow-24: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
+  0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
