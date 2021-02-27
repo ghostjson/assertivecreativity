@@ -184,7 +184,7 @@ export class ProductService {
 
     return this._http
       .post<Product[]>(
-        `${this.stockProductsLink()}/${product.id}/updated`,
+        `${this.stockProductsLink()}/${product.product_key}/updated`,
         attributeReq
       )
       .pipe(
