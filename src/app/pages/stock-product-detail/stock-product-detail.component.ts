@@ -127,6 +127,7 @@ export class StockProductDetailComponent implements OnInit {
         })
         .subscribe((updatedProducts) => {
           this.product.product = updatedProducts[0];
+          this.productSpecsTable = this.transformToTable(this.product);
           /**
            * TODO: Fix this once the primeng galleria component is fixed
            * so that the current image updates when the images list updates
@@ -165,6 +166,7 @@ export class StockProductDetailComponent implements OnInit {
         })
         .subscribe((updatedProducts) => {
           this.product.product = updatedProducts[0];
+          this.productSpecsTable = this.transformToTable(this.product);
           /**
            * TODO: Fix this once the primeng galleria component is fixed
            * so that the current image updates when the images list updates
