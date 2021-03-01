@@ -119,7 +119,6 @@ import { AdminFormsQuestionMakerColorComponent } from './components/admin-forms-
 import { AdminFormsQuestionMakerDatePickerComponent } from './components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component';
 import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
 import { AdminTagSelectorComponent } from './components/admin-tag-selector/admin-tag-selector.component';
-import { AdminPriceTableInputComponent } from './components/admin-price-table-input/admin-price-table-input.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
@@ -153,6 +152,7 @@ import { AdminCustomProductCrudFormComponent } from './components/admin-custom-p
 import { AdminCustomProductCrudFormBasicDetailsComponent } from './components/admin-custom-product-crud-form-basic-details/admin-custom-product-crud-form-basic-details.component';
 import { AdminCustomProductCrudFormProductImageComponent } from './components/admin-custom-product-crud-form-product-image/admin-custom-product-crud-form-product-image.component';
 import { ImagePickerFormComponent } from './components/image-picker-form/image-picker-form.component';
+import { AdminCustomProductCrudFormPricingComponent } from './components/admin-custom-product-crud-form-pricing/admin-custom-product-crud-form-pricing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -187,7 +187,6 @@ import { ImagePickerFormComponent } from './components/image-picker-form/image-p
     OrdersComponent,
     AdminCategorySelectorComponent,
     AdminTagSelectorComponent,
-    AdminPriceTableInputComponent,
     AdminHeaderComponent,
     AdminSidebarComponent,
     AdminNavbarComponent,
@@ -234,6 +233,7 @@ import { ImagePickerFormComponent } from './components/image-picker-form/image-p
     AdminCustomProductCrudFormBasicDetailsComponent,
     AdminCustomProductCrudFormProductImageComponent,
     ImagePickerFormComponent,
+    AdminCustomProductCrudFormPricingComponent,
   ],
   imports: [
     /** Angular modules */
@@ -298,7 +298,7 @@ import { ImagePickerFormComponent } from './components/image-picker-form/image-p
     ScrollTopModule,
     TooltipModule,
     ChartModule,
-    SlideMenuModule
+    SlideMenuModule,
   ],
   providers: [
     FormComponent,

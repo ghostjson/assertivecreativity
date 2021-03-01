@@ -225,6 +225,7 @@ export class AdminProductService {
         description: [initial.description, [Validators.required]],
         category: [initial.category, [Validators.required]],
         category_id: [initial.category_id, [Validators.required]],
+        base_cost: [initial.base_cost, [Validators.required]],
         base_price: [initial.base_price, [Validators.required]],
         stock: [initial.stock, [Validators.required]],
         sales: [initial.sales, [Validators.required]],
@@ -250,7 +251,8 @@ export class AdminProductService {
         description: ['', [Validators.required]],
         category: [null, [Validators.required]],
         category_id: [null, [Validators.required]],
-        base_price: [null, [Validators.required]],
+        base_cost: [0, [Validators.required, Validators.min(0)]],
+        base_price: [0, [Validators.required, Validators.min(0)]],
         stock: [0, [Validators.required]],
         sales: [0, [Validators.required]],
         images: this._fb.array([
@@ -302,13 +304,18 @@ export class AdminProductService {
 
     if (initial) {
       priceGroup = this._fb.group({
+        id: initial.id,
         label: [initial.label, [Validators.required]],
         price_per_piece: [initial.price_per_piece, [Validators.required]],
         quantity: [initial.quantity, [Validators.required]],
-        relation: [initial.relation, [Validators.required]],
       });
     } else {
-      priceGroup = this._fb.group(new PriceGroup());
+      priceGroup = this._fb.group({
+        id: this._idGenService.getId(),
+        label: ['', [Validators.required]],
+        price_per_piece: [null, [Validators.required]],
+        quantity: [null, [Validators.required]],
+      });
     }
 
     return priceGroup;

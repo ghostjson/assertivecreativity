@@ -935,14 +935,14 @@ p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
   background: rgba(0, 0, 0, 0.38);
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-  background: rgba(63, 81, 181, 0.5);
+  background: $primary-color--active;
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
   background: $primary-color;
 }
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
   .p-inputswitch-slider {
-  background: rgba(63, 81, 181, 0.5);
+  background: $primary-color--hover;
 }
 .p-inputswitch.p-error,
 .p-inputswitch.p-invalid {

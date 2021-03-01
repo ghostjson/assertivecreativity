@@ -51,7 +51,13 @@
         accept="image/*"
         maxFileSize="1000000"
         chooseLabel="Select Image"
+        uploadLabel="Selected"
+        cancelLabel="Selected"
         [disabled]="imageForm.value.src"
+        invalidFileSizeMessageSummary=""
+        invalidFileSizeMessageDetail="Maximum upload size is {0}"
+        invalidFileTypeMessageSummary="Invalid file type"
+        invalidFileTypeMessageDetail=""
         (onSelect)="onImgSelect($event)"
       ></p-fileUpload>
     </ng-template>

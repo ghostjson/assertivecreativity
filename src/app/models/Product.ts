@@ -9,6 +9,7 @@ export class Product {
   category?: Category;
   category_id?: number;
   tags?: string[];
+  base_cost?: number;
   base_price?: number;
   total_price?: number;
   stock?: number;
@@ -107,25 +108,11 @@ export class Product {
   updated_at?: string;
 }
 
-export class PriceGroup {
+export interface PriceGroup {
+  id?: number;
   label: string;
   price_per_piece: number;
   quantity: number;
-  relation?: string;
-
-  constructor(initial: PriceGroup = null) {
-    if (initial) {
-      this.label = initial.label;
-      this.price_per_piece = initial.price_per_piece;
-      this.quantity = initial.quantity;
-      this.relation = initial.relation;
-    } else {
-      this.label = null;
-      this.price_per_piece = null;
-      this.quantity = null;
-      this.relation = null;
-    }
-  }
 }
 
 export class PriceTable {

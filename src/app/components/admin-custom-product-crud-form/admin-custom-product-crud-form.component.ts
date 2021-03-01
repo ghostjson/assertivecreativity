@@ -15,16 +15,25 @@ export class AdminCustomProductCrudFormComponent implements OnInit {
     console.log('image form: ', this.baseProductImageForm().value);
   }
 
+  /**
+   * get the base product formgroup
+   */
   baseProductForm(): FormGroup {
     return this.productForm.get('product') as FormGroup;
   }
 
+  /**
+   * get the base product image form
+   */
   baseProductImageForm(): FormGroup {
     return (<FormArray>this.productForm.get('product.images')).at(
       0
     ) as FormGroup;
   }
 
+  /**
+   * save the product
+   */
   saveProduct(): void {
     console.log('product saved: ', this.productForm.value);
   }

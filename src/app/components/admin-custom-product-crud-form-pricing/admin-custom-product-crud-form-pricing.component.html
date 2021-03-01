@@ -1,0 +1,73 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="baseProductForm">
+    <ng-template pTemplate="header">
+      <div class="p-card-title">Pricing</div>
+      <div class="pricing-table-switch">
+        <label>
+          <span class="p-mr-1"> Pricing Table </span>
+          <p-inputSwitch formControlName="price_table_mode"></p-inputSwitch>
+        </label>
+      </div>
+    </ng-template>
+
+    <div class="base-pricing p-grid p-nogutter">
+      <div class="p-col-12 p-lg-6 p-pr-lg-2">
+        <div class="p-field p-input-filled p-fluid">
+          <label>
+            <span> base cost </span>
+            <p-inputNumber
+              type="text"
+              formControlName="base_cost"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+              placeholder="Enter the base cost of the product"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12 p-lg-6">
+        <div class="p-field p-input-filled p-fluid">
+          <label>
+            <span> Base Price </span>
+            <p-inputNumber
+              type="text"
+              formControlName="base_price"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+              placeholder="Enter the base price"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <div class="margin-profit p-d-flex p-jc-end">
+          <div class="margin-profit__attr p-mr-3">
+            <div class="p-text-bold">Profit</div>
+            <div>
+              {{
+                baseProductForm.value.base_price -
+                  baseProductForm.value.base_cost
+                  | currency: 'USD':'symbol':'1.2-2'
+              }}
+            </div>
+          </div>
+          <div class="margin-profit__attr">
+            <div class="p-text-bold">Margin</div>
+            <div>
+              {{
+                (baseProductForm.value.base_price
+                  ? (baseProductForm.value.base_price -
+                      baseProductForm.value.base_cost) /
+                    baseProductForm.value.base_price
+                  : 0
+                ) | percent: '1.2-2'
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>

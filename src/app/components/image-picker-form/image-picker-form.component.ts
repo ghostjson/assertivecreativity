@@ -8,7 +8,7 @@ import { AdminFileManagerService } from 'src/app/services/admin-file-manager/adm
   templateUrl: './image-picker-form.component.html',
   styleUrls: ['./image-picker-form.component.scss'],
 })
-export class ImagePickerFormComponent implements OnInit {
+export class ImagePickerFormComponent {
   @Input() formTitle: string;
   @Input() imageForm: FormGroup;
   @Input() styleClass: string;
@@ -19,24 +19,20 @@ export class ImagePickerFormComponent implements OnInit {
 
   constructor(private _fileManagerService: AdminFileManagerService) {}
 
-  ngOnInit(): void {
-    console.log('image form received: ', this.imageForm.value);
-  }
-
   /**
    * handle image selection and from the file upload component
    * @param event event object from file upload component
    */
   onImgSelect(event: any): void {
-    console.log(event);
-
-    this._fileManagerService
-      .convertToDataUrl(event.currentFiles[0])
-      .subscribe((dataUrl) => {
-        this.imageForm.patchValue({
-          src: dataUrl,
+    if (event.currentFiles[0]) {
+      this._fileManagerService
+        .convertToDataUrl(event.currentFiles[0])
+        .subscribe((dataUrl) => {
+          this.imageForm.patchValue({
+            src: dataUrl,
+          });
         });
-      });
+    }
   }
 
   /**
@@ -44,7 +40,6 @@ export class ImagePickerFormComponent implements OnInit {
    */
   clearSelectedImg(): void {
     this.imgFilePicker.clear();
-    console.log('clearing image: ', this.imageForm.get('src').value);
     this.imageForm.get('src').reset();
   }
 

@@ -50,6 +50,8 @@
 
       .p-fileupload {
         .p-button {
+          max-width: 150px;
+
           &.p-fileupload-choose {
             font-size: 0.875rem;
             padding: 0.62475rem 0.875rem;
@@ -58,6 +60,12 @@
               display: none;
             }
           }
+        }
+
+        .p-messages {
+          position: fixed;
+          top: 10vh;
+          right: 2vw;
         }
       }
     }
