@@ -6,35 +6,45 @@ import { FileRequest } from 'src/app/models/FileManagement';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminFileManagerService {
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   private fileLink(): string {
     return `${environment.apiUrl}/admin/file`;
   }
 
   /**
-   * upload file
-   * @param file file object to upload
+   * upload file or base64 string
+   * @param file file object or bass64 string to upload
    */
-  uploadFile(file: File): Observable<string> {
-    return this.convertToBase64(file).pipe(
-      take(1),
-      concatMap(fileString => {
-        // add the necessary headers to file string
-        fileString = `data:${file.type};base64,${fileString}`;
-        const fileReq = new FileRequest(fileString);
-        return this._http.post(`${this.fileLink()}`, fileReq).pipe(
-          take(1),
-          map((res: any) => {
-            return res.url as string;
-          })
-        );
-      })
-    )
+  uploadFile(file: File | string): Observable<string> {
+    if (file instanceof File) {
+      // if file object is passed, convert it to base64 string first
+      return this.convertToDataUrl(file).pipe(
+        take(1),
+        concatMap((fileString) => {
+          const fileReq = new FileRequest(fileString);
+          return this._http.post(`${this.fileLink()}`, fileReq).pipe(
+            take(1),
+            map((res: any) => {
+              return res.url as string;
+            })
+          );
+        })
+      );
+    } else {
+      // else if base64 string is used then directly use it to
+      // upload the file
+      const fileReq = new FileRequest(file);
+      return this._http.post(`${this.fileLink()}`, fileReq).pipe(
+        take(1),
+        map((res: any) => {
+          return res.url as string;
+        })
+      );
+    }
   }
 
   /**
@@ -48,8 +58,25 @@ export class AdminFileManagerService {
     reader.onload = (event) => {
       result.next(btoa(event.target.result.toString()));
       result.complete();
-    }
+    };
 
-    return result;
+    return result.pipe(take(1));
+  }
+
+  /**
+   * convert file object to data url for file previewing
+   * @param file file object to convert
+   */
+  convertToDataUrl(file: File): Observable<string> {
+    const reader = new FileReader();
+    const result = new Subject<string>();
+
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      result.next(<string>event.target.result);
+      result.complete();
+    };
+
+    return result.pipe(take(1));
   }
 }

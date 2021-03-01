@@ -151,6 +151,8 @@ import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-cr
 import { CustomProductImagePreviewComponent } from './components/custom-product-image-preview/custom-product-image-preview.component';
 import { AdminCustomProductCrudFormComponent } from './components/admin-custom-product-crud-form/admin-custom-product-crud-form.component';
 import { AdminCustomProductCrudFormBasicDetailsComponent } from './components/admin-custom-product-crud-form-basic-details/admin-custom-product-crud-form-basic-details.component';
+import { AdminCustomProductCrudFormProductImageComponent } from './components/admin-custom-product-crud-form-product-image/admin-custom-product-crud-form-product-image.component';
+import { ImagePickerFormComponent } from './components/image-picker-form/image-picker-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -230,6 +232,8 @@ import { AdminCustomProductCrudFormBasicDetailsComponent } from './components/ad
     CustomProductImagePreviewComponent,
     AdminCustomProductCrudFormComponent,
     AdminCustomProductCrudFormBasicDetailsComponent,
+    AdminCustomProductCrudFormProductImageComponent,
+    ImagePickerFormComponent,
   ],
   imports: [
     /** Angular modules */

@@ -8,11 +8,13 @@
         <div class="p-col-12 p-lg-6 p-p-2">
           <app-custom-product-image-preview
             viewType="Front View"
+            [baseImage]="productForm.value.product.images[0].front_view.src"
           ></app-custom-product-image-preview>
         </div>
         <div class="p-col-12 p-lg-6 p-p-2">
           <app-custom-product-image-preview
             viewType="Back View"
+            [baseImage]="productForm.value.product.images[0].back_view.src"
           ></app-custom-product-image-preview>
         </div>
       </div>

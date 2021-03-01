@@ -3546,7 +3546,7 @@ a.p-button.p-button-success.p-button-outlined,
   text-transform: capitalize;
   font-size: 1.15rem;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  // margin-bottom: 0.5rem;
 }
 .p-card .p-card-subtitle {
   font-weight: 400;
@@ -3557,7 +3557,7 @@ a.p-button.p-button-success.p-button-outlined,
   padding: 1rem 0;
 }
 .p-card .p-card-footer {
-  padding: 1rem 0 0 0;
+  // padding: 1rem 0 0 0;
 }
 
 .p-divider .p-divider-content {
@@ -4010,15 +4010,16 @@ a.p-button.p-button-success.p-button-outlined,
   margin-top: 0;
 }
 
-.p-fileupload-choose:not(.p-disabled):hover {
-  background: rgba(63, 81, 181, 0.92);
+.p-fileupload-choose:not(.p-disabled) {
+  background: $utility-color;
   color: #ffffff;
   border-color: transparent;
 }
+.p-fileupload-choose:not(.p-disabled):hover {
+  background: $utility-color--hover;
+}
 .p-fileupload-choose:not(.p-disabled):active {
-  background: rgba(63, 81, 181, 0.68);
-  color: #ffffff;
-  border-color: transparent;
+  background: $utility-color--active;
 }
 
 .p-breadcrumb {

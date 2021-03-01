@@ -1,0 +1,78 @@
+<div class="{{ styleClass }}">
+  <p-card
+    [formGroup]="imageForm"
+    [header]="formTitle"
+    styleClass="img-picker-form"
+  >
+    <div class="p-grid p-nogutter">
+      <div class="img-preview p-d-flex p-ai-center p-jc-center p-col-12 p-md-2">
+        <img
+          *ngIf="imageForm.value.src; else imgThumbnail"
+          class="img-preview__img"
+          [src]="imageForm.value.src"
+          [alt]="imageForm.value.alt_text"
+        />
+        <ng-template #imgThumbnail>
+          <i class="img-preview__thumbnail pi pi-image"></i>
+        </ng-template>
+        <div
+          *ngIf="imageForm.value.src"
+          class="img-preview__zoom-img-btn p-d-flex p-ai-center p-jc-center"
+          (click)="toggleFullScrPreview()"
+        >
+          <i class="pi pi-search-plus"></i>
+        </div>
+      </div>
+      <div class="img-metadata p-col-12 p-md-10 p-pl-2">
+        <div class="p-field p-input-filled p-fluid p-m-0">
+          <label for="image-alt-text-{{ imageForm.value.id }}">
+            Title/Alt Text
+          </label>
+          <input
+            formControlName="alt_text"
+            id="image-alt-text-{{ imageForm.value.id }}"
+            type="text"
+            placeholder="Enter the alt text for image."
+            pInputText
+          />
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        label="clear"
+        styleClass="p-button-sm p-button-danger p-button-text p-mr-2"
+        [disabled]="!imageForm.value.src"
+        (onClick)="clearSelectedImg()"
+      ></p-button>
+      <p-fileUpload
+        #imgFilePicker
+        mode="basic"
+        accept="image/*"
+        maxFileSize="1000000"
+        chooseLabel="Select Image"
+        [disabled]="imageForm.value.src"
+        (onSelect)="onImgSelect($event)"
+      ></p-fileUpload>
+    </ng-template>
+  </p-card>
+
+  <p-dialog
+    [(visible)]="imgFullScrPreview"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+    [dismissableMask]="true"
+    styleClass="fullscreen-preview"
+  >
+    <img
+      class="fullscreen-preview__img"
+      [src]="imageForm.value.src"
+      [alt]="imageForm.value.alt_text"
+    />
+    <div class="fullscreen-preview__title p-mt-2">
+      {{ imageForm.value.alt_text }}
+    </div>
+  </p-dialog>
+</div>

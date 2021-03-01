@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-custom-product-crud-form',
@@ -11,10 +11,18 @@ export class AdminCustomProductCrudFormComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('image form: ', this.baseProductImageForm().value);
+  }
 
   baseProductForm(): FormGroup {
     return this.productForm.get('product') as FormGroup;
+  }
+
+  baseProductImageForm(): FormGroup {
+    return (<FormArray>this.productForm.get('product.images')).at(
+      0
+    ) as FormGroup;
   }
 
   saveProduct(): void {

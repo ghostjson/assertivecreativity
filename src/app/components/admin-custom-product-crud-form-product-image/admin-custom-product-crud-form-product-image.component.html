@@ -1,0 +1,16 @@
+<p-card
+  [formGroup]="imageForm"
+  styleClass="p-mt-3 {{ styleClass }}"
+  header="base product image"
+>
+  <app-image-picker-form
+    styleClass="p-mt-3"
+    [imageForm]="frontView()"
+    formTitle="front view"
+  ></app-image-picker-form>
+  <app-image-picker-form
+    styleClass="p-mt-3"
+    [imageForm]="backView()"
+    formTitle="back view"
+  ></app-image-picker-form>
+</p-card>

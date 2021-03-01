@@ -184,6 +184,36 @@ export class AdminProductService {
 
   /********************** PRODUCT CREATION FUNCTIONS ***********************/
 
+  /**
+   * create formgroup for picking images
+   * @param initial initial state of the image form
+   */
+  createImgForm(initial?: ImageDetails): FormGroup {
+    let imgFormTemplate = null;
+
+    if (initial) {
+      imgFormTemplate = {
+        id: [initial.id, [Validators.required]],
+        src: [initial.src, [Validators.required]],
+        alt_text: [initial.alt_text, [Validators.required]],
+        title: initial.title,
+      };
+    } else {
+      imgFormTemplate = {
+        id: [this._idGenService.getId(), [Validators.required]],
+        src: ['', [Validators.required]],
+        alt_text: ['', [Validators.required]],
+        title: '',
+      };
+    }
+
+    return this._fb.group(imgFormTemplate);
+  }
+
+  /**
+   * create formgroup for base details of the custom product form
+   * @param initial initial state of the product base form
+   */
   createCustomProductBaseForm(initial?: Product): FormGroup {
     let baseFormTemplate = null;
 
@@ -200,8 +230,8 @@ export class AdminProductService {
         sales: [initial.sales, [Validators.required]],
         images: this._fb.array([
           this._fb.group({
-            front_view: [initial.images[0].front_view, [Validators.required]],
-            back_view: [initial.images[0].back_view, [Validators.required]],
+            front_view: this.createImgForm(initial.images[0].front_view),
+            back_view: this.createImgForm(initial.images[0].back_view),
           }),
         ]),
         price_table_mode: [initial.price_table_mode, [Validators.required]],
@@ -225,8 +255,8 @@ export class AdminProductService {
         sales: [0, [Validators.required]],
         images: this._fb.array([
           this._fb.group({
-            front_view: [new ImageDetails(), [Validators.required]],
-            back_view: [new ImageDetails(), [Validators.required]],
+            front_view: this.createImgForm(),
+            back_view: this.createImgForm(),
           }),
         ]),
         price_table_mode: [false, [Validators.required]],
@@ -238,6 +268,10 @@ export class AdminProductService {
     return this._fb.group(baseFormTemplate);
   }
 
+  /**
+   * create a formgroup for the new custom product form
+   * @param initial initial state of the product form
+   */
   createCustomProductForm(initial?: CustomProduct): FormGroup {
     let newProductFormTemplate = null;
 

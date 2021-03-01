@@ -180,13 +180,8 @@ export interface ProductImage {
 }
 
 export class ImageDetails {
+  id?: number;
   src: string;
   alt_text?: string;
   title?: string;
-
-  constructor() {
-    this.src = '';
-    this.alt_text = '';
-    this.title = '';
-  }
 }

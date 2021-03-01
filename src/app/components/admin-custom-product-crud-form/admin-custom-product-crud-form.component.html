@@ -1,5 +1,5 @@
 <form [formGroup]="productForm" class="form" (ngSubmit)="saveProduct()">
-  <div class="form-header p-mb-3 p-d-flex p-jc-between p-ai-center">
+  <div class="form-header p-d-flex p-jc-between p-ai-center">
     <h2 class="form-header__title font-headline5 p-m-0">Product Details</h2>
     <div class="form-header__tools">
       <p-button
@@ -18,5 +18,8 @@
     <app-admin-custom-product-crud-form-basic-details
       [baseProductForm]="baseProductForm()"
     ></app-admin-custom-product-crud-form-basic-details>
+    <app-admin-custom-product-crud-form-product-image
+      [imageForm]="baseProductImageForm()"
+    ></app-admin-custom-product-crud-form-product-image>
   </div>
 </form>

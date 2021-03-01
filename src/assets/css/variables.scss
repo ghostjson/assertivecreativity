@@ -19,6 +19,18 @@ $success-color: rgba(40, 223, 153, 1);
 $success-color--hover: rgba(40, 223, 153, 0.92);
 $success-color--focus: rgba(40, 223, 153, 0.76);
 $success-color--active: rgba(40, 223, 153, 0.68);
+$danger-color: rgba(248, 81, 97, 1);
+$danger-color--hover: rgba(248, 81, 97, 0.92);
+$danger-color--focus: rgba(248, 81, 97, 0.76);
+$danger-color--active: rgba(248, 81, 97, 0.68);
+$warning-color: rgba(253, 222, 73, 1);
+$warning-color--hover: rgba(253, 222, 73, 0.92);
+$warning-color--focus: rgba(253, 222, 73, 0.76);
+$warning-color--active: rgba(253, 222, 73, 0.68);
+$utility-color: rgba(54, 125, 240, 1);
+$utility-color--hover: rgba(54, 125, 240, 0.92);
+$utility-color--focus: rgba(54, 125, 240, 0.76);
+$utility-color--active: rgba(54, 125, 240, 0.68);
 $bg-primary: linear-gradient(90deg, #cc9933 0%, #e1b458 100%);
 $bg-primary-hover: rgba(204, 153, 51, 0.4);
 $bg-primary-transparent: linear-gradient(
@@ -29,7 +41,6 @@ $bg-primary-transparent: linear-gradient(
 $bg-danger: linear-gradient(90deg, #ff414d 0%, #f85161 100%);
 $bg-warning: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
 $bg-success: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
-$danger-color: #f85161;
 $danger-color-grad: linear-gradient(90deg, #ff414d 0%, #f85161 100%);
 $warning-color-grad: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
 

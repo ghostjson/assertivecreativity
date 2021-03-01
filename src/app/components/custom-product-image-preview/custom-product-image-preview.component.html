@@ -1,15 +1,9 @@
 <div class="img-preview p-d-flex p-flex-column p-ai-center p-p-3">
   <img
-    *ngIf="baseImage; else thumbnail"
     class="img-preview__img"
-    [src]="baseImage"
+    [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
     [alt]="baseImageAltText"
-  >
-  <ng-template #thumbnail>
-    <div class="img-preview__thumb p-d-flex p-ai-center">
-      <i class="pi pi-image"></i>
-    </div>
-  </ng-template>
+  />
   <h2 class="img-preview__title font-headline5 p-as-start">
     {{ viewType }}
   </h2>

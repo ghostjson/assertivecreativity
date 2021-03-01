@@ -1,0 +1,105 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .img-preview {
+      position: relative;
+      border: 1px solid $light-grey;
+      border-radius: 4px;
+      overflow: hidden;
+      max-height: 6rem;
+
+      &:hover {
+        .img-preview__zoom-img-btn {
+          opacity: 1;
+        }
+      }
+
+      &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &__thumbnail {
+        color: $dark-grey;
+      }
+
+      &__zoom-img-btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        opacity: 0;
+        transition: all 0.3s;
+        border-radius: 4px;
+        cursor: pointer;
+
+        i {
+          color: white;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .p-card-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      .p-fileupload {
+        .p-button {
+          &.p-fileupload-choose {
+            font-size: 0.875rem;
+            padding: 0.62475rem 0.875rem;
+
+            .p-button-icon {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .fullscreen-preview {
+      box-shadow: none;
+      height: 90vh;
+      width: auto;
+      max-width: 90vw;
+
+      .p-dialog-header {
+        background: transparent;
+        padding: 0 0 1em 0;
+        justify-content: flex-end;
+
+        .p-dialog-header-icon {
+          color: white;
+          font-size: 2rem;
+        }
+      }
+
+      .p-dialog-content {
+        padding: 0;
+        color: white;
+        background: transparent;
+        height: 90%;
+        width: auto;
+        overflow-y: visible;
+
+        .fullscreen-preview__img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        .fullscreen-preview__title {
+          font-size: 1.1rem;
+          font-weight: 500;
+          text-transform: capitalize;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
