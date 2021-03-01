@@ -94,13 +94,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { FormViewComponent } from './pages/form-view/form-view.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { CustomProductDetailComponent } from './pages/custom-product-detail/custom-product-detail.component';
-import { ProductOptionsColorComponent } from './components/product-options-color/product-options-color.component';
-import { ProductOptionsRadioBtnComponent } from './components/product-options-radio-btn/product-options-radio-btn.component';
-import { ProductOptionsDropdownComponent } from './components/product-options-dropdown/product-options-dropdown.component';
-import { ProductOptionsQuestionComponent } from './components/product-options-question/product-options-question.component';
 import { OrdersComponent } from './pages/orders/orders.component';
-import { ProductOptionsComponent } from './components/product-options/product-options.component';
 import { FeaturedProductSliderComponent } from './components/featured-product-slider/featured-product-slider.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { CartItemDetailComponent } from './pages/cart-item-detail/cart-item-detail.component';
@@ -155,6 +149,8 @@ import { CustomFormQuestionFileComponent } from './components/custom-form-questi
 import { CategoryDropdownComponent } from './components/category-dropdown/category-dropdown.component';
 import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
 import { CustomProductImagePreviewComponent } from './components/custom-product-image-preview/custom-product-image-preview.component';
+import { AdminCustomProductCrudFormComponent } from './components/admin-custom-product-crud-form/admin-custom-product-crud-form.component';
+import { AdminCustomProductCrudFormBasicDetailsComponent } from './components/admin-custom-product-crud-form-basic-details/admin-custom-product-crud-form-basic-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -179,7 +175,6 @@ import { CustomProductImagePreviewComponent } from './components/custom-product-
     FormViewComponent,
     CartComponent,
     CheckoutComponent,
-    CustomProductDetailComponent,
     AdminDashboardComponent,
     AdminProductsComponent,
     AdminProductsListComponent,
@@ -187,10 +182,6 @@ import { CustomProductImagePreviewComponent } from './components/custom-product-
     AdminFooterComponent,
     AdminChartCardComponent,
     LoaderComponent,
-    ProductOptionsColorComponent,
-    ProductOptionsRadioBtnComponent,
-    ProductOptionsDropdownComponent,
-    ProductOptionsQuestionComponent,
     OrdersComponent,
     AdminCategorySelectorComponent,
     AdminTagSelectorComponent,
@@ -198,7 +189,6 @@ import { CustomProductImagePreviewComponent } from './components/custom-product-
     AdminHeaderComponent,
     AdminSidebarComponent,
     AdminNavbarComponent,
-    ProductOptionsComponent,
     AdminCategoryAdderComponent,
     AdminTagAdderComponent,
     FeaturedProductSliderComponent,
@@ -238,6 +228,8 @@ import { CustomProductImagePreviewComponent } from './components/custom-product-
     CategoryDropdownComponent,
     AdminCustomProductCrudComponent,
     CustomProductImagePreviewComponent,
+    AdminCustomProductCrudFormComponent,
+    AdminCustomProductCrudFormBasicDetailsComponent,
   ],
   imports: [
     /** Angular modules */

@@ -14,11 +14,11 @@
             [numVisible]="5"
           >
             <ng-template pTemplate="item" let-item>
-              <img [src]="item.src" alt="{{ item.title }}" />
+              <img [src]="item.front_view.src" alt="{{ item.front_view.title }}" />
             </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
               <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.src" alt="{{ item.title }}" />
+                <img [src]="item.front_view.src" alt="{{ item.front_view.title }}" />
               </div>
             </ng-template>
           </p-galleria>

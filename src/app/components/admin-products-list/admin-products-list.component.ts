@@ -35,13 +35,13 @@ export class AdminProductsListComponent implements OnInit {
     this.user = this._userDetailsService.getUserLocal();
     this._productService
       .getStockProducts(this.user.role)
-      .subscribe(stockProducts => {
+      .subscribe((stockProducts) => {
         this.stockProducts = stockProducts;
       });
 
     this._productService
       .getCustomProducts(this.user.role)
-      .subscribe(customProducts => {
+      .subscribe((customProducts) => {
         this.customProducts = customProducts;
       });
 
@@ -68,7 +68,7 @@ export class AdminProductsListComponent implements OnInit {
               .subscribe({
                 complete: () => {
                   // delete from local
-                  this.stockProducts = this.stockProducts.filter(value => {
+                  this.stockProducts = this.stockProducts.filter((value) => {
                     return value.product_key !== product.product_key;
                   });
 
@@ -93,7 +93,7 @@ export class AdminProductsListComponent implements OnInit {
           // delete from the server
           this._productService.deleteCustomProduct(product.id).subscribe({
             complete: () => {
-              this.customProducts = this.customProducts.filter(value => {
+              this.customProducts = this.customProducts.filter((value) => {
                 return value.id !== product.id;
               });
               this._messageService.add({
@@ -126,7 +126,6 @@ export class AdminProductsListComponent implements OnInit {
 
     duplicate.id = null;
     duplicate.category_id = product.category.id;
-    duplicate.serial = product.serial + '-copy';
 
     // add the product to products
     this._productService.addCustomProduct(duplicate).subscribe((res: any) => {
@@ -174,7 +173,7 @@ export class AdminProductsListComponent implements OnInit {
 
         this._productService
           .getStockProducts(this.user.role)
-          .subscribe(stockProducts => {
+          .subscribe((stockProducts) => {
             this.stockProducts = stockProducts;
           });
       });

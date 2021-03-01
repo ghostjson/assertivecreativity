@@ -1,0 +1,48 @@
+<div [formGroup]="baseProductForm">
+  <p-card header="basic product details">
+    <div class="p-field p-input-filled p-fluid">
+      <label for="product-name">
+        product name
+        <sup class="required-superscript"> * </sup>
+      </label>
+      <input
+        class="ng-invalid"
+        id="product-name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter the product name"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-input-filled p-fluid">
+      <label for="product-id">
+        product ID
+        <sup class="required-superscript"> * </sup>
+      </label>
+      <input
+        class="ng-invalid"
+        id="product-id"
+        type="text"
+        formControlName="product_id"
+        placeholder="Enter the product ID"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-input-filled p-fluid">
+      <label for="product-desc">
+        product description
+        <sup class="required-superscript"> * </sup>
+      </label>
+      <textarea
+        class="ng-invalid"
+        id="product-desc"
+        formControlName="description"
+        rows="5"
+        cols="30"
+        autoResize="autoResize"
+        placeholder="Enter the product description"
+        pInputTextarea
+      ></textarea>
+    </div>
+  </p-card>
+</div>

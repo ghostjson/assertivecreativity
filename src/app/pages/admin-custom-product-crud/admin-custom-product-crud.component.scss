@@ -1,0 +1,16 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .product-views-panel {
+      height: 100%;
+    }
+
+    .form-panel {
+      height: 100vh;
+      overflow-y: auto;
+      border-left: 1px solid $light-grey;
+      background-color: $bg-color;
+    }
+  }
+}

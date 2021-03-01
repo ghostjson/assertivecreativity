@@ -1,5 +1,5 @@
-@import "./assets/css/variables.scss";
-@import "./assets/css/bootstrap-container.css";
+@import './assets/css/variables.scss';
+@import './assets/css/bootstrap-container.css';
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -22,43 +22,43 @@
 
 /* roboto-regular - latin-ext_latin */
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local("Roboto"), local("Roboto-Regular"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff2")
-      format("woff2"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-regular.woff") format("woff");
+  src: local('Roboto'), local('Roboto-Regular'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-regular.woff2')
+      format('woff2'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-regular.woff') format('woff');
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-500 - latin-ext_latin */
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local("Roboto Medium"), local("Roboto-Medium"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff2") format("woff2"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-500.woff") format("woff");
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-500.woff2') format('woff2'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-500.woff') format('woff');
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-700 - latin-ext_latin */
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: local("Roboto Bold"), local("Roboto-Bold"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff2") format("woff2"),
-    url("./assets/fonts/roboto-v20-latin-ext_latin-700.woff") format("woff");
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-700.woff2') format('woff2'),
+    url('./assets/fonts/roboto-v20-latin-ext_latin-700.woff') format('woff');
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /* roboto-900 */
 @font-face {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 900;
-  src: local("Roboto Black"),
-    url("./assets/fonts/Roboto-Black.ttf") format("truetype");
+  src: local('Roboto Black'),
+    url('./assets/fonts/Roboto-Black.ttf') format('truetype');
 }
 
 html,
@@ -69,9 +69,10 @@ body {
   height: 100%;
   background: $lighter-grey;
   color: $dark-color;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-size: 14px;
   min-height: 600px;
+  line-height: 1.5;
 }
 
 img {
@@ -80,6 +81,14 @@ img {
 
 p {
   line-height: 1.8;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+textarea {
+  line-height: inherit;
 }
 
 .highlight {
@@ -117,6 +126,11 @@ p {
   border: 0;
 }
 
+.required-superscript {
+  color: $danger-color;
+  font-size: $font-size-caption;
+}
+
 .bg-success {
   background: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
 }
@@ -141,11 +155,57 @@ p {
   position: sticky;
   top: 10px;
 }
+
+.font-headline1 {
+  font-size: $font-size-headline1;
+}
+
+.font-headline2 {
+  font-size: $font-size-headline2;
+}
+
+.font-headline3 {
+  font-size: $font-size-headline3;
+}
+
+.font-headline4 {
+  font-size: $font-size-headline4;
+}
+
+.font-headline5 {
+  font-weight: 500;
+  font-size: $font-size-headline5;
+}
+
+.font-headline6 {
+  font-size: $font-size-headline6;
+}
+
+.font-body {
+  font-size: $font-size-body;
+}
+
+.font-subtitle {
+  font-size: $font-size-subtitle;
+}
+
+.font-button {
+  font-size: $font-size-button;
+}
+
+.font-overline {
+  font-size: $font-size-overline;
+}
+
+.font-caption {
+  font-size: $font-size-caption;
+}
+
 /**
  * utility classes for the project ends
  */
 
-@import "./assets/css/primeng-theme-edited.scss";
+@import './assets/css/primeng-theme-edited.scss';
 
 /**
   For angular cdk drag preview

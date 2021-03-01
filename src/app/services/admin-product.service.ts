@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
   Product,
-  listAllFeatures,
-  listCustomOptions,
   PriceGroup,
   StockProduct,
+  CustomProduct,
+  ProductAttribute,
+  ImageDetails,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -13,6 +14,7 @@ import { SelectItem } from 'primeng/api';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { IdGeneratorService } from './id-generator.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +25,14 @@ export class AdminProductService {
 
   possibleOptions: Object;
 
-  constructor(private _http: HttpClient, private _fb: FormBuilder) {
+  constructor(
+    private _http: HttpClient,
+    private _fb: FormBuilder,
+    private _idGenService: IdGeneratorService
+  ) {
     this.host = environment.apiUrl;
 
     this.API_URL = environment.apiUrl;
-
-    // initialise the possible options
-    this.possibleOptions = listAllFeatures();
   }
 
   /**
@@ -179,10 +182,88 @@ export class AdminProductService {
       .pipe(take(1));
   }
 
+  /********************** PRODUCT CREATION FUNCTIONS ***********************/
+
+  createCustomProductBaseForm(initial?: Product): FormGroup {
+    let baseFormTemplate = null;
+
+    if (initial) {
+      baseFormTemplate = {
+        id: [initial.id, Validators.required],
+        name: [initial.name, [Validators.required]],
+        product_id: [initial.product_id, [Validators.required]],
+        description: [initial.description, [Validators.required]],
+        category: [initial.category, [Validators.required]],
+        category_id: [initial.category_id, [Validators.required]],
+        base_price: [initial.base_price, [Validators.required]],
+        stock: [initial.stock, [Validators.required]],
+        sales: [initial.sales, [Validators.required]],
+        images: this._fb.array([
+          this._fb.group({
+            front_view: [initial.images[0].front_view, [Validators.required]],
+            back_view: [initial.images[0].back_view, [Validators.required]],
+          }),
+        ]),
+        price_table_mode: [initial.price_table_mode, [Validators.required]],
+        price_table: this._fb.array([
+          initial.price_table.map((priceGroupConfig) => {
+            return this.newPriceGroupForm(priceGroupConfig);
+          }),
+        ]),
+        is_stock: [false, [Validators.required]],
+      };
+    } else {
+      baseFormTemplate = {
+        id: [this._idGenService.getId(), Validators.required],
+        name: ['', [Validators.required]],
+        product_id: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        category: [null, [Validators.required]],
+        category_id: [null, [Validators.required]],
+        base_price: [null, [Validators.required]],
+        stock: [0, [Validators.required]],
+        sales: [0, [Validators.required]],
+        images: this._fb.array([
+          this._fb.group({
+            front_view: [new ImageDetails(), [Validators.required]],
+            back_view: [new ImageDetails(), [Validators.required]],
+          }),
+        ]),
+        price_table_mode: [false, [Validators.required]],
+        price_table: this._fb.array([]),
+        is_stock: [false, [Validators.required]],
+      };
+    }
+
+    return this._fb.group(baseFormTemplate);
+  }
+
+  createCustomProductForm(initial?: CustomProduct): FormGroup {
+    let newProductFormTemplate = null;
+
+    if (initial) {
+      newProductFormTemplate = {
+        product: this.createCustomProductBaseForm(initial.product),
+        attributes: this._fb.array([
+          this._fb.group(new ProductAttribute(this._idGenService.getId())),
+        ]),
+      };
+    } else {
+      newProductFormTemplate = {
+        product: this.createCustomProductBaseForm(),
+        attributes: this._fb.array([
+          this._fb.group(new ProductAttribute(this._idGenService.getId())),
+        ]),
+      };
+    }
+
+    return this._fb.group(newProductFormTemplate);
+  }
+
   /**
    * Create a price group for adding to a price table
    */
-  newPriceGroup(initial: PriceGroup = null): FormGroup {
+  newPriceGroupForm(initial: PriceGroup = null): FormGroup {
     let priceGroup: FormGroup = null;
 
     if (initial) {
@@ -204,21 +285,7 @@ export class AdminProductService {
    * @param priceTable Form array representing a price table
    */
   addPriceGroup(priceTable: FormArray): void {
-    priceTable.push(this.newPriceGroup());
-  }
-
-  /**
-   * return the list of the custom options possible
-   */
-  getCustomOptions(): SelectItem[] {
-    return listCustomOptions();
-  }
-
-  /**
-   * return the form template objects for inputs in options
-   */
-  getOptionDefinitions(): Object {
-    return this.possibleOptions;
+    priceTable.push(this.newPriceGroupForm());
   }
 
   /**

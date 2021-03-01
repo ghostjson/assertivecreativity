@@ -1,0 +1,34 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .img-preview {
+      position: relative;
+      width: 100%;
+      min-height: 60vh;
+      height: auto;
+      border-radius: 4px;
+      background-color: $bg-color;
+
+      &__img {
+        width: 100%;
+        height: auto;
+        flex-grow: 1;
+        border-radius: 4px;
+      }
+
+      &__title {
+        font-weight: 900;
+        margin: 0;
+      }
+
+      &__thumb {
+        flex-grow: 1;
+
+        i {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}

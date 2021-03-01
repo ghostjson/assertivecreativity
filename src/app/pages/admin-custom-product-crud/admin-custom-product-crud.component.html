@@ -1,12 +1,27 @@
 <div>
   <app-admin-header></app-admin-header>
-  <div class="container-fluid">
-    <div class="p-grid">
-      <div class="p-col-12 p-lg-8">
-
+  <div class="p-grid p-nogutter">
+    <div class="p-col-12 p-lg-8">
+      <div
+        class="product-views-panel p-grid p-nogutter p-jc-center p-ai-center"
+      >
+        <div class="p-col-12 p-lg-6 p-p-2">
+          <app-custom-product-image-preview
+            viewType="Front View"
+          ></app-custom-product-image-preview>
+        </div>
+        <div class="p-col-12 p-lg-6 p-p-2">
+          <app-custom-product-image-preview
+            viewType="Back View"
+          ></app-custom-product-image-preview>
+        </div>
       </div>
-      <div class="p-col-12 p-lg-4">
-
+    </div>
+    <div class="p-col-12 p-lg-4">
+      <div class="form-panel p-p-3">
+        <app-admin-custom-product-crud-form
+          [productForm]="productForm"
+        ></app-admin-custom-product-crud-form>
       </div>
     </div>
   </div>

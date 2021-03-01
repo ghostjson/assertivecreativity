@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "../css/variables.scss";
+@import '../css/variables.scss';
 
 * {
   box-sizing: border-box;
@@ -25,7 +25,7 @@
 
 .p-error,
 .p-invalid {
-  color: #b00020;
+  color: $danger-color;
 }
 
 .p-text-secondary {
@@ -101,11 +101,11 @@
 }
 .p-autocomplete.p-error > .p-inputtext,
 .p-autocomplete.p-invalid > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-autocomplete.ng-dirty.ng-invalid > .p-autocomplete > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-autocomplete-panel {
@@ -139,11 +139,11 @@ p-autocomplete.ng-dirty.ng-invalid > .p-autocomplete > .p-inputtext {
 
 .p-calendar.p-error > .p-inputtext,
 .p-calendar.p-invalid > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-datepicker {
@@ -387,7 +387,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 }
 .p-cascadeselect.p-error,
 .p-cascadeselect.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-cascadeselect-panel {
@@ -491,11 +491,11 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 }
 .p-checkbox.p-error > .p-checkbox-box,
 .p-checkbox.p-invalid > .p-checkbox-box {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-input-filled .p-checkbox .p-checkbox-box {
@@ -552,11 +552,11 @@ p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
 }
 .p-chips.p-error > .p-inputtext,
 .p-chips.p-invalid > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-chips.ng-dirty.ng-invalid > .p-chips > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-colorpicker-preview {
@@ -680,11 +680,11 @@ p-chips.ng-dirty.ng-invalid > .p-chips > .p-inputtext {
 }
 .p-dropdown-panel.p-error,
 .p-dropdown-panel.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-input-filled .p-dropdown {
@@ -897,11 +897,11 @@ p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
 }
 
 p-inputmask.ng-dirty.ng-invalid > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-inputswitch {
@@ -946,11 +946,11 @@ p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {
 }
 .p-inputswitch.p-error,
 .p-inputswitch.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-inputtext {
@@ -978,7 +978,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 .p-inputtext.p-error,
 .p-inputtext.p-invalid,
 .p-inputtext.ng-dirty.ng-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 .p-inputtext.p-inputtext-sm {
   font-size: 0.875rem;
@@ -1104,11 +1104,11 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 }
 .p-listbox.p-error,
 .p-listbox.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-listbox.ng-dirty.ng-invalid > .p-listbox {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-multiselect {
@@ -1156,7 +1156,7 @@ p-listbox.ng-dirty.ng-invalid > .p-listbox {
 }
 .p-multiselect.p-error,
 .p-multiselect.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-inputwrapper-filled .p-multiselect.p-multiselect-chip .p-multiselect-label {
@@ -1253,7 +1253,7 @@ p-listbox.ng-dirty.ng-invalid > .p-listbox {
 }
 
 p-multiselect.ng-dirty.ng-invalid > .p-multiselect {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-input-filled .p-multiselect {
@@ -1319,11 +1319,11 @@ p-multiselect.ng-dirty.ng-invalid > .p-multiselect {
 }
 .p-radiobutton.p-error > .p-radiobutton-box,
 .p-radiobutton.p-invalid > .p-radiobutton-box {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-input-filled .p-radiobutton .p-radiobutton-box {
@@ -1353,7 +1353,7 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
   font-size: 1.143rem;
 }
 .p-rating .p-rating-icon.p-rating-cancel {
-  color: #b00020;
+  color: $danger-color;
 }
 .p-rating .p-rating-icon:focus {
   outline: 0 none;
@@ -1371,7 +1371,7 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
 }
 .p-rating:not(.p-disabled):not(.p-readonly)
   .p-rating-icon.p-rating-cancel:hover {
-  color: #b00020;
+  color: $danger-color;
 }
 
 .p-selectbutton .p-button {
@@ -1418,11 +1418,11 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
 }
 .p-selectbutton.p-error > .p-button,
 .p-selectbutton.p-invalid > .p-button {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-slider {
@@ -1524,11 +1524,11 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
 }
 .p-togglebutton.p-button.p-error,
 .p-togglebutton.p-button.p-invalid {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
-  border-color: #b00020;
+  border-color: $danger-color;
 }
 
 .p-button {
@@ -1540,28 +1540,29 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
+  text-transform: capitalize;
   cursor: pointer;
 }
 .p-button:enabled:hover {
-  background: $primary-color-hover;
+  background: $primary-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:hover {
-  background: $primary-color-hover;
+  background: $primary-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 .p-button:enabled:active {
-  background: $primary-color-active;
+  background: $primary-color--active;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:active {
-  background: $primary-color-active;
+  background: $primary-color--active;
   color: #ffffff;
   border-color: transparent;
 }
@@ -1572,12 +1573,12 @@ a.p-button:active {
 }
 .p-button.p-button-outlined:enabled:hover {
   background: rgba(63, 81, 181, 0.04);
-  color: $primary-color-hover;
+  color: $primary-color--hover;
   border: 1px solid;
 }
 .p-button.p-button-outlined:enabled:active {
   background: rgba(63, 81, 181, 0.16);
-  color: $primary-color-active;
+  color: $primary-color--active;
   border: 1px solid;
 }
 .p-button.p-button-outlined.p-button-plain {
@@ -1604,7 +1605,7 @@ a.p-button:active {
 }
 .p-button.p-button-text:enabled:active {
   background: rgba(63, 81, 181, 0.16);
-  color: $primary-color-active;
+  color: $primary-color--active;
   border-color: transparent;
 }
 .p-button.p-button-text.p-button-plain {
@@ -1848,7 +1849,7 @@ a.p-button.p-button-success,
 a.p-button.p-button-success:hover,
 .p-buttonset.p-button-success > .p-button:enabled:hover,
 .p-splitbutton.p-button-success > .p-button:enabled:hover {
-  background: rgba(104, 159, 56, 0.92);
+  background: $success-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
@@ -1856,13 +1857,14 @@ a.p-button.p-button-success:hover,
 a.p-button.p-button-success:focus,
 .p-buttonset.p-button-success > .p-button:enabled:focus,
 .p-splitbutton.p-button-success > .p-button:enabled:focus {
+  background: $success-color--focus;
   box-shadow: none;
 }
 .p-button.p-button-success:enabled:active,
 a.p-button.p-button-success:active,
 .p-buttonset.p-button-success > .p-button:enabled:active,
 .p-splitbutton.p-button-success > .p-button:enabled:active {
-  background: rgba(104, 159, 56, 0.68);
+  background: $success-color--active;
   color: #ffffff;
   border-color: transparent;
 }
@@ -2639,20 +2641,20 @@ a.p-button.p-button-success.p-button-outlined,
   box-shadow: none;
 }
 .fc .fc-toolbar .fc-button .fc-icon-chevron-left {
-  font-family: "PrimeIcons" !important;
+  font-family: 'PrimeIcons' !important;
   text-indent: 0;
   font-size: 1rem;
 }
 .fc .fc-toolbar .fc-button .fc-icon-chevron-left:before {
-  content: "";
+  content: '';
 }
 .fc .fc-toolbar .fc-button .fc-icon-chevron-right {
-  font-family: "PrimeIcons" !important;
+  font-family: 'PrimeIcons' !important;
   text-indent: 0;
   font-size: 1rem;
 }
 .fc .fc-toolbar .fc-button .fc-icon-chevron-right:before {
-  content: "";
+  content: '';
 }
 .fc .fc-toolbar .fc-button:focus {
   outline: 0 none;
@@ -2994,16 +2996,16 @@ a.p-button.p-button-success.p-button-outlined,
     margin-right: 0;
   }
   .p-picklist .p-picklist-transfer-buttons .pi-angle-right:before {
-    content: "";
+    content: '';
   }
   .p-picklist .p-picklist-transfer-buttons .pi-angle-double-right:before {
-    content: "";
+    content: '';
   }
   .p-picklist .p-picklist-transfer-buttons .pi-angle-left:before {
-    content: "";
+    content: '';
   }
   .p-picklist .p-picklist-transfer-buttons .pi-angle-double-left:before {
-    content: "";
+    content: '';
   }
 }
 .p-timeline .p-timeline-event-marker {
@@ -3541,8 +3543,9 @@ a.p-button.p-button-success.p-button-outlined,
   padding: 1rem;
 }
 .p-card .p-card-title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1.15rem;
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 .p-card .p-card-subtitle {
@@ -5768,10 +5771,10 @@ a.p-button.p-button-success.p-button-outlined,
   min-width: auto;
 }
 .p-button:enabled:focus {
-  background: $primary-color-focus;
+  background: $primary-color--focus;
 }
 .p-button:enabled:active {
-  background: $primary-color-active;
+  background: $primary-color--active;
 }
 .p-button .p-ink {
   background-color: rgba(255, 255, 255, 0.32);
@@ -5877,39 +5880,39 @@ a.p-button.p-button-success.p-button-outlined,
   background-color: rgba(33, 150, 243, 0.16);
 }
 
-.p-button.p-button-success:enabled:focus,
-.p-buttonset.p-button-success > .p-button:enabled:focus,
-.p-splitbutton.p-button-success > .p-button:enabled:focus {
-  background: rgba(104, 159, 56, 0.76);
-}
-.p-button.p-button-success:enabled:active,
-.p-buttonset.p-button-success > .p-button:enabled:active,
-.p-splitbutton.p-button-success > .p-button:enabled:active {
-  background: rgba(104, 159, 56, 0.68);
-}
-.p-button.p-button-success.p-button-text:enabled:focus,
-.p-button.p-button-success.p-button-outlined:enabled:focus,
-.p-buttonset.p-button-success > .p-button.p-button-text:enabled:focus,
-.p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus,
-.p-splitbutton.p-button-success > .p-button.p-button-text:enabled:focus,
-.p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus {
-  background: rgba(104, 159, 56, 0.12);
-}
-.p-button.p-button-success.p-button-text:enabled:active,
-.p-button.p-button-success.p-button-outlined:enabled:active,
-.p-buttonset.p-button-success > .p-button.p-button-text:enabled:active,
-.p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active,
-.p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active,
-.p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
-  background: rgba(104, 159, 56, 0.16);
-}
+// .p-button.p-button-success:enabled:focus,
+// .p-buttonset.p-button-success > .p-button:enabled:focus,
+// .p-splitbutton.p-button-success > .p-button:enabled:focus {
+//   background: rgba(104, 159, 56, 0.76);
+// }
+// .p-button.p-button-success:enabled:active,
+// .p-buttonset.p-button-success > .p-button:enabled:active,
+// .p-splitbutton.p-button-success > .p-button:enabled:active {
+//   background: rgba(104, 159, 56, 0.68);
+// }
+// .p-button.p-button-success.p-button-text:enabled:focus,
+// .p-button.p-button-success.p-button-outlined:enabled:focus,
+// .p-buttonset.p-button-success > .p-button.p-button-text:enabled:focus,
+// .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus,
+// .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:focus,
+// .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus {
+//   background: rgba(104, 159, 56, 0.12);
+// }
+// .p-button.p-button-success.p-button-text:enabled:active,
+// .p-button.p-button-success.p-button-outlined:enabled:active,
+// .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active,
+// .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active,
+// .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active,
+// .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
+//   background: rgba(104, 159, 56, 0.16);
+// }
 .p-button.p-button-success.p-button-text .p-ink,
 .p-button.p-button-success.p-button-outlined .p-ink,
 .p-buttonset.p-button-success > .p-button.p-button-text .p-ink,
 .p-buttonset.p-button-success > .p-button.p-button-outlined .p-ink,
 .p-splitbutton.p-button-success > .p-button.p-button-text .p-ink,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined .p-ink {
-  background-color: rgba(104, 159, 56, 0.16);
+  background-color: $success-color;
 }
 
 .p-button.p-button-warning:enabled:focus,
@@ -6137,7 +6140,7 @@ a.p-button.p-button-success.p-button-outlined,
   border-color: $primary-color;
 }
 .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon.pi-check:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 6px;
   left: 1px;
@@ -6802,7 +6805,7 @@ a.p-button.p-button-success.p-button-outlined,
   color: rgba(0, 0, 0, 0.87);
 }
 .p-steps .p-steps-item:before {
-  content: " ";
+  content: ' ';
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   width: 100%;
   top: 50%;
@@ -7116,7 +7119,6 @@ body {
   }
 }
 
-
 /**
   Admin Products list page
 **/
@@ -7238,7 +7240,6 @@ body {
     }
   }
 }
-
 
 /**
   Admin add product form component

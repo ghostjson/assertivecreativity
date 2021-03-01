@@ -45,7 +45,7 @@
           [paginator]="true"
           [globalFilterFields]="[
             'name',
-            'serial',
+            'product_id',
             'category.name',
             'base_price'
           ]"
@@ -62,7 +62,7 @@
                   class="admin-data-table-searchbar__input"
                   type="text"
                   (input)="dt.filterGlobal($event.target.value, 'contains')"
-                  placeholder="Search name, serial, category and base price"
+                  placeholder="Search name, product ID, category and base price"
                   pInputText
                 />
               </span>
@@ -178,7 +178,7 @@
           [paginator]="true"
           [globalFilterFields]="[
             'name',
-            'serial',
+            'product_id',
             'category.name',
             'base_price'
           ]"
@@ -195,7 +195,7 @@
                   class="admin-data-table-searchbar__input"
                   type="text"
                   (input)="dt.filterGlobal($event.target.value, 'contains')"
-                  placeholder="Search name, serial, category and base price"
+                  placeholder="Search name, product id, category and base price"
                   pInputText
                 />
               </span>
@@ -245,9 +245,9 @@
                 </span>
               </td>
               <td>
-                <span class="p-column-title"> Serial </span>
+                <span class="p-column-title"> Product ID </span>
                 <span>
-                  {{ product.serial }}
+                  {{ product.product_id }}
                 </span>
               </td>
               <td>

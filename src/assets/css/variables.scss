@@ -1,19 +1,24 @@
 /**
   Color Palette
 **/
+$bg-color: #ffffff;
 $accent-color: #4056a1;
 $dark-grey: #828282;
 $light-grey: #f1f1f1;
 $lighter-grey: #f9f9f9;
 $primary-color: rgb(204, 153, 51);
-$primary-color-hover: rgba(204, 153, 51, 0.92);
-$primary-color-focus: rgba(204, 153, 51, 0.76);
-$primary-color-active: rgba(204, 153, 51, 0.68);
+$primary-color--hover: rgba(204, 153, 51, 0.92);
+$primary-color--focus: rgba(204, 153, 51, 0.76);
+$primary-color--active: rgba(204, 153, 51, 0.68);
 $secondary-color: rgb(223, 239, 184);
 $dark-color: rgba(43, 43, 43, 1);
-$dark-color-hover: rgba(43, 43, 43, 0.92);
-$dark-color-focus: rgba(43, 43, 43, 0.76);
-$dark-color-active: rgba(43, 43, 43, 0.68);
+$dark-color--hover: rgba(43, 43, 43, 0.92);
+$dark-color--focus: rgba(43, 43, 43, 0.76);
+$dark-color--active: rgba(43, 43, 43, 0.68);
+$success-color: rgba(40, 223, 153, 1);
+$success-color--hover: rgba(40, 223, 153, 0.92);
+$success-color--focus: rgba(40, 223, 153, 0.76);
+$success-color--active: rgba(40, 223, 153, 0.68);
 $bg-primary: linear-gradient(90deg, #cc9933 0%, #e1b458 100%);
 $bg-primary-hover: rgba(204, 153, 51, 0.4);
 $bg-primary-transparent: linear-gradient(
@@ -27,44 +32,21 @@ $bg-success: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
 $danger-color: #f85161;
 $danger-color-grad: linear-gradient(90deg, #ff414d 0%, #f85161 100%);
 $warning-color-grad: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
-$success-color: #28df99;
 
 /**
   Font Styles
 **/
-$font-headline1: (
-  font-size: 96,
-);
-$font-headline2: (
-  font-size: 60,
-);
-$font-headline3: (
-  font-size: 48,
-);
-$font-headline4: (
-  font-size: 34,
-);
-$font-headline5: (
-  font-size: 24,
-);
-$font-headline6: (
-  font-size: 20,
-);
-$font-body: (
-  font-size: 14,
-);
-$font-subtitle: (
-  font-size: 14,
-);
-$font-button: (
-  font-size: 14,
-);
-$font-overline: (
-  font-size: 10,
-);
-$font-caption: (
-  font-size: 12,
-);
+$font-size-headline1: 96px;
+$font-size-headline2: 60px;
+$font-size-headline3: 48px;
+$font-size-headline4: 34px;
+$font-size-headline5: 24px;
+$font-size-headline6: 20px;
+$font-size-body: 14px;
+$font-size-subtitle: 14px;
+$font-size-button: 14px;
+$font-size-overline: 10px;
+$font-size-caption: 12px;
 
 /**
   Shadows

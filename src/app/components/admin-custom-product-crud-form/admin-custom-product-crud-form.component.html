@@ -1,0 +1,22 @@
+<form [formGroup]="productForm" class="form" (ngSubmit)="saveProduct()">
+  <div class="form-header p-mb-3 p-d-flex p-jc-between p-ai-center">
+    <h2 class="form-header__title font-headline5 p-m-0">Product Details</h2>
+    <div class="form-header__tools">
+      <p-button
+        type="button"
+        styleClass="p-button-text p-button-danger p-mr-2"
+        label="cancel"
+      ></p-button>
+      <p-button
+        type="submit"
+        styleClass="p-button-success p-shadow-6"
+        label="Save Product"
+      ></p-button>
+    </div>
+  </div>
+  <div class="form-content">
+    <app-admin-custom-product-crud-form-basic-details
+      [baseProductForm]="baseProductForm()"
+    ></app-admin-custom-product-crud-form-basic-details>
+  </div>
+</form>

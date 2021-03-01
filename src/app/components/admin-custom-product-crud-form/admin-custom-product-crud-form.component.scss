@@ -1,0 +1,10 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .form {
+      width: 100%;
+      background-color: $bg-color;
+    }
+  }
+}
