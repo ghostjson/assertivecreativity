@@ -120,7 +120,7 @@ export class ProductService {
             return {
               label: color,
               value: color,
-              show: true,
+              display_in_product: true,
               price: 0,
               is_attribute_group: false,
               type: 'color',

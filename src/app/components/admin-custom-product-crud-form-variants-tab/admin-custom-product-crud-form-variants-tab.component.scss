@@ -1,0 +1,49 @@
+@import '../../../assets/css/variables.scss';
+
+::ng-deep {
+  /*
+    style isolation is forced to not apply because
+    of the need of drag and drop support
+  */
+  .attr-list-item {
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    padding: 1em 1em 1em 0.5em;
+    background-color: white;
+
+    &:not(:first-child) {
+      margin-top: 1em;
+    }
+
+    &__thumb {
+      border-radius: 4px;
+      height: 70px;
+      width: 70px;
+      background: $light-color;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__drag-area {
+      align-self: flex-start;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    &__content {
+      height: 100%;
+      flex-grow: 1;
+
+      &__label {
+        font-weight: 500;
+      }
+    }
+  }
+}

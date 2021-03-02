@@ -15,23 +15,32 @@
     </div>
   </div>
   <div class="form-content">
-    <app-admin-custom-product-crud-form-basic-details
-      [baseProductForm]="baseProductForm()"
-    ></app-admin-custom-product-crud-form-basic-details>
-    <app-admin-custom-product-crud-form-product-image
-      [imageForm]="baseProductImageForm()"
-    ></app-admin-custom-product-crud-form-product-image>
-    <app-admin-custom-product-crud-form-pricing
-      [baseProductForm]="baseProductForm()"
-      styleClass="p-mt-3"
-    ></app-admin-custom-product-crud-form-pricing>
-    <app-admin-custom-product-crud-form-inventory-mgmnt
-      styleClass="p-mt-3"
-      [inventoryForm]="baseProductForm()"
-    ></app-admin-custom-product-crud-form-inventory-mgmnt>
-    <app-admin-custom-product-crud-form-order-properties
-      styleClass="p-mt-3"
-      [orderPropsForm]="orderPropsForm()"
-    ></app-admin-custom-product-crud-form-order-properties>
+    <p-tabView styleClass="p-mt-3">
+      <p-tabPanel header="base product">
+        <app-admin-custom-product-crud-form-basic-details
+          [baseProductForm]="baseProductForm()"
+        ></app-admin-custom-product-crud-form-basic-details>
+        <app-admin-custom-product-crud-form-product-image
+          [imageForm]="baseProductImageForm()"
+        ></app-admin-custom-product-crud-form-product-image>
+        <app-admin-custom-product-crud-form-pricing
+          [baseProductForm]="baseProductForm()"
+          styleClass="p-mt-3"
+        ></app-admin-custom-product-crud-form-pricing>
+        <app-admin-custom-product-crud-form-inventory-mgmnt
+          styleClass="p-mt-3"
+          [inventoryForm]="baseProductForm()"
+        ></app-admin-custom-product-crud-form-inventory-mgmnt>
+        <app-admin-custom-product-crud-form-order-properties
+          styleClass="p-mt-3"
+          [orderPropsForm]="orderPropsForm()"
+        ></app-admin-custom-product-crud-form-order-properties>
+      </p-tabPanel>
+      <p-tabPanel header="Variants">
+        <app-admin-custom-product-crud-form-variants-tab
+          [productForm]="productForm"
+        ></app-admin-custom-product-crud-form-variants-tab>
+      </p-tabPanel>
+    </p-tabView>
   </div>
 </form>

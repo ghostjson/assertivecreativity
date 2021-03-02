@@ -5,7 +5,7 @@ import {
   StockProduct,
   CustomProduct,
   ProductAttribute,
-  ImageDetails,
+  ImageObj,
   OrderProps,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
@@ -189,12 +189,12 @@ export class AdminProductService {
    * create formgroup for picking images
    * @param initial initial state of the image form
    */
-  createImgForm(initial?: ImageDetails): FormGroup {
+  createImgForm(initial?: ImageObj): FormGroup {
     let imgFormTemplate = null;
 
     if (initial) {
       imgFormTemplate = {
-        id: [initial.id, [Validators.required]],
+        id: [this._idGenService.getId(), [Validators.required]],
         src: [initial.src, [Validators.required]],
         alt_text: [initial.alt_text, [Validators.required]],
         title: initial.title,
@@ -246,7 +246,7 @@ export class AdminProductService {
 
     if (initial) {
       baseFormTemplate = {
-        id: [initial.id, Validators.required],
+        id: [this._idGenService.getId(), Validators.required],
         name: [initial.name, [Validators.required]],
         product_id: [initial.product_id, [Validators.required]],
         description: [initial.description, [Validators.required]],
@@ -299,6 +299,71 @@ export class AdminProductService {
     return this._fb.group(baseFormTemplate);
   }
 
+  createProductAttrForm(
+    type: string,
+    is_attribute_group: boolean,
+    initial?: ProductAttribute
+  ): FormGroup {
+    let prodAttrFormTemplate = null;
+
+    if (initial) {
+      prodAttrFormTemplate = {
+        id: [this._idGenService.getId(), [Validators.required]],
+        type: [initial.type, [Validators.required]],
+        label: [initial.label, [Validators.required]],
+        value: initial.value,
+        thumbnail: initial.thumbnail,
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(initial.images[0].front_view),
+            back_view: this.createImgForm(initial.images[0].back_view),
+          }),
+        ]),
+        cost: [initial.cost, [Validators.required, Validators.min(0)]],
+        price: [initial.price, [Validators.required, Validators.min(0)]],
+        display_in_product: [initial.display_in_product, [Validators.required]],
+        is_attribute_group: [initial.is_attribute_group, [Validators.required]],
+      };
+
+      // add in the child attributes if the attribute is a group
+      if (initial.is_attribute_group) {
+        prodAttrFormTemplate.child_attributes = this._fb.array(
+          initial.child_attributes.map((childAttr) => {
+            return this.createProductAttrForm(
+              childAttr.type,
+              childAttr.is_attribute_group,
+              childAttr
+            );
+          })
+        );
+      }
+    } else {
+      prodAttrFormTemplate = {
+        id: [this._idGenService.getId(), [Validators.required]],
+        type: [type, [Validators.required]],
+        label: [
+          'test label created for testing' + this._idGenService.getId(),
+          [Validators.required],
+        ],
+        value: '',
+        thumbnail: '',
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(),
+            back_view: this.createImgForm(),
+          }),
+        ]),
+        cost: [0, [Validators.required, Validators.min(0)]],
+        price: [0, [Validators.required, Validators.min(0)]],
+        display_in_product: [true, [Validators.required]],
+        is_attribute_group: [is_attribute_group, [Validators.required]],
+        child_attributes: this._fb.array([]),
+      };
+    }
+
+    return this._fb.group(prodAttrFormTemplate);
+  }
+
   /**
    * create a formgroup for the new custom product form
    * @param initial initial state of the product form
@@ -309,16 +374,20 @@ export class AdminProductService {
     if (initial) {
       newProductFormTemplate = {
         product: this.createCustomProductBaseForm(initial.product),
-        attributes: this._fb.array([
-          this._fb.group(new ProductAttribute(this._idGenService.getId())),
-        ]),
+        attributes: this._fb.array(
+          initial.attributes.map((attr) => {
+            return this.createProductAttrForm(
+              attr.type,
+              attr.is_attribute_group,
+              attr
+            );
+          })
+        ),
       };
     } else {
       newProductFormTemplate = {
         product: this.createCustomProductBaseForm(),
-        attributes: this._fb.array([
-          this._fb.group(new ProductAttribute(this._idGenService.getId())),
-        ]),
+        attributes: this._fb.array([]),
       };
     }
 
@@ -333,7 +402,7 @@ export class AdminProductService {
 
     if (initial) {
       priceGroup = this._fb.group({
-        id: initial.id,
+        id: this._idGenService.getId(),
         cost_per_piece: [
           initial.cost_per_piece,
           [Validators.required, Validators.min(0)],

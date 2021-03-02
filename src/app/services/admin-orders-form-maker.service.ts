@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { SelectItem } from "primeng/api";
-import { IdGeneratorService } from "./id-generator.service";
-import { PANTONE_COLORS } from "../../assets/js/pantone-colors";
-import { Color } from "../models/Color";
+} from '@angular/forms';
+import { SelectItem } from 'primeng/api';
+import { IdGeneratorService } from './id-generator.service';
+import { PANTONE_COLORS } from '../../assets/js/pantone-colors';
+import { Color } from '../models/Color';
 import {
   OrderFormInputConfig,
   OrderFormConfig,
@@ -17,14 +17,14 @@ import {
   OrderFormResponse,
   QUESTION_TYPES,
   OrderFormSectionConfig,
-} from "../models/OrderForm";
-import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { map, take } from "rxjs/operators";
+} from '../models/OrderForm';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AdminOrdersFormMakerService {
   componentDict: Object;
@@ -153,9 +153,9 @@ export class AdminOrdersFormMakerService {
     } else {
       questionInput = this._fb.group({
         id: this._idGenService.getId(),
-        label: "",
-        placeholder: "",
-        value: "",
+        label: '',
+        placeholder: '',
+        value: '',
         children_form_questions: this._fb.array([]),
       });
     }
@@ -170,7 +170,7 @@ export class AdminOrdersFormMakerService {
    */
   createFormQuestion(
     isChild: boolean,
-    properties: {[key: string]: any},
+    properties: { [key: string]: any },
     initial: OrderFormQuestionConfig = null
   ): FormGroup {
     let formQuestion: FormGroup = null;
@@ -196,13 +196,13 @@ export class AdminOrdersFormMakerService {
     } else {
       formQuestion = this._fb.group({
         id: this._idGenService.getId(),
-        label: "Question label " + this._idGenService.getId(),
-        placeholder: "",
-        type: "dropdown",
+        label: 'Question label ' + this._idGenService.getId(),
+        placeholder: '',
+        type: 'dropdown',
         is_child: isChild,
         properties: this._fb.group(properties),
         validators: this._fb.group({
-          required: false
+          required: false,
         }),
         inputs: this._fb.array([this.createQuestionInput()]),
       });
@@ -218,29 +218,28 @@ export class AdminOrdersFormMakerService {
   createOrderFormSection(initial: OrderFormSectionConfig = null): FormGroup {
     let formSection: FormGroup = null;
 
-    if(initial) {
+    if (initial) {
       const sectionTemplate = {
         id: initial.id ? initial.id : this._idGenService.getId(),
         title: initial.title,
         required: initial.required,
-        questions: this._fb.array([])
+        questions: this._fb.array([]),
       };
 
       // add questions to the section
-      initial.questions.forEach(question => {
+      initial.questions.forEach((question) => {
         sectionTemplate.questions.push(
           this.createFormQuestion(false, question.properties, question)
         );
       });
 
       formSection = this._fb.group(sectionTemplate);
-    }
-    else {
+    } else {
       const sectionTemplate = {
         id: this._idGenService.getId(),
         required: false,
         title: 'Section Title ' + this._idGenService.getId(),
-        questions: this._fb.array([this.createFormQuestion(false, {})])
+        questions: this._fb.array([this.createFormQuestion(false, {})]),
       };
 
       formSection = this._fb.group(sectionTemplate);
@@ -259,24 +258,20 @@ export class AdminOrdersFormMakerService {
     if (initial) {
       const mailFormTemp = {
         id: initial.id ? initial.id : this._idGenService.getId(),
-        title: [
-          initial.title,
-          [Validators.required]
-        ],
+        title: [initial.title, [Validators.required]],
         sections: this._fb.array([]),
       };
 
-      initial.sections.forEach(section => {
+      initial.sections.forEach((section) => {
         mailFormTemp.sections.push(this.createOrderFormSection(section));
       });
 
       mailForm = this._fb.group(mailFormTemp);
-    }
-    else {
+    } else {
       mailForm = this._fb.group({
         id: this._idGenService.getId(),
         title: [
-          "Form Title " + this._idGenService.getId(),
+          'Form Title ' + this._idGenService.getId(),
           [Validators.required],
         ],
         sections: this._fb.array([this.createOrderFormSection()]),
@@ -295,8 +290,8 @@ export class AdminOrdersFormMakerService {
       id: this._idGenService.getId(),
       question: question.label,
       type: question.type,
-      label: "",
-      input_value: "",
+      label: '',
+      input_value: '',
     });
 
     return mailFormEntry;
@@ -314,25 +309,5 @@ export class AdminOrdersFormMakerService {
     });
 
     return formEntry;
-  }
-
-  /**
-   * Move formgroup in a formarray
-   * @param formArray formarray to sort
-   * @param prevIndex previous index of the item
-   * @param currentIndex current index of the item
-   */
-  moveItemInFormArray(formArray: FormArray, prevIndex: number, currentIndex: number): void {
-    // let item: AbstractControl = formArray.at(prevIndex);
-    // let insertIndex = currentIndex >= prevIndex ? currentIndex + 1 : currentIndex;
-    // formArray.insert(insertIndex, item);
-
-    // let removeIndex: number = currentIndex >= prevIndex ? prevIndex : prevIndex + 1;
-    // formArray.removeAt(removeIndex);
-
-    let itemPrev: AbstractControl = formArray.at(prevIndex);
-    let itemCurr: AbstractControl = formArray.at(currentIndex);
-    formArray.setControl(prevIndex, itemCurr);
-    formArray.setControl(currentIndex, itemPrev);
   }
 }

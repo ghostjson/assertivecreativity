@@ -1,0 +1,68 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="productForm" header="variants">
+    <div
+      class="attr-list"
+      formArrayName="attributes"
+      cdkDropList
+      [cdkDropListData]="attributes().value"
+      (cdkDropListDropped)="handleDragSort($event)"
+    >
+      <div
+        *ngFor="let attr of attributes().value; index as attrIndex"
+        class="attr-list-item p-d-flex p-ai-center"
+        cdkDrag
+        cdkDragLockAxis="y"
+      >
+        <div class="attr-list-item__drag-area p-mr-1 p-pb-3" cdkDragHandle>
+          <i class="pi pi-sort"></i>
+        </div>
+        <div
+          class="attr-list-item__thumb p-d-flex p-ai-center p-jc-center p-mr-2"
+        >
+          <img
+            *ngIf="attr?.thumbnail.src; else noThumb"
+            [src]="attr?.thumbnail.src"
+            [alt]="attr?.thumbnail.alt_text"
+          />
+          <ng-template #noThumb>
+            <i class="pi pi-image"></i>
+          </ng-template>
+        </div>
+        <div class="attr-list-item__content p-mr-2">
+          <div class="attr-list-item__content__label p-mb-2">
+            {{ attr.label }}
+          </div>
+          <div
+            *ngIf="!attr.is_attribute_group"
+            class="attr-list-item__content__info"
+          >
+            <span class="p-mr-2">
+              Cost:
+              {{ attr.cost }}
+            </span>
+            <span> Price: {{ attr.price }} </span>
+          </div>
+        </div>
+        <div class="attr-list-item__tools">
+          <p-button
+            styleClass="p-button-danger p-button-text"
+            icon="pi pi-trash"
+            (onClick)="removeAttribute(attrIndex)"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="p-fluid">
+        <p-button
+          styleClass="p-button-secondary"
+          label="add variant option/ group"
+          icon="pi pi-plus"
+          iconPos="right"
+          (onClick)="addAttribute()"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

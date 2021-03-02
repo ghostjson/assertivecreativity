@@ -1,4 +1,4 @@
-@import "../../../assets/css/variables.scss";
+@import '../../../assets/css/variables.scss';
 
 :host {
   ::ng-deep {
@@ -78,7 +78,7 @@
     }
 
     .form-list__item {
-      border: 1px solid $secondary-color;
+      border: 1px solid $light-color;
       border-radius: 6px;
       padding: 1em;
       display: flex;

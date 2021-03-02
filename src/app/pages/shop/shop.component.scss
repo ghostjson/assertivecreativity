@@ -1,83 +1,83 @@
 @import '../../../assets/css/variables.scss';
 
 :host {
-	::ng-deep {
-		.p-grid {
-			margin-top: 0;
-			margin-right: 0;
-			margin-left: 0;
-		}
+  ::ng-deep {
+    .p-grid {
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0;
+    }
 
-		.filter-container {
-			background-color: white;
-			border-right: 1px solid $secondary-color;
-			padding: 0;
+    .filter-container {
+      background-color: white;
+      border-right: 1px solid $light-color;
+      padding: 0;
 
-			h3 {
-				font-size: 1.35rem;
-				padding: 1em;
-				margin: 0;
-				border-bottom: 1px solid $secondary-color;
-			}
+      h3 {
+        font-size: 1.35rem;
+        padding: 1em;
+        margin: 0;
+        border-bottom: 1px solid $light-color;
+      }
 
-			.p-accordion {
-				.p-accordion-tab {
-					box-shadow: none;
-					border-bottom: 1px solid $secondary-color;
+      .p-accordion {
+        .p-accordion-tab {
+          box-shadow: none;
+          border-bottom: 1px solid $light-color;
 
-					.p-accordion-header {
-						.p-accordion-header-link {
-							font-size: 0.9rem;
-							text-transform: uppercase;
-							font-weight: 500;
-							padding: 1em;
-						}
-					}
-	
-					.p-accordion-content {
-						padding-bottom: 0;
-					}
-				}
-			}
-		}
+          .p-accordion-header {
+            .p-accordion-header-link {
+              font-size: 0.9rem;
+              text-transform: uppercase;
+              font-weight: 500;
+              padding: 1em;
+            }
+          }
 
-		.product-list {
-			margin-top: 1em;
-			border-radius: 6px;
+          .p-accordion-content {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
 
-			.p-dataview-header {
-				border-radius: 6px;
-				border: none;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+    .product-list {
+      margin-top: 1em;
+      border-radius: 6px;
 
-				h3 {
-					margin: 0;
-					font-size: 1.75rem;
-				}
-			}
+      .p-dataview-header {
+        border-radius: 6px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-			.p-dataview-content {
-				background: transparent;
-				min-height: 90vh;
+        h3 {
+          margin: 0;
+          font-size: 1.75rem;
+        }
+      }
 
-				.p-grid {
-					.product-grid-item {
-						padding: 0.5em;
-					}
-				}
-			}
+      .p-dataview-content {
+        background: transparent;
+        min-height: 90vh;
 
-			.p-paginator-bottom {
-				border-radius: 6px;
-				border: none;
-			}
+        .p-grid {
+          .product-grid-item {
+            padding: 0.5em;
+          }
+        }
+      }
 
-			.product-grid-item {
-				display: flex;
-				justify-content: center;
-			}
-		}
-	}
+      .p-paginator-bottom {
+        border-radius: 6px;
+        border: none;
+      }
+
+      .product-grid-item {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
 }

@@ -134,6 +134,20 @@ export interface CustomProduct {
   attributes: ProductAttribute[];
 }
 
+export interface ProductAttribute {
+  id?: number;
+  type: string;
+  label: string;
+  value: any;
+  thumbnail?: ImageObj;
+  images?: ProductImage[];
+  cost?: number;
+  price: number;
+  display_in_product: boolean;
+  is_attribute_group: boolean;
+  child_attributes?: ProductAttribute[];
+}
+
 export class StockProductAttributes {
   colors?: any[];
   variant_ids?: any[];
@@ -142,32 +156,14 @@ export class StockProductAttributes {
   price_table?: PriceTable;
 }
 
-export class ProductAttribute {
-  id?: number;
-  type: string;
-  label: string;
-  value: any;
-  attribute_thumbnail?: ImageDetails;
-  image?: ProductImage;
-  cost?: number;
-  price: number;
-  show: boolean;
-  is_attribute_group: boolean;
-  child_attributes?: ProductAttribute[];
-
-  constructor(id: number) {
-    this.id = id;
-  }
-}
-
 export interface ProductImage {
-  front_view?: ImageDetails;
-  back_view?: ImageDetails;
-  left_view?: ImageDetails;
-  right_view?: ImageDetails;
+  front_view?: ImageObj;
+  back_view?: ImageObj;
+  left_view?: ImageObj;
+  right_view?: ImageObj;
 }
 
-export class ImageDetails {
+export class ImageObj {
   id?: number;
   src: string;
   alt_text?: string;

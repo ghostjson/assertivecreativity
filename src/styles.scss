@@ -97,20 +97,26 @@ textarea {
 }
 
 .cdk-drag-preview {
-  // transition: transform 25000ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: $shadow-6;
 
   &:active {
-    cursor: grab;
+    cursor: grabbing;
   }
 }
 
 .cdk-drag-placeholder {
+  opacity: 0.6;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging {
+  div {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 
 /**

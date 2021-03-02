@@ -43,7 +43,7 @@
     .toolbar__title {
       margin: 0;
     }
-    
+
     .admin-products-table {
       .admin-products-table__image-header {
         width: 4rem;
@@ -121,7 +121,7 @@
         }
 
         .p-datatable-tbody > tr {
-          border-bottom: 1px solid $secondary-color;
+          border-bottom: 1px solid $light-color;
 
           > td {
             text-align: left;

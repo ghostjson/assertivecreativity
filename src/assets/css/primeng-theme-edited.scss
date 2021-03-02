@@ -1703,13 +1703,13 @@ a.p-button.p-button-text.p-button-plain:active {
 .p-buttonset.p-button-secondary > .p-button,
 .p-splitbutton.p-button-secondary > .p-button {
   color: #ffffff;
-  background: #ff4081;
+  background: $utility-color;
   border: 0 none;
 }
 .p-button.p-button-secondary:enabled:hover,
 .p-buttonset.p-button-secondary > .p-button:enabled:hover,
 .p-splitbutton.p-button-secondary > .p-button:enabled:hover {
-  background: rgba(255, 64, 129, 0.92);
+  background: $utility-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
@@ -1721,7 +1721,7 @@ a.p-button.p-button-text.p-button-plain:active {
 .p-button.p-button-secondary:enabled:active,
 .p-buttonset.p-button-secondary > .p-button:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button:enabled:active {
-  background: rgba(255, 64, 129, 0.68);
+  background: $utility-color--active;
   color: #ffffff;
   border-color: transparent;
 }
@@ -1729,43 +1729,43 @@ a.p-button.p-button-text.p-button-plain:active {
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #ff4081;
+  color: $utility-color;
   border: 1px solid;
 }
 .p-button.p-button-secondary.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:hover {
-  background: rgba(255, 64, 129, 0.04);
-  color: #ff4081;
+  background: $utility-color-outlined--hover;
+  color: $utility-color;
   border: 1px solid;
 }
 .p-button.p-button-secondary.p-button-outlined:enabled:active,
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
-  background: rgba(255, 64, 129, 0.16);
-  color: #ff4081;
+  background: $utility-color-outlined--active;
+  color: $utility-color;
   border: 1px solid;
 }
 .p-button.p-button-secondary.p-button-text,
 .p-buttonset.p-button-secondary > .p-button.p-button-text,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text {
   background-color: transparent;
-  color: #ff4081;
+  color: $utility-color;
   border-color: transparent;
 }
 .p-button.p-button-secondary.p-button-text:enabled:hover,
 .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:hover,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:hover {
-  background: rgba(255, 64, 129, 0.04);
+  background: $utility-color-outlined--hover;
   border-color: transparent;
-  color: #ff4081;
+  color: $utility-color;
 }
 .p-button.p-button-secondary.p-button-text:enabled:active,
 .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active {
-  background: rgba(255, 64, 129, 0.16);
+  background: $utility-color-outlined--active;
   border-color: transparent;
-  color: #ff4081;
+  color: $utility-color;
 }
 
 .p-button.p-button-info,
@@ -3557,7 +3557,6 @@ a.p-button.p-button-success.p-button-outlined,
   padding: 1rem 0;
 }
 .p-card .p-card-footer {
-  // padding: 1rem 0 0 0;
 }
 
 .p-divider .p-divider-content {
@@ -3698,9 +3697,9 @@ a.p-button.p-button-success.p-button-outlined,
 }
 
 .p-tabview .p-tabview-nav {
+  position: relative;
   background: #ffffff;
-  border: solid rgba(0, 0, 0, 0.12);
-  border-width: 0 0 1px 0;
+  justify-content: space-evenly;
 }
 .p-tabview .p-tabview-nav li {
   margin-right: 0;
@@ -3717,6 +3716,7 @@ a.p-button.p-button-success.p-button-outlined,
   border-top-left-radius: 4px;
   transition: none;
   margin: 0 0 0 0;
+  text-transform: capitalize;
 }
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
   outline: 0 none;
@@ -5458,7 +5458,7 @@ a.p-button.p-button-success.p-button-outlined,
   line-height: 1.5rem;
 }
 .p-badge.p-badge-secondary {
-  background-color: #ff4081;
+  background-color: $utility-color;
   color: #ffffff;
 }
 .p-badge.p-badge-success {
@@ -5567,7 +5567,7 @@ a.p-button.p-button-success.p-button-outlined,
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .p-scrolltop.p-link {
-  background: #ff4081;
+  background: $utility-color;
 }
 .p-scrolltop.p-link:hover {
   background: rgba(255, 64, 129, 0.92);
@@ -5814,12 +5814,12 @@ a.p-button.p-button-success.p-button-outlined,
 .p-button.p-button-secondary:enabled:focus,
 .p-buttonset.p-button-secondary > .p-button:enabled:focus,
 .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
-  background: rgba(255, 64, 129, 0.76);
+  background: $utility-color--focus;
 }
 .p-button.p-button-secondary:enabled:active,
 .p-buttonset.p-button-secondary > .p-button:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button:enabled:active {
-  background: rgba(255, 64, 129, 0.68);
+  background: $utility-color--active;
 }
 .p-button.p-button-secondary.p-button-text:enabled:focus,
 .p-button.p-button-secondary.p-button-outlined:enabled:focus,
@@ -5827,7 +5827,7 @@ a.p-button.p-button-success.p-button-outlined,
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:focus,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:focus,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:focus {
-  background: rgba(255, 64, 129, 0.12);
+  background: $utility-color-outlined--focus;
 }
 .p-button.p-button-secondary.p-button-text:enabled:active,
 .p-button.p-button-secondary.p-button-outlined:enabled:active,
@@ -5835,7 +5835,7 @@ a.p-button.p-button-success.p-button-outlined,
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
-  background: rgba(255, 64, 129, 0.16);
+  background: $utility-color-outlined--active;
 }
 .p-button.p-button-secondary.p-button-text .p-ink,
 .p-button.p-button-secondary.p-button-outlined .p-ink,
@@ -5843,7 +5843,7 @@ a.p-button.p-button-success.p-button-outlined,
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined .p-ink,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text .p-ink,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined .p-ink {
-  background-color: rgba(255, 64, 129, 0.16);
+  background-color: $utility-color-outlined--active;
 }
 
 .p-button.p-button-info:enabled:focus,
@@ -6118,7 +6118,7 @@ a.p-button.p-button-success.p-button-outlined,
 }
 
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-  background: #ff4081;
+  background: $utility-color;
   color: #ffffff;
 }
 
@@ -6329,14 +6329,14 @@ a.p-button.p-button-success.p-button-outlined,
   padding: 1rem;
 }
 .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-  background: #ff4081;
+  background: $utility-color;
   color: #ffffff;
 }
 .p-galleria.p-galleria-indicator-onitem
   .p-galleria-indicators
   .p-galleria-indicator.p-highlight
   button {
-  background: rgba(255, 64, 129, 0.68);
+  background: $utility-color--active;
   color: #ffffff;
 }
 
@@ -6689,9 +6689,6 @@ a.p-button.p-button-success.p-button-outlined,
   transform: scale(1);
 }
 
-.p-tabview .p-tabview-nav {
-  position: relative;
-}
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   transition: background-color 0.2s;
   border-radius: 0;
@@ -6707,7 +6704,8 @@ a.p-button.p-button-success.p-button-outlined,
   display: block;
   position: absolute;
   bottom: 0;
-  height: 2px;
+  height: 3px;
+  border-radius: 4px 4px 0 0;
   background-color: $primary-color;
   transition: 500ms cubic-bezier(0.35, 0, 0.25, 1);
 }
@@ -6903,7 +6901,7 @@ a {
 
     &:enabled {
       &:hover {
-        border: 1px solid $secondary-color;
+        border: 1px solid $light-color;
         background-image: none;
       }
 
@@ -6994,7 +6992,7 @@ a {
 
     &:not(.p-disabled) {
       &:hover {
-        border: 1px solid $secondary-color;
+        border: 1px solid $light-color;
         background-image: none;
       }
 
@@ -7203,9 +7201,8 @@ body {
       }
 
       .p-datatable-tbody > tr {
-        border-bottom: 1px solid $secondary-color;
-
-        > td {
+        border-bottom: 1px solid $light-color;
+        & > td {
           text-align: left;
           display: flex;
           border: 0 none !important;

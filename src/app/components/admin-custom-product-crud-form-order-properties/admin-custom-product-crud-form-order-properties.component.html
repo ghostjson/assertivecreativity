@@ -6,6 +6,7 @@
           <label class="p-m-0">
             <span>
               maximum order quantity
+              <sup class="required-superscript">*</sup>
               <i
                 class="pi pi-exclamation-circle info-color font-headline6 p-ml-2"
                 pTooltip="0 indicates no limit is imposed"
@@ -22,7 +23,10 @@
       <div class="p-col-12 p-lg-6 p-pr-2">
         <div class="p-field p-input-filled p-fluid">
           <label class="p-m-0">
-            <span> Minimum order quantity </span>
+            <span>
+              Minimum order quantity
+              <sup class="required-superscript">*</sup>
+            </span>
             <p-inputNumber
               formControlName="min_order_quantity"
               [min]="1"
@@ -34,7 +38,10 @@
       <div class="p-col-12 p-lg-6">
         <div class="p-field p-input-filled p-fluid">
           <label class="p-m-0">
-            <span> order quantity step </span>
+            <span>
+              order quantity step
+              <sup class="required-superscript">*</sup>
+            </span>
             <p-inputNumber
               formControlName="order_quantity_step"
               [min]="1"

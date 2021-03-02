@@ -1,14 +1,12 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
-  OnChanges,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import {
   FormQuestionEvent,
@@ -17,6 +15,7 @@ import {
 } from 'src/app/models/OrderForm';
 import { AdminOrdersFormMakerService } from 'src/app/services/admin-orders-form-maker.service';
 import { MenuItem } from 'primeng/api';
+import { moveItemInFormArray } from 'src/app/library/FormsUtilities';
 
 @Component({
   selector: 'app-admin-forms-maker',
@@ -31,7 +30,7 @@ export class AdminFormsMakerComponent implements OnInit {
 
   activeChildQuestion: FormQuestionEvent;
   overlays: {
-    childQuestion: boolean
+    childQuestion: boolean;
   };
   formsPartWidth: string;
   newSectionTitle: string;
@@ -41,15 +40,15 @@ export class AdminFormsMakerComponent implements OnInit {
 
   ngOnInit(): void {
     this.overlays = {
-      childQuestion: false
+      childQuestion: false,
     };
 
     this.sectionMenuItems = [
       {
         label: 'Duplicate Section',
         title: 'Duplicate this section of the form',
-        icon: 'pi pi-clone'
-      }
+        icon: 'pi pi-clone',
+      },
     ];
   }
 
@@ -71,7 +70,10 @@ export class AdminFormsMakerComponent implements OnInit {
    * Add a new section to form
    * @param section form section config
    */
-  addSection(section: OrderFormSectionConfig = null, insertIndex: number = this.sections().length): void {
+  addSection(
+    section: OrderFormSectionConfig = null,
+    insertIndex: number = this.sections().length
+  ): void {
     let sectionForm: FormGroup = null;
 
     // if initial config is present initialise the formgroup with that
@@ -105,7 +107,11 @@ export class AdminFormsMakerComponent implements OnInit {
 
     // if initial config is present initialise the formgroup with that
     if (question) {
-      questionForm = this._formMakerService.createFormQuestion(false, {}, question);
+      questionForm = this._formMakerService.createFormQuestion(
+        false,
+        {},
+        question
+      );
     } else {
       questionForm = this._formMakerService.createFormQuestion(false, {});
     }
@@ -167,7 +173,7 @@ export class AdminFormsMakerComponent implements OnInit {
     e: CdkDragDrop<OrderFormQuestionConfig[]>,
     sectionIndex: number
   ): void {
-    this._formMakerService.moveItemInFormArray(
+    moveItemInFormArray(
       this.questions(sectionIndex),
       e.previousIndex,
       e.currentIndex
@@ -175,11 +181,7 @@ export class AdminFormsMakerComponent implements OnInit {
   }
 
   handleSectionsDragSort(e: CdkDragDrop<OrderFormQuestionConfig[]>): void {
-    this._formMakerService.moveItemInFormArray(
-      this.sections(),
-      e.previousIndex,
-      e.currentIndex
-    );
+    moveItemInFormArray(this.sections(), e.previousIndex, e.currentIndex);
   }
 
   /**
@@ -229,9 +231,13 @@ export class AdminFormsMakerComponent implements OnInit {
    * @param section section formgroup to do operation on
    * @param sectionIndex index of the section in the sections formarrat
    */
-  doSectionOperation(event: any, section: FormGroup, sectionIndex: number): void {
+  doSectionOperation(
+    event: any,
+    section: FormGroup,
+    sectionIndex: number
+  ): void {
     console.log('clicked: ', event);
-    switch(event.item.label) {
+    switch (event.item.label) {
       case 'Duplicate Section':
         let duplicate: OrderFormSectionConfig = section.value;
         duplicate.id = null;
@@ -246,7 +252,7 @@ export class AdminFormsMakerComponent implements OnInit {
    * @param sectionIndex index of the section to do the operation
    */
   doQuestionOperation(event: any, sectionIndex: number): void {
-    switch(event.operation) {
+    switch (event.operation) {
       case 'Duplicate Question':
         let duplicate: OrderFormQuestionConfig = event.question.value;
         duplicate.id = null;
