@@ -19,6 +19,7 @@ export class Product {
   price_table_mode?: boolean | string;
   price_table?: PriceGroup[];
   custom_forms?: any[];
+  order_props?: OrderProps;
 
   // stock product
   is_stock: boolean;
@@ -171,4 +172,10 @@ export class ImageDetails {
   src: string;
   alt_text?: string;
   title?: string;
+}
+
+export interface OrderProps {
+  min_order_quantity: number;
+  max_order_quantity: number;
+  order_quantity_step: number;
 }

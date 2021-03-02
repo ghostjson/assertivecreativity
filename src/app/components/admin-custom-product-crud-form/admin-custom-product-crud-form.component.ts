@@ -32,6 +32,13 @@ export class AdminCustomProductCrudFormComponent implements OnInit {
   }
 
   /**
+   * return order_props formgroup
+   */
+  orderPropsForm(): FormGroup {
+    return this.productForm.get('product.order_props') as FormGroup;
+  }
+
+  /**
    * save the product
    */
   saveProduct(): void {

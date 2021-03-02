@@ -6,6 +6,7 @@ import {
   CustomProduct,
   ProductAttribute,
   ImageDetails,
+  OrderProps,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -210,6 +211,32 @@ export class AdminProductService {
     return this._fb.group(imgFormTemplate);
   }
 
+  createOrderPropsForm(initial?: OrderProps): FormGroup {
+    let orderPropsFormTemplate = null;
+
+    if (initial) {
+      orderPropsFormTemplate = {
+        min_order_quantity: [
+          initial.min_order_quantity,
+          [Validators.required, Validators.min(1)],
+        ],
+        max_order_quantity: [initial.max_order_quantity, [Validators.required]],
+        order_quantity_step: [
+          initial.order_quantity_step,
+          [Validators.required, Validators.min(1)],
+        ],
+      };
+    } else {
+      orderPropsFormTemplate = {
+        min_order_quantity: [1, [Validators.required, Validators.min(1)]],
+        max_order_quantity: [0, [Validators.required, Validators.min(0)]],
+        order_quantity_step: [1, [Validators.required, Validators.min(1)]],
+      };
+    }
+
+    return this._fb.group(orderPropsFormTemplate);
+  }
+
   /**
    * create formgroup for base details of the custom product form
    * @param initial initial state of the product base form
@@ -242,6 +269,7 @@ export class AdminProductService {
           }),
         ]),
         is_stock: [false, [Validators.required]],
+        order_props: this.createOrderPropsForm(initial.order_props),
       };
     } else {
       baseFormTemplate = {
@@ -264,6 +292,7 @@ export class AdminProductService {
         price_table_mode: [false, [Validators.required]],
         price_table: this._fb.array([this.newPriceGroupForm()]),
         is_stock: [false, [Validators.required]],
+        order_props: this.createOrderPropsForm(),
       };
     }
 

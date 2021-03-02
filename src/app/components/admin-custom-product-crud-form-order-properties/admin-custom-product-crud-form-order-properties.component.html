@@ -1,0 +1,48 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="orderPropsForm" header="order properties">
+    <div class="p-grid p-nogutter">
+      <div class="p-col-12">
+        <div class="p-field p-input-filled p-fluid">
+          <label class="p-m-0">
+            <span>
+              maximum order quantity
+              <i
+                class="pi pi-exclamation-circle info-color font-headline6 p-ml-2"
+                pTooltip="0 indicates no limit is imposed"
+              ></i>
+            </span>
+            <p-inputNumber
+              formControlName="max_order_quantity"
+              [min]="0"
+              placeholder="Eg: 5 sets an upper limit on quantity of 5"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12 p-lg-6 p-pr-2">
+        <div class="p-field p-input-filled p-fluid">
+          <label class="p-m-0">
+            <span> Minimum order quantity </span>
+            <p-inputNumber
+              formControlName="min_order_quantity"
+              [min]="1"
+              placeholder="Eg: 4 sets a lower limit on quantity of 4"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12 p-lg-6">
+        <div class="p-field p-input-filled p-fluid">
+          <label class="p-m-0">
+            <span> order quantity step </span>
+            <p-inputNumber
+              formControlName="order_quantity_step"
+              [min]="1"
+              placeholder="Eg: 2, order quantity can only be changed by increments of 2"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>

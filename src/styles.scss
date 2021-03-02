@@ -1,5 +1,6 @@
 @import './assets/css/variables.scss';
 @import './assets/css/bootstrap-container.css';
+@import './assets/css/primeng-theme-edited.scss';
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -132,19 +133,23 @@ textarea {
 }
 
 .bg-success {
-  background: linear-gradient(90deg, #21bf73 0%, #28df99 100%);
+  background: $success-color;
 }
 
 .bg-danger {
-  background: linear-gradient(90deg, #ff414d 0%, #ff4b5c 96.87%);
+  background: $danger-color;
 }
 
 .bg-warning {
-  background: linear-gradient(90deg, #f6d743 0%, #f6f578 100%);
+  background: $warning-color;
 }
 
 .bg-info {
-  background: linear-gradient(90deg, #00a8cc 0%, #00bcd4 100%);
+  background: $utility-color;
+}
+
+.info-color {
+  color: $utility-color;
 }
 
 .p-flex-grow-1 {
@@ -204,8 +209,6 @@ textarea {
 /**
  * utility classes for the project ends
  */
-
-@import './assets/css/primeng-theme-edited.scss';
 
 /**
   For angular cdk drag preview
