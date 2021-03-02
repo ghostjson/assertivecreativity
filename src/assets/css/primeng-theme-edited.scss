@@ -7011,18 +7011,15 @@ a {
   box-shadow: none;
 }
 
+.p-fluid {
+  label {
+    width: 100%;
+    flex-grow: 1;
+  }
+}
+
 /**Legacu syles**/
 body {
-  .ui-card {
-    box-shadow: none;
-    border-radius: 6px;
-    color: $dark-color;
-  }
-
-  .ui-button {
-    cursor: pointer;
-  }
-
   .p-dropdown {
     width: 100%;
   }
@@ -7240,56 +7237,6 @@ body {
       .p-paginator-current {
         width: 100%;
       }
-    }
-  }
-}
-
-/**
-  Admin add product form component
-**/
-.admin-product-form {
-  .form-card__header {
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .chained-option-controls {
-    width: 100%;
-  }
-}
-
-/**
-Admin Custom Form component
-**/
-.admin-custom-form-component {
-  .option-input {
-    border: 1px solid $light-grey;
-    border-radius: 6px;
-    position: relative;
-    box-shadow: $regular-shadow;
-  }
-
-  .chained-options {
-    width: 100%;
-
-    .form-group__label {
-      width: 100%;
-    }
-  }
-
-  .card-footer {
-    border: 1px solid $light-grey;
-    position: relative;
-    box-shadow: $regular-shadow;
-    background: white;
-    border-radius: 6px;
-  }
-
-  .add-form-options-overlay {
-    .p-overlaypanel-content {
-      padding: 0;
     }
   }
 }

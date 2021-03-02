@@ -153,6 +153,7 @@ import { AdminCustomProductCrudFormBasicDetailsComponent } from './components/ad
 import { AdminCustomProductCrudFormProductImageComponent } from './components/admin-custom-product-crud-form-product-image/admin-custom-product-crud-form-product-image.component';
 import { ImagePickerFormComponent } from './components/image-picker-form/image-picker-form.component';
 import { AdminCustomProductCrudFormPricingComponent } from './components/admin-custom-product-crud-form-pricing/admin-custom-product-crud-form-pricing.component';
+import { AdminCustomProductCrudFormInventoryMgmntComponent } from './components/admin-custom-product-crud-form-inventory-mgmnt/admin-custom-product-crud-form-inventory-mgmnt.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -234,6 +235,7 @@ import { AdminCustomProductCrudFormPricingComponent } from './components/admin-c
     AdminCustomProductCrudFormProductImageComponent,
     ImagePickerFormComponent,
     AdminCustomProductCrudFormPricingComponent,
+    AdminCustomProductCrudFormInventoryMgmntComponent,
   ],
   imports: [
     /** Angular modules */

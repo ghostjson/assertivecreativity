@@ -1,0 +1,23 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="inventoryForm" header="Inventory">
+    <div class="p-grid p-nogutter">
+      <div class="p-col-12">
+        <div class="p-field p-input-filled p-fluid p-m-0">
+          <label class="p-m-0">
+            <span>
+              Stock
+              <sup class="required-superscript">*</sup>
+            </span>
+            <p-inputNumber
+              styleClass="p-mt-2"
+              formControlName="stock"
+              mode="decimal"
+              [min]="0"
+              placeholder="Enter stock available"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
