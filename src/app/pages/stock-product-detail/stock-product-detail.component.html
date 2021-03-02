@@ -14,11 +14,17 @@
             [numVisible]="5"
           >
             <ng-template pTemplate="item" let-item>
-              <img [src]="item.front_view.src" alt="{{ item.front_view.title }}" />
+              <img
+                [src]="item.front_view.src"
+                alt="{{ item.front_view.title }}"
+              />
             </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
               <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.front_view.src" alt="{{ item.front_view.title }}" />
+                <img
+                  [src]="item.front_view.src"
+                  alt="{{ item.front_view.title }}"
+                />
               </div>
             </ng-template>
           </p-galleria>
@@ -42,7 +48,9 @@
             <ng-container formArrayName="stock_order_attributes">
               <ng-container formGroupName="1">
                 <div class="product-details-section">
-                  <label for="variant_id" class="product-details-section__title">Variant Id</label>
+                  <label for="variant_id" class="product-details-section__title"
+                    >Variant Id</label
+                  >
                   <div class="p-field p-input-filled">
                     <p-dropdown
                       inputId="variant_id"
@@ -64,14 +72,12 @@
               >
                 <ng-template pTemplate="header">
                   <tr>
-                    <th>Price Group</th>
                     <th>Price Per Piece</th>
                     <th>Quantity (Upto)</th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-price>
                   <tr>
-                    <td>{{ price.label }}</td>
                     <td>$ {{ price.price_per_piece }}</td>
                     <td>
                       {{ price.quantity }}

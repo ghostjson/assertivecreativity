@@ -7,8 +7,8 @@
     }
 
     .form-panel {
-      height: 100vh;
-      overflow-y: auto;
+      min-height: 100vh;
+      overflow-y: show;
       border-left: 1px solid $light-grey;
       background-color: $bg-color;
     }

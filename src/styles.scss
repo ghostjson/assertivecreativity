@@ -152,8 +152,8 @@ textarea {
 }
 
 .position-sticky {
-  position: sticky;
-  top: 10px;
+  position: sticky !important;
+  top: 10px !important;
 }
 
 .font-headline1 {

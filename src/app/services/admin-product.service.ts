@@ -262,7 +262,7 @@ export class AdminProductService {
           }),
         ]),
         price_table_mode: [false, [Validators.required]],
-        price_table: this._fb.array([]),
+        price_table: this._fb.array([this.newPriceGroupForm()]),
         is_stock: [false, [Validators.required]],
       };
     }
@@ -305,16 +305,22 @@ export class AdminProductService {
     if (initial) {
       priceGroup = this._fb.group({
         id: initial.id,
-        label: [initial.label, [Validators.required]],
-        price_per_piece: [initial.price_per_piece, [Validators.required]],
-        quantity: [initial.quantity, [Validators.required]],
+        cost_per_piece: [
+          initial.cost_per_piece,
+          [Validators.required, Validators.min(0)],
+        ],
+        price_per_piece: [
+          initial.price_per_piece,
+          [Validators.required, Validators.min(0)],
+        ],
+        quantity: [initial.quantity, [Validators.required, Validators.min(0)]],
       });
     } else {
       priceGroup = this._fb.group({
         id: this._idGenService.getId(),
-        label: ['', [Validators.required]],
-        price_per_piece: [null, [Validators.required]],
-        quantity: [null, [Validators.required]],
+        cost_per_piece: [0, [Validators.required, Validators.min(0)]],
+        price_per_piece: [0, [Validators.required, Validators.min(0)]],
+        quantity: [0, [Validators.required, Validators.min(0)]],
       });
     }
 

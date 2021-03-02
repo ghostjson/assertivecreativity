@@ -110,7 +110,7 @@ export class Product {
 
 export interface PriceGroup {
   id?: number;
-  label: string;
+  cost_per_piece?: number;
   price_per_piece: number;
   quantity: number;
 }

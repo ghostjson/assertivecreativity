@@ -6959,10 +6959,12 @@ a {
   .p-inputnumber {
     position: relative;
 
-    .p-inputnumber-input {
-      border-radius: 6px;
-      padding-left: 3.5rem;
-      padding-right: 3.5rem;
+    &.p-inputnumber-buttons-horizontal {
+      .p-inputnumber-input {
+        border-radius: 6px;
+        padding-left: 3.5rem;
+        padding-right: 3.5rem;
+      }
     }
 
     .p-inputnumber-button {

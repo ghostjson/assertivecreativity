@@ -156,7 +156,6 @@ export class ProductService {
           (price: number, index: number) => {
             if (productRes.product.quantities_list[index] > 0) {
               productRes.attributes.price_table.price_groups.push({
-                label: `Price ${index + 1}`,
                 price_per_piece: price,
                 quantity: productRes.product.quantities_list[index],
               });
@@ -191,17 +190,15 @@ export class ProductService {
         map((products) => {
           return products.map((product) => {
             // map product images string list to the ProductImage list
-            product.images = product.images.map(
-              (url, index) => {
-                return {
-                  front_view: {
-                    src: <string>url,
-                    title: 'Product Image ' + index,
-                    alt_text: 'Product Image',
-                  },
-                };
-              }
-            );
+            product.images = product.images.map((url, index) => {
+              return {
+                front_view: {
+                  src: <string>url,
+                  title: 'Product Image ' + index,
+                  alt_text: 'Product Image',
+                },
+              };
+            });
 
             return product;
           });

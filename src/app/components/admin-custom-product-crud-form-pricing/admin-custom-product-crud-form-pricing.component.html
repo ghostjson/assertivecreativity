@@ -10,11 +10,11 @@
       </div>
     </ng-template>
 
-    <div class="base-pricing p-grid p-nogutter">
+    <div class="base-pricing p-grid p-nogutter p-px-3">
       <div class="p-col-12 p-lg-6 p-pr-lg-2">
         <div class="p-field p-input-filled p-fluid">
           <label>
-            <span> base cost </span>
+            <span> base cost per item </span>
             <p-inputNumber
               type="text"
               formControlName="base_cost"
@@ -29,7 +29,7 @@
       <div class="p-col-12 p-lg-6">
         <div class="p-field p-input-filled p-fluid">
           <label>
-            <span> Base Price </span>
+            <span> Base Price Per Item </span>
             <p-inputNumber
               type="text"
               formControlName="base_price"
@@ -68,6 +68,125 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="pricing-table p-mt-3">
+      <p-accordion formArrayName="price_table">
+        <p-accordionTab
+          header="Pricing Table"
+          [disabled]="!baseProductForm.value.price_table_mode"
+          [selected]="baseProductForm.value.price_table_mode"
+        >
+          <div class="p-pt-3 p-px-3">
+            <p-messages [(value)]="pricingInfoMsgs"></p-messages>
+          </div>
+          <ng-container
+            *ngFor="
+              let priceRow of pricingTableForm().controls;
+              index as rowIndex
+            "
+          >
+            <div
+              [formGroupName]="rowIndex"
+              class="price-row p-grid p-nogutter p-mt-3 p-p-3"
+            >
+              <div class="p-col-12">
+                <div
+                  class="pricing-header p-d-flex p-jc-between p-ai-center p-mb-2"
+                >
+                  <strong> Pricing Range {{ rowIndex + 1 }} </strong>
+                  <p-button
+                    aria-label="remove pricing row"
+                    styleClass="p-button-danger p-button-text"
+                    icon="pi pi-trash"
+                    (onClick)="removePriceRow(rowIndex)"
+                  ></p-button>
+                </div>
+              </div>
+              <div class="p-col-12 p-lg-6 p-pr-lg-2">
+                <div class="p-field p-input-filled p-fluid">
+                  <label>
+                    <span> Base cost per item </span>
+                    <p-inputNumber
+                      type="text"
+                      formControlName="cost_per_piece"
+                      mode="currency"
+                      currency="USD"
+                      locale="en-US"
+                      placeholder="Enter the price per item"
+                    ></p-inputNumber>
+                  </label>
+                </div>
+              </div>
+              <div class="p-col-12 p-lg-6">
+                <div class="p-field p-input-filled p-fluid">
+                  <label>
+                    <span> Base price per item </span>
+                    <p-inputNumber
+                      type="text"
+                      formControlName="price_per_piece"
+                      mode="currency"
+                      currency="USD"
+                      locale="en-US"
+                      placeholder="Enter the price per item"
+                    ></p-inputNumber>
+                  </label>
+                </div>
+              </div>
+              <div class="p-col-12 p-lg-6">
+                <div class="p-field p-input-filled p-fluid p-m-0">
+                  <label>
+                    <span> Quantity </span>
+                    <p-inputNumber
+                      styleClass="p-m-0"
+                      type="text"
+                      formControlName="quantity"
+                      mode="decimal"
+                      placeholder="Enter the quantity"
+                    ></p-inputNumber>
+                  </label>
+                </div>
+              </div>
+              <div class="p-col-12 p-lg-6">
+                <div class="margin-profit p-d-flex p-jc-end p-ai-end">
+                  <div class="margin-profit__attr p-mr-3">
+                    <div class="p-text-bold">Profit</div>
+                    <div>
+                      {{
+                        priceRow.value.price_per_piece -
+                          priceRow.value.cost_per_piece
+                          | currency: 'USD':'symbol':'1.2-2'
+                      }}
+                    </div>
+                  </div>
+                  <div class="margin-profit__attr">
+                    <div class="p-text-bold">Margin</div>
+                    <div>
+                      {{
+                        (priceRow.value.price_per_piece
+                          ? (priceRow.value.price_per_piece -
+                              priceRow.value.cost_per_piece) /
+                            priceRow.value.price_per_piece
+                          : 0
+                        ) | percent: '1.2-2'
+                      }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <div
+            class="accordion-footer p-d-flex p-jc-end p-ai-center p-mt-2 p-px-3"
+          >
+            <p-button
+              styleClass="p-button-sm p-button-info"
+              label="add row"
+              (onClick)="addPriceRow()"
+            ></p-button>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
     </div>
   </p-card>
 </div>

@@ -1,10 +1,61 @@
+@import '../../../assets/css/variables.scss';
+
 :host {
   ::ng-deep {
-    .p-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1em;
+    .p-card {
+      &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em 1em 0 1em;
+      }
+
+      &-content {
+        padding-bottom: 0;
+      }
+
+      &-body {
+        padding: 0;
+      }
+    }
+
+    .pricing-table {
+      .p-accordion {
+        &-tab {
+          box-shadow: none;
+          border-top: 1px solid $light-grey;
+          border-radius: 0 0 4px 4px;
+        }
+
+        &-header {
+          &.p-highlight {
+            border-bottom: 1px solid $light-grey;
+            background-color: $secondary-color--active;
+          }
+
+          &-text {
+            font-weight: 500;
+          }
+
+          &:not(.p-disabled)-header-link {
+            background: transparent;
+          }
+        }
+
+        &-content {
+          padding: 0;
+        }
+
+        .price-row {
+          &:not(:nth-child(2)) {
+            border-top: 1px solid $light-grey;
+          }
+
+          .margin-profit {
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }
