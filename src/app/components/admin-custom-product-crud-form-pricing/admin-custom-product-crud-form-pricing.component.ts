@@ -26,14 +26,48 @@ export class AdminCustomProductCrudFormPricingComponent implements OnInit {
     ];
   }
 
+  /**
+   * get the pricing table formarray
+   */
   pricingTableForm(): FormArray {
     return this.baseProductForm.get('price_table') as FormArray;
   }
 
-  addPriceRow(): void {
-    this.pricingTableForm().push(this._productService.newPriceGroupForm());
+  /**
+   * return the minimum quantity that can be given in a row so that it is larger than the
+   * previous row
+   * @param currentRow index of the current row
+   */
+  minQuantityOfRow(currentRow: number): number {
+    if (currentRow > 0) {
+      return (
+        (<FormArray>this.pricingTableForm()).at(currentRow - 1).value.quantity +
+        1
+      );
+    }
+
+    return 0;
   }
 
+  /**
+   * add pricing row to pricing table
+   */
+  addPriceRow(): void {
+    // an initial value with quantity is passed so that the initial quantity
+    // is larger than the previous quantity added
+    this.pricingTableForm().push(
+      this._productService.newPriceGroupForm({
+        cost_per_piece: 0,
+        price_per_piece: 0,
+        quantity: this.minQuantityOfRow(this.pricingTableForm().length),
+      })
+    );
+  }
+
+  /**
+   * remove the price at index
+   * @param index index of the price row to remove
+   */
   removePriceRow(index: number): void {
     this.pricingTableForm().removeAt(index);
   }

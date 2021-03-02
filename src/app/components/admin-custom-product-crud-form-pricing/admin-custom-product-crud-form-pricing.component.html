@@ -142,6 +142,7 @@
                       formControlName="quantity"
                       mode="decimal"
                       placeholder="Enter the quantity"
+                      [min]="minQuantityOfRow(rowIndex)"
                     ></p-inputNumber>
                   </label>
                 </div>
