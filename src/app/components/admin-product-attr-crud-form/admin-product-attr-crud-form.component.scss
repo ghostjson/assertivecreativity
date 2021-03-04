@@ -1,0 +1,45 @@
+@import '../../../assets/css/variables.scss';
+
+:host {
+  ::ng-deep {
+    .child-attr-list {
+      .p-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em 1em 0 1em;
+      }
+    }
+
+    .attr-tools {
+      .p-toolbar {
+        &.parent-group {
+          border-radius: 4px 4px 0 0;
+        }
+      }
+
+      .p-accordion {
+        &-header-text {
+          font-weight: 500;
+        }
+
+        &-tab {
+          box-shadow: none;
+          border: 1px solid $light-grey;
+          border-top: none;
+          border-radius: 0 0 4px 4px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .attr-option-list-item {
+    border-radius: 4px;
+
+    &:not(:first-child) {
+      margin-top: 1em;
+    }
+  }
+}

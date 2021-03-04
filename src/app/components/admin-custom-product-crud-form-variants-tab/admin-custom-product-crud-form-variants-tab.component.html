@@ -1,9 +1,24 @@
 <div class="{{ styleClass }}">
-  <div *ngIf="showAttrFormPanel; else variantList" class="attribute-crud">
+  <div
+    *ngIf="showAttrFormPanel; else variantList"
+    [ngClass]="{
+      'attribute-crud': true,
+      'hide-panel': showChildAttrFormPanel
+    }"
+  >
     <app-admin-product-attr-crud-form
       [attributeForm]="activeAttrForm"
+      [showAttrGroupSwitch]="true"
       (onClose)="hideAttrCrudForm()"
       (onDelete)="removeAttribute(activeAttrFormIndex)"
+      (onActiveChildAttr)="setChildAttrForm($event)"
+    ></app-admin-product-attr-crud-form>
+  </div>
+  <div *ngIf="showChildAttrFormPanel" class="child-attr-form">
+    <app-admin-product-attr-crud-form
+      [attributeForm]="activeChildAttrForm"
+      (onClose)="hideChildAttrCrudForm()"
+      (onDelete)="removeChildAttribute()"
     ></app-admin-product-attr-crud-form>
   </div>
   <ng-template #variantList>

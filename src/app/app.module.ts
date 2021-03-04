@@ -159,6 +159,7 @@ import { AdminCustomProductCrudFormVariantsTabComponent } from './components/adm
 import { AdminProductAttrCrudFormComponent } from './components/admin-product-attr-crud-form/admin-product-attr-crud-form.component';
 import { AdminProductAttrCrudFormBasicDetailsComponent } from './components/admin-product-attr-crud-form-basic-details/admin-product-attr-crud-form-basic-details.component';
 import { AdminProductAttrCrudFormOptionPropsComponent } from './components/admin-product-attr-crud-form-option-props/admin-product-attr-crud-form-option-props.component';
+import { AdminProductAttrCrudFormAttrOptionsListItemComponent } from './components/admin-product-attr-crud-form-attr-options-list-item/admin-product-attr-crud-form-attr-options-list-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -246,6 +247,7 @@ import { AdminProductAttrCrudFormOptionPropsComponent } from './components/admin
     AdminProductAttrCrudFormComponent,
     AdminProductAttrCrudFormBasicDetailsComponent,
     AdminProductAttrCrudFormOptionPropsComponent,
+    AdminProductAttrCrudFormAttrOptionsListItemComponent,
   ],
   imports: [
     /** Angular modules */

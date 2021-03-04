@@ -17,6 +17,9 @@ export class AdminCustomProductCrudFormVariantsTabComponent {
   activeAttrForm: FormGroup;
   activeAttrFormIndex: number;
   showAttrFormPanel: boolean;
+  activeChildAttrForm: FormGroup;
+  activeChildAttrFormIndex: number;
+  showChildAttrFormPanel: boolean;
 
   constructor(private _productService: AdminProductService) {}
 
@@ -40,6 +43,10 @@ export class AdminCustomProductCrudFormVariantsTabComponent {
     this.showAttrCrudForm();
   }
 
+  /**
+   * edit an attribute
+   * @param index index of the attribute to edit
+   */
   editAttribute(index: number): void {
     this.activeAttrFormIndex = index;
     this.activeAttrForm = <FormGroup>this.attributes().at(index);
@@ -70,9 +77,55 @@ export class AdminCustomProductCrudFormVariantsTabComponent {
     this.showAttrFormPanel = false;
   }
 
+  /**
+   * clear the active attribute
+   */
   resetActiveAttr(): void {
     this.activeAttrFormIndex = null;
     this.activeAttrForm = null;
+  }
+
+  /**
+   * show child attribute crud form
+   */
+  showChildAttrCrudForm(): void {
+    this.showChildAttrFormPanel = true;
+  }
+
+  /**
+   * hide child attribute crud form
+   */
+  hideChildAttrCrudForm(): void {
+    this.showChildAttrFormPanel = false;
+  }
+
+  /**
+   * remove a child attribute
+   */
+  removeChildAttribute(): void {
+    this.hideChildAttrCrudForm();
+    (<FormArray>this.activeChildAttrForm.parent).removeAt(
+      this.activeChildAttrFormIndex
+    );
+    this.resetActiveChildAttr();
+  }
+
+  /**
+   * clear the active child attribute
+   */
+  resetActiveChildAttr(): void {
+    this.activeChildAttrFormIndex = null;
+    this.activeChildAttrForm = null;
+  }
+
+  /**
+   * set the active child attribute form
+   * @param event event object which is emitted from the attribute crud form
+   */
+  setChildAttrForm(event: any): void {
+    this.activeChildAttrForm = event.formGroup;
+    this.activeChildAttrFormIndex = event.index;
+    this.showChildAttrCrudForm();
   }
 
   /**

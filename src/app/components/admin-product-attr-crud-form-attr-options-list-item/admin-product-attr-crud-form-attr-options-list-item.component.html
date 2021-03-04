@@ -1,0 +1,29 @@
+<div class="{{ styleClass }} attr-option p-d-flex p-ai-center">
+  <div class="attr-option__drag-area p-pr-2" cdkDragHandle>
+    <i class="pi pi-sort"></i>
+  </div>
+  <div class="attr-option-img p-d-flex p-ai-center p-jc-center">
+    <img
+      *ngIf="attributeForm.value.thumbnail.src; else noImg"
+      class="attr-option-img__img"
+      src="{{ attributeForm.value.thumbnail.src }}"
+      alt="{{ attributeForm.value.thumbnail.alt_text }}"
+    />
+    <ng-template #noImg>
+      <i class="pi pi-image"></i>
+    </ng-template>
+  </div>
+  <div class="attr-option-content p-ml-2 p-mr-auto">
+    <div class="attr-option-content__label">
+      {{ attributeForm.value.label }}
+    </div>
+  </div>
+  <div class="attr-option-tools">
+    <p-button
+      aria-label="delete attribute option"
+      styleClass="p-button-danger p-button-text"
+      icon="pi pi-trash"
+      (onClick)="emitDeleteEvent()"
+    ></p-button>
+  </div>
+</div>

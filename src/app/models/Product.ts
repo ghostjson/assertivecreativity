@@ -143,6 +143,8 @@ export interface ProductAttribute {
   images?: ProductImage[];
   cost?: number;
   price: number;
+  stock: number;
+  sales: number;
   display_in_product: boolean;
   is_attribute_group: boolean;
   child_attributes?: ProductAttribute[];

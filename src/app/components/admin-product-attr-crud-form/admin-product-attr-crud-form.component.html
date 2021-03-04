@@ -1,29 +1,95 @@
-<div class="{{ styleClass }}">
-  <p-toolbar styleClass="p-mb-3">
-    <div class="p-toolbar-group-left">
-      <p-button
-        label="back"
-        icon="pi pi-arrow-left"
-        styleClass="p-button-plain p-button-text"
-        (onClick)="emitCloseEvent()"
-        [disabled]="!attributeForm.valid"
-      ></p-button>
-    </div>
+<div [formGroup]="attributeForm" class="{{ styleClass }}">
+  <div
+    [ngClass]="{
+      'parent-group': showAttrGroupSwitch,
+      'attr-tools': true,
+      'p-mb-3': true
+    }"
+  >
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <p-button
+          label="back"
+          icon="pi pi-arrow-left"
+          styleClass="p-button-plain p-button-text"
+          (onClick)="emitCloseEvent()"
+          [disabled]="!attributeForm.valid"
+        ></p-button>
+      </div>
 
-    <div class="p-toolbar-group-right">
-      <p-button
-        label="delete"
-        styleClass="p-button-danger p-button-text"
-        (onClick)="emitDeleteEvent()"
-      ></p-button>
-    </div>
-  </p-toolbar>
+      <div class="p-toolbar-group-right">
+        <p-button
+          label="delete"
+          styleClass="p-button-danger p-button-text"
+          (onClick)="emitDeleteEvent()"
+        ></p-button>
+      </div>
+    </p-toolbar>
+    <p-accordion *ngIf="showAttrGroupSwitch">
+      <p-accordionTab [selected]="true" header="Attribute Options">
+        <div class="p-field">
+          <label class="is-attr-group-switch p-d-flex p-ai-center p-jc-between">
+            <span> This is a variant group </span>
+            <p-inputSwitch
+              formControlName="is_attribute_group"
+              (onChange)="handleAttrGroupSwitch($event)"
+            ></p-inputSwitch>
+          </label>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
 
   <app-admin-product-attr-crud-form-basic-details
     [attributeForm]="attributeForm"
   ></app-admin-product-attr-crud-form-basic-details>
-  <app-admin-product-attr-crud-form-option-props
-    styleClass="p-mt-3"
-    [attributeForm]="attributeForm"
-  ></app-admin-product-attr-crud-form-option-props>
+
+  <ng-container
+    *ngIf="attributeForm.value.is_attribute_group; else notAttrGroup"
+  >
+    <p-card styleClass="child-attr-list p-mt-3">
+      <ng-template pTemplate="header">
+        <div class="p-card-title">variant options</div>
+        <p-button
+          label="add"
+          icon="pi pi-plus"
+          iconPos="right"
+          styleClass="p-button-secondary"
+          (onClick)="addChildAttrs()"
+        ></p-button>
+      </ng-template>
+      <div
+        class="attr-option-list"
+        cdkDropList
+        (cdkDropListDropped)="handleDragSort($event)"
+      >
+        <div
+          class="attr-option-list-item"
+          *ngFor="
+            let childAttrForm of childAttrs().controls;
+            index as childAttrIndex;
+            trackBy: trackById
+          "
+          cdkDrag
+          cdkDragBoundary=".attr-option-list"
+          cdkDragLockAxis="y"
+        >
+          <app-admin-product-attr-crud-form-attr-options-list-item
+            [attributeForm]="childAttrForm"
+            (onDelete)="removeChildAttr(childAttrIndex)"
+            (click)="emitActiveChildAttr(childAttrForm, childAttrIndex)"
+          ></app-admin-product-attr-crud-form-attr-options-list-item>
+        </div>
+      </div>
+      <p *ngIf="!childAttrs().length" class="text-grey p-text-center">
+        Add options to see them here
+      </p>
+    </p-card>
+  </ng-container>
+  <ng-template #notAttrGroup>
+    <app-admin-product-attr-crud-form-option-props
+      styleClass="p-mt-3"
+      [attributeForm]="attributeForm"
+    ></app-admin-product-attr-crud-form-option-props>
+  </ng-template>
 </div>

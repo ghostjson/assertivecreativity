@@ -122,6 +122,8 @@ export class ProductService {
               value: color,
               display_in_product: true,
               price: 0,
+              stock: 0,
+              sales: 0,
               is_attribute_group: false,
               type: 'color',
             };

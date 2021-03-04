@@ -134,6 +134,10 @@ textarea {
   border: 0;
 }
 
+.text-grey {
+  color: $dark-grey;
+}
+
 .required-superscript {
   color: $danger-color;
   font-size: $font-size-caption;

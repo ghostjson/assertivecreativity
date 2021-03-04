@@ -21,6 +21,10 @@
         }
       }
     }
+
+    .hide-panel {
+      display: none !important;
+    }
   }
 }
 
@@ -37,7 +41,7 @@
     transition: box-shadow $transition-func;
 
     &:hover {
-      box-shadow: $shadow-6;
+      box-shadow: $shadow-3;
     }
 
     &:not(:first-child) {

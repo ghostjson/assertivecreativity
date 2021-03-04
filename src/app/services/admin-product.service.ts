@@ -206,14 +206,20 @@ export class AdminProductService {
 
     if (initial) {
       imgFormTemplate = {
-        id: [this._idGenService.getId(), [Validators.required]],
+        id: [
+          { value: this._idGenService.getId(), disabled: true },
+          [Validators.required],
+        ],
         src: [initial.src, validators],
         alt_text: initial.alt_text,
         title: initial.title,
       };
     } else {
       imgFormTemplate = {
-        id: [this._idGenService.getId(), [Validators.required]],
+        id: [
+          { value: this._idGenService.getId(), disabled: true },
+          [Validators.required],
+        ],
         src: ['', validators],
         alt_text: '',
         title: '',
@@ -343,6 +349,8 @@ export class AdminProductService {
         ]),
         cost: [initial.cost, [Validators.required, Validators.min(0)]],
         price: [initial.price, [Validators.required, Validators.min(0)]],
+        stock: [initial.stock, [Validators.required, Validators.min(0)]],
+        sales: [initial.sales, [Validators.required, Validators.min(0)]],
         display_in_product: [initial.display_in_product, [Validators.required]],
         is_attribute_group: [initial.is_attribute_group, [Validators.required]],
       };
@@ -377,6 +385,8 @@ export class AdminProductService {
         ]),
         cost: [0, [Validators.required, Validators.min(0)]],
         price: [0, [Validators.required, Validators.min(0)]],
+        stock: [0, [Validators.required, Validators.min(0)]],
+        sales: [0, [Validators.required, Validators.min(0)]],
         display_in_product: [true, [Validators.required]],
         is_attribute_group: [is_attribute_group, [Validators.required]],
         child_attributes: this._fb.array([]),
