@@ -106,16 +106,17 @@ textarea {
 
 .cdk-drag-placeholder {
   opacity: 0.6;
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: none !important;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 
 .cdk-drop-list-dragging {
   div {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
   }
 }
 
@@ -226,7 +227,7 @@ textarea {
   &.cdk-drop-list-dragging,
   &__questions.cdk-drop-list-dragging {
     .questions-overview-list-item {
-      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+      transition: transform $transition-func;
     }
   }
 

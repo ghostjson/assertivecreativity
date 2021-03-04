@@ -1,0 +1,68 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="attributeForm" header="basic details">
+    <div class="p-grid p-nogutter">
+      <div class="p-col-12">
+        <div class="p-field p-fluid p-input-filled">
+          <label>
+            <span> Label </span>
+            <input
+              formControlName="label"
+              type="text"
+              placeholder="Enter the label to display"
+              pInputText
+            />
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <div class="p-field p-fluid p-input-filled">
+          <label>
+            <span> Value </span>
+            <input
+              formControlName="value"
+              type="text"
+              placeholder="Enter the value of the variant option"
+              pInputText
+            />
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12 p-lg-6 p-pr-1">
+        <div class="p-field p-fluid p-input-filled">
+          <label>
+            <span> variant cost </span>
+            <p-inputNumber
+              formControlName="cost"
+              mode="currency"
+              [min]="0"
+              currency="USD"
+              locale="en-US"
+              placeholder="Enter the cost of the variant"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12 p-lg-6 p-pl-1">
+        <div class="p-field p-fluid p-input-filled">
+          <label>
+            <span> variant price </span>
+            <p-inputNumber
+              formControlName="price"
+              mode="currency"
+              [min]="0"
+              currency="USD"
+              locale="en-US"
+              placeholder="Enter the price of the variant"
+            ></p-inputNumber>
+          </label>
+        </div>
+      </div>
+      <div class="p-col-12">
+        <app-image-picker-form
+          [imageForm]="thumbnail()"
+          formTitle="Thumbnail image"
+        ></app-image-picker-form>
+      </div>
+    </div>
+  </p-card>
+</div>

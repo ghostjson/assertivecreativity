@@ -1,0 +1,29 @@
+<div class="{{ styleClass }}">
+  <p-toolbar styleClass="p-mb-3">
+    <div class="p-toolbar-group-left">
+      <p-button
+        label="back"
+        icon="pi pi-arrow-left"
+        styleClass="p-button-plain p-button-text"
+        (onClick)="emitCloseEvent()"
+        [disabled]="!attributeForm.valid"
+      ></p-button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+      <p-button
+        label="delete"
+        styleClass="p-button-danger p-button-text"
+        (onClick)="emitDeleteEvent()"
+      ></p-button>
+    </div>
+  </p-toolbar>
+
+  <app-admin-product-attr-crud-form-basic-details
+    [attributeForm]="attributeForm"
+  ></app-admin-product-attr-crud-form-basic-details>
+  <app-admin-product-attr-crud-form-option-props
+    styleClass="p-mt-3"
+    [attributeForm]="attributeForm"
+  ></app-admin-product-attr-crud-form-option-props>
+</div>

@@ -156,6 +156,9 @@ import { AdminCustomProductCrudFormPricingComponent } from './components/admin-c
 import { AdminCustomProductCrudFormInventoryMgmntComponent } from './components/admin-custom-product-crud-form-inventory-mgmnt/admin-custom-product-crud-form-inventory-mgmnt.component';
 import { AdminCustomProductCrudFormOrderPropertiesComponent } from './components/admin-custom-product-crud-form-order-properties/admin-custom-product-crud-form-order-properties.component';
 import { AdminCustomProductCrudFormVariantsTabComponent } from './components/admin-custom-product-crud-form-variants-tab/admin-custom-product-crud-form-variants-tab.component';
+import { AdminProductAttrCrudFormComponent } from './components/admin-product-attr-crud-form/admin-product-attr-crud-form.component';
+import { AdminProductAttrCrudFormBasicDetailsComponent } from './components/admin-product-attr-crud-form-basic-details/admin-product-attr-crud-form-basic-details.component';
+import { AdminProductAttrCrudFormOptionPropsComponent } from './components/admin-product-attr-crud-form-option-props/admin-product-attr-crud-form-option-props.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -240,6 +243,9 @@ import { AdminCustomProductCrudFormVariantsTabComponent } from './components/adm
     AdminCustomProductCrudFormInventoryMgmntComponent,
     AdminCustomProductCrudFormOrderPropertiesComponent,
     AdminCustomProductCrudFormVariantsTabComponent,
+    AdminProductAttrCrudFormComponent,
+    AdminProductAttrCrudFormBasicDetailsComponent,
+    AdminProductAttrCrudFormOptionPropsComponent,
   ],
   imports: [
     /** Angular modules */

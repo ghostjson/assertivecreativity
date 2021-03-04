@@ -1,0 +1,19 @@
+<div class="{{ styleClass }}">
+  <p-card [formGroup]="attributeForm" header="option properties">
+    <div class="p-grid p-nogutter">
+      <div class="p-col-12">
+        <app-image-picker-form
+          formTitle="front view"
+          [imageForm]="frontView()"
+        ></app-image-picker-form>
+      </div>
+      <div class="p-col-12">
+        <app-image-picker-form
+          styleClass="p-mt-3"
+          formTitle="back view"
+          [imageForm]="backView()"
+        ></app-image-picker-form>
+      </div>
+    </div>
+  </p-card>
+</div>

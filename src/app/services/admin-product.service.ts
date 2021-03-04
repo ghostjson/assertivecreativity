@@ -12,7 +12,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 import { SelectItem } from 'primeng/api';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormArray,
+  FormBuilder,
+  Validators,
+  ValidatorFn,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { IdGeneratorService } from './id-generator.service';
@@ -188,22 +194,28 @@ export class AdminProductService {
   /**
    * create formgroup for picking images
    * @param initial initial state of the image form
+   * @param required true makes the image src required
    */
-  createImgForm(initial?: ImageObj): FormGroup {
+  createImgForm(initial?: ImageObj, required: boolean = true): FormGroup {
     let imgFormTemplate = null;
+    let validators: ValidatorFn[] = [];
+
+    if (required) {
+      validators.push(Validators.required);
+    }
 
     if (initial) {
       imgFormTemplate = {
         id: [this._idGenService.getId(), [Validators.required]],
-        src: [initial.src, [Validators.required]],
-        alt_text: [initial.alt_text, [Validators.required]],
+        src: [initial.src, validators],
+        alt_text: initial.alt_text,
         title: initial.title,
       };
     } else {
       imgFormTemplate = {
         id: [this._idGenService.getId(), [Validators.required]],
-        src: ['', [Validators.required]],
-        alt_text: ['', [Validators.required]],
+        src: ['', validators],
+        alt_text: '',
         title: '',
       };
     }
@@ -211,6 +223,10 @@ export class AdminProductService {
     return this._fb.group(imgFormTemplate);
   }
 
+  /**
+   * create order prperties form
+   * @param initial initial value of the order properties form
+   */
   createOrderPropsForm(initial?: OrderProps): FormGroup {
     let orderPropsFormTemplate = null;
 
@@ -299,9 +315,15 @@ export class AdminProductService {
     return this._fb.group(baseFormTemplate);
   }
 
+  /**
+   * create a formgroup for product attribute
+   * @param type type of the attribute
+   * @param is_attribute_group true if the attribute is parent attribute with children attributes
+   * @param initial initial value of the attribute form
+   */
   createProductAttrForm(
-    type: string,
     is_attribute_group: boolean,
+    type: string = 'generic',
     initial?: ProductAttribute
   ): FormGroup {
     let prodAttrFormTemplate = null;
@@ -312,11 +334,11 @@ export class AdminProductService {
         type: [initial.type, [Validators.required]],
         label: [initial.label, [Validators.required]],
         value: initial.value,
-        thumbnail: initial.thumbnail,
+        thumbnail: this.createImgForm(initial.thumbnail),
         images: this._fb.array([
           this._fb.group({
-            front_view: this.createImgForm(initial.images[0].front_view),
-            back_view: this.createImgForm(initial.images[0].back_view),
+            front_view: this.createImgForm(initial.images[0].front_view, false),
+            back_view: this.createImgForm(initial.images[0].back_view, false),
           }),
         ]),
         cost: [initial.cost, [Validators.required, Validators.min(0)]],
@@ -330,8 +352,8 @@ export class AdminProductService {
         prodAttrFormTemplate.child_attributes = this._fb.array(
           initial.child_attributes.map((childAttr) => {
             return this.createProductAttrForm(
-              childAttr.type,
               childAttr.is_attribute_group,
+              childAttr.type ? childAttr.type : 'generic',
               childAttr
             );
           })
@@ -342,15 +364,15 @@ export class AdminProductService {
         id: [this._idGenService.getId(), [Validators.required]],
         type: [type, [Validators.required]],
         label: [
-          'test label created for testing' + this._idGenService.getId(),
+          'test label created for testing ' + this._idGenService.getId(),
           [Validators.required],
         ],
         value: '',
-        thumbnail: '',
+        thumbnail: this.createImgForm(null, false),
         images: this._fb.array([
           this._fb.group({
-            front_view: this.createImgForm(),
-            back_view: this.createImgForm(),
+            front_view: this.createImgForm(null, false),
+            back_view: this.createImgForm(null, false),
           }),
         ]),
         cost: [0, [Validators.required, Validators.min(0)]],
@@ -377,8 +399,8 @@ export class AdminProductService {
         attributes: this._fb.array(
           initial.attributes.map((attr) => {
             return this.createProductAttrForm(
-              attr.type,
               attr.is_attribute_group,
+              attr.type ? attr.type : 'generic',
               attr
             );
           })
