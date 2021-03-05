@@ -48,7 +48,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
 import { EditorModule } from 'primeng/editor';
 import { MenuModule } from 'primeng/menu';
-import { PanelMenuModule } from 'primeng/panelmenu';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TreeModule } from 'primeng/tree';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -298,7 +297,6 @@ import { AdminProductAttrCrudFormAttrOptionsListItemComponent } from './componen
     TabViewModule,
     EditorModule,
     MenuModule,
-    PanelMenuModule,
     ScrollPanelModule,
     TreeModule,
     SelectButtonModule,

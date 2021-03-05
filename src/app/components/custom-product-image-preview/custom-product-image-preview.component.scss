@@ -2,32 +2,36 @@
 
 :host {
   ::ng-deep {
-    .img-preview {
-      position: relative;
+    .img-container {
       width: 100%;
-      min-height: 60vh;
-      height: auto;
+      height: 100%;
       border-radius: 4px;
       background-color: $bg-color;
+    }
 
-      &__img {
+    .img-preview {
+      height: 100%;
+      width: 100%;
+      max-height: 80vh;
+      position: relative;
+
+      &__base-img {
+        position: absolute;
         width: 100%;
-        height: auto;
-        flex-grow: 1;
+        height: 100%;
         border-radius: 4px;
+        z-index: 0;
+        object-fit: contain;
       }
 
-      &__title {
-        font-weight: 900;
-        margin: 0;
-      }
-
-      &__thumb {
-        flex-grow: 1;
-
-        i {
-          font-size: 2.5rem;
-        }
+      &__overlay-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        object-fit: contain;
       }
     }
   }

@@ -11,7 +11,6 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-import { SelectItem } from 'primeng/api';
 import {
   FormGroup,
   FormArray,
@@ -19,8 +18,8 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { IdGeneratorService } from './id-generator.service';
 
 @Injectable({
@@ -32,14 +31,48 @@ export class AdminProductService {
 
   possibleOptions: Object;
 
+  /**
+   * TODO: Remove this once a proper state management solution
+   * is implemented
+   */
+  private state$: BehaviorSubject<any>;
+
   constructor(
     private _http: HttpClient,
     private _fb: FormBuilder,
     private _idGenService: IdGeneratorService
   ) {
     this.host = environment.apiUrl;
-
     this.API_URL = environment.apiUrl;
+
+    /**
+     * TODO: Remove this once a proper state management solution
+     * is implemented
+     */
+    this.state$ = new BehaviorSubject<any>({
+      activeProduct: null,
+      activeAttr: null,
+      activeChildAttr: null,
+    });
+  }
+
+  /**
+   * TODO: Remove this once a proper state management solution
+   * is implemented
+   */
+  get state(): any {
+    return this.state$.getValue();
+  }
+
+  getState(): Observable<any> {
+    return this.state$.asObservable().pipe(distinctUntilChanged());
+  }
+
+  setState(newState: Partial<any>) {
+    this.state$.next({
+      ...this.state,
+      ...newState,
+    });
   }
 
   /**
@@ -206,20 +239,14 @@ export class AdminProductService {
 
     if (initial) {
       imgFormTemplate = {
-        id: [
-          { value: this._idGenService.getId(), disabled: true },
-          [Validators.required],
-        ],
+        id: { value: this._idGenService.getId(), disabled: true },
         src: [initial.src, validators],
         alt_text: initial.alt_text,
         title: initial.title,
       };
     } else {
       imgFormTemplate = {
-        id: [
-          { value: this._idGenService.getId(), disabled: true },
-          [Validators.required],
-        ],
+        id: { value: this._idGenService.getId(), disabled: true },
         src: ['', validators],
         alt_text: '',
         title: '',
@@ -268,7 +295,7 @@ export class AdminProductService {
 
     if (initial) {
       baseFormTemplate = {
-        id: [this._idGenService.getId(), Validators.required],
+        id: { value: this._idGenService.getId(), disabled: true },
         name: [initial.name, [Validators.required]],
         product_id: [initial.product_id, [Validators.required]],
         description: [initial.description, [Validators.required]],
@@ -295,7 +322,7 @@ export class AdminProductService {
       };
     } else {
       baseFormTemplate = {
-        id: [this._idGenService.getId(), Validators.required],
+        id: { value: this._idGenService.getId(), disabled: true },
         name: ['', [Validators.required]],
         product_id: ['', [Validators.required]],
         description: ['', [Validators.required]],
@@ -336,7 +363,7 @@ export class AdminProductService {
 
     if (initial) {
       prodAttrFormTemplate = {
-        id: [this._idGenService.getId(), [Validators.required]],
+        id: { value: this._idGenService.getId(), disabled: true },
         type: [initial.type, [Validators.required]],
         label: [initial.label, [Validators.required]],
         value: initial.value,
@@ -369,7 +396,7 @@ export class AdminProductService {
       }
     } else {
       prodAttrFormTemplate = {
-        id: [this._idGenService.getId(), [Validators.required]],
+        id: { value: this._idGenService.getId(), disabled: true },
         type: [type, [Validators.required]],
         label: [
           'test label created for testing ' + this._idGenService.getId(),

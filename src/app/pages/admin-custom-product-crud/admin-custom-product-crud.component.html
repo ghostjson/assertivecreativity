@@ -3,19 +3,23 @@
   <div class="p-grid p-nogutter">
     <div class="p-col-12 p-lg-8">
       <div class="product-views-panel p-grid p-nogutter p-jc-center">
-        <div class="p-col-12 p-lg-6 p-p-2 position-sticky">
-          <app-custom-product-image-preview
-            viewType="Front View"
-            [baseImage]="productForm.value.product.images[0].front_view.src"
-            styleClass="position-sticky"
-          ></app-custom-product-image-preview>
-        </div>
-        <div class="p-col-12 p-lg-6 p-p-2 position-sticky">
-          <app-custom-product-image-preview
-            viewType="Back View"
-            [baseImage]="productForm.value.product.images[0].back_view.src"
-            styleClass="position-sticky"
-          ></app-custom-product-image-preview>
+        <div class="p-col-12 p-p-2">
+          <p-tabView styleClass="position-sticky img-preview-tabs">
+            <p-tabPanel header="Front View">
+              <app-custom-product-image-preview
+                viewType="Front View"
+                [baseImage]="productForm.value.product.images[0].front_view.src"
+                [overlayImg]="activeAttr?.value?.images[0]?.front_view"
+              ></app-custom-product-image-preview>
+            </p-tabPanel>
+            <p-tabPanel header="Back View">
+              <app-custom-product-image-preview
+                viewType="Back View"
+                [baseImage]="productForm.value.product.images[0].back_view.src"
+                [overlayImg]="activeAttr?.value?.images[0]?.back_view"
+              ></app-custom-product-image-preview>
+            </p-tabPanel>
+          </p-tabView>
         </div>
       </div>
     </div>

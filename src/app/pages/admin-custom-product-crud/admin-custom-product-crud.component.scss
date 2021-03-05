@@ -4,6 +4,20 @@
   ::ng-deep {
     .product-views-panel {
       height: 100%;
+
+      .img-preview-tabs {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+
+        .p-tabview-panels {
+          flex-grow: 1;
+
+          .p-tabview-panel {
+            height: 100%;
+          }
+        }
+      }
     }
 
     .form-panel {

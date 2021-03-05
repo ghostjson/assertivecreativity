@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ImageObj } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-custom-product-image-preview',
@@ -10,6 +11,7 @@ export class CustomProductImagePreviewComponent implements OnInit {
   @Input() baseImageAltText: string;
   @Input() viewType: string;
   @Input() styleClass: string;
+  @Input() overlayImg: ImageObj;
 
   constructor() {}
 

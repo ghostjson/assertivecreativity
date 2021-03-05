@@ -26,7 +26,13 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
 
   constructor(private _productService: AdminProductService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!this.attributeForm.value.is_attribute_group) {
+      this._productService.setState({
+        activeAttr: this.attributeForm,
+      });
+    }
+  }
 
   /**
    * return the child attributes form array
@@ -39,7 +45,9 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
    * add a new child attribute
    */
   addChildAttrs(): void {
-    this.childAttrs().push(this._productService.createProductAttrForm(false));
+    let newChildAttr = this._productService.createProductAttrForm(false);
+    this.childAttrs().push(newChildAttr);
+    this.emitActiveChildAttr(newChildAttr, this.childAttrs().length - 1);
   }
 
   /**
@@ -72,6 +80,9 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
       });
     } else {
       this.childAttrs().clear();
+      this._productService.setState({
+        activeAttr: this.attributeForm,
+      });
     }
   }
 
@@ -80,6 +91,9 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
    */
   emitCloseEvent(): void {
     this.onClose.emit();
+    this._productService.setState({
+      activeAttr: null,
+    });
   }
 
   /**
@@ -94,6 +108,9 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
    * @param activeAttr currenlty active child attribute
    */
   emitActiveChildAttr(activeAttr: FormGroup, index: number): void {
+    this._productService.setState({
+      activeAttr: activeAttr,
+    });
     this.onActiveChildAttr.emit({
       formGroup: activeAttr,
       index: index,

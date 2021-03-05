@@ -1,12 +1,18 @@
-<div
-  class="img-preview p-d-flex p-flex-column p-ai-center p-p-3 {{ styleClass }}"
->
-  <img
-    class="img-preview__img"
-    [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
-    [alt]="baseImageAltText"
-  />
-  <h2 class="img-preview__title font-headline5 p-as-start">
+<div class="img-container p-p-3 {{ styleClass }}">
+  <h2 class="img-preview__title sr-only">
     {{ viewType }}
   </h2>
+  <div class="img-preview">
+    <img
+      class="img-preview__base-img"
+      [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
+      [alt]="baseImageAltText"
+    />
+    <img
+      *ngIf="overlayImg && overlayImg.src"
+      class="img-preview__overlay-img"
+      [src]="overlayImg.src"
+      [alt]="overlayImg.alt_text"
+    />
+  </div>
 </div>
