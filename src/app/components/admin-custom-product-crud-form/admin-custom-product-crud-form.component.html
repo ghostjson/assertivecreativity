@@ -6,11 +6,13 @@
         type="button"
         styleClass="p-button-text p-button-danger p-mr-2"
         label="cancel"
+        (onClick)="cancelForm()"
       ></p-button>
       <p-button
         type="submit"
         styleClass="p-button-success p-shadow-6"
         label="Save Product"
+        (onClick)="emitSubmitEvent()"
       ></p-button>
     </div>
   </div>

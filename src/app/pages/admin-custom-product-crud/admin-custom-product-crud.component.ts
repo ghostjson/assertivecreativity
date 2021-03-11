@@ -1,7 +1,15 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   CustomProduct,
   Product,
@@ -35,10 +43,13 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
       this.productForm = this._productService.createCustomProductForm();
     }
 
-    this._productService.getState().subscribe((state) => {
-      this.activeChildAttr = state.activeChildAttr;
-      this.activeAttr = state.activeAttr;
-    });
+    this._productService
+      .getState()
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe((state) => {
+        this.activeChildAttr = state.activeChildAttr;
+        this.activeAttr = state.activeAttr;
+      });
 
     this.productViews = [
       {
