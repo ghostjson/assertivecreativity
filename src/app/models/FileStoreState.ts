@@ -4,5 +4,8 @@ export interface FileStoreState {
 
 export interface FileStoreObj {
   id: number;
-  file: File | string;
+  file?: File | string;
+  url?: string;
+  size?: number | string;
+  name?: string;
 }

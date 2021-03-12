@@ -167,7 +167,7 @@ export interface ProductImage {
 
 export class ImageObj {
   id?: number;
-  src: string;
+  src: string | number;
   alt_text?: string;
   title?: string;
 }
