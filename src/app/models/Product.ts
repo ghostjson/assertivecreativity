@@ -18,9 +18,12 @@ export class Product {
   images?: ProductImage[];
   price_table_mode?: boolean | string;
   price_table?: PriceGroup[];
-  custom_forms?: any[];
+  custom_forms?: any;
   order_props?: OrderProps;
-
+  /**
+   * TODO: remove once products/custom api is updated
+   */
+  serial?: string;
   // stock product
   is_stock: boolean;
   product?: Product;

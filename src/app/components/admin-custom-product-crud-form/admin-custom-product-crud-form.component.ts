@@ -43,13 +43,6 @@ export class AdminCustomProductCrudFormComponent implements OnInit {
   }
 
   /**
-   * save the product
-   */
-  saveProduct(): void {
-    console.log('product saved: ', this.productForm.value);
-  }
-
-  /**
    * emit cancel event
    */
   emitCancelEvent(): void {

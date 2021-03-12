@@ -27,6 +27,7 @@
       <div class="form-panel p-p-3">
         <app-admin-custom-product-crud-form
           [productForm]="productForm"
+          (onSubmit)="saveProduct()"
         ></app-admin-custom-product-crud-form>
       </div>
     </div>
