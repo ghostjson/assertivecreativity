@@ -5,6 +5,8 @@ import {
   StockProduct,
   ProductAttribute,
   ProductImage,
+  CustomProduct,
+  ProductServiceState,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -13,15 +15,22 @@ import { SelectItem } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Category } from '../models/Category';
+import { StateService } from '../store/state/state.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
-  products: Product[];
-  API_URL: string;
+export class ProductService extends StateService<ProductServiceState> {
+  private products: Product[];
+  private API_URL: string;
 
   constructor(private _http: HttpClient, private _fb: FormBuilder) {
+    super({
+      activeProductId: null,
+      activeAttrGrps: [],
+      selectedAttributes: [],
+    });
+
     this.API_URL = environment.apiUrl;
   }
 
@@ -289,11 +298,14 @@ export class ProductService {
    * Return the product from the server
    * @param id Id of the product
    */
-  getCustomProduct(id: number): Observable<Product> {
+  getCustomProduct(id: number): Observable<CustomProduct> {
     return this._http.get(this.customProductLink(id)).pipe(
       take(1),
       map((product: any) => {
-        return product.data;
+        /**
+         * TODO: change after the api is updated
+         */
+        return product.data.custom_forms;
       })
     );
   }
@@ -387,5 +399,84 @@ export class ProductService {
         product_key: '1234124',
       },
     ];
+  }
+
+  /**
+   * state management
+   */
+
+  /**
+   * get the active attribure groups from the state
+   * @returns active attribute groups
+   */
+  getActiveProductAttrs() {
+    return this.select((state) => {
+      return state.activeAttrGrps;
+    });
+  }
+
+  /**
+   * add an attribute group to the active state
+   * @param attrFormGroup active formgroup to add to the state
+   */
+  addActiveAttrGrp(attrFormGroup: FormGroup): void {
+    this.setState({
+      activeAttrGrps: [...this.state.activeAttrGrps, attrFormGroup],
+    });
+  }
+
+  /**
+   * remove active attribute group from the active attributes state
+   * @param removeIndex index of the active attribute to remove
+   */
+  removeActiveAttrGrp(removeIndex: number): void {
+    this.setState({
+      activeAttrGrps: this.state.activeAttrGrps.filter((val, index) => {
+        return index !== removeIndex;
+      }),
+    });
+  }
+
+  /**
+   * get the attributes selected by the user from the state
+   * @returns selected attributes by the user
+   */
+  getSelectedAttrs() {
+    return this.select((state) => {
+      return state.selectedAttributes;
+    });
+  }
+
+  /**
+   * add selected attribute to the state
+   * @param attrConfig config/value of the selected attribute
+   * @param attrForm formgroup that the attribute is part of
+   */
+  addSelectedAttribute(
+    attrConfig: ProductAttribute,
+    attrForm: FormGroup
+  ): void {
+    this.removeSelectedAttribute(attrForm?.value?.id);
+    this.setState({
+      selectedAttributes: [
+        ...this.state.selectedAttributes,
+        {
+          form: attrForm,
+          config: attrConfig,
+        },
+      ],
+    });
+  }
+
+  /**
+   * remove a selected attribute from the state
+   * @param id id of the selected attribute to remove
+   */
+  removeSelectedAttribute(id: number): void {
+    this.setState({
+      selectedAttributes: this.state.selectedAttributes.filter((val) => {
+        return id !== val.form.value.id;
+      }),
+    });
   }
 }

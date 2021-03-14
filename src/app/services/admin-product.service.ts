@@ -417,7 +417,7 @@ export class AdminProductService {
         id: { value: this._idGenService.getId(), disabled: true },
         type: [type, [Validators.required]],
         label: [
-          'test label created for testing ' + this._idGenService.getId(),
+          'Default Label ' + this._idGenService.getId(),
           [Validators.required],
         ],
         value: '',
@@ -464,7 +464,9 @@ export class AdminProductService {
     } else {
       newProductFormTemplate = {
         product: this.createCustomProductBaseForm(),
-        attributes: this._fb.array([]),
+        attributes: this._fb.array([
+          this.createProductAttrForm(true, 'generic'),
+        ]),
       };
     }
 

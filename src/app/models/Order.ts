@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
-import { Product } from './Product';
+import { Product, ProductAttribute, ProductImage } from './Product';
 
 export class Order {
   id?: number;
@@ -29,15 +29,29 @@ export class OrderData {
   product_details: Product;
   dates?: OrderAttribute[];
   stock_order_attributes?: OrderAttribute[];
-  custom_forms_entry?: CustomFormsEntry[];
+  custom_order_attributes?: OrderAttribute[];
+  custom_forms_entry?: any;
 }
 
 export interface OrderAttribute {
   id?: number;
-  attribute_label: string;
+  attribute_label?: string;
+  attribute_value?: string;
   attribute_type?: string;
-  attribute_price: number;
-  input: any;
+  attribute_cost?: number;
+  attribute_price?: number;
+  attribute_images?: ProductImage[];
+  child_attributes?: OrderAttribute[];
+  input?: any | OrderAttributeInput | ProductAttribute;
+}
+
+export interface OrderAttributeInput {
+  label?: string;
+  value?: string;
+  cost?: number;
+  price?: number;
+  type?: string;
+  images?: ProductImage[];
 }
 export class CustomFormsEntry {
   id: number;
@@ -52,7 +66,7 @@ export class CustomFormInput {
   id: number;
   title: string;
   parent_form: number;
-  options: CustomOption[]
+  options: CustomOption[];
 }
 
 export class CustomOption {
@@ -62,7 +76,7 @@ export class CustomOption {
   price: number;
   input: any;
   meta: OptionMeta;
-  chained_options?: CustomOption[]
+  chained_options?: CustomOption[];
 }
 
 export class OptionMeta {
@@ -77,7 +91,7 @@ export class CustomOptionForm extends FormGroup {
   price: FormControl;
   input: FormControl;
   meta: FormGroup;
-  chained_options?: FormArray
+  chained_options?: FormArray;
 }
 
 export type OrderSummaryTable = TreeNode[];

@@ -1,23 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   CustomFormInput,
   CustomFormsEntry,
   CustomOption,
   Order,
   OrderAttribute,
-} from "src/app/models/Order";
-import { OrderService } from "src/app/services/order.service";
-import { CartService } from "src/app/services/cart.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { CommonService } from "src/app/common.service";
-import { CartItem } from "src/app/models/Cart";
-import { UserDetailsService } from "src/app/store/user-details.service";
-import { FormGroup } from "@angular/forms";
+} from 'src/app/models/Order';
+import { OrderService } from 'src/app/services/order.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
+import { CartItem } from 'src/app/models/Cart';
+import { UserDetailsService } from 'src/app/store/user-details.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: "app-cart-item-detail",
-  templateUrl: "./cart-item-detail.component.html",
-  styleUrls: ["./cart-item-detail.component.scss"],
+  selector: 'app-cart-item-detail',
+  templateUrl: './cart-item-detail.component.html',
+  styleUrls: ['./cart-item-detail.component.scss'],
 })
 export class CartItemDetailComponent implements OnInit {
   cartItemId: number;
@@ -39,14 +39,14 @@ export class CartItemDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get("id"));
-    this.is_stock = this._router.url.includes("stock");
+    this.cartItemId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
+    this.is_stock = this._router.url.includes('stock');
 
     this._cartService
       .getCartItem(this.cartItemId, this.is_stock)
       .subscribe((cartItem: CartItem) => {
         this.cartItem = cartItem;
-        console.info("cart item received: ", cartItem);
+        console.info('cart item received: ', cartItem);
       });
 
     let today = new Date();
@@ -84,28 +84,29 @@ export class CartItemDetailComponent implements OnInit {
       data: {
         is_stock: this.cartItem.order_data.is_stock,
         product_details: this.cartItem.product,
-        custom_forms_entry: this.cartItem.order_data.is_stock
-          ? null
-          : this.cartItem.order_data.forms_input,
+        /**
+         * TODO: fix when api is finalized
+         */
+        custom_order_attributes: null,
         stock_order_attributes: this.cartItem.order_data.is_stock
           ? this.cartItem.order_data.stock_order_attributes
           : null,
         total_price: this.cartItem.order_data.order_price,
         quantity: this.cartItem.quantity,
-      }
+      },
     };
 
     // remove order from cart and add it to orders
     this._commonService.setLoaderFor(
       this._cartService
-      .deleteCartItem(this.cartItemId, this.cartItem.order_data.is_stock)
-      .subscribe(() => {
-        this._commonService.setLoaderFor(
-          this._orderService.placeOrder(this.order).subscribe((res: any) => {
-            this._router.navigate(["/orders/", res.data.id]);
-          })
-        );
-      })
+        .deleteCartItem(this.cartItemId, this.cartItem.order_data.is_stock)
+        .subscribe(() => {
+          this._commonService.setLoaderFor(
+            this._orderService.placeOrder(this.order).subscribe((res: any) => {
+              this._router.navigate(['/orders/', res.data.id]);
+            })
+          );
+        })
     );
   }
 }

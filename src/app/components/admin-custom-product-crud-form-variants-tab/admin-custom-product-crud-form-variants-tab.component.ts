@@ -27,7 +27,9 @@ export class AdminCustomProductCrudFormVariantsTabComponent {
    * return attributes formarray
    */
   attributes(): FormArray {
-    return this.productForm.get('attributes') as FormArray;
+    return (<FormArray>this.productForm.get('attributes'))
+      .at(0)
+      .get('child_attributes') as FormArray;
   }
 
   /**

@@ -1,4 +1,6 @@
-<div class="img-container p-p-3 {{ styleClass }}">
+<div
+  class="img-container p-p-3 p-d-flex p-ai-center p-jc-center {{ styleClass }}"
+>
   <h2 class="img-preview__title sr-only">
     {{ viewType }}
   </h2>
@@ -6,7 +8,7 @@
     <img
       class="img-preview__base-img"
       [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
-      [alt]="baseImageAltText"
+      [alt]="baseImageAltText || 'Product Image'"
     />
     <img
       *ngIf="overlayImg && overlayImg.src"

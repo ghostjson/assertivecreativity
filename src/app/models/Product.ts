@@ -1,3 +1,4 @@
+import { FormArray, FormGroup } from '@angular/forms';
 import { Category } from './Category';
 
 // model describing a Product
@@ -179,4 +180,13 @@ export interface OrderProps {
   min_order_quantity: number;
   max_order_quantity: number;
   order_quantity_step: number;
+}
+
+export interface ProductServiceState {
+  activeProductId: number;
+  activeAttrGrps: FormGroup[];
+  selectedAttributes: {
+    form: FormGroup;
+    config: ProductAttribute;
+  }[];
 }

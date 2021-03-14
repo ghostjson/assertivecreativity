@@ -1,0 +1,88 @@
+<div class="attr-form {{ styleClass }}">
+  <div class="attrs-panel">
+    <div class="attrs-panel-header p-d-flex p-jc-end">
+      <div class="attrs-panel-header--start">
+        <p-button
+          *ngIf="prevAttr"
+          styleClass="back-btn p-button-text p-button-plain"
+          icon="pi pi-angle-left"
+          iconPos="left"
+          [label]="prevAttr.getRawValue().config.label"
+          (onClick)="closeForm()"
+        ></p-button>
+      </div>
+      <div class="attrs-panel-header--end">
+        <p-button
+          styleClass="summary-btn p-button-info"
+          icon="pi pi-book"
+          iconPos="right"
+          label="Summary"
+        ></p-button>
+      </div>
+    </div>
+    <div [formGroup]="attrForm" class="attrs">
+      <ng-container
+        *ngFor="
+          let attr of attrForm.getRawValue().config.child_attributes;
+          index as attrIndex
+        "
+      >
+        <label
+          *ngIf="attr.is_attribute_group; else notAttrGrp"
+          class="attrs-item p-p-3 p-d-flex p-ai-center p-jc-between"
+        >
+          <div
+            *ngIf="attr.thumbnail.src"
+            class="attrs-item-thumb p-flex-grow-1"
+          >
+            <img
+              class="attrs-item-thumb__img"
+              [src]="attr.thumbnail.src"
+              [alt]="attr.thumbnail.alt_text || 'Variant Thumbnail'"
+            />
+          </div>
+          <div class="attrs-item-label">
+            {{ attr.label }}
+          </div>
+          <span class="attrs-item__icon p-p-3">
+            <i class="pi pi-angle-right"></i>
+          </span>
+
+          <input
+            class="sr-only"
+            type="radio"
+            formControlName="input"
+            [value]="attr"
+            (click)="addActiveAttrGrp(attrIndex)"
+          />
+        </label>
+        <ng-template #notAttrGrp>
+          <label class="attrs-item p-p-3 p-d-flex p-ai-center p-jc-between">
+            <div
+              *ngIf="attr.thumbnail.src"
+              class="attrs-item-thumb p-flex-grow-1"
+            >
+              <img
+                class="attrs-item-thumb__img"
+                [src]="attr.thumbnail.src"
+                [alt]="attr.thumbnail.alt_text || 'Variant Thumbnail'"
+              />
+            </div>
+            <div class="attrs-item-label">
+              {{ attr.label }}
+            </div>
+            <span class="attrs-item__icon p-p-3">
+              <i class="pi pi-plus"></i>
+            </span>
+            <input
+              formControlName="input"
+              class="sr-only"
+              type="radio"
+              [value]="attr"
+            />
+          </label>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</div>

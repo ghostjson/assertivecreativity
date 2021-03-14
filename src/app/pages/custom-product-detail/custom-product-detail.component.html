@@ -1,0 +1,38 @@
+<div>
+  <app-header></app-header>
+  <div *ngIf="product" class="p-grid p-nogutter">
+    <div class="p-col-12 p-lg-8">
+      <div class="product-views">
+        <app-custom-product-image-preview
+          styleClass="product-views__view product-views__view--front"
+          [baseImage]="product.product.images[0].front_view.src"
+        ></app-custom-product-image-preview>
+        <app-custom-product-image-preview
+          styleClass="product-views__view product-views__view--back"
+          [baseImage]="product.product.images[0].back_view.src"
+        ></app-custom-product-image-preview>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-4">
+      <div class="product-detail-panel p-shadow-12">
+        <app-custom-product-detail-attr-form
+          [attrForm]="baseAttrFormGroup()"
+        ></app-custom-product-detail-attr-form>
+        <app-custom-product-detail-attr-form
+          styleClass="child-attr-panel"
+          *ngFor="
+            let activeAttr of activeAttrs;
+            index as stateIndex;
+            trackBy: trackById
+          "
+          [attrForm]="activeAttr"
+          [prevAttr]="
+            activeAttrs.length > 1 ? activeAttrs[stateIndex - 1] : activeAttr
+          "
+          [stateIndex]="stateIndex"
+        ></app-custom-product-detail-attr-form>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

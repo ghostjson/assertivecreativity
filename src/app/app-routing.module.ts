@@ -23,6 +23,7 @@ import { AdminTagAdderComponent } from './pages/admin-tag-adder/admin-tag-adder.
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
 import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
+import { CustomProductDetailComponent } from './pages/custom-product-detail/custom-product-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,68 +34,69 @@ const routes: Routes = [
   {
     path: 'shop/stock',
     component: ShopComponent,
-    data: { is_stock: true }
+    data: { is_stock: true },
   },
   { path: 'products/stock/:id', component: StockProductDetailComponent },
   {
     path: 'shop/custom',
     component: ShopComponent,
-    data: { is_stock: false }
+    data: { is_stock: false },
   },
+  { path: 'products/custom/:id', component: CustomProductDetailComponent },
   {
     path: 'profile',
     component: UserProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: 'logout', component: LogoutComponent },
   { path: 'form/:formId', component: FormViewComponent },
   {
     path: 'cart',
     component: CartComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'cart/stock/:id',
     component: CartItemDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'cart/custom/:id',
     component: CartItemDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'orders',
     component: OrdersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'orders/:id',
     component: OrderDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin',
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'admin/products',
     component: AdminProductsComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'admin/products/add',
     component: AdminCustomProductCrudComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   // {
   //   path: 'admin/products/:id/edit',
@@ -106,42 +108,42 @@ const routes: Routes = [
     path: 'admin/categories',
     component: AdminCategoryAdderComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'admin/tags',
     component: AdminTagAdderComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/orders/:id',
     component: OrderDetailComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'admin/forms',
     component: AdminFormsComponent,
     canActivate: [AuthGuard],
-    data: { role: 'admin' }
+    data: { role: 'admin' },
   },
   {
     path: 'vendor',
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   {
     path: 'vendor/products',
     component: AdminProductsComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   // {
   //   path: 'vendor/products/add',
@@ -159,30 +161,30 @@ const routes: Routes = [
     path: 'vendor/categories',
     component: AdminCategoryAdderComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   {
     path: 'vendor/tags',
     component: AdminTagAdderComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   {
     path: 'vendor/orders/:id',
     component: OrderDetailComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   {
     path: 'vendor/orders',
     component: AdminOrdersComponent,
     canActivate: [AuthGuard],
-    data: { role: 'vendor' }
+    data: { role: 'vendor' },
   },
   {
     path: '**',
-    component: HomeComponent
-  }
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({
