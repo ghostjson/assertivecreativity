@@ -257,14 +257,14 @@ export class AdminProductService {
 
     if (initial) {
       imgFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         src: [initial.src, validators],
         alt_text: initial.alt_text,
         title: initial.title,
       };
     } else {
       imgFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         src: ['', validators],
         alt_text: '',
         title: '',
@@ -313,7 +313,7 @@ export class AdminProductService {
 
     if (initial) {
       baseFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         name: [initial.name, [Validators.required]],
         product_id: [initial.product_id, [Validators.required]],
         description: [initial.description, [Validators.required]],
@@ -340,7 +340,7 @@ export class AdminProductService {
       };
     } else {
       baseFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         name: ['', [Validators.required]],
         product_id: ['', [Validators.required]],
         description: ['', [Validators.required]],
@@ -381,7 +381,7 @@ export class AdminProductService {
 
     if (initial) {
       prodAttrFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         type: [initial.type, [Validators.required]],
         label: [initial.label, [Validators.required]],
         value: initial.value,
@@ -414,10 +414,10 @@ export class AdminProductService {
       }
     } else {
       prodAttrFormTemplate = {
-        id: { value: this._idGenService.getId(), disabled: true },
+        id: [this._idGenService.getId()],
         type: [type, [Validators.required]],
         label: [
-          'Default Label ' + this._idGenService.getId(),
+          'Default Label ' + [this._idGenService.getId()],
           [Validators.required],
         ],
         value: '',
@@ -481,7 +481,7 @@ export class AdminProductService {
 
     if (initial) {
       priceGroup = this._fb.group({
-        id: this._idGenService.getId(),
+        id: [this._idGenService.getId()],
         cost_per_piece: [
           initial.cost_per_piece,
           [Validators.required, Validators.min(0)],
@@ -494,7 +494,7 @@ export class AdminProductService {
       });
     } else {
       priceGroup = this._fb.group({
-        id: this._idGenService.getId(),
+        id: [this._idGenService.getId()],
         cost_per_piece: [0, [Validators.required, Validators.min(0)]],
         price_per_piece: [0, [Validators.required, Validators.min(0)]],
         quantity: [0, [Validators.required, Validators.min(0)]],

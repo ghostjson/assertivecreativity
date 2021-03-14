@@ -6,15 +6,25 @@
   </h2>
   <div class="img-preview">
     <img
-      class="img-preview__base-img"
+      class="img-preview__img img-preview__img--base"
       [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
       [alt]="baseImageAltText || 'Product Image'"
     />
     <img
       *ngIf="overlayImg && overlayImg.src"
-      class="img-preview__overlay-img"
+      class="img-preview__img img-preview__img--overlay"
       [src]="overlayImg.src"
       [alt]="overlayImg.alt_text"
+    />
+    <img
+      *ngFor="let attrId of attributeIds"
+      [ngClass]="{
+        'img-preview__img': true,
+        'img-preview__img--overlay': true,
+        show: attributesDict[attrId].show
+      }"
+      [src]="attributesDict[attrId].image[viewType].src"
+      [alt]="attributesDict[attrId].image[viewType].alt_text"
     />
   </div>
 </div>

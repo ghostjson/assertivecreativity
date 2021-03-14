@@ -6,11 +6,17 @@
         <app-custom-product-image-preview
           styleClass="product-views__view product-views__view--front"
           [baseImage]="product.product.images[0].front_view.src"
+          [selectedAttrs]="selectedAttrs"
+          [attributes]="product.attributes[0].child_attributes"
+          viewType="front_view"
         ></app-custom-product-image-preview>
-        <app-custom-product-image-preview
+        <!-- <app-custom-product-image-preview
           styleClass="product-views__view product-views__view--back"
           [baseImage]="product.product.images[0].back_view.src"
-        ></app-custom-product-image-preview>
+          [selectedAttrs]="selectedAttrs"
+          viewType="back_view"
+          [attributes]="product.attributes[0].child_attributes"
+        ></app-custom-product-image-preview> -->
       </div>
     </div>
     <div class="p-col-12 p-lg-4">
