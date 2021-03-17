@@ -3,7 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OrderAttribute } from 'src/app/models/Order';
-import { ProductAttribute } from 'src/app/models/Product';
+import { CustomProduct, ProductAttribute } from 'src/app/models/Product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class CustomProductDetailAttrFormComponent implements OnInit {
   @Input() prevAttr: FormGroup;
   @Input() stateIndex: number;
   @Input() attrForm: FormGroup;
+  @Input() product: CustomProduct;
 
   childAttrsVisible: boolean = false;
   componentDestroy: Subject<void>;
@@ -29,7 +30,10 @@ export class CustomProductDetailAttrFormComponent implements OnInit {
     this.attrForm.valueChanges
       .pipe(takeUntil(this.componentDestroy))
       .subscribe((change: OrderAttribute) => {
-        if (!change.input.is_attribute_group) {
+        console.log('changes: ', change);
+        if (change.input.is_attribute_group) {
+          this._productService.removeSelectedAttribute(change.id);
+        } else {
           this._productService.addSelectedAttribute(
             change.input,
             this.attrForm
@@ -60,5 +64,9 @@ export class CustomProductDetailAttrFormComponent implements OnInit {
    */
   closeForm(): void {
     this._productService.removeActiveAttrGrp(this.stateIndex);
+  }
+
+  showSummaryPanel(): void {
+    this._productService.setSummaryPanel(true);
   }
 }

@@ -29,6 +29,7 @@ export class ProductService extends StateService<ProductServiceState> {
       activeProductId: null,
       activeAttrGrps: [],
       selectedAttributes: [],
+      showSummaryPanel: false,
     });
 
     this.API_URL = environment.apiUrl;
@@ -477,6 +478,18 @@ export class ProductService extends StateService<ProductServiceState> {
       selectedAttributes: this.state.selectedAttributes.filter((val) => {
         return id !== val.form.value.id;
       }),
+    });
+  }
+
+  setSummaryPanel(visibility: boolean): void {
+    this.setState({
+      showSummaryPanel: visibility,
+    });
+  }
+
+  getSummaryPanelState(): Observable<boolean> {
+    return this.select((state) => {
+      return state.showSummaryPanel;
     });
   }
 }

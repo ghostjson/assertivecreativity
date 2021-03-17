@@ -30,6 +30,7 @@
         }
 
         &--overlay {
+          transition: opacity $transition-func;
           opacity: 0;
           z-index: 1;
         }

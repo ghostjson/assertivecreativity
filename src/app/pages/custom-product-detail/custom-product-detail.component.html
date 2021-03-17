@@ -21,22 +21,108 @@
     </div>
     <div class="p-col-12 p-lg-4">
       <div class="product-detail-panel p-shadow-12">
-        <app-custom-product-detail-attr-form
-          [attrForm]="baseAttrFormGroup()"
-        ></app-custom-product-detail-attr-form>
-        <app-custom-product-detail-attr-form
-          styleClass="child-attr-panel"
-          *ngFor="
-            let activeAttr of activeAttrs;
-            index as stateIndex;
-            trackBy: trackById
-          "
-          [attrForm]="activeAttr"
-          [prevAttr]="
-            activeAttrs.length > 1 ? activeAttrs[stateIndex - 1] : activeAttr
-          "
-          [stateIndex]="stateIndex"
-        ></app-custom-product-detail-attr-form>
+        <div>
+          <app-custom-product-detail-attr-form
+            [attrForm]="baseAttrFormGroup()"
+            [product]="product"
+          ></app-custom-product-detail-attr-form>
+          <div
+            class="child-attr-panel"
+            *ngFor="
+              let activeAttr of activeAttrs;
+              index as stateIndex;
+              trackBy: trackById
+            "
+            [@fadeInRightOnEnter]
+            [@fadeOutRightOnLeave]
+          >
+            <app-custom-product-detail-attr-form
+              [attrForm]="activeAttr"
+              [prevAttr]="
+                activeAttrs.length > 1
+                  ? activeAttrs[stateIndex - 1]
+                  : activeAttr
+              "
+              [stateIndex]="stateIndex"
+            ></app-custom-product-detail-attr-form>
+          </div>
+        </div>
+        <div
+          [ngClass]="{ 'summary-panel': true, 'show-panel': summaryVisible }"
+        >
+          <div class="summary-panel-header p-d-flex p-jc-end">
+            <div class="summary-panel-header--start">
+              <p-button
+                styleClass="back-btn p-button-text p-button-plain"
+                icon="pi pi-angle-left"
+                iconPos="left"
+                label="Back"
+                (onClick)="hideSummaryPanel()"
+              ></p-button>
+            </div>
+            <div
+              class="summary-panel-header--end p-d-flex p-ai-center p-jc-center"
+            >
+              <h2 class="p-my-0 font-body">Summary</h2>
+            </div>
+          </div>
+          <div class="summary-list p-flex-grow-1">
+            <ng-container
+              *ngFor="let attr of selectedAttrs; index as attrIndex"
+            >
+              <label
+                class="summary-list-item p-p-3 p-d-flex p-ai-center p-jc-between"
+              >
+                <div
+                  *ngIf="attr.form.value.input.thumbnail.src"
+                  class="summary-list-item-thumb"
+                >
+                  <img
+                    class="summary-list-item-thumb__img"
+                    [src]="attr.form.value.input.thumbnail.src"
+                    [alt]="
+                      attr.form.value.input.thumbnail.alt_text ||
+                      'Variant Thumbnail'
+                    "
+                  />
+                </div>
+                <div class="summary-list-item-label">
+                  {{ attr.form.value.input.label }}
+                </div>
+                <span class="summary-list-item__price p-p-3">
+                  {{ attr.form.value.input.price | currency }}
+                </span>
+
+                <input
+                  class="sr-only"
+                  type="radio"
+                  (click)="editSelectedAttr(attr.form)"
+                />
+              </label>
+            </ng-container>
+            <p class="p-text-center p-mt-5" *ngIf="!selectedAttrs.length">
+              You have not selected any customizations currently
+            </p>
+          </div>
+          <div
+            class="summary-panel-footer font-headline6 p-p-3 p-d-flex p-ai-center p-jc-between"
+          >
+            <div>
+              <strong> Total Price </strong>
+              <div>
+                {{ totalPrice | currency }}
+              </div>
+            </div>
+            <div>
+              <p-button
+                styleClass="p-button-success p-button-lg p-shadow-4"
+                label="Add to Cart"
+                icon="pi pi-shopping-cart"
+                iconPos="right"
+              ></p-button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

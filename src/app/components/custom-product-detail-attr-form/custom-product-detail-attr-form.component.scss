@@ -5,6 +5,10 @@
     .attrs-panel {
       &-header {
         height: 70px;
+
+        &__prod-name {
+          font-weight: 400;
+        }
       }
     }
     .attrs {
@@ -12,11 +16,13 @@
       padding: 0;
 
       &-item {
-        transition: font-size $transition-func;
+        transition: font-size $transition-func,
+          background-color $transition-func;
         background-color: white;
 
         &:hover {
           cursor: pointer;
+          background-color: $light-grey;
 
           .product-attrs-item-label {
             font-size: 13px;

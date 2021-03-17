@@ -7,7 +7,7 @@ import { Tag } from 'src/app/models/Tag';
 import { Category } from 'src/app/models/Category';
 import { ActivatedRoute } from '@angular/router';
 import { take, takeUntil } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { concat, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shop',
@@ -47,7 +47,7 @@ export class ShopComponent implements OnInit, OnDestroy {
         .subscribe((categories: Category[]) => {
           this.categories = categories;
           this.getCategoryFromUrl().add(() => {
-            if(this.selectedCategories.length) {
+            if (this.selectedCategories.length) {
               this.updateProducts();
             }
           });
@@ -59,7 +59,7 @@ export class ShopComponent implements OnInit, OnDestroy {
         .subscribe((categories: Category[]) => {
           this.categories = categories;
           this.getCategoryFromUrl().add(() => {
-            if(this.selectedCategories.length) {
+            if (this.selectedCategories.length) {
               this.updateProducts();
             }
           });
@@ -72,7 +72,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.componentDestroy))
       .subscribe(() => {
         this.getCategoryFromUrl().add(() => {
-          if(this.selectedCategories.length) {
+          if (this.selectedCategories.length) {
             this.updateProducts();
           }
         });
@@ -96,6 +96,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       .getCustomProducts()
       .subscribe((products: Product[]) => {
         this.products = products;
+        console.log('products: ', this.products);
 
         // hide the loader
         setTimeout(() => {

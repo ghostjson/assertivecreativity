@@ -189,4 +189,5 @@ export interface ProductServiceState {
     form: FormGroup;
     config: ProductAttribute;
   }[];
+  showSummaryPanel: boolean;
 }

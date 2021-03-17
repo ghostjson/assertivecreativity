@@ -7,11 +7,19 @@ import { trackById } from 'src/app/library/TrackByFunctions';
 import { CustomProduct, ProductAttribute } from 'src/app/models/Product';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
+import {
+  fadeInRightOnEnterAnimation,
+  fadeOutRightOnLeaveAnimation,
+} from 'angular-animations';
 
 @Component({
   selector: 'app-custom-product-detail',
   templateUrl: './custom-product-detail.component.html',
   styleUrls: ['./custom-product-detail.component.scss'],
+  animations: [
+    fadeInRightOnEnterAnimation({ duration: 250 }),
+    fadeOutRightOnLeaveAnimation({ duration: 250 }),
+  ],
 })
 export class CustomProductDetailComponent implements OnInit, OnDestroy {
   productId: number;
@@ -24,6 +32,8 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
   }[];
   orderForm: FormGroup;
   trackById = trackById;
+  summaryVisible: boolean;
+  totalPrice: number;
 
   constructor(
     private _router: Router,
@@ -41,10 +51,7 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
     // get the product data
     this._productService.getCustomProduct(this.productId).subscribe((res) => {
       this.product = res;
-      console.log('custom product received: ', this.product);
       this.orderForm = this._orderService.createCustomOrderForm(this.product);
-      console.log('order form raw value: ', this.orderForm.getRawValue());
-      console.log('order form value: ', this.orderForm.value);
     });
 
     this._productService
@@ -52,10 +59,6 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.componentDestroy))
       .subscribe((attrs) => {
         this.activeAttrs = attrs;
-        console.log(
-          'active attributes changed: ',
-          new FormArray(this.activeAttrs).getRawValue()
-        );
       });
 
     this._productService
@@ -63,13 +66,32 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.componentDestroy))
       .subscribe((attrs) => {
         this.selectedAttrs = attrs;
-        console.log('selected attributes changed: ', this.selectedAttrs);
+        this.totalPrice = this.selectedAttrs.reduce((prev: number, curr) => {
+          return prev + curr.form.value.input.price;
+        }, 0);
+        console.log('total price: ', this.totalPrice);
+        console.log('selected attrs: ', this.selectedAttrs);
+      });
+
+    this._productService
+      .getSummaryPanelState()
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe((panelState) => {
+        this.summaryVisible = panelState;
       });
   }
 
   ngOnDestroy(): void {
     this.componentDestroy.next();
     this.componentDestroy.complete();
+  }
+
+  showSummaryPanel(): void {
+    this._productService.setSummaryPanel(true);
+  }
+
+  hideSummaryPanel(): void {
+    this._productService.setSummaryPanel(false);
   }
 
   /**
@@ -86,5 +108,10 @@ export class CustomProductDetailComponent implements OnInit, OnDestroy {
    */
   baseAttrFormGroup(): FormGroup {
     return <FormGroup>this.attributes().at(0);
+  }
+
+  editSelectedAttr(form: FormGroup): void {
+    this._productService.addActiveAttrGrp(form);
+    this.hideSummaryPanel();
   }
 }

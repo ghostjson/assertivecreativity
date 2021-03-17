@@ -3,13 +3,18 @@
     <div class="attrs-panel-header p-d-flex p-jc-end">
       <div class="attrs-panel-header--start">
         <p-button
-          *ngIf="prevAttr"
+          *ngIf="prevAttr; else prodName"
           styleClass="back-btn p-button-text p-button-plain"
           icon="pi pi-angle-left"
           iconPos="left"
           [label]="prevAttr.getRawValue().config.label"
           (onClick)="closeForm()"
         ></p-button>
+        <ng-template #prodName>
+          <h1 class="attrs-panel-header__prod-name p-p-3 font-body">
+            {{ product.product.name }}
+          </h1>
+        </ng-template>
       </div>
       <div class="attrs-panel-header--end">
         <p-button
@@ -17,6 +22,7 @@
           icon="pi pi-book"
           iconPos="right"
           label="Summary"
+          (onClick)="showSummaryPanel()"
         ></p-button>
       </div>
     </div>

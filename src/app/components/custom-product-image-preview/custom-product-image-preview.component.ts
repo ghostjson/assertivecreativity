@@ -31,14 +31,13 @@ export class CustomProductImagePreviewComponent implements OnInit, OnChanges {
   @Input() attributes: ProductAttribute[];
   @Input() selectedAttrs: SelectedAttr[];
 
-  attributesDict: DictEntry;
-  attributeIds: string[];
+  attributesDict: DictEntry = {};
+  attributeIds: string[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
     if (this.attributes) {
-      this.attributesDict = {};
       this.attributes.forEach((attr) => {
         this.transformToDict(attr);
       });

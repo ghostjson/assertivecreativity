@@ -14,6 +14,10 @@
 
         &.img-container {
           border-radius: 0;
+
+          .img-preview {
+            max-height: 100vh;
+          }
         }
       }
     }
@@ -23,6 +27,12 @@
       min-height: 100vh;
       background-color: white;
 
+      &__name {
+        margin-top: 0;
+        margin-bottom: 1em;
+        font-weight: 400;
+      }
+
       .child-attr-panel {
         position: absolute;
         top: 0;
@@ -31,6 +41,83 @@
         min-height: 100vh;
         background-color: white;
       }
+    }
+
+    .summary-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 100vh;
+      width: 100%;
+      background-color: white;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform $transition-func, opacity $transition-func;
+
+      &-header {
+        height: 70px;
+
+        &--end,
+        &--start {
+          height: 100%;
+          width: 50%;
+
+          .p-button {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+          }
+        }
+
+        &--end {
+          border-left: 1px solid $light-grey;
+        }
+      }
+
+      &-footer {
+        border-top: 1px solid $light-grey;
+      }
+    }
+    .summary-list {
+      margin: 0;
+      padding: 0;
+
+      &-item {
+        transition: font-size $transition-func,
+          background-color $transition-func;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $light-grey;
+
+          .product-attrs-item-label {
+            font-size: 13px;
+          }
+        }
+        &-thumb {
+          &__img {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+        }
+        &-label {
+          text-transform: uppercase;
+          font-size: $font-size-caption;
+        }
+
+        &__price {
+        }
+      }
+    }
+
+    .show-panel {
+      opacity: 1;
+      transform: translateX(0%);
     }
   }
 }
