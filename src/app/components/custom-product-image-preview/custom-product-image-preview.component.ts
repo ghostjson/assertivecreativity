@@ -23,10 +23,9 @@ type SelectedAttr = {
   styleUrls: ['./custom-product-image-preview.component.scss'],
 })
 export class CustomProductImagePreviewComponent implements OnInit, OnChanges {
-  @Input() baseImage: string;
-  @Input() baseImageAltText: string;
   @Input() viewType: string;
   @Input() styleClass: string;
+  @Input() baseImage: ImageObj;
   @Input() overlayImg: ImageObj;
   @Input() attributes: ProductAttribute[];
   @Input() selectedAttrs: SelectedAttr[];
@@ -46,6 +45,7 @@ export class CustomProductImagePreviewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any): void {
+    console.log('changes in image preview: ', changes);
     // listen for changes in selected attributes and update the preview
     if (changes.selectedAttrs) {
       let changedAttrs: SelectedAttr[] = changes.selectedAttrs.currentValue;

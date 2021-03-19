@@ -181,13 +181,3 @@ export interface OrderProps {
   max_order_quantity: number;
   order_quantity_step: number;
 }
-
-export interface ProductServiceState {
-  activeProductId: number;
-  activeAttrGrps: FormGroup[];
-  selectedAttributes: {
-    form: FormGroup;
-    config: ProductAttribute;
-  }[];
-  showSummaryPanel: boolean;
-}

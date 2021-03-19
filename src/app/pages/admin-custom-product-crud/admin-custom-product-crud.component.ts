@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -19,8 +25,7 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
 
   productId: number;
   productForm: FormGroup;
-  activeAttr: ProductAttribute;
-  activeChildAttr: ProductAttribute;
+  activeAttrForm: FormGroup;
   productViews: MenuItem[];
   editMode: boolean;
 
@@ -31,7 +36,8 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     private _commonService: CommonService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _fileManagerService: AdminFileManagerService
+    private _fileManagerService: AdminFileManagerService,
+    private _ref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -70,11 +76,13 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     }
 
     this._productService
-      .getState()
+      .getActiveProduct()
       .pipe(takeUntil(this.componentDestroy))
       .subscribe((state) => {
-        this.activeChildAttr = state.activeChildAttr;
-        this.activeAttr = state.activeAttr;
+        this.activeAttrForm = state && state.activeAttrForm;
+        // force change detection so that the view updates. For reasons to
+        // do this refer: https://stackoverflow.com/q/45236671/6882980
+        this._ref.detectChanges();
       });
 
     this.productViews = [
@@ -88,6 +96,7 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this._productService.setActiveProduct(null);
     this.componentDestroy.next();
     this.componentDestroy.complete();
   }

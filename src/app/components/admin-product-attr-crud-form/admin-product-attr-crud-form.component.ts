@@ -1,5 +1,12 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { moveItemInFormArray } from 'src/app/library/FormsUtilities';
 import { AdminProductService } from 'src/app/services/admin-product.service';
@@ -24,12 +31,15 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
 
   trackById = trackById;
 
-  constructor(private _productService: AdminProductService) {}
+  constructor(
+    private _productService: AdminProductService,
+    private _ref: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     if (!this.attributeForm.value.is_attribute_group) {
-      this._productService.setState({
-        activeAttr: this.attributeForm,
+      this._productService.setActiveProduct({
+        activeAttrForm: this.attributeForm,
       });
     }
   }
@@ -80,9 +90,6 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
       });
     } else {
       this.childAttrs().clear();
-      this._productService.setState({
-        activeAttr: this.attributeForm,
-      });
     }
   }
 
@@ -91,8 +98,8 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
    */
   emitCloseEvent(): void {
     this.onClose.emit();
-    this._productService.setState({
-      activeAttr: null,
+    this._productService.setActiveProduct({
+      activeAttrForm: null,
     });
   }
 
@@ -108,9 +115,6 @@ export class AdminProductAttrCrudFormComponent implements OnInit {
    * @param activeAttr currenlty active child attribute
    */
   emitActiveChildAttr(activeAttr: FormGroup, index: number): void {
-    this._productService.setState({
-      activeAttr: activeAttr,
-    });
     this.onActiveChildAttr.emit({
       formGroup: activeAttr,
       index: index,

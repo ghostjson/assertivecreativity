@@ -7,8 +7,12 @@
   <div class="img-preview">
     <img
       class="img-preview__img img-preview__img--base"
-      [src]="baseImage ? baseImage : '/assets/images/img-placeholder.svg'"
-      [alt]="baseImageAltText || 'Product Image'"
+      [src]="
+        baseImage && baseImage.src
+          ? baseImage.src
+          : '/assets/images/img-placeholder.svg'
+      "
+      [alt]="(baseImage && baseImage.alt_text) || 'Product Image'"
     />
     <img
       *ngIf="overlayImg && overlayImg.src"

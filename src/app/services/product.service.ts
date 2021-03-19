@@ -4,18 +4,16 @@ import {
   PriceTable,
   StockProduct,
   ProductAttribute,
-  ProductImage,
   CustomProduct,
-  ProductServiceState,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Category } from '../models/Category';
 import { StateService } from '../store/state/state.service';
+import { ProductServiceState } from '../models/ProductServiceState';
 
 @Injectable({
   providedIn: 'root',
