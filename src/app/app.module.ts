@@ -116,7 +116,6 @@ import { AdminFormsQuestionMakerRadioComponent } from './components/admin-forms-
 import { AdminFormsQuestionMakerParagraphComponent } from './components/admin-forms-question-maker-paragraph/admin-forms-question-maker-paragraph.component';
 import { AdminFormsQuestionMakerColorComponent } from './components/admin-forms-question-maker-color/admin-forms-question-maker-color.component';
 import { AdminFormsQuestionMakerDatePickerComponent } from './components/admin-forms-question-maker-date-picker/admin-forms-question-maker-date-picker.component';
-import { AdminCategorySelectorComponent } from './components/admin-category-selector/admin-category-selector.component';
 import { AdminTagSelectorComponent } from './components/admin-tag-selector/admin-tag-selector.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
@@ -193,7 +192,6 @@ import { CustomProductDetailAttrFormComponent } from './components/custom-produc
     AdminChartCardComponent,
     LoaderComponent,
     OrdersComponent,
-    AdminCategorySelectorComponent,
     AdminTagSelectorComponent,
     AdminHeaderComponent,
     AdminSidebarComponent,

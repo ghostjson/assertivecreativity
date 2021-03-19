@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserDetailsService } from './store/user-details.service';
 import { CommonService } from './common.service';
 import { PrimeNGConfig } from 'primeng/api';

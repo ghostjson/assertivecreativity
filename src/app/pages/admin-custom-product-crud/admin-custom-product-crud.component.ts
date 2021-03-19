@@ -1,13 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -24,10 +17,12 @@ import { AdminProductService } from 'src/app/services/admin-product.service';
 export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
   @Input() product: CustomProduct;
 
+  productId: number;
   productForm: FormGroup;
   activeAttr: ProductAttribute;
   activeChildAttr: ProductAttribute;
   productViews: MenuItem[];
+  editMode: boolean;
 
   componentDestroy = new Subject<void>();
 
@@ -35,14 +30,41 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     private _productService: AdminProductService,
     private _commonService: CommonService,
     private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private _fileManagerService: AdminFileManagerService
   ) {}
 
   ngOnInit(): void {
-    if (this.product) {
-      this.productForm = this._productService.createCustomProductForm(
-        this.product
-      );
+    /**
+     * TODO: change once the api is fixed
+     */
+    this.product = history.state.product && history.state.product.custom_forms;
+    this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
+    this.editMode = Boolean(
+      this._router.url.includes('edit') && this.productId
+    );
+
+    if (this.editMode) {
+      if (this.product) {
+        this.productForm = this._productService.createCustomProductForm(
+          this.product
+        );
+      } else {
+        this._commonService.setLoaderFor(
+          this._productService
+            .getCustomProduct(this.productId)
+            .subscribe((res) => {
+              /**
+               * TODO: edit this once the api is implemented
+               */
+              res.custom_forms.product.id = res.id;
+              this.product = res.custom_forms;
+              this.productForm = this._productService.createCustomProductForm(
+                this.product
+              );
+            })
+        );
+      }
     } else {
       this.productForm = this._productService.createCustomProductForm();
     }
@@ -75,16 +97,29 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
    */
   async saveProduct(): Promise<void> {
     let transformedProd = await this.transformProductImgs();
-    this._commonService.setLoaderFor(
-      this._productService.addCustomProduct(transformedProd).subscribe(
-        (res) => {
-          this._router.navigate(['/admin/products']);
-        },
-        (err) => {
-          console.error(err);
-        }
-      )
-    );
+    if (this.editMode) {
+      this._commonService.setLoaderFor(
+        this._productService.editCustomProduct(transformedProd).subscribe(
+          (res) => {
+            this._router.navigate(['/admin/products']);
+          },
+          (err) => {
+            console.error(err);
+          }
+        )
+      );
+    } else {
+      this._commonService.setLoaderFor(
+        this._productService.addCustomProduct(transformedProd).subscribe(
+          (res) => {
+            this._router.navigate(['/admin/products']);
+          },
+          (err) => {
+            console.error(err);
+          }
+        )
+      );
+    }
   }
 
   /**
@@ -97,7 +132,8 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
 
     // upload the base images
     for (let i = 0; i < productObj.product.images.length; i += 1) {
-      if (productObj.product.images[i].front_view.src) {
+      const frontView = <string>productObj.product.images[i].front_view.src;
+      if (frontView && !frontView.startsWith('http')) {
         productObj.product.images[
           i
         ].front_view.src = await this._fileManagerService
@@ -105,7 +141,8 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
           .toPromise();
       }
 
-      if (productObj.product.images[i].back_view.src) {
+      const backView = <string>productObj.product.images[i].back_view.src;
+      if (backView && !backView.startsWith('http')) {
         productObj.product.images[
           i
         ].back_view.src = await this._fileManagerService
@@ -134,7 +171,8 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     attr: ProductAttribute
   ): Promise<ProductAttribute> {
     // upload thumbnail image
-    if (attr.thumbnail.src) {
+    const thumbnail = <string>attr.thumbnail.src;
+    if (thumbnail && !thumbnail.startsWith('http')) {
       attr.thumbnail.src = await this._fileManagerService
         .uploadFile(<string>attr.thumbnail.src)
         .toPromise();
@@ -150,14 +188,17 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     } else {
       // upload the images of the attribute
       for (let i = 0; i < attr.images.length; i += 1) {
-        if (attr.images[i].front_view.src) {
+        const frontView = <string>attr.images[i].front_view.src;
+        if (frontView && !frontView.startsWith('http')) {
           attr.images[
             i
           ].front_view.src = await this._fileManagerService
             .uploadFile(<string>attr.images[i].front_view.src)
             .toPromise();
         }
-        if (attr.images[i].back_view.src) {
+
+        const backView = <string>attr.images[i].back_view.src;
+        if (backView && !backView.startsWith('http')) {
           attr.images[
             i
           ].back_view.src = await this._fileManagerService

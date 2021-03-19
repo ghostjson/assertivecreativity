@@ -17,6 +17,7 @@ export class AdminCustomProductCrudFormPricingComponent implements OnInit {
   constructor(private _productService: AdminProductService) {}
 
   ngOnInit(): void {
+    console.log('prodyct in pricing table: ', this.baseProductForm.value);
     this.pricingInfoMsgs = [
       {
         severity: 'info',
@@ -70,5 +71,19 @@ export class AdminCustomProductCrudFormPricingComponent implements OnInit {
    */
   removePriceRow(index: number): void {
     this.pricingTableForm().removeAt(index);
+  }
+
+  /**
+   * set the pricing table mode by initialising table or resetting
+   * if not disabling price table mode
+   * @param state whether to turn on pricing table or not
+   */
+  setPricingTableMode(state: boolean): void {
+    if (state) {
+      this.pricingTableForm().clear();
+      this.addPriceRow();
+    } else {
+      this.pricingTableForm().clear();
+    }
   }
 }

@@ -12,6 +12,7 @@
         type="submit"
         styleClass="p-button-success p-shadow-6"
         label="Save Product"
+        [disabled]="!productForm.valid"
         (onClick)="emitSubmitEvent()"
       ></p-button>
     </div>

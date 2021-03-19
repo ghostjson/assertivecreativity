@@ -106,7 +106,7 @@
               <td>
                 <span class="p-column-title"> Name </span>
                 <span>
-                  <a href="/products/stock/{{ product.product_key }}">
+                  <a [routerLink]="['/products/stock/', product.product_key]">
                     {{ product.name }}
                   </a>
                 </span>
@@ -226,8 +226,11 @@
             <tr>
               <td class="admin-products-table__image">
                 <img
-                  *ngIf="product.image; else placeholderImg"
-                  [src]="product.image"
+                  *ngIf="
+                    product.custom_forms.product.images[0].front_view;
+                    else placeholderImg
+                  "
+                  [src]="product.custom_forms.product.images[0].front_view.src"
                   [alt]="product.name"
                   width="100"
                   class="shadow"
@@ -239,7 +242,7 @@
               <td>
                 <span class="p-column-title"> Name </span>
                 <span>
-                  <a href="/products/custom/{{ product.id }}">
+                  <a [routerLink]="['/products/custom/', product.id]">
                     {{ product.name }}
                   </a>
                 </span>
@@ -271,6 +274,7 @@
               <td class="admin-data-table__tools">
                 <a
                   [routerLink]="[product.id, 'edit']"
+                  [state]="{ product: product }"
                   pButton
                   pRipple
                   icon="pi pi-pencil"

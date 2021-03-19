@@ -221,11 +221,29 @@ export class AdminProductService {
    * Edit product
    * @param editedProduct edited product object
    */
-  editCustomProduct(editedProduct: Product): Observable<Product> {
+  editCustomProduct(editedProduct: CustomProduct): Observable<Product> {
+    /**
+     * TODO: fix once the api is updated
+     */
+    let transformedProduct: Product = {
+      name: editedProduct.product.name,
+      base_price: editedProduct.product.base_price,
+      image: this.testImageString,
+      description: editedProduct.product.description,
+      price_table: null,
+      sales: editedProduct.product.sales,
+      stock: editedProduct.product.stock,
+      price_table_mode: false,
+      category_id: editedProduct.product.category_id,
+      is_stock: false,
+      product_key: editedProduct.product.product_id,
+      custom_forms: editedProduct,
+      serial: 'random',
+    };
     return this._http
       .post<Product>(
-        `${this.customProductLinkById(editedProduct.id)}`,
-        editedProduct
+        `${this.customProductLinkById(editedProduct.product.id)}`,
+        transformedProduct
       )
       .pipe(take(1));
   }
@@ -313,7 +331,7 @@ export class AdminProductService {
 
     if (initial) {
       baseFormTemplate = {
-        id: [this._idGenService.getId()],
+        id: initial.id,
         name: [initial.name, [Validators.required]],
         product_id: [initial.product_id, [Validators.required]],
         description: [initial.description, [Validators.required]],
@@ -330,17 +348,17 @@ export class AdminProductService {
           }),
         ]),
         price_table_mode: [initial.price_table_mode, [Validators.required]],
-        price_table: this._fb.array([
+        price_table: this._fb.array(
           initial.price_table.map((priceGroupConfig) => {
             return this.newPriceGroupForm(priceGroupConfig);
-          }),
-        ]),
+          })
+        ),
         is_stock: [false, [Validators.required]],
         order_props: this.createOrderPropsForm(initial.order_props),
       };
     } else {
       baseFormTemplate = {
-        id: [this._idGenService.getId()],
+        id: this._idGenService.getId(),
         name: ['', [Validators.required]],
         product_id: ['', [Validators.required]],
         description: ['', [Validators.required]],
@@ -385,7 +403,7 @@ export class AdminProductService {
         type: [initial.type, [Validators.required]],
         label: [initial.label, [Validators.required]],
         value: initial.value,
-        thumbnail: this.createImgForm(initial.thumbnail),
+        thumbnail: this.createImgForm(initial.thumbnail, false),
         images: this._fb.array([
           this._fb.group({
             front_view: this.createImgForm(initial.images[0].front_view, false),
