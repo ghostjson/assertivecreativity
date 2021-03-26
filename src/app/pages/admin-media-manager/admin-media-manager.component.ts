@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MediaFolder } from 'src/app/models/MediaManagement';
+import { MediaFile, MediaFolder } from 'src/app/models/MediaManagement';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/a
 })
 export class AdminMediaManagerComponent implements OnInit {
   folders: Observable<MediaFolder[]>;
+  files: Observable<MediaFile[]>;
 
   constructor(private _mediaMgrService: AdminMediaManagerService) {}
 
   ngOnInit(): void {
     this.folders = this._mediaMgrService.getRootFolderList();
+    this.files = this._mediaMgrService.getFilesInFolder('/');
   }
 }

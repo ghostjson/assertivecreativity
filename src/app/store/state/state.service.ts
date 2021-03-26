@@ -36,5 +36,6 @@ export class StateService<T> {
       ...this.state,
       ...newState,
     });
+    console.log('state updated: ', this.state);
   }
 }

@@ -1,17 +1,17 @@
-<div class="folder-wrapper p-p-3">
-  <p-menu #menu [popup]="true" [model]="menuItems" appendTo="body"></p-menu>
-  <div class="folder-header p-d-flex p-jc-between p-ai-center p-mb-3">
+<div class="folder-wrapper">
+  <div class="folder-header p-d-flex p-jc-between p-ai-center p-mb-4">
     <div class="folder-header__icon">
       <i class="pi pi-folder"></i>
     </div>
+    <p-menu #menu [popup]="true" [model]="menuItems" appendTo="body"></p-menu>
     <p-button
-      styleClass="options-btn p-button-text p-button-plain p-button-lg"
+      styleClass="folder-header__options-btn p-button-text p-button-plain p-button-lg"
       aria-label="Options"
       icon="pi pi-ellipsis-v"
       (onClick)="menu.toggle($event)"
     ></p-button>
   </div>
-  <div class="folder-details">
+  <div class="folder-details" pRipple>
     <div class="folder-details__name">
       {{ folder.name | limitLength: 19 }}
     </div>

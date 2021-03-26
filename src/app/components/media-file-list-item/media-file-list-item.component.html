@@ -1,0 +1,27 @@
+<div class="file-wrapper">
+  <div class="file-header p-d-flex p-jc-between p-ai-center">
+    <div class="file-header__icon">
+      <i class="pi pi-file-o"></i>
+    </div>
+    <p-menu #menu [popup]="true" [model]="menuItems" appendTo="body"></p-menu>
+    <p-button
+      styleClass="file-header__options-btn p-button-text p-button-plain p-button-lg"
+      aria-label="Options"
+      icon="pi pi-ellipsis-v"
+      (onClick)="menu.toggle($event)"
+    ></p-button>
+  </div>
+  <div class="file-details" pRipple>
+    <div class="file-details__name">
+      {{ file.name | limitLength: 19 }}
+    </div>
+    <div class="file-details__meta p-d-flex p-jc-between">
+      <div class="file-details__meta__count">
+        {{ file.updated_at ? file.updated_at + 'items' : ' ' }}
+      </div>
+      <div class="file-details__meta__size">
+        {{ file.size ? file.size + 'MB' : ' ' }}
+      </div>
+    </div>
+  </div>
+</div>
