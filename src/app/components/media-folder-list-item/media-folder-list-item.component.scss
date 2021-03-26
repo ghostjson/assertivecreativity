@@ -1,0 +1,28 @@
+@import '../../../assets/css/variables.scss';
+
+.folder-wrapper {
+  min-width: 175px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.folder-header {
+  &__icon {
+    i {
+      font-size: $font-size-headline5;
+      color: $utility-color;
+    }
+  }
+}
+
+.folder-details {
+  &__name {
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  &__meta {
+    font-size: $font-size-overline;
+    color: $dark-grey;
+  }
+}

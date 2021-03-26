@@ -160,6 +160,9 @@ import { AdminProductAttrCrudFormOptionPropsComponent } from './components/admin
 import { AdminProductAttrCrudFormAttrOptionsListItemComponent } from './components/admin-product-attr-crud-form-attr-options-list-item/admin-product-attr-crud-form-attr-options-list-item.component';
 import { CustomProductDetailComponent } from './pages/custom-product-detail/custom-product-detail.component';
 import { CustomProductDetailAttrFormComponent } from './components/custom-product-detail-attr-form/custom-product-detail-attr-form.component';
+import { AdminMediaManagerComponent } from './pages/admin-media-manager/admin-media-manager.component';
+import { MediaFolderListItemComponent } from './components/media-folder-list-item/media-folder-list-item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -249,6 +252,8 @@ import { CustomProductDetailAttrFormComponent } from './components/custom-produc
     AdminProductAttrCrudFormAttrOptionsListItemComponent,
     CustomProductDetailComponent,
     CustomProductDetailAttrFormComponent,
+    AdminMediaManagerComponent,
+    MediaFolderListItemComponent,
   ],
   imports: [
     /** Angular modules */

@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { AdminFileManagerService } from 'src/app/services/admin-file-manager/admin-file-manager.service';
+import { convertToDataUrl } from 'src/app/library/FileFunctions';
 
 @Component({
   selector: 'app-image-picker-form',
@@ -25,13 +26,11 @@ export class ImagePickerFormComponent {
    */
   onImgSelect(event: any): void {
     if (event.currentFiles[0]) {
-      this._fileManagerService
-        .convertToDataUrl(event.currentFiles[0])
-        .subscribe((dataUrl) => {
-          this.imageForm.patchValue({
-            src: dataUrl,
-          });
+      convertToDataUrl(event.currentFiles[0]).subscribe((dataUrl) => {
+        this.imageForm.patchValue({
+          src: dataUrl,
         });
+      });
     }
   }
 

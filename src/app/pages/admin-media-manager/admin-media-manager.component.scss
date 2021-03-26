@@ -1,0 +1,14 @@
+.container {
+  min-height: 100vh;
+}
+
+:host {
+  ::ng-deep {
+    .p-dataview {
+      &-content {
+        padding-top: 0;
+        background-color: transparent;
+      }
+    }
+  }
+}

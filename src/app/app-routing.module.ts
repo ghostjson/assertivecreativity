@@ -24,6 +24,7 @@ import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.componen
 import { AdminFormsComponent } from './pages/admin-forms/admin-forms.component';
 import { AdminCustomProductCrudComponent } from './pages/admin-custom-product-crud/admin-custom-product-crud.component';
 import { CustomProductDetailComponent } from './pages/custom-product-detail/custom-product-detail.component';
+import { AdminMediaManagerComponent } from './pages/admin-media-manager/admin-media-manager.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -130,6 +131,12 @@ const routes: Routes = [
   {
     path: 'admin/forms',
     component: AdminFormsComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'admin' },
+  },
+  {
+    path: 'admin/media',
+    component: AdminMediaManagerComponent,
     canActivate: [AuthGuard],
     data: { role: 'admin' },
   },
