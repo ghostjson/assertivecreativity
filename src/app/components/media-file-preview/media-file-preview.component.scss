@@ -1,0 +1,57 @@
+:host {
+  ::ng-deep {
+    .preview {
+      max-width: 95%;
+      height: 100%;
+
+      &__img {
+        margin-bottom: 1em;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      &-meta {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .preview-dialog.p-dialog {
+      height: 100%;
+      width: 100%;
+      max-height: none;
+      box-shadow: none;
+
+      .p-dialog-header {
+        background: transparent;
+
+        &-icon {
+          color: white;
+        }
+      }
+
+      .p-dialog-mask {
+        height: 100vh;
+      }
+
+      .preview__img {
+        height: 90%;
+      }
+
+      .preview-details {
+        display: flex;
+        justify-content: center;
+      }
+
+      .p-dialog-content {
+        overflow-y: hidden;
+        background: transparent;
+        color: white;
+      }
+    }
+  }
+}

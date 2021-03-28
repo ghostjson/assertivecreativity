@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MediaFile } from 'src/app/models/MediaManagement';
 
@@ -9,6 +9,7 @@ import { MediaFile } from 'src/app/models/MediaManagement';
 })
 export class MediaFileListItemComponent implements OnInit {
   @Input() file: MediaFile;
+  @Output() onSelect: EventEmitter<MediaFile> = new EventEmitter<MediaFile>();
 
   menuItems: MenuItem[];
 
@@ -20,5 +21,12 @@ export class MediaFileListItemComponent implements OnInit {
         label: 'Delete File',
       },
     ];
+  }
+
+  /**
+   * emit file open event
+   */
+  emitFileOpen(): void {
+    this.onSelect.emit(this.file);
   }
 }

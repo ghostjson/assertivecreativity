@@ -41,18 +41,34 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     );
   }
 
+  /**
+   * return the media api link
+   * @returns media api link
+   */
   mediaLink(): string {
     return `${environment.apiUrl}/admin/media`;
   }
 
+  /**
+   * return folder api link
+   * @returns folder api link
+   */
   folderLink(): string {
     return `${this.mediaLink()}/folder`;
   }
 
+  /**
+   * return file api link
+   * @returns file api link
+   */
   fileLink(): string {
     return `${this.mediaLink()}/file`;
   }
 
+  /**
+   * refresh the files in root folder from the api
+   * @returns files in root folder
+   */
   refreshRootFolderPaths(): Observable<MediaFolder[]> {
     return this._http.get(`${this.folderLink()}`).pipe(
       take(1),
@@ -95,18 +111,32 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     );
   }
 
+  /**
+   * get files in root folder
+   * @returns files in root folder
+   */
   getRootFolderList(): Observable<MediaFolder[]> {
     return this.select((state) => {
       return state.rootFolderList;
     });
   }
 
+  /**
+   * get files in a folder
+   * @param path path to fetch files in
+   * @returns files in folder
+   */
   getFilesInFolder(path: string): Observable<MediaFile[]> {
     return this.select((state) => {
       return state.folders[path] ? state.folders[path].files : [];
     });
   }
 
+  /**
+   *
+   * @param path path to refresh files
+   * @returns files in the path
+   */
   refreshFilesInFolder(path: string): Observable<MediaFile[]> {
     return this._http
       .post<MediaApiRes<MediaFile[]>>(`${this.folderLink()}`, {
@@ -185,10 +215,20 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     }
   }
 
+  /**
+   *
+   * @param str string to convert to normal string
+   * @returns human readable normal string with spaces
+   */
   deSlugify(str: string): string {
     return str.replace(/-/, ' ');
   }
 
+  /**
+   * get the current folder name from
+   * @param path path to parse
+   * @returns current folder name
+   */
   parseCurrentFolderName(path: string): string {
     const parsedPath = path.split('/');
     return parsedPath[parsedPath.length - 2];

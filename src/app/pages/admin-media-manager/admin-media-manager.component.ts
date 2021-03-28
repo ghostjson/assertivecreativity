@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MediaFile, MediaFolder } from 'src/app/models/MediaManagement';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
@@ -11,11 +11,32 @@ import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/a
 export class AdminMediaManagerComponent implements OnInit {
   folders: Observable<MediaFolder[]>;
   files: Observable<MediaFile[]>;
+  filePreviewVisible: boolean;
+  previewFile: MediaFile;
 
   constructor(private _mediaMgrService: AdminMediaManagerService) {}
 
   ngOnInit(): void {
     this.folders = this._mediaMgrService.getRootFolderList();
     this.files = this._mediaMgrService.getFilesInFolder('/');
+    this.filePreviewVisible = false;
+  }
+
+  /**
+   * show the media file preview dialog
+   * @param file file to preview
+   */
+  showFilePreview(file: MediaFile): void {
+    console.log('before setting: ', this.filePreviewVisible);
+    this.filePreviewVisible = true;
+    this.previewFile = file;
+    console.log('media file: ', file, this.filePreviewVisible);
+  }
+
+  /**
+   * hide media file preview dialog
+   */
+  hideFilePreview(): void {
+    this.filePreviewVisible = false;
   }
 }

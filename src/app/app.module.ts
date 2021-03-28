@@ -163,6 +163,7 @@ import { CustomProductDetailAttrFormComponent } from './components/custom-produc
 import { AdminMediaManagerComponent } from './pages/admin-media-manager/admin-media-manager.component';
 import { MediaFolderListItemComponent } from './components/media-folder-list-item/media-folder-list-item.component';
 import { MediaFileListItemComponent } from './components/media-file-list-item/media-file-list-item.component';
+import { MediaFilePreviewComponent } from './components/media-file-preview/media-file-preview.component';
 
 @NgModule({
   declarations: [
@@ -256,6 +257,7 @@ import { MediaFileListItemComponent } from './components/media-file-list-item/me
     AdminMediaManagerComponent,
     MediaFolderListItemComponent,
     MediaFileListItemComponent,
+    MediaFilePreviewComponent,
   ],
   imports: [
     /** Angular modules */

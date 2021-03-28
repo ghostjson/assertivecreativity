@@ -164,6 +164,7 @@
             <div class="p-col-12 p-md-3 p-lg-2 p-p-1">
               <app-media-file-list-item
                 [file]="file"
+                (onSelect)="showFilePreview($event)"
               ></app-media-file-list-item>
             </div>
           </ng-template>
@@ -172,4 +173,10 @@
     </div>
   </div>
   <app-footer></app-footer>
+
+  <app-media-file-preview
+    [file]="previewFile"
+    [visible]="filePreviewVisible"
+    (onHide)="hideFilePreview()"
+  ></app-media-file-preview>
 </div>

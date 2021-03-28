@@ -11,7 +11,7 @@
       (onClick)="menu.toggle($event)"
     ></p-button>
   </div>
-  <div class="file-details" pRipple>
+  <div class="file-details" pRipple (click)="emitFileOpen()">
     <div class="file-details__name">
       {{ file.name | limitLength: 19 }}
     </div>

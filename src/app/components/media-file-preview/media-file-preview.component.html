@@ -1,0 +1,29 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [dismissableMask]="true"
+  styleClass="preview-dialog"
+  closeIcon="pi pi-arrow-left"
+  [resizable]="false"
+  [blockScroll]="false"
+  (onHide)="emitHide()"
+>
+  <div *ngIf="file" class="preview p-d-flex p-flex-column p-ai-between">
+    <div class="preview__img p-flex-grow">
+      <img [src]="file.file" alt="File alt text" />
+    </div>
+    <div class="preview-details">
+      <div class="preview-details__name">
+        {{ file.name }}
+      </div>
+      <div class="preview-details__slug">
+        {{ file.slug }}
+      </div>
+    </div>
+    <div class="preview-meta">
+      <div class="preview-meta__modified-date">
+        {{ file.updated_at ? (file.updated_at | date) : ' ' }}
+      </div>
+    </div>
+  </div>
+</p-dialog>
