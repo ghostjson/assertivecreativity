@@ -172,47 +172,13 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * upload file or base64 string
    * @param file file object or bass64 string to upload
    */
-  saveFile(
-    name: string,
-    slug: string,
-    folder: string,
-    file: File | string
-  ): Observable<MediaFile> {
-    if (file instanceof File) {
-      // if file object is passed, convert it to base64 string first
-      return convertToDataUrl(file).pipe(
-        take(1),
-        concatMap((fileString) => {
-          const fileReq: MediaFile = {
-            name: name,
-            slug: slug,
-            folder: folder,
-            file: fileString,
-          };
-          return this._http.post(`${this.mediaLink()}`, fileReq).pipe(
-            take(1),
-            map((res: { data: MediaFile }) => {
-              return res.data;
-            })
-          );
-        })
-      );
-    } else {
-      // else if base64 string is used then directly use it to
-      // upload the file
-      const fileReq: MediaFile = {
-        name: name,
-        slug: slug,
-        folder: folder,
-        file: file,
-      };
-      return this._http.post(`${this.mediaLink()}`, fileReq).pipe(
-        take(1),
-        map((res: { data: MediaFile }) => {
-          return res.data;
-        })
-      );
-    }
+  saveFile(file: MediaFile): Observable<MediaFile> {
+    return this._http.post(`${this.mediaLink()}`, file).pipe(
+      take(1),
+      map((res: { data: MediaFile }) => {
+        return res.data;
+      })
+    );
   }
 
   /**

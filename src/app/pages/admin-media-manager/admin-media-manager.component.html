@@ -14,6 +14,7 @@
               icon="pi pi-plus"
               iconPos="right"
               styleClass="p-button-success"
+              (onClick)="showUploadMediaDialog()"
             ></p-button>
           </div>
         </p-toolbar>
@@ -179,4 +180,80 @@
     [visible]="filePreviewVisible"
     (onHide)="hideFilePreview()"
   ></app-media-file-preview>
+
+  <p-dialog
+    styleClass="upload-media-dialog"
+    [(visible)]="uploadMediaVisible"
+    [closable]="false"
+    [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  >
+    <div
+      [ngClass]="{
+        'upload-media-preview': true,
+        'p-d-flex': true,
+        'p-ai-center': true,
+        'p-jc-center': true,
+        'upload-media-preview--img-selected': newMedia.value.file
+      }"
+    >
+      <img
+        [ngClass]="{
+          'upload-media-preview__img': true,
+          hide: !newMedia.value.file
+        }"
+        [src]="newMedia.value.file"
+        alt="New Media Image"
+      />
+      <div
+        [ngClass]="{
+          hide: newMedia.value.file
+        }"
+      >
+        <p-fileUpload
+          #mediaUpload
+          mode="basic"
+          accept="image/*"
+          maxFileSize="10240000"
+          [customUpload]="true"
+          chooseLabel="Choose Image"
+          (onSelect)="convertMedia($event.currentFiles)"
+        ></p-fileUpload>
+      </div>
+    </div>
+    <form [formGroup]="newMedia" class="p-fluid p-mt-3">
+      <div class="p-field p-input-filled">
+        <label>
+          Name
+          <input
+            formControlName="name"
+            name="name"
+            id="filename"
+            type="text"
+            pInputText
+          />
+        </label>
+      </div>
+      <div class="p-field p-input-filled p-mb-0">
+        <label>
+          Slug
+          <input formControlName="slug" id="slug" type="text" pInputText />
+        </label>
+      </div>
+    </form>
+    <p-footer>
+      <div class="p-d-flex p-jc-end">
+        <p-button
+          styleClass="p-button-text p-button-danger p-mr-2"
+          label="Close"
+          (onClick)="hideUploadMediaDialog()"
+        ></p-button>
+        <p-button
+          styleClass="p-button-success"
+          label="Upload"
+          (onClick)="uploadMedia()"
+        ></p-button>
+      </div>
+    </p-footer>
+  </p-dialog>
+  <p-toast></p-toast>
 </div>

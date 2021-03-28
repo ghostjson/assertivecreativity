@@ -1,3 +1,5 @@
+@import '../../../assets/css/variables.scss';
+
 .container {
   min-height: 100vh;
 }
@@ -9,6 +11,45 @@
         padding-top: 0;
         background-color: transparent;
       }
+    }
+
+    .upload-media {
+      &-dialog.p-dialog {
+        width: 50vw;
+        height: 80vh;
+        background-color: white;
+
+        .p-dialog-content {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          padding-bottom: 0;
+        }
+      }
+
+      &-preview {
+        border: 2px dashed $dark-grey;
+        border-radius: 4px;
+        position: relative;
+        flex-grow: 1;
+
+        &__img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        &--img-selected {
+          border-color: transparent;
+        }
+      }
+    }
+
+    .hide {
+      display: none;
     }
   }
 }
