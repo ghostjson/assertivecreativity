@@ -13,4 +13,5 @@ export interface MediaFolderState {
 export interface MediaManagerServiceState {
   folders: { [key: string]: MediaFolderState };
   rootFolderList: MediaFolder[];
+  deleteFile: MediaFile;
 }

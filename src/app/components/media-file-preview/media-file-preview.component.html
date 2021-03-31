@@ -6,6 +6,7 @@
   closeIcon="pi pi-arrow-left"
   [resizable]="false"
   [blockScroll]="false"
+  [dismissableMask]="true"
   (onHide)="emitHide()"
 >
   <div *ngIf="file" class="preview p-d-flex p-flex-column p-ai-between">

@@ -17,7 +17,7 @@
     </div>
     <div class="file-details__meta p-d-flex p-jc-between">
       <div class="file-details__meta__count">
-        {{ file.updated_at ? file.updated_at + 'items' : ' ' }}
+        {{ file.updated_at ? (file.updated_at | date) : ' ' }}
       </div>
       <div class="file-details__meta__size">
         {{ file.size ? file.size + 'MB' : ' ' }}

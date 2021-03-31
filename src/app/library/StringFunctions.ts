@@ -5,6 +5,7 @@
  * @returns string that is in the form of string
  */
 export function slugify(str: string) {
+  str = str ? str : '';
   str = str.replace(/^\s+|\s+$/g, ''); // trim
   str = str.toLowerCase();
 

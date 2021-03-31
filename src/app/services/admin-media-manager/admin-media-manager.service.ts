@@ -4,10 +4,12 @@ import { Observable } from 'rxjs';
 import { concatMap, map, take, tap } from 'rxjs/operators';
 import { MediaFile, MediaFolder } from 'src/app/models/MediaManagement';
 import { environment } from 'src/environments/environment';
-import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { CommonService } from 'src/app/common.service';
 import { StateService } from 'src/app/store/state/state.service';
-import { MediaManagerServiceState } from 'src/app/models/MediaManagerServiceState';
+import {
+  MediaFolderState,
+  MediaManagerServiceState,
+} from 'src/app/models/MediaManagerServiceState';
 
 type MediaApiRes<T> = {
   data: T;
@@ -24,9 +26,8 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     super({
       folders: {},
       rootFolderList: [],
+      deleteFile: null,
     });
-
-    console.info('media manager service initialised');
 
     // initialise the folders list
     _commonService.setLoaderFor(
@@ -77,8 +78,9 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
          * TODO: Discuss about adding these details in the api
          */
         const transformedRes = res.map((val) => {
+          const parsedPath = this.parsePath(val.folder);
           return {
-            name: this.deSlugify(this.parseCurrentFolderName(val.folder)),
+            name: this.deSlugify(parsedPath[parsedPath.length - 1]),
             path: val.folder,
             file_count: 0,
             size: 0,
@@ -151,8 +153,10 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
           /**
            * TODO: Discuss for including these details in api
            */
+          const parsedPath = this.parsePath(path);
+          console.log('paths: ', parsedPath);
           newFoldersState[path] = {
-            name: this.deSlugify(this.parseCurrentFolderName(path)),
+            name: this.deSlugify(parsedPath[parsedPath.length - 1]),
             path: path,
             size: 0,
             file_count: 0,
@@ -183,6 +187,66 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
 
   /**
    *
+   * @param slug slug of the file to be deleted
+   * @returns
+   */
+  deleteFile(slug: string): Observable<any> {
+    return this._http.delete(`${this.fileLink()}/${slug}`);
+  }
+
+  /**
+   * delete file from the store
+   * @param file file to delete
+   */
+  deleteFileFromStore(file: MediaFile): void {
+    const parsedPath = this.parsePath(file.folder);
+
+    const foldersState = { ...this.state.folders };
+    let currentFolder: MediaFolderState = foldersState[parsedPath[0]];
+    // find the folder in which the file is in and remove it
+    for (let i = 1; i < parsedPath.length; i += 1) {
+      const path = parsedPath[i];
+      if (!currentFolder[path]) {
+        break;
+      }
+      currentFolder = currentFolder[path];
+    }
+
+    if (currentFolder) {
+      currentFolder.files = currentFolder.files.filter((el) => {
+        return el.slug !== file.slug;
+      });
+    }
+
+    // update the state
+    this.setState({
+      folders: foldersState,
+      deleteFile: null,
+    });
+  }
+
+  /**
+   * set the file to delete in the store
+   * @param file file to delete
+   */
+  setDeleteFile(file: MediaFile): void {
+    this.setState({
+      deleteFile: file,
+    });
+  }
+
+  /**
+   * return a delete file event stream
+   * @returns stream to listen for delete events
+   */
+  deleteFileStream(): Observable<MediaFile> {
+    return this.select((state) => {
+      return state.deleteFile;
+    });
+  }
+
+  /**
+   *
    * @param str string to convert to normal string
    * @returns human readable normal string with spaces
    */
@@ -191,12 +255,26 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   }
 
   /**
-   * get the current folder name from
+   * get the folders list from path
    * @param path path to parse
-   * @returns current folder name
+   * @returns folder list
    */
-  parseCurrentFolderName(path: string): string {
+  parsePath(path: string): string[] {
+    // add '/' before and after path if it is not present
+    if (!path.startsWith('/')) {
+      path = '/' + path;
+    }
+    if (!path.endsWith('/')) {
+      path = path + '/';
+    }
+
+    if (path.length <= 1) {
+      return ['/'];
+    }
+
     const parsedPath = path.split('/');
-    return parsedPath[parsedPath.length - 2];
+    return parsedPath.filter((val) => {
+      return val.length;
+    });
   }
 }

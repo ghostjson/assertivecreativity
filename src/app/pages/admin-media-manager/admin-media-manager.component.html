@@ -27,7 +27,7 @@
           [value]="folders | async"
           filterBy="name"
           layout="grid"
-          emptyMessage="Add files to see them here"
+          emptyMessage="You have no folders"
         >
           <!-- <ng-template pTemplate="header">
             <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
@@ -186,6 +186,7 @@
     [(visible)]="uploadMediaVisible"
     [closable]="false"
     [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [modal]="true"
   >
     <div
       [ngClass]="{

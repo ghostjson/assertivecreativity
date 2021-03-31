@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -22,6 +22,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   uploadMediaVisible: boolean;
   previewFile: MediaFile;
   newMedia: FormGroup;
+  closeUploadDialog: Subject<void>;
   componentDestroy: Subject<void>;
 
   @ViewChild('mediaUpload', { static: true }) mediaUpload: FileUpload;
@@ -31,6 +32,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     private _commonService: CommonService,
     private _messageService: MessageService
   ) {
+    this.closeUploadDialog = new Subject<void>();
     this.componentDestroy = new Subject<void>();
   }
 
@@ -46,19 +48,43 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       file: new FormControl('', [Validators.required]),
     });
 
-    // update slug as the name input changes
-    const nameField = <FormControl>this.newMedia.get('name');
-    const slugField = <FormControl>this.newMedia.get('slug');
-
-    nameField.valueChanges
-      .pipe(takeUntil(this.componentDestroy))
-      .subscribe((changes: string) => {
-        console.log('changes: ', changes);
-        slugField.setValue(slugify(changes));
-      });
+    // listen for delete file events and delete them
+    this._mediaMgrService
+      .deleteFileStream()
+      .pipe(
+        takeUntil(this.componentDestroy),
+        filter((res) => {
+          return res != null;
+        }),
+        concatMap((fileToDelete) => {
+          this._commonService.setLoader(true);
+          this._mediaMgrService.deleteFileFromStore(fileToDelete);
+          return this._mediaMgrService.deleteFile(fileToDelete.slug);
+        })
+      )
+      .subscribe(
+        (res) => {
+          this._commonService.setLoader(false);
+          this._messageService.add({
+            severity: 'success',
+            summary: 'File Deleted',
+            detail: 'Media file was deleted',
+          });
+        },
+        () => {
+          this._commonService.setLoader(false);
+          this._messageService.add({
+            severity: 'error',
+            summary: 'Something went wrong',
+            detail: 'Media file could not be deleted',
+          });
+        }
+      );
   }
 
   ngOnDestroy(): void {
+    this.closeUploadDialog.next();
+    this.closeUploadDialog.complete();
     this.componentDestroy.next();
     this.componentDestroy.complete();
   }
@@ -82,18 +108,38 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     this.previewFile = null;
   }
 
+  /**
+   * show the upload media dialog
+   */
   showUploadMediaDialog(): void {
     this.uploadMediaVisible = true;
+    // update slug as the name input changes
+    const nameField = <FormControl>this.newMedia.get('name');
+    const slugField = <FormControl>this.newMedia.get('slug');
+
+    nameField.valueChanges
+      .pipe(takeUntil(this.closeUploadDialog))
+      .subscribe((changes: string) => {
+        slugField.setValue(slugify(changes));
+        console.log('changes: ', changes, slugField.value);
+      });
   }
 
+  /**
+   * hide the upload media dialog
+   */
   hideUploadMediaDialog(): void {
     this.uploadMediaVisible = false;
     this.mediaUpload.clear();
     this.newMedia.reset();
+    this.closeUploadDialog.next();
   }
 
+  /**
+   * convert files to data url
+   * @param files files to convert to data url
+   */
   convertMedia(files: File[]): void {
-    console.log('files: ', files);
     convertToDataUrl(files[0]).subscribe((res) => {
       this.newMedia.patchValue({
         file: res,
@@ -101,10 +147,18 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateSlug(str: string, formControl: FormControl): void {
-    formControl.setValue(slugify(str));
+  /**
+   * update the slug as the filename changes
+   * @param fileName name of the file
+   * @param formControl formcontrol to update the slug
+   */
+  updateSlug(fileName: string, formControl: FormControl): void {
+    formControl.setValue(slugify(fileName));
   }
 
+  /**
+   * upload new media file
+   */
   uploadMedia(): void {
     console.log('media uploading: ', this.newMedia.value);
     this._commonService.setLoaderFor(

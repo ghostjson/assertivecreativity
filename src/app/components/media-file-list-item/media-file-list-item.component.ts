@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MediaFile } from 'src/app/models/MediaManagement';
+import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
 
 @Component({
   selector: 'app-media-file-list-item',
@@ -13,12 +14,18 @@ export class MediaFileListItemComponent implements OnInit {
 
   menuItems: MenuItem[];
 
-  constructor() {}
+  constructor(private _mediaMgrService: AdminMediaManagerService) {}
 
   ngOnInit(): void {
     this.menuItems = [
       {
         label: 'Delete File',
+        command: (event: any) => {
+          let deleteFile: MediaFile = event.item.automationId;
+          // set the delete file in the state
+          this._mediaMgrService.setDeleteFile(deleteFile);
+        },
+        automationId: this.file,
       },
     ];
   }
