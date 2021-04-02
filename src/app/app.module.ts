@@ -64,6 +64,7 @@ import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 /** Common Imports */
 import { LoaderComponent } from './components/loader/loader.component';
@@ -322,6 +323,7 @@ import { MediaFilePreviewComponent } from './components/media-file-preview/media
     TooltipModule,
     ChartModule,
     SlideMenuModule,
+    BreadcrumbModule,
   ],
   providers: [
     FormComponent,

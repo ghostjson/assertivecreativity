@@ -6,12 +6,17 @@ export interface MediaFolderState {
   file_count: number;
   size: 0;
   files: MediaFile[];
+  folders: MediaFolder[];
   created_at?: string;
   updated_at?: string;
 }
 
 export interface MediaManagerServiceState {
-  folders: { [key: string]: MediaFolderState };
-  rootFolderList: MediaFolder[];
-  deleteFile: MediaFile;
+  folders: MediaFolderStateDB;
+  root_folder_list: MediaFolder[];
+  delete_file: MediaFile;
+  delete_folder: MediaFolder;
+  folder_list: MediaFolder[];
 }
+
+export type MediaFolderStateDB = { [key: string]: MediaFolderState };

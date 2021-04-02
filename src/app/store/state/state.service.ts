@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { count, distinctUntilChanged, map } from 'rxjs/operators';
 
 /**
  * The state management class is based on a dev.to post. So check out that post
@@ -36,6 +36,6 @@ export class StateService<T> {
       ...this.state,
       ...newState,
     });
-    console.log('state updated: ', this.state);
+    console.log('state updated: ', { ...this.state });
   }
 }

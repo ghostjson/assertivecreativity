@@ -9,12 +9,18 @@
           </div>
 
           <div class="p-toolbar-group-right">
+            <p-menu
+              #newMenu
+              [popup]="true"
+              [model]="createNewMenuItems"
+              appendTo="body"
+            ></p-menu>
             <p-button
               label="New"
               icon="pi pi-plus"
               iconPos="right"
               styleClass="p-button-success"
-              (onClick)="showUploadMediaDialog()"
+              (onClick)="newMenu.toggle($event)"
             ></p-button>
           </div>
         </p-toolbar>
@@ -24,7 +30,7 @@
         <h2 class="font-headline6 p-my-0 font-500">Folders</h2>
         <p-dataView
           #dv
-          [value]="folders | async"
+          [value]="folders"
           filterBy="name"
           layout="grid"
           emptyMessage="You have no folders"
@@ -99,7 +105,7 @@
         <h2 class="font-headline6 p-my-0 font-500">Files</h2>
         <p-dataView
           #dv
-          [value]="files | async"
+          [value]="files"
           filterBy="name"
           layout="grid"
           emptyMessage="Add files to see them here"
@@ -237,7 +243,16 @@
       <div class="p-field p-input-filled p-mb-0">
         <label>
           Slug
-          <input formControlName="slug" id="slug" type="text" pInputText />
+          <input
+            class="ng-invalid"
+            formControlName="slug"
+            id="slug"
+            type="text"
+            pInputText
+          />
+          <small *ngIf="newMedia.get('slug').errors?.notUnique" class="p-error"
+            >Slug already exist. Try changing the filename or the slug</small
+          >
         </label>
       </div>
     </form>
@@ -252,6 +267,47 @@
           styleClass="p-button-success"
           label="Upload"
           (onClick)="uploadMedia()"
+        ></p-button>
+      </div>
+    </p-footer>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="new-folder-dialog"
+    [closable]="false"
+    [breakpoints]="{ '960px': '50vw', '640px': '90vw' }"
+    [modal]="true"
+    [(visible)]="createFolderVisible"
+  >
+    <form [formGroup]="newFolder" class="p-fluid">
+      <div class="p-field p-input-filled p-mb-0">
+        <label>
+          Name
+          <input
+            class="ng-invalid"
+            formControlName="name"
+            name="name"
+            id="foldername"
+            type="text"
+            pInputText
+          />
+          <small *ngIf="newFolder.get('name').errors?.notUnique" class="p-error"
+            >Folder already exist. Try giving a different name</small
+          >
+        </label>
+      </div>
+    </form>
+    <p-footer>
+      <div class="p-d-flex p-jc-end">
+        <p-button
+          styleClass="p-button-text p-button-danger p-mr-2"
+          label="Close"
+          (onClick)="hideNewFolderDialog()"
+        ></p-button>
+        <p-button
+          styleClass="p-button-success"
+          label="Create"
+          (onClick)="createFolder()"
         ></p-button>
       </div>
     </p-footer>

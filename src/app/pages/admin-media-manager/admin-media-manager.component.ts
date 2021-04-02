@@ -1,9 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Observable, Subject } from 'rxjs';
-import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
+import { concatMap, filter, takeUntil, tap } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -16,29 +23,44 @@ import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/a
   styleUrls: ['./admin-media-manager.component.scss'],
 })
 export class AdminMediaManagerComponent implements OnInit, OnDestroy {
-  folders: Observable<MediaFolder[]>;
-  files: Observable<MediaFile[]>;
+  folders: MediaFolder[] = [];
+  files: MediaFile[] = [];
   filePreviewVisible: boolean;
   uploadMediaVisible: boolean;
+  createFolderVisible: boolean;
   previewFile: MediaFile;
   newMedia: FormGroup;
+  newFolder: FormGroup;
+  createNewMenuItems: MenuItem[];
   closeUploadDialog: Subject<void>;
   componentDestroy: Subject<void>;
+  activeFolder: string;
 
   @ViewChild('mediaUpload', { static: true }) mediaUpload: FileUpload;
 
   constructor(
     private _mediaMgrService: AdminMediaManagerService,
     private _commonService: CommonService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _ref: ChangeDetectorRef
   ) {
     this.closeUploadDialog = new Subject<void>();
     this.componentDestroy = new Subject<void>();
   }
 
   ngOnInit(): void {
-    this.folders = this._mediaMgrService.getRootFolderList();
-    this.files = this._mediaMgrService.getFilesInFolder('/');
+    this._mediaMgrService
+      .getRootFolderList()
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe((res) => {
+        this.folders = res;
+      });
+    this._mediaMgrService
+      .getFilesInFolder('/')
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe((res) => {
+        this.files = res;
+      });
     this.filePreviewVisible = false;
     this.uploadMediaVisible = false;
     this.newMedia = new FormGroup({
@@ -47,6 +69,26 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       folder: new FormControl('/', [Validators.required]),
       file: new FormControl('', [Validators.required]),
     });
+    this.newFolder = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+    });
+
+    this.createNewMenuItems = [
+      {
+        label: 'Folder',
+        icon: 'pi pi-folder',
+        command: () => {
+          this.showNewFolderDialog();
+        },
+      },
+      {
+        label: 'File',
+        icon: 'pi pi-file',
+        command: () => {
+          this.showUploadMediaDialog();
+        },
+      },
+    ];
 
     // listen for delete file events and delete them
     this._mediaMgrService
@@ -63,7 +105,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(
-        (res) => {
+        () => {
           this._commonService.setLoader(false);
           this._messageService.add({
             severity: 'success',
@@ -80,6 +122,42 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           });
         }
       );
+
+    // listen for delete folder events and delete them
+    this._mediaMgrService
+      .deleteFolderStream()
+      .pipe(
+        takeUntil(this.componentDestroy),
+        filter((res) => {
+          return res != null;
+        }),
+        concatMap((folderToDelete) => {
+          this._commonService.setLoader(true);
+          // delete from local store
+          this._mediaMgrService.deleteFolderFromStore(folderToDelete);
+          return this._mediaMgrService.deleteFolder(folderToDelete.path);
+        })
+      )
+      .subscribe(
+        (res) => {
+          this._commonService.setLoader(false);
+          this._messageService.add({
+            severity: 'success',
+            summary: 'Folder Deleted',
+            detail: 'Folder was deleted',
+          });
+        },
+        () => {
+          this._commonService.setLoader(false);
+          this._messageService.add({
+            severity: 'error',
+            summary: 'Something went wrong',
+            detail: 'Folder could not be deleted',
+          });
+        }
+      );
+
+    this.activeFolder = '/';
   }
 
   ngOnDestroy(): void {
@@ -94,10 +172,8 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
    * @param file file to preview
    */
   showFilePreview(file: MediaFile): void {
-    console.log('before setting: ', this.filePreviewVisible);
     this.filePreviewVisible = true;
     this.previewFile = file;
-    console.log('media file: ', file, this.filePreviewVisible);
   }
 
   /**
@@ -121,7 +197,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.closeUploadDialog))
       .subscribe((changes: string) => {
         slugField.setValue(slugify(changes));
-        console.log('changes: ', changes, slugField.value);
       });
   }
 
@@ -160,28 +235,85 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
    * upload new media file
    */
   uploadMedia(): void {
-    console.log('media uploading: ', this.newMedia.value);
+    const newFile: MediaFile = this.newMedia.value;
     this._commonService.setLoaderFor(
-      this._mediaMgrService.saveFile(<MediaFile>this.newMedia.value).subscribe(
-        (res) => {
-          console.log('image uploaded: ', res);
-          this._mediaMgrService.refreshFilesInFolder('/').subscribe((res) => {
-            this.hideUploadMediaDialog();
-            this._messageService.add({
-              severity: 'success',
-              summary: 'File Uploaded',
-              detail: 'Media file uploaded',
+      this._mediaMgrService
+        .isSlugExist(newFile.slug)
+        .pipe(
+          filter((res) => {
+            return !res;
+          }),
+          concatMap(() => {
+            return this._mediaMgrService.saveFile(newFile);
+          })
+        )
+        .subscribe(
+          (res) => {
+            this._mediaMgrService.refreshFilesInFolder('/').subscribe((res) => {
+              this.hideUploadMediaDialog();
+              this._messageService.add({
+                severity: 'success',
+                summary: 'File Uploaded',
+                detail: 'Media file uploaded',
+              });
             });
-          });
-        },
-        () => {
-          this._messageService.add({
-            severity: 'error',
-            summary: 'Something went wrong',
-            detail: 'Try Again',
-          });
-        }
-      )
+          },
+          (error: HttpErrorResponse) => {
+            switch (error.statusText.toLowerCase()) {
+              case 'conflict':
+                const slugField = <FormControl>this.newMedia.get('slug');
+                slugField.markAsDirty();
+                slugField.setErrors({
+                  notUnique: true,
+                });
+                this._messageService.add({
+                  severity: 'error',
+                  summary: 'Slug Already Exist',
+                  detail: 'Try changing the slug to a different one',
+                });
+                break;
+
+              default:
+                this._messageService.add({
+                  severity: 'error',
+                  summary: 'Something went wrong',
+                  detail: 'Try Again',
+                });
+            }
+          }
+        )
+    );
+  }
+
+  /**
+   * show the dialog to create new folder
+   */
+  showNewFolderDialog(): void {
+    this.createFolderVisible = true;
+  }
+
+  /**
+   * hide the dialog to create new folder
+   */
+  hideNewFolderDialog(): void {
+    this.createFolderVisible = false;
+    this.newFolder.reset();
+  }
+
+  /**
+   * create a new folder in the current active folder
+   */
+  createFolder(): void {
+    const newFolderDetails: {
+      name: string;
+    } = this.newFolder.value;
+
+    this._commonService.setLoaderFor(
+      this._mediaMgrService
+        .createFolder(newFolderDetails.name, this.activeFolder)
+        .subscribe(() => {
+          this.hideNewFolderDialog();
+        })
     );
   }
 }

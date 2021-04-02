@@ -48,6 +48,14 @@
       }
     }
 
+    .new-folder-dialog {
+      .p-dialog {
+        &-header {
+          padding-bottom: 0;
+        }
+      }
+    }
+
     .hide {
       display: none;
     }

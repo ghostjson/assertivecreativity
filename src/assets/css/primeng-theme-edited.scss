@@ -4321,7 +4321,7 @@ a.p-button.p-button-success.p-button-outlined,
 }
 
 .p-menu {
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   background: #ffffff;
   color: $dark-color;
   border: 1px solid #e5e5e5;
@@ -4331,7 +4331,7 @@ a.p-button.p-button-success.p-button-outlined,
 .p-menu .p-menuitem-link {
   padding: 1rem 1rem;
   color: $dark-color;
-  border-radius: 0;
+  border-radius: 4px;
   transition: none;
   user-select: none;
 }
@@ -4340,7 +4340,7 @@ a.p-button.p-button-success.p-button-outlined,
 }
 .p-menu .p-menuitem-link .p-menuitem-icon {
   color: rgba(0, 0, 0, 0.6);
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 .p-menu .p-menuitem-link .p-submenu-icon {
   color: rgba(0, 0, 0, 0.6);
