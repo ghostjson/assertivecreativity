@@ -1,20 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
-import { Observable, Subject } from 'rxjs';
-import { concatMap, filter, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { concatMap, filter, mergeMap, takeUntil } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
-import { MediaFile, MediaFolder } from 'src/app/models/MediaManagement';
+import { trackByPath } from 'src/app/library/TrackByFunctions';
+import { MediaFile } from 'src/app/models/MediaManagement';
+import {
+  HOME_FOLDER,
+  MediaFolderState,
+} from 'src/app/models/MediaManagerServiceState';
+import { MenuItemClickEvent } from 'src/app/models/PrimeNgEvents';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
 
 @Component({
@@ -23,7 +23,7 @@ import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/a
   styleUrls: ['./admin-media-manager.component.scss'],
 })
 export class AdminMediaManagerComponent implements OnInit, OnDestroy {
-  folders: MediaFolder[] = [];
+  folders: MediaFolderState[] = [];
   files: MediaFile[] = [];
   filePreviewVisible: boolean;
   uploadMediaVisible: boolean;
@@ -34,33 +34,101 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   createNewMenuItems: MenuItem[];
   closeUploadDialog: Subject<void>;
   componentDestroy: Subject<void>;
-  activeFolder: string;
+  activeFolderPath: string;
+  home: MenuItem;
+  breadcrumbMenu: MenuItem[];
+  trackByPath = trackByPath;
 
   @ViewChild('mediaUpload', { static: true }) mediaUpload: FileUpload;
 
   constructor(
     private _mediaMgrService: AdminMediaManagerService,
     private _commonService: CommonService,
-    private _messageService: MessageService,
-    private _ref: ChangeDetectorRef
+    private _messageService: MessageService
   ) {
     this.closeUploadDialog = new Subject<void>();
     this.componentDestroy = new Subject<void>();
   }
 
   ngOnInit(): void {
+    // initialise the breadcrumb menu
+    this.home = {
+      label: 'Home',
+      automationId: {
+        path: '/',
+      },
+      routerLink: '/admin/media/',
+      command: (event: MenuItemClickEvent) => {
+        console.log('breadcrumb clicked: ', event);
+        if (event.item.automationId.path !== this.activeFolderPath) {
+          this._mediaMgrService.setActiveFolder({
+            name: 'Home',
+            path: event.item.automationId.path,
+          });
+        }
+      },
+    };
+    this.breadcrumbMenu = [];
+
+    // initialise the folder contents
+    this.activeFolderPath = '/';
     this._mediaMgrService
-      .getRootFolderList()
-      .pipe(takeUntil(this.componentDestroy))
+      .activeFolderStream()
+      .pipe(
+        mergeMap((activeFolder) => {
+          this.activeFolderPath = activeFolder.path;
+          console.log(
+            'merge map function: ',
+            activeFolder,
+            this.activeFolderPath
+          );
+          // update the breadcrumb if the path is not root
+          if (activeFolder.path !== '/') {
+            const parsedPath = this._mediaMgrService.parsePath(
+              this.activeFolderPath
+            );
+            this.breadcrumbMenu = parsedPath.map(
+              (el, index): MenuItem => {
+                return {
+                  label: el,
+                  automationId: {
+                    path: this._mediaMgrService.constructPath(
+                      parsedPath.slice(0, index + 1)
+                    ),
+                  },
+                  disabled: index === parsedPath.length - 1,
+                  command: (event: MenuItemClickEvent) => {
+                    console.log('breadcrumb clicked: ', event);
+                    if (
+                      event.item.automationId.path !== this.activeFolderPath
+                    ) {
+                      this._mediaMgrService.setActiveFolder({
+                        name: el,
+                        path: event.item.automationId.path,
+                      });
+                    }
+                  },
+                };
+              }
+            );
+            console.log('breadcrumb: ', this.breadcrumbMenu);
+          } else {
+            this.breadcrumbMenu = [];
+          }
+
+          return this._mediaMgrService.getContentsOfPath(activeFolder.path);
+        }),
+        takeUntil(this.componentDestroy)
+      )
       .subscribe((res) => {
-        this.folders = res;
+        console.log('contents of active folder fetched: ', res);
+        if (res) {
+          // update the files and folders in the current active path
+          this.files = res.files;
+          this.folders = res.folders;
+        }
       });
-    this._mediaMgrService
-      .getFilesInFolder('/')
-      .pipe(takeUntil(this.componentDestroy))
-      .subscribe((res) => {
-        this.files = res;
-      });
+
     this.filePreviewVisible = false;
     this.uploadMediaVisible = false;
     this.newMedia = new FormGroup({
@@ -156,11 +224,11 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           });
         }
       );
-
-    this.activeFolder = '/';
   }
 
   ngOnDestroy(): void {
+    // reset the active folder to home folder when the component is destroyed
+    this._mediaMgrService.setActiveFolder(HOME_FOLDER);
     this.closeUploadDialog.next();
     this.closeUploadDialog.complete();
     this.componentDestroy.next();
@@ -192,6 +260,9 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     // update slug as the name input changes
     const nameField = <FormControl>this.newMedia.get('name');
     const slugField = <FormControl>this.newMedia.get('slug');
+
+    // set the current active folder
+    this.newMedia.get('folder').setValue(this.activeFolderPath);
 
     nameField.valueChanges
       .pipe(takeUntil(this.closeUploadDialog))
@@ -249,14 +320,16 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (res) => {
-            this._mediaMgrService.refreshFilesInFolder('/').subscribe((res) => {
-              this.hideUploadMediaDialog();
-              this._messageService.add({
-                severity: 'success',
-                summary: 'File Uploaded',
-                detail: 'Media file uploaded',
+            this._mediaMgrService
+              .refreshFilesInFolder(this.activeFolderPath)
+              .subscribe((res) => {
+                this.hideUploadMediaDialog();
+                this._messageService.add({
+                  severity: 'success',
+                  summary: 'File Uploaded',
+                  detail: 'Media file uploaded',
+                });
               });
-            });
           },
           (error: HttpErrorResponse) => {
             switch (error.statusText.toLowerCase()) {
@@ -310,7 +383,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
 
     this._commonService.setLoaderFor(
       this._mediaMgrService
-        .createFolder(newFolderDetails.name, this.activeFolder)
+        .createFolder(newFolderDetails.name, this.activeFolderPath)
         .subscribe(() => {
           this.hideNewFolderDialog();
         })

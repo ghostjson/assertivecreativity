@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { count, distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 /**
  * The state management class is based on a dev.to post. So check out that post
@@ -20,10 +20,13 @@ export class StateService<T> {
    * select a particular data from the state
    * @param mapFn map function to select the state
    */
-  protected select<K>(mapFn: (state: T) => K): Observable<K> {
+  protected select<K>(
+    mapFn: (state: T) => K,
+    changeFn?: (a: K, key: K) => boolean
+  ): Observable<K> {
     return this.state$.asObservable().pipe(
       map((state: T) => mapFn(state)),
-      distinctUntilChanged()
+      distinctUntilChanged(changeFn)
     );
   }
 

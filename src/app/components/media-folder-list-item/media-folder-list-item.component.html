@@ -11,7 +11,7 @@
       (onClick)="menu.toggle($event)"
     ></p-button>
   </div>
-  <div class="folder-details" pRipple>
+  <div class="folder-details" pRipple (click)="setActiveFolder()">
     <div class="folder-details__name">
       {{ folder.name | limitLength: 15 }}
     </div>

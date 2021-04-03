@@ -7,11 +7,13 @@ import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/app/common.service';
 import { StateService } from 'src/app/store/state/state.service';
 import {
+  HOME_FOLDER,
   MediaFolderState,
   MediaFolderStateDB,
   MediaManagerServiceState,
 } from 'src/app/models/MediaManagerServiceState';
 import { slugify } from 'src/app/library/StringFunctions';
+import { compareByPath } from 'src/app/library/CompareFunctions';
 
 type MediaApiRes<T> = {
   data: T;
@@ -27,10 +29,13 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   ) {
     super({
       folders: {},
-      root_folder_list: [],
       delete_file: null,
       delete_folder: null,
       folder_list: [],
+      /**
+       * TODO: properties like file_count and size should be added from api
+       */
+      active_folder: HOME_FOLDER,
     });
 
     // initialise the folders list
@@ -70,38 +75,47 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   }
 
   /**
+   * return the current state
+   * @returns the current state synchronously
+   */
+  getState(): MediaManagerServiceState {
+    return this.state;
+  }
+
+  /**
    * get the list of all folders in the media storage
    * @returns list of folders in thee media storage
    */
-  refreshFolderPaths(): Observable<MediaFolder[]> {
+  refreshFolderPaths(): Observable<MediaFolderState[]> {
     return this._http.get(`${this.folderLink()}`).pipe(
       take(1),
       tap((res: { folder: string }[]) => {
+        console.log('folder paths response: ', res);
         /**
          * TODO: Discuss about adding these details in the api
          */
-        const transformedRes = res.map((val) => {
-          const parsedPath = this.parsePath(val.folder);
-          return {
-            name: this.deSlugify(parsedPath[parsedPath.length - 1]),
-            path: val.folder,
-            file_count: 0,
-            size: 0,
-          };
-        });
+        const folderList = res.map(
+          (val): MediaFolderState => {
+            const parsedPath = this.parsePath(val.folder);
+            return {
+              name: this.deSlugify(parsedPath[parsedPath.length - 1]),
+              path: val.folder,
+              file_count: 0,
+              size: 0,
+              files: [],
+              folders: [],
+              visited: 0,
+              visited_at: Date.now(),
+            };
+          }
+        );
 
         // populate the folders hashtable
         const folders: MediaFolderStateDB = {};
-        transformedRes.forEach((item) => {
-          folders[item.path] = {
-            name: item.name,
-            path: item.path,
-            file_count: 0,
-            size: 0,
-            files: [],
-            folders: [],
-          };
+        folderList.forEach((item) => {
+          folders[item.path] = item;
         });
+        console.log('transformed folders: ', folderList);
 
         // populate the nested folders for each folder path
         Object.keys(folders).forEach((key) => {
@@ -117,27 +131,15 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
 
         this.setState({
           folders: folders,
-          root_folder_list: transformedRes.filter((val) => {
-            return val.path !== '/';
-          }),
-          folder_list: transformedRes,
+          folder_list: folderList,
         });
       }),
       concatMap(() => {
-        return this.getRootFolderList();
+        return this.select((state) => {
+          return state.folder_list;
+        });
       })
     );
-  }
-
-  /**
-   * get files in root folder
-   * @returns files in root folder
-   */
-  getRootFolderList(): Observable<MediaFolder[]> {
-    return this.select((state) => {
-      console.log('root folder list: ', [...state.root_folder_list]);
-      return state.root_folder_list;
-    });
   }
 
   /**
@@ -147,10 +149,11 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @returns observable to create the folder
    */
   createFolder(name: string, path: string = '/'): Observable<MediaFile> {
+    const folderName = name.trim();
     const newFolderFile: MediaFile = {
-      name: name,
-      slug: `${slugify(name)}_folder.file`,
-      folder: `${path}${slugify(name)}/`,
+      name: folderName,
+      slug: `.${slugify(folderName)}`,
+      folder: `${path}${slugify(folderName)}/`,
       // an empty svg is used as a placeholder image
       file:
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==',
@@ -169,6 +172,8 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
           size: 0,
           files: [],
           folders: [],
+          visited: 0,
+          visited_at: Date.now(),
         };
         newFolders[val.folder] = newFolder;
 
@@ -181,13 +186,6 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
           folders: newFolders,
           folder_list: [...this.state.folder_list, newFolder],
         };
-        // add to the root folder list if the new folder is in the root folder
-        if (this.parseParentFolderPath(newFolder.path) === '/') {
-          updatedState['root_folder_list'] = [
-            ...this.state.root_folder_list,
-            newFolder,
-          ];
-        }
         this.setState(updatedState);
       })
     );
@@ -219,6 +217,7 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @returns returns true if folder was found and deleted, false if failed
    */
   deleteFolderFromStore(folder: MediaFolder): boolean {
+    console.log('delete folders from store function');
     const foldersState = { ...this.state.folders };
 
     if (foldersState[folder.path]) {
@@ -232,14 +231,6 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
         delete_folder: null,
       };
 
-      // remove from root folder list if the deleted folder is in root folder
-      if (this.parseParentFolderPath(folder.path) === '/') {
-        newState['root_folder_list'] = this.state.root_folder_list.filter(
-          (val) => {
-            return val.path !== folder.path;
-          }
-        );
-      }
       this.setState(newState);
 
       return true;
@@ -279,12 +270,18 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @returns files in the path
    */
   refreshFilesInFolder(path: string): Observable<MediaFile[]> {
+    console.log('refresh files in ', path);
     return this._http
       .post<MediaApiRes<MediaFile[]>>(`${this.folderLink()}`, {
         folder: path,
       })
       .pipe(
         take(1),
+        map((res) => {
+          return res.data.filter((el) => {
+            return el.slug[0] !== '.';
+          });
+        }),
         tap((res) => {
           let newFoldersState = {
             ...this.state.folders,
@@ -292,21 +289,16 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
           /**
            * TODO: Discuss for including these details in api
            */
-          const parsedPath = this.parsePath(path);
           newFoldersState[path] = {
-            name: this.deSlugify(parsedPath[parsedPath.length - 1]),
-            path: path,
-            size: 0,
-            file_count: 0,
-            files: res.data,
-            folders: [],
+            ...newFoldersState[path],
+            visited: newFoldersState[path].visited + 1,
+            visited_at: Date.now(),
+            file_count: res.length,
+            files: res,
           };
           this.setState({
             folders: newFoldersState,
           });
-        }),
-        map((res) => {
-          return res.data;
         })
       );
   }
@@ -399,6 +391,55 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   }
 
   /**
+   * set the active folder
+   * @param folder active folder
+   */
+  setActiveFolder(folder: MediaFolder): void {
+    if (this.state.folders[folder.path]) {
+      console.log('set new active folder: ', folder);
+      this.setState({
+        active_folder: folder,
+      });
+    }
+  }
+
+  /**
+   * emit a stream of events which emit when the active folder changes
+   * @returns stream active folder change events
+   */
+  activeFolderStream(): Observable<MediaFolder> {
+    return this.select((state) => {
+      return state.active_folder;
+    }, compareByPath);
+  }
+
+  /**
+   * get the files and folders at the path
+   * @param path path of the folder to get the contents
+   * @returns files and folders at the path
+   */
+  getContentsOfPath(path: string): Observable<MediaFolderState> {
+    console.log('get contents of path: ', path);
+    return this.select((state) => {
+      const cachedFolderContents = state.folders[path];
+
+      if (cachedFolderContents) {
+        const now = Date.now();
+        const timePassed: number =
+          (now - cachedFolderContents.visited_at) / 1000;
+        console.log('time passed: ', timePassed);
+        if (timePassed > 60 || cachedFolderContents.visited === 0) {
+          this.refreshFilesInFolder(path).pipe(take(1)).subscribe();
+        }
+
+        return state.folders[path];
+      }
+
+      return null;
+    });
+  }
+
+  /**
    *
    * @param str string to convert to normal string
    * @returns human readable normal string with spaces
@@ -449,9 +490,21 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     // ['a', 'b', 'c'] --> ['a', 'b'] --> '/a/b/'
     let parentPath = `/${parsedPath.slice(0, parsedPath.length - 1).join('/')}`;
     if (!parentPath.endsWith('/')) {
-      parentPath.padEnd(parentPath.length + 1, '/');
+      parentPath = parentPath + '/';
+      console.log('paren path padded: ', parentPath);
     }
 
     return parentPath;
+  }
+
+  /**
+   * construct the path from a list of folders
+   * @param folderList list of folders in order of hierarchy from left to right
+   * @returns path as a string
+   */
+  constructPath(folderList: string[]): string {
+    return folderList.reduce((a, b) => {
+      return a + b + '/';
+    }, '/');
   }
 }

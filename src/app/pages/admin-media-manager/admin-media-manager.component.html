@@ -24,6 +24,7 @@
             ></p-button>
           </div>
         </p-toolbar>
+        <p-breadcrumb [model]="breadcrumbMenu" [home]="home"></p-breadcrumb>
       </div>
 
       <div class="p-col-12 p-mt-3">
@@ -33,6 +34,7 @@
           [value]="folders"
           filterBy="name"
           layout="grid"
+          [trackBy]="trackByPath"
           emptyMessage="You have no folders"
         >
           <!-- <ng-template pTemplate="header">

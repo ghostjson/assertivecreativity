@@ -28,4 +28,12 @@ export class MediaFolderListItemComponent implements OnInit {
       },
     ];
   }
+
+  /**
+   * set the active folder as the current folder in the state store
+   */
+  setActiveFolder(): void {
+    console.log('setting folder list item: ', this.folder);
+    this._mediaMgrService.setActiveFolder(this.folder);
+  }
 }
