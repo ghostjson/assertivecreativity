@@ -4,7 +4,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Subject } from 'rxjs';
-import { concatMap, filter, mergeMap, takeUntil } from 'rxjs/operators';
+import {
+  concatMap,
+  filter,
+  mergeMap,
+  switchMap,
+  takeUntil,
+} from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -51,6 +57,35 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.filePreviewVisible = false;
+    this.uploadMediaVisible = false;
+    this.newMedia = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      slug: new FormControl('', [Validators.required]),
+      folder: new FormControl('/', [Validators.required]),
+      file: new FormControl('', [Validators.required]),
+    });
+    this.newFolder = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+    });
+
+    this.createNewMenuItems = [
+      {
+        label: 'Folder',
+        icon: 'pi pi-folder',
+        command: () => {
+          this.showNewFolderDialog();
+        },
+      },
+      {
+        label: 'File',
+        icon: 'pi pi-file',
+        command: () => {
+          this.showUploadMediaDialog();
+        },
+      },
+    ];
+
     // initialise the breadcrumb menu
     this.home = {
       label: 'Home',
@@ -72,16 +107,35 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
 
     // initialise the folder contents
     this.activeFolderPath = '/';
+    this.initFolderContentManager();
+
+    // listen for delete file events and delete them
+    this.initFileDeleteManager();
+
+    // listen for delete folder events and delete them
+    this.initFolderDeleteManager();
+  }
+
+  ngOnDestroy(): void {
+    // reset the active folder to home folder when the component is destroyed
+    this._mediaMgrService.setActiveFolder(HOME_FOLDER);
+    this.closeUploadDialog.next();
+    this.closeUploadDialog.complete();
+    this.componentDestroy.next();
+    this.componentDestroy.complete();
+  }
+
+  /**
+   * initiliaze the contents of the current folder and update the folder
+   * contents as the currently active folder changes
+   */
+  initFolderContentManager(): void {
     this._mediaMgrService
       .activeFolderStream()
       .pipe(
-        mergeMap((activeFolder) => {
+        switchMap((activeFolder) => {
           this.activeFolderPath = activeFolder.path;
-          console.log(
-            'merge map function: ',
-            activeFolder,
-            this.activeFolderPath
-          );
+          console.log('map function: ', activeFolder, this.activeFolderPath);
           // update the breadcrumb if the path is not root
           if (activeFolder.path !== '/') {
             const parsedPath = this._mediaMgrService.parsePath(
@@ -90,7 +144,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
             this.breadcrumbMenu = parsedPath.map(
               (el, index): MenuItem => {
                 return {
-                  label: el,
+                  label: this._mediaMgrService.deSlugify(el),
                   automationId: {
                     path: this._mediaMgrService.constructPath(
                       parsedPath.slice(0, index + 1)
@@ -128,37 +182,12 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           this.folders = res.folders;
         }
       });
+  }
 
-    this.filePreviewVisible = false;
-    this.uploadMediaVisible = false;
-    this.newMedia = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      slug: new FormControl('', [Validators.required]),
-      folder: new FormControl('/', [Validators.required]),
-      file: new FormControl('', [Validators.required]),
-    });
-    this.newFolder = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-    });
-
-    this.createNewMenuItems = [
-      {
-        label: 'Folder',
-        icon: 'pi pi-folder',
-        command: () => {
-          this.showNewFolderDialog();
-        },
-      },
-      {
-        label: 'File',
-        icon: 'pi pi-file',
-        command: () => {
-          this.showUploadMediaDialog();
-        },
-      },
-    ];
-
-    // listen for delete file events and delete them
+  /**
+   * start listening for file delete events and manage them
+   */
+  initFileDeleteManager(): void {
     this._mediaMgrService
       .deleteFileStream()
       .pipe(
@@ -190,8 +219,12 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           });
         }
       );
+  }
 
-    // listen for delete folder events and delete them
+  /**
+   * start listening for folder delete events and manage them
+   */
+  initFolderDeleteManager(): void {
     this._mediaMgrService
       .deleteFolderStream()
       .pipe(
@@ -224,15 +257,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           });
         }
       );
-  }
-
-  ngOnDestroy(): void {
-    // reset the active folder to home folder when the component is destroyed
-    this._mediaMgrService.setActiveFolder(HOME_FOLDER);
-    this.closeUploadDialog.next();
-    this.closeUploadDialog.complete();
-    this.componentDestroy.next();
-    this.componentDestroy.complete();
   }
 
   /**
