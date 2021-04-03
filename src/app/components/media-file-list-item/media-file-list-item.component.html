@@ -1,7 +1,7 @@
 <div class="file-wrapper">
   <div class="file-header p-d-flex p-jc-between p-ai-center">
     <div class="file-header__icon">
-      <i class="pi pi-file-o"></i>
+      <!-- <i class="pi pi-file-o"></i> -->
     </div>
     <p-menu #menu [popup]="true" [model]="menuItems" appendTo="body"></p-menu>
     <p-button
@@ -12,6 +12,9 @@
     ></p-button>
   </div>
   <div class="file-details" pRipple (click)="emitFileOpen()">
+    <div class="file-details__thumbnail">
+      <img [src]="file.file" [alt]="file.name" />
+    </div>
     <div class="file-details__name">
       {{ file.name | limitLength: 19 }}
     </div>

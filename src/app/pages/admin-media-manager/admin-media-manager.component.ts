@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import {
   concatMap,
   filter,
+  finalize,
   mergeMap,
   switchMap,
   takeUntil,
@@ -178,6 +179,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
         console.log('contents of active folder fetched: ', res);
         if (res) {
           // update the files and folders in the current active path
+          console.log('updating files and folders');
           this.files = res.files;
           this.folders = res.folders;
         }

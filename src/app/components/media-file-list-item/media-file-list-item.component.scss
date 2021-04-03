@@ -45,6 +45,17 @@
         text-transform: capitalize;
       }
 
+      &__thumbnail {
+        height: 100px;
+        width: 100%;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
       &__meta {
         font-size: $font-size-overline;
         color: $dark-grey;

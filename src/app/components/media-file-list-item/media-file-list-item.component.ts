@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MediaFile } from 'src/app/models/MediaManagement';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-media-file-list-item',
@@ -14,7 +15,10 @@ export class MediaFileListItemComponent implements OnInit {
 
   menuItems: MenuItem[];
 
-  constructor(private _mediaMgrService: AdminMediaManagerService) {}
+  constructor(
+    private _mediaMgrService: AdminMediaManagerService,
+    private _clipboard: Clipboard
+  ) {}
 
   ngOnInit(): void {
     this.menuItems = [
@@ -26,6 +30,12 @@ export class MediaFileListItemComponent implements OnInit {
           this._mediaMgrService.setDeleteFile(deleteFile);
         },
         automationId: this.file,
+      },
+      {
+        label: 'Copy Link',
+        command: (event: any) => {
+          this._clipboard.copy(this.file.file);
+        },
       },
     ];
   }

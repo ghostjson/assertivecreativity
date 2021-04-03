@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 /**
  * The state management class is based on a dev.to post. So check out that post

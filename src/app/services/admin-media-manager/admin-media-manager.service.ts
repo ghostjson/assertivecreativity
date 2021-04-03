@@ -161,10 +161,6 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
 
     return this.saveFile(newFolderFile).pipe(
       tap((val) => {
-        let newFolders: MediaFolderStateDB = {
-          ...this.state.folders,
-        };
-
         let newFolder: MediaFolderState = {
           name: val.name,
           path: val.folder,
@@ -175,15 +171,18 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
           visited: 0,
           visited_at: Date.now(),
         };
-        newFolders[val.folder] = newFolder;
+        this.state.folders[val.folder] = newFolder;
 
         // add to parent folder
         const parentFolderPath = this.parseParentFolderPath(val.folder);
-        newFolders[parentFolderPath].folders.push(newFolder);
+        this.state.folders[parentFolderPath] = {
+          ...this.state.folders[parentFolderPath],
+          folders: [...this.state.folders[parentFolderPath].folders, newFolder],
+        };
 
         // update the state
         let updatedState = {
-          folders: newFolders,
+          folders: this.state.folders,
           folder_list: [...this.state.folder_list, newFolder],
         };
         this.setState(updatedState);
@@ -218,15 +217,28 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    */
   deleteFolderFromStore(folder: MediaFolder): boolean {
     console.log('delete folders from store function');
-    const foldersState = { ...this.state.folders };
+    if (this.state.folders[folder.path]) {
+      // delete the folder and the nested folders inside the folder from folders DB
+      Object.keys(this.state.folders).forEach((el) => {
+        if (el.includes(folder.path)) {
+          delete this.state.folders[el];
+        }
+      });
 
-    if (foldersState[folder.path]) {
-      delete foldersState[folder.path];
+      // delete the folder from parent folder's folders field
+      const parentFolderPath = this.parseParentFolderPath(folder.path);
+      this.state.folders[parentFolderPath] = {
+        ...this.state.folders[parentFolderPath],
+        folders: this.state.folders[parentFolderPath].folders.filter((el) => {
+          return folder.path !== el.path;
+        }),
+      };
+
       // update the state
       const newState: Partial<MediaManagerServiceState> = {
-        folders: foldersState,
+        folders: this.state.folders,
         folder_list: this.state.folder_list.filter((val) => {
-          return val.path !== folder.path;
+          return !val.path.includes(folder.path);
         }),
         delete_folder: null,
       };
@@ -344,28 +356,17 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @param file file to delete
    */
   deleteFileFromStore(file: MediaFile): void {
-    const parsedPath = this.parsePath(file.folder);
-
-    const foldersState = { ...this.state.folders };
-    let currentFolder: MediaFolderState = foldersState[parsedPath[0]];
-    // find the folder in which the file is in and remove it
-    for (let i = 1; i < parsedPath.length; i += 1) {
-      const path = parsedPath[i];
-      if (!currentFolder[path]) {
-        break;
-      }
-      currentFolder = currentFolder[path];
-    }
-
-    if (currentFolder) {
-      currentFolder.files = currentFolder.files.filter((el) => {
+    const parentFolder = this.state.folders[file.folder];
+    this.state.folders[file.folder] = {
+      ...parentFolder,
+      files: parentFolder.files.filter((el) => {
         return el.slug !== file.slug;
-      });
-    }
+      }),
+    };
 
     // update the state
     this.setState({
-      folders: foldersState,
+      folders: this.state.folders,
       delete_file: null,
     });
   }
@@ -419,24 +420,34 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @returns files and folders at the path
    */
   getContentsOfPath(path: string): Observable<MediaFolderState> {
-    console.log('get contents of path: ', path);
-    return this.select((state) => {
-      const cachedFolderContents = state.folders[path];
+    const contentRefreshTime: Number = 300;
+    return this.select(
+      (state) => {
+        console.log('get contents of path: ', path);
+        const cachedFolderContents = state.folders[path];
 
-      if (cachedFolderContents) {
-        const now = Date.now();
-        const timePassed: number =
-          (now - cachedFolderContents.visited_at) / 1000;
-        console.log('time passed: ', timePassed);
-        if (timePassed > 60 || cachedFolderContents.visited === 0) {
-          this.refreshFilesInFolder(path).pipe(take(1)).subscribe();
+        if (cachedFolderContents) {
+          const now = Date.now();
+          const timePassed: number =
+            (now - cachedFolderContents.visited_at) / 1000;
+          console.log('time passed: ', timePassed);
+          if (
+            timePassed > contentRefreshTime ||
+            !cachedFolderContents.visited
+          ) {
+            this.refreshFilesInFolder(path).pipe(take(1)).subscribe();
+          }
+
+          return state.folders[path];
         }
 
-        return state.folders[path];
+        return null;
+      },
+      (a, b) => {
+        console.log('change: ', a === b, a, b);
+        return a === b;
       }
-
-      return null;
-    });
+    );
   }
 
   /**
