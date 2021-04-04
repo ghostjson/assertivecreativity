@@ -33,13 +33,37 @@
         position: relative;
         flex-grow: 1;
 
+        &.valid-drop-file {
+          border-color: $success-color;
+          color: $success-color;
+        }
+
+        &.invalid-drop-file {
+          border-color: $danger-color;
+          color: $danger-color;
+        }
+
         &__img {
           position: absolute;
-          top: 0;
           left: 0;
+          top: 0;
           width: 100%;
           height: 100%;
-          object-fit: contain;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+
+          .clear-img-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
         }
 
         &--img-selected {
@@ -57,7 +81,11 @@
     }
 
     .hide {
-      display: none;
+      opacity: 0;
+
+      &--remove {
+        display: none;
+      }
     }
   }
 }

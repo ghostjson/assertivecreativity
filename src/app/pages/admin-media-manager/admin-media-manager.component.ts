@@ -45,6 +45,9 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   home: MenuItem;
   breadcrumbMenu: MenuItem[];
   trackByPath = trackByPath;
+  validDropFile: boolean;
+  invalidDropFile: boolean;
+  dragOver: boolean;
 
   @ViewChild('mediaUpload', { static: true }) mediaUpload: FileUpload;
 
@@ -326,6 +329,70 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
    */
   updateSlug(fileName: string, formControl: FormControl): void {
     formControl.setValue(slugify(fileName));
+  }
+
+  /**
+   * handle drag events fired when image is dragged over the image uploader
+   * @param event drag event emitted when image is dragged over
+   */
+  dragOverHandler(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.dragOver = true;
+
+    if (
+      event.dataTransfer.items.length === 1 &&
+      event.dataTransfer.items[0].type.includes('image')
+    ) {
+      this.validDropFile = true;
+      this.invalidDropFile = false;
+    } else {
+      this.validDropFile = false;
+      this.invalidDropFile = true;
+    }
+  }
+
+  /**
+   * handle when dragged file leaves the drop target area
+   * @param event event fired when image dragged leaves the target drag area
+   */
+  dragEndHandler(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.dragOver = false;
+    this.validDropFile = false;
+    this.invalidDropFile = false;
+  }
+
+  /**
+   * handle when the file is dropped in the upload manager
+   * @param event drag event emitted when the image is dropped in the drag area
+   */
+  fileDropHandler(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.validDropFile) {
+      this.convertMedia([event.dataTransfer.files[0]]);
+    } else {
+      this._messageService.add({
+        severity: 'error',
+        summary: 'File dropped is not supported',
+        detail: 'Images are the only supported files',
+      });
+    }
+
+    this.dragOver = false;
+    this.validDropFile = false;
+    this.invalidDropFile = false;
+  }
+
+  /**
+   * clear the selected image
+   */
+  clearSelectedMedia(): void {
+    this.newMedia.get('file').reset();
+    this.mediaUpload.clear();
   }
 
   /**
