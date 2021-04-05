@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { concatMap, map, take, tap } from 'rxjs/operators';
+import { concatMap, filter, map, take, tap } from 'rxjs/operators';
 import { MediaFile, MediaFolder } from 'src/app/models/MediaManagement';
 import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/app/common.service';
@@ -11,12 +11,18 @@ import {
   MediaFolderState,
   MediaFolderStateDB,
   MediaManagerServiceState,
+  RenameFolderDetails,
 } from 'src/app/models/MediaManagerServiceState';
 import { slugify } from 'src/app/library/StringFunctions';
 import { compareByPath } from 'src/app/library/CompareFunctions';
 
 type MediaApiRes<T> = {
   data: T;
+};
+
+type RenameApiRes = {
+  message: string;
+  effectedFiles: MediaFolder[];
 };
 
 @Injectable({
@@ -31,6 +37,7 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
       folders: {},
       delete_file: null,
       delete_folder: null,
+      rename_folder: null,
       folder_list: [],
       /**
        * TODO: properties like file_count and size should be added from api
@@ -207,7 +214,11 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   deleteFolderStream(): Observable<MediaFolder> {
     return this.select((state) => {
       return state.delete_folder;
-    });
+    }).pipe(
+      filter((val) => {
+        return val !== null;
+      })
+    );
   }
 
   /**
@@ -388,7 +399,11 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   deleteFileStream(): Observable<MediaFile> {
     return this.select((state) => {
       return state.delete_file;
-    });
+    }).pipe(
+      filter((val) => {
+        return val !== null;
+      })
+    );
   }
 
   /**
@@ -411,7 +426,11 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
   activeFolderStream(): Observable<MediaFolder> {
     return this.select((state) => {
       return state.active_folder;
-    }, compareByPath);
+    }, compareByPath).pipe(
+      filter((val) => {
+        return val !== null;
+      })
+    );
   }
 
   /**
@@ -421,33 +440,148 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    */
   getContentsOfPath(path: string): Observable<MediaFolderState> {
     const contentRefreshTime: Number = 300;
-    return this.select(
-      (state) => {
-        console.log('get contents of path: ', path);
-        const cachedFolderContents = state.folders[path];
+    return this.select((state) => {
+      console.log('get contents of path: ', path);
+      const cachedFolderContents = state.folders[path];
 
-        if (cachedFolderContents) {
-          const now = Date.now();
-          const timePassed: number =
-            (now - cachedFolderContents.visited_at) / 1000;
-          console.log('time passed: ', timePassed);
-          if (
-            timePassed > contentRefreshTime ||
-            !cachedFolderContents.visited
-          ) {
-            this.refreshFilesInFolder(path).pipe(take(1)).subscribe();
-          }
-
-          return state.folders[path];
+      if (cachedFolderContents) {
+        const now = Date.now();
+        const timePassed: number =
+          (now - cachedFolderContents.visited_at) / 1000;
+        console.log('time passed: ', timePassed);
+        if (timePassed > contentRefreshTime || !cachedFolderContents.visited) {
+          this.refreshFilesInFolder(path).pipe(take(1)).subscribe();
         }
 
-        return null;
-      },
-      (a, b) => {
-        console.log('change: ', a === b, a, b);
-        return a === b;
+        return state.folders[path];
       }
+
+      return null;
+    }).pipe(
+      filter((val) => {
+        return val !== null;
+      })
     );
+  }
+
+  /**
+   * set the folder to rename
+   * @param details details of the folder to rename
+   */
+  setRenameFolder(details: RenameFolderDetails): void {
+    details.old_name = this.deSlugify(
+      this.parsePath(details.old_path).slice(-1)[0]
+    );
+    this.setState({
+      rename_folder: details,
+    });
+  }
+
+  /**
+   * emit a stream of folder rename events
+   * @returns stream of folder rename events
+   */
+  renameFolderStream(): Observable<RenameFolderDetails> {
+    return this.select((state) => {
+      return state.rename_folder;
+    }).pipe(
+      filter((val) => {
+        return val !== null;
+      })
+    );
+  }
+
+  /**
+   * rename the folder in the store
+   * @param oldPath old path of the folder
+   * @param newPath new path of the folder
+   */
+  renameFolderStore(oldPath: string, newPath: string): void {
+    const newFolders: MediaFolderStateDB = { ...this.state.folders };
+    const parentPath: string = this.parseParentFolderPath(oldPath);
+    // remove the folder from the parent folder's folders list
+    newFolders[parentPath] = {
+      ...newFolders[parentPath],
+      folders: newFolders[parentPath].folders.filter((el) => {
+        return el.path !== oldPath;
+      }),
+    };
+
+    // filter out the folders to change
+    const foldersToChange = this.state.folder_list.filter((folder) => {
+      return folder.path.includes(oldPath);
+    });
+
+    // construct files list to change
+    const filesToChange: MediaFile[] = [];
+    for (const folder of foldersToChange) {
+      filesToChange.push(...newFolders[folder.path].files);
+    }
+
+    // populate the folders hashtable
+    for (let i = 0; i < foldersToChange.length; i += 1) {
+      const folder = { ...newFolders[foldersToChange[i].path] };
+      // remove the old folders object from updated store object
+      delete newFolders[folder.path];
+
+      // update the path with new one
+      folder.path = folder.path.replace(oldPath, newPath);
+      const parsedPath = this.parsePath(folder.path);
+
+      folder.name = this.deSlugify(parsedPath[parsedPath.length - 1]);
+      folder.folders = [];
+      folder.files = [];
+      newFolders[folder.path] = folder;
+    }
+
+    // populate the nested folders for each folder path
+    foldersToChange.forEach((folder) => {
+      const key: string = folder.path.replace(oldPath, newPath);
+      const currFolder = newFolders[key];
+      const currFolderParentPath = this.parseParentFolderPath(currFolder.path);
+
+      const parentFolder = newFolders[currFolderParentPath];
+      if (parentFolder && parentFolder.path !== currFolder.path) {
+        parentFolder.folders.push(currFolder);
+      }
+    });
+
+    // add the files to updated folders
+    filesToChange.forEach((file) => {
+      file.folder = file.folder.replace(oldPath, newPath);
+      newFolders[file.folder].files.push(file);
+    });
+
+    this.setState({
+      folders: newFolders,
+      folder_list: this.state.folder_list.map((folder) => {
+        if (folder.path.includes(oldPath)) {
+          folder.path.replace(oldPath, newPath);
+          const parsedPath = this.parsePath(folder.path);
+          folder.name = parsedPath[parsedPath.length - 1];
+        }
+
+        return folder;
+      }),
+      rename_folder: null,
+    });
+  }
+
+  /**
+   * rename the folder on the server
+   * @param oldPath old path of the file
+   * @param newPath new path of the file
+   * @returns api response with affected files
+   */
+  renameFolder(oldPath: string, newPath: string): Observable<RenameApiRes> {
+    const req = {
+      old_name: oldPath,
+      new_name: newPath,
+    };
+
+    return this._http
+      .post<RenameApiRes>(`${this.folderLink()}/rename`, req)
+      .pipe(take(1));
   }
 
   /**

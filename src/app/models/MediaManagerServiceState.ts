@@ -17,11 +17,19 @@ export interface MediaManagerServiceState {
   folders: MediaFolderStateDB;
   delete_file: MediaFile;
   delete_folder: MediaFolder;
+  rename_folder: RenameFolderDetails;
   folder_list: MediaFolderState[];
   active_folder: MediaFolder;
 }
 
 export type MediaFolderStateDB = { [key: string]: MediaFolderState };
+
+export type RenameFolderDetails = {
+  old_path: string;
+  new_path: string;
+  old_name?: string;
+  new_name?: string;
+};
 
 export const HOME_FOLDER = {
   name: 'Home',

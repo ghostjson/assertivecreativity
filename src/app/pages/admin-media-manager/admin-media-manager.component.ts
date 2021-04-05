@@ -4,14 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Subject } from 'rxjs';
-import {
-  concatMap,
-  filter,
-  finalize,
-  mergeMap,
-  switchMap,
-  takeUntil,
-} from 'rxjs/operators';
+import { concatMap, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -20,6 +13,7 @@ import { MediaFile } from 'src/app/models/MediaManagement';
 import {
   HOME_FOLDER,
   MediaFolderState,
+  RenameFolderDetails,
 } from 'src/app/models/MediaManagerServiceState';
 import { MenuItemClickEvent } from 'src/app/models/PrimeNgEvents';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
@@ -38,6 +32,8 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   previewFile: MediaFile;
   newMedia: FormGroup;
   newFolder: FormGroup;
+  folderRenameMode: boolean;
+  renameFolder: RenameFolderDetails;
   createNewMenuItems: MenuItem[];
   closeUploadDialog: Subject<void>;
   componentDestroy: Subject<void>;
@@ -109,6 +105,9 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     };
     this.breadcrumbMenu = [];
 
+    // intialise folder rename manager
+    this.initFolderRenameManager();
+
     // initialise the folder contents
     this.activeFolderPath = '/';
     this.initFolderContentManager();
@@ -127,6 +126,20 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     this.closeUploadDialog.complete();
     this.componentDestroy.next();
     this.componentDestroy.complete();
+  }
+
+  /**
+   * initalise the folder rename manager
+   */
+  initFolderRenameManager(): void {
+    this._mediaMgrService
+      .renameFolderStream()
+      .pipe(takeUntil(this.componentDestroy))
+      .subscribe((res) => {
+        this.folderRenameMode = true;
+        this.renameFolder = res;
+        this.showNewFolderDialog();
+      });
   }
 
   /**
@@ -180,12 +193,10 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       )
       .subscribe((res) => {
         console.log('contents of active folder fetched: ', res);
-        if (res) {
-          // update the files and folders in the current active path
-          console.log('updating files and folders');
-          this.files = res.files;
-          this.folders = res.folders;
-        }
+        // update the files and folders in the current active path
+        console.log('updating files and folders');
+        this.files = res.files;
+        this.folders = res.folders;
       });
   }
 
@@ -197,9 +208,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       .deleteFileStream()
       .pipe(
         takeUntil(this.componentDestroy),
-        filter((res) => {
-          return res != null;
-        }),
         concatMap((fileToDelete) => {
           this._commonService.setLoader(true);
           this._mediaMgrService.deleteFileFromStore(fileToDelete);
@@ -234,9 +242,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       .deleteFolderStream()
       .pipe(
         takeUntil(this.componentDestroy),
-        filter((res) => {
-          return res != null;
-        }),
         concatMap((folderToDelete) => {
           this._commonService.setLoader(true);
           // delete from local store
@@ -467,19 +472,38 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * create a new folder in the current active folder
+   * create or rename a folder in the current active folder
    */
-  createFolder(): void {
-    const newFolderDetails: {
-      name: string;
-    } = this.newFolder.value;
+  saveFolder(): void {
+    if (this.folderRenameMode) {
+      this.folderRenameMode = false;
+      const newPath: string = `${this._mediaMgrService.parseParentFolderPath(
+        this.renameFolder.old_path
+      )}${slugify(this.newFolder.value.name)}/`;
+      this._commonService.setLoaderFor(
+        this._mediaMgrService
+          .renameFolder(this.renameFolder.old_path, newPath)
+          .subscribe((res) => {
+            console.log('folder renamed ', res);
+            this._mediaMgrService.renameFolderStore(
+              this.renameFolder.old_path,
+              newPath
+            );
+            this.hideNewFolderDialog();
+          })
+      );
+    } else {
+      const newFolderDetails: {
+        name: string;
+      } = this.newFolder.value;
 
-    this._commonService.setLoaderFor(
-      this._mediaMgrService
-        .createFolder(newFolderDetails.name, this.activeFolderPath)
-        .subscribe(() => {
-          this.hideNewFolderDialog();
-        })
-    );
+      this._commonService.setLoaderFor(
+        this._mediaMgrService
+          .createFolder(newFolderDetails.name, this.activeFolderPath)
+          .subscribe(() => {
+            this.hideNewFolderDialog();
+          })
+      );
+    }
   }
 }

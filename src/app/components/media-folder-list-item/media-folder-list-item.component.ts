@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MediaFolder } from 'src/app/models/MediaManagement';
+import { MenuItemClickEvent } from 'src/app/models/PrimeNgEvents';
 import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/admin-media-manager.service';
 
 @Component({
@@ -24,6 +25,16 @@ export class MediaFolderListItemComponent implements OnInit {
           const deleteFolder: MediaFolder = event.item.automationId;
           // set the delete folder in the state
           this._mediaMgrService.setDeleteFolder(deleteFolder);
+        },
+      },
+      {
+        label: 'Rename Folder',
+        automationId: this.folder,
+        command: (event: MenuItemClickEvent) => {
+          this._mediaMgrService.setRenameFolder({
+            old_path: this.folder.path,
+            new_path: null,
+          });
         },
       },
     ];

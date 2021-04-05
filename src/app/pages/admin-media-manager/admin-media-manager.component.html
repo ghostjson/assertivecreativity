@@ -33,7 +33,7 @@
           'hide--remove': !folders.length
         }"
       >
-        <h2 class="font-headline6 p-my-0 font-500">Folders</h2>
+        <h2 class="font-body p-my-0 font-500 text-grey">Folders</h2>
         <p-dataView
           #dv
           [value]="folders"
@@ -109,7 +109,7 @@
         </p-dataView>
       </div>
       <div class="p-col-12 p-mt-3">
-        <h2 class="font-headline6 p-my-0 font-500">Files</h2>
+        <h2 class="font-body p-my-0 font-500 text-grey">Files</h2>
         <p-dataView
           #dv
           [value]="files"
@@ -323,7 +323,12 @@
     <form [formGroup]="newFolder" class="p-fluid">
       <div class="p-field p-input-filled p-mb-0">
         <label>
-          Name
+          <div class="p-mb-1" *ngIf="folderRenameMode; else createMode">
+            Enter the new name for {{ renameFolder.old_name | titlecase }}
+          </div>
+          <ng-template #createMode>
+            <div class="p-mb-1">Folder Name</div>
+          </ng-template>
           <input
             class="ng-invalid"
             formControlName="name"
@@ -348,7 +353,7 @@
         <p-button
           styleClass="p-button-success"
           label="Create"
-          (onClick)="createFolder()"
+          (onClick)="saveFolder()"
         ></p-button>
       </div>
     </p-footer>
