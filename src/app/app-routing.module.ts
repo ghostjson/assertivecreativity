@@ -135,6 +135,12 @@ const routes: Routes = [
     data: { role: 'admin' },
   },
   {
+    path: 'admin/media/:path',
+    component: AdminMediaManagerComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'admin' },
+  },
+  {
     path: 'admin/media',
     component: AdminMediaManagerComponent,
     canActivate: [AuthGuard],

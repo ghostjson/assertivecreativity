@@ -6,3 +6,13 @@ export interface Token {
   expires_in: number;
   user: User;
 }
+
+export interface ParsedToken {
+  exp: number;
+  iat: number;
+  nbf: number;
+  iss: string;
+  jti: string;
+  prv: string;
+  sub: number;
+}
