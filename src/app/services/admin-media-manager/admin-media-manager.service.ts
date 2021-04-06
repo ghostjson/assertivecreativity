@@ -602,7 +602,8 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
       .pipe(
         take(1),
         map((res) => {
-          return res.data;
+          // filter the folder files from search results
+          return res.data.filter((result) => result.slug[0] !== '.');
         }),
         tap((res) => {
           this.setState({

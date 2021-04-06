@@ -124,7 +124,9 @@
       </div>
 
       <div class="p-col-12 p-mt-3">
-        <h2 class="font-body p-my-0 font-500 text-grey">Files</h2>
+        <h2 class="font-body p-my-0 font-500 text-grey">
+          {{ searchMode ? 'Search Results' : 'Files' }}
+        </h2>
         <p-dataView
           #filesGrid
           [loading]="filesLoading"
