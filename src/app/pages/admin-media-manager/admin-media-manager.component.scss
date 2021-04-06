@@ -6,6 +6,22 @@
 
 :host {
   ::ng-deep {
+    .header {
+      .p-toolbar {
+        border-bottom: none;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .p-breadcrumb {
+        padding-top: 0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+
+        ul li:last-child .p-menuitem-text {
+          font-weight: 500;
+        }
+      }
+    }
     .p-dataview {
       &-content {
         padding-top: 0;

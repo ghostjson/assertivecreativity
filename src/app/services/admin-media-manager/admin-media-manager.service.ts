@@ -612,6 +612,10 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
       );
   }
 
+  /**
+   * emit a stream of events of search results
+   * @returns stream of events with search results
+   */
   searchResultsStream(): Observable<MediaFile[]> {
     return this.select((state) => {
       return state.search_results;

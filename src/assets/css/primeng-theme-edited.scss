@@ -4025,13 +4025,17 @@ a.p-button.p-button-success.p-button-outlined,
 
 .p-breadcrumb {
   background: #ffffff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $light-grey;
   border-radius: 4px;
   padding: 1rem;
 }
 .p-breadcrumb ul li .p-menuitem-link {
   transition: none;
   border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 .p-breadcrumb ul li .p-menuitem-link:focus {
   outline: 0 none;

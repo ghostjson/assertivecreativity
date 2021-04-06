@@ -2,7 +2,7 @@
   <app-admin-header></app-admin-header>
   <div class="container p-mt-5">
     <div class="p-grid">
-      <div class="p-col-12">
+      <div class="header p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <h1 class="font-headline5 font-700 p-my-0">Media</h1>
@@ -323,6 +323,7 @@
         <p-button
           styleClass="p-button-success"
           label="Upload"
+          [disabled]="!newMedia.valid"
           (onClick)="uploadMedia()"
         ></p-button>
       </div>
@@ -369,6 +370,7 @@
         <p-button
           styleClass="p-button-success"
           label="Create"
+          [disabled]="!newFolder.valid"
           (onClick)="saveFolder()"
         ></p-button>
       </div>
