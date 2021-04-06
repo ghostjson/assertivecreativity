@@ -1,0 +1,22 @@
+<div class="nav-searchbar p-input-filled">
+  <input
+    class="nav-searchbar__input p-inputtext-sm"
+    type="text"
+    [(ngModel)]="searchString"
+    [placeholder]="placeholder ? placeholder : 'Search'"
+    (keyup.enter)="emitSearchEvent()"
+    [pTooltip]="tooltip ? tooltip : null"
+    showDelay="500"
+    tooltipPosition="top"
+    pInputText
+  />
+  <p-button
+    aria-label="Search"
+    icon="pi pi-search"
+    styleClass="search-btn p-shadow-2 p-button-sm"
+    (onClick)="emitSearchEvent()"
+    [pTooltip]="tooltip ? tooltip : null"
+    showDelay="500"
+    tooltipPosition="top"
+  ></p-button>
+</div>

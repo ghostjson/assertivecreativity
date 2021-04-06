@@ -20,6 +20,7 @@ export interface MediaManagerServiceState {
   rename_folder: RenameFolderDetails;
   folder_list: MediaFolderState[];
   active_folder: MediaFolder;
+  search_results: MediaFile[];
 }
 
 export type MediaFolderStateDB = { [key: string]: MediaFolderState };

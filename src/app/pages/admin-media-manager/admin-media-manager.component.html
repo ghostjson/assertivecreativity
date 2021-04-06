@@ -9,6 +9,19 @@
           </div>
 
           <div class="p-toolbar-group-right">
+            <p-button
+              *ngIf="searchMode"
+              [@fadeInOnEnter]="searchMode"
+              [@fadeOutOnLeave]="!searchMode"
+              label="close search"
+              styleClass="p-button-outlined p-button-danger"
+              (onClick)="disableSearchMode()"
+            ></p-button>
+            <app-searchbar
+              (onSearch)="searchMedia($event)"
+              tooltip="Search media files in {{ activeFolderName }}"
+              placeholder="Search media files in {{ activeFolderName }}"
+            ></app-searchbar>
             <p-menu
               #newMenu
               [popup]="true"
@@ -26,23 +39,23 @@
         </p-toolbar>
         <p-breadcrumb [model]="breadcrumbMenu" [home]="home"></p-breadcrumb>
       </div>
-
+      <!-- TODO: Find a way to group animations instead of separately adding both the animations -->
       <div
-        class="p-col-12 p-mt-3"
-        [ngClass]="{
-          'hide--remove': !folders.length
-        }"
+        class="p-col-12"
+        [@fadeOut]="searchMode || !folders.length"
+        [@collapse]="searchMode || !folders.length"
       >
-        <h2 class="font-body p-my-0 font-500 text-grey">Folders</h2>
-        <p-dataView
-          #dv
-          [value]="folders"
-          filterBy="name"
-          layout="grid"
-          [trackBy]="trackByPath"
-          emptyMessage="You have no folders"
-        >
-          <!-- <ng-template pTemplate="header">
+        <div class="folders-list p-mt-3">
+          <h2 class="font-body p-my-0 font-500 text-grey">Folders</h2>
+          <p-dataView
+            #dv
+            [value]="folders"
+            filterBy="name"
+            layout="grid"
+            [trackBy]="trackByPath"
+            emptyMessage="You have no folders"
+          >
+            <!-- <ng-template pTemplate="header">
             <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
               <p-dropdown
                 [options]="sortOptions"
@@ -63,7 +76,7 @@
               <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
             </div>
           </ng-template> -->
-          <!-- <ng-template let-product pTemplate="listItem">
+            <!-- <ng-template let-product pTemplate="listItem">
             <div class="p-col-12">
               <div class="product-list-item">
                 <img
@@ -99,19 +112,22 @@
               </div>
             </div>
           </ng-template> -->
-          <ng-template let-folder pTemplate="gridItem">
-            <div class="p-col-12 p-md-3 p-lg-2 p-p-1">
-              <app-media-folder-list-item
-                [folder]="folder"
-              ></app-media-folder-list-item>
-            </div>
-          </ng-template>
-        </p-dataView>
+            <ng-template let-folder pTemplate="gridItem">
+              <div class="p-col-12 p-md-3 p-lg-2 p-p-1">
+                <app-media-folder-list-item
+                  [folder]="folder"
+                ></app-media-folder-list-item>
+              </div>
+            </ng-template>
+          </p-dataView>
+        </div>
       </div>
+
       <div class="p-col-12 p-mt-3">
         <h2 class="font-body p-my-0 font-500 text-grey">Files</h2>
         <p-dataView
-          #dv
+          #filesGrid
+          [loading]="filesLoading"
           [value]="files"
           filterBy="name"
           layout="grid"

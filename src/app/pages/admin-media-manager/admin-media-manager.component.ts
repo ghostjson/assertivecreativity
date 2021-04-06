@@ -1,10 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  collapseAnimation,
+  fadeInOnEnterAnimation,
+  fadeOutAnimation,
+  fadeOutOnLeaveAnimation,
+} from 'angular-animations';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Subject } from 'rxjs';
-import { concatMap, filter, switchMap, takeUntil } from 'rxjs/operators';
+import { concatMap, filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -22,6 +28,12 @@ import { AdminMediaManagerService } from 'src/app/services/admin-media-manager/a
   selector: 'app-admin-media-manager',
   templateUrl: './admin-media-manager.component.html',
   styleUrls: ['./admin-media-manager.component.scss'],
+  animations: [
+    collapseAnimation({ duration: 250 }),
+    fadeOutAnimation({ duration: 250 }),
+    fadeOutOnLeaveAnimation({ duration: 250 }),
+    fadeInOnEnterAnimation({ duration: 250 }),
+  ],
 })
 export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   folders: MediaFolderState[] = [];
@@ -38,12 +50,15 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   closeUploadDialog: Subject<void>;
   componentDestroy: Subject<void>;
   activeFolderPath: string;
+  activeFolderName: string;
   home: MenuItem;
   breadcrumbMenu: MenuItem[];
   trackByPath = trackByPath;
   validDropFile: boolean;
   invalidDropFile: boolean;
   dragOver: boolean;
+  filesLoading: boolean;
+  searchMode: boolean = false;
 
   @ViewChild('mediaUpload', { static: true }) mediaUpload: FileUpload;
 
@@ -110,6 +125,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
 
     // initialise the folder contents
     this.activeFolderPath = '/';
+    this.activeFolderName = 'Home';
     this.initFolderContentManager();
 
     // listen for delete file events and delete them
@@ -151,6 +167,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       .activeFolderStream()
       .pipe(
         switchMap((activeFolder) => {
+          this.activeFolderName = activeFolder.name;
           this.activeFolderPath = activeFolder.path;
           console.log('map function: ', activeFolder, this.activeFolderPath);
           // update the breadcrumb if the path is not root
@@ -505,5 +522,39 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
           })
       );
     }
+  }
+
+  /**
+   * search the media for the string in event
+   * @param event searchbar search event
+   */
+  searchMedia(event: string): void {
+    this.filesLoading = true;
+
+    this._mediaMgrService
+      .searchInFolder(event, this.activeFolderPath)
+      .subscribe((res) => {
+        console.log('resutls: ', res);
+        this.searchMode = true;
+        this.files = res;
+        this.filesLoading = false;
+      });
+  }
+
+  /**
+   * disable search mode, reverting to listing files
+   */
+  disableSearchMode(): void {
+    this.filesLoading = true;
+
+    this._mediaMgrService
+      .getContentsOfPath(this.activeFolderPath)
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.files = res.files;
+        this.folders = res.folders;
+        this.filesLoading = false;
+        this.searchMode = false;
+      });
   }
 }

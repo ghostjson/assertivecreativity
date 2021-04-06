@@ -165,6 +165,7 @@ import { AdminMediaManagerComponent } from './pages/admin-media-manager/admin-me
 import { MediaFolderListItemComponent } from './components/media-folder-list-item/media-folder-list-item.component';
 import { MediaFileListItemComponent } from './components/media-file-list-item/media-file-list-item.component';
 import { MediaFilePreviewComponent } from './components/media-file-preview/media-file-preview.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -259,6 +260,7 @@ import { MediaFilePreviewComponent } from './components/media-file-preview/media
     MediaFolderListItemComponent,
     MediaFileListItemComponent,
     MediaFilePreviewComponent,
+    SearchbarComponent,
   ],
   imports: [
     /** Angular modules */

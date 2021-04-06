@@ -43,6 +43,7 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
        * TODO: properties like file_count and size should be added from api
        */
       active_folder: HOME_FOLDER,
+      search_results: null,
     });
 
     // initialise the folders list
@@ -582,6 +583,39 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
     return this._http
       .post<RenameApiRes>(`${this.folderLink()}/rename`, req)
       .pipe(take(1));
+  }
+
+  /**
+   * search for files in a folder
+   * @param query query to search for
+   * @param searchPath path to search the files in
+   * @returns list of files as the search results
+   */
+  searchInFolder(query: string, searchPath: string): Observable<MediaFile[]> {
+    const req = {
+      query: query,
+      folder: searchPath,
+    };
+
+    return this._http
+      .post<MediaApiRes<MediaFile[]>>(`${this.fileLink()}/search`, req)
+      .pipe(
+        take(1),
+        map((res) => {
+          return res.data;
+        }),
+        tap((res) => {
+          this.setState({
+            search_results: res,
+          });
+        })
+      );
+  }
+
+  searchResultsStream(): Observable<MediaFile[]> {
+    return this.select((state) => {
+      return state.search_results;
+    });
   }
 
   /**
