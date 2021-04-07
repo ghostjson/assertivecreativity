@@ -1,4 +1,8 @@
-<div class="file-wrapper">
+<div
+  [@pulse]="copySuccess"
+  (@pulse.done)="copySuccess = false"
+  class="file-wrapper"
+>
   <div class="file-header p-d-flex p-jc-between p-ai-center">
     <div class="file-header__icon">
       <!-- <i class="pi pi-file-o"></i> -->

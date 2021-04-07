@@ -13,17 +13,23 @@
     <div class="preview__img p-flex-grow">
       <img [src]="file.file" alt="File alt text" />
     </div>
-    <div class="preview-details">
-      <div class="preview-details__name">
+    <div class="preview-details p-d-flex p-jc-center p-ai-center">
+      <div class="preview-details__name font-headline6">
         {{ file.name }}
       </div>
-      <div class="preview-details__slug">
-        {{ file.slug }}
-      </div>
-    </div>
-    <div class="preview-meta">
-      <div class="preview-meta__modified-date">
-        {{ file.updated_at ? (file.updated_at | date) : ' ' }}
+      <div
+        [@pulse]="copySuccess"
+        (@pulse.done)="copySuccess = false"
+        class="preview-details__link p-d-flex p-ai-center p-ml-2 p-p-1"
+      >
+        {{ file.file }}
+        <p-button
+          label="copy"
+          styleClass="p-button-plain p-button-text p-button-sm"
+          icon="pi pi-copy"
+          iconPos="right"
+          (onClick)="copyLinkToClipboard()"
+        ></p-button>
       </div>
     </div>
   </div>
