@@ -412,12 +412,10 @@ export class AdminMediaManagerService extends StateService<MediaManagerServiceSt
    * @param folder active folder
    */
   setActiveFolder(folder: MediaFolder): void {
-    if (this.state.folders[folder.path]) {
-      console.log('set new active folder: ', folder);
-      this.setState({
-        active_folder: folder,
-      });
-    }
+    console.log('set new active folder: ', folder);
+    this.setState({
+      active_folder: folder,
+    });
   }
 
   /**

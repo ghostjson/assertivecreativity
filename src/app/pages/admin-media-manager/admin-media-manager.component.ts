@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   collapseAnimation,
   fadeInOnEnterAnimation,
@@ -10,7 +11,14 @@ import {
 import { MenuItem, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Subject } from 'rxjs';
-import { concatMap, filter, switchMap, take, takeUntil } from 'rxjs/operators';
+import {
+  concatMap,
+  filter,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
 import { slugify } from 'src/app/library/StringFunctions';
@@ -65,13 +73,16 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
   constructor(
     private _mediaMgrService: AdminMediaManagerService,
     private _commonService: CommonService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
     this.closeUploadDialog = new Subject<void>();
     this.componentDestroy = new Subject<void>();
   }
 
   ngOnInit(): void {
+    console.log('media manager init');
     this.filePreviewVisible = false;
     this.uploadMediaVisible = false;
     this.newMedia = new FormGroup({
@@ -107,9 +118,7 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
       automationId: {
         path: '/',
       },
-      routerLink: '/admin/media/',
       command: (event: MenuItemClickEvent) => {
-        console.log('breadcrumb clicked: ', event);
         if (event.item.automationId.path !== this.activeFolderPath) {
           this._mediaMgrService.setActiveFolder({
             name: 'Home',
@@ -120,13 +129,44 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     };
     this.breadcrumbMenu = [];
 
-    // intialise folder rename manager
-    this.initFolderRenameManager();
+    // check if the active folder is provided in the url
+    const queryParams = this._activatedRoute.snapshot.queryParams;
+    if (queryParams && queryParams.folder) {
+      this.activeFolderName = this._mediaMgrService
+        .parsePath(queryParams.folder)
+        .slice(-1)[0];
+      this.activeFolderPath = queryParams.folder;
+      this._mediaMgrService.setActiveFolder({
+        name: this.activeFolderName,
+        path: this.activeFolderPath,
+      });
+    }
+
+    // update the active folder as the folder in the url changes
+    this._activatedRoute.queryParams
+      .pipe(
+        filter((res) => {
+          return res.folder ? res.folder !== this.activeFolderPath : true;
+        }),
+        takeUntil(this.componentDestroy)
+      )
+      .subscribe((res) => {
+        console.log('query params changed: ', res, this.activeFolderPath);
+        if (res.folder) {
+          this._mediaMgrService.setActiveFolder({
+            name: this._mediaMgrService.parsePath(res.folder).slice(-1)[0],
+            path: res.folder,
+          });
+        } else {
+          this._mediaMgrService.setActiveFolder(HOME_FOLDER);
+        }
+      });
 
     // initialise the folder contents
-    this.activeFolderPath = '/';
-    this.activeFolderName = 'Home';
     this.initFolderContentManager();
+
+    // intialise folder rename manager
+    this.initFolderRenameManager();
 
     // listen for delete file events and delete them
     this.initFileDeleteManager();
@@ -166,10 +206,11 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     this._mediaMgrService
       .activeFolderStream()
       .pipe(
-        switchMap((activeFolder) => {
+        tap((activeFolder) => {
+          // update the active folder state
           this.activeFolderName = activeFolder.name;
           this.activeFolderPath = activeFolder.path;
-          console.log('map function: ', activeFolder, this.activeFolderPath);
+
           // update the breadcrumb if the path is not root
           if (activeFolder.path !== '/') {
             const parsedPath = this._mediaMgrService.parsePath(
@@ -186,7 +227,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
                   },
                   disabled: index === parsedPath.length - 1,
                   command: (event: MenuItemClickEvent) => {
-                    console.log('breadcrumb clicked: ', event);
                     if (
                       event.item.automationId.path !== this.activeFolderPath
                     ) {
@@ -199,19 +239,29 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
                 };
               }
             );
-            console.log('breadcrumb: ', this.breadcrumbMenu);
+
+            // update the url to reflect current folder
+            this._router.navigate([], {
+              relativeTo: this._activatedRoute,
+              queryParams: {
+                folder: this.activeFolderPath,
+              },
+              queryParamsHandling: 'merge',
+            });
           } else {
             this.breadcrumbMenu = [];
+            this._router.navigate([], {
+              relativeTo: this._activatedRoute,
+            });
           }
-
+        }),
+        switchMap((activeFolder) => {
           return this._mediaMgrService.getContentsOfPath(activeFolder.path);
         }),
         takeUntil(this.componentDestroy)
       )
       .subscribe((res) => {
-        console.log('contents of active folder fetched: ', res);
         // update the files and folders in the current active path
-        console.log('updating files and folders');
         this.files = res.files;
         this.folders = res.folders;
       });
@@ -501,7 +551,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
         this._mediaMgrService
           .renameFolder(this.renameFolder.old_path, newPath)
           .subscribe((res) => {
-            console.log('folder renamed ', res);
             this._mediaMgrService.renameFolderStore(
               this.renameFolder.old_path,
               newPath
@@ -534,7 +583,6 @@ export class AdminMediaManagerComponent implements OnInit, OnDestroy {
     this._mediaMgrService
       .searchInFolder(event, this.activeFolderPath)
       .subscribe((res) => {
-        console.log('resutls: ', res);
         this.searchMode = true;
         this.files = res;
         this.filesLoading = false;
