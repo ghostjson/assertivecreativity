@@ -7,7 +7,7 @@
         <p-steps
           [model]="formSteps"
           [activeIndex]="currentFormStep"
-          styleClass="p-shadow-24"
+          styleClass="shadow-xl"
         ></p-steps>
         <div class="right-panel-content">
           <h1>
@@ -26,14 +26,9 @@
     </div>
     <div class="p-col-12 p-lg-6">
       <!-- personal details form starts -->
-      <p-card
-        *ngIf="currentFormStep === 0"
-        styleClass="signup-form-card"
-      >
+      <p-card *ngIf="currentFormStep === 0" styleClass="signup-form-card">
         <p-header>
-          <h2 class="signup-form-card-title">
-            Personal Details
-          </h2>
+          <h2 class="signup-form-card-title">Personal Details</h2>
         </p-header>
         <form
           #personalDetailsForm="ngForm"
@@ -159,14 +154,22 @@
                 pInputText
               />
               <small
-                *ngIf="!password.pristine && password.errors &&  password.errors.required"
+                *ngIf="
+                  !password.pristine &&
+                  password.errors &&
+                  password.errors.required
+                "
                 id="password-help"
                 class="p-invalid form-error-message"
               >
                 Password is required
               </small>
               <small
-                *ngIf="!password.pristine && password.errors &&  password.errors.minlength"
+                *ngIf="
+                  !password.pristine &&
+                  password.errors &&
+                  password.errors.minlength
+                "
                 class="p-invalid form-error-message"
               >
                 Password must be at least 8 characters long
@@ -226,8 +229,11 @@
 
             <div class="p-field p-col-12">
               <p-button
-                [disabled]="!personalDetailsForm.valid || newUser.password !== password_confirm"
-                styleClass="p-button-lg p-shadow-12"
+                [disabled]="
+                  !personalDetailsForm.valid ||
+                  newUser.password !== password_confirm
+                "
+                styleClass="p-button-lg shadow-lg"
                 label="Proceed"
                 icon="pi pi-arrow-right"
                 iconPos="right"
@@ -239,23 +245,19 @@
       </p-card>
       <!-- personal details form ends -->
 
-
       <!-- company details form starts -->
-      <p-card
-        *ngIf="currentFormStep === 1"
-        styleClass="signup-form-card"
-      >
+      <p-card *ngIf="currentFormStep === 1" styleClass="signup-form-card">
         <p-header>
-          <h2 class="signup-form-card-title">
-            Company Details
-          </h2>
+          <h2 class="signup-form-card-title">Company Details</h2>
         </p-header>
         <form
           #companyDetailsForm="ngForm"
           (ngSubmit)="signup()"
           class="signup-form p-fluid"
         >
-          <div class="personal-details-form p-fluid p-formgrid p-grid p-jc-between">
+          <div
+            class="personal-details-form p-fluid p-formgrid p-grid p-jc-between"
+          >
             <div class="p-field p-input-filled p-col-12">
               <label for="company-name">
                 Company Name
@@ -422,7 +424,9 @@
               >
               </p-inputNumber>
               <small
-                *ngIf="!zipCode.pristine && zipCode.errors && zipCode.errors.required"
+                *ngIf="
+                  !zipCode.pristine && zipCode.errors && zipCode.errors.required
+                "
                 id="zip-help"
                 class="p-invalid form-error-message"
               >
@@ -515,11 +519,11 @@
             </div>
 
             <div class="p-field p-col-3">
-              <button 
-                label="Back" 
-                pButton 
-                pRipple 
-                type="button" 
+              <button
+                label="Back"
+                pButton
+                pRipple
+                type="button"
                 class="p-button-text p-button-lg"
                 (click)="currentFormStep = 0"
               ></button>
@@ -528,7 +532,7 @@
             <div class="p-field p-col-9">
               <p-button
                 [disabled]="!companyDetailsForm.valid"
-                styleClass="p-button-success p-button-lg p-shadow-12"
+                styleClass="p-button-success p-button-lg shadow-xl"
                 label="Create Account"
                 icon="pi pi-check"
                 iconPos="right"

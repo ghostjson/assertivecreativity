@@ -6978,8 +6978,7 @@ a {
       width: 2.5rem;
       border-radius: 6px !important;
       /* p-shadow-2 */
-      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: $shadow;
     }
 
     .p-inputnumber-button-up {
@@ -7087,7 +7086,7 @@ body {
   .account-btn:enabled:hover,
   .account-btn:enabled:focus {
     background-color: $primary-color;
-    box-shadow: $regular-shadow;
+    box-shadow: $shadow;
     border: none;
   }
 }
@@ -7264,7 +7263,7 @@ Admin Header
       height: 3rem;
       width: 3rem;
       z-index: 10002;
-      box-shadow: $large-shadow;
+      box-shadow: $shadow-lg;
       transition: all 0.3s;
     }
 

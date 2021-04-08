@@ -3,11 +3,8 @@
 
   <div class="container">
     <h1>Cart</h1>
-    <div
-      *ngIf="cart"
-      class="p-grid"
-    >
-      <div 
+    <div *ngIf="cart" class="p-grid">
+      <div
         class="p-col-12 p-md-6 p-lg-4"
         *ngFor="let item of cart.data; index as itemIndex"
       >
@@ -16,16 +13,24 @@
             <div class="cart-item-card__img p-col-4">
               <img
                 *ngIf="item.product.image; else imgPlaceholder"
-                src="{{ item.product.image }}" alt="{{ item.product.name }}"
+                src="{{ item.product.image }}"
+                alt="{{ item.product.name }}"
               />
               <ng-template #imgPlaceholder>
-                <div class="image-placeholder pi pi-image">
-                </div>
+                <div class="image-placeholder pi pi-image"></div>
               </ng-template>
             </div>
-            <div class="cart-item-card__order-details p-col-8 p-d-flex p-flex-column p-jc-between">
+            <div
+              class="cart-item-card__order-details p-col-8 p-d-flex p-flex-column p-jc-between"
+            >
               <h2 class="order-details__name">
-                <a [routerLink]="['/products', item.order_data.is_stock ? 'stock' : 'custom', item.id]">
+                <a
+                  [routerLink]="[
+                    '/products',
+                    item.order_data.is_stock ? 'stock' : 'custom',
+                    item.id
+                  ]"
+                >
                   {{ item.product.name }}
                 </a>
               </h2>
@@ -34,7 +39,7 @@
                 {{ item.quantity }}
               </div>
               <div class="order-details__price">
-                {{ item.order_data.order_price | currency: "USD" }}
+                {{ item.order_data.order_price | currency: 'USD' }}
               </div>
             </div>
           </div>
@@ -48,11 +53,14 @@
                 (onClick)="deleteItem(itemIndex)"
               ></p-button>
               <a
-                [routerLink]="[item.order_data.is_stock ? 'stock' : 'custom', item.id]"
+                [routerLink]="[
+                  item.order_data.is_stock ? 'stock' : 'custom',
+                  item.id
+                ]"
                 label="Buy Now"
                 icon="pi pi-check"
                 iconPos="right"
-                class="buy-btn p-button-success p-shadow-4"
+                class="buy-btn p-button-success shadow"
                 pButton
               ></a>
             </div>
@@ -62,14 +70,18 @@
     </div>
 
     <p-card class="cart-empty" *ngIf="cart && !cart.data.length">
-      <img class="cart-empty__img" src="assets/images/empty-illus.svg" alt="Empty Cart illustration">
+      <img
+        class="cart-empty__img"
+        src="assets/images/empty-illus.svg"
+        alt="Empty Cart illustration"
+      />
       <h2 class="cart-empty-title">Your cart is empty</h2>
       <a
         routerLink="/"
         label="Go to store"
         icon="pi pi-arrow-right"
         iconPos="right"
-        class="p-button-primary p-button-lg p-shadow-6"
+        class="p-button-primary p-button-lg shadow-md"
         pButton
       ></a>
     </p-card>

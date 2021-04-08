@@ -1,19 +1,10 @@
 <div class="product-card p-fluid">
-  <div
-    *ngIf="itemNum"
-    class="item-num-badge"
-  >
-    <span class="sr-only">
-      Item Number
-    </span>
-    {{itemNum}}
+  <div *ngIf="itemNum" class="item-num-badge">
+    <span class="sr-only"> Item Number </span>
+    {{ itemNum }}
   </div>
   <div class="product-card__img">
-    <img
-      *ngIf="image; else placeholder"
-      src="{{image}}"
-      alt="{{name}}"
-    >
+    <img *ngIf="image; else placeholder" src="{{ image }}" alt="{{ name }}" />
     <ng-template #placeholder>
       <span class="img-placeholder pi pi-image"></span>
     </ng-template>
@@ -21,17 +12,15 @@
   <div class="product-card__name">
     {{ name | limitLength: 50 }}
   </div>
-  <div class="product-card__price"
-    *ngIf="price"
-  >
-    {{price | currency: 'USD'}}
+  <div class="product-card__price" *ngIf="price">
+    {{ price | currency: 'USD' }}
   </div>
   <div class="product-card__desc">
-    {{ description | limitLength: 50}}
+    {{ description | limitLength: 50 }}
   </div>
   <a
     label="Shop"
-    class="show-btn p-shadow-2 p-button-lg"
+    class="show-btn shadow p-button-lg"
     icon="pi pi-shopping-cart"
     iconPos="right"
     [routerLink]="['/products', stock ? 'stock' : 'custom', productId]"

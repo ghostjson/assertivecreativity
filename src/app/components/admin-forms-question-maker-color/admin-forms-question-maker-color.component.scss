@@ -1,4 +1,4 @@
-@import "../../../assets/css/variables.scss";
+@import '../../../assets/css/variables.scss';
 
 :host {
   ::ng-deep {
@@ -14,7 +14,7 @@
 
       &:hover {
         cursor: pointer;
-        box-shadow: $shadow-1;
+        box-shadow: $shadow;
       }
 
       &:active {
@@ -33,7 +33,7 @@
         }
       }
     }
-    
+
     .form-color-picker-label-input {
       text-transform: capitalize;
       margin-bottom: 1em;
@@ -43,7 +43,7 @@
       display: flex;
       width: 100%;
       align-items: center;
-  
+
       &__preview {
         height: 2rem;
         width: 2rem;
@@ -83,7 +83,7 @@
         height: 2.5rem;
         width: 2.5rem;
         position: relative;
-        box-shadow: $regular-shadow;
+        box-shadow: $shadow;
         margin-right: 1em;
         border-radius: 6px;
       }

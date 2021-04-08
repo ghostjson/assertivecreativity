@@ -17,7 +17,7 @@
       width: 100%;
       font-weight: bold;
     }
-    
+
     .form-group__input,
     .p-inputnumber {
       width: 100%;
@@ -31,7 +31,7 @@
 
     .profile-img {
       border: 1px solid $light-grey;
-  
+
       .p-card-header {
         border-bottom: none;
         border-radius: 6px;
@@ -40,7 +40,7 @@
         img {
           border-radius: 6px;
           position: relative;
-          box-shadow: $regular-shadow;
+          box-shadow: $shadow;
         }
       }
     }
@@ -61,6 +61,5 @@
         }
       }
     }
-
   }
 }

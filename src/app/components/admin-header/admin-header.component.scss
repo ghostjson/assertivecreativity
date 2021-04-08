@@ -49,7 +49,7 @@
 .sidebar-item__link--active {
   color: white;
   background: $bg-primary;
-  box-shadow: $regular-shadow;
+  box-shadow: $shadow;
   font-weight: bold;
 
   &:hover {

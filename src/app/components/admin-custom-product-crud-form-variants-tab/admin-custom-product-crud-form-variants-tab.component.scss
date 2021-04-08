@@ -41,7 +41,7 @@
     transition: box-shadow $transition-func;
 
     &:hover {
-      box-shadow: $shadow-3;
+      box-shadow: $shadow;
     }
 
     &:not(:first-child) {

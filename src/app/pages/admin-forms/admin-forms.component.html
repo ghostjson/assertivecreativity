@@ -10,7 +10,7 @@
 
           <div class="p-toolbar-group-right">
             <button
-              class="p-button-success p-shadow-4"
+              class="p-button-success shadow-md"
               type="button"
               label="Create Form"
               icon="pi pi-plus"
@@ -30,7 +30,9 @@
         >
           <p-card class="form-grid-item">
             <ng-template pTemplate="header">
-              <div class="form-grid-item__header p-d-flex p-p-2 p-ai-center p-text-bold">
+              <div
+                class="form-grid-item__header p-d-flex p-p-2 p-ai-center p-text-bold"
+              >
                 <app-overlay-menu
                   #menu
                   [menuItems]="formItemMenuItems"
@@ -52,11 +54,11 @@
             <div class="form-grid-item__content">
               <div class="content-row p-mt-2">
                 <span> Updated On: </span>
-                {{ form.updated_at | date: "mediumDate" }}
+                {{ form.updated_at | date: 'mediumDate' }}
               </div>
               <div class="content-row p-mt-2">
                 <span> Created On: </span>
-                {{ form.created_at | date: "mediumDate" }}
+                {{ form.created_at | date: 'mediumDate' }}
               </div>
             </div>
             <p-footer>
@@ -69,7 +71,7 @@
                   pButton
                 ></button>
                 <button
-                  class="edit-btn p-shadow-6"
+                  class="edit-btn shadow-md"
                   type="button"
                   label="Edit"
                   icon="pi pi-pencil"
