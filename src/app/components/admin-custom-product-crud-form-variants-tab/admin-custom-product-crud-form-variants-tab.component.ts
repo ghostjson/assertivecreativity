@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { moveItemInFormArray } from 'src/app/library/FormsUtilities';
-import { ProductAttribute } from 'src/app/models/Product';
+import { ProductVariant } from 'src/app/models/Product';
 import { AdminProductService } from 'src/app/services/admin-product.service';
 
 @Component({
@@ -14,127 +14,82 @@ export class AdminCustomProductCrudFormVariantsTabComponent {
   @Input() styleClass: string;
   @Input() productForm: FormGroup;
 
-  activeAttrForm: FormGroup;
-  activeAttrFormIndex: number;
-  showAttrFormPanel: boolean;
-  activeChildAttrForm: FormGroup;
-  activeChildAttrFormIndex: number;
-  showChildAttrFormPanel: boolean;
+  activeVariantForm: FormGroup;
+  activeVariantFormIndex: number;
+  showVariantFormPanel: boolean;
 
   constructor(private _productService: AdminProductService) {}
 
   /**
-   * return attributes formarray
+   * return variants formarray
    */
-  attributes(): FormArray {
-    return (<FormArray>this.productForm.get('attributes'))
-      .at(0)
-      .get('child_attributes') as FormArray;
+  variants(): FormArray {
+    return <FormArray>this.productForm.get('variants');
   }
 
   /**
-   * add new attribute
+   * add new variant
    */
-  addAttribute(): void {
-    let newForm = this._productService.createProductAttrForm(false);
-    this.attributes().push(newForm);
+  addVariant(): void {
+    let newForm = this._productService.createProductVariantForm({
+      variantId: Math.random() * 1000000,
+      productId: Math.random() * 1000000,
+    });
+    this.variants().push(newForm);
 
     // set the active form as newly created form
-    this.activeAttrForm = newForm;
-    this.activeAttrFormIndex = this.attributes().length - 1;
-    this.showAttrCrudForm();
+    this.activeVariantForm = newForm;
+    this.activeVariantFormIndex = this.variants().length - 1;
+    this.showVariantCrudForm();
   }
 
   /**
-   * edit an attribute
-   * @param index index of the attribute to edit
+   * edit an variant
+   * @param index index of the variant to edit
    */
-  editAttribute(index: number): void {
-    this.activeAttrFormIndex = index;
-    this.activeAttrForm = <FormGroup>this.attributes().at(index);
-    this.showAttrCrudForm();
+  editVariant(index: number): void {
+    this.activeVariantFormIndex = index;
+    this.activeVariantForm = <FormGroup>this.variants().at(index);
+    this.showVariantCrudForm();
   }
 
   /**
-   * remove the attribute
-   * @param index index of the attribute to remove
+   * remove the variant
+   * @param index index of the variant to remove
    */
-  removeAttribute(index: number): void {
-    this.resetActiveAttr();
-    this.hideAttrCrudForm();
-    this.attributes().removeAt(index);
+  removeVariant(index: number): void {
+    this.resetActiveVariant();
+    this.hideVariantCrudForm();
+    this.variants().removeAt(index);
   }
 
   /**
-   * show attribute crud form
+   * show variant crud form
    */
-  showAttrCrudForm(): void {
-    this.showAttrFormPanel = true;
+  showVariantCrudForm(): void {
+    this.showVariantFormPanel = true;
   }
 
   /**
-   * hide attribute crud form
+   * hide variant crud form
    */
-  hideAttrCrudForm(): void {
-    this.showAttrFormPanel = false;
+  hideVariantCrudForm(): void {
+    this.showVariantFormPanel = false;
   }
 
   /**
-   * clear the active attribute
+   * clear the active variant
    */
-  resetActiveAttr(): void {
-    this.activeAttrFormIndex = null;
-    this.activeAttrForm = null;
+  resetActiveVariant(): void {
+    this.activeVariantFormIndex = null;
+    this.activeVariantForm = null;
   }
 
   /**
-   * show child attribute crud form
-   */
-  showChildAttrCrudForm(): void {
-    this.showChildAttrFormPanel = true;
-  }
-
-  /**
-   * hide child attribute crud form
-   */
-  hideChildAttrCrudForm(): void {
-    this.showChildAttrFormPanel = false;
-  }
-
-  /**
-   * remove a child attribute
-   */
-  removeChildAttribute(): void {
-    this.hideChildAttrCrudForm();
-    (<FormArray>this.activeChildAttrForm.parent).removeAt(
-      this.activeChildAttrFormIndex
-    );
-    this.resetActiveChildAttr();
-  }
-
-  /**
-   * clear the active child attribute
-   */
-  resetActiveChildAttr(): void {
-    this.activeChildAttrFormIndex = null;
-    this.activeChildAttrForm = null;
-  }
-
-  /**
-   * set the active child attribute form
-   * @param event event object which is emitted from the attribute crud form
-   */
-  setChildAttrForm(event: any): void {
-    this.activeChildAttrForm = event.formGroup;
-    this.activeChildAttrFormIndex = event.index;
-    this.showChildAttrCrudForm();
-  }
-
-  /**
-   * handle drag sort of the attributes list
+   * handle drag sort of the variants list
    * @param e event object
    */
-  handleDragSort(e: CdkDragDrop<ProductAttribute[]>): void {
-    moveItemInFormArray(this.attributes(), e.previousIndex, e.currentIndex);
+  handleDragSort(e: CdkDragDrop<ProductVariant[]>): void {
+    moveItemInFormArray(this.variants(), e.previousIndex, e.currentIndex);
   }
 }

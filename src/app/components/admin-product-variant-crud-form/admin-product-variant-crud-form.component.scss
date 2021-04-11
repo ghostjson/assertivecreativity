@@ -2,7 +2,7 @@
 
 :host {
   ::ng-deep {
-    .child-attr-list {
+    .child-variant-list {
       .p-card-header {
         display: flex;
         justify-content: space-between;
@@ -11,7 +11,7 @@
       }
     }
 
-    .attr-tools {
+    .variant-tools {
       .p-toolbar {
         &.parent-group {
           border-radius: 4px 4px 0 0;
@@ -35,7 +35,7 @@
 }
 
 ::ng-deep {
-  .attr-option-list-item {
+  .variant-option-list-item {
     border-radius: 4px;
 
     &:not(:first-child) {

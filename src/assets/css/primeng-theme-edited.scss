@@ -1533,36 +1533,41 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 
 .p-button {
   color: #ffffff;
-  background: $primary-color;
+  background-color: $primary-color;
   border: 0 none;
   padding: 0.714rem 1rem;
   font-size: 1rem;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s,
-    box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: opacity $transition-func, background-color 0.2s, border-color 0.2s,
+    color 0.2s, box-shadow 0.2s,
+    background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
   text-transform: capitalize;
   cursor: pointer;
+
+  &:disabled {
+    box-shadow: none;
+  }
 }
 .p-button:enabled:hover {
-  background: $primary-color--hover;
+  background-color: $primary-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:hover {
-  background: $primary-color--hover;
+  background-color: $primary-color--hover;
   color: #ffffff;
   border-color: transparent;
 }
 
 .p-button:enabled:active {
-  background: $primary-color--active;
+  background-color: $primary-color--active;
   color: #ffffff;
   border-color: transparent;
 }
 
 a.p-button:active {
-  background: $primary-color--active;
+  background-color: $primary-color--active;
   color: #ffffff;
   border-color: transparent;
 }
@@ -6882,13 +6887,6 @@ a.p-button.p-button-success.p-button-outlined,
 a {
   &.p-button {
     text-decoration: none;
-  }
-}
-
-.p-button {
-  &:disabled {
-    opacity: 0.5;
-    box-shadow: none;
   }
 }
 

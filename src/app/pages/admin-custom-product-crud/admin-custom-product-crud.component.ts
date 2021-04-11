@@ -11,7 +11,11 @@ import { MenuItem } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CommonService } from 'src/app/common.service';
-import { CustomProduct, ProductAttribute } from 'src/app/models/Product';
+import {
+  CustomProduct,
+  NewProduct,
+  ProductAttribute,
+} from 'src/app/models/Product';
 import { AdminFileManagerService } from 'src/app/services/admin-file-manager/admin-file-manager.service';
 import { AdminProductService } from 'src/app/services/admin-product.service';
 
@@ -21,13 +25,14 @@ import { AdminProductService } from 'src/app/services/admin-product.service';
   styleUrls: ['./admin-custom-product-crud.component.scss'],
 })
 export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
-  @Input() product: CustomProduct;
+  @Input() product: NewProduct;
 
   productId: number;
   productForm: FormGroup;
-  activeAttrForm: FormGroup;
+  activeVariantForm: FormGroup;
   productViews: MenuItem[];
   editMode: boolean;
+  previewCanvas: fabric.Canvas;
 
   componentDestroy = new Subject<void>();
 
@@ -44,7 +49,7 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
     /**
      * TODO: change once the api is fixed
      */
-    this.product = history.state.product && history.state.product.custom_forms;
+    this.product = history.state.product;
     this.productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     this.editMode = Boolean(
       this._router.url.includes('edit') && this.productId
@@ -52,7 +57,7 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
 
     if (this.editMode) {
       if (this.product) {
-        this.productForm = this._productService.createCustomProductForm(
+        this.productForm = this._productService.createNewCustomProductForm(
           this.product
         );
       } else {
@@ -65,21 +70,21 @@ export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
                */
               res.custom_forms.product.id = res.id;
               this.product = res.custom_forms;
-              this.productForm = this._productService.createCustomProductForm(
+              this.productForm = this._productService.createNewCustomProductForm(
                 this.product
               );
             })
         );
       }
     } else {
-      this.productForm = this._productService.createCustomProductForm();
+      this.productForm = this._productService.createNewCustomProductForm();
     }
 
     this._productService
       .getActiveProduct()
       .pipe(takeUntil(this.componentDestroy))
       .subscribe((state) => {
-        this.activeAttrForm = state && state.activeAttrForm;
+        this.activeVariantForm = state && state.activeVariantForm;
         // force change detection so that the view updates. For reasons to
         // do this refer: https://stackoverflow.com/q/45236671/6882980
         this._ref.detectChanges();

@@ -28,6 +28,10 @@ export class AdminCustomProductCrudFormBasicDetailsComponent implements OnInit {
     this.categoryField = <FormControl>this.baseProductForm.get('category');
   }
 
+  /**
+   * set the category_id field with the selected category object
+   * @param category category object selected
+   */
   setCategoryId(category: Category): void {
     this.categoryIdField.setValue((category && category.id) || null);
     console.log('form errors: ', this.baseProductForm.errors);

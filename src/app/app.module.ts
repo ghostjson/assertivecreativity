@@ -155,10 +155,10 @@ import { AdminCustomProductCrudFormPricingComponent } from './components/admin-c
 import { AdminCustomProductCrudFormInventoryMgmntComponent } from './components/admin-custom-product-crud-form-inventory-mgmnt/admin-custom-product-crud-form-inventory-mgmnt.component';
 import { AdminCustomProductCrudFormOrderPropertiesComponent } from './components/admin-custom-product-crud-form-order-properties/admin-custom-product-crud-form-order-properties.component';
 import { AdminCustomProductCrudFormVariantsTabComponent } from './components/admin-custom-product-crud-form-variants-tab/admin-custom-product-crud-form-variants-tab.component';
-import { AdminProductAttrCrudFormComponent } from './components/admin-product-attr-crud-form/admin-product-attr-crud-form.component';
-import { AdminProductAttrCrudFormBasicDetailsComponent } from './components/admin-product-attr-crud-form-basic-details/admin-product-attr-crud-form-basic-details.component';
-import { AdminProductAttrCrudFormOptionPropsComponent } from './components/admin-product-attr-crud-form-option-props/admin-product-attr-crud-form-option-props.component';
-import { AdminProductAttrCrudFormAttrOptionsListItemComponent } from './components/admin-product-attr-crud-form-attr-options-list-item/admin-product-attr-crud-form-attr-options-list-item.component';
+import { AdminProductVariantCrudFormComponent } from './components/admin-product-variant-crud-form/admin-product-variant-crud-form.component';
+import { AdminProductVariantCrudFormBasicDetailsComponent } from './components/admin-product-variant-crud-form-basic-details/admin-product-variant-crud-form-basic-details.component';
+import { AdminProductVariantCrudFormOptionPropsComponent } from './components/admin-product-variant-crud-form-option-props/admin-product-variant-crud-form-option-props.component';
+import { AdminProductVariantCrudFormVariantOptionsListItemComponent } from './components/admin-product-variant-crud-form-variant-options-list-item/admin-product-variant-crud-form-variant-options-list-item.component';
 import { CustomProductDetailComponent } from './pages/custom-product-detail/custom-product-detail.component';
 import { CustomProductDetailAttrFormComponent } from './components/custom-product-detail-attr-form/custom-product-detail-attr-form.component';
 import { AdminMediaManagerComponent } from './pages/admin-media-manager/admin-media-manager.component';
@@ -166,6 +166,7 @@ import { MediaFolderListItemComponent } from './components/media-folder-list-ite
 import { MediaFileListItemComponent } from './components/media-file-list-item/media-file-list-item.component';
 import { MediaFilePreviewComponent } from './components/media-file-preview/media-file-preview.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { ProductPreviewCanvasComponent } from './components/product-preview-canvas/product-preview-canvas.component';
 
 @NgModule({
   declarations: [
@@ -250,10 +251,10 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     AdminCustomProductCrudFormInventoryMgmntComponent,
     AdminCustomProductCrudFormOrderPropertiesComponent,
     AdminCustomProductCrudFormVariantsTabComponent,
-    AdminProductAttrCrudFormComponent,
-    AdminProductAttrCrudFormBasicDetailsComponent,
-    AdminProductAttrCrudFormOptionPropsComponent,
-    AdminProductAttrCrudFormAttrOptionsListItemComponent,
+    AdminProductVariantCrudFormComponent,
+    AdminProductVariantCrudFormBasicDetailsComponent,
+    AdminProductVariantCrudFormOptionPropsComponent,
+    AdminProductVariantCrudFormVariantOptionsListItemComponent,
     CustomProductDetailComponent,
     CustomProductDetailAttrFormComponent,
     AdminMediaManagerComponent,
@@ -261,6 +262,7 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     MediaFileListItemComponent,
     MediaFilePreviewComponent,
     SearchbarComponent,
+    ProductPreviewCanvasComponent,
   ],
   imports: [
     /** Angular modules */

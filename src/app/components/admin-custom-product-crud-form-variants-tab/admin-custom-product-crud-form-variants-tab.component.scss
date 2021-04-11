@@ -2,12 +2,12 @@
 
 :host {
   ::ng-deep {
-    .empty-attr-msg {
+    .empty-variant-msg {
       color: $dark-grey;
       text-align: center;
     }
 
-    .attr-mgmt {
+    .variant-mgmt {
       .p-card {
         &-header {
           display: flex;
@@ -33,7 +33,7 @@
     style isolation is forced to not apply because
     of the need of drag and drop support
   */
-  .attr-list-item {
+  .variant-list-item {
     border: 1px solid $light-grey;
     border-radius: 4px;
     padding: 1em 1em 1em 0.5em;

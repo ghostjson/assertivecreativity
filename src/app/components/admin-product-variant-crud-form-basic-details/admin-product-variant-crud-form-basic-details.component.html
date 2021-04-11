@@ -1,5 +1,5 @@
 <div class="{{ styleClass }}">
-  <p-card [formGroup]="attributeForm" header="basic details">
+  <p-card [formGroup]="variantForm" header="basic details">
     <div class="p-grid p-nogutter">
       <div class="p-col-12">
         <div class="p-field p-fluid p-input-filled">
@@ -14,7 +14,7 @@
           </label>
         </div>
       </div>
-      <ng-container *ngIf="!attributeForm.value.is_attribute_group">
+      <ng-container *ngIf="!variantForm.value.variant_group">
         <div class="p-col-12">
           <div class="p-field p-fluid p-input-filled">
             <label>
@@ -33,7 +33,7 @@
             <label>
               <span> variant cost </span>
               <p-inputNumber
-                formControlName="cost"
+                formControlName="base_cost"
                 mode="currency"
                 [min]="0"
                 currency="USD"
@@ -48,7 +48,7 @@
             <label>
               <span> variant price </span>
               <p-inputNumber
-                formControlName="price"
+                formControlName="base_price"
                 mode="currency"
                 [min]="0"
                 currency="USD"

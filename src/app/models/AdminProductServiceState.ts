@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Category } from './Category';
-import { CustomProduct, ProductAttribute, StockProduct } from './Product';
+import { CustomProduct, ProductVariant, StockProduct } from './Product';
 
 export interface AdminProductServiceState {
   activeProduct: ActiveProductState;
@@ -14,7 +14,7 @@ export interface AdminProductServiceState {
 export interface ActiveProductState {
   productConfig?: CustomProduct | StockProduct;
   productForm?: FormGroup;
-  activeAttrConfig?: ProductAttribute;
-  activeAttrForm?: FormGroup;
-  activeAttrIndex?: number;
+  activeVariantConfig?: ProductVariant;
+  activeVariantForm?: FormGroup;
+  activeVariantIndex?: number;
 }

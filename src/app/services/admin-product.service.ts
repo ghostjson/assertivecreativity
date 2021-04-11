@@ -7,6 +7,8 @@ import {
   ProductAttribute,
   ImageObj,
   OrderProps,
+  ProductVariant,
+  NewProduct,
 } from '../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -33,8 +35,9 @@ import {
 export class AdminProductService extends StateService<AdminProductServiceState> {
   host: string;
   API_URL: string;
-
   possibleOptions: Object;
+  PLACEHOLDER_IMAGE_STRING: string =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==';
 
   constructor(
     private _http: HttpClient,
@@ -178,7 +181,7 @@ export class AdminProductService extends StateService<AdminProductServiceState> 
     let transformedProduct: Product = {
       name: product.product.name,
       base_price: product.product.base_price,
-      image: this.testImageString,
+      image: this.PLACEHOLDER_IMAGE_STRING,
       description: product.product.description,
       price_table: null,
       sales: product.product.sales,
@@ -435,6 +438,180 @@ export class AdminProductService extends StateService<AdminProductServiceState> 
     }
 
     return this._fb.group(prodAttrFormTemplate);
+  }
+  /**
+   * create a new product variant formgroup based on config
+   * @param config config to create the new product variant form
+   * @returns product variant formgroup
+   */
+  createProductVariantForm(config: {
+    variantId?: number;
+    productId?: number;
+    type?: string;
+    initial?: ProductVariant;
+  }): FormGroup {
+    let prodVariantFormTemplate = null;
+
+    if (config && config.initial) {
+      prodVariantFormTemplate = {
+        variant_id: [config.initial.variant_id],
+        product_id: [config.initial.product_id],
+        variant_group: [config.initial.variant_group, [Validators.required]],
+        type: [config.initial.type, [Validators.required]],
+        label: [config.initial.label, [Validators.required]],
+        value: config.initial.value,
+        stock: [config.initial.stock, [Validators.required, Validators.min(0)]],
+        sales: [config.initial.value, [Validators.required, Validators.min(0)]],
+        thumbnail: this.createImgForm(config.initial.thumbnail, false),
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(
+              config.initial.images[0].front_view,
+              false
+            ),
+            back_view: this.createImgForm(
+              config.initial.images[0].back_view,
+              false
+            ),
+          }),
+        ]),
+        base_cost: [
+          config.initial.base_cost,
+          [Validators.required, Validators.min(0)],
+        ],
+        base_price: [
+          config.initial.base_price,
+          [Validators.required, Validators.min(0)],
+        ],
+        price_table_mode: [
+          config.initial.price_table_mode,
+          [Validators.required],
+        ],
+        price_table: this._fb.array(
+          config.initial.price_table.map((el) => {
+            return this.newPriceGroupForm(el);
+          })
+        ),
+        variant_status: [config.initial.variant_status, [Validators.required]],
+        config: [config.initial.config, [Validators.required]],
+        attrs: [config.initial.attrs, [Validators.required]],
+        order_config: [config.initial.order_config, Validators.required],
+      };
+    } else {
+      prodVariantFormTemplate = {
+        variant_id: [config.variantId],
+        product_id: [config.productId],
+        variant_group: [false, [Validators.required]],
+        type: [config.type ? config.type : 'generic', [Validators.required]],
+        label: ['', [Validators.required]],
+        value: null,
+        stock: [0, [Validators.required, Validators.min(0)]],
+        sales: [0, [Validators.required, Validators.min(0)]],
+        thumbnail: this.createImgForm(null, false),
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(null, false),
+            back_view: this.createImgForm(null, false),
+          }),
+        ]),
+        base_cost: [0, [Validators.required, Validators.min(0)]],
+        base_price: [0, [Validators.required, Validators.min(0)]],
+        price_table_mode: [false, [Validators.required]],
+        price_table: this._fb.array([]),
+        variant_status: ['draft', [Validators.required]],
+        config: [null, [Validators.required]],
+        attrs: [null, [Validators.required]],
+        order_config: this.createOrderPropsForm(),
+      };
+    }
+
+    return this._fb.group(prodVariantFormTemplate);
+  }
+
+  /**
+   * create a custom product formgroup
+   * @param initial initial values for the fields of the custom product form
+   * @returns custom product formgroup
+   */
+  createNewCustomProductForm(initial?: NewProduct): FormGroup {
+    let newProductFormTemplate = null;
+
+    if (initial) {
+      newProductFormTemplate = {
+        id: [this._idGenService.getId()],
+        product_id: initial.product_id,
+        name: [initial.name, [Validators.required]],
+        description: [initial.description, [Validators.required]],
+        category: [null, [Validators.required]],
+        category_id: [null, [Validators.required]],
+        tags: this._fb.array([]),
+        base_cost: [
+          initial.base_cost,
+          [Validators.required, Validators.min(0)],
+        ],
+        base_price: [
+          initial.base_price,
+          [Validators.required, Validators.min(0)],
+        ],
+        total_price: [
+          initial.total_price,
+          [Validators.required, Validators.min(0)],
+        ],
+        stock: [initial.stock, [Validators.required, Validators.min(0)]],
+        sales: [initial.sales, [Validators.required, Validators.min(0)]],
+        thumbnail: this.createImgForm(initial.thumbnail, false),
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(initial.images[0].front_view, false),
+            back_view: this.createImgForm(initial.images[0].back_view, false),
+          }),
+        ]),
+        price_table_mode: [initial.price_table_mode, [Validators.required]],
+        price_table: this._fb.array(
+          initial.price_table.map((el) => {
+            return this.newPriceGroupForm(el);
+          })
+        ),
+        order_config: this.createOrderPropsForm(initial.order_config),
+        config: initial.config,
+        attrs: initial.attrs,
+        variants: initial.variants.map((el) => {
+          return this.createProductVariantForm({
+            initial: el,
+          });
+        }),
+      };
+    } else {
+      newProductFormTemplate = {
+        id: [this._idGenService.getId()],
+        product_id: null,
+        name: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        category: [null, [Validators.required]],
+        category_id: [null, [Validators.required]],
+        tags: this._fb.array([]),
+        base_cost: [0, [Validators.required, Validators.min(0)]],
+        base_price: [0, [Validators.required, Validators.min(0)]],
+        total_price: [0, [Validators.required, Validators.min(0)]],
+        stock: [0, [Validators.required, Validators.min(0)]],
+        sales: [0, [Validators.required, Validators.min(0)]],
+        thumbnail: this.createImgForm(null, false),
+        images: this._fb.array([
+          this._fb.group({
+            front_view: this.createImgForm(null, false),
+            back_view: this.createImgForm(null, false),
+          }),
+        ]),
+        price_table_mode: [false, [Validators.required]],
+        price_table: this._fb.array([]),
+        order_config: this.createOrderPropsForm(),
+        config: null,
+        attrs: null,
+        variants: this._fb.array([]),
+      };
+    }
+
+    return this._fb.group(newProductFormTemplate);
   }
 
   /**

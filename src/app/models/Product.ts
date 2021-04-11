@@ -165,6 +165,7 @@ export class StockProductAttributes {
 export interface ProductVariant {
   variant_id?: number;
   product_id: number;
+  variant_group: boolean;
   type: string;
   label: string;
   value: any;
@@ -229,12 +230,14 @@ export class NewProduct {
   price_table?: PriceGroup[];
   order_config?: OrderProps;
   serial?: string;
+  // NOTE: These are also in ProductVariant, because I am not sure where it will be needed
+  config: JSON;
+  attrs: JSON;
 
   /**
    * stock product starts
    */
   is_stock: boolean;
-  product?: Product;
   product_id?: string;
   product_key: string;
   variant_id?: string;
@@ -326,4 +329,6 @@ export class NewProduct {
 
   created_at?: string;
   updated_at?: string;
+
+  variants: ProductVariant[];
 }

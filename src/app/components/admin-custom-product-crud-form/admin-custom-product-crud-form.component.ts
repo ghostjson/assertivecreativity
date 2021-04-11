@@ -20,26 +20,17 @@ export class AdminCustomProductCrudFormComponent implements OnInit {
   }
 
   /**
-   * get the base product formgroup
-   */
-  baseProductForm(): FormGroup {
-    return this.productForm.get('product') as FormGroup;
-  }
-
-  /**
    * get the base product image form
    */
   baseProductImageForm(): FormGroup {
-    return (<FormArray>this.productForm.get('product.images')).at(
-      0
-    ) as FormGroup;
+    return (<FormArray>this.productForm.get('images')).at(0) as FormGroup;
   }
 
   /**
    * return order_props formgroup
    */
   orderPropsForm(): FormGroup {
-    return this.productForm.get('product.order_props') as FormGroup;
+    return this.productForm.get('order_config') as FormGroup;
   }
 
   /**

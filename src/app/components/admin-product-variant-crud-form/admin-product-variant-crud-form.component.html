@@ -1,9 +1,8 @@
-<div [formGroup]="attributeForm" class="{{ styleClass }}">
+<div [formGroup]="variantForm" class="{{ styleClass }}">
   <div
+    class="p-mb-3 variant-tools"
     [ngClass]="{
-      'parent-group': showAttrGroupSwitch,
-      'attr-tools': true,
-      'p-mb-3': true
+      'parent-group': showVariantGroupSwitch
     }"
   >
     <p-toolbar>
@@ -24,14 +23,16 @@
         ></p-button>
       </div>
     </p-toolbar>
-    <p-accordion *ngIf="showAttrGroupSwitch">
-      <p-accordionTab [selected]="true" header="Attribute Options">
+    <p-accordion *ngIf="showVariantGroupSwitch">
+      <p-accordionTab [selected]="true" header="Variant Settings">
         <div class="p-field">
-          <label class="is-attr-group-switch p-d-flex p-ai-center p-jc-between">
+          <label
+            class="is-variant-group-switch p-d-flex p-ai-center p-jc-between"
+          >
             <span> This is a variant group </span>
             <p-inputSwitch
-              formControlName="is_attribute_group"
-              (onChange)="handleAttrGroupSwitch($event)"
+              formControlName="variant_group"
+              (onChange)="handleVariantGroupSwitch($event)"
             ></p-inputSwitch>
           </label>
         </div>
@@ -39,14 +40,12 @@
     </p-accordion>
   </div>
 
-  <app-admin-product-attr-crud-form-basic-details
-    [attributeForm]="attributeForm"
-  ></app-admin-product-attr-crud-form-basic-details>
+  <app-admin-product-variant-crud-form-basic-details
+    [variantForm]="variantForm"
+  ></app-admin-product-variant-crud-form-basic-details>
 
-  <ng-container
-    *ngIf="attributeForm.value.is_attribute_group; else notAttrGroup"
-  >
-    <p-card styleClass="child-attr-list p-mt-3">
+  <ng-container *ngIf="variantForm.value.variant_group; else notVariantGroup">
+    <!-- <p-card styleClass="child-attr-list p-mt-3">
       <ng-template pTemplate="header">
         <div class="p-card-title">variant options</div>
         <p-button
@@ -83,12 +82,12 @@
       <p *ngIf="!childAttrs().length" class="text-grey p-text-center">
         Add options to see them here
       </p>
-    </p-card>
+    </p-card> -->
   </ng-container>
-  <ng-template #notAttrGroup>
-    <app-admin-product-attr-crud-form-option-props
+  <ng-template #notVariantGroup>
+    <app-admin-product-variant-crud-form-option-props
       styleClass="p-mt-3"
-      [attributeForm]="attributeForm"
-    ></app-admin-product-attr-crud-form-option-props>
+      [variantForm]="variantForm"
+    ></app-admin-product-variant-crud-form-option-props>
   </ng-template>
 </div>

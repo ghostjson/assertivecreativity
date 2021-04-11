@@ -1,98 +1,85 @@
 <div class="{{ styleClass }}">
-  <div
-    *ngIf="showAttrFormPanel; else variantList"
-    [ngClass]="{
-      'attribute-crud': true,
-      'hide-panel': showChildAttrFormPanel
-    }"
-  >
-    <app-admin-product-attr-crud-form
-      [attributeForm]="activeAttrForm"
-      [showAttrGroupSwitch]="true"
-      (onClose)="hideAttrCrudForm()"
-      (onDelete)="removeAttribute(activeAttrFormIndex)"
-      (onActiveChildAttr)="setChildAttrForm($event)"
-    ></app-admin-product-attr-crud-form>
-  </div>
-  <div *ngIf="showChildAttrFormPanel" class="child-attr-form">
-    <app-admin-product-attr-crud-form
-      [attributeForm]="activeChildAttrForm"
-      (onClose)="hideChildAttrCrudForm()"
-      (onDelete)="removeChildAttribute()"
-    ></app-admin-product-attr-crud-form>
+  <div *ngIf="showVariantFormPanel; else variantList" class="variant-crud">
+    <app-admin-product-variant-crud-form
+      [variantForm]="activeVariantForm"
+      [showVariantGroupSwitch]="true"
+      (onClose)="hideVariantCrudForm()"
+      (onDelete)="removeVariant(activeVariantFormIndex)"
+    ></app-admin-product-variant-crud-form>
   </div>
   <ng-template #variantList>
-    <div class="attr-mgmt">
+    <div class="variant-mgmt">
       <p-card [formGroup]="productForm">
         <ng-template pTemplate="header">
           <div class="p-card-title">variants</div>
-          <div class="attr-mgmt__tools">
+          <div class="variant-mgmt__tools">
             <p-button
               styleClass="p-button-secondary"
               label="add"
               icon="pi pi-plus"
               iconPos="right"
-              (onClick)="addAttribute()"
+              (onClick)="addVariant()"
             ></p-button>
           </div>
         </ng-template>
         <div
-          class="attr-list"
-          formArrayName="attributes"
+          class="variant-list"
+          formArrayName="variants"
           cdkDropList
-          [cdkDropListData]="attributes().value"
+          [cdkDropListData]="variants().value"
           (cdkDropListDropped)="handleDragSort($event)"
         >
-          <p *ngIf="!attributes().length" class="empty-attr-msg">
+          <p *ngIf="!variants().length" class="empty-variant-msg">
             Add variants to see them here
           </p>
           <div
-            *ngFor="let attr of attributes().value; index as attrIndex"
-            class="attr-list-item p-d-flex p-ai-center"
+            *ngFor="let variant of variants().value; index as variantIndex"
+            class="variant-list-item p-d-flex p-ai-center"
             cdkDrag
-            cdkDragBoundary=".attr-list"
+            cdkDragBoundary=".variant-list"
             cdkDragLockAxis="y"
           >
-            <div class="attr-list-item__drag-area p-mr-1 p-pb-3" cdkDragHandle>
+            <div
+              class="variant-list-item__drag-area p-mr-1 p-pb-3"
+              cdkDragHandle
+            >
               <i class="pi pi-sort"></i>
             </div>
             <div
-              class="attr-list-item__thumb p-d-flex p-ai-center p-jc-center p-mr-2"
+              class="variant-list-item__thumb p-d-flex p-ai-center p-jc-center p-mr-2"
             >
               <img
-                *ngIf="attr?.thumbnail.src; else noThumb"
-                [src]="attr?.thumbnail.src"
-                [alt]="attr?.thumbnail.alt_text"
+                *ngIf="variant?.thumbnail.src; else noThumb"
+                [src]="variant?.thumbnail.src"
+                [alt]="variant?.thumbnail.alt_text"
               />
               <ng-template #noThumb>
                 <i class="pi pi-image"></i>
               </ng-template>
             </div>
             <div
-              class="attr-list-item__content p-mr-2"
-              (click)="editAttribute(attrIndex)"
+              class="variant-list-item__content p-mr-2"
+              (click)="editVariant(variantIndex)"
             >
-              <div class="attr-list-item__content__label p-mb-2">
-                {{ attr.label }}
+              <div class="variant-list-item__content__label p-mb-2">
+                {{ variant.label }}
               </div>
-              <div
-                *ngIf="!attr.is_attribute_group"
-                class="attr-list-item__content__info"
-              >
+              <div class="variant-list-item__content__info">
                 <span class="p-mr-2">
                   Cost:
-                  {{ attr.cost | currency: 'USD':'symbol':'2.2-2' }}
+                  {{ variant.base_cost | currency: 'USD':'symbol':'2.2-2' }}
                 </span>
                 <span>
-                  Price: {{ attr.price | currency: 'USD':'symbol':'2.2-2' }}
+                  Price:
+                  {{ variant.base_price | currency: 'USD':'symbol':'2.2-2' }}
                 </span>
               </div>
             </div>
-            <div class="attr-list-item__tools">
+            <div class="variant-list-item__tools">
               <p-button
                 styleClass="p-button-danger p-button-text"
                 icon="pi pi-trash"
-                (onClick)="removeAttribute(attrIndex)"
+                (onClick)="removeVariant(variantIndex)"
               ></p-button>
             </div>
           </div>

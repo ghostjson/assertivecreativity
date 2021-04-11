@@ -1,0 +1,29 @@
+<div class="{{ styleClass }} variant-option p-d-flex p-ai-center">
+  <div class="variant-option__drag-area p-pr-2" cdkDragHandle>
+    <i class="pi pi-sort"></i>
+  </div>
+  <div class="variant-option-img p-d-flex p-ai-center p-jc-center">
+    <img
+      *ngIf="variantForm.value.thumbnail.src; else noImg"
+      class="variant-option-img__img"
+      src="{{ variantForm.value.thumbnail.src }}"
+      alt="{{ variantForm.value.thumbnail.alt_text }}"
+    />
+    <ng-template #noImg>
+      <i class="pi pi-image"></i>
+    </ng-template>
+  </div>
+  <div class="variant-option-content p-ml-2 p-mr-auto">
+    <div class="variant-option-content__label">
+      {{ variantForm.value.label }}
+    </div>
+  </div>
+  <div class="variant-option-tools">
+    <p-button
+      aria-label="delete variant option"
+      styleClass="p-button-danger p-button-text"
+      icon="pi pi-trash"
+      (onClick)="emitDeleteEvent()"
+    ></p-button>
+  </div>
+</div>
