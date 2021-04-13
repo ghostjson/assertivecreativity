@@ -1,9 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Input,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,14 +30,18 @@ import { AdminProductService } from 'src/app/services/admin-product.service';
 export class AdminCustomProductCrudComponent implements OnInit, OnDestroy {
   @Input() product: NewProduct;
 
+  @ViewChild('panelsWrapper')
+  panelsWrapper: ElementRef<HTMLDivElement>;
+
   productId: number;
   productForm: FormGroup;
   activeVariantForm: FormGroup;
   productViews: MenuItem[];
   editMode: boolean;
   previewCanvas: fabric.Canvas;
-
   componentDestroy = new Subject<void>();
+  canvasHeight: number;
+  canvasWidth: number;
 
   constructor(
     private _productService: AdminProductService,

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { AdminFileManagerService } from 'src/app/services/admin-file-manager/admin-file-manager.service';
 import { convertToDataUrl } from 'src/app/library/FileFunctions';
+import { IdGeneratorService } from 'src/app/services/id-generator.service';
 
 @Component({
   selector: 'app-image-picker-form',
@@ -18,7 +19,7 @@ export class ImagePickerFormComponent {
 
   imgFullScrPreview: boolean;
 
-  constructor(private _fileManagerService: AdminFileManagerService) {}
+  constructor(private _idGenService: IdGeneratorService) {}
 
   /**
    * handle image selection and from the file upload component
@@ -28,6 +29,7 @@ export class ImagePickerFormComponent {
     if (event.currentFiles[0]) {
       convertToDataUrl(event.currentFiles[0]).subscribe((dataUrl) => {
         this.imageForm.patchValue({
+          id: this._idGenService.getId(),
           src: dataUrl,
         });
       });
@@ -39,7 +41,10 @@ export class ImagePickerFormComponent {
    */
   clearSelectedImg(): void {
     this.imgFilePicker.clear();
-    this.imageForm.get('src').reset();
+    this.imageForm.patchValue({
+      id: null,
+      src: null,
+    });
   }
 
   /**

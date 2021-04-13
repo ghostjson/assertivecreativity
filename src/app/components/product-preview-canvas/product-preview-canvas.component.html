@@ -1,3 +1,20 @@
-<div #wrapper class="wrapper">
-  <canvas id="preview-canvas"></canvas>
+<div class="wrapper-div p-p-2 {{ styleClass }}">
+  <p-tabMenu
+    [model]="views"
+    [activeItem]="views[0]"
+    styleClass="view-switcher"
+  ></p-tabMenu>
+  <div #canvasWrapper class="preview-wrapper">
+    <div
+      *ngFor="let productView of views"
+      [ngClass]="{
+        hide:
+          productView.automationId.canvasId !==
+          activeCanvas.automationId.canvasId
+      }"
+      class="preview-canvas"
+    >
+      <canvas id="{{ productView.automationId.canvasId }}"></canvas>
+    </div>
+  </div>
 </div>

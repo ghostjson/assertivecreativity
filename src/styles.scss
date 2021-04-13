@@ -113,12 +113,14 @@ textarea {
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  transition: box-shadow $transition-func,
+    transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 
 .cdk-drop-list-dragging {
   div {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+    transition: box-shadow $transition-func,
+      transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
   }
 }
 

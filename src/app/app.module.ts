@@ -65,6 +65,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ChartModule } from 'primeng/chart';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 /** Common Imports */
 import { LoaderComponent } from './components/loader/loader.component';
@@ -328,6 +329,7 @@ import { ProductPreviewCanvasComponent } from './components/product-preview-canv
     ChartModule,
     SlideMenuModule,
     BreadcrumbModule,
+    TabMenuModule,
   ],
   providers: [
     FormComponent,
